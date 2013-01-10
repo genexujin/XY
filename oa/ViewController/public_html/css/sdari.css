@@ -1,0 +1,237 @@
+.body{
+   font-family: 'Microsoft YaHei';
+}
+
+af|inputListOfValues{
+     font-family: 'Microsoft YaHei';
+}
+
+af|table{
+    font-family: 'Microsoft YaHei';
+}
+
+.AFBrandingBarTitle{
+    font-family: 'Microsoft YaHei';
+}
+
+af|activeOutputText{
+   font-family: 'Microsoft YaHei';
+}
+
+
+af|inputText::label {
+    font-family: 'Microsoft YaHei';
+}
+
+af|inputText::content {
+    font-family: 'Microsoft YaHei';
+}
+
+af|commandImageLink::text {
+    font-family: 'Microsoft YaHei';
+    font-size: medium;
+}
+
+af|panelAccordion::header-title {
+    font-family: 'Microsoft YaHei';
+    font-size: medium;
+}
+
+af|panelBox::header-element {
+    font-family: 'Microsoft YaHei';
+    font-size: medium;
+}
+
+af|panelHeader::title-text0 {
+    font-family: 'Microsoft YaHei';
+}
+
+af|panelHeader::content0 {
+    font-family: 'Microsoft YaHei';
+}
+
+af|train::stop-link {
+    font-family: 'Microsoft YaHei';
+}
+
+af|trainButtonBar::next-button{
+  font-family: 'Microsoft YaHei';
+}
+
+af|trainButtonBar::back-button{
+   font-family: 'Microsoft YaHei';
+}
+
+af|commandButton {
+    font-family: 'Microsoft YaHei';
+}
+
+af|column::column-header-cell-content {
+    font-family: 'Microsoft YaHei';
+}
+
+af|column::data-cell{
+   font-family: 'Microsoft YaHei';
+}
+
+af|commandToolbarButton::text{
+  font-family: 'Microsoft YaHei';
+}
+
+af|menu::bar-item-text {
+  font-family: 'Microsoft YaHei';
+}
+
+af|dialog {
+  font-family: 'Microsoft YaHei';
+  width: 200px;
+  height: 100px;
+}
+
+af|query::criterion{
+  font-family: 'Microsoft YaHei';
+}
+
+af|menu::bar-item-text{
+  font-family: 'Microsoft YaHei';
+}
+
+af|menu{
+  font-family: 'Microsoft YaHei';
+  font-size: 120%; 
+}
+
+af|inputDate{
+  font-family: 'Microsoft YaHei';
+}
+
+af|selectOneRadio{
+    font-family: 'Microsoft YaHei';
+}
+
+af|selectOneChoice::content{
+    font-family: 'Microsoft YaHei';
+}
+
+af|selectOneChoice::label{
+    font-family: 'Microsoft YaHei';
+}
+
+af|query::button{
+   font-family: 'Microsoft YaHei';
+}
+
+af|inputFile::label{
+  font-family: 'Microsoft YaHei';
+}
+
+af|panelTabbed::tab-text-link{
+    font-family: 'Microsoft YaHei';
+}
+.AFTableCellDataSelected:alias
+{
+  background-color: rgb(186,201,89); 
+}
+.AFTableCellDataSelectedFocused:alias
+{
+  background-color: Yellow; 
+}
+
+af|panelLabelAndMessage::label
+{
+  font-family: 'Microsoft YaHei'; 
+}
+af|panelLabelAndMessage::content-cell
+{
+  font-family: 'Microsoft YaHei'; 
+}
+.AFTableCellDataSelectedBandedInactive:alias
+{
+  background-color: Yellow; 
+}
+.AFTableCellDataSelectedBanded:alias
+{
+  background-color: Yellow; 
+}
+.AFTableCellDataSelectedBandedFocused:alias
+{
+  background-color: Yellow; 
+}
+af|inputComboboxListOfValues::label
+{
+  font-family: 'Microsoft YaHei'; 
+}
+af|inputComboboxListOfValues::context-content
+{
+  font-family: 'Microsoft YaHei'; 
+}
+af|inputComboboxListOfValues::dropdown-cell
+{
+  font-family: 'Microsoft YaHei'; 
+}
+af|inputListOfValues::content
+{
+  font-family: 'Microsoft YaHei'; 
+}
+af|inputComboboxListOfValues
+{
+  -tr-dropdown-number-of-rows: 30; 
+  -tr-stretch-dropdown-table: true; 
+}
+af|table::data-row af|inputListOfValues::content
+{
+  width: auto; 
+}
+af|dvt-pivotTable
+{
+  font-family: 'Microsoft YaHei'; 
+}
+af|dvt-graph
+{
+  font-family: 'Microsoft YaHei'; 
+}
+af|dvt-graphTitle
+{
+  -tr-font-family: Microsoft YaHei; 
+}
+af|dvt-graphSubtitle
+{
+  -tr-font-family: Microsoft YaHei; 
+}
+af|dvt-legendText
+{
+  -tr-font-family: Microsoft YaHei; 
+}
+af|dvt-legendTitle
+{
+  -tr-font-family: Microsoft YaHei; 
+}
+af|dvt-o1Title
+{
+  -tr-font-family: Microsoft YaHei; 
+}
+af|dvt-o1TickLabel
+{
+  -tr-font-family: Microsoft YaHei; 
+}
+af|dvt-markerText
+{
+  -tr-font-family: Microsoft YaHei; 
+}
+.AFDvtGraphTitlesFont:alias
+{
+  -tr-font-family: Microsoft YaHei; 
+}
+.AFDefaultFontFamily:alias
+{
+  font-family: 'Microsoft YaHei'; 
+}
+af|goMenuItem
+{
+  font-family: 'Microsoft YaHei'; 
+  font-size: 120%; 
+}
+af|menuBar
+{
+  font-size: 15px; 
+}

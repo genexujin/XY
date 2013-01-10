@@ -1,0 +1,62 @@
+#bgimage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#apDiv1 {
+    position: absolute;
+    z-index: 1;
+    margin-left: 10%;
+    margin-top: 200px;;
+}
+
+#login-box {
+    width: 510px;
+    height: 200px;
+    color: rgb(63, 134, 235);
+    font-family: 'Microsoft YaHei';
+    font-weight: bold;
+}
+
+#login-box img {
+    border: none;
+}
+
+#login-box h2 {
+    padding: 0;
+    margin: 0;
+    color: rgb(0, 132, 198);
+    font-family: 'Microsoft YaHei';
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+#login-box-name {
+    display: inline;
+    width: 50px;
+    padding-left: 10px;
+}
+
+#login-box-field {
+    display: inline;
+    width: 150px;
+    padding-left: 10px;
+}
+
+.form-login {
+    width: 140px;
+    border: 1px solid #0d2c52;
+    background-color: rgb(233, 246, 255);
+    font-size: 16px;
+    color: black;
+}
+
+.login-box-options {
+    font-size: 12px;
+}
+
+.login-box-options a {
+    color: black;
+    font-size: 12px;
+}
