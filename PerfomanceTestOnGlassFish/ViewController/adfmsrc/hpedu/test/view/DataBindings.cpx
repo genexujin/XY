@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="11.1.2.62.76" id="DataBindings"
+             SeparateXMLFiles="false" Package="hpedu.test.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
+             className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/Home.jsf" usageId="hpedu_test_view_HomePageDef"/>
+    <page path="/Report.jsf" usageId="hpedu_test_view_ReportPageDef"/>
+    <page path="/Notifications.jsf" usageId="hpedu_test_view_NotificationsPageDef"/>
+    <page path="/Browse.jsff" usageId="hpedu_test_view_BrowsePageDef"/>
+    <page path="/Edit.jsff" usageId="hpedu_test_view_EditPageDef"/>
+    <page path="/EmpReport.jsff" usageId="hpedu_test_view_EmpReportPageDef"/>
+    <page path="/DeptRpt.jsff" usageId="hpedu_test_view_DeptRptPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="hpedu_test_view_HomePageDef" path="hpedu.test.view.pageDefs.HomePageDef"/>
+    <page id="hpedu_test_view_ReportPageDef" path="hpedu.test.view.pageDefs.ReportPageDef"/>
+    <page id="hpedu_test_view_NotificationsPageDef" path="hpedu.test.view.pageDefs.NotificationsPageDef"/>
+    <page id="hpedu_test_view_BrowsePageDef" path="hpedu.test.view.pageDefs.BrowsePageDef"/>
+    <page id="hpedu_test_view_EditPageDef" path="hpedu.test.view.pageDefs.EditPageDef"/>
+    <page id="hpedu_test_view_EmpReportPageDef" path="hpedu.test.view.pageDefs.EmpReportPageDef"/>
+    <page id="hpedu_test_view_DeptRptPageDef" path="hpedu.test.view.pageDefs.DeptRptPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="AppModuleDataControl" Package="hpedu.test.model"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

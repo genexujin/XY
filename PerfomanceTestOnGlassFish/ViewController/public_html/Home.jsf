@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Home.jsf" id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/oracle/ui/pattern/dynamicShell/dynamicTabShell.jspx" value="#{bindings.ptb1}"
+                             id="pt1">
+                <f:facet name="copyright"/>
+                <f:facet name="about"/>
+                <f:facet name="navigation">
+                    <af:panelAccordion id="pa1">
+                        <af:showDetailItem text="员工" id="sdi1">
+                            <af:panelGroupLayout id="pgl1" layout="vertical">
+                                <af:commandImageLink text="新建员工" id="cil1"
+                                                     actionListener="#{RegionManager.launchNewEmployee}"/>
+                                <af:commandButton text="Test" id="cb1"
+                                                  actionListener="#{RegionManager.fireButton}"/>
+                            </af:panelGroupLayout>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="部门" id="sdi2"/>
+                    </af:panelAccordion>
+                </f:facet>
+                <f:facet name="globalLinks"/>
+                <f:facet name="status"/>
+                <f:facet name="globalToolbar"/>
+                <f:facet name="globalSearch"/>
+                <f:facet name="globalTabs">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="系统菜单" id="cni1" action="home" disabled="false" selected="true"/>
+                        <af:commandNavigationItem text="通知" id="cni2" action="notes"/>
+                        <af:commandNavigationItem text="报表" id="cni3" action="report"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="welcome">
+                    <af:image source="/images/BusinessLifestyle.png" id="i2"/>
+                </f:facet>
+                <f:facet name="innerToolbar">
+                
+                 <af:toolbar id="t2" visible="false">
+                        <af:commandToolbarButton text="Close Tabs" id="ctb1" icon="/images/close.gif"
+                                                 actionListener="#{RegionManager.closeAllTabs}"/>
+                        <af:commandToolbarButton text="Close Tabs Except Current" id="ctb2" icon="/images/close.gif"
+                                                 actionListener="#{RegionManager.closeAllButCurrent}"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:attribute name="legalAreaPosition" value="20"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

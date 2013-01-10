@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="new-employee">
+    <default-activity>Browse</default-activity>
+    <view id="Browse">
+      <page>/Browse.jsff</page>
+    </view>
+    <view id="Edit">
+      <page>/Edit.jsff</page>
+    </view>
+    <control-flow-rule id="__3">
+      <from-activity-id>Browse</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>Edit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>Edit</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>browse</from-outcome>
+        <to-activity-id>Browse</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

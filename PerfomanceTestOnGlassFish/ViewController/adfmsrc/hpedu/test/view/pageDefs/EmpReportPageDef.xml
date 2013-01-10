@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="EmpReportPageDef"
+                Package="hpedu.test.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="EmployeesView1" RangeSize="25" DataControl="AppModuleDataControl" id="EmployeesView1Iterator"/>
+  </executables>
+  <bindings>
+    <graph IterBinding="EmployeesView1Iterator" id="EmployeesView1" xmlns="http://xmlns.oracle.com/adfm/dvt"
+           type="BAR_VERT_CLUST">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <data>
+            <item value="Salary"/>
+          </data>
+        </series>
+        <groups>
+          <item value="ManagerId"/>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <tree IterBinding="EmployeesView1Iterator" id="EmployeesView11">
+      <nodeDefinition DefName="hpedu.test.model.EmployeesView" Name="EmployeesView110">
+        <AttrNames>
+          <Item Value="ManagerId"/>
+          <Item Value="Email"/>
+          <Item Value="JobId"/>
+          <Item Value="Salary"/>
+          <Item Value="HireDate"/>
+          <Item Value="FirstName"/>
+          <Item Value="PhoneNumber"/>
+          <Item Value="CommissionPct"/>
+          <Item Value="DepartmentId"/>
+          <Item Value="LastName"/>
+          <Item Value="EmployeeId"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="EmployeesView"/>
+        </Accessors>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

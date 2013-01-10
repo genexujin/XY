@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Notifications.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/oracle/ui/pattern/dynamicShell/dynamicTabShell.jspx" value="#{bindings.ptb1}"
+                             id="pt1">
+                <f:facet name="copyright"/>
+                <f:facet name="about"/>
+                <f:facet name="navigation"/>
+                <f:facet name="globalLinks"/>
+                <f:facet name="status"/>
+                <f:facet name="globalToolbar"/>
+                <f:facet name="globalSearch"/>
+                <f:facet name="globalTabs">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="系统菜单" id="cni1" action="home" disabled="false"
+                                                  selected="false"/>
+                        <af:commandNavigationItem text="通知" id="cni2" action="notes" selected="true"/>
+                        <af:commandNavigationItem text="报表" id="cni3" action="report"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="welcome">
+                    <af:table value="#{bindings.DepartmentsView1.collectionModel}" var="row"
+                              rows="#{bindings.DepartmentsView1.rangeSize}"
+                              emptyText="#{bindings.DepartmentsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.DepartmentsView1.rangeSize}" rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.DepartmentsView1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.DepartmentsView1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1">
+                        <af:column sortProperty="#{bindings.DepartmentsView1.hints.DepartmentId.name}" sortable="true"
+                                   headerText="#{bindings.DepartmentsView1.hints.DepartmentId.label}" id="c1">
+                            <af:outputText value="#{row.DepartmentId}" id="ot1">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.DepartmentsView1.hints.DepartmentId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.DepartmentsView1.hints.DepartmentName.name}" sortable="true"
+                                   headerText="#{bindings.DepartmentsView1.hints.DepartmentName.label}" id="c2">
+                            <af:outputText value="#{row.DepartmentName}" id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.DepartmentsView1.hints.ManagerId.name}" sortable="true"
+                                   headerText="#{bindings.DepartmentsView1.hints.ManagerId.label}" id="c3">
+                            <af:outputText value="#{row.ManagerId}" id="ot3">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.DepartmentsView1.hints.ManagerId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.DepartmentsView1.hints.LocationId.name}" sortable="true"
+                                   headerText="#{bindings.DepartmentsView1.hints.LocationId.label}" id="c4">
+                            <af:outputText value="#{row.LocationId}" id="ot4">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.DepartmentsView1.hints.LocationId.format}"/>
+                            </af:outputText>
+                        </af:column>
+                    </af:table>
+                </f:facet>
+                <f:facet name="innerToolbar">
+                
+                 <af:toolbar id="t2" visible="false">
+                        <af:commandToolbarButton text="Close Tabs" id="ctb1" icon="/images/close.gif"
+                                                 actionListener="#{RegionManager.closeAllTabs}"/>
+                        <af:commandToolbarButton text="Close Tabs Except Current" id="ctb2" icon="/images/close.gif"
+                                                 actionListener="#{RegionManager.closeAllButCurrent}"/>
+                    </af:toolbar>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>
