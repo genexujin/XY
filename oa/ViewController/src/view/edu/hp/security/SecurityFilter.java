@@ -33,8 +33,12 @@ public class SecurityFilter implements Filter {
         LoginUser loginUser = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
 
         if (loginUser == null) {
-
-            ((HttpServletResponse)response).sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login.html");
+        
+            chain.doFilter(request, response);
+            
+            //((HttpServletResponse)response).sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login.html");
+            
+           
 
         } else {
 

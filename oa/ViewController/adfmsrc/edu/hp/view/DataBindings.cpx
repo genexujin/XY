@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="11.1.2.62.76" id="DataBindings"
+             SeparateXMLFiles="false" Package="edu.hp.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/pages/main/Home.jsf" usageId="edu_hp_view_HomePageDef"/>
+    <page path="/pages/main/Report.jsf" usageId="edu_hp_view_ReportPageDef"/>
+    <page path="/pages/main/System.jsf" usageId="edu_hp_view_SystemPageDef"/>
+    <page path="/pages/main/Admin.jsf" usageId="edu_hp_view_AdminPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
+    <page id="edu_hp_view_ReportPageDef" path="pages.main.ReportPageDef"/>
+    <page id="edu_hp_view_SystemPageDef" path="pages.main.SystemPageDef"/>
+    <page id="edu_hp_view_AdminPageDef" path="pages.main.AdminPageDef"/>
+  </pageDefinitionUsages>
+</Application>
