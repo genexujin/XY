@@ -8,7 +8,12 @@
                              id="pt1">
                 <f:facet name="copyright"/>
                 <f:facet name="about"/>
-                <f:facet name="navigation"/>
+                <f:facet name="navigation">
+                    <af:commandLink text="commandLink 1" id="cl1" action="home">
+                        <af:setActionListener to="#{pageFlowScope.welcomeURL}"
+                                              from="#{&quot;/WEB-INF/new-employee.xml#new-employee&quot;}"/>
+                    </af:commandLink>
+                </f:facet>
                 <f:facet name="globalLinks"/>
                 <f:facet name="status"/>
                 <f:facet name="globalToolbar"/>

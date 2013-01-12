@@ -5,6 +5,8 @@
   <executables>
     <variableIterator id="variables"/>
     <page path="oracle.ui.pattern.dynamicShell.model.dynamicTabShellDefinition" id="ptb1" Refresh="ifNeeded"/>
+    <taskFlow id="dynamicRegion1" taskFlowId="${RegionManager.dynamicTaskFlowId}" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding" parametersMap="${RegionManager.params}"/>
   </executables>
   <bindings/>
 </pageDefinition>

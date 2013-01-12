@@ -85,8 +85,8 @@
             <hash n="libraryDependencies">
                <value n="IncludeLibrariesFromOtherContainers" v="true"/>
             </hash>
-            <value n="platformType" v="GLASSFISH"/>
-            <value n="platformVersion" v="3.1.0.0"/>
+            <value n="platformType" v="WEBLOGIC"/>
+            <value n="platformVersion" v="10.3.0.0"/>
             <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
             <value n="profileName" v="PerfomanceTestOnGlassFish_Project1_PerfomanceTestOnGlassFish"/>
          </hash>
@@ -94,7 +94,7 @@
       <list n="profileList">
          <string v="PerfomanceTestOnGlassFish_Project1_PerfomanceTestOnGlassFish"/>
       </list>
-      <value n="Weblogic-JDBC-Auto-Sync-Key" v="false"/>
+      <value n="Weblogic-JDBC-Auto-Sync-Key" v="true"/>
    </hash>
    <hash n="oracle.jdeveloper.model.PathsConfiguration">
       <hash n="ApplicationSrcContentSet">
