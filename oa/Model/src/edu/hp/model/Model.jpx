@@ -47,6 +47,14 @@
     </DesignTime>
   </Containee>
   <Containee
+    Name="security"
+    PackageName="edu.hp.model.vo.query.security"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
     Name="vo"
     PackageName="edu.hp.model.vo"
     ObjectType="JboPackage">

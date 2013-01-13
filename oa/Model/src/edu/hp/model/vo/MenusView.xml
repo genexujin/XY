@@ -10,7 +10,9 @@
        Menus.MENU_TASKFLOW_URL, 
        Menus.MENU_DESC, 
        Menus.MENU_CATEGORY, 
-       Menus.PARENT_MENU_ID"
+       Menus.PARENT_MENU_ID, 
+       Menus.MENU_ICON_URL, 
+       Menus.MENU_MASTER_CATEGORY"
   FromList="MENUS Menus"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -56,6 +58,18 @@
     EntityAttrName="ParentMenuId"
     EntityUsage="Menus"
     AliasName="PARENT_MENU_ID"/>
+  <ViewAttribute
+    Name="MenuIconUrl"
+    PrecisionRule="true"
+    EntityAttrName="MenuIconUrl"
+    EntityUsage="Menus"
+    AliasName="MENU_ICON_URL"/>
+  <ViewAttribute
+    Name="MenuMasterCategory"
+    PrecisionRule="true"
+    EntityAttrName="MenuMasterCategory"
+    EntityUsage="Menus"
+    AliasName="MENU_MASTER_CATEGORY"/>
   <ViewLinkAccessor
     Name="RolesVA"
     ViewLink="edu.hp.model.vo.link.RoleMenuViewLink"
