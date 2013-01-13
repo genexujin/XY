@@ -16,14 +16,84 @@
                     </af:panelGroupLayout>
                 </f:facet>
                 <f:facet name="navigation">
-                    <af:panelAccordion id="pa1">
-                        <af:showDetailItem text="采购管理" id="sdi1" icon="/images/icons/cart.gif"/>
-                        <af:showDetailItem text="设备报修" id="sdi2" icon="/images/icons/monitors.png"/>
-                        <af:showDetailItem text="教室管理" id="sdi3" icon="/images/icons/structure.png"/>
-                        <af:showDetailItem text="会议室管理" id="sdi4" icon="/images/icons/team.png"/>
-                        <af:showDetailItem text="车辆管理" id="sdi5" icon="/images/icons/car_arrow.png"/>
-                        <af:showDetailItem text="订餐管理" id="sdi7" icon="/images/icons/coffee.png"/>
-                        <af:showDetailItem text="通知下达" id="sdi6" icon="/images/icons/history.png"/>
+                    <af:panelAccordion id="pa1" binding="#{viewScope.SystemBean.menuPanelAccordion}">
+                        <af:showDetailItem text="采购管理" id="sdi1" icon="/images/icons/cart.gif">
+                            <af:panelList id="pl1">
+                                <af:forEach items="#{sessionScope.LoginUserMenuBean.sysPurMenus}" var="menu">
+                                    <af:commandImageLink text="#{menu.menuName}" id="cil1"
+                                                         actionListener="#{viewScope.SystemBean.openMenu}">
+                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                    </af:commandImageLink>
+                                </af:forEach>
+                            </af:panelList>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="设备报修" id="sdi2" icon="/images/icons/monitors.png">
+                            <af:forEach items="#{sessionScope.LoginUserMenuBean.sysHdMenus}" var="menu">
+                                <af:panelList id="pl7">
+                                    <af:commandImageLink text="#{menu.menuName}" id="cil2"
+                                                         actionListener="#{viewScope.SystemBean.openMenu}">
+                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                    </af:commandImageLink>
+                                </af:panelList>
+                            </af:forEach>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="教室管理" id="sdi3" icon="/images/icons/structure.png">
+                            <af:forEach items="#{sessionScope.LoginUserMenuBean.sysClsRmMenus}" var="menu">
+                                <af:panelList id="pl6">
+                                    <af:commandImageLink text="#{menu.menuName}" id="cil3"
+                                                         actionListener="#{viewScope.SystemBean.openMenu}">
+                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                    </af:commandImageLink>
+                                </af:panelList>
+                            </af:forEach>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="会议室管理" id="sdi4" icon="/images/icons/team.png">
+                            <af:forEach items="#{sessionScope.LoginUserMenuBean.sysConfRmMenus}" var="menu">
+                                <af:panelList id="pl5">
+                                    <af:commandImageLink text="#{menu.menuName}" id="cil4"
+                                                         actionListener="#{viewScope.SystemBean.openMenu}">
+                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                    </af:commandImageLink>
+                                </af:panelList>
+                            </af:forEach>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="车辆管理" id="sdi5" icon="/images/icons/car_arrow.png">
+                            <af:forEach items="#{sessionScope.LoginUserMenuBean.sysCarMenus}" var="menu">
+                                <af:panelList id="pl4">
+                                    <af:commandImageLink text="#{menu.menuName}" id="cil5"
+                                                         actionListener="#{viewScope.SystemBean.openMenu}">
+                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                    </af:commandImageLink>
+                                </af:panelList>
+                            </af:forEach>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="订餐管理" id="sdi7" icon="/images/icons/coffee.png">
+                            <af:forEach items="#{sessionScope.LoginUserMenuBean.sysMealMenus}" var="menu">
+                                <af:panelList id="pl3">
+                                    <af:commandImageLink text="#{menu.menuName}" id="cil6"
+                                                         actionListener="#{viewScope.SystemBean.openMenu}">
+                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                    </af:commandImageLink>
+                                </af:panelList>
+                            </af:forEach>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="通知下达" id="sdi6" icon="/images/icons/history.png">
+                            <af:forEach items="#{sessionScope.LoginUserMenuBean.sysAncmtMenus}" var="menu">
+                                <af:panelList id="pl2">
+                                    <af:commandImageLink text="#{menu.menuName}" id="cil7"
+                                                         actionListener="#{viewScope.SystemBean.openMenu}">
+                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                    </af:commandImageLink>
+                                </af:panelList>
+                            </af:forEach>
+                        </af:showDetailItem>
                     </af:panelAccordion>
                 </f:facet>
                 <f:facet name="globalLinks"/>

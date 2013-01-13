@@ -9,9 +9,15 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.query.security.UserMenuQueryImpl"
+  ComponentInterface="edu.hp.model.vo.query.security.common.UserMenuQuery"
+  ClientProxyName="edu.hp.model.vo.query.security.client.UserMenuQueryClient"
+  FetchMode="FETCH_ALL"
+  FetchSize="25">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -204,4 +210,30 @@ and employees.user_name = :userName]]></SQLQuery>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="queryUserMenu"
+      MethodName="queryUserMenu">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="masterCategory"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="category"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="userName"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="queryUserMenu1"
+      MethodName="queryUserMenu">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userName"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

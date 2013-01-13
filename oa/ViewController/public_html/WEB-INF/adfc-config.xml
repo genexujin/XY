@@ -51,4 +51,9 @@
     <managed-bean-class>edu.hp.view.bean.main.ReportBean</managed-bean-class>
     <managed-bean-scope>view</managed-bean-scope>
   </managed-bean>
+  <managed-bean id="__10">
+    <managed-bean-name>LoginUserMenuBean</managed-bean-name>
+    <managed-bean-class>edu.hp.view.bean.session.LoginUserMenuBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
 </adfc-config>

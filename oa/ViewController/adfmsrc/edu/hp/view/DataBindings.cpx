@@ -18,4 +18,16 @@
     <page id="edu_hp_view_SystemPageDef" path="pages.main.SystemPageDef"/>
     <page id="edu_hp_view_AdminPageDef" path="pages.main.AdminPageDef"/>
   </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AdminModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="RootAppModuleDataControl" Package="edu.hp.model.biz"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="RootAppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
 </Application>

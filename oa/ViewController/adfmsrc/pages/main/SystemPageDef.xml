@@ -7,6 +7,14 @@
     <page path="oracle.ui.pattern.dynamicShell.model.dynamicTabShellDefinition" id="ptb1" Refresh="ifNeeded"/>
     <taskFlow id="dynamicRegion1" taskFlowId="${viewScope.SystemBean.dynamicTaskFlowId}" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <iterator id="UserMenusIterator" Binds="Root.AdminModule.UserMenus" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
   </executables>
-  <bindings/>
+  <bindings>
+    <methodAction id="queryUserMenu" RequiresUpdateModel="true" Action="invokeMethod" MethodName="queryUserMenu"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.AdminModule.UserMenus">
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
 </pageDefinition>
