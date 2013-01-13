@@ -32,10 +32,11 @@
                 <f:facet name="globalSearch"/>
                 <f:facet name="globalTabs">
                     <af:navigationPane id="np1">
-                        <af:commandNavigationItem text="主页" id="cni1" action="Home"/>
-                        <af:commandNavigationItem text="平台功能" id="cni2" selected="true"/>
-                        <af:commandNavigationItem text="报表" id="cni3" action="Report"/>
-                        <af:commandNavigationItem text="平台管理" id="cni4" action="Admin"/>
+                          <af:commandNavigationItem text="主页" id="cni1" action="Home" icon="/images/icons/home.gif"  />
+                        <af:commandNavigationItem text="平台功能" action="System" id="cni2" icon="/images/icons/applicationModule.png" selected="true"/>
+                        <af:commandNavigationItem text="报表" id="cni3" action="Report" icon="/images/icons/library.png" />
+                        <af:commandNavigationItem text="平台管理" id="cni4" action="Admin"
+                                                  icon="/images/icons/accessors.png"/>
                     </af:navigationPane>
                 </f:facet>
                 <f:facet name="welcome">
