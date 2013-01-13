@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MenusView"
+  Version="11.1.2.62.76"
+  SelectList="Menus.MENU_ID, 
+       Menus.MENU_NAME, 
+       Menus.MENU_TASKFLOW_URL, 
+       Menus.MENU_DESC, 
+       Menus.MENU_CATEGORY, 
+       Menus.PARENT_MENU_ID"
+  FromList="MENUS Menus"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="Menus"
+    Entity="edu.hp.model.eo.Menus"/>
+  <ViewAttribute
+    Name="MenuId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="MenuId"
+    EntityUsage="Menus"
+    AliasName="MENU_ID"/>
+  <ViewAttribute
+    Name="MenuName"
+    PrecisionRule="true"
+    EntityAttrName="MenuName"
+    EntityUsage="Menus"
+    AliasName="MENU_NAME"/>
+  <ViewAttribute
+    Name="MenuTaskflowUrl"
+    PrecisionRule="true"
+    EntityAttrName="MenuTaskflowUrl"
+    EntityUsage="Menus"
+    AliasName="MENU_TASKFLOW_URL"/>
+  <ViewAttribute
+    Name="MenuDesc"
+    PrecisionRule="true"
+    EntityAttrName="MenuDesc"
+    EntityUsage="Menus"
+    AliasName="MENU_DESC"/>
+  <ViewAttribute
+    Name="MenuCategory"
+    PrecisionRule="true"
+    EntityAttrName="MenuCategory"
+    EntityUsage="Menus"
+    AliasName="MENU_CATEGORY"/>
+  <ViewAttribute
+    Name="ParentMenuId"
+    PrecisionRule="true"
+    EntityAttrName="ParentMenuId"
+    EntityUsage="Menus"
+    AliasName="PARENT_MENU_ID"/>
+  <ViewLinkAccessor
+    Name="RolesVA"
+    ViewLink="edu.hp.model.vo.link.RoleMenuViewLink"
+    Type="oracle.jbo.RowIterator"
+    Reversed="true"
+    IsUpdateable="false"/>
+</ViewObject>

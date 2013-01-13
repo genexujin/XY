@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Menus"
+  Version="11.1.2.62.76"
+  DBObjectType="table"
+  DBObjectName="MENUS"
+  AliasName="Menus"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="MenuId"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="MENU_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MENUS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MenuName"
+    Precision="20"
+    ColumnName="MENU_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MENUS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MenuTaskflowUrl"
+    Precision="500"
+    ColumnName="MENU_TASKFLOW_URL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MENUS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MenuDesc"
+    Precision="20"
+    ColumnName="MENU_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MENUS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MenuCategory"
+    Precision="20"
+    ColumnName="MENU_CATEGORY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MENUS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParentMenuId"
+    Precision="20"
+    ColumnName="PARENT_MENU_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MENUS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Roles"
+    Association="edu.hp.model.eo.asso.RoleMenuAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.RoleMenuAssoc.Roles"
+    AssociationOtherEnd="edu.hp.model.eo.asso.RoleMenuAssoc.Menus"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="MenusPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MENUS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.Menus.MenuId"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -65,9 +65,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">268.1494</property>
+         name="y">251.20117</property>
       <property
-         name="x">234.5</property>
+         name="x">216.5</property>
    </View>
    <WildcardControlFlowRule
       id="WildcardControlFlowRule6">
@@ -86,7 +86,7 @@
       <property
          name="fromOutcome">Home</property>
       <property
-         name="sdm:polyPoints">L50,182.5,84.149414,182.5,250.85059,R50</property>
+         name="sdm:polyPoints">L45,182.5,80.649414,182.5,250.85059,R50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -106,7 +106,7 @@
       <property
          name="fromOutcome">System</property>
       <property
-         name="sdm:polyPoints">B57,293.0,250.85059,L50</property>
+         name="sdm:polyPoints">B50,289.5,250.85059,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -116,6 +116,6 @@
       <property
          name="fromOutcome">Report</property>
       <property
-         name="sdm:polyPoints">B43,286.0,170.22412,234.5,170.22412,T50</property>
+         name="sdm:polyPoints">L55,216.5,87.649414,T50</property>
    </ControlFlowCase>
 </SDM>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RoleMenusView"
+  Version="11.1.2.62.76"
+  SelectList="RoleMenus.ROLE_ID, 
+       RoleMenus.MENU_ID, 
+       RoleMenus.CREATED_BY, 
+       RoleMenus.CREATED_AT"
+  FromList="ROLE_MENUS RoleMenus"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="RoleMenus"
+    Entity="edu.hp.model.eo.RoleMenus"/>
+  <ViewAttribute
+    Name="RoleId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RoleId"
+    EntityUsage="RoleMenus"
+    AliasName="ROLE_ID"/>
+  <ViewAttribute
+    Name="MenuId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="MenuId"
+    EntityUsage="RoleMenus"
+    AliasName="MENU_ID"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="RoleMenus"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreatedAt"
+    PrecisionRule="true"
+    EntityAttrName="CreatedAt"
+    EntityUsage="RoleMenus"
+    AliasName="CREATED_AT"/>
+</ViewObject>

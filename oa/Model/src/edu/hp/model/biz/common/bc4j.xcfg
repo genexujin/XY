@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.AdminModule">
+      <AppModuleConfig name="AdminModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.AdminModule" DeployPlatform="LOCAL">
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.AdminModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="AdminModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.AdminModule" DeployPlatform="LOCAL">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.AdminModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.RootAppModule">
+      <AppModuleConfig name="RootAppModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.RootAppModule" DeployPlatform="LOCAL">
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.RootAppModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="RootAppModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.RootAppModule" DeployPlatform="LOCAL">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.RootAppModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>
