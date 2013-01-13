@@ -51,7 +51,7 @@
   </filter>
   <filter>
     <filter-name>SecurityFilter</filter-name>
-    <filter-class>view.edu.hp.security.SecurityFilter</filter-class>
+    <filter-class>edu.hp.view.security.SecurityFilter</filter-class>
   </filter>
   <filter>
     <filter-name>adfBindings</filter-name>

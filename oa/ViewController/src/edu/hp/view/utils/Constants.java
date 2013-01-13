@@ -1,4 +1,4 @@
-package view.edu.hp.utils;
+package edu.hp.view.utils.utils;
 
 public class Constants {
 

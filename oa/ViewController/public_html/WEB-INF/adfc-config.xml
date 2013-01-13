@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <view id="Home"></view>
+  <view id="Home">
+    <page>/pages/main/Home.jsf</page>
+  </view>
   <view id="Admin">
     <page>/pages/main/Admin.jsf</page>
   </view>

@@ -14,6 +14,8 @@
       <property
          name="activityId">Home</property>
       <property
+         name="page">/pages/main/Home.jsf</property>
+      <property
          name="description">&lt;html>&lt;p>&lt;b>Home&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
@@ -114,6 +116,6 @@
       <property
          name="fromOutcome">Report</property>
       <property
-         name="sdm:polyPoints">B43,286.0,170.75,234.5,170.75,T50</property>
+         name="sdm:polyPoints">B43,286.0,170.22412,234.5,170.22412,T50</property>
    </ControlFlowCase>
 </SDM>

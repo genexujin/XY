@@ -1,4 +1,4 @@
-package view.edu.hp.security;
+package edu.hp.view.security;
 
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import view.edu.hp.utils.Constants;
+import edu.hp.view.utils.utils.Constants;
 
 public class SecurityFilter implements Filter {
     private FilterConfig _filterConfig = null;
