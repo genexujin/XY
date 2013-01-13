@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="HomePageDef"
-                Package="hpedu.test.view.pageDefs">
+                Package="pages.main">
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
     <page path="oracle.ui.pattern.dynamicShell.model.dynamicTabShellDefinition" id="ptb1" Refresh="ifNeeded"/>
-    <taskFlow id="dynamicRegion1" taskFlowId="${RegionManager.dynamicTaskFlowId}" activation="deferred"
-              xmlns="http://xmlns.oracle.com/adf/controller/binding" parametersMap="${RegionManager.params}"/>
+    <taskFlow id="dynamicRegion1" taskFlowId="${viewScope.HomeBean.dynamicTaskFlowId}" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
   </executables>
   <bindings/>
 </pageDefinition>

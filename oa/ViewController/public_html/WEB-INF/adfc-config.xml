@@ -1,2 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2"></adfc-config>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="Home">
+    <page>/pages/main/Home.jsf</page>
+  </view>
+  <view id="Admin">
+    <page>/pages/main/Admin.jsf</page>
+  </view>
+  <view id="System">
+    <page>/pages/main/System.jsf</page>
+  </view>
+  <view id="Report">
+    <page>/pages/main/Report.jsf</page>
+  </view>
+  <control-flow-rule id="__1">
+    <from-activity-id>*</from-activity-id>
+    <control-flow-case id="__2">
+      <from-outcome>Home</from-outcome>
+      <to-activity-id>Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__3">
+      <from-outcome>Admin</from-outcome>
+      <to-activity-id>Admin</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__4">
+      <from-outcome>System</from-outcome>
+      <to-activity-id>System</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__5">
+      <from-outcome>Report</from-outcome>
+      <to-activity-id>Report</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__6">
+    <managed-bean-name>HomeBean</managed-bean-name>
+    <managed-bean-class>edu.hp.view.bean.main.HomeBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__7">
+    <managed-bean-name>SystemBean</managed-bean-name>
+    <managed-bean-class>edu.hp.view.bean.main.SystemBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__8">
+    <managed-bean-name>AdminBean</managed-bean-name>
+    <managed-bean-class>edu.hp.view.bean.main.AdminBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__9">
+    <managed-bean-name>ReportBean</managed-bean-name>
+    <managed-bean-class>edu.hp.view.bean.main.ReportBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

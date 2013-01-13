@@ -2,10 +2,11 @@ package hpedu.test.view;
 
 import java.util.HashMap;
 import java.util.List;
-
+import hpedu.test.view.utils.*;
 import javax.faces.component.UIComponent;
 import javax.faces.event.ActionEvent;
 
+import oracle.adf.controller.TaskFlowId;
 import oracle.adf.view.rich.component.rich.layout.RichPanelGroupLayout;
 import oracle.adf.view.rich.component.rich.layout.RichToolbar;
 import oracle.adf.view.rich.context.AdfFacesContext;
@@ -14,7 +15,15 @@ import oracle.ui.pattern.dynamicShell.Tab;
 import oracle.ui.pattern.dynamicShell.TabContext;
 
 public class RegionManager {
+    private String taskFlowId = "/WEB-INF/dept-rpt.xml#dept-rpt";
+    private HashMap params;
+
     public RegionManager() {
+        
+        String welcomeURL = JSFUtils.resolveExpressionAsString("#{viewScope.welcomeURL}");           
+        System.err.println(welcomeURL);
+        if(welcomeURL!=null)
+            this.taskFlowId=   welcomeURL;
     }
     
     private TabContext tabContext = null;
@@ -214,5 +223,37 @@ public class RegionManager {
     public void launchDeptReport(ActionEvent actionEvent) {
         _launchActivity("部门相关报表","/WEB-INF/dept-rpt.xml#dept-rpt",false);
         this.showInnerToolbar();
+    }
+
+    public TaskFlowId getDynamicTaskFlowId() {
+        return TaskFlowId.parse(taskFlowId);
+    }
+
+    public void setTaskFlowId(String taskFlowId) {
+        this.taskFlowId = taskFlowId;
+    }
+
+    public String getTaskFlowId() {
+        return taskFlowId;
+    }
+
+    public void setParams(HashMap params) {
+        this.params = params;
+    }
+
+    public HashMap getParams() {
+        return params;
+    }
+
+    public void setTabContext(TabContext tabContext) {
+        this.tabContext = tabContext;
+    }
+
+    public void setTaskFlowName(String taskFlowName) {
+        this.taskFlowName = taskFlowName;
+    }
+
+    public String getTaskFlowName() {
+        return taskFlowName;
     }
 }

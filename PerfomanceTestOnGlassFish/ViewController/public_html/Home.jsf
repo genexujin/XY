@@ -17,7 +17,9 @@
                                                   actionListener="#{RegionManager.fireButton}"/>
                             </af:panelGroupLayout>
                         </af:showDetailItem>
-                        <af:showDetailItem text="部门" id="sdi2"/>
+                        <af:showDetailItem text="部门" id="sdi2">
+                            <af:commandButton text="commandButton 1" id="cb2"/>
+                        </af:showDetailItem>
                     </af:panelAccordion>
                 </f:facet>
                 <f:facet name="globalLinks"/>
@@ -32,7 +34,7 @@
                     </af:navigationPane>
                 </f:facet>
                 <f:facet name="welcome">
-                    <af:image source="/images/BusinessLifestyle.png" id="i2"/>
+                    <af:region value="#{bindings.dynamicRegion1.regionModel}" id="r1"/>
                 </f:facet>
                 <f:facet name="innerToolbar">
                 

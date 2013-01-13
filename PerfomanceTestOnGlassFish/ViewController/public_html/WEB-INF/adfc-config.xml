@@ -2,6 +2,10 @@
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <view id="Home">
     <page>/Home.jsf</page>
+    <input-page-parameter id="__5">
+      <from-value>#{pageFlowScope.welcomeURL}</from-value>
+      <to-value>#{viewScope.welcomeURL}</to-value>
+    </input-page-parameter>
   </view>
   <view id="Report">
     <page>/Report.jsf</page>

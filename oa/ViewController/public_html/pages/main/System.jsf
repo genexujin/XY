@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="System.jsf" id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/oracle/ui/pattern/dynamicShell/dynamicTabShell.jspx" value="#{bindings.ptb1}"
+                             id="pt1">
+                <f:facet name="copyright">
+                    <af:panelGroupLayout id="pgl1" layout="horizontal">
+                        <af:outputText value="上海市黄浦区教育学院 版权所有" id="ot1"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="about">
+                    <af:panelGroupLayout id="pgl2" halign="right">
+                        <af:outputText value="地址：黄浦区丽园路478号 邮编:200023" id="ot2"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="navigation">
+                    <af:panelAccordion id="pa1">
+                        <af:showDetailItem text="采购管理" id="sdi1" icon="/images/icons/cart.gif"/>
+                        <af:showDetailItem text="设备报修" id="sdi2" icon="/images/icons/monitors.png"/>
+                        <af:showDetailItem text="教室管理" id="sdi3" icon="/images/icons/structure.png"/>
+                        <af:showDetailItem text="会议室管理" id="sdi4" icon="/images/icons/team.png"/>
+                        <af:showDetailItem text="车辆管理" id="sdi5" icon="/images/icons/car_arrow.png"/>
+                        <af:showDetailItem text="订餐管理" id="sdi7" icon="/images/icons/coffee.png"/>
+                        <af:showDetailItem text="通知下达" id="sdi6" icon="/images/icons/history.png"/>
+                    </af:panelAccordion>
+                </f:facet>
+                <f:facet name="globalLinks"/>
+                <f:facet name="status"/>
+                <f:facet name="globalToolbar"/>
+                <f:facet name="globalSearch"/>
+                <f:facet name="globalTabs">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="主页" id="cni1" action="Home"/>
+                        <af:commandNavigationItem text="平台功能" id="cni2" selected="true"/>
+                        <af:commandNavigationItem text="报表" id="cni3" action="Report"/>
+                        <af:commandNavigationItem text="平台管理" id="cni4" action="Admin"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="welcome">
+                    <af:region value="#{bindings.dynamicRegion1.regionModel}" id="r1"/>
+                </f:facet>
+                <f:facet name="innerToolbar"/>
+                <f:attribute name="tooManyTabsPopupText" value="您已打开太多标签页。您需要关闭一些，然后才能打开新的标签页。"/>
+                <f:attribute name="tooManyTabsPopupTitle" value="打开太多标签页"/>
+                <f:attribute name="legalAreaPosition" value="12"/>
+                <f:attribute name="headerSplitterPosition" value="25"/>
+                <f:attribute name="globalAreaSplitterPosition" value="0"/>
+                <f:attribute name="dirtyTabPopupTitle" value="当前标签有未保存的数据"/>
+                <f:attribute name="dirtyTabPopupText" value="当前标签有未保存的数据，确定离开吗？"/>
+                <f:attribute name="brandingTitle" value="黄浦区教育学院内部管理平台"/>
+                <f:attribute name="logoImagePath" value="/images/Logo.jpg"/>
+                <f:attribute name="navSplitterPosition" value="170"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>
