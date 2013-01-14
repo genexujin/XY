@@ -44,6 +44,13 @@
 --------------------------------------------------------
 
    CREATE SEQUENCE  "OA"."ROLES_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+   
+--------------------------------------------------------
+--  DDL for Sequence REPAIR_CALLS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "OA"."REPAIR_CALLS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+  
 --------------------------------------------------------
 --  DDL for Table ANNOUNCEMENTS
 --------------------------------------------------------
@@ -196,6 +203,32 @@
 	"CREATED_AT" DATE, 
 	"CREATED_BY" VARCHAR2(20 BYTE)
    ) ;
+   
+--------------------------------------------------------
+--  DDL for Table REPAIR_CALLS
+--------------------------------------------------------
+
+  CREATE TABLE "OA"."REPAIR_CALLS" 
+   (	"CALL_ID" VARCHAR2(20 BYTE), 
+	"CALLER_ID" VARCHAR2(20 BYTE), 
+	"CALLEE_ID" VARCHAR2(20 BYTE), 
+	"LOCATION_ID" VARCHAR2(20 BYTE), 
+	"LOCATION_DETAIL" VARCHAR2(200 BYTE), 
+	"CREATE_BY" VARCHAR2(20 BYTE), 
+	"CREATE_AT" DATE, 
+	"LAST_UPDATED_BY" VARCHAR2(20 BYTE), 
+	"LAST_UPDATED_AT" DATE, 
+	"STATE" VARCHAR2(20 BYTE), 
+	"CALL_RESULT" VARCHAR2(20 BYTE), 
+	"CALL_RESULT_DETAIL" VARCHAR2(500 BYTE), 
+	"CALL_EVAL" VARCHAR2(20 BYTE), 
+	"CALL_EVAL_DETAIL" VARCHAR2(20 BYTE), 
+	"REASON_LEVEL_1" VARCHAR2(40 BYTE), 
+	"REASON_LEVEL_2" VARCHAR2(40 BYTE), 
+	"REASON_LEVEL_3" VARCHAR2(40 BYTE), 
+	"REASON_DETAIL" VARCHAR2(500 BYTE)
+   ) ;
+   
 REM INSERTING into OA.ANNOUNCEMENTS
 REM INSERTING into OA.DEPARTMENTS
 REM INSERTING into OA.EMPLOYEES
@@ -321,6 +354,13 @@ Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','2
 
   CREATE UNIQUE INDEX "OA"."MENUS_PK" ON "OA"."MENUS" ("MENU_ID") 
   ;
+  
+--------------------------------------------------------
+--  DDL for Index REPAIR_CALLS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OA"."REPAIR_CALLS_PK" ON "OA"."REPAIR_CALLS" ("CALL_ID") ;
+  
 --------------------------------------------------------
 --  Constraints for Table DEPARTMENTS
 --------------------------------------------------------
@@ -385,6 +425,14 @@ Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','2
   ALTER TABLE "OA"."ROLE_MENUS" ADD CONSTRAINT "ROLE_MENUS_PK" PRIMARY KEY ("ROLE_ID", "MENU_ID") ENABLE;
   ALTER TABLE "OA"."ROLE_MENUS" MODIFY ("MENU_ID" NOT NULL ENABLE);
   ALTER TABLE "OA"."ROLE_MENUS" MODIFY ("ROLE_ID" NOT NULL ENABLE);
+  
+--------------------------------------------------------
+--  Constraints for Table REPAIR_CALLS
+--------------------------------------------------------
+
+  ALTER TABLE "OA"."REPAIR_CALLS" ADD CONSTRAINT "REPAIR_CALLS_PK" PRIMARY KEY ("CALL_ID") ENABLE;
+  ALTER TABLE "OA"."REPAIR_CALLS" MODIFY ("CALL_ID" NOT NULL ENABLE);
+  
 --------------------------------------------------------
 --  DDL for Trigger ANNOUNCEMENTS_TRG
 --------------------------------------------------------
@@ -497,3 +545,20 @@ BEGIN
 END;
 /
 ALTER TRIGGER "OA"."ROLES_TRG" ENABLE;
+
+--------------------------------------------------------
+--  DDL for Trigger REPAIR_CALLS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OA"."REPAIR_CALLS_TRG" BEFORE INSERT ON "OA"."REPAIR_CALLS"
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.CALL_ID IS NULL THEN
+      SELECT REPAIR_CALLS_SEQ.NEXTVAL INTO :NEW.CALL_ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "OA"."REPAIR_CALLS_TRG" ENABLE;
