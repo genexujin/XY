@@ -78,6 +78,7 @@
     function submit() {
         var form = document.getElementById('form1');
         if (validation()) {
+            
             form.submit();
         }
     }

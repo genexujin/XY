@@ -152,6 +152,24 @@ public class JSFUtils {
             valueExp.setValue(elContext, newValue);
         }
     }
+    
+    public static void setExpressionValue(String expression, Object newValue,FacesContext facesContext) {
+         
+        Application app = facesContext.getApplication();
+        ExpressionFactory elFactory = app.getExpressionFactory();
+        ELContext elContext = facesContext.getELContext();
+        ValueExpression valueExp = 
+            elFactory.createValueExpression(elContext, expression, 
+                                            Object.class);
+
+        //Check that the input newValue can be cast to the property type
+        //expected by the managed bean.
+        //If the managed Bean expects a primitive we rely on Auto-Unboxing
+        Class bindClass = valueExp.getType(elContext);
+        if (bindClass.isPrimitive() || bindClass.isInstance(newValue)) {
+            valueExp.setValue(elContext, newValue);
+        }
+    }
 
     /**
      * Convenience method for setting the value of a managed bean by name

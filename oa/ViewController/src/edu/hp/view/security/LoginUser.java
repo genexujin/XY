@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class LoginUser {
     
     private String userName;
+    private String displayName;
     private ArrayList<String> userGroups;
     private ArrayList<String> userRoles;
     
@@ -31,5 +32,13 @@ public class LoginUser {
 
     public ArrayList<String> getUserRoles() {
         return userRoles;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 }

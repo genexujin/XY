@@ -34,9 +34,9 @@ public class SecurityFilter implements Filter {
 
         if (loginUser == null) {
         
-            chain.doFilter(request, response);
+            //chain.doFilter(request, response);
             
-            //((HttpServletResponse)response).sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login.html");
+            ((HttpServletResponse)response).sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login.html");
             
            
 
