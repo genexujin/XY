@@ -20,7 +20,10 @@ import javax.servlet.http.*;
 import javax.sql.DataSource;
 
 public class SignInServlet extends HttpServlet {
+    
     private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
+    private static final String LOGIN_PAGE_NAME = "/login.jsp";
+    private static final String ACTION_LOGIN = "signin";
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -37,7 +40,7 @@ public class SignInServlet extends HttpServlet {
         String password = request.getParameter("password");
         HttpSession session = request.getSession(true);
 
-        if (userName != null && password != null && action != null && action.equals("signin")) {
+        if (userName != null && password != null && action != null && action.equals(ACTION_LOGIN)) {
             String sql =
                 "select employees.user_name," + "employees.first_name, " + "employees.last_name, " + "employees.gender," +
                 "roles.role_name " + "from employees,role_users,roles" + " where " +
@@ -104,7 +107,7 @@ public class SignInServlet extends HttpServlet {
 
         } else {
             session.invalidate();
-            response.sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login.html");
+            response.sendRedirect(Constants.WEB_ROOT_CONTEXT + LOGIN_PAGE_NAME);
         }
 
     }

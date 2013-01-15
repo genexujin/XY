@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
-    <af:document title="系统功能" id="d1">
+    <af:document title="系统功能" id="d1" binding="#{viewScope.SystemBean.document}">
         <af:form id="f1">
             <af:pageTemplate viewId="/oracle/ui/pattern/dynamicShell/dynamicTabShell.jspx" value="#{bindings.ptb1}"
                              id="pt1">
@@ -97,7 +97,17 @@
                     </af:panelAccordion>
                 </f:facet>
                 <f:facet name="globalLinks"/>
-                <f:facet name="status"/>
+                <f:facet name="status">
+                    <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end">
+                        <af:goLink text="登出" id="gl1" destination="/signinservlet?action=logout"/>
+                        <af:spacer width="4" height="10" id="s1"/>
+                        <af:image source="/images/icons/exit.png" id="i1"/>
+                        <af:spacer width="12" height="10" id="s2"/>
+                        <af:outputText value="当前用户：" id="ot3"/>
+                        <af:outputText value="#{sessionScope.LoginUserBean.displayName}" id="ot4"
+                                       inlineStyle="color:rgb(33,33,255);"/>
+                    </af:panelGroupLayout>
+                </f:facet>
                 <f:facet name="globalToolbar"/>
                 <f:facet name="globalSearch"/>
                 <f:facet name="globalTabs">

@@ -12,7 +12,7 @@
     <body style="margin: 0;" onload="remCookie();" >
     <img src="/oa/images/bk.jpg" id="bgimage"></img>
         <div id="apDiv1">
-            <form id="form1" action="​signinservlet"  name="form1" method="post">
+            <form id="form1"  name="form1" method="post">
                ​
                 <div id="login-box">
                     <h2 style="padding-bottom:30px;">黄浦区教育学院办公管理系统</h2>

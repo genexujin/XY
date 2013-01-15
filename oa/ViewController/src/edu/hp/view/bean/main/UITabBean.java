@@ -42,13 +42,7 @@ public class UITabBean {
     //    protected String launchTitle;
     //    protected String launchTaskflow;
 
-
-    /**
-     *
-     */
-    protected void initMenus() {
-
-        LoginUserMenuBean menus = (LoginUserMenuBean)JSFUtils.resolveExpression("#{sessionScope.LoginUserMenuBean}");
+    public UITabBean(){
         
         LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
         
@@ -57,6 +51,16 @@ public class UITabBean {
             user = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
             JSFUtils.setExpressionValue("#{sessionScope.LoginUserBean}",user);
         }
+        
+    }
+    /**
+     *
+     */
+    protected void initMenus() {
+
+        LoginUserMenuBean menus = (LoginUserMenuBean)JSFUtils.resolveExpression("#{sessionScope.LoginUserMenuBean}");
+        
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
         
         if (menus == null) {
             
