@@ -84,7 +84,7 @@ function submit() {
         else {
             delMem();
         }
-        
+        form.action='signinservlet';
         form.submit();
 
     }
@@ -103,7 +103,7 @@ function validation() {
     }
 
     if (pass.length <= 0) {
-        document.getElementById('passwordspan').innerHTML = " <span style='color:red;font-size:15px;'> * 请输入密�?/span>";
+        document.getElementById('passwordspan').innerHTML = " <span style='color:red;font-size:15px;'> * 请输入密�?/span>";
         return false;
     }
     else {
