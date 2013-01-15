@@ -134,8 +134,8 @@
     <servlet-class>oracle.adf.library.webapp.ResourceServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>edu.hp.view.security.LoginServlet</servlet-class>
+    <servlet-name>SignInServlet</servlet-name>
+    <servlet-class>edu.hp.view.security.SignInServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
@@ -170,8 +170,8 @@
     <url-pattern>/adflib/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/loginservlet</url-pattern>
+    <servlet-name>SignInServlet</servlet-name>
+    <url-pattern>/signinservlet</url-pattern>
   </servlet-mapping>
   <mime-mapping>
     <extension>swf</extension>

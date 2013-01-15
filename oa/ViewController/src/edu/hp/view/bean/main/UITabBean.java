@@ -2,8 +2,10 @@ package edu.hp.view.bean.main;
 
 import edu.hp.view.bean.session.LoginUserMenuBean;
 
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.security.LoginUserMenu;
 import edu.hp.view.utils.utils.ADFUtils;
+import edu.hp.view.utils.utils.Constants;
 import edu.hp.view.utils.utils.JSFUtils;
 
 import java.util.ArrayList;
@@ -14,7 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import javax.servlet.http.HttpSession;
 
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.layout.RichPanelGroupLayout;
@@ -39,25 +44,31 @@ public class UITabBean {
 
 
     /**
-     * 初始化菜单
+     *
      */
     protected void initMenus() {
 
         LoginUserMenuBean menus = (LoginUserMenuBean)JSFUtils.resolveExpression("#{sessionScope.LoginUserMenuBean}");
-
-        //如果菜单没有被初始化则做初始化
+        
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        
+        if(user==null){
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            user = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
+            JSFUtils.setExpressionValue("#{sessionScope.LoginUserBean}",user);
+        }
+        
         if (menus == null) {
-            //新建菜单Bean
+            
             menus = new LoginUserMenuBean();
-            //设置到Session Scope
+            
             JSFUtils.setExpressionValue("#{sessionScope.LoginUserMenuBean}", menus);
 
-            //执行查询当前用户所能访问的所有菜单
-            //页面绑定文件中需要有queryUserMenu的方法绑定
+
             OperationBinding binding = ADFUtils.findOperation("queryUserMenu");
             Map map = binding.getParamsMap();
-            //TODO gene需要换成当前登录用户
-            map.put("userName", "gene");
+            
+            map.put("userName", user.getUserName());
             binding.execute();
 
             if (binding.getErrors().isEmpty()) {
@@ -68,7 +79,7 @@ public class UITabBean {
     }
 
     /**
-     * 将菜单加载到Session中
+     * 
      * @param menus
      */
     protected void createMenus(LoginUserMenuBean menus) {
@@ -82,7 +93,7 @@ public class UITabBean {
         menus.setSysMealMenus(new ArrayList<LoginUserMenu>());
         menus.setSysPurMenus(new ArrayList<LoginUserMenu>());
 
-        //页面需要有UserMenusIterator的绑定
+        //椤甸潰闇�鏈塙serMenusIterator鐨勭粦瀹�
         DCIteratorBinding it = ADFUtils.findIterator("UserMenusIterator");
 
         for (Row row : it.getAllRowsInRange()) {

@@ -2,38 +2,24 @@ package edu.hp.view.security;
 
 import edu.hp.view.utils.utils.Constants;
 
-import edu.hp.view.utils.utils.JSFUtils;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
 
-import javax.faces.FactoryFinder;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.FacesContext;
-
-import javax.faces.context.FacesContextFactory;
-
-import javax.faces.lifecycle.Lifecycle;
-import javax.faces.lifecycle.LifecycleFactory;
-
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 import javax.sql.DataSource;
 
-public class LoginServlet extends HttpServlet {
+public class SignInServlet extends HttpServlet {
     private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
 
     public void init(ServletConfig config) throws ServletException {
@@ -91,11 +77,12 @@ public class LoginServlet extends HttpServlet {
                 if (user != null) {
                                        
                     session.setAttribute(Constants.SECURITY_FILTER_SESSION_KEY, user);
-                    LoginUser usernew = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
+                    //LoginUser usernew = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
+                    //request.getRequestDispatcher(Constants.WEB_ROOT_CONTEXT + "/faces/Home").forward(request, response);
                     response.sendRedirect(Constants.WEB_ROOT_CONTEXT + "/faces/Home");
                                         
                 } else {
-                    response.sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login_error.html");
+                    response.sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login_error.jsp");
                 }
 
             } catch (Exception sqle) {
@@ -121,6 +108,4 @@ public class LoginServlet extends HttpServlet {
         }
 
     }
-
-    
 }
