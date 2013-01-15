@@ -74,7 +74,7 @@ addLoadEvent(function () {
     remCookie();
 });
 
-function submit() {
+function submitform() {
     var form = document.getElementById('form1');
     if (validation()) {
         
