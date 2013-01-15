@@ -16,6 +16,10 @@
     Name="AdminModule"
     FullName="edu.hp.model.biz.AdminModule"
     SharedScope="0"/>
+  <AppModuleUsage
+    Name="RepairCallsAppModule"
+    FullName="edu.hp.model.biz.RepairCallsAppModule"
+    SharedScope="0"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
