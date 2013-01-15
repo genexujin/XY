@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RepairCallsAppModule"
+  Version="11.1.2.62.76"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="RepairCallsView1"
+    ViewObjectName="edu.hp.model.vo.RepairCallsView"/>
+  <ViewUsage
+    Name="EmployeesView1"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"/>
+  <ViewUsage
+    Name="RepairCallsView2"
+    ViewObjectName="edu.hp.model.vo.RepairCallsView"/>
+  <ViewUsage
+    Name="EmployeesView2"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"/>
+  <ViewUsage
+    Name="RepairCallsView3"
+    ViewObjectName="edu.hp.model.vo.RepairCallsView"/>
+  <ViewLinkUsage
+    Name="EmpRepairCalleeViewLink"
+    ViewLinkObjectName="edu.hp.model.vo.link.EmpRepairCalleeViewLink"
+    SrcViewUsageName="edu.hp.model.biz.RepairCallsAppModule.EmployeesView1"
+    DstViewUsageName="edu.hp.model.biz.RepairCallsAppModule.RepairCallsView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="EmpRepairCallerViewLink"
+    ViewLinkObjectName="edu.hp.model.vo.link.EmpRepairCallerViewLink"
+    SrcViewUsageName="edu.hp.model.biz.RepairCallsAppModule.EmployeesView2"
+    DstViewUsageName="edu.hp.model.biz.RepairCallsAppModule.RepairCallsView3"
+    Reversed="false"/>
+</AppModule>

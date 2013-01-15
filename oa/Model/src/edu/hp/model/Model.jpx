@@ -13,6 +13,7 @@
     <Attr Name="_NamedConnection" Value="oa"/>
     <Attr Name="_appModuleNames0" Value="edu.hp.model.biz.AdminModule"/>
     <Attr Name="_appModuleNames1" Value="edu.hp.model.biz.RootAppModule"/>
+    <Attr Name="_appModuleNames2" Value="edu.hp.model.biz.RepairCallsAppModule"/>
   </DesignTime>
   <Containee
     Name="biz"

@@ -26,4 +26,17 @@
          <Custom JDBCDataSource="jdbc/oaDS"/>
       </AppModuleConfig>
    </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.RepairCallsAppModule">
+      <AppModuleConfig name="RepairCallsAppModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.RepairCallsAppModule" DeployPlatform="LOCAL">
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.RepairCallsAppModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="RepairCallsAppModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.RepairCallsAppModule" DeployPlatform="LOCAL">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.RepairCallsAppModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
 </BC4JConfig>

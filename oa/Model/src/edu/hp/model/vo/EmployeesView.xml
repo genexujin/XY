@@ -170,7 +170,8 @@
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Employees"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsUpdateable="while_insert"/>
   <ViewLinkAccessor
     Name="RolesVA"
     ViewLink="edu.hp.model.vo.link.UserRoleViewLink"
@@ -185,6 +186,16 @@
   <ViewLinkAccessor
     Name="MgrEmployeesVA"
     ViewLink="edu.hp.model.vo.link.EmpMgrViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="RepairCallsForCalleeView"
+    ViewLink="edu.hp.model.vo.link.EmpRepairCalleeViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="RepairCallsForCallerVA"
+    ViewLink="edu.hp.model.vo.link.EmpRepairCallerViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
 </ViewObject>
