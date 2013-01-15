@@ -9,7 +9,12 @@
   DBObjectName="EMPLOYEES"
   AliasName="Employees"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.eo.EmployeesImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="UserName"
     IsNotNull="true"

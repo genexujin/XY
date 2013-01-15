@@ -22,6 +22,7 @@ import oracle.adf.controller.TaskFlowId;
 
 import oracle.adf.model.binding.DCIteratorBinding;
 
+import oracle.adf.view.rich.component.rich.RichDocument;
 import oracle.adf.view.rich.component.rich.layout.RichPanelAccordion;
 
 import oracle.binding.OperationBinding;
@@ -34,6 +35,7 @@ public class SystemBean extends UITabBean {
 
     private String taskFlowId = "/WEB-INF/flows/welcome/welcome-btf.xml#welcome-btf";
     private RichPanelAccordion menuPanelAccordion;
+    private RichDocument document;
 
 
     public SystemBean() {
@@ -58,5 +60,13 @@ public class SystemBean extends UITabBean {
 
     public String getTaskFlowId() {
         return taskFlowId;
+    }
+
+    public void setDocument(RichDocument document) {
+        this.document = document;
+    }
+
+    public RichDocument getDocument() {
+        return document;
     }
 }
