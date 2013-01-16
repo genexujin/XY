@@ -158,6 +158,9 @@
                         </list>
                      </hash>
                      <value n="internalName" v="libraries"/>
+                     <list n="selectedLibraries">
+                        <string v="SMS"/>
+                     </list>
                      <value n="targetWithinJar" v="WEB-INF/lib"/>
                      <value n="type" v="3"/>
                   </hash>
