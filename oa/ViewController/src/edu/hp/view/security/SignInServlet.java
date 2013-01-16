@@ -12,6 +12,8 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 
+import java.util.HashMap;
+
 import javax.naming.InitialContext;
 
 import javax.servlet.*;
@@ -67,13 +69,14 @@ public class SignInServlet extends HttpServlet {
                     if (first) {
                         user = new LoginUser();
                         user.setUserName(rs.getString(1));
-                        user.setDisplayName(rs.getString(3) + rs.getString(2));
-                        user.setUserRoles(new ArrayList<String>());
-                        user.getUserRoles().add(rs.getString(4));
+                        user.setDisplayName(rs.getString(3) + rs.getString(2));                        
+                        user.setUserRoles(new ArrayList<String>());                       
+                        user.setIsUserInRole( new HashMap<String,Boolean>());                        
                         first = false;
                     }
-
-                    user.getUserRoles().add(rs.getString(4));
+                    
+                    user.getIsUserInRole().put(rs.getString(5), true);
+                    user.getUserRoles().add(rs.getString(5));
 
                 }
 

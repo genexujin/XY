@@ -11,6 +11,7 @@ import edu.hp.view.utils.utils.JSFUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.util.Iterator;
 import java.util.List;
 
 import java.util.Map;
@@ -42,36 +43,45 @@ public class UITabBean {
     //    protected String launchTitle;
     //    protected String launchTaskflow;
 
-    public UITabBean(){
-        
+    public UITabBean() {
+
         LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-        
-        if(user==null){
-            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+       
+        if (user == null) {
+            HttpSession session =
+                (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             user = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
-            JSFUtils.setExpressionValue("#{sessionScope.LoginUserBean}",user);
+            JSFUtils.setExpressionValue("#{sessionScope.LoginUserBean}", user);
+            HashMap<String, Boolean> hashMap = user.getIsUserInRole();
+            Iterator<String> iterator = hashMap.keySet().iterator();
+            while (iterator.hasNext()) {
+
+                System.err.println(iterator.next());
+            }
+
         }
-        
+
     }
+
     /**
      *
      */
     protected void initMenus() {
 
         LoginUserMenuBean menus = (LoginUserMenuBean)JSFUtils.resolveExpression("#{sessionScope.LoginUserMenuBean}");
-        
+
         LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-        
+
         if (menus == null) {
-            
+
             menus = new LoginUserMenuBean();
-            
+
             JSFUtils.setExpressionValue("#{sessionScope.LoginUserMenuBean}", menus);
 
 
             OperationBinding binding = ADFUtils.findOperation("queryUserMenu");
             Map map = binding.getParamsMap();
-            
+
             map.put("userName", user.getUserName());
             binding.execute();
 
@@ -83,7 +93,7 @@ public class UITabBean {
     }
 
     /**
-     * 
+     *
      * @param menus
      */
     protected void createMenus(LoginUserMenuBean menus) {
@@ -150,13 +160,13 @@ public class UITabBean {
         }
     }
 
-    
+
     public void openMenu(ActionEvent actionEvent) {
         try {
             UIComponent component = actionEvent.getComponent();
             String title = (String)(component.getAttributes().get("title"));
             String taskflowId = (String)(component.getAttributes().get("taskflow"));
-            HashMap<String,Object> parameters = new HashMap<String,Object>();
+            HashMap<String, Object> parameters = new HashMap<String, Object>();
             TabContext.getCurrentInstance().addTab(title, taskflowId, parameters);
 
         } catch (TabContext.TabOverflowException toe) {

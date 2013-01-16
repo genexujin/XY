@@ -86,7 +86,7 @@
       <property
          name="fromOutcome">Home</property>
       <property
-         name="sdm:polyPoints">B36,282.5,140.39941,-168.5,140.39941,T50</property>
+         name="sdm:polyPoints">B31,279.69513,140.39943,-168.50002,140.39943,T50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -96,7 +96,7 @@
       <property
          name="fromOutcome">Admin</property>
       <property
-         name="sdm:polyPoints">R50,588.5,84.149414,T50</property>
+         name="sdm:polyPoints">R50,588.5,84.14943,T50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -106,7 +106,7 @@
       <property
          name="fromOutcome">System</property>
       <property
-         name="sdm:polyPoints">B64,296.5,269.1494,L50</property>
+         name="sdm:polyPoints">B69,299.30487,269.1494,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"

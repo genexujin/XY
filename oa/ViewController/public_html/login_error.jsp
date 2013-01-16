@@ -4,11 +4,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>黄浦区教育学院办公管理系统</title>
-        
+         <script src="js/login.js" type="text/javascript"></script>
         <link href="/oa/css/login-box.css" rel="stylesheet" type="text/css"/>
     </head>
    
-    <script src="js/login.js" type="application/javascript"></script>
+   
     <body style="margin: 0;" onload="remCookie();" >
     <img src="/oa/images/bk.jpg" id="bgimage"></img>
         <div id="apDiv1">

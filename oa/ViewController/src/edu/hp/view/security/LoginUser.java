@@ -1,6 +1,7 @@
 package edu.hp.view.security;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LoginUser {
     
@@ -8,7 +9,7 @@ public class LoginUser {
     private String displayName;
     private ArrayList<String> userGroups;
     private ArrayList<String> userRoles;
-    
+    private HashMap<String,Boolean> isUserInRole;
     
     public void setUserName(String userName) {
         this.userName = userName;
@@ -40,5 +41,13 @@ public class LoginUser {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public void setIsUserInRole(HashMap<String, Boolean> isUserInRole) {
+        this.isUserInRole = isUserInRole;
+    }
+
+    public HashMap<String, Boolean> getIsUserInRole() {
+        return isUserInRole;
     }
 }

@@ -53,30 +53,9 @@ function remCookie() {
     document.getElementById('rememberMe').checked = readCookie("rem");
 }
 
-// Multiple onload function created by: Simon Willison
-// http://simon.incutio.com/archive/2004/05/26/addLoadEvent
-function addLoadEvent(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-        window.onload = func;
-    }
-    else {
-        window.onload = function () {
-            if (oldonload) {
-                oldonload();
-            }
-            func();
-        }
-    }
-}
-
-addLoadEvent(function () {
-    remCookie();
-});
-
 function submitform() {
     var form = document.getElementById('form1');
-    if (validation()) {
+    if (validationForm()) {
         
         if (document.getElementById('rememberMe').checked) {
             toMem();
@@ -84,13 +63,13 @@ function submitform() {
         else {
             delMem();
         }
-        form.action='signinservlet';
+        form.setAttribute('action','signinservlet');
         form.submit();
 
     }
 }
 
-function validation() {
+function validationForm() {
     var name = document.getElementById('userid').value;
     var pass = document.getElementById('password').value;
 
@@ -103,7 +82,7 @@ function validation() {
     }
 
     if (pass.length <= 0) {
-        document.getElementById('passwordspan').innerHTML = " <span style='color:red;font-size:15px;'> * 请输入密码/span>";
+        document.getElementById('passwordspan').innerHTML = " <span style='color:red;font-size:15px;'> * 请输入密码 </span>";
         return false;
     }
     else {
@@ -112,3 +91,4 @@ function validation() {
 
     return true;
 }
+  

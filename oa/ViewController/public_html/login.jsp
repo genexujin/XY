@@ -4,20 +4,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>黄浦区教育学院办公管理系统</title>
-        
+         <script src="js/login.js" type="text/javascript"></script>
         <link href="/oa/css/login-box.css" rel="stylesheet" type="text/css"/>
     </head>
-   <script src="js/login.js" type="application/javascript"></script>
-    
+   
+   
     <body style="margin: 0;" onload="remCookie();" >
     <img src="/oa/images/bk.jpg" id="bgimage"></img>
         <div id="apDiv1">
-            <form id='form1' name='form1' method='post' onsubmit="validation()">
+            <form id="form1" action="signinservlet"  name="form1" method="post" onsubmit="validation()">
                ​
                 <div id="login-box">
                     <h2 style="padding-bottom:30px;">黄浦区教育学院办公管理系统</h2>
                        
-                      
+                     
                     <div id="login-box-name">用户名:</div>
                     <div id="login-box-field">
                         <input id="userid" name="userid" class="form-login" title="Username" value="" size="30"
@@ -30,10 +30,10 @@
                         <input id="password" name="password" type="password" class="form-login" title="Password"
                                value="" size="30"/>
                     </div>
-                    <br/><span id="usernamespan"></span><span id="passwordspan"></span>  <br/>                   
+                    <br/><span style='color:red;font-size:15px;' id="usernamespan"> </span><span id="passwordspan"></span>  <br/>                   
                      
                     <span class="login-box-options" >
-                       <a style="margin-left:10px;" href="#" onclick="submitform()">
+                       <a style="margin-left:10px;" href="#" onclick="submitform();">
                             <img src="/oa/images/LoginButton.png" width="80" height="20"/>
                        </a>
                        <span style="float:right;margin-right:40px">
