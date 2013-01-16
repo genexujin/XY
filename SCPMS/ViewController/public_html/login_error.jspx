@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="登录" id="d1">
+            <af:messages id="m1"/>
+            <af:pageTemplate viewId="/oracle/ui/pattern/dynamicShell/dynamicTabShell.jspx"
+                             value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="copyright">
+                    <af:outputText value="2011 SDARI 版权所有" id="ot2"/>
+                </f:facet>
+                <f:facet name="about">
+                    <af:navigationPane hint="buttons" id="ptnp1">
+                        <af:commandNavigationItem text="关于" action="noop"
+                                                  id="commandNavigationItem3"/>
+                        <af:commandNavigationItem text="隐私条款" action="noop"
+                                                  id="commandNavigationItem4"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="navigation">
+                 <af:panelAccordion id="pa1">
+                            <af:showDetailItem text="合同管理" id="sdi1" icon="/images/icons/factory.png">
+                                <af:panelList id="pl1"/>
+                            </af:showDetailItem>
+     
+                            <af:showDetailItem text="发票及收款管理" id="sdi3" icon="/images/icons/make.png"
+                                               disabled="true">
+                                <af:panelList id="pl3"/>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="报表" id="sdi4" icon="/images/icons/graph.png"
+                                               disabled="true">
+                                <af:panelList id="pl4"/>
+                            </af:showDetailItem>
+                            
+                            <af:showDetailItem id="sdi5" text="系统管理" icon="/images/icons/controller.png"
+                                               disabled="true">
+                              <af:panelList id="pl5"/>
+                            </af:showDetailItem>
+                        </af:panelAccordion>
+                </f:facet>
+                <f:facet name="globalLinks">
+                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                        <af:commandImageLink text="主页" id="cl2"
+                                             icon="/images/icons/home.gif"/>
+                        <af:spacer width="10" height="10" id="s1"/>
+                        <af:commandImageLink text="帮助" id="cil2"
+                                             icon="/images/icons/help.png"/>
+                        <af:spacer width="10" height="10" id="s2"/>
+                        <af:commandImageLink text="登出" id="cil3"
+                                             icon="/images/icons/fix.png"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="status"></f:facet>
+                <f:facet name="globalToolbar"/>
+                <f:facet name="globalSearch"/>
+                <f:facet name="globalTabs"/>
+                <f:facet name="welcome">
+                    <af:panelGroupLayout layout="vertical" valign="middle"
+                                         halign="center" id="pgl1">
+                        <!-- main body -->
+                        <af:spacer width="10" height="150" id="s3"/>
+                        <af:panelBox text="用户名密码输入错误，请重新输入！"
+                                    
+                                     background="medium" showDisclosure="false"
+                                     titleHalign="center" ramp="core"
+                                     inlineStyle="width:300px;"
+                                     styleClass="AFErrorIconStyle">
+                            <af:spacer height="1px" width="240px" id="s6"/>
+                            <f:verbatim>
+                                <form action="j_security_check" method="POST">
+                                    <table style="font-family: 'Microsoft YaHei';">
+                                        <tbody>
+                                            <tr>
+                                                <td>用户名</td>
+                                                <td>
+                                                    <input type="text"
+                                                           id="j_username"
+                                                           name="j_username"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>密码</td>
+                                                <td>
+                                                    <input type="password"
+                                                           id="j_password"
+                                                           name="j_password"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right" colspan="2">
+                                                    <input id="login"
+                                                           type="submit"
+                                                           value="登录"
+                                                           onclick="this.disabled=true; this.form.submit();"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </f:verbatim>
+                            <!--af:form-->
+                            
+                        </af:panelBox>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="innerToolbar"/>
+                <f:attribute name="brandingTitle" value="合同收款管理系统"/>
+                <f:attribute name="logoImagePath" value="/images/Logo.gif"/>
+                <f:attribute name="headerSplitterPosition" value="30"/>
+                <f:attribute name="legalAreaPosition" value="20"/>
+                <f:attribute name="navSplitterPosition" value="180"/>
+                <f:attribute name="globalAreaSplitterPosition" value="10"/>
+                <f:attribute name="headerSplitterDisabled" value="true"/>
+                <f:attribute name="navSplitterDisabled" value="true"/>
+                <f:attribute name="statusWidth" value="150px"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,1357 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="Requisitions.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="center">
+                        <af:panelCollection id="pc1">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.DraftInvoiceRequisition.collectionModel}" var="row"
+                                      rows="#{bindings.DraftInvoiceRequisition.rangeSize}"
+                                      emptyText="#{bindings.DraftInvoiceRequisition.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.DraftInvoiceRequisition.rangeSize}" rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.DraftInvoiceRequisition.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.DraftInvoiceRequisition.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t1">
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.Id.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.Id.label}" id="c1">
+                                    <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.Id.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.Id.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.Id.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.Id.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.Id.tooltip}"
+                                                  id="it1">
+                                        <f:validator binding="#{row.bindings.Id.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.Id.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.Requestor.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.Requestor.label}"
+                                           id="c2">
+                                    <af:inputText value="#{row.bindings.Requestor.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.Requestor.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.Requestor.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.Requestor.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.Requestor.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.Requestor.tooltip}"
+                                                  id="it2">
+                                        <f:validator binding="#{row.bindings.Requestor.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.RequestDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.RequestDate.label}"
+                                           id="c3">
+                                    <af:inputDate value="#{row.bindings.RequestDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.RequestDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.RequestDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.RequestDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.RequestDate.tooltip}"
+                                                  id="id1">
+                                        <f:validator binding="#{row.bindings.RequestDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.RequestDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentId.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentId.label}"
+                                           id="c4">
+                                    <af:inputText value="#{row.bindings.LinePaymentId.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentId.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentId.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentId.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentId.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentId.tooltip}"
+                                                  id="it3">
+                                        <f:validator binding="#{row.bindings.LinePaymentId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentId.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.Amount.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.Amount.label}" id="c5">
+                                    <af:inputText value="#{row.bindings.Amount.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.Amount.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.Amount.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.Amount.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.Amount.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.Amount.tooltip}"
+                                                  id="it4">
+                                        <f:validator binding="#{row.bindings.Amount.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.Amount.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.Status.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.Status.label}" id="c6">
+                                    <af:inputText value="#{row.bindings.Status.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.Status.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.Status.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.Status.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.Status.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.Status.tooltip}"
+                                                  id="it5">
+                                        <f:validator binding="#{row.bindings.Status.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.Memo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.Memo.label}" id="c7">
+                                    <af:inputText value="#{row.bindings.Memo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.Memo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.Memo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.Memo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.Memo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.Memo.tooltip}"
+                                                  id="it6">
+                                        <f:validator binding="#{row.bindings.Memo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.DeptHeadApprover.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.DeptHeadApprover.label}"
+                                           id="c8">
+                                    <af:inputText value="#{row.bindings.DeptHeadApprover.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.DeptHeadApprover.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.DeptHeadApprover.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.DeptHeadApprover.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.DeptHeadApprover.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.DeptHeadApprover.tooltip}"
+                                                  id="it7">
+                                        <f:validator binding="#{row.bindings.DeptHeadApprover.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.DeptHeadOutcome.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.DeptHeadOutcome.label}"
+                                           id="c9">
+                                    <af:inputText value="#{row.bindings.DeptHeadOutcome.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.DeptHeadOutcome.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.DeptHeadOutcome.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.DeptHeadOutcome.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.DeptHeadOutcome.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.DeptHeadOutcome.tooltip}"
+                                                  id="it8">
+                                        <f:validator binding="#{row.bindings.DeptHeadOutcome.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.DeptHeadDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.DeptHeadDate.label}"
+                                           id="c10">
+                                    <af:inputDate value="#{row.bindings.DeptHeadDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.DeptHeadDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.DeptHeadDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.DeptHeadDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.DeptHeadDate.tooltip}"
+                                                  id="id2">
+                                        <f:validator binding="#{row.bindings.DeptHeadDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.DeptHeadDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.DeptHeadMemo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.DeptHeadMemo.label}"
+                                           id="c11">
+                                    <af:inputText value="#{row.bindings.DeptHeadMemo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.DeptHeadMemo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.DeptHeadMemo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.DeptHeadMemo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.DeptHeadMemo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.DeptHeadMemo.tooltip}"
+                                                  id="it9">
+                                        <f:validator binding="#{row.bindings.DeptHeadMemo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.MrktHeadApprover.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.MrktHeadApprover.label}"
+                                           id="c12">
+                                    <af:inputText value="#{row.bindings.MrktHeadApprover.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.MrktHeadApprover.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.MrktHeadApprover.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.MrktHeadApprover.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.MrktHeadApprover.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.MrktHeadApprover.tooltip}"
+                                                  id="it10">
+                                        <f:validator binding="#{row.bindings.MrktHeadApprover.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.MrktHeadOutcome.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.MrktHeadOutcome.label}"
+                                           id="c13">
+                                    <af:inputText value="#{row.bindings.MrktHeadOutcome.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.MrktHeadOutcome.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.MrktHeadOutcome.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.MrktHeadOutcome.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.MrktHeadOutcome.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.MrktHeadOutcome.tooltip}"
+                                                  id="it11">
+                                        <f:validator binding="#{row.bindings.MrktHeadOutcome.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.MrktHeadMemo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.MrktHeadMemo.label}"
+                                           id="c14">
+                                    <af:inputText value="#{row.bindings.MrktHeadMemo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.MrktHeadMemo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.MrktHeadMemo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.MrktHeadMemo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.MrktHeadMemo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.MrktHeadMemo.tooltip}"
+                                                  id="it12">
+                                        <f:validator binding="#{row.bindings.MrktHeadMemo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.MrktHeadDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.MrktHeadDate.label}"
+                                           id="c15">
+                                    <af:inputDate value="#{row.bindings.MrktHeadDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.MrktHeadDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.MrktHeadDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.MrktHeadDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.MrktHeadDate.tooltip}"
+                                                  id="id3">
+                                        <f:validator binding="#{row.bindings.MrktHeadDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.MrktHeadDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.BatchId.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.BatchId.label}"
+                                           id="c16">
+                                    <af:inputText value="#{row.bindings.BatchId.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.BatchId.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.BatchId.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.BatchId.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.BatchId.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.BatchId.tooltip}"
+                                                  id="it13">
+                                        <f:validator binding="#{row.bindings.BatchId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.BatchId.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.Deleted.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.Deleted.label}"
+                                           id="c17">
+                                    <af:inputText value="#{row.bindings.Deleted.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.Deleted.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.Deleted.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.Deleted.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.Deleted.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.Deleted.tooltip}"
+                                                  id="it14">
+                                        <f:validator binding="#{row.bindings.Deleted.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt.label}"
+                                           id="c18">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.CreatedAt.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt.tooltip}"
+                                                  id="id4">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.CreatedAt.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy.label}"
+                                           id="c19">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.CreatedBy.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy.tooltip}"
+                                                  id="it15">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.CreatedBy.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted.label}"
+                                           id="c20">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Deleted.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted.tooltip}"
+                                                  id="it16">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Deleted.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id.label}"
+                                           id="c21">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Id.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id.tooltip}"
+                                                  id="it17">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Id.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceAmount.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceAmount.label}"
+                                           id="c22">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.InvoiceAmount.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceAmount.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceAmount.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceAmount.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceAmount.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceAmount.tooltip}"
+                                                  id="it18">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.InvoiceAmount.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceAmount.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceBatchId.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceBatchId.label}"
+                                           id="c23">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.InvoiceBatchId.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceBatchId.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceBatchId.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceBatchId.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceBatchId.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceBatchId.tooltip}"
+                                                  id="it19">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.InvoiceBatchId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceBatchId.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceDate.label}"
+                                           id="c24">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.InvoiceDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceDate.tooltip}"
+                                                  id="id5">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.InvoiceDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceNumber.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceNumber.label}"
+                                           id="c25">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.InvoiceNumber.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceNumber.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceNumber.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceNumber.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceNumber.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.InvoiceNumber.tooltip}"
+                                                  id="it20">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.InvoiceNumber.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineId.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineId.label}"
+                                           id="c26">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.LineId.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineId.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineId.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineId.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineId.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineId.tooltip}"
+                                                  id="it21">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.LineId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineId.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo.label}"
+                                           id="c27">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Memo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo.tooltip}"
+                                                  id="it22">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Memo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentName.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentName.label}"
+                                           id="c28">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.PaymentName.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentName.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentName.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentName.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentName.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentName.tooltip}"
+                                                  id="it23">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.PaymentName.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanAmount.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanAmount.label}"
+                                           id="c29">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.PaymentPlanAmount.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanAmount.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanAmount.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanAmount.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanAmount.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanAmount.tooltip}"
+                                                  id="it24">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.PaymentPlanAmount.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanAmount.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanDate.label}"
+                                           id="c30">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.PaymentPlanDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanDate.tooltip}"
+                                                  id="id6">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.PaymentPlanDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanInvoiceDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanInvoiceDate.label}"
+                                           id="c31">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.PaymentPlanInvoiceDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanInvoiceDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanInvoiceDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanInvoiceDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanInvoiceDate.tooltip}"
+                                                  id="id7">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.PaymentPlanInvoiceDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PaymentPlanInvoiceDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status.label}"
+                                           id="c32">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Status.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status.tooltip}"
+                                                  id="it25">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Status.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalPayment.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalPayment.label}"
+                                           id="c33">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.TotalPayment.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalPayment.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalPayment.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalPayment.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalPayment.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalPayment.tooltip}"
+                                                  id="it26">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.TotalPayment.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Variance.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Variance.label}"
+                                           id="c34">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Variance.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Variance.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Variance.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Variance.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Variance.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Variance.tooltip}"
+                                                  id="it27">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Variance.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonDate.label}"
+                                           id="c35">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.AbandonDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonDate.tooltip}"
+                                                  id="id8">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.AbandonDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonFlag.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonFlag.label}"
+                                           id="c36">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.AbandonFlag.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonFlag.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonFlag.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonFlag.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonFlag.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AbandonFlag.tooltip}"
+                                                  id="it28">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.AbandonFlag.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.BrokerType.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.BrokerType.label}"
+                                           id="c37">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.BrokerType.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.BrokerType.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.BrokerType.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.BrokerType.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.BrokerType.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.BrokerType.tooltip}"
+                                                  id="it29">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.BrokerType.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType.label}"
+                                           id="c38">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ContractType.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType.tooltip}"
+                                                  id="it30">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ContractType.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt1.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt1.label}"
+                                           id="c39">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.CreatedAt1.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt1.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt1.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt1.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt1.tooltip}"
+                                                  id="id9">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.CreatedAt1.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedAt1.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy1.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy1.label}"
+                                           id="c40">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.CreatedBy1.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy1.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy1.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy1.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy1.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CreatedBy1.tooltip}"
+                                                  id="it31">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.CreatedBy1.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Currency.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Currency.label}"
+                                           id="c41">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Currency.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Currency.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Currency.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Currency.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Currency.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Currency.tooltip}"
+                                                  id="it32">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Currency.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted1.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted1.label}"
+                                           id="c42">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Deleted1.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted1.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted1.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted1.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted1.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted1.tooltip}"
+                                                  id="it33">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Deleted1.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.EffectiveDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.EffectiveDate.label}"
+                                           id="c43">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.EffectiveDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.EffectiveDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.EffectiveDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.EffectiveDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.EffectiveDate.tooltip}"
+                                                  id="id10">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.EffectiveDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.EffectiveDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ExchangeRate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ExchangeRate.label}"
+                                           id="c44">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ExchangeRate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ExchangeRate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ExchangeRate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ExchangeRate.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ExchangeRate.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ExchangeRate.tooltip}"
+                                                  id="it34">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ExchangeRate.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ExchangeRate.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FgCompletionDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FgCompletionDate.label}"
+                                           id="c45">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.FgCompletionDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FgCompletionDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FgCompletionDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FgCompletionDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FgCompletionDate.tooltip}"
+                                                  id="id11">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.FgCompletionDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FgCompletionDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FourContractBatch.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FourContractBatch.label}"
+                                           id="c46">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.FourContractBatch.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FourContractBatch.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FourContractBatch.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FourContractBatch.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FourContractBatch.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FourContractBatch.tooltip}"
+                                                  id="it35">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.FourContractBatch.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.HeaderId.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.HeaderId.label}"
+                                           id="c47">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.HeaderId.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.HeaderId.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.HeaderId.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.HeaderId.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.HeaderId.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.HeaderId.tooltip}"
+                                                  id="it36">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.HeaderId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.HeaderId.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id1.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id1.label}"
+                                           id="c48">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Id1.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id1.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id1.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id1.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id1.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id1.tooltip}"
+                                                  id="it37">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Id1.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id1.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ImoNo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ImoNo.label}"
+                                           id="c49">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ImoNo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ImoNo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ImoNo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ImoNo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ImoNo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ImoNo.tooltip}"
+                                                  id="it38">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ImoNo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineNo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineNo.label}"
+                                           id="c50">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.LineNo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineNo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineNo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineNo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineNo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineNo.tooltip}"
+                                                  id="it39">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.LineNo.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.LineNo.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo1.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo1.label}"
+                                           id="c51">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Memo1.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo1.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo1.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo1.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo1.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Memo1.tooltip}"
+                                                  id="it40">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Memo1.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.OwnerType.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.OwnerType.label}"
+                                           id="c52">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.OwnerType.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.OwnerType.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.OwnerType.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.OwnerType.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.OwnerType.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.OwnerType.tooltip}"
+                                                  id="it41">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.OwnerType.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PlantType.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PlantType.label}"
+                                           id="c53">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.PlantType.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PlantType.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PlantType.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PlantType.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PlantType.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.PlantType.tooltip}"
+                                                  id="it42">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.PlantType.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Price.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Price.label}"
+                                           id="c54">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Price.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Price.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Price.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Price.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Price.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Price.tooltip}"
+                                                  id="it43">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Price.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Price.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipBroker.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipBroker.label}"
+                                           id="c55">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipBroker.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipBroker.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipBroker.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipBroker.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipBroker.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipBroker.tooltip}"
+                                                  id="it44">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipBroker.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipClsfctSociety.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipClsfctSociety.label}"
+                                           id="c56">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipClsfctSociety.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipClsfctSociety.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipClsfctSociety.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipClsfctSociety.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipClsfctSociety.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipClsfctSociety.tooltip}"
+                                                  id="it45">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipClsfctSociety.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipMnftNo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipMnftNo.label}"
+                                           id="c57">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipMnftNo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipMnftNo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipMnftNo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipMnftNo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipMnftNo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipMnftNo.tooltip}"
+                                                  id="it46">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipMnftNo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipName.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipName.label}"
+                                           id="c58">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipName.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipName.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipName.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipName.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipName.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipName.tooltip}"
+                                                  id="it47">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipName.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal.label}"
+                                           id="c59">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipNoInternal.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal.tooltip}"
+                                                  id="it48">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipNoInternal.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipOwner.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipOwner.label}"
+                                           id="c60">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipOwner.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipOwner.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipOwner.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipOwner.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipOwner.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipOwner.tooltip}"
+                                                  id="it49">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipOwner.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPlant.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPlant.label}"
+                                           id="c61">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipPlant.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPlant.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPlant.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPlant.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPlant.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPlant.tooltip}"
+                                                  id="it50">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipPlant.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPrice.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPrice.label}"
+                                           id="c62">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipPrice.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPrice.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPrice.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPrice.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPrice.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPrice.tooltip}"
+                                                  id="it51">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipPrice.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipPrice.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.SignOffDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.SignOffDate.label}"
+                                           id="c63">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.SignOffDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.SignOffDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.SignOffDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.SignOffDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.SignOffDate.tooltip}"
+                                                  id="id12">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.SignOffDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.SignOffDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status1.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status1.label}"
+                                           id="c64">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Status1.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status1.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status1.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status1.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status1.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Status1.tooltip}"
+                                                  id="it52">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Status1.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.WorkStartDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.WorkStartDate.label}"
+                                           id="c65">
+                                    <af:inputDate value="#{row.LinePaymentDetailView.bindings.WorkStartDate.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.WorkStartDate.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.WorkStartDate.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.WorkStartDate.displayWidth}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.WorkStartDate.tooltip}"
+                                                  id="id13">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.WorkStartDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.WorkStartDate.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AgreementImgUrl.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AgreementImgUrl.label}"
+                                           id="c66">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.AgreementImgUrl.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AgreementImgUrl.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AgreementImgUrl.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AgreementImgUrl.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AgreementImgUrl.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AgreementImgUrl.tooltip}"
+                                                  id="it53">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.AgreementImgUrl.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthName.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthName.label}"
+                                           id="c67">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.AuthName.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthName.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthName.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthName.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthName.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthName.tooltip}"
+                                                  id="it54">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.AuthName.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthType.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthType.label}"
+                                           id="c68">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.AuthType.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthType.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthType.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthType.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthType.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthType.tooltip}"
+                                                  id="it55">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.AuthType.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthorizerType.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthorizerType.label}"
+                                           id="c69">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.AuthorizerType.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthorizerType.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthorizerType.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthorizerType.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthorizerType.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.AuthorizerType.tooltip}"
+                                                  id="it56">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.AuthorizerType.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractEntity.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractEntity.label}"
+                                           id="c70">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ContractEntity.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractEntity.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractEntity.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractEntity.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractEntity.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractEntity.tooltip}"
+                                                  id="it57">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ContractEntity.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractNo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractNo.label}"
+                                           id="c71">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ContractNo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractNo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractNo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractNo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractNo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractNo.tooltip}"
+                                                  id="it58">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ContractNo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType1.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType1.label}"
+                                           id="c72">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ContractType1.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType1.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType1.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType1.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType1.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractType1.tooltip}"
+                                                  id="it59">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ContractType1.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactName.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactName.label}"
+                                           id="c73">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.CustomerContactName.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactName.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactName.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactName.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactName.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactName.tooltip}"
+                                                  id="it60">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.CustomerContactName.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactor.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactor.label}"
+                                           id="c74">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.CustomerContactor.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactor.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactor.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactor.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactor.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactor.tooltip}"
+                                                  id="it61">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.CustomerContactor.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerContactor.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerId.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerId.label}"
+                                           id="c75">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.CustomerId.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerId.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerId.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerId.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerId.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerId.tooltip}"
+                                                  id="it62">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.CustomerId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.CustomerId.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted2.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted2.label}"
+                                           id="c76">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Deleted2.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted2.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted2.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted2.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted2.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Deleted2.tooltip}"
+                                                  id="it63">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Deleted2.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignDept.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignDept.label}"
+                                           id="c77">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.DesignDept.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignDept.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignDept.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignDept.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignDept.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignDept.tooltip}"
+                                                  id="it64">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.DesignDept.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignPhase.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignPhase.label}"
+                                           id="c78">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.DesignPhase.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignPhase.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignPhase.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignPhase.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignPhase.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.DesignPhase.tooltip}"
+                                                  id="it65">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.DesignPhase.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FirstDesignFee.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FirstDesignFee.label}"
+                                           id="c79">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.FirstDesignFee.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FirstDesignFee.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FirstDesignFee.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FirstDesignFee.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FirstDesignFee.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FirstDesignFee.tooltip}"
+                                                  id="it66">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.FirstDesignFee.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.FirstDesignFee.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id2.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id2.label}"
+                                           id="c80">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.Id2.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id2.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id2.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id2.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id2.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id2.tooltip}"
+                                                  id="it67">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.Id2.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.Id2.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractMemo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractMemo.label}"
+                                           id="c81">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ContractMemo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractMemo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractMemo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractMemo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractMemo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractMemo.tooltip}"
+                                                  id="it68">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ContractMemo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractId.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractId.label}"
+                                           id="c82">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ParentContractId.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractId.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractId.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractId.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractId.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractId.tooltip}"
+                                                  id="it69">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ParentContractId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractId.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractNo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractNo.label}"
+                                           id="c83">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ParentContractNo.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractNo.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractNo.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractNo.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractNo.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ParentContractNo.tooltip}"
+                                                  id="it70">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ParentContractNo.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectManager.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectManager.label}"
+                                           id="c84">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ProjectManager.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectManager.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectManager.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectManager.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectManager.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectManager.tooltip}"
+                                                  id="it71">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ProjectManager.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectName.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectName.label}"
+                                           id="c85">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ProjectName.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectName.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectName.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectName.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectName.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ProjectName.tooltip}"
+                                                  id="it72">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ProjectName.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RefinedFlag.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RefinedFlag.label}"
+                                           id="c86">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.RefinedFlag.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RefinedFlag.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RefinedFlag.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RefinedFlag.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RefinedFlag.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RefinedFlag.tooltip}"
+                                                  id="it73">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.RefinedFlag.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RegionManager.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RegionManager.label}"
+                                           id="c87">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.RegionManager.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RegionManager.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RegionManager.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RegionManager.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RegionManager.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.RegionManager.tooltip}"
+                                                  id="it74">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.RegionManager.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipModel.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipModel.label}"
+                                           id="c88">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipModel.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipModel.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipModel.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipModel.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipModel.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipModel.tooltip}"
+                                                  id="it75">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipModel.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal1.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal1.label}"
+                                           id="c89">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ShipNoInternal1.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal1.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal1.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal1.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal1.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ShipNoInternal1.tooltip}"
+                                                  id="it76">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ShipNoInternal1.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractStatus.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractStatus.label}"
+                                           id="c90">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.ContractStatus.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractStatus.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractStatus.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractStatus.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractStatus.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.ContractStatus.tooltip}"
+                                                  id="it77">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.ContractStatus.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalAmount.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalAmount.label}"
+                                           id="c91">
+                                    <af:inputText value="#{row.LinePaymentDetailView.bindings.TotalAmount.inputValue}"
+                                                  label="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalAmount.label}"
+                                                  required="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalAmount.mandatory}"
+                                                  columns="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalAmount.displayWidth}"
+                                                  maximumLength="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalAmount.precision}"
+                                                  shortDesc="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalAmount.tooltip}"
+                                                  id="it78">
+                                        <f:validator binding="#{row.LinePaymentDetailView.bindings.TotalAmount.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.DraftInvoiceRequisition.hints.LinePaymentDetailView.TotalAmount.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                            </af:table>
+                        </af:panelCollection>
+                        <!-- id="af_one_column_stretched"   -->
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

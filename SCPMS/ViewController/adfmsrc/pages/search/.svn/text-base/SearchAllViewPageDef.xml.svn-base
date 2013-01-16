@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="SearchAllViewPageDef"
+                Package="pages.search">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="SearchContractBaseViewIterator" Binds="SearchContractBaseView" DataControl="CoreModuleDataControl"
+              RangeSize="25"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchContractBaseViewIterator" id="ImplicitViewCriteriaQuery"/>
+    <iterator Binds="ChildContracts1" RangeSize="25" DataControl="CoreModuleDataControl" id="ChildContracts1Iterator"/>
+    <page path="pages.search.BaseSearchPageDef" id="ptb1" Refresh="ifNeeded"/>
+    <iterator Binds="SearchParentContract" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="SearchParentContractIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchContractBaseViewIterator" id="SearchContractBaseView">
+      <nodeDefinition DefName="com.xy.scpms.model.query.search.SearchContractBaseView" Name="SearchContractBaseView0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ProjectName"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="AuthName"/>
+          <Item Value="AuthType"/>
+          <Item Value="ContractType"/>
+          <Item Value="RgMgrFullName"/>
+          <Item Value="PrjMgrFullName"/>
+          <Item Value="AuthorizerType"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="DesignDept"/>
+          <Item Value="DesignPhase"/>
+          <Item Value="FirstDesignFee"/>
+          <Item Value="ParentContractNo"/>
+          <Item Value="ShipModel"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="Status"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="Memo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ChildContracts1Iterator" id="ChildContracts1">
+      <nodeDefinition DefName="com.xy.scpms.model.query.search.SearchContractBaseView" Name="ChildContracts10">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="AuthName"/>
+          <Item Value="ContractEntity"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findContractById"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findContractById"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.CoreModuleDataControl.methodResults.findContractById_CoreModuleDataControl_dataProvider_findContractById_result">
+      <NamedData NDName="id" NDValue="#{bindings.Id.inputValue}" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <attributeValues IterBinding="SearchContractBaseViewIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SearchParentContractIterator" id="SearchParentContract">
+      <nodeDefinition DefName="com.xy.scpms.model.query.search.SearchContractBaseView"
+                      Name="SearchParentContract0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="AuthName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SearchParentContractIterator" id="ParId">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChildContracts1Iterator" id="SubId">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchContractBaseViewIterator"
+                     id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" InstanceName="CoreModuleDataControl" DataControl="CoreModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

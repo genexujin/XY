@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="browse-contract-btf">
+    <default-activity>findById</default-activity>
+    <input-parameter-definition id="__1">
+      <name>contractId</name>
+      <value>#{pageFlowScope.contractId}</value>
+      <class>oracle.jbo.domain.Number</class>
+      <required/>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>BrowseBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.BrowseBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <method-call id="findById">
+      <method>#{bindings.findById.execute}</method>
+      <outcome>
+        <fixed-outcome>findById</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="ContractDetail">
+      <page>/pages/lookup/ContractDetail.jsff</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>findById</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>findById</from-outcome>
+        <to-activity-id>ContractDetail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

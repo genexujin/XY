@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="BaseSearchPageDef"
+                Package="pages.search">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SearchContractBaseView" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="SearchContractBaseViewIterator"/>
+    <searchRegion Binds="SearchContractBaseViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SearchContractBaseViewQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchContractBaseViewIterator" id="SearchContractBaseView">
+      <nodeDefinition DefName="com.xy.scpms.model.query.search.SearchContractBaseView" Name="SearchContractBaseView0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="ProjectName"/>
+          <Item Value="AuthName"/>
+          <Item Value="AuthType"/>
+          <Item Value="AuthorizerType"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="DesignDept"/>
+          <Item Value="RgMgrFullName"/>
+          <Item Value="PrjMgrFullName"/>
+          <Item Value="ContractType"/>
+          <Item Value="DesignPhase"/>
+          <Item Value="FirstDesignFee"/>
+          <Item Value="ParentContractNo"/>
+          <Item Value="ShipModel"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="Status"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="Memo"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="CreatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" InstanceName="CoreModuleDataControl" DataControl="CoreModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <methodAction id="findContractById" InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findContractById" IsViewObjectMethod="false">
+      <NamedData NDName="id" NDValue="#{bindings.Id.inputValue}" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <attributeValues IterBinding="SearchContractBaseViewIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

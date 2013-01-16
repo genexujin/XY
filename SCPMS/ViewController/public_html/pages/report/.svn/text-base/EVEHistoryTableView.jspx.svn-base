@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="EVEHistoryTableView.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="0px"
+                                       endWidth="0px" bottomHeight="0px"
+                                       topHeight="110px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox text="分析表" id="pb2"
+                                     background="medium" titleHalign="left">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t1">
+                                    <af:commandToolbarButton text="打印预览"
+                                                             id="ctb1"
+                                                             icon="/images/icons/print.png"
+                                                             action="graphic"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelSplitter id="ps1" splitterPosition="450">
+                                <f:facet name="first">
+                                    
+                                        <af:panelStretchLayout id="psl2">
+                                            <f:facet name="bottom"/>
+                                            <f:facet name="center">
+                                                <dvt:pivotTable id="pt1"
+                                                                value="#{bindings.PaymentHistoryView.pivotTableModel}"
+                                                                var="cellData"
+                                                                varStatus="cellStatus"
+                                                                summary="Pivot分析表"
+                                                                modelName="pt1Model">
+                                                    <dvt:headerCell>
+                                                        <af:switcher facetName="#{cellData.layerName}"
+                                                                     defaultFacet="Default"
+                                                                     id="s1">
+                                                            <f:facet name="DataLayer">
+                                                                <af:outputText value="#{cellData.label}"
+                                                                               id="ot1"/>
+                                                            </f:facet>
+                                                            <f:facet name="Month">
+                                                                <af:outputText value="#{cellData.dataValue}"
+                                                                               id="ot2"/>
+                                                            </f:facet>
+                                                            <f:facet name="Year">
+                                                                <af:outputText value="#{cellData.dataValue}"
+                                                                               id="ot4"/>
+                                                            </f:facet>
+                                                            <f:facet name="Default">
+                                                                <af:outputText value="#{cellData.dataValue}"
+                                                                               id="ot5"/>
+                                                            </f:facet>
+                                                        </af:switcher>
+                                                    </dvt:headerCell>
+                                                    <dvt:dataCell>
+                                                        <af:switcher facetName="#{cellStatus.members.DataLayer.value}"
+                                                                     defaultFacet="Default"
+                                                                     id="s2">
+                                                            <f:facet name="ContractAmount">
+                                                                <af:outputText value="#{cellData.dataValue}"
+                                                                               id="ot6">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.PaymentHistoryView.hints.ContractAmount.format}"
+                                                                                      maxFractionDigits="7"/>
+                                                                </af:outputText>
+                                                            </f:facet>
+                                                            <f:facet name="PaymentAmount">
+                                                                <af:outputText value="#{cellData.dataValue}"
+                                                                               id="ot7">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.PaymentHistoryView.hints.PaymentAmount.format}"
+                                                                                      maxFractionDigits="7"/>
+                                                                </af:outputText>
+                                                            </f:facet>
+                                                            <f:facet name="Default">
+                                                                <af:outputText value="#{cellData.dataValue}"
+                                                                               id="ot8"/>
+                                                            </f:facet>
+                                                        </af:switcher>
+                                                    </dvt:dataCell>
+                                                </dvt:pivotTable>
+                                            </f:facet>
+                                            <f:facet name="start"/>
+                                            <f:facet name="end"/>
+                                            <f:facet name="top"/>
+                                        </af:panelStretchLayout>
+                                    
+                                </f:facet>
+                                <f:facet name="second">
+                                    <dvt:lineGraph id="graph1"
+                                                   value="#{bindings.PaymentHistoryView1.graphModel}"
+                                                   subType="LINE_VERT_ABS"
+                                                   shortDesc="图形"
+                                                   
+                                                   threeDEffect="false"
+                                                   partialTriggers="::ctb2">
+                                        <dvt:background>
+                                            <dvt:specialEffects/>
+                                        </dvt:background>
+                                        <dvt:graphPlotArea/>
+                                        <dvt:seriesSet>
+                                            <dvt:series/>
+                                        </dvt:seriesSet>
+                                        <dvt:o1Axis/>
+                                        <dvt:y1Axis/>
+                                        <dvt:legendArea automaticPlacement="AP_NEVER"/>
+                                    </dvt:lineGraph>
+                                </f:facet>
+                            </af:panelSplitter>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        
+                            <af:panelBox text="EVE 历史报表" id="pb1"
+                                         background="medium">
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t3">
+                                        <af:commandToolbarButton text="返回主页"
+                                                                 id="commandToolbarButton1"
+                                                                 icon="/images/icons/home.gif"
+                                                                 action="return"
+                                                                 actionListener="#{bindings.Rollback.execute}"
+                                                                 immediate="true"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <af:panelList id="pl1">
+                                    <af:outputText value="请输入需要分析的部门，开始年和结束年，然后按回车键执行查询"
+                                                   id="ot3"
+                                                   inlineStyle="font-family:'Microsoft YaHei';"/>
+                                </af:panelList>
+                                <af:panelFormLayout id="pfl1" rows="1"
+                                                    maxColumns="7">
+                                    <f:facet name="footer"/>
+                                    <af:selectOneChoice label="部门" id="soc1"
+                                                        binding="#{viewScope.ReportBean.deptLov}"
+                                                        showRequired="true"
+                                                        required="true"
+                                                        autoSubmit="true">
+                                        <af:selectItem label="研究开发部" id="si3"
+                                                       value="研究开发部"/>
+                                        <af:selectItem label="海洋工程部" id="si1"
+                                                       value="海洋工程部"/>
+                                        <af:selectItem label="船舶设计一部" id="si4"
+                                                       value="船舶设计一部"/>
+                                        <af:selectItem label="船舶设计二部" id="si5"
+                                                       value="船舶设计二部"/>
+                                        <af:selectItem label="生产设计部" id="si6"
+                                                       value="生产设计部"/>
+                                        <af:selectItem label="南通斯达瑞" id="si7"
+                                                       value="南通斯达瑞"/>
+                                        <af:selectItem label="全院(不包括南通斯达瑞)"
+                                                       id="si2"
+                                                       value="全院(不包括南通斯达瑞)"/>
+                                    </af:selectOneChoice>
+                                <af:selectOneChoice label="从" id="soc2"
+                                                    binding="#{viewScope.ReportBean.fyLov}"
+                                                    showRequired="true"
+                                                    required="true"
+                                                    autoSubmit="true">
+                                    <af:selectItem label="2009" id="pt_si1"
+                                                   value="2009"/>
+                                    <af:selectItem label="2010" id="pt_si2"
+                                                   value="2010"/>
+                                    <af:selectItem label="2011" id="pt_si3"
+                                                   value="2011"/>
+                                    <af:selectItem label="2012" id="pt_si4"
+                                                   value="2012"/>
+                                    <af:selectItem label="2013" id="pt_si5"
+                                                   value="2013"/>
+                                    <af:selectItem label="2014" id="pt_si6"
+                                                   value="2014"/>
+                                    <af:selectItem label="2015" id="pt_si7"
+                                                   value="2015"/>
+                                    <af:selectItem label="2016" id="pt_si8"
+                                                   value="2016"/>
+                                    <af:selectItem label="2017" id="pt_si9"
+                                                   value="2017"/>
+                                </af:selectOneChoice>
+                                <af:selectOneChoice label="至" id="soc3"
+                                                    binding="#{viewScope.ReportBean.endLov}"
+                                                    showRequired="true"
+                                                    required="true"
+                                                    autoSubmit="true"
+                                                    value="2011">
+                                    <af:selectItem label="2009" id="si8"
+                                                   value="2009"/>
+                                    <af:selectItem label="2010" id="si9"
+                                                   value="2010"/>
+                                    <af:selectItem label="2011" id="si10"
+                                                   value="2011"/>
+                                    <af:selectItem label="2012" id="si11"
+                                                   value="2012"/>
+                                    <af:selectItem label="2013" id="si12"
+                                                   value="2013"/>
+                                    <af:selectItem label="2014" id="si13"
+                                                   value="2014"/>
+                                    <af:selectItem label="2015" id="si14"
+                                                   value="2015"/>
+                                    <af:selectItem label="2016" id="si15"
+                                                   value="2016"/>
+                                    <af:selectItem label="2017" id="si16"
+                                                   value="2017"/>
+                                </af:selectOneChoice>
+                                <af:commandToolbarButton text="运算并生成报表"
+                                                         id="ctb2"
+                                                         icon="/images/icons/graph.png"
+                                                         action="#{viewScope.ReportBean.runReport}">
+                                    <af:setActionListener from="#{'yes'}"
+                                                          to="#{pageFlowScope.hasRun}"/>
+                                </af:commandToolbarButton>
+                            </af:panelFormLayout>
+                            </af:panelBox>
+                        
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

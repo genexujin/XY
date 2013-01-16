@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="PaymentBatchesPageDef"
+                Package="pages.invoice">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="InvoiceBatches" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="InvoiceBatchesIterator"/>
+    <iterator Binds="InvReqOfBatch" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="InvReqOfBatchIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="InvoiceBatchesIterator" id="InvoiceBatches">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.InvoiceBatchView"
+                      Name="InvoiceBatches0">
+        <AttrNames>
+          <Item Value="BatchName"/>
+          <Item Value="InvNum"/>
+          <Item Value="Status"/>
+          <Item Value="Memo"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="InvReqOfBatchIterator" id="InvReqOfBatch">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.InvoiceRequisitionView"
+                      Name="InvReqOfBatch0">
+        <AttrNames>
+          <Item Value="ContractEntity"/>
+          <Item Value="AuthName1"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ContractNo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="FullName"/>
+          <Item Value="RequestDate"/>
+          <Item Value="Status"/>
+          <Item Value="Memo"/>
+          <Item Value="Department"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="LinePaymentDetailView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.xy.scpms.model.query.LinePaymentDetailView"
+                      Name="InvReqOfBatch1">
+        <AttrNames>
+          <Item Value="CreatedAt"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="Deleted"/>
+          <Item Value="Id"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="InvoiceBatchId"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="LineId"/>
+          <Item Value="Memo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="Status"/>
+          <Item Value="TotalPayment"/>
+          <Item Value="Variance"/>
+          <Item Value="AbandonDate"/>
+          <Item Value="AbandonFlag"/>
+          <Item Value="BrokerType"/>
+          <Item Value="ContractType"/>
+          <Item Value="CreatedAt1"/>
+          <Item Value="CreatedBy1"/>
+          <Item Value="Currency"/>
+          <Item Value="Deleted1"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="ExchangeRate"/>
+          <Item Value="FgCompletionDate"/>
+          <Item Value="FourContractBatch"/>
+          <Item Value="HeaderId"/>
+          <Item Value="Id1"/>
+          <Item Value="ImoNo"/>
+          <Item Value="LineNo"/>
+          <Item Value="Memo1"/>
+          <Item Value="OwnerType"/>
+          <Item Value="PlantType"/>
+          <Item Value="Price"/>
+          <Item Value="ShipBroker"/>
+          <Item Value="ShipClsfctSociety"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ShipName"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="ShipOwner"/>
+          <Item Value="ShipPlant"/>
+          <Item Value="ShipPrice"/>
+          <Item Value="SignOffDate"/>
+          <Item Value="Status1"/>
+          <Item Value="WorkStartDate"/>
+          <Item Value="AgreementImgUrl"/>
+          <Item Value="AuthName"/>
+          <Item Value="AuthType"/>
+          <Item Value="AuthorizerType"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractType1"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="CustomerContactor"/>
+          <Item Value="CustomerId"/>
+          <Item Value="Deleted2"/>
+          <Item Value="DesignDept"/>
+          <Item Value="DesignPhase"/>
+          <Item Value="FirstDesignFee"/>
+          <Item Value="Id2"/>
+          <Item Value="ContractMemo"/>
+          <Item Value="ParentContractId"/>
+          <Item Value="ParentContractNo"/>
+          <Item Value="ProjectManager"/>
+          <Item Value="ProjectName"/>
+          <Item Value="RefinedFlag"/>
+          <Item Value="RegionManager"/>
+          <Item Value="ShipModel"/>
+          <Item Value="ShipNoInternal1"/>
+          <Item Value="ContractStatus"/>
+          <Item Value="TotalAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="InvoiceBatchesIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

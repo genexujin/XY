@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="四技合同" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" topHeight="200px">
+                    <f:facet name="center">
+                        <!-- id="af_one_column_stretched"   -->
+                        <af:panelBox id="pb2" text="四技合同列表" background="medium"
+                                     showDisclosure="false">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t1">
+                                        <af:commandToolbarButton
+                                                                 id="ctb3"
+                                                                 text="新建"
+                                                                 icon="/images/icons/new.png"
+                                                                 action="goChoose"/>
+                                        <af:commandToolbarButton
+                                                                 id="ctb1"
+                                                                 icon="/images/icons/filesave.png"
+                                                                 text="保存"
+                                                                 disabled="#{!bindings.Commit.enabled}">
+                                            <af:showPopupBehavior popupId="::p1"/>
+                                        </af:commandToolbarButton>
+                                        <af:commandToolbarButton text="删除"
+                                                                 id="ctb2"
+                                                                 icon="/images/icons/delete.png"
+                                                                 actionListener="#{bindings.Delete.execute}"
+                                                                 disabled="#{!bindings.Delete.enabled}"
+                                                                 immediate="true"/>
+                                        <af:commandToolbarButton text="取消"
+                                                                 id="ctb4"
+                                                                 icon="/images/icons/undo.png"
+                                                                 disabled="#{!bindings.Rollback.enabled}"
+                                                                 actionListener="#{bindings.Rollback.execute}"
+                                                                 immediate="true"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.FourTechContract.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.FourTechContract.rangeSize}"
+                                          emptyText="#{bindings.FourTechContract.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.FourTechContract.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                                          queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                                          filterVisible="false" varStatus="vs"
+                                          selectedRowKeys="#{bindings.FourTechContract.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.FourTechContract.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t2"
+                                          partialTriggers="::ctb2">
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.ContractNo.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.ContractNo.label}"
+                                               id="c1">
+                                        <af:inputText value="#{row.bindings.ContractNo.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.ContractNo.label}"
+                                                      required="#{bindings.FourTechContract.hints.ContractNo.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.ContractNo.displayWidth}"
+                                                      maximumLength="#{bindings.FourTechContract.hints.ContractNo.precision}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.ContractNo.tooltip}"
+                                                      id="it1">
+                                            <f:validator binding="#{row.bindings.ContractNo.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.LineContractNo.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.LineContractNo.label}"
+                                               id="c13">
+                                        <af:inputText value="#{row.bindings.LineContractNo.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.LineContractNo.label}"
+                                                      required="#{bindings.FourTechContract.hints.LineContractNo.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.LineContractNo.displayWidth}"
+                                                      maximumLength="#{bindings.FourTechContract.hints.LineContractNo.precision}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.LineContractNo.tooltip}"
+                                                      id="it7">
+                                            <f:validator binding="#{row.bindings.LineContractNo.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.LineShipMnftNo.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.LineShipMnftNo.label}"
+                                               id="c14">
+                                        <af:inputText value="#{row.bindings.LineShipMnftNo.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.LineShipMnftNo.label}"
+                                                      required="#{bindings.FourTechContract.hints.LineShipMnftNo.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.LineShipMnftNo.displayWidth}"
+                                                      maximumLength="#{bindings.FourTechContract.hints.LineShipMnftNo.precision}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.LineShipMnftNo.tooltip}"
+                                                      id="it8">
+                                            <f:validator binding="#{row.bindings.LineShipMnftNo.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.Amount.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.Amount.label}"
+                                               id="c2">
+                                        <af:inputText value="#{row.bindings.Amount.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.Amount.label}"
+                                                      required="#{bindings.FourTechContract.hints.Amount.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.Amount.displayWidth}"
+                                                      maximumLength="#{bindings.FourTechContract.hints.Amount.precision}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.Amount.tooltip}"
+                                                      id="it2">
+                                            <f:validator binding="#{row.bindings.Amount.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.FourTechContract.hints.Amount.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.Type.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.Type.label}"
+                                               id="c3">
+                                        <af:selectOneChoice value="#{row.bindings.Type.inputValue}"
+                                                            label="#{row.bindings.Type.label}"
+                                                            required="#{bindings.FourTechContract.hints.Type.mandatory}"
+                                                            shortDesc="#{bindings.FourTechContract.hints.Type.tooltip}"
+                                                            id="soc1">
+                                            <f:selectItems value="#{row.bindings.Type.items}"
+                                                           id="si1"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.RegNo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.RegNo.label}"
+                                               id="c4">
+                                        <af:inputText value="#{row.bindings.RegNo.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.RegNo.label}"
+                                                      required="#{bindings.FourTechContract.hints.RegNo.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.RegNo.displayWidth}"
+                                                      maximumLength="#{bindings.FourTechContract.hints.RegNo.precision}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.RegNo.tooltip}"
+                                                      id="it3">
+                                            <f:validator binding="#{row.bindings.RegNo.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.SentDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.SentDate.label}"
+                                               id="c5">
+                                        <af:inputDate value="#{row.bindings.SentDate.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.SentDate.label}"
+                                                      required="#{bindings.FourTechContract.hints.SentDate.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.SentDate.displayWidth}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.SentDate.tooltip}"
+                                                      id="id1">
+                                            <f:validator binding="#{row.bindings.SentDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FourTechContract.hints.SentDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.RcvDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.RcvDate.label}"
+                                               id="c6">
+                                        <af:inputDate value="#{row.bindings.RcvDate.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.RcvDate.label}"
+                                                      required="#{bindings.FourTechContract.hints.RcvDate.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.RcvDate.displayWidth}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.RcvDate.tooltip}"
+                                                      id="id2">
+                                            <f:validator binding="#{row.bindings.RcvDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FourTechContract.hints.RcvDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.SubmitDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.SubmitDate.label}"
+                                               id="c7">
+                                        <af:inputDate value="#{row.bindings.SubmitDate.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.SubmitDate.label}"
+                                                      required="#{bindings.FourTechContract.hints.SubmitDate.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.SubmitDate.displayWidth}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.SubmitDate.tooltip}"
+                                                      id="id3">
+                                            <f:validator binding="#{row.bindings.SubmitDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FourTechContract.hints.SubmitDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.RegDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.RegDate.label}"
+                                               id="c8">
+                                        <af:inputDate value="#{row.bindings.RegDate.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.RegDate.label}"
+                                                      required="#{bindings.FourTechContract.hints.RegDate.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.RegDate.displayWidth}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.RegDate.tooltip}"
+                                                      id="id4">
+                                            <f:validator binding="#{row.bindings.RegDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FourTechContract.hints.RegDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.Creator.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.Creator.label}"
+                                               id="c9">
+                                        <af:inputText value="#{row.bindings.Creator.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.Creator.label}"
+                                                      required="#{bindings.FourTechContract.hints.Creator.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.Creator.displayWidth}"
+                                                      maximumLength="#{bindings.FourTechContract.hints.Creator.precision}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.Creator.tooltip}"
+                                                      id="it4">
+                                            <f:validator binding="#{row.bindings.Creator.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.CreationDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.CreationDate.label}"
+                                               id="c10">
+                                        <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.CreationDate.label}"
+                                                      required="#{bindings.FourTechContract.hints.CreationDate.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.CreationDate.displayWidth}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.CreationDate.tooltip}"
+                                                      id="id5">
+                                            <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FourTechContract.hints.CreationDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.FourTechContract.hints.Memo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.FourTechContract.hints.Memo.label}"
+                                               id="c11">
+                                        <af:inputText value="#{row.bindings.Memo.inputValue}"
+                                                      label="#{bindings.FourTechContract.hints.Memo.label}"
+                                                      required="#{bindings.FourTechContract.hints.Memo.mandatory}"
+                                                      columns="#{bindings.FourTechContract.hints.Memo.displayWidth}"
+                                                      maximumLength="#{bindings.FourTechContract.hints.Memo.precision}"
+                                                      shortDesc="#{bindings.FourTechContract.hints.Memo.tooltip}"
+                                                      id="it5">
+                                            <f:validator binding="#{row.bindings.Memo.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="top">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:panelBox text="四技合同" id="pb1"
+                                         background="medium"
+                                         showDisclosure="false">
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t3">
+                                        <af:commandToolbarButton id="ctb5"
+                                                                 text="返回主页面"
+                                                                 icon="/images/icons/home.gif"
+                                                                 action="return"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <af:query id="qryId1" headerText="搜索"
+                                          disclosed="true"
+                                          value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                                          model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                                          queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                                          queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                                          displayMode="compact" rows="1"
+                                          maxColumns="5"
+                                          resultComponentId="::pc1:t2"/>
+                            </af:panelBox>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                </af:panelStretchLayout>
+                <af:popup childCreation="deferred" autoCancel="disabled"
+                          id="p1">
+                    <af:dialog id="d2" title="确定该操作吗？"
+                               dialogListener="#{Browse4TechBean.confirm}">
+                        <f:facet name="buttonBar"/>
+                        <af:panelList id="pl1">
+                            <af:outputText value="所有的修改以及删除操作即将生效 ！" id="ot1"/>
+                        </af:panelList>
+                    </af:dialog>
+                </af:popup>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

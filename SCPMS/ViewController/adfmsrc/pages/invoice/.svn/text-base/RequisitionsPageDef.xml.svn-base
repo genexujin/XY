@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="RequisitionsPageDef"
+                Package="pages.invoice">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DraftInvoiceRequisition" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="DraftInvoiceRequisitionIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DraftInvoiceRequisitionIterator" id="DraftInvoiceRequisition">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.InvoiceRequisitionView" Name="DraftInvoiceRequisition0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Requestor"/>
+          <Item Value="RequestDate"/>
+          <Item Value="LinePaymentId"/>
+          <Item Value="Amount"/>
+          <Item Value="Status"/>
+          <Item Value="Memo"/>
+          <Item Value="DeptHeadApprover"/>
+          <Item Value="DeptHeadOutcome"/>
+          <Item Value="DeptHeadDate"/>
+          <Item Value="DeptHeadMemo"/>
+          <Item Value="MrktHeadApprover"/>
+          <Item Value="MrktHeadOutcome"/>
+          <Item Value="MrktHeadMemo"/>
+          <Item Value="MrktHeadDate"/>
+          <Item Value="BatchId"/>
+          <Item Value="Deleted"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="LinePaymentDetailView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.xy.scpms.model.query.LinePaymentDetailView" Name="DraftInvoiceRequisition1">
+        <AttrNames>
+          <Item Value="CreatedAt"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="Deleted"/>
+          <Item Value="Id"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="InvoiceBatchId"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="LineId"/>
+          <Item Value="Memo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="Status"/>
+          <Item Value="TotalPayment"/>
+          <Item Value="Variance"/>
+          <Item Value="AbandonDate"/>
+          <Item Value="AbandonFlag"/>
+          <Item Value="BrokerType"/>
+          <Item Value="ContractType"/>
+          <Item Value="CreatedAt1"/>
+          <Item Value="CreatedBy1"/>
+          <Item Value="Currency"/>
+          <Item Value="Deleted1"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="ExchangeRate"/>
+          <Item Value="FgCompletionDate"/>
+          <Item Value="FourContractBatch"/>
+          <Item Value="HeaderId"/>
+          <Item Value="Id1"/>
+          <Item Value="ImoNo"/>
+          <Item Value="LineNo"/>
+          <Item Value="Memo1"/>
+          <Item Value="OwnerType"/>
+          <Item Value="PlantType"/>
+          <Item Value="Price"/>
+          <Item Value="ShipBroker"/>
+          <Item Value="ShipClsfctSociety"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ShipName"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="ShipOwner"/>
+          <Item Value="ShipPlant"/>
+          <Item Value="ShipPrice"/>
+          <Item Value="SignOffDate"/>
+          <Item Value="Status1"/>
+          <Item Value="WorkStartDate"/>
+          <Item Value="AgreementImgUrl"/>
+          <Item Value="AuthName"/>
+          <Item Value="AuthType"/>
+          <Item Value="AuthorizerType"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractType1"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="CustomerContactor"/>
+          <Item Value="CustomerId"/>
+          <Item Value="Deleted2"/>
+          <Item Value="DesignDept"/>
+          <Item Value="DesignPhase"/>
+          <Item Value="FirstDesignFee"/>
+          <Item Value="Id2"/>
+          <Item Value="ContractMemo"/>
+          <Item Value="ParentContractId"/>
+          <Item Value="ParentContractNo"/>
+          <Item Value="ProjectManager"/>
+          <Item Value="ProjectName"/>
+          <Item Value="RefinedFlag"/>
+          <Item Value="RegionManager"/>
+          <Item Value="ShipModel"/>
+          <Item Value="ShipNoInternal1"/>
+          <Item Value="ContractStatus"/>
+          <Item Value="TotalAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

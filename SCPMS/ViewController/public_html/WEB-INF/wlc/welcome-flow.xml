@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="welcome-flow">
+    <default-activity id="__1">prepareDashboard</default-activity>
+    <input-parameter-definition id="__4">
+      <name>userRole</name>
+      <value>#{sessionScope.role}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name>dept</name>
+      <value>#{sessionScope.userDept}</value>
+    </input-parameter-definition>
+    <managed-bean id="__5">
+      <managed-bean-name>WelcomeBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.WelcomeBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__7">
+      <managed-bean-name>ApprovalBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.ApprovalBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="Welcome">
+      <page>/pages/Welcome.jsff</page>
+    </view>
+    <method-call id="prepareDashboard">
+      <method>#{bindings.prepareDashboard.execute}</method>
+      <outcome>
+        <fixed-outcome>setAIPCriteria</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>prepareDashboard</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>setAIPCriteria</from-outcome>
+        <to-activity-id>Welcome</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

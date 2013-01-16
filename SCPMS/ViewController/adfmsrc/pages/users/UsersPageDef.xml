@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="UsersPageDef" Package="pages.users">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Users" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="UsersIterator"/>
+    <searchRegion Binds="UsersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="UsersQuery"/>
+    <iterator id="GroupsIterator" Binds="Groups"
+              DataControl="CoreModuleDataControl" RangeSize="25"/>
+    <iterator id="UserRolesIterator" Binds="UserRoles"
+              DataControl="CoreModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="updateUserRole"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="updateUserRole"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="userRoles" NDValue="" NDType="java.util.List"/>
+    </methodAction>
+    <tree IterBinding="UsersIterator" id="Users">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.UsersView" Name="Users0">
+        <AttrNames>
+          <Item Value="Username"/>
+          <Item Value="Password"/>
+          <Item Value="Firstname"/>
+          <Item Value="Lastname"/>
+          <Item Value="UDescription"/>
+          <Item Value="Department"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="CoreModuleDataControl"/>
+    <tree IterBinding="UserRolesIterator" id="UserRoles">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.GroupmembersView"
+                      Name="UserRoles0">
+        <AttrNames>
+          <Item Value="GName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action IterBinding="UsersIterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action IterBinding="UsersIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="用户管理" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="center">
+                        <af:panelBox text="用户信息维护" id="pb1"
+                                     background="medium">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t1">
+                                    <af:commandToolbarButton
+                                                             id="ctb1"
+                                                             text="返回主页面"
+                                                             icon="/images/icons/home.png"
+                                                             action="return"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelStretchLayout id="psl2"
+                                                   bottomHeight="300px"
+                                                   startWidth="0px"
+                                                   endWidth="0px"
+                                                   topHeight="0px">
+                                <f:facet name="bottom"/>
+                                <f:facet name="center">
+                                    
+                                        <af:panelSplitter id="ps1"
+                                                          splitterPosition="180"
+                                                          positionedFromEnd="true">
+                                            <f:facet name="first">
+                                                <af:panelCollection id="pc1">
+                                                    <f:facet name="menus"/>
+                                                    <f:facet name="toolbar">
+                                                        <af:toolbar id="t2">
+                                                            <af:commandToolbarButton text="保存"
+                                                                                     id="ctb4"
+                                                                                     icon="/images/icons/filesave.png">
+                                                            <af:showPopupBehavior popupId="p2"/>
+                                                        </af:commandToolbarButton>
+                                                        <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                                                                 text="删除"
+                                                                                 disabled="#{!bindings.Delete.enabled}"
+                                                                                 immediate="true"
+                                                                                 id="ctb7"
+                                                                                 icon="/images/icons/delete.png"/>
+                                                        <af:commandToolbarButton text="用户信息报表"
+                                                                                 id="ctb6"
+                                                                                 icon="/images/icons/listview.png"
+                                                                                 action="report"/>
+                                                        <af:commandToolbarButton text="取消"
+                                                                                     id="ctb5"
+                                                                                     icon="/images/icons/undo.png"
+                                                                                     actionListener="#{bindings.Rollback.execute}"
+                                                                                     disabled="#{!bindings.Rollback.enabled}"
+                                                                                     immediate="true">
+                                                                <af:resetActionListener/>
+                                                            </af:commandToolbarButton>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <f:facet name="statusbar"/>
+                                                <af:popup childCreation="deferred"
+                                                          autoCancel="disabled"
+                                                          id="p2">
+                                                    <af:dialog id="d2"
+                                                               title="确认保存？"
+                                                               dialogListener="#{UserBean.confirm}">
+                                                        <f:facet name="buttonBar"/>
+                                                        <af:outputText value="系统将要把更新的数据保存到数据库中，请确认！"
+                                                                       id="ot1"/>
+                                                    </af:dialog>
+                                                </af:popup>
+                                                <af:table value="#{bindings.Users.collectionModel}"
+                                                              var="row"
+                                                              rows="#{bindings.Users.rangeSize}"
+                                                              emptyText="#{bindings.Users.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                              fetchSize="#{bindings.Users.rangeSize}"
+                                                              rowBandingInterval="1"
+                                                              filterModel="#{bindings.UsersQuery.queryDescriptor}"
+                                                              queryListener="#{bindings.UsersQuery.processQuery}"
+                                                              filterVisible="false"
+                                                              varStatus="vs"
+                                                              selectedRowKeys="#{bindings.Users.collectionModel.selectedRow}"
+                                                              selectionListener="#{bindings.Users.collectionModel.makeCurrent}"
+                                                              rowSelection="single"
+                                                              id="t3"
+                                                              partialTriggers="::ctb7">
+                                                        <af:column sortProperty="#{bindings.Users.hints.Username.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.Users.hints.Username.label}"
+                                                                   id="c1"
+                                                                   width="60">
+                                                            <af:inputText value="#{row.bindings.Username.inputValue}"
+                                                                          label="#{bindings.Users.hints.Username.label}"
+                                                                          required="#{bindings.Users.hints.Username.mandatory}"
+                                                                          columns="#{bindings.Users.hints.Username.displayWidth}"
+                                                                          maximumLength="#{bindings.Users.hints.Username.precision}"
+                                                                          shortDesc="#{bindings.Users.hints.Username.tooltip}"
+                                                                          id="it1" autoSubmit="true">
+                                                                <f:validator binding="#{row.bindings.Username.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.Users.hints.Password.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.Users.hints.Password.label}"
+                                                                   id="c2"
+                                                                   width="60">
+                                                            <af:inputText value="#{row.bindings.Password.inputValue}"
+                                                                          label="#{bindings.Users.hints.Password.label}"
+                                                                          required="#{bindings.Users.hints.Password.mandatory}"
+                                                                          columns="#{bindings.Users.hints.Password.displayWidth}"
+                                                                          maximumLength="#{bindings.Users.hints.Password.precision}"
+                                                                          shortDesc="#{bindings.Users.hints.Password.tooltip}"
+                                                                          id="it2"
+                                                                          secret="true" autoSubmit="true">
+                                                                <f:validator binding="#{row.bindings.Password.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.Users.hints.Firstname.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.Users.hints.Firstname.label}"
+                                                                   id="c3"
+                                                                   width="60">
+                                                            <af:inputText value="#{row.bindings.Firstname.inputValue}"
+                                                                          label="#{bindings.Users.hints.Firstname.label}"
+                                                                          required="#{bindings.Users.hints.Firstname.mandatory}"
+                                                                          columns="#{bindings.Users.hints.Firstname.displayWidth}"
+                                                                          maximumLength="#{bindings.Users.hints.Firstname.precision}"
+                                                                          shortDesc="#{bindings.Users.hints.Firstname.tooltip}"
+                                                                          id="it3" autoSubmit="true">
+                                                                <f:validator binding="#{row.bindings.Firstname.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.Users.hints.Lastname.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.Users.hints.Lastname.label}"
+                                                                   id="c4"
+                                                                   width="60">
+                                                            <af:inputText value="#{row.bindings.Lastname.inputValue}"
+                                                                          label="#{bindings.Users.hints.Lastname.label}"
+                                                                          required="#{bindings.Users.hints.Lastname.mandatory}"
+                                                                          columns="#{bindings.Users.hints.Lastname.displayWidth}"
+                                                                          maximumLength="#{bindings.Users.hints.Lastname.precision}"
+                                                                          shortDesc="#{bindings.Users.hints.Lastname.tooltip}"
+                                                                          id="it4" autoSubmit="true">
+                                                                <f:validator binding="#{row.bindings.Lastname.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.Users.hints.UDescription.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.Users.hints.UDescription.label}"
+                                                                   id="c5">
+                                                            <af:inputText value="#{row.bindings.UDescription.inputValue}"
+                                                                          label="#{bindings.Users.hints.UDescription.label}"
+                                                                          required="#{bindings.Users.hints.UDescription.mandatory}"
+                                                                          columns="#{bindings.Users.hints.UDescription.displayWidth}"
+                                                                          maximumLength="#{bindings.Users.hints.UDescription.precision}"
+                                                                          shortDesc="#{bindings.Users.hints.UDescription.tooltip}"
+                                                                          id="it5" autoSubmit="true">
+                                                                <f:validator binding="#{row.bindings.UDescription.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.Users.hints.Department.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.Users.hints.Department.label}"
+                                                                   id="c6">
+                                                            <af:inputText value="#{row.bindings.Department.inputValue}"
+                                                                          label="#{bindings.Users.hints.Department.label}"
+                                                                          required="#{bindings.Users.hints.Department.mandatory}"
+                                                                          columns="#{bindings.Users.hints.Department.displayWidth}"
+                                                                          maximumLength="#{bindings.Users.hints.Department.precision}"
+                                                                          shortDesc="#{bindings.Users.hints.Department.tooltip}"
+                                                                          id="it6" autoSubmit="true">
+                                                                <f:validator binding="#{row.bindings.Department.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="用户角色"
+                                                                   id="c7">
+                                                            <af:commandButton text="定义角色"
+                                                                              id="cb1"
+                                                                              icon="/images/icons/activity.png"
+                                                                              action="#{UserBean.showPopup}"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelCollection>
+                                            </f:facet>
+                                            <f:facet name="second">
+                                            <af:panelTabbed id="pt1">
+                                                <af:showDetailItem text="用户角色"
+                                                                   id="sdi1"
+                                                                   stretchChildren="first">
+                                                    <af:table value="#{bindings.UserRoles.collectionModel}"
+                                                              var="row"
+                                                              rows="#{bindings.UserRoles.rangeSize}"
+                                                              emptyText="#{bindings.UserRoles.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                              fetchSize="#{bindings.UserRoles.rangeSize}"
+                                                              rowBandingInterval="0"
+                                                              id="t5">
+                                                        <af:column sortProperty="#{bindings.UserRoles.hints.GName.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.UserRoles.hints.GName.label}"
+                                                                   id="c8"
+                                                                   partialTriggers="::pc1:t3">
+                                                            <af:selectOneChoice value="#{row.bindings.GName.inputValue}"
+                                                                                label="#{row.bindings.GName.label}"
+                                                                                required="#{bindings.UserRoles.hints.GName.mandatory}"
+                                                                                shortDesc="#{bindings.UserRoles.hints.GName.tooltip}"
+                                                                                readOnly="true"
+                                                                                id="soc1">
+                                                                <f:selectItems value="#{row.bindings.GName.items}"
+                                                                               id="si2"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:showDetailItem>
+                                            </af:panelTabbed>
+                                        </f:facet>
+                                        </af:panelSplitter>
+                                    
+                                </f:facet>
+                                <f:facet name="start"/>
+                                <f:facet name="end"/>
+                                <f:facet name="top"/>
+                            </af:panelStretchLayout>
+                        </af:panelBox>
+                        <!-- id="af_one_column_stretched"   -->
+                    </f:facet>
+                </af:panelStretchLayout>
+                <af:popup childCreation="deferred" autoCancel="disabled"
+                          id="p1" binding="#{UserBean.popup}">
+                    <af:panelWindow id="pw1" stretchChildren="first"
+                                    modal="true" resize="on"
+                                    contentHeight="300" contentWidth="400">
+                        <af:panelBox text="用户角色" id="pb2" background="medium">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t4">
+                                    <af:commandToolbarButton text="确认"
+                                                             id="ctb2"
+                                                             icon="/images/icons/check.png"
+                                                             action="#{UserBean.updateRole}"/>
+                                    <af:commandToolbarButton
+                                                             id="ctb3"
+                                                             text="取消"
+                                                             icon="/images/icons/undo.png"
+                                                             action="#{UserBean.cancelUpdateRole}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:selectManyShuttle label=""
+                                                  value="#{viewScope.UserBean.selectedValues}"
+                                                  id="sms1" leadingHeader="可选角色"
+                                                  trailingHeader="现有角色"
+                                                  partialTriggers="pc1:t3 pc1:t3:cb1"
+                                                  leadingDescShown="true"
+                                                  trailingDescShown="true">
+                                <f:selectItems value="#{viewScope.UserBean.allItems}"
+                                               id="si1"/>
+                            </af:selectManyShuttle>
+                        </af:panelBox>
+                    </af:panelWindow>
+                </af:popup>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

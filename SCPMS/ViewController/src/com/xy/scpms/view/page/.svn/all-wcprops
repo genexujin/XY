@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page
+END
+MicsReportBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/15/trunk/OM/ViewController/src/com/xy/scpms/view/page/MicsReportBean.java
+END
+Browse4TechBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/Browse4TechBean.java
+END
+PaymentNoticeBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/home/!svn/ver/7/trunk/OM/ViewController/src/com/xy/scpms/view/page/PaymentNoticeBean.java
+END
+CreateBatchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/CreateBatchBean.java
+END
+FourTechUploadBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/FourTechUploadBean.java
+END
+FourTechBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/home/!svn/ver/8/trunk/OM/ViewController/src/com/xy/scpms/view/page/FourTechBean.java
+END
+LookupCustomerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/LookupCustomerBean.java
+END
+ConfirmationBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/ConfirmationBean.java
+END
+DynPayStatusReportBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/DynPayStatusReportBean.java
+END
+LineBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/LineBean.java
+END
+LovBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/LovBean.java
+END
+HeaderBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/HeaderBean.java
+END
+UserBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/UserBean.java
+END
+PaymentNodesBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/7/trunk/OM/ViewController/src/com/xy/scpms/view/page/PaymentNodesBean.java
+END
+BrowseBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/home/!svn/ver/16/trunk/OM/ViewController/src/com/xy/scpms/view/page/BrowseBean.java
+END
+UpdateBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/home/!svn/ver/16/trunk/OM/ViewController/src/com/xy/scpms/view/page/UpdateBean.java
+END
+InvBatchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/InvBatchBean.java
+END
+UrgeSettleBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/11/trunk/OM/ViewController/src/com/xy/scpms/view/page/UrgeSettleBean.java
+END
+InvoiceEntryBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/InvoiceEntryBean.java
+END
+InvoiceApprvalBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/InvoiceApprvalBean.java
+END
+ApprovalBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/ApprovalBean.java
+END
+TaskListBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/TaskListBean.java
+END
+WelcomeBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/home/!svn/ver/13/trunk/OM/ViewController/src/com/xy/scpms/view/page/WelcomeBean.java
+END
+UploadBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/home/!svn/ver/3/trunk/OM/ViewController/src/com/xy/scpms/view/page/UploadBean.java
+END

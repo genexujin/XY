@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="lov-flow">
+    <default-activity>Lovs</default-activity>
+    <managed-bean id="__4">
+      <managed-bean-name>LovBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.LovBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <exception-handler>Messages</exception-handler>
+    <view id="Messages">
+      <page>/pages/common/Messages.jspx</page>
+    </view>
+    <task-flow-return id="return">
+      <outcome>
+        <name>return</name>
+      </outcome>
+    </task-flow-return>
+    <view id="Lovs">
+      <page>/pages/lov/Lovs.jspx</page>
+    </view>
+    <view id="LovRawEdit">
+      <page>/pages/lov/LovRawEdit.jspx</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>return</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__3">
+        <from-outcome>msg</from-outcome>
+        <to-activity-id>Messages</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>Lovs</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>raw</from-outcome>
+        <to-activity-id>LovRawEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

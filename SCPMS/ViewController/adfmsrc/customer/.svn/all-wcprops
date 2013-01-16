@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer
+END
+customerDetailPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/customerDetailPageDef.xml
+END
+ContactLookupPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/ContactLookupPageDef.xml
+END
+CustomerSearchPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/CustomerSearchPageDef.xml
+END
+search_customer_byId_search_customer_byId_setViewCriteriaPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/search_customer_byId_search_customer_byId_setViewCriteriaPageDef.xml
+END
+search_contact_byId_search_contact_byId_SetCriteriaPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/search_contact_byId_search_contact_byId_SetCriteriaPageDef.xml
+END
+customer_contact_btf_customer_contact_btf_setQueryTypeByIdPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/customer_contact_btf_customer_contact_btf_setQueryTypeByIdPageDef.xml
+END
+customer_btf_customer_btf_setQueryTypeByIdPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/customer_btf_customer_btf_setQueryTypeByIdPageDef.xml
+END
+ContactDetailPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/ContactDetailPageDef.xml
+END
+customer_customer_setQueryTypePageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/customer_customer_setQueryTypePageDef.xml
+END
+lookup_contact_lookup_contact_setQueryTypeByCustomerIdPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/customer/lookup_contact_lookup_contact_setQueryTypeByCustomerIdPageDef.xml
+END

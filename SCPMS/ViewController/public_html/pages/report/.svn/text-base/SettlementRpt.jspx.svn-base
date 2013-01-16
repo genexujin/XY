@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="催款函" id="d1" inlineStyle="background-color:White;">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelGroupLayout layout="scroll" id="pgl1"  inlineStyle="padding:0px 0px 0px 10px;">
+                    <af:panelGroupLayout id="pgl10">
+                        <af:commandButton text="返回" id="cb2" icon="/images/icons/undo.png" iconPosition="leading"
+                                          action="chooseContract"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl4" layout="horizontal" halign="center">
+                        <af:outputText value="催款函" id="aot1" inlineStyle="font-size:xx-large; font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                    <af:panelHeader text="提醒" id="ph1" messageType="warning">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar"/>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelGroupLayout id="pgl35" layout="vertical">
+                            <af:panelGroupLayout id="pgl16" inlineStyle="width:800px;">
+                                <af:outputText value="以下所列，我院已开发票的设计费小计" id="ot35"/>
+                                <af:outputText value="#{bindings.TotalInvoicedNotPaid.inputValue}" id="ot36"
+                                               inlineStyle="font-size:small; font-style:italic; font-weight:bold;">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.TotalInvoicedNotPaid.format}"/>
+                                </af:outputText>
+                                <af:outputText value="万元，下列发票部分账龄3个月，外审时审计机构对于帐龄超过3个月以上的款项亦多次提出疑议，要求我们尽快解决此类问题，盼贵司核对后将上述应收款尽快汇入我院为荷！"
+                                               id="ot37"/>
+                            </af:panelGroupLayout>
+                            <af:panelGroupLayout id="pgl34" halign="left" layout="horizontal" valign="middle">
+                                <af:outputText value="财务部         市场营销部" id="ot38" inlineStyle="font-weight:bold;"/>
+                                <af:spacer width="30" height="10" id="s14"/>
+                                <af:outputText id="ot39" value="#{viewScope.UrgeSettleBean.currentDate}"/>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                    <af:iterator id="i1" var="row" value="#{bindings.UrgeSettlementRpt1.collectionModel}" rows="-1"
+                                 varStatus="varStat">
+                        <af:panelGroupLayout id="pgl2" layout="vertical">
+                            <af:panelGroupLayout id="pgl33" layout="vertical" rendered="true"
+                                                 visible="#{!viewScope.UrgeSettleBean.breakGroupMap[row.ContractNo]}">
+                                <af:spacer width="10" height="40" id="s5"/>
+                                
+                                <af:panelGroupLayout id="pgl3" layout="horizontal" halign="left">
+                                    <af:outputText value="合同号：#{row.ContractNo}" id="ot1"
+                                                   inlineStyle="font-size:small;font-weight:bold;"/>
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:outputText value="本合同总金额为：" id="ot2" inlineStyle="font-size:small;"></af:outputText>
+                                    <af:outputText value="#{row.TotalAmount}" id="ot31"
+                                                   inlineStyle="font-size:small;font-style:italic;font-weight:bold;"></af:outputText>
+                                    <af:outputText value="（万元人民币），" id="ot32" inlineStyle="font-size:small; "></af:outputText>
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                    <af:outputText value="已付款项：" id="ot3" inlineStyle="font-size:small; "/>
+                                    <af:outputText value="#{row.TotalPaid}" id="ot33"
+                                                   inlineStyle="font-size:small; font-style:italic;font-weight:bold;"/>
+                                    <af:outputText value="（万元人民币），" id="ot34" inlineStyle="font-size:small; "/>
+                                    <af:spacer width="10" height="10" id="s3"/>
+                                    <af:outputText value="已开票未付（或差异）：" id="ot4"
+                                                   inlineStyle="font-size:small;"/>
+                                    <af:outputText value="#{row.TotalInvoiced}" id="ot5"
+                                                   inlineStyle="font-size:small;font-style:italic; font-weight:bold;"/>
+                                    <af:outputText value="（万元人民币）" id="ot14"
+                                                   inlineStyle="font-size:small;"/>
+                                </af:panelGroupLayout>
+                                <af:separator id="s4"/>
+                                <af:panelGroupLayout id="pgl5" layout="horizontal" inlineStyle="font-size:110%;">
+                                    <af:spacer width="10" height="10" id="s10"/>
+                                    <af:panelGroupLayout id="pgl6" inlineStyle="width:75px;" layout="horizontal">
+                                        <af:outputText value="项目名称" id="ot6" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s6"/>
+                                    <af:panelGroupLayout id="pgl7" inlineStyle="width:75px;" layout="horizontal">
+                                        <af:outputText value="船厂船号" id="ot7" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s7"/>
+                                    <af:panelGroupLayout id="pgl8" inlineStyle="width:75px;" layout="horizontal">
+                                        <af:outputText value="收款节点" id="ot8" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s8"/>
+                                    <af:panelGroupLayout id="pgl9" inlineStyle="width:100px;" layout="horizontal">
+                                        <af:outputText value="金额（万元）" id="ot9" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s9"/>
+                                    <af:panelGroupLayout id="pgl11" inlineStyle="width:85px;" layout="horizontal">
+                                        <af:outputText value="节点状态" id="ot10" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s11"/>
+                                    <af:panelGroupLayout id="pgl12" inlineStyle="width:75px;" layout="horizontal">
+                                        <af:outputText value="开票时间" id="ot11" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s12"/>
+                                    <af:panelGroupLayout id="pgl13" inlineStyle="width:75px;" layout="horizontal">
+                                        <af:outputText value="发票号" id="ot12" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s13"/>
+                                    <af:panelGroupLayout id="pgl14" inlineStyle="width:75px;" layout="horizontal">
+                                        <af:outputText value="发票账龄" id="ot13" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:separator id="s26"/>
+                            </af:panelGroupLayout>
+                            <af:panelGroupLayout id="pgl15" layout="horizontal" inlineStyle="font-size:105%;">
+                                <af:spacer width="10" height="10" id="s15"/>
+                                <af:panelGroupLayout id="pgl17" inlineStyle="width:75px;" layout="horizontal">
+                                    <af:outputText value="#{row.ProjectName}" id="ot15"/>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s16"/>
+                                <af:panelGroupLayout id="pgl18" inlineStyle="width:75px;" layout="horizontal">
+                                    <af:outputText value="#{row.ShipMnftNo}" id="ot16"/>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s17"/>
+                                <af:panelGroupLayout id="pgl19" inlineStyle="width:75px;" layout="horizontal">
+                                    <af:outputText value="#{row.PaymentName}" id="ot17"/>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s18"/>
+                                <af:panelGroupLayout id="pgl20" inlineStyle="width:100px;" layout="horizontal">
+                                    <af:outputText value="#{row.PaymentPlanAmount}" id="ot18">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.UrgeSettlementRpt1.hints.PaymentPlanAmount.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:outputText>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s19"/>
+                                <af:panelGroupLayout id="pgl21" inlineStyle="width:85px;" layout="horizontal">
+                                    <af:outputText value="#{row.Status}" id="ot19"/>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s20"/>
+                                <af:panelGroupLayout id="pgl22" inlineStyle="width:75px;" layout="horizontal">
+                                    <af:outputText value="#{row.InvoiceDate}" id="ot20">
+                                        <af:convertDateTime pattern="#{bindings.UrgeSettlementRpt1.hints.InvoiceDate.format}"/>
+                                    </af:outputText>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s21"/>
+                                <af:panelGroupLayout id="pgl23" inlineStyle="width:75px;" layout="horizontal">
+                                    <af:outputText value="#{row.InvoiceNumber}" id="ot21"/>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s22"/>
+                                <af:panelGroupLayout id="pgl24" inlineStyle="width:75px;" layout="horizontal">
+                                    <af:outputText value="#{row.Aging}" id="ot22">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.UrgeSettlementRpt1.hints.Less90.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:outputText>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                        <af:separator id="s25"/>
+                    </af:iterator>
+                    <af:spacer width="10" height="30" id="s24"/>
+                    <af:separator id="s23"/>
+                    <af:panelGroupLayout id="pgl25" layout="horizontal" halign="center">
+                        <af:outputText value="催款函结束" id="ot23"/>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

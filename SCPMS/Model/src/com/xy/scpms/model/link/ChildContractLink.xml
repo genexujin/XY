@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ChildContractLink"
+  Version="11.1.2.60.17"
+  EntityAssociation="com.xy.scpms.model.assoc.ContractContractFk1Assoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.link.ChildContractLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="ParentContractIdSearchContractBaseView"
+    Cardinality="1"
+    Source="true"
+    Owner="com.xy.scpms.model.query.search.SearchContractBaseView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="ParentContractIdSearchContractBaseView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.query.search.SearchContractBaseView.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ChildContractAccessor"
+    Cardinality="-1"
+    Owner="com.xy.scpms.model.query.search.SearchContractBaseView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="ChildContractAccessor"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.query.search.SearchContractBaseView.ParentContractId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

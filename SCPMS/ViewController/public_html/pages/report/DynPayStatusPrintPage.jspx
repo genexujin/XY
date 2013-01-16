@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="报表打印页" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="pgl1" layout="vertical">
+                            <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                                 halign="center">
+                                <af:outputText value="#{pageFlowScope.fy}" id="ot2"
+                                               styleClass="AFBrandingBarTitle"
+                                               inlineStyle="font-size:xx-large;"/>
+                                <af:outputText value="年 度 收 费 动 态 表 (" id="ot1"
+                                               styleClass="AFBrandingBarTitle"
+                                               inlineStyle="font-size:xx-large;"/>
+                                <af:outputText value=" #{pageFlowScope.dept} )" id="ot3"
+                                               styleClass="AFBrandingBarTitle"
+                                               inlineStyle="font-size:xx-large;"/>
+                            </af:panelGroupLayout>
+                            <af:panelGroupLayout id="pgl3" layout="horizontal"
+                                                 halign="center">
+                                <af:outputText value="导出日期： #{viewScope.DynPayStatusReportBean.currentDate}" id="ot4"/>
+                            </af:panelGroupLayout>
+                            <af:table value="#{bindings.Rpt_DynPayStatusByYear.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Rpt_DynPayStatusByYear.rangeSize}"
+                                      emptyText="#{bindings.Rpt_DynPayStatusByYear.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Rpt_DynPayStatusByYear.rangeSize}"
+                                      rowBandingInterval="0" id="t1"
+                                      styleClass="AFStretchWidth">
+                                <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.ContractNo.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Rpt_DynPayStatusByYear.hints.ContractNo.label}"
+                                           id="c1" width="120"
+                                           inlineStyle="text-align:center;"
+                                           align="center">
+                                    <af:outputText value="#{row.ContractNo}"
+                                                   id="ot21"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.ProjectName.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Rpt_DynPayStatusByYear.hints.ProjectName.label}"
+                                           id="c2" width="80" noWrap="false"
+                                           inlineStyle="text-align:center;"
+                                           align="center">
+                                    <af:outputText value="#{row.ProjectName}"
+                                                   id="ot22"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.AuthName.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Rpt_DynPayStatusByYear.hints.AuthName.label}"
+                                           id="c3" noWrap="false"
+                                           inlineStyle="text-align:center;"
+                                           align="center">
+                                    <af:outputText value="#{row.AuthName}"
+                                                   id="ot23"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.TotalAmount.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Rpt_DynPayStatusByYear.hints.TotalAmount.label}"
+                                           id="c4" width="50"
+                                           inlineStyle="text-align:center;"
+                                           align="center">
+                                    <af:outputText value="#{row.TotalAmount}"
+                                                   id="ot24">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.Rpt_DynPayStatusByYear.hints.TotalAmount.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.ProjectManager.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Rpt_DynPayStatusByYear.hints.ProjectManager.label}"
+                                           id="c5" width="50" noWrap="false"
+                                           inlineStyle="text-align:center;"
+                                           align="center">
+                                    <af:outputText value="#{row.ProjectManager}"
+                                                   id="ot5"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.RegionManager.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Rpt_DynPayStatusByYear.hints.RegionManager.label}"
+                                           id="c6" width="50" noWrap="false"
+                                           inlineStyle="text-align:center;"
+                                           align="center">
+                                    <af:outputText value="#{row.RegionManager}"
+                                                   id="ot6" noWrap="false"/>
+                                </af:column>
+                                <af:column id="c7"
+                                           headerText="已收款" align="center">
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Paidamount.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Paidamount.label}"
+                                               id="c8" width="40"
+                                               align="center">
+                                        <af:outputText value="#{row.Paidamount}"
+                                                       id="ot7">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_DynPayStatusByYear.hints.Paidamount.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Paidno.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Paidno.label}"
+                                               id="c9" width="40"
+                                               align="center">
+                                        <af:outputText value="#{row.Paidno}"
+                                                       id="ot8">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_DynPayStatusByYear.hints.Paidno.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:column>
+                                <af:column id="c10"
+                                           headerText="未开票" align="center">
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Intactamount.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Intactamount.label}"
+                                               id="c11" width="40"
+                                               align="center">
+                                        <af:outputText value="#{row.Intactamount}"
+                                                       id="ot9">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_DynPayStatusByYear.hints.Intactamount.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Intactno.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Intactno.label}"
+                                               id="c12" width="40"
+                                               align="center">
+                                        <af:outputText value="#{row.Intactno}"
+                                                       id="ot10">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_DynPayStatusByYear.hints.Intactno.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:column>
+                                <af:column id="c13"
+                                           headerText="应收款" align="center">
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Invoicedamount.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Invoicedamount.label}"
+                                               id="c14" width="40"
+                                               align="center">
+                                        <af:outputText value="#{row.Invoicedamount}"
+                                                       id="ot11">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_DynPayStatusByYear.hints.Invoicedamount.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Invoicedno.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Invoicedno.label}"
+                                               id="c15" width="40"
+                                               align="center">
+                                        <af:outputText value="#{row.Invoicedno}"
+                                                       id="ot12">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_DynPayStatusByYear.hints.Invoicedno.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:column>
+                                <af:column id="c16"
+                                           headerText="最近8个已开票收款节点"
+                                           align="center">
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Pay1.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Pay1.label}"
+                                               id="c17" noWrap="false"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Pay1}"
+                                                       id="ot13"
+                                                       noWrap="false"
+                                                       inlineStyle="font-size:70%;"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Pay2.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Pay2.label}"
+                                               id="c18" noWrap="false"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Pay2}"
+                                                       id="ot14"
+                                                       inlineStyle="font-size:70%;"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Pay3.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Pay3.label}"
+                                               id="c19" noWrap="false"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Pay3}"
+                                                       id="ot15"
+                                                       inlineStyle="font-size:70%;"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Pay4.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Pay4.label}"
+                                               id="c20" noWrap="false"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Pay4}"
+                                                       id="ot16"
+                                                       inlineStyle="font-size:70%;"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Pay5.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Pay5.label}"
+                                               id="c21" noWrap="false"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Pay5}"
+                                                       id="ot17"
+                                                       inlineStyle="font-size:70%;"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Pay6.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Pay6.label}"
+                                               id="c22" noWrap="false"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Pay6}"
+                                                       id="ot18"
+                                                       inlineStyle="font-size:70%;"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Pay7.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Pay7.label}"
+                                               id="c23" noWrap="false"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Pay7}"
+                                                       id="ot19"
+                                                       inlineStyle="font-size:70%;"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_DynPayStatusByYear.hints.Pay8.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_DynPayStatusByYear.hints.Pay8.label}"
+                                               id="c24" noWrap="false"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Pay8}"
+                                                       id="ot20"
+                                                       inlineStyle="font-size:70%;"/>
+                                    </af:column>
+                                </af:column>
+                            </af:table>
+                        </af:panelGroupLayout>
+                        <!-- id="af_one_column_stretched"   -->
+                    </f:facet>
+                    <f:facet name="top">
+                        <af:toolbar id="t2">
+                            <af:commandToolbarButton text="打印"
+                                                     id="ctb1"
+                                                     icon="/images/icons/print.png">
+                                <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                            <af:commandToolbarButton text="返回"
+                                                     id="ctb2" action="report"
+                                                     icon="/images/icons/previous.png"/>
+                        </af:toolbar>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

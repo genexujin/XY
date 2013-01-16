@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvoiceForecastRpt"
+  Version="11.1.2.60.17"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.xy.scpms.model.reports.InvoiceForecastRptImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.reports.InvoiceForecastRpt_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT lookup_value dept_Name,
+nvl(Bef.total_payment,0) Bef_total, 
+nvl(Jan.total_payment,0) Jan_total, 
+nvl(Feb.total_payment,0) Feb_total,
+nvl(Mar.total_payment,0) Mar_total,
+nvl(Apr.total_payment,0) Apr_total,
+nvl(May.total_payment,0) May_total,
+nvl(Jun.total_payment,0) Jun_total,
+nvl(Jul.total_payment,0) Jul_total,
+nvl(Aug.total_payment,0) Aug_total,
+nvl(Sep.total_payment,0) Sep_total,
+nvl(Oct.total_payment,0) Oct_total,
+nvl(Nov.total_payment,0) Nov_total,
+nvl(Deb.total_payment,0) Deb_total,
+nvl(Q1.total_payment,0) Q1_total,
+nvl(Q2.total_payment,0) Q2_total,
+nvl(Q3.total_payment,0) Q3_total,
+nvl(Q4.total_payment,0) Q4_total,
+nvl(Aft.total_payment,0) Aft_total
+from 
+(SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') depts,
+----Before
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM 
+(SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE < TRUNC (SYSDATE, 'YY')
+group by hd.design_dept) TOTAL  
+WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE ) Bef,
+----Jan
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),0) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),1))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Jan,
+----Feb
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),1) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),2))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Feb,
+----Mar
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),2) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),3))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Mar,
+----Apr
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),3) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),4))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Apr,
+----May
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),4) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),5))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )May,
+----Jun
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),5) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),6))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Jun,
+----Jul
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),6) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),7))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Jul,
+----Aug
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),7) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),8))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Aug,
+----Sep
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),8) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),9))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Sep,
+----Oct
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),9) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),10))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Oct,
+----Nov
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),10) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),11))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE ) Nov,
+----Dec
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),11) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),12))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Deb,
+----Q1
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),12) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),15))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Q1,
+----Q2
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),15) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),18))
+group by hd.design_dept) TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Q2,
+----Q3
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),18) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),21))
+group by hd.design_dept)  TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Q3,
+----Q4
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE BETWEEN ADD_MONTHS(TRUNC (SYSDATE, 'YY'),21) AND (ADD_MONTHS(TRUNC (SYSDATE, 'YY'),24))
+group by hd.design_dept)  TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE )Q4,
+(SELECT LOOKUP_VALUE design_dept, TOTAL.total_payment FROM (SELECT LOOKUP_VALUE from lov where lookup_code='DEPT_NAMES') DEPT,
+(SELECT hd.design_dept,sum(py.PAYMENT_PLAN_AMOUNT) total_payment
+FROM contract hd, contract_line ln,  contract_line_payments py
+WHERE hd.id    = ln.header_id AND ln.id      =py.line_id AND hd.deleted ='N'AND ln.deleted ='N'
+AND py.deleted ='N' AND ln.status = '审核通过' AND py.status='待开票'
+AND py.PAYMENT_PLAN_INVOICE_DATE > ADD_MONTHS(TRUNC (SYSDATE, 'YY'),24)
+group by hd.design_dept)  TOTAL WHERE TOTAL.design_dept(+) = DEPT.LOOKUP_VALUE ) Aft
+where depts.lookup_value = Jan.design_dept 
+AND depts.lookup_value = Feb.design_dept 
+AND depts.lookup_value = Mar.design_dept 
+AND depts.lookup_value = Apr.design_dept 
+AND depts.lookup_value = May.design_dept 
+AND depts.lookup_value = Jun.design_dept 
+AND depts.lookup_value = Jul.design_dept 
+AND depts.lookup_value = Aug.design_dept
+AND depts.lookup_value = Sep.design_dept
+AND depts.lookup_value = Oct.design_dept
+AND depts.lookup_value = Nov.design_dept
+AND depts.lookup_value = Deb.design_dept
+AND depts.lookup_value = Q1.design_dept 
+AND depts.lookup_value = Q2.design_dept 
+AND depts.lookup_value = Q3.design_dept 
+AND depts.lookup_value = Q4.design_dept 
+AND depts.lookup_value = Bef.design_dept
+AND depts.lookup_value = Aft.design_dept
+order by dept_name]]></SQLQuery>
+  <ViewAttribute
+    Name="DeptName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEPT_NAME"
+    Expression="DEPT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.DeptName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BefTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="BEF_TOTAL"
+    Expression="BEF_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.BefTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JanTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="JAN_TOTAL"
+    Expression="JAN_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.JanTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FebTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="FEB_TOTAL"
+    Expression="FEB_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.FebTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MarTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="MAR_TOTAL"
+    Expression="MAR_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.MarTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AprTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="APR_TOTAL"
+    Expression="APR_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.AprTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MayTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="MAY_TOTAL"
+    Expression="MAY_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.MayTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JunTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="JUN_TOTAL"
+    Expression="JUN_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.JunTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JulTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="JUL_TOTAL"
+    Expression="JUL_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.JulTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AugTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="AUG_TOTAL"
+    Expression="AUG_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.AugTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SepTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SEP_TOTAL"
+    Expression="SEP_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.SepTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OctTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="OCT_TOTAL"
+    Expression="OCT_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.OctTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NovTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="NOV_TOTAL"
+    Expression="NOV_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.NovTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DebTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="DEB_TOTAL"
+    Expression="DEB_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.DebTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Q1Total"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="Q1_TOTAL"
+    Expression="Q1_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.Q1Total_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Q2Total"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="Q2_TOTAL"
+    Expression="Q2_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.Q2Total_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Q3Total"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="Q3_TOTAL"
+    Expression="Q3_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.Q3Total_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Q4Total"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="Q4_TOTAL"
+    Expression="Q4_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.Q4Total_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AftTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="AFT_TOTAL"
+    Expression="AFT_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.InvoiceForecastRpt.AftTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="DeptName"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

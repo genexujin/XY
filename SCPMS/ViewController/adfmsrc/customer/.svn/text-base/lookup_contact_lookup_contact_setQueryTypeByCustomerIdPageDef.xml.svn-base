@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17"
+                id="lookup_contact_lookup_contact_setQueryTypeByCustomerIdPageDef" Package="customer"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="setQueryTypeByCustomerId" RequiresUpdateModel="true" Action="invokeMethod"
+            MethodName="setQueryTypeByCustomerId" IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.CustomerContacts">
+      <NamedData NDName="customerId" NDValue="#{pageFlowScope.customerId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,805 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <af:resource type="javascript">
+      function enforcePreventUserInput(evt) {
+          var popup = AdfPage.PAGE.findComponentByAbsoluteId('p1');
+          if (popup != null) {
+              AdfPage.PAGE.addBusyStateListener(popup, handleBusyState);
+              evt.preventUserInput();
+          }
+      }
+
+      function handleBusyState(evt) {
+          var popup = AdfPage.PAGE.findComponentByAbsoluteId('p1');
+          if (popup != null) {
+              if (evt.isBusy()) {
+                  popup.show();
+              }
+              else {
+                  popup.hide();
+                  AdfPage.PAGE.removeBusyStateListener(popup, handleBusyState);
+              }
+          }
+      }
+      
+       function openMthlyEffDBClick(evt) {
+          var table = evt.getSource();
+          AdfCustomEvent.queue(table, "openMthlyEffDBClick", 
+          {
+          },
+true);
+          evt.cancel();
+      }
+      
+             function openMthlyPayDBClick(evt) {
+          var table = evt.getSource();
+          AdfCustomEvent.queue(table, "openMthlyPayDBClick", 
+          {
+          },
+true);
+          evt.cancel();
+      }
+
+      function aipDbclick(evt) {
+          var table = evt.getSource();
+          AdfCustomEvent.queue(table, "aipDbclick", 
+          {
+          },
+true);
+          evt.cancel();
+      }
+
+      function invreqDbclick(evt) {
+          var table = evt.getSource();
+          AdfCustomEvent.queue(table, "invreqDbclick", 
+          {
+          },
+true);
+          evt.cancel();
+      }
+
+      function invnotDbclick(evt) {
+          var table = evt.getSource();
+          AdfCustomEvent.queue(table, "invnotDbclick", 
+          {
+          },
+true);
+
+          evt.cancel();
+      }
+
+      function paynotDbclick(evt) {
+          var table = evt.getSource();
+          AdfCustomEvent.queue(table, "paynotDbclick", 
+          {
+          },
+true);
+          evt.cancel();
+      }
+    </af:resource>
+    <af:panelStretchLayout id="psl1" topHeight="150px" startWidth="0px" endWidth="0">
+        <f:facet name="center">
+            <af:panelBox text="欢迎使用合同收款管理系统" id="pb1">
+                <f:facet name="toolbar"/>
+                <af:panelStretchLayout id="psl2" topHeight="0" endWidth="0px" startWidth="0">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                      
+                            <af:panelTabbed id="pt1">
+                            <af:showDetailItem text="当月信息" id="sdi2" stretchChildren="first">
+                                <af:panelDashboard id="pd2" columns="1" rowHeight="250px">
+                                    <af:panelBox text="当月生效列表" id="pb6" background="medium"
+                                                 icon="/images/icons/accessors.png">
+                                        <f:facet name="toolbar"/>
+                                        <af:panelCollection id="pc5">
+                                            <f:facet name="menus"/>
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t14">
+                                                    <af:commandToolbarButton text="导出为Excel" id="ctb8"
+                                                                             icon="/images/icons/export.png">
+                                                        <af:exportCollectionActionListener type="excelHTML"
+                                                                                           exportedId="t13"
+                                                                                           title="MonthlyEffective.xls"
+                                                                                           filename="MonthlyEffective.xls"/>
+                                                    </af:commandToolbarButton>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <f:facet name="statusbar"/>
+                                            <af:table value="#{bindings.MonthlyEffectiveRpt1.collectionModel}" var="row"
+                                                      rows="#{bindings.MonthlyEffectiveRpt1.rangeSize}"
+                                                      emptyText="#{bindings.MonthlyEffectiveRpt1.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.MonthlyEffectiveRpt1.rangeSize}"
+                                                      rowBandingInterval="1"
+                                                      filterModel="#{bindings.MonthlyEffectiveRpt1Query.queryDescriptor}"
+                                                      queryListener="#{bindings.MonthlyEffectiveRpt1Query.processQuery}"
+                                                      filterVisible="false" varStatus="vs"
+                                                      selectedRowKeys="#{bindings.MonthlyEffectiveRpt1.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.MonthlyEffectiveRpt1.collectionModel.makeCurrent}"
+                                                      rowSelection="single" id="t13">
+                                                <af:column sortProperty="#{bindings.MonthlyEffectiveRpt1.hints.ContractNo.name}"
+                                                           filterable="true" sortable="true"
+                                                           headerText="#{bindings.MonthlyEffectiveRpt1.hints.ContractNo.label}"
+                                                           id="c37">
+                                                    <af:outputText value="#{row.ContractNo}" id="ot38"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyEffectiveRpt1.hints.ProjectName.name}"
+                                                           filterable="true" sortable="true"
+                                                           headerText="#{bindings.MonthlyEffectiveRpt1.hints.ProjectName.label}"
+                                                           id="c38">
+                                                    <af:outputText value="#{row.ProjectName}" id="ot39"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyEffectiveRpt1.hints.AuthName.name}"
+                                                           filterable="true" sortable="true"
+                                                           headerText="#{bindings.MonthlyEffectiveRpt1.hints.AuthName.label}"
+                                                           id="c39" width="150">
+                                                    <af:outputText value="#{row.AuthName}" id="ot40"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyEffectiveRpt1.hints.ShipMnftNo.name}"
+                                                           filterable="true" sortable="true"
+                                                           headerText="#{bindings.MonthlyEffectiveRpt1.hints.ShipMnftNo.label}"
+                                                           id="c40">
+                                                    <af:outputText value="#{row.ShipMnftNo}" id="ot41"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyEffectiveRpt1.hints.Price.name}"
+                                                           filterable="true" sortable="true"
+                                                           headerText="#{bindings.MonthlyEffectiveRpt1.hints.Price.label}"
+                                                           id="c41">
+                                                    <af:outputText value="#{row.Price}" id="ot43">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.MonthlyEffectiveRpt1.hints.Price.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyEffectiveRpt1.hints.DesignDept.name}"
+                                                           filterable="true" sortable="true"
+                                                           headerText="#{bindings.MonthlyEffectiveRpt1.hints.DesignDept.label}"
+                                                           id="c42">
+                                                    <af:outputText value="#{row.DesignDept}" id="ot44"/>
+                                                </af:column>
+                                                 <af:clientListener type="dblClick" method="openMthlyEffDBClick"/>
+                                                     
+                                                    <af:serverListener type="openMthlyEffDBClick"
+                                                                       method="#{WelcomeBean.openMthlyEffDBClick}"/>
+                                            </af:table>
+                                        </af:panelCollection>
+                                    </af:panelBox>
+                                    <af:panelBox text="当月完成收款列表" id="pb7" background="medium"
+                                                 icon="/images/icons/check.png">
+                                        <f:facet name="toolbar"/>
+                                        <af:panelCollection id="pc6">
+                                            <f:facet name="menus"/>
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t15">
+                                                    <af:commandToolbarButton text="导出为Excel" id="ctb9"
+                                                                             icon="/images/icons/export.png">
+                                                        <af:exportCollectionActionListener type="excelHTML"
+                                                                                           exportedId="t16"
+                                                                                           title="MonthlyPayment.xls"
+                                                                                           filename="MonthlyPayment.xls"/>
+                                                    </af:commandToolbarButton>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <f:facet name="statusbar"/>
+                                            <af:table value="#{bindings.MonthlyPaymentRpt1.collectionModel}" var="row"
+                                                      rows="#{bindings.MonthlyPaymentRpt1.rangeSize}"
+                                                      emptyText="#{bindings.MonthlyPaymentRpt1.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.MonthlyPaymentRpt1.rangeSize}"
+                                                      rowBandingInterval="0"
+                                                      selectedRowKeys="#{bindings.MonthlyPaymentRpt1.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.MonthlyPaymentRpt1.collectionModel.makeCurrent}"
+                                                      rowSelection="single" id="t16">
+                                                <af:column sortProperty="#{bindings.MonthlyPaymentRpt1.hints.ContractNo.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.MonthlyPaymentRpt1.hints.ContractNo.label}"
+                                                           id="c43">
+                                                    <af:outputText value="#{row.ContractNo}" id="ot45"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyPaymentRpt1.hints.ProjectName.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.MonthlyPaymentRpt1.hints.ProjectName.label}"
+                                                           id="c44">
+                                                    <af:outputText value="#{row.ProjectName}" id="ot46"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyPaymentRpt1.hints.AuthName.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.MonthlyPaymentRpt1.hints.AuthName.label}"
+                                                           id="c45" width="150">
+                                                    <af:outputText value="#{row.AuthName}" id="ot47"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyPaymentRpt1.hints.ShipMnftNo.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.MonthlyPaymentRpt1.hints.ShipMnftNo.label}"
+                                                           id="c46">
+                                                    <af:outputText value="#{row.ShipMnftNo}" id="ot48"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyPaymentRpt1.hints.PaymentName.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.MonthlyPaymentRpt1.hints.PaymentName.label}"
+                                                           id="c47">
+                                                    <af:outputText value="#{row.PaymentName}" id="ot49"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyPaymentRpt1.hints.PaymentDate.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.MonthlyPaymentRpt1.hints.PaymentDate.label}"
+                                                           id="c48">
+                                                    <af:outputText value="#{row.PaymentDate}" id="ot50">
+                                                        <af:convertDateTime pattern="#{bindings.MonthlyPaymentRpt1.hints.PaymentDate.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyPaymentRpt1.hints.TotalPayment.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.MonthlyPaymentRpt1.hints.TotalPayment.label}"
+                                                           id="c49">
+                                                    <af:outputText value="#{row.TotalPayment}" id="ot51">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.MonthlyPaymentRpt1.hints.TotalPayment.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MonthlyPaymentRpt1.hints.DesignDept.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.MonthlyPaymentRpt1.hints.DesignDept.label}"
+                                                           id="c50">
+                                                    <af:outputText value="#{row.DesignDept}" id="ot52"/>
+                                                </af:column>
+                                                <af:clientListener type="dblClick" method="openMthlyPayDBClick"/><af:serverListener type="openMthlyPayDBClick"
+                                                                                                                                    method="#{WelcomeBean.openMthlyPayDBClick}"/>
+                                            </af:table>
+                                        </af:panelCollection>
+                                    </af:panelBox>
+                                </af:panelDashboard>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="待办事项" id="sdi1" stretchChildren="first">
+                                    <af:panelDashboard id="pd1" rowHeight="220px" columns="2" dimensionsFrom="auto">
+                                        <af:panelBox text="合同审核" id="pb11" icon="/images/icons/actor.png"
+                                                     background="medium" ramp="core" showDisclosure="false"
+                                                     rendered="#{securityContext.userInRole['contractor,marketing_director']}">
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t8">
+                                                    <af:commandButton text="查看全部" id="cb4"
+                                                                      icon="/images/icons/quick_query.png"
+                                                                      actionListener="#{bindings.eventBinding3.listener.processAction}">
+                                                        <af:clientListener method="enforcePreventUserInput"
+                                                                           type="action"/>
+                                                    </af:commandButton>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <af:panelCollection id="pc2">
+                                                <f:facet name="menus"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t10">
+                                                        <af:commandToolbarButton text="审核通过" id="ctb2"
+                                                                                 icon="/images/icons/check.png"
+                                                                                 action="#{WelcomeBean.setApproved}"/>
+                                                        <af:commandToolbarButton text="退回" id="ctb3"
+                                                                                 icon="/images/icons/terminate.png"
+                                                                                 action="#{WelcomeBean.setRejected}"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.ApprovalInProcess.collectionModel}"
+                                                          var="row" rows="#{bindings.ApprovalInProcess.rangeSize}"
+                                                          emptyText="#{bindings.ApprovalInProcess.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.ApprovalInProcess.rangeSize}"
+                                                          rowBandingInterval="1" id="t1"
+                                                          filterModel="#{bindings.ApprovalInProcessQuery.queryDescriptor}"
+                                                          queryListener="#{bindings.ApprovalInProcessQuery.processQuery}"
+                                                          filterVisible="false" varStatus="vs"
+                                                          selectedRowKeys="#{bindings.ApprovalInProcess.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.ApprovalInProcess.collectionModel.makeCurrent}"
+                                                          rowSelection="single" binding="#{WelcomeBean.dashboardTable}">
+                                                    <af:column sortProperty="#{bindings.ApprovalInProcess.hints.ContractNo.name}"
+                                                               sortable="true" headerText="合同号" id="c2" align="center">
+                                                        <af:commandLink id="ot4" text="#{row.ContractNo}"
+                                                                        actionListener="#{bindings.eventBinding.listener.processAction}">
+                                                            <af:setActionListener from="#{row.ContractId}"
+                                                                                  to="#{viewScope.contractId}"/>
+                                                        </af:commandLink>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.ApprovalInProcess.hints.Type.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.ApprovalInProcess.hints.Type.label}"
+                                                               id="c1" align="center" filterable="true">
+                                                        <af:outputText value="#{row.Type}" id="ot3"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.ApprovalInProcess.hints.AuthName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.ApprovalInProcess.hints.AuthName.label}"
+                                                               id="c3" align="center" filterable="true">
+                                                        <af:outputText value="#{row.AuthName}" id="ot5"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.ApprovalInProcess.hints.ProjectName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.ApprovalInProcess.hints.ProjectName.label}"
+                                                               id="c4" align="center" filterable="true">
+                                                        <af:outputText value="#{row.ProjectName}" id="ot6"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.ApprovalInProcess.hints.ContractEntity.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.ApprovalInProcess.hints.ContractEntity.label}"
+                                                               id="c5" align="center" filterable="true">
+                                                        <af:outputText value="#{row.ContractEntity}" id="ot7"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.ApprovalInProcess.hints.FullName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.ApprovalInProcess.hints.FullName.label}"
+                                                               id="c6" align="center">
+                                                        <af:outputText value="#{row.FullName}" id="ot8"/>
+                                                    </af:column>
+                                                    <af:clientListener type="dblClick" method="aipDbclick"/>
+                                                     
+                                                    <af:serverListener type="aipDbclick"
+                                                                       method="#{WelcomeBean.openAIPContractDBClick}"/>
+                                                </af:table>
+                                                <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                                                          binding="#{WelcomeBean.popup}">
+                                                    <af:panelWindow id="pw1" stretchChildren="first" contentHeight="150"
+                                                                    contentWidth="300" modal="true"
+                                                                    closeIconVisible="false">
+                                                        <af:panelBox text="请确认审核意见" id="pb5" background="medium">
+                                                            <f:facet name="toolbar"/>
+                                                            <af:panelFormLayout id="pfl2">
+                                                                <f:facet name="footer">
+                                                                    <af:toolbar id="t11">
+                                                                        <af:commandToolbarButton text="确定" id="ctb4"
+                                                                                                 icon="/images/icons/check.png"
+                                                                                                 actionListener="#{WelcomeBean.submitInDashboard}"/>
+                                                                        <af:commandToolbarButton id="ctb5" text="取消"
+                                                                                                 icon="/images/icons/undo.png"
+                                                                                                 action="#{WelcomeBean.cancel}"/>
+                                                                    </af:toolbar>
+                                                                </f:facet>
+                                                                <af:inputText label="备注" id="it2" rows="3"
+                                                                              binding="#{WelcomeBean.memoInput}"
+                                                                              columns="40"/>
+                                                            </af:panelFormLayout>
+                                                        </af:panelBox>
+                                                    </af:panelWindow>
+                                                </af:popup>
+                                            </af:panelCollection>
+                                        </af:panelBox>
+                                        <af:panelBox text="开票申请" id="pb2" background="medium" ramp="core"
+                                                     showDisclosure="false" icon="/images/icons/cuecard.png"
+                                                     rendered="#{securityContext.userInRole['design_director,marketing_director']}">
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t5">
+                                                    <af:commandButton id="cb2" icon="/images/icons/quick_query.png"
+                                                                      actionListener="#{WelcomeBean.processEvent}"
+                                                                      text="查看全部">
+                                                        <af:clientListener method="enforcePreventUserInput"
+                                                                           type="action"/>
+                                                    </af:commandButton>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <af:panelCollection id="pc3">
+                                                <f:facet name="menus"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t12">
+                                                        <af:commandToolbarButton text="审核通过" id="ctb6"
+                                                                                 icon="/images/icons/check.png"
+                                                                                 action="#{WelcomeBean.setApproveInv}"/>
+                                                        <af:commandToolbarButton id="ctb7" text="退回申请"
+                                                                                 icon="/images/icons/terminate.png"
+                                                                                 action="#{WelcomeBean.setRejectInv}"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.InvoiceRequisitionView.collectionModel}"
+                                                          var="row" rows="#{bindings.InvoiceRequisitionView.rangeSize}"
+                                                          emptyText="#{bindings.InvoiceRequisitionView.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.InvoiceRequisitionView.rangeSize}"
+                                                          rowBandingInterval="1"
+                                                          selectedRowKeys="#{bindings.InvoiceRequisitionView.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.InvoiceRequisitionView.collectionModel.makeCurrent}"
+                                                          rowSelection="single" id="t3"
+                                                          filterModel="#{bindings.InvoiceRequisitionViewQuery.queryDescriptor}"
+                                                          queryListener="#{bindings.InvoiceRequisitionViewQuery.processQuery}"
+                                                          filterVisible="false" varStatus="vs"
+                                                          binding="#{WelcomeBean.invReqTable}">
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.ContractNo.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.ContractNo.label}"
+                                                               id="c23" width="100" align="center" filterable="true">
+                                                        <af:outputText value="#{row.ContractNo}" id="ot24"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.AuthName1.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.AuthName1.label}"
+                                                               id="c22" width="100" align="center" filterable="true">
+                                                        <af:outputText value="#{row.AuthName1}" id="ot23"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.ProjectName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.ProjectName.label}"
+                                                               id="c24" width="100" align="center" filterable="true">
+                                                        <af:outputText value="#{row.ProjectName}" id="ot25"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.ShipMnftNo.name}"
+                                                               filterable="true" sortable="false"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.ShipMnftNo.label}"
+                                                               id="c36">
+                                                        <af:outputText value="#{row.ShipMnftNo}" id="ot35"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.PaymentName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.PaymentName.label}"
+                                                               id="c17" width="50" align="center" filterable="true">
+                                                        <af:outputText value="#{row.PaymentName}" id="ot18"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.Amount.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.Amount.label}"
+                                                               id="c21" width="100" align="center" filterable="true">
+                                                        <af:outputText value="#{row.Amount}" id="ot22">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.InvoiceRequisitionView.hints.Amount.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.LinePaymentDetailView.DesignDept.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.LinePaymentDetailView.DesignDept.label}"
+                                                               id="c25" width="50" align="center" filterable="true">
+                                                        <af:outputText value="#{row.LinePaymentDetailView.bindings.DesignDept.inputValue}"
+                                                                       id="ot26"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.FullName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.FullName.label}"
+                                                               id="c16" width="50" align="center">
+                                                        <af:outputText value="#{row.FullName}" id="ot17"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.RequestDate.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.RequestDate.label}"
+                                                               id="c18" width="50" align="center" filterable="true">
+                                                        <af:outputText value="#{row.RequestDate}" id="ot19">
+                                                            <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.RequestDate.format}"/>
+                                                        </af:outputText>
+                                                        <f:facet name="filter">
+                                                            <af:inputDate value="#{vs.filterCriteria.RequestDate}"
+                                                                          id="id2">
+                                                                <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.RequestDate.format}"/>
+                                                            </af:inputDate>
+                                                        </f:facet>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.PaymentPlanInvoiceDate.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.PaymentPlanInvoiceDate.label}"
+                                                               id="c19" width="80" align="center" filterable="true">
+                                                        <af:outputText value="#{row.PaymentPlanInvoiceDate}" id="ot20">
+                                                            <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.PaymentPlanInvoiceDate.format}"/>
+                                                        </af:outputText>
+                                                        <f:facet name="filter">
+                                                            <af:inputDate value="#{vs.filterCriteria.PaymentPlanInvoiceDate}"
+                                                                          id="id1">
+                                                                <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.PaymentPlanInvoiceDate.format}"/>
+                                                            </af:inputDate>
+                                                        </f:facet>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.Status1.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceRequisitionView.hints.Status1.label}"
+                                                               id="c20" width="50" align="center" filterable="true">
+                                                        <af:outputText value="#{row.Status1}" id="ot21"/>
+                                                    </af:column>
+                                                    <af:clientListener type="dblClick" method="invreqDbclick"/>
+                                                     
+                                                    <af:serverListener type="invreqDbclick"
+                                                                       method="#{WelcomeBean.openInvReqContractDBClick}"/>
+                                                </af:table>
+                                                <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                                                          binding="#{WelcomeBean.invPopup}">
+                                                    <af:dialog id="d3" title="确认审核意见" stretchChildren="first"
+                                                               contentWidth="240" contentHeight="100"
+                                                               closeIconVisible="false"
+                                                               dialogListener="#{WelcomeBean.confirmApproveInvoice}"
+                                                               titleIconSource="/images/icons/task.png">
+                                                        <f:facet name="buttonBar"/>
+                                                        <af:panelGroupLayout id="pgl1">
+                                                            <af:outputText value="请确认审核通过或者退回该发票申请，并填写相关说明。" id="ot36"/>
+                                                            <af:inputText label="备注" id="it3" rows="3" columns="25"
+                                                                          value="#{viewScope.WelcomeBean.appInvMemo}"/>
+                                                        </af:panelGroupLayout>
+                                                    </af:dialog>
+                                                </af:popup>
+                                            </af:panelCollection>
+                                        </af:panelBox>
+                                        <af:panelBox text="亟待开票（30天内需处理）" id="pb3" background="medium" ramp="core"
+                                                     showDisclosure="false" icon="/images/icons/task.png">
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t4">
+                                                    <af:commandButton text="查看全部" id="cb1"
+                                                                      icon="/images/icons/quick_query.png"
+                                                                      actionListener="#{bindings.eventBinding1.listener.processAction}">
+                                                        <af:clientListener method="enforcePreventUserInput"
+                                                                           type="action"/>
+                                                    </af:commandButton>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <af:panelCollection id="pc1">
+                                                <f:facet name="menus"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t9">
+                                                        <af:commandToolbarButton text="申请开票" id="ctb1"
+                                                                                 icon="/images/icons/compare.png"
+                                                                                 disabled="false"
+                                                                                 rendered="#{securityContext.userInRole['project_manager,region_manager']}">
+                                                            <af:showPopupBehavior popupId="p3"/>
+                                                        </af:commandToolbarButton>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.InvoiceNotificaitonView.collectionModel}"
+                                                          var="row" rows="#{bindings.InvoiceNotificaitonView.rangeSize}"
+                                                          emptyText="#{bindings.InvoiceNotificaitonView.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.InvoiceNotificaitonView.rangeSize}"
+                                                          rowBandingInterval="1" rowSelection="single" id="t2"
+                                                          filterModel="#{bindings.InvoiceNotificaitonViewQuery.queryDescriptor}"
+                                                          queryListener="#{bindings.InvoiceNotificaitonViewQuery.processQuery}"
+                                                          filterVisible="false" varStatus="vs"
+                                                          binding="#{WelcomeBean.pendInvTable}"
+                                                          selectedRowKeys="#{bindings.InvoiceNotificaitonView.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.InvoiceNotificaitonView.collectionModel.makeCurrent}">
+                                                    <f:facet name="contextMenu">
+                                                        <!-- 右键开票快捷按钮
+                                            <af:popup childCreation="deferred"
+                                                      autoCancel="disabled"
+                                                      id="p1"
+                                                      rendered="#{securityContext.userInRole['region_manager,project_manager,contractor']}">
+                                                <af:menu text="开票" id="m1"
+                                                         icon="/images/icons/component.png">
+                                                    <af:menu text="开票" id="m2"
+                                                             icon="/images/icons/accessors.png">
+                                                        <af:commandMenuItem text="生成此项发票申请"
+                                                                            id="cmi1"
+                                                                            icon="/images/icons/action.png"
+                                                                            action="#{WelcomeBean.createInvReq}"/>
+                                                    </af:menu>
+                                                </af:menu>
+                                            </af:popup>
+                                            -->
+                                                    </f:facet>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.ContractNo.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.ContractNo.label}"
+                                                               id="c7" width="120" align="center" filterable="true">
+                                                        <af:outputText value="#{row.ContractNo}" id="ot9"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.ShipMnftNo.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.ShipMnftNo.label}"
+                                                               id="c9" width="70" align="center" filterable="true">
+                                                        <af:outputText value="#{row.ShipMnftNo}" id="ot11"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.PaymentName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.PaymentName.label}"
+                                                               id="c10" width="80" align="center" filterable="true">
+                                                        <af:outputText value="#{row.PaymentName}" id="ot12"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.AuthName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.AuthName.label}"
+                                                               id="c8" width="150" align="center" filterable="true">
+                                                        <af:outputText value="#{row.AuthName}" id="ot10"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.PaymentPlanAmount.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.PaymentPlanAmount.label}"
+                                                               id="c12" width="100" align="center" filterable="true">
+                                                        <af:outputText value="#{row.PaymentPlanAmount}" id="ot14">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.InvoiceNotificaitonView.hints.PaymentPlanAmount.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.PaymentPlanInvoiceDate.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.PaymentPlanInvoiceDate.label}"
+                                                               id="c11" width="80" align="center">
+                                                        <af:outputText value="#{row.PaymentPlanInvoiceDate}" id="ot13">
+                                                            <af:convertDateTime pattern="#{bindings.InvoiceNotificaitonView.hints.PaymentPlanInvoiceDate.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.CustomerContactName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.CustomerContactName.label}"
+                                                               id="c13" width="80" align="center">
+                                                        <af:outputText value="#{row.CustomerContactName}" id="ot15"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.Day2due.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.Day2due.label}"
+                                                               id="c14" width="50" align="center">
+                                                        <af:outputText value="#{row.Day2due}" id="ot16">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.InvoiceNotificaitonView.hints.Day2due.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.InvoiceNotificaitonView.hints.Status1.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.InvoiceNotificaitonView.hints.Status1.label}"
+                                                               id="c15" align="center" filterable="true">
+                                                        <af:outputText value="#{row.Status1}"
+                                                                       shortDesc="#{bindings.InvoiceNotificaitonView.hints.Status1.tooltip}"
+                                                                       id="it1"/>
+                                                    </af:column>
+                                                    <af:clientListener type="dblClick" method="invnotDbclick"/>
+                                                     
+                                                    <af:serverListener type="invnotDbclick"
+                                                                       method="#{WelcomeBean.openInvNotContractDBClick}"/>
+                                                </af:table>
+                                                <af:popup childCreation="deferred" autoCancel="disabled" id="p3">
+                                                    <af:dialog id="d2" title="确定该操作吗？"
+                                                               dialogListener="#{WelcomeBean.invAppSubmit}"
+                                                               contentWidth="300" contentHeight="100"
+                                                               stretchChildren="first" closeIconVisible="false"
+                                                               titleIconSource="/images/icons/task.png">
+                                                        <f:facet name="buttonBar"/>
+                                                        <af:panelFormLayout id="pfl1">
+                                                            <f:facet name="footer">
+                                                                <af:inputDate value="#{viewScope.WelcomeBean.planPaymentDate}"
+                                                                              label="预计收款日期" id="id5"
+                                                                              showRequired="true" required="true">
+                                                                    <f:validator binding="#{bindings.PaymentPlanDate.validator}"/>
+                                                                    <af:convertDateTime pattern="#{bindings.PaymentPlanDate.format}"/>
+                                                                </af:inputDate>
+                                                            </f:facet>
+                                                            <af:outputText value="确认后，发票申请将会提交至本部门主任审核，最后通过市场部主任审核通过后方能开票 ！"
+                                                                           id="ot42"/>
+                                                        </af:panelFormLayout>
+                                                    </af:dialog>
+                                                </af:popup>
+                                            </af:panelCollection>
+                                        </af:panelBox>
+                                        <af:panelBox id="pb4" text="亟待收款（30天内需处理)" background="medium" ramp="core"
+                                                     icon="/images/icons/component.png" showDisclosure="false">
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t7">
+                                                    <af:commandButton text="查看全部" id="cb3"
+                                                                      icon="/images/icons/quick_query.png"
+                                                                      actionListener="#{bindings.eventBinding2.listener.processAction}">
+                                                        <af:clientListener method="enforcePreventUserInput"
+                                                                           type="action"/>
+                                                    </af:commandButton>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <af:panelCollection id="pc4">
+                                                <f:facet name="menus"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.PaymentNotification.collectionModel}"
+                                                          var="row" rows="#{bindings.PaymentNotification.rangeSize}"
+                                                          emptyText="#{bindings.PaymentNotification.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.PaymentNotification.rangeSize}"
+                                                          rowBandingInterval="1"
+                                                          selectedRowKeys="#{bindings.PaymentNotification.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.PaymentNotification.collectionModel.makeCurrent}"
+                                                          rowSelection="single" id="t6"
+                                                          filterModel="#{bindings.PaymentNotificationQuery.queryDescriptor}"
+                                                          queryListener="#{bindings.PaymentNotificationQuery.processQuery}"
+                                                          filterVisible="false" varStatus="vs">
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.ContractNo.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.ContractNo.label}"
+                                                               id="c26" align="center" filterable="true">
+                                                        <af:outputText value="#{row.ContractNo}" id="ot1"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.ShipMnftNo.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.ShipMnftNo.label}"
+                                                               id="c27" width="60" align="center" filterable="true">
+                                                        <af:outputText value="#{row.ShipMnftNo}" id="ot2"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.PaymentName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.PaymentName.label}"
+                                                               id="c29" width="50" align="center" filterable="true">
+                                                        <af:outputText value="#{row.PaymentName}" id="ot28"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.AuthName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.AuthName.label}"
+                                                               id="c28" align="center" filterable="true">
+                                                        <af:outputText value="#{row.AuthName}" id="ot27"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.InvoiceNumber.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.InvoiceNumber.label}"
+                                                               id="c30" align="center" filterable="true">
+                                                        <af:outputText value="#{row.InvoiceNumber}" id="ot29"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.InvoiceAmount.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.InvoiceAmount.label}"
+                                                               id="c31" width="50" align="center" filterable="true">
+                                                        <af:outputText value="#{row.InvoiceAmount}" id="ot30">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.PaymentNotification.hints.InvoiceAmount.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.InvoiceDate.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.InvoiceDate.label}"
+                                                               id="c32" width="70" align="center" filterable="true">
+                                                        <af:outputText value="#{row.InvoiceDate}" id="ot31">
+                                                            <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.InvoiceDate.format}"/>
+                                                        </af:outputText>
+                                                        <f:facet name="filter">
+                                                            <af:inputDate value="#{vs.filterCriteria.InvoiceDate}"
+                                                                          id="id3">
+                                                                <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.InvoiceDate.format}"/>
+                                                            </af:inputDate>
+                                                        </f:facet>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.PaymentPlanAmount.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.PaymentPlanAmount.label}"
+                                                               id="c33" width="50" align="center" filterable="true">
+                                                        <af:outputText value="#{row.PaymentPlanAmount}" id="ot32">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.PaymentNotification.hints.PaymentPlanAmount.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.PaymentPlanDate.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.PaymentPlanDate.label}"
+                                                               id="c34" width="80" align="center" filterable="true">
+                                                        <af:outputText value="#{row.PaymentPlanDate}" id="ot33">
+                                                            <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.PaymentPlanDate.format}"/>
+                                                        </af:outputText>
+                                                        <f:facet name="filter">
+                                                            <af:inputDate value="#{vs.filterCriteria.PaymentPlanDate}"
+                                                                          id="id4">
+                                                                <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.PaymentPlanDate.format}"/>
+                                                            </af:inputDate>
+                                                        </f:facet>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PaymentNotification.hints.DesignDept.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.PaymentNotification.hints.DesignDept.label}"
+                                                               id="c35" width="70" filterable="true">
+                                                        <af:outputText value="#{row.DesignDept}" id="ot34"/>
+                                                    </af:column>
+                                                    <af:clientListener type="dblClick" method="paynotDbclick"/>
+                                                     
+                                                    <af:serverListener type="paynotDbclick"
+                                                                       method="#{WelcomeBean.openPayNotContractDBClick}"/>
+                                                </af:table>
+                                            </af:panelCollection>
+                                        </af:panelBox>
+                                    </af:panelDashboard>
+                                </af:showDetailItem>
+                            </af:panelTabbed>
+                        
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end">
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p5"
+                                  binding="#{WelcomeBean.contractPopup}" contentDelivery="immediate">
+                            <af:panelWindow id="pw2" title="合同详情" stretchChildren="first" contentHeight="600"
+                                            contentWidth="800" modal="true">
+                                <af:region value="#{bindings.browsecontractbtf1.regionModel}" id="r1"/>
+                            </af:panelWindow>
+                        </af:popup>
+                    </f:facet>
+                    <f:facet name="top">
+                        <af:popup childCreation="immediate" autoCancel="disabled" id="p1" contentDelivery="immediate">
+                            <af:dialog id="d1" type="none" title="进入页面中..." closeIconVisible="false">
+                                <af:panelGroupLayout id="pgl7" layout="vertical" halign="center">
+                                    <af:image source="/images/logo.png" id="i1"/>
+                                    <af:image source="/images/animbar.gif" id="i2" inlineStyle="width:140px;"/>
+                                    <af:outputText value="进入页面中请等待..." id="ot37"/>
+                                </af:panelGroupLayout>
+                            </af:dialog>
+                        </af:popup>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:panelBox>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

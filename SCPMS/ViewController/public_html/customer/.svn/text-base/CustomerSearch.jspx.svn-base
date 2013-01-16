@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="请搜索并选择一个客户" id="d1">
+            <af:resource type="javascript">
+                  function handleTableDoubleClick(evt) {
+                      var table = evt.getSource();
+                      AdfCustomEvent.queue(table, "TableDoubleClickEvent",{},true);
+                      evt.cancel();
+                  }
+             </af:resource>
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" topHeight="150px"
+                                       startWidth="0px" endWidth="0px"
+                                       bottomHeight="0px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox text="客户列表:请输入查询条件, 可以使用百分号'%'来进行模糊搜索，如：输入 '%设计%' 表示包含字符'设计'的条件。" id="pb2"
+                                     background="medium">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t1">
+                                        <af:commandToolbarButton id="ctb2"
+                                                                 text="选择当前客户"
+                                                                 icon="/images/icons/check.png"
+                                                                 action="#{pageFlowScope.CustomerBean.selectCustomer}"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.Customers.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.Customers.rangeSize}"
+                                          emptyText="#{bindings.Customers.viewable ? '暂无数据，请执行查询。' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Customers.rangeSize}"
+                                          rowBandingInterval="1"
+                                          filterModel="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                                          queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.Customers.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.Customers.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t3">
+                                    <af:column sortProperty="#{bindings.Customers.hints.CustomerCode.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Customers.hints.CustomerCode.label}"
+                                               id="c1">
+                                        <af:outputText value="#{row.CustomerCode}"
+                                                       id="ot1"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.CustomerName.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Customers.hints.CustomerName.label}"
+                                               id="c2" width="180">
+                                        <af:outputText value="#{row.CustomerName}"
+                                                       id="ot2"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.CustomerType.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Customers.hints.CustomerType.label}"
+                                               id="c3" width="60">
+                                        <af:outputText value="#{row.CustomerType}"
+                                                       id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.Region.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Customers.hints.Region.label}"
+                                               id="c4">
+                                        <af:outputText value="#{row.Region}"
+                                                       id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.CustomerLevel.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.CustomerLevel.label}"
+                                               id="c5">
+                                        <af:outputText value="#{row.CustomerLevel}"
+                                                       id="ot5"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.Owner.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.Owner.label}"
+                                               id="c6">
+                                        <af:outputText value="#{row.Owner}"
+                                                       id="ot6"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.ParentGroup.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.ParentGroup.label}"
+                                               id="c7">
+                                        <af:outputText value="#{row.ParentGroup}"
+                                                       id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.PrimaryShipType.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.PrimaryShipType.label}"
+                                               id="c8">
+                                        <af:outputText value="#{row.PrimaryShipType}"
+                                                       id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.ShipGroupLevel.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.ShipGroupLevel.label}"
+                                               id="c9">
+                                        <af:outputText value="#{row.ShipGroupLevel}"
+                                                       id="ot9"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.RecentAction.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.RecentAction.label}"
+                                               id="c10">
+                                        <af:outputText value="#{row.RecentAction}"
+                                                       id="ot10"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.CustomerBillAddress.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.CustomerBillAddress.label}"
+                                               id="c11">
+                                        <af:outputText value="#{row.CustomerBillAddress}"
+                                                       id="ot11"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.CustomerShiptoAddress.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.CustomerShiptoAddress.label}"
+                                               id="c12">
+                                        <af:outputText value="#{row.CustomerShiptoAddress}"
+                                                       id="ot12"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Customers.hints.PostCode.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Customers.hints.PostCode.label}"
+                                               id="c13">
+                                        <af:outputText value="#{row.PostCode}"
+                                                       id="ot13"/>
+                                    </af:column>
+                                    <af:clientListener method="handleTableDoubleClick"
+                                                       type="dblClick"/>
+                                    <af:serverListener type="TableDoubleClickEvent"
+                                                       method="#{pageFlowScope.CustomerBean.selectCustomer}"/>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

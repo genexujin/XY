@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/home/!svn/ver/3/trunk/OM/ViewController/model/WEB-INF/customer
+END
+customer.adfc_diagram
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/home/!svn/ver/3/trunk/OM/ViewController/model/WEB-INF/customer/customer.adfc_diagram
+END
+lookup-contact.adfc_diagram
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/home/!svn/ver/3/trunk/OM/ViewController/model/WEB-INF/customer/lookup-contact.adfc_diagram
+END
+search-customer-byId.adfc_diagram
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/home/!svn/ver/3/trunk/OM/ViewController/model/WEB-INF/customer/search-customer-byId.adfc_diagram
+END
+contract-btf.adfc_diagram
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/3/trunk/OM/ViewController/model/WEB-INF/customer/contract-btf.adfc_diagram
+END
+customer-contact-btf.adfc_diagram
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/home/!svn/ver/3/trunk/OM/ViewController/model/WEB-INF/customer/customer-contact-btf.adfc_diagram
+END
+customer-btf.adfc_diagram
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/3/trunk/OM/ViewController/model/WEB-INF/customer/customer-btf.adfc_diagram
+END
+search-contact-byId.adfc_diagram
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/home/!svn/ver/3/trunk/OM/ViewController/model/WEB-INF/customer/search-contact-byId.adfc_diagram
+END

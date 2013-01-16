@@ -1,0 +1,438 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="Lovs.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox text="值列表维护" id="pb1" background="medium"
+                                     showDisclosure="false">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                    <af:commandToolbarButton text="管理员功能" id="ctb20" action="raw"/>
+                                    <af:commandToolbarButton
+                                                             id="ctb3"
+                                                             icon="/images/icons/filesave (2).png"
+                                                             text="保存"
+                                                             actionListener="#{bindings.Commit.execute}"/>
+                                    <af:commandToolbarButton actionListener="#{bindings.Rollback.execute}"
+                                                             disabled="#{!bindings.Rollback.enabled}"
+                                                             immediate="true"
+                                                             id="ctb4"
+                                                             icon="/images/icons/undo.png"
+                                                             text="取消">
+                                        <af:resetActionListener/>
+                                    </af:commandToolbarButton>
+                                    <af:commandToolbarButton
+                                                             id="ctb5"
+                                                             text="返回主页"
+                                                             icon="/images/icons/home.png"
+                                                             action="return"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelDashboard id="pd1" rowHeight="220px">
+                                <af:panelBox text="合同设计阶段" id="pb3"
+                                             titleHalign="center"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc2">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t4">
+                                                <af:commandToolbarButton
+                                                                         text="+"
+                                                                         id="ctb1"
+                                                                         action="#{LovBean.createDesignPhase}"/>
+                                                <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                                                         text="x"
+                                                                         disabled="#{!bindings.Delete.enabled}"
+                                                                         immediate="true"
+                                                                         id="ctb2"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.DesignPhase.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.DesignPhase.rangeSize}"
+                                                  emptyText="#{bindings.DesignPhase.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.DesignPhase.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.DesignPhase.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.DesignPhase.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t5"
+                                                  partialTriggers="::ctb1 ::ctb2"
+                                                  editingMode="editAll"
+                                                  >
+                                            <af:column sortProperty="#{bindings.DesignPhase.hints.LookupValue.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.DesignPhase.hints.LookupValue.label}"
+                                                       id="c2">
+                                                <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                              label="#{bindings.DesignPhase.hints.LookupValue.label}"
+                                                              required="#{bindings.DesignPhase.hints.LookupValue.mandatory}"
+                                                              columns="#{bindings.DesignPhase.hints.LookupValue.displayWidth}"
+                                                              maximumLength="#{bindings.DesignPhase.hints.LookupValue.precision}"
+                                                              shortDesc="#{bindings.DesignPhase.hints.LookupValue.tooltip}"
+                                                              id="it2">
+                                                    <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                                <af:panelBox id="pb4" text="委托类型"
+                                             titleHalign="center"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc1">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t11">
+                                                <af:commandToolbarButton
+                                                                         text="+"
+                                                                         id="ctb6"
+                                                                         action="#{LovBean.createAuthType}"/>
+                                                <af:commandToolbarButton
+                                                                         text="x"
+                                                                         disabled="#{!bindings.Delete2.enabled}"
+                                                                         id="ctb7"
+                                                                         actionListener="#{bindings.Delete2.execute}"
+                                                                         immediate="true"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.AuthType.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.AuthType.rangeSize}"
+                                                  emptyText="#{bindings.AuthType.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.AuthType.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.AuthType.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.AuthType.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t1"
+                                                  partialTriggers="::ctb7 ::ctb6">
+                                            <af:column sortProperty="#{bindings.AuthType.hints.LookupValue.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.AuthType.hints.LookupValue.label}"
+                                                       id="c1">
+                                                <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                              label="#{bindings.AuthType.hints.LookupValue.label}"
+                                                              required="#{bindings.AuthType.hints.LookupValue.mandatory}"
+                                                              columns="#{bindings.AuthType.hints.LookupValue.displayWidth}"
+                                                              maximumLength="#{bindings.AuthType.hints.LookupValue.precision}"
+                                                              shortDesc="#{bindings.AuthType.hints.LookupValue.tooltip}"
+                                                              id="it1">
+                                                    <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                                <af:panelBox id="pb5" text="船型"
+                                             titleHalign="center"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc3">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t12">
+                                                <af:commandToolbarButton
+                                                                         text="+"
+                                                                         id="ctb8"
+                                                                         action="#{LovBean.createShipType}"/>
+                                                <af:commandToolbarButton actionListener="#{bindings.Delete1.execute}"
+                                                                         text="x"
+                                                                         disabled="#{!bindings.Delete1.enabled}"
+                                                                         immediate="true"
+                                                                         id="ctb9"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.ShipType1.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.ShipType1.rangeSize}"
+                                                  emptyText="#{bindings.ShipType1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.ShipType1.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.ShipType1.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.ShipType1.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t2"
+                                                  partialTriggers="::ctb8 ::ctb9">
+                                            <af:column sortProperty="#{bindings.ShipType1.hints.LookupValue.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.ShipType1.hints.LookupValue.label}"
+                                                       id="c3">
+                                                <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                              label="#{bindings.ShipType1.hints.LookupValue.label}"
+                                                              required="#{bindings.ShipType1.hints.LookupValue.mandatory}"
+                                                              columns="#{bindings.ShipType1.hints.LookupValue.displayWidth}"
+                                                              maximumLength="#{bindings.ShipType1.hints.LookupValue.precision}"
+                                                              shortDesc="#{bindings.ShipType1.hints.LookupValue.tooltip}"
+                                                              id="it3">
+                                                    <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                                <af:panelBox id="pb6" text="收款节点"
+                                             titleHalign="center"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc4">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t15">
+                                                <af:commandToolbarButton
+                                                                         text="+"
+                                                                         id="ctb10"
+                                                                         action="#{LovBean.createPaymentName}"/>
+                                                <af:commandToolbarButton actionListener="#{bindings.Delete3.execute}"
+                                                                         text="x"
+                                                                         disabled="#{!bindings.Delete3.enabled}"
+                                                                         immediate="true"
+                                                                         id="ctb11"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.PaymentName1.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.PaymentName1.rangeSize}"
+                                                  emptyText="#{bindings.PaymentName1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.PaymentName1.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.PaymentName1.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.PaymentName1.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t6"
+                                                  partialTriggers="::ctb10 ::ctb11">
+                                            <af:column sortProperty="#{bindings.PaymentName1.hints.LookupValue.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.PaymentName1.hints.LookupValue.label}"
+                                                       id="c4">
+                                                <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                              label="#{bindings.PaymentName1.hints.LookupValue.label}"
+                                                              required="#{bindings.PaymentName1.hints.LookupValue.mandatory}"
+                                                              columns="#{bindings.PaymentName1.hints.LookupValue.displayWidth}"
+                                                              maximumLength="#{bindings.PaymentName1.hints.LookupValue.precision}"
+                                                              shortDesc="#{bindings.PaymentName1.hints.LookupValue.tooltip}"
+                                                              id="it4">
+                                                    <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                                <af:panelBox id="pb7" text="委托方类型"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc5">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t14">
+                                                <af:commandToolbarButton
+                                                                         text="+"
+                                                                         id="ctb12"
+                                                                         action="#{ConstantsBean.createAuthorizerType}"/>
+                                                <af:commandToolbarButton actionListener="#{bindings.Delete4.execute}"
+                                                                         text="x"
+                                                                         disabled="#{!bindings.Delete4.enabled}"
+                                                                         immediate="true"
+                                                                         id="ctb13"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.AuthorizerType.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.AuthorizerType.rangeSize}"
+                                                  emptyText="#{bindings.AuthorizerType.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.AuthorizerType.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.AuthorizerType.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.AuthorizerType.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t7"
+                                                  partialTriggers=":::pc1:ctb6 :::pc1:ctb7 ::ctb12 ::ctb13">
+                                            <af:column sortProperty="#{bindings.AuthorizerType.hints.LookupValue.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.AuthorizerType.hints.LookupValue.label}"
+                                                       id="c5">
+                                                <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                              label="#{bindings.AuthorizerType.hints.LookupValue.label}"
+                                                              required="#{bindings.AuthorizerType.hints.LookupValue.mandatory}"
+                                                              columns="#{bindings.AuthorizerType.hints.LookupValue.displayWidth}"
+                                                              maximumLength="#{bindings.AuthorizerType.hints.LookupValue.precision}"
+                                                              shortDesc="#{bindings.AuthorizerType.hints.LookupValue.tooltip}"
+                                                              id="it5">
+                                                    <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                                <af:panelBox id="pb9" text="船东类型"
+                                             titleHalign="center"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc6">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t13">
+                                                <af:commandToolbarButton
+                                                                         text="+"
+                                                                         id="ctb14"
+                                                                         action="#{LovBean.createOwnerType}"/>
+                                                <af:commandToolbarButton actionListener="#{bindings.Delete5.execute}"
+                                                                         text="x"
+                                                                         disabled="#{!bindings.Delete5.enabled}"
+                                                                         immediate="true"
+                                                                         id="ctb15"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.OwnerType.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.OwnerType.rangeSize}"
+                                                  emptyText="#{bindings.OwnerType.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.OwnerType.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.OwnerType.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.OwnerType.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t8"
+                                                  partialTriggers="::ctb14 ::ctb15">
+                                            <af:column sortProperty="#{bindings.OwnerType.hints.LookupValue.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.OwnerType.hints.LookupValue.label}"
+                                                       id="c6">
+                                                <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                              label="#{bindings.OwnerType.hints.LookupValue.label}"
+                                                              required="#{bindings.OwnerType.hints.LookupValue.mandatory}"
+                                                              columns="#{bindings.OwnerType.hints.LookupValue.displayWidth}"
+                                                              maximumLength="#{bindings.OwnerType.hints.LookupValue.precision}"
+                                                              shortDesc="#{bindings.OwnerType.hints.LookupValue.tooltip}"
+                                                              id="it6">
+                                                    <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                                <af:panelBox id="pb10" text="船厂类型"
+                                             titleHalign="center"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc7">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t16">
+                                                <af:commandToolbarButton
+                                                                         text="+"
+                                                                         id="ctb16"
+                                                                         action="#{LovBean.createPlantType}"/>
+                                                <af:commandToolbarButton actionListener="#{bindings.Delete6.execute}"
+                                                                         text="x"
+                                                                         disabled="#{!bindings.Delete6.enabled}"
+                                                                         immediate="true"
+                                                                         id="ctb17"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.PlantType.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.PlantType.rangeSize}"
+                                                  emptyText="#{bindings.PlantType.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.PlantType.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.PlantType.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.PlantType.collectionModel.makeCurrent}"
+                                                  rowSelection="single"
+                                                  id="t10"
+                                                  partialTriggers="::ctb16 ::ctb17"
+                                                  editingMode="editAll">
+                                            <af:column sortProperty="#{bindings.PlantType.hints.LookupValue.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.PlantType.hints.LookupValue.label}"
+                                                       id="c8">
+                                                <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                              label="#{bindings.PlantType.hints.LookupValue.label}"
+                                                              required="#{bindings.PlantType.hints.LookupValue.mandatory}"
+                                                              columns="#{bindings.PlantType.hints.LookupValue.displayWidth}"
+                                                              maximumLength="#{bindings.PlantType.hints.LookupValue.precision}"
+                                                              shortDesc="#{bindings.PlantType.hints.LookupValue.tooltip}"
+                                                              id="it8">
+                                                    <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                                <af:panelBox text="中间商类型" id="pb11"
+                                             titleHalign="center"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc8">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t17">
+                                                <af:commandToolbarButton
+                                                                         text="+"
+                                                                         id="ctb18"
+                                                                         action="#{LovBean.createBrokerType}"/>
+                                                <af:commandToolbarButton actionListener="#{bindings.Delete7.execute}"
+                                                                         text="x"
+                                                                         disabled="#{!bindings.Delete7.enabled}"
+                                                                         immediate="true"
+                                                                         id="ctb19"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.BrokerType.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.BrokerType.rangeSize}"
+                                                  emptyText="#{bindings.BrokerType.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.BrokerType.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.BrokerType.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.BrokerType.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t9"
+                                                  partialTriggers="::ctb18 ::ctb19"
+                                                  editingMode="editAll">
+                                            <af:column sortProperty="#{bindings.BrokerType.hints.LookupValue.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.BrokerType.hints.LookupValue.label}"
+                                                       id="c7">
+                                                <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                              label="#{bindings.BrokerType.hints.LookupValue.label}"
+                                                              required="#{bindings.BrokerType.hints.LookupValue.mandatory}"
+                                                              columns="#{bindings.BrokerType.hints.LookupValue.displayWidth}"
+                                                              maximumLength="#{bindings.BrokerType.hints.LookupValue.precision}"
+                                                              shortDesc="#{bindings.BrokerType.hints.LookupValue.tooltip}"
+                                                              id="it7">
+                                                    <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                            </af:panelDashboard>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

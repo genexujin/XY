@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report
+END
+report-setup-flow.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report/report-setup-flow.xml
+END
+pay-forecast-btf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/10/trunk/OM/ViewController/public_html/WEB-INF/report/pay-forecast-btf.xml
+END
+group-perf-report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/home/!svn/ver/15/trunk/OM/ViewController/public_html/WEB-INF/report/group-perf-report.xml
+END
+prjmgr-perf-report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report/prjmgr-perf-report.xml
+END
+ship-delivery-btf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/home/!svn/ver/10/trunk/OM/ViewController/public_html/WEB-INF/report/ship-delivery-btf.xml
+END
+eve-report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report/eve-report.xml
+END
+cust-perf-report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report/cust-perf-report.xml
+END
+inv-forecast-btf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/10/trunk/OM/ViewController/public_html/WEB-INF/report/inv-forecast-btf.xml
+END
+regmgr-perf-report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report/regmgr-perf-report.xml
+END
+dynPayStatus-report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report/dynPayStatus-report.xml
+END
+ar-aging-report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report/ar-aging-report.xml
+END
+urge-settlement-btf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/home/!svn/ver/11/trunk/OM/ViewController/public_html/WEB-INF/report/urge-settlement-btf.xml
+END
+eve-history-report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/report/eve-history-report.xml
+END

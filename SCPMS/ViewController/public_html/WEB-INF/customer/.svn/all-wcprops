@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/customer
+END
+customer-contact-btf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/customer/customer-contact-btf.xml
+END
+contract-btf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/customer/contract-btf.xml
+END
+search-customer-byId.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/customer/search-customer-byId.xml
+END
+lookup-contact.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/customer/lookup-contact.xml
+END
+customer.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/customer/customer.xml
+END
+search-contact-byId.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/WEB-INF/customer/search-contact-byId.xml
+END
+customer-btf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/home/!svn/ver/6/trunk/OM/ViewController/public_html/WEB-INF/customer/customer-btf.xml
+END

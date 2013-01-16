@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="BrowsePageDef" Package="pages.4tech">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="FourTechContract" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="FourTechContractIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="FourTechContractIterator" id="FourTechContract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.FourTechContractView"
+                      Name="FourTechContract0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="LineContractNo"/>
+          <Item Value="LineShipMnftNo"/>
+          <Item Value="Amount"/>
+          <Item Value="Type"/>
+          <Item Value="RegNo"/>
+          <Item Value="SentDate"/>
+          <Item Value="RcvDate"/>
+          <Item Value="SubmitDate"/>
+          <Item Value="RegDate"/>
+          <Item Value="Creator"/>
+          <Item Value="CreationDate"/>
+          <Item Value="Memo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

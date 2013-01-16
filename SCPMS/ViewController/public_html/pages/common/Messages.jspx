@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:messages id="m1"/>
+        <af:panelGroupLayout id="pgl1" halign="center" valign="middle"
+                             layout="vertical"
+                             inlineStyle="background-color:Silver;">
+          <af:panelBox text="系统错误" inlineStyle="width:500px;"
+                       id="pb1" titleHalign="center" showDisclosure="false"
+                       background="medium">
+            <af:outputText value="您运行的页面发生了不可预知的错误！请联系管理员，或者返回主页面重试。"
+                           inlineStyle="width:200px; font-size:x-large;"
+                           id="ot1"/>
+            <af:goImageLink text="返回主页" id="gil1"
+                            icon="/images/icons/home.png"
+                            destination="/faces/Home"/>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

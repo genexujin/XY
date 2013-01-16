@@ -1,0 +1,351 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <!--oracle-jdev-comment:preferred-managed-bean-name:UploadBean-->
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document id="d1">
+            <af:resource type="javascript">
+            
+               function disableContextMenu(){
+         document.oncontextmenu=function(){return false};
+               }
+            
+              function enforcePreventUserInput(evt) {
+                  var popup = AdfPage.PAGE.findComponentByAbsoluteId('p3');
+                  if (popup != null) {
+                      AdfPage.PAGE.addBusyStateListener(popup, handleBusyState);
+                      evt.preventUserInput();
+                  }
+              }
+
+              function handleBusyState(evt) {
+                  var popup = AdfPage.PAGE.findComponentByAbsoluteId('p3');
+                  if (popup != null) {
+                      if (evt.isBusy()) {
+                          popup.show();
+                      }
+                      else {
+                          popup.hide();
+                          AdfPage.PAGE.removeBusyStateListener(popup, handleBusyState);
+                      }
+                  }
+              }
+            </af:resource>
+            <af:form id="f1" usesUpload="true">
+                <af:panelSplitter orientation="horizontal"
+                                  splitterPosition="100"
+                                  positionedFromEnd="true" id="ps1">
+                    <f:facet name="first">
+                        <!-- id="af_twocol_right_partial_header_splitandstretched"   -->
+                        <af:panelStretchLayout topHeight="90px" id="psl1">
+                            <f:facet name="top">
+                                <af:panelBox text="新建#{pageFlowScope.CreationFlowBean.agreement?'协议':'合同'}流程" id="pb2"
+                                             background="medium"
+                                             showDisclosure="false">
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="toolbar1">
+                                            <af:commandToolbarButton text="返回主页"
+                                                                     id="commandToolbarButton1"
+                                                                     icon="/images/icons/home.gif"
+                                                                     action="return"
+                                                                     actionListener="#{bindings.Rollback.execute}"
+                                                                     immediate="true"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <af:panelGroupLayout id="pgl2"
+                                                         layout="horizontal">
+                                        <af:messages id="m1"
+                                                     partialTriggers="ctb5"/>
+                                        <af:panelGroupLayout id="pgl1"
+                                                             layout="horizontal">
+                                            <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                                                      id="t1"
+                                                      clientComponent="true"/>
+                                            <af:trainButtonBar value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                                                               id="tbb1"/>
+                                            <af:commandToolbarButton text="保存工作"
+                                                                     id="ctb5"
+                                                                     icon="/images/icons/filesave.png"
+                                                                     action="#{HeaderBean.save}"/>
+                                            <af:commandToolbarButton text="取消并退出"
+                                                                     id="ctb1"
+                                                                     icon="/images/icons/undo.png"
+                                                                     actionListener="#{bindings.Rollback.execute}"
+                                                                     disabled="#{!bindings.Rollback.enabled}"
+                                                                     immediate="true"
+                                                                     action="return">
+                                                <af:resetActionListener/>
+                                            </af:commandToolbarButton>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl3">
+                                            <af:panelList id="pl2">
+                                                <af:outputText value="请按照系统流程来创建合同信息，顺序为：合同头部 -> 合同船号 -> 船号节点 -> 确认提交审批"
+                                                               id="ot2"
+                                                               inlineStyle="font-family:'Microsoft YaHei';"/>
+                                            </af:panelList>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelBox>
+                            </f:facet>
+                            <f:facet name="center">
+                                <af:panelBox text="添加附件" id="pb1"
+                                             showDisclosure="false"
+                                             background="medium">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelStretchLayout id="psl2"
+                                                           topHeight="90px"
+                                                           startWidth="0px"
+                                                           endWidth="0px"
+                                                           bottomHeight="0px">
+                                        <f:facet name="bottom"/>
+                                        <f:facet name="center">
+                                            <af:panelHeader text="相关附件上传"
+                                                            id="ph2">
+                                                <f:facet name="context"/>
+                                                <f:facet name="menuBar"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="legend"/>
+                                                <f:facet name="info"/>
+                                                <af:popup id="p1"
+                                                          binding="#{viewScope.UploadBean.popup}">
+                                                    <af:panelWindow id="pw1"
+                                                                    modal="true"
+                                                                    resize="on"
+                                                                    contentWidth="500">
+                                                        <af:panelHeader text="上传附件"
+                                                                        id="ph3">
+                                                            <f:facet name="context"/>
+                                                            <f:facet name="menuBar"/>
+                                                            <f:facet name="toolbar"/>
+                                                            <f:facet name="legend"/>
+                                                            <f:facet name="info"/>
+                                                            <af:panelFormLayout id="pfl3">
+                                                                <af:inputText value="#{bindings.FileDesc.inputValue}"
+                                                                              label="#{bindings.FileDesc.hints.label}"
+                                                                              required="#{bindings.FileDesc.hints.mandatory}"
+                                                                              columns="#{bindings.FileDesc.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.FileDesc.hints.precision}"
+                                                                              shortDesc="#{bindings.FileDesc.hints.tooltip}"
+                                                                              id="it4">
+                                                                    <f:validator binding="#{bindings.FileDesc.validator}"/>
+                                                                </af:inputText>
+                                                            </af:panelFormLayout>
+                                                            <af:panelFormLayout id="pfl2">
+                                                                <f:facet name="footer">
+                                                                    <af:group id="g1">
+                                                                        <af:panelGroupLayout id="pgl6"
+                                                                                             layout="horizontal">
+                                                                            <af:commandToolbarButton text="上传文件"
+                                                                                                     id="ctb7"
+                                                                                                     icon="/images/icons/file_upload.png"
+                                                                                                     action="#{viewScope.UploadBean.submit}"
+                                                                                                     binding="#{UploadBean.attUpldBtn}"/>
+                                                                            <af:commandToolbarButton text="关闭"
+                                                                                                     id="ctb6"
+                                                                                                     icon="/images/icons/update.png"
+                                                                                                     action="#{viewScope.UploadBean.close}"/>
+                                                                        </af:panelGroupLayout>
+                                                                    </af:group>
+                                                                </f:facet>
+                                                                <af:panelGroupLayout id="pgl5"
+                                                                                     layout="horizontal">
+                                                                    <af:inputFile id="if2"
+                                                                                  label="选择文件"
+                                                                                  value="#{viewScope.UploadBean.attachment}"
+                                                                                  valueChangeListener="#{UploadBean.onAttachmentSelected}"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelFormLayout>
+                                                        </af:panelHeader>
+                                                    </af:panelWindow>
+                                                </af:popup>
+                                                <af:panelStretchLayout id="psl3"
+                                                                       startWidth="0px"
+                                                                       topHeight="0px"
+                                                                       bottomHeight="0px">
+                                                    <f:facet name="bottom"/>
+                                                    <f:facet name="center">
+                                                        <af:panelCollection id="pc1">
+                                                            <f:facet name="menus"/>
+                                                            <f:facet name="toolbar">
+                                                                <af:toolbar id="t3">
+                                                                    <af:commandToolbarButton text="添加新附件"
+                                                                                             id="ctb3"
+                                                                                             icon="/images/icons/add.png"
+                                                                                             action="#{UploadBean.addNewAttachment}">
+                                                                        <af:showPopupBehavior popupId="::p1"
+                                                                                              triggerType="click"/>
+                                                                    </af:commandToolbarButton>
+                                                                    <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                                                                             disabled="#{!bindings.Delete.enabled}"
+                                                                                             id="ctb4"
+                                                                                             text="删除附件"
+                                                                                             icon="/images/icons/delete.png"/>
+                                                                </af:toolbar>
+                                                            </f:facet>
+                                                            <f:facet name="statusbar"/>
+                                                            <af:table value="#{bindings.AttachmentOfContract.collectionModel}"
+                                                                      var="row"
+                                                                      rows="#{bindings.AttachmentOfContract.rangeSize}"
+                                                                      emptyText="#{bindings.AttachmentOfContract.viewable ? '暂无附件。' : 'Access Denied.'}"
+                                                                      fetchSize="#{bindings.AttachmentOfContract.rangeSize}"
+                                                                      rowBandingInterval="0"
+                                                                      selectedRowKeys="#{bindings.AttachmentOfContract.collectionModel.selectedRow}"
+                                                                      selectionListener="#{bindings.AttachmentOfContract.collectionModel.makeCurrent}"
+                                                                      rowSelection="single"
+                                                                      id="t2"
+                                                                      partialTriggers="::ctb3 ::ctb4 :::ctb7">
+                                                                <af:column sortProperty="FileName"
+                                                                           sortable="false"
+                                                                           headerText="#{bindings.AttachmentOfContract.hints.FileName.label}"
+                                                                           id="c2">
+                                                                    <af:outputText value="#{row.FileName}"
+                                                                                   id="ot3"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="FileDesc"
+                                                                           sortable="false"
+                                                                           headerText="#{bindings.AttachmentOfContract.hints.FileDesc.label}"
+                                                                           id="c1">
+                                                                    <af:outputText value="#{row.FileDesc}"
+                                                                                   id="ot4"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="FileLink"
+                                                                           sortable="false"
+                                                                           headerText="#{bindings.AttachmentOfContract.hints.FileLink.label}"
+                                                                           id="c3">
+                                                                    <af:commandButton text="下载文件"
+                                                                                      id="cb1"
+                                                                                      binding="#{UploadBean.downloadButton}"
+                                                                                      rendered="#{row.FileLink!=null}">
+                                                                        <af:fileDownloadActionListener method="#{UploadBean.download}"
+                                                                                                       filename="#{row.FileName}"/>
+                                                                        <af:clientAttribute name="filePath"
+                                                                                            value="#{row.FileLink}"/>
+                                                                    </af:commandButton>
+                                                                </af:column>
+                                                            </af:table>
+                                                        </af:panelCollection>
+                                                    </f:facet>
+                                                    <f:facet name="start"/>
+                                                    <f:facet name="end"/>
+                                                    <f:facet name="top"/>
+                                                </af:panelStretchLayout>
+                                            </af:panelHeader>
+                                        </f:facet>
+                                        <f:facet name="start"/>
+                                        <f:facet name="end"/>
+                                        <f:facet name="top">
+                                            <af:panelHeader text="上传合同文本"
+                                                            id="ph1">
+                                                <f:facet name="context"/>
+                                                <f:facet name="menuBar"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="legend"/>
+                                                <f:facet name="info"/>
+                                                <af:separator id="s1"/>
+                                                <af:messages id="m2"/>
+                                                <af:panelFormLayout id="pfl1">
+                                                    <f:facet name="footer"/>
+                                                    <af:panelGroupLayout id="pgl4"
+                                                                         layout="horizontal">
+                                                        <af:commandToolbarButton id="ctb8"
+                                                                                 icon="/images/icons/find.png"
+                                                                                 text="查看已上传合同"
+                                                                                 binding="#{UploadBean.browseBtn}"
+                                                                                 disabled="#{bindings.AgreementImgUrl.inputValue eq null}">
+                                                            <af:showPopupBehavior popupId="p2"
+                                                                                  triggerType="action"
+                                                                                  alignId="t1"/>
+                                                        </af:commandToolbarButton>
+                                                        <af:commandToolbarButton text="删除"
+                                                                                 id="ctb9"
+                                                                                 icon="/images/icons/delete.png"
+                                                                                 binding="#{UploadBean.delBtn}"
+                                                                                 disabled="#{bindings.AgreementImgUrl.inputValue eq null}">
+                                                            <af:showPopupBehavior popupId="p4" triggerType="action"
+                                                                                  align="afterEnd"/>
+                                                        </af:commandToolbarButton>
+                                                        <af:inputFile id="if1"
+                                                                      label="上传合同文本"
+                                                                      showRequired="true"
+                                                                      valueChangeListener="#{viewScope.UploadBean.fileUploaded}"
+                                                                      value="#{viewScope.UploadBean.file}"
+                                                                      binding="#{UploadBean.uploadInput}"
+                                                                      disabled="#{bindings.AgreementImgUrl.inputValue!=null}"/>
+                                                        <af:commandToolbarButton text="上传"
+                                                                                 id="ctb2"
+                                                                                 icon="/images/icons/file_upload.png"
+                                                                                 action="#{UploadBean.doUpload}"
+                                                                                 partialTriggers="if1"
+                                                                                 binding="#{UploadBean.uploadBtn}"
+                                                                                 disabled="#{bindings.AgreementImgUrl.inputValue!=null}">
+                                                            <af:clientListener method="enforcePreventUserInput"
+                                                                               type="action"/>
+                                                        </af:commandToolbarButton>
+                                                        <af:outputText value="如有多个文档，请先合并然后上传" id="ot1"/>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="p4" binding="#{UploadBean.overwirtePopup}">
+                                                            <af:dialog id="d3" closeIconVisible="false" title="请确认"
+                                                                       dialogListener="#{UploadBean.confirmOverwrite}"
+                                                                       type="yesNo">
+                                                                <f:facet name="buttonBar"/>
+                                                                <af:outputText value="合同文本已存在，如需删除请确认！请注意，此操作不可恢复！" id="ot5"
+                                                                               inlineStyle="font-size:130%;"/>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                        <af:popup childCreation="deferred"
+                                                                  autoCancel="disabled"
+                                                                  id="p2" binding="#{UploadBean.browsePopup}">
+                                                            <af:panelWindow id="pw2"
+                                                                            modal="true"
+                                                                            title="合同文本图片"
+                                                                            contentHeight="600"
+                                                                            contentWidth="800">
+                                                                <af:panelGroupLayout id="pgl8"
+                                                                                     layout="scroll">
+                                                                    <af:forEach items="#{viewScope.UploadBean.imageList}"
+                                                                                var="row">
+                                                                        <af:image source="#{row}" id="ai1"/>
+                                                                    </af:forEach>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelWindow>
+                                                        </af:popup>
+                                                        <af:popup childCreation="immediate"
+                                                                  autoCancel="disabled"
+                                                                  id="p3"
+                                                                  contentDelivery="immediate">
+                                                            <af:dialog id="d2"
+                                                                       type="none"
+                                                                       title="上传中请等待..."
+                                                                       closeIconVisible="false">
+                                                                <af:panelGroupLayout id="pgl7"
+                                                                                     layout="vertical"
+                                                                                     halign="center">
+                                                                    <af:image source="/images/logo.png"
+                                                                              id="i1"/>
+                                                                    <af:image source="/images/animbar.gif"
+                                                                              id="i2"
+                                                                              inlineStyle="width:140px;"/>
+                                                                    <af:outputText value="上传中请等待..."
+                                                                                   id="ot11"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                    </af:panelGroupLayout>
+                                                </af:panelFormLayout>
+                                                <af:separator id="s2"/>
+                                            </af:panelHeader>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:panelBox>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </f:facet>
+                    <f:facet name="second"/>
+                </af:panelSplitter>
+            </af:form>
+            <af:clientListener type="load" method="disableContextMenu"/>
+        </af:document>
+    </f:view>
+</jsp:root>

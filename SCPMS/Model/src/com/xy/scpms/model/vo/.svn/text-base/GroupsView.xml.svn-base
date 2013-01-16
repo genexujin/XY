@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GroupsView"
+  Version="11.1.1.60.13"
+  SelectList="Groups.G_NAME, 
+       Groups.G_DESCRIPTION"
+  FromList="GROUPS Groups"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="Groups"
+    Entity="com.xy.scpms.model.eo.Groups"/>
+  <ViewAttribute
+    Name="GName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="GName"
+    EntityUsage="Groups"
+    AliasName="G_NAME"/>
+  <ViewAttribute
+    Name="GDescription"
+    PrecisionRule="true"
+    EntityAttrName="GDescription"
+    EntityUsage="Groups"
+    AliasName="G_DESCRIPTION"/>
+  <ViewLinkAccessor
+    Name="GroupmembersView"
+    ViewLink="com.xy.scpms.model.link.GroupmembersGroupsFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

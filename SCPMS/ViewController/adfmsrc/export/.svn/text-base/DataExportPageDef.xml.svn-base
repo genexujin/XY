@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="DataExportPageDef" Package="export">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Contract" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ContractIterator"/>
+    <iterator Binds="ContractLine" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ContractLineIterator"/>
+    <iterator Binds="ContractLinePayments" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="ContractLinePaymentsIterator"/>
+    <searchRegion Binds="ContractIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ContractQuery"/>
+    <searchRegion Binds="ContractLineIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ContractLineQuery"/>
+    <searchRegion Binds="ContractLinePaymentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ContractLinePaymentsQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ContractIterator" id="Contract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractView"
+                      Name="Contract0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="AgreementImgUrl"/>
+          <Item Value="AuthType"/>
+          <Item Value="AuthorizerType"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractType"/>
+          <Item Value="CustomerContactor"/>
+          <Item Value="Deleted"/>
+          <Item Value="DesignDept"/>
+          <Item Value="DesignPhase"/>
+          <Item Value="FirstDesignFee"/>
+          <Item Value="Memo"/>
+          <Item Value="ParentContractId"/>
+          <Item Value="ProjectManager"/>
+          <Item Value="ProjectName"/>
+          <Item Value="RegionManager"/>
+          <Item Value="ShipModel"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="Status"/>
+          <Item Value="AuthName"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="RefinedFlag"/>
+          <Item Value="CustomerId"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="ParentContractNo"/>
+          <Item Value="PrjLastname"/>
+          <Item Value="PrjUsername"/>
+          <Item Value="PrjFirstname"/>
+          <Item Value="RegLastname"/>
+          <Item Value="Username1"/>
+          <Item Value="RegFirstname"/>
+          <Item Value="CreatorLastname"/>
+          <Item Value="CreatorUsername"/>
+          <Item Value="CreatorFirstname"/>
+          <Item Value="PrjFullName"/>
+          <Item Value="RegFullName"/>
+          <Item Value="CreatorFullName"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="CreatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ContractLineIterator" id="ContractLine">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractLineView"
+                      Name="ContractLine0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="HeaderId"/>
+          <Item Value="LineNo"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ShipPlant"/>
+          <Item Value="ShipOwner"/>
+          <Item Value="ShipBroker"/>
+          <Item Value="ShipClsfctSociety"/>
+          <Item Value="ShipName"/>
+          <Item Value="ImoNo"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="ContractType"/>
+          <Item Value="SignOffDate"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="AbandonDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="Deleted"/>
+          <Item Value="Status"/>
+          <Item Value="Memo"/>
+          <Item Value="Price"/>
+          <Item Value="WorkStartDate"/>
+          <Item Value="FgCompletionDate"/>
+          <Item Value="AbandonFlag"/>
+          <Item Value="BrokerType"/>
+          <Item Value="Currency"/>
+          <Item Value="ExchangeRate"/>
+          <Item Value="FourContractBatch"/>
+          <Item Value="OwnerType"/>
+          <Item Value="PlantType"/>
+          <Item Value="ShipPrice"/>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ContractLinePaymentsIterator" id="ContractLinePayments">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractLinePaymentsView"
+                      Name="ContractLinePayments0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="LineId"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="Deleted"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="Status"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="TotalPayment"/>
+          <Item Value="Variance"/>
+          <Item Value="Memo"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="InvoiceBatchId"/>
+          <Item Value="PaymentDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <action IterBinding="ContractIterator" id="Execute"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="ContractLineIterator" id="Execute1"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="ContractLinePaymentsIterator" id="Execute2"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

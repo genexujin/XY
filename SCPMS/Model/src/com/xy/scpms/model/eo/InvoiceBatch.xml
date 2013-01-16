@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvoiceBatch"
+  Version="11.1.2.60.17"
+  DBObjectType="table"
+  DBObjectName="INVOICE_BATCH"
+  AliasName="InvoiceBatch"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.xy.scpms.model.eo.InvoiceBatchImpl">
+  <DesignTime>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_superClass" Value="com.xy.scpms.model.common.BaseEntity"/>
+    <Attr Name="_codeGenFlag2" Value="Delete|Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="INVOICE_BATCH"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="SEQ"
+          Value="INVOICE_BATCH_SEQ"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="BatchName"
+    IsNotNull="true"
+    Precision="100"
+    ColumnName="BATCH_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="INVOICE_BATCH">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.InvoiceBatch.BatchName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="InvNum"
+    ColumnName="INV_NUM"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="INVOICE_BATCH">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.InvoiceBatch.InvNum_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Status"
+    Precision="20"
+    ColumnName="STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="INVOICE_BATCH">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.InvoiceBatch.Status_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="20"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="INVOICE_BATCH"
+    HistoryColumn="UserHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.InvoiceBatch.CreatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreationDate"
+    ColumnName="CREATION_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="INVOICE_BATCH"
+    HistoryColumn="DateHistory"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.InvoiceBatch.CreationDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Memo"
+    Precision="200"
+    ColumnName="MEMO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="INVOICE_BATCH">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.InvoiceBatch.Memo_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Deleted"
+    Precision="1"
+    ColumnName="DELETED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="INVOICE_BATCH"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="ContractLinePayments"
+    Association="com.xy.scpms.model.assoc.BatchInvoiceFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.BatchInvoiceFk1Assoc.ContractLinePayments"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.BatchInvoiceFk1Assoc.InvoiceBatch"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="InvoiceRequisition"
+    Association="com.xy.scpms.model.assoc.InvBatchReqAssoc"
+    AssociationEnd="com.xy.scpms.model.assoc.InvBatchReqAssoc.InvoiceRequisition"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.InvBatchReqAssoc.InvoiceBatch"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="InvoiceBatchPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="INVOICE_BATCH_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.InvoiceBatch.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0022330">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0022330"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.InvoiceBatch.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0022331">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0022331"/>
+      <Attr Name="_checkCondition" Value='"BATCH_NAME" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.InvoiceBatch.BatchName"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="four-tech">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>FourTechList</default-activity>
+    <managed-bean id="__4">
+      <managed-bean-name>Browse4TechBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.Browse4TechBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__7">
+      <managed-bean-name>FourTechBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.FourTechBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__1">
+      <managed-bean-name>FourTechUploadBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.FourTechUploadBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <method-call id="findBlankFourTechLines">
+      <method>#{bindings.findBlankFourTechLines.execute}</method>
+      <outcome>
+        <fixed-outcome>findBlankFourTechLines</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="FourTechList">
+      <page>/pages/fourtech/FourTechList.jspx</page>
+    </view>
+    <view id="CreateFourTech">
+      <page>/pages/fourtech/CreateFourTech.jspx</page>
+    </view>
+    <task-flow-return id="return">
+      <outcome>
+        <name>return</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__5">
+      <from-activity-id>findBlankFourTechLines</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>findBlankFourTechLines</from-outcome>
+        <to-activity-id>CreateFourTech</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>FourTechList</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>goChoose</from-outcome>
+        <to-activity-id>findBlankFourTechLines</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>CreateFourTech</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>goBrowse</from-outcome>
+        <to-activity-id>FourTechList</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>return</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

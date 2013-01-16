@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="RunReport.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" topHeight="100px"
+                                       startWidth="0px" endWidth="0px"
+                                       bottomHeight="0px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox id="pb2" text="报表输出" background="medium">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t2">
+                                        <af:commandToolbarButton text="导出"
+                                                                 id="ctb2"
+                                                                 icon="/images/icons/export.png">
+                                            <af:exportCollectionActionListener type="excelHTML"
+                                                                               exportedId="t1"/>
+                                        </af:commandToolbarButton>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.Rpt_PrjMgrPerf.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.Rpt_PrjMgrPerf.rangeSize}"
+                                          emptyText="#{bindings.Rpt_PrjMgrPerf.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Rpt_PrjMgrPerf.rangeSize}"
+                                          rowBandingInterval="1"
+                                          filterModel="#{bindings.Rpt_PrjMgrPerfQuery.queryDescriptor}"
+                                          queryListener="#{bindings.Rpt_PrjMgrPerfQuery.processQuery}"
+                                          filterVisible="false" varStatus="vs"
+                                          selectedRowKeys="#{bindings.Rpt_PrjMgrPerf.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.Rpt_PrjMgrPerf.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1"
+                                          partialTriggers=":::ctb1">
+                                    <af:column sortProperty="#{bindings.Rpt_PrjMgrPerf.hints.ProjectManager.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_PrjMgrPerf.hints.ProjectManager.label}"
+                                               id="c1" align="center">
+                                        <af:outputText value="#{row.ProjectManager}" id="ot1"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_PrjMgrPerf.hints.Lastname.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_PrjMgrPerf.hints.Lastname.label}" id="c2"
+                                               align="center">
+                                        <af:outputText value="#{row.Lastname}" id="ot2"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_PrjMgrPerf.hints.EffAmount.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_PrjMgrPerf.hints.EffAmount.label}" id="c4"
+                                               align="center">
+                                        <af:outputText value="#{row.EffAmount}" id="ot4">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_PrjMgrPerf.hints.EffAmount.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_PrjMgrPerf.hints.PaidAmount.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_PrjMgrPerf.hints.PaidAmount.label}" id="c5"
+                                               align="center">
+                                        <af:outputText value="#{row.PaidAmount}" id="ot5">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_PrjMgrPerf.hints.PaidAmount.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_PrjMgrPerf.hints.NumOfShip.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_PrjMgrPerf.hints.NumOfShip.label}" id="c6"
+                                               align="center">
+                                        <af:outputText value="#{row.NumOfShip}" id="ot6">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_PrjMgrPerf.hints.NumOfShip.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_PrjMgrPerf.hints.TotalNewWeight.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_PrjMgrPerf.hints.TotalNewWeight.label}"
+                                               id="c7" align="center">
+                                        <af:outputText value="#{row.TotalNewWeight}" id="ot7">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_PrjMgrPerf.hints.TotalNewWeight.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_PrjMgrPerf.hints.TotalFgWeight.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_PrjMgrPerf.hints.TotalFgWeight.label}" id="c8"
+                                               align="center">
+                                        <af:outputText value="#{row.TotalFgWeight}" id="ot8">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_PrjMgrPerf.hints.TotalFgWeight.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_PrjMgrPerf.hints.PaymentCredit.name}"
+                                               filterable="true" sortable="false"
+                                               headerText="#{bindings.Rpt_PrjMgrPerf.hints.PaymentCredit.label}"
+                                               id="c3" align="center">
+                                        <af:outputText value="#{row.PaymentCredit}" id="ot3">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_PrjMgrPerf.hints.PaymentCredit.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelBox text="项目经理数据分析报表" id="pb1" background="medium">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                    <af:commandToolbarButton text="返回主页"
+                                                             id="commandToolbarButton1"
+                                                             icon="/images/icons/home.gif"
+                                                             action="return"
+                                                             actionListener="#{bindings.Rollback.execute}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelFormLayout id="pfl1" rows="1">
+                                <f:facet name="footer"/>
+                                <af:inputDate label="起始日期" id="id1"
+                                              autoSubmit="false"
+                                              value="#{pageFlowScope.startDate}"/>
+                                <af:inputDate label="结束日期" id="id2"
+                                              value="#{pageFlowScope.endDate}"
+                                              autoSubmit="false"/>
+                                <af:commandToolbarButton text="运算并生成报表"
+                                                         id="ctb1"
+                                                         icon="/images/icons/graph.png"
+                                                         action="#{MicsReportBean.runReport}"/>
+                            </af:panelFormLayout>
+                        </af:panelBox>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="EVEHistoryTableViewPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PaymentHistoryView" RangeSize="-1"
+              DataControl="CoreModuleDataControl"
+              id="PaymentHistoryViewIterator"/>
+  </executables>
+  <bindings>
+    <pivotTable IterBinding="PaymentHistoryViewIterator" id="PaymentHistoryView"
+                xmlns="http://xmlns.oracle.com/adfm/dvt"
+                ChangeEventPolicy="ppr">
+      <pivotTableDataMap convert="false">
+        <sorts>
+          <categorySort item="Year" direction="ASCENDING"/>
+        </sorts>
+        <columns>
+          <item value="Year" sortAttribute="Month"/>
+          <data aggregateDuplicates="true" defaultAggregateType="SUM">
+            <item value="ContractAmount"/>
+            <item value="PaymentAmount"/>
+          </data>
+        </columns>
+        <rows>
+          <item value="Month"/>
+        </rows>
+        <pages/>
+      </pivotTableDataMap>
+    </pivotTable>
+    <graph IterBinding="PaymentHistoryViewIterator" id="PaymentHistoryView1"
+           xmlns="http://xmlns.oracle.com/adfm/dvt" type="LINE_VERT_ABS">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <data>
+            <item value="ContractAmount"/>
+            <item value="PaymentAmount"/>
+          </data>
+          <item value="Year"/>
+        </series>
+        <groups>
+          <item value="Month"/>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

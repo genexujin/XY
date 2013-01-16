@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="客户联系人" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelHeader text="客户联系人信息" id="ph1"
+                                        messageType="info">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:panelFormLayout id="pfl1">
+                                <af:panelLabelAndMessage label="#{bindings.Id.hints.label}"
+                                                         id="plam1">
+                                    <af:outputText value="#{bindings.Id.inputValue}"
+                                                   id="ot1"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Name.hints.label}"
+                                                         id="plam2">
+                                    <af:outputText value="#{bindings.Name.inputValue}"
+                                                   id="ot2"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Department.hints.label}"
+                                                         id="plam3">
+                                    <af:outputText value="#{bindings.Department.inputValue}"
+                                                   id="ot3"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Mobile.hints.label}"
+                                                         id="plam4">
+                                    <af:outputText value="#{bindings.Mobile.inputValue}"
+                                                   id="ot4"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OfficePhone.hints.label}"
+                                                         id="plam5">
+                                    <af:outputText value="#{bindings.OfficePhone.inputValue}"
+                                                   id="ot5"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OfficeFax.hints.label}"
+                                                         id="plam6">
+                                    <af:outputText value="#{bindings.OfficeFax.inputValue}"
+                                                   id="ot6"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.HomePhone.hints.label}"
+                                                         id="plam7">
+                                    <af:outputText value="#{bindings.HomePhone.inputValue}"
+                                                   id="ot7"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Email.hints.label}"
+                                                         id="plam8">
+                                    <af:outputText value="#{bindings.Email.inputValue}"
+                                                   id="ot8"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.ImportantLevel.hints.label}"
+                                                         id="plam9">
+                                    <af:outputText value="#{bindings.ImportantLevel.inputValue}"
+                                                   id="ot9"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Im.hints.label}"
+                                                         id="plam10">
+                                    <af:outputText value="#{bindings.Im.inputValue}"
+                                                   id="ot10"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Address.hints.label}"
+                                                         id="plam11">
+                                    <af:outputText value="#{bindings.Address.inputValue}"
+                                                   id="ot11"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Memo.hints.label}"
+                                                         id="plam12">
+                                    <af:outputText value="#{bindings.Memo.inputValue}"
+                                                   id="ot12"/>
+                                </af:panelLabelAndMessage>
+                            </af:panelFormLayout>
+                        </af:panelHeader>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

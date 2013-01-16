@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="SelectContract.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="pt_psl1" topHeight="230px" startWidth="0px" endWidth="0px"
+                                       bottomHeight="0px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t2">
+                                        <af:commandToolbarButton text="生成催款函" id="ctb1"
+                                                                 icon="/images/icons/run.png"
+                                                                 action="#{viewScope.SearchBean.urgeSettlement}"
+                                                                 binding="#{viewScope.SearchBean.openBtn}"
+                                                                 disabled="false"/>
+                                        <af:commandToolbarButton text="导出" id="pt_ctb1" icon="/images/icons/export.png">
+                                            <af:exportCollectionActionListener type="excelHTML" exportedId="t1"/>
+                                        </af:commandToolbarButton>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar">
+                                    <af:panelGroupLayout id="pgl1" layout="horizontal" inlineStyle="width:200px;">
+                                        <af:outputText value="共搜索到#{bindings.SearchContractBaseView.estimatedRowCount}条记录"
+                                                       id="ot35" partialTriggers="::qryId1"
+                                                       inlineStyle="font-size:120%; font-weight:bold; text-align:left;"/>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                                <af:table value="#{bindings.SearchContractBaseView.collectionModel}" var="row"
+                                          rows="#{bindings.SearchContractBaseView.rangeSize}"
+                                          emptyText="#{bindings.SearchContractBaseView.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.SearchContractBaseView.rangeSize}"
+                                          rowBandingInterval="1"
+                                          filterModel="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                                          queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                                          filterVisible="false" varStatus="vs"
+                                          rowSelection="multiple" id="t1"
+                                          binding="#{viewScope.SearchBean.resultTable}">
+                                                                    
+
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.ContractNo.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.ContractNo.label}"
+                                           id="c44" width="130" align="center">
+                                    <af:outputText value="#{row.ContractNo}" id="ot36"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.ProjectName.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.ProjectName.label}"
+                                           id="c45" width="160" align="center">
+                                    <af:outputText value="#{row.ProjectName}" id="ot37"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.AuthName.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.AuthName.label}" id="c46"
+                                           width="160" align="center" filterable="true">
+                                    <af:outputText value="#{row.AuthName}" id="ot38"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.TotalAmount.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.TotalAmount.label}"
+                                           id="c47" width="50" align="center">
+                                    <af:outputText value="#{row.TotalAmount}" id="ot39">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.SearchContractBaseView.hints.TotalAmount.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.ContractEntity.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.ContractEntity.label}"
+                                           id="c48" align="center" width="100">
+                                    <af:outputText value="#{row.ContractEntity}" id="ot40"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.RgMgrFullName.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.RgMgrFullName.label}"
+                                           id="c49" align="center" width="70">
+                                    <af:outputText value="#{row.RgMgrFullName}" id="ot41"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.PrjMgrFullName.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.PrjMgrFullName.label}"
+                                           id="c50" align="center" width="70">
+                                    <af:outputText value="#{row.PrjMgrFullName}" id="ot42"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.AuthorizerType.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.AuthorizerType.label}"
+                                           id="c51" align="center" width="70">
+                                    <af:outputText value="#{row.AuthorizerType}" id="ot43"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.AuthType.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.AuthType.label}" id="c52"
+                                           width="50" align="center">
+                                    <af:outputText value="#{row.AuthType}" id="ot44"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.CustomerContactName.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.CustomerContactName.label}"
+                                           id="c53" align="center" width="70">
+                                    <af:outputText value="#{row.CustomerContactName}" id="ot45"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.DesignDept.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.DesignDept.label}"
+                                           id="c54" align="center" width="70">
+                                    <af:outputText value="#{row.DesignDept}" id="ot46"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.DesignPhase.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.DesignPhase.label}"
+                                           id="c55" align="center" width="70">
+                                    <af:outputText value="#{row.DesignPhase}" id="ot47"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.FirstDesignFee.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.FirstDesignFee.label}"
+                                           id="c56" align="center" width="70">
+                                    <af:outputText value="#{row.FirstDesignFee}" id="ot48">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.SearchContractBaseView.hints.FirstDesignFee.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.ShipModel.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.ShipModel.label}"
+                                           id="c57" align="center" width="70">
+                                    <af:outputText value="#{row.ShipModel}" id="ot49"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.ContractType.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.ContractType.label}"
+                                           id="c58" align="center" width="70">
+                                    <af:outputText value="#{row.ContractType}" id="ot50"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.ShipNoInternal.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.ShipNoInternal.label}"
+                                           id="c59" align="center" width="70">
+                                    <af:outputText value="#{row.ShipNoInternal}" id="ot51"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.Status.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.Status.label}" id="c60"
+                                           align="center" width="50">
+                                    <af:outputText value="#{row.Status}" id="ot52"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.ParentContractNo.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.ParentContractNo.label}"
+                                           id="c61" align="center" width="50">
+                                    <af:outputText value="#{row.ParentContractNo}" id="ot53"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.CreatedBy.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.CreatedBy.label}"
+                                           id="c62" align="center" width="50">
+                                    <af:outputText value="#{row.CreatedBy}" id="ot54"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.CreatedAt.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.CreatedAt.label}"
+                                           id="c63" align="center" width="70">
+                                    <af:outputText value="#{row.CreatedAt}" id="ot55">
+                                        <af:convertDateTime pattern="#{bindings.SearchContractBaseView.hints.CreatedAt.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.SearchContractBaseView.hints.Memo.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.SearchContractBaseView.hints.Memo.label}" id="c64"
+                                           align="center">
+                                    <af:outputText value="#{row.Memo}" id="ot56"/>
+                                </af:column>
+                            </af:table>
+                            </af:panelCollection>
+                        
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelBox text="选择合同生成催款函" id="pb3" showDisclosure="false" background="medium">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                    <af:commandToolbarButton text="返回主页" id="commandToolbarButton1"
+                                                             icon="/images/icons/home.gif" action="return"
+                                                             actionListener="#{bindings.Rollback.execute}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:group id="g1">
+                                <af:query id="qryId1" headerText="请输入查询条件, 可以使用百分号'%'来进行模糊搜索，如：输入 '%设计%' 表示包含字符'设计'的条件。"
+                                          disclosed="true" value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                                          model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                                          queryListener="#{viewScope.SearchBean.onSearchQuery}"
+                                          queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                                          resultComponentId="::pc1:t1" rows="3" maxColumns="5"/>
+                            </af:group>
+                        </af:panelBox>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

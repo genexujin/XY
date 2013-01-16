@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17"
+                id="ar_aging_report_ar_aging_report_runReportPageDef"
+                Package="report" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="runReportCriteria" RequiresUpdateModel="true"
+            Action="invokeMethod" MethodName="runReportCriteria"
+            IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.Rpt_ARAgingReport">
+      <NamedData NDName="month" NDValue="#{pageFlowScope.month}"
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="year" NDValue="#{pageFlowScope.year}"
+                 NDType="oracle.jbo.domain.Number"/>
+    </action>
+  </bindings>
+</pageDefinition>

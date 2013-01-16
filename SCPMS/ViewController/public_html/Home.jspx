@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="主页" id="d1">
+          <af:resource type="javascript">
+              function disableContextMenu() {
+                  document.oncontextmenu = function () {
+                      return false
+                  };
+
+              }
+            </af:resource>
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:pageTemplate viewId="/oracle/ui/pattern/dynamicShell/dynamicTabShell.jspx" value="#{bindings.ptb1}"
+                                 id="pt1">
+                    <f:facet name="copyright">
+                        <af:outputText value="2011 SDARI 版权所有" id="ot2"/>
+                    </f:facet>
+                    <f:facet name="about">
+                        <af:navigationPane hint="buttons" id="ptnp1">
+                            <af:commandNavigationItem text="关于" action="noop" id="commandNavigationItem3"/>
+                            <af:commandNavigationItem text="隐私条款" action="noop" id="commandNavigationItem4"/>
+                        </af:navigationPane>
+                    </f:facet>
+                    <f:facet name="navigation">
+                        <af:panelAccordion id="pa1">
+                            <af:showDetailItem text="合同管理" id="sdi1" icon="/images/icons/factory.png">
+                                <af:panelList id="pl1">
+                                    <af:commandImageLink text="合同查询" id="cil1" iconPosition="leading"
+                                                         icon="/images/icons/search_sourcepath.png"
+                                                         action="#{viewScope.MenuBean.goSearch}"/>
+                                    <af:commandImageLink text="创建合同" action="#{viewScope.MenuBean.createFlow}" id="cl1"
+                                                         immediate="true" icon="/images/icons/new.png"
+                                                         disabled="#{!securityContext.userInRole['region_manager,project_manager,contractor']}"
+                                                         rendered="#{securityContext.userInRole['region_manager,project_manager,contractor']}"/>
+                                    <af:commandImageLink text="创建复用合同"
+                                                         action="#{viewScope.MenuBean.createDuplicateFlow}" id="cl11"
+                                                         immediate="true" icon="/images/icons/copy.png"
+                                                         disabled="#{!securityContext.userInRole['region_manager,project_manager,contractor']}"
+                                                         rendered="#{securityContext.userInRole['region_manager,project_manager,contractor']}"/>
+                                    <af:commandImageLink text="创建协议" action="#{viewScope.MenuBean.createPaymentFlow}"
+                                                         id="cl12" immediate="true" icon="/images/icons/cuecard.png"
+                                                         disabled="#{!securityContext.userInRole['region_manager,project_manager,contractor']}"
+                                                         rendered="#{securityContext.userInRole['region_manager,project_manager,contractor']}"/>
+                                    <af:commandImageLink text="合同审批" id="commandImageLink1" immediate="true"
+                                                         icon="/images/icons/ico_person.gif" action="goTask"
+                                                         disabled="#{!securityContext.userInRole['contractor,marketing_director']}"
+                                                         rendered="#{securityContext.userInRole['contractor,marketing_director']}"/>
+                                    <af:commandImageLink text="四技合同" id="cil4"
+                                                         immediate="true"
+                                                         icon="/images/icons/debugger/array.gif"
+                                                         action="goFourtech"
+                                                         disabled="#{!securityContext.userInRole['contractor']}"
+                                                         rendered="#{securityContext.userInRole['contractor']}"/>
+                                </af:panelList>
+                            </af:showDetailItem>
+     
+                            <af:showDetailItem text="发票及收款管理" id="sdi3" icon="/images/icons/make.png">
+                                <af:panelList id="pl3">
+                                <af:commandImageLink id="commandImageLink2" immediate="true"
+                                                         icon="/images/icons/compare.png" action="goInvoice"
+                                                     text="申请开票"
+                                                     disabled="#{!securityContext.userInRole['project_manager,region_manager']}"
+                                                     rendered="#{securityContext.userInRole['project_manager,region_manager']}"/>
+                                <af:commandImageLink text="开票申请审核" id="commandImageLink3" immediate="true"
+                                                         icon="/images/icons/actor.png"
+                                                     action="#{viewScope.MenuBean.goApproveInvReq}"
+                                                     disabled="#{!securityContext.userInRole['design_director,marketing_director']}"
+                                                     rendered="#{securityContext.userInRole['design_director,marketing_director']}"/>
+                                <af:commandImageLink text="我的发票申请" id="commandImageLink4" immediate="true"
+                                                         icon="/images/icons/bookmark.png"
+                                                     action="#{viewScope.MenuBean.goBrowseReq}"/>                                                         
+                                 <af:commandImageLink text="发票批" id="commandImageLink5" immediate="true"
+                                                         icon="/images/icons/cuecard.png"
+                                                      action="#{viewScope.MenuBean.goInvBatch}"
+                                                      disabled="#{!securityContext.userInRole['contractor']}"
+                                                      rendered="#{securityContext.userInRole['contractor']}"/>  
+                                 <af:commandImageLink text="登记发票" id="commandImageLink6" immediate="true"
+                                                         icon="/images/icons/file.png"
+                                                      action="goInvEntry"
+                                                      disabled="#{!securityContext.userInRole['contractor']}"
+                                                      rendered="#{securityContext.userInRole['contractor']}"/>
+                                <af:commandImageLink text="登记收款" id="commandImageLink7" immediate="true"
+                                                         icon="/images/icons/import.png"
+                                                     action="goPaymentEntry"
+                                                     disabled="#{!securityContext.userInRole['contractor']}"
+                                                     rendered="#{securityContext.userInRole['contractor']}"/>
+                                    <af:commandImageLink id="cil12"
+                                                         immediate="true"
+                                                         icon="/images/icons/compare.png"
+                                                         action="#{viewScope.MenuBean.goPayNot}"
+                                                         text="收款提醒"/>
+                                    <af:commandImageLink id="cil20" immediate="true" icon="/images/icons/audit.png"
+                                                         action="urge" text="催款函"/>
+                                </af:panelList>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="报表" id="sdi4" icon="/images/icons/graph.png">
+                                <af:panelList id="pl4">
+                                    <af:commandImageLink text="指标设定" id="cil8"
+                                                         immediate="true"
+                                                         icon="/images/icons/debugger/set_stat.gif"
+                                                         action="goSetupDeptTgt"
+                                                         rendered="#{securityContext.userInRole['marketing_director']}"
+                                                         iconPosition="leading"/>
+                                    <af:commandImageLink id="cil9"
+                                                         immediate="true"
+                                                         action="dynRpt"
+                                                         rendered="#{securityContext.userInRole['marketing_director,contractor,vip']}"
+                                                         icon="/images/icons/graph.png"
+                                                         text="收费动态报表"/>
+                                    <af:commandImageLink id="cil10"
+                                                         immediate="true"
+                                                         action="agingRpt"
+                                                         rendered="#{securityContext.userInRole['marketing_director,contractor,vip']}"
+                                                         icon="/images/icons/graph.png"
+                                                         text="应收账龄报表"/>
+                                    <af:commandImageLink id="cil11"
+                                                         immediate="true"
+                                                         action="eveRpt"
+                                                         rendered="#{securityContext.userInRole['marketing_director,contractor,vip']}"
+                                                         icon="/images/icons/graph.png"
+                                                         text="EVE报表"/>
+                                    <af:commandImageLink id="cil13"
+                                                         immediate="true"
+                                                         action="prjRpt"
+                                                         rendered="#{securityContext.userInRole['project_manager,design_director,marketing_director,vip']}"
+                                                         icon="/images/icons/actor.png"
+                                                         text="项目经理数据"/>
+                                    <af:commandImageLink id="cil14"
+                                                         immediate="true"
+                                                         action="regRpt"
+                                                         rendered="#{securityContext.userInRole['region_manager,marketing_director,vip']}"
+                                                         icon="/images/icons/actor.png"
+                                                         text="区域经理数据"/>
+                                    <af:commandImageLink id="cil15"
+                                                         immediate="true"
+                                                         action="custRpt"
+                                                         rendered="#{securityContext.userInRole['marketing_director,vip']}"
+                                                         icon="/images/icons/audit.png"
+                                                         text="客户收款分析"/>
+                                    <af:commandImageLink id="cil21" immediate="true" action="grpPerf"
+                                                         rendered="#{securityContext.userInRole['marketing_director,vip']}"
+                                                         icon="/images/icons/audit.png" text="集团收款分析"/>
+                                    <af:commandImageLink id="cil16"
+                                                         immediate="true"
+                                                         action="eveGraphic"
+                                                         rendered="#{securityContext.userInRole['marketing_director,contractor,vip']}"
+                                                         icon="/images/icons/graph.png"
+                                                         text="EVE分析图表"/>
+                                    <af:commandImageLink id="cil2" immediate="true" action="invForRpt"
+                                                         rendered="#{securityContext.userInRole['marketing_director,contractor,vip']}"
+                                                         icon="/images/icons/graph.png" text="当年发票预测"/>
+                                    <af:commandImageLink id="cil18" immediate="true" action="payForRpt"
+                                                         rendered="#{securityContext.userInRole['marketing_director,contractor,vip']}"
+                                                         icon="/images/icons/graph.png" text="当年收款预测"/>
+                                    <af:commandImageLink id="cil19" immediate="true" action="shipDevRpt"
+                                                         icon="/images/icons/action.png" text="交船统计表"/>
+                                </af:panelList>
+                            </af:showDetailItem>
+                            
+                            <af:showDetailItem id="sdi5" text="系统管理" icon="/images/icons/controller.png">
+                              <af:panelList id="pl5">
+                                <af:commandImageLink id="commandImageLink8" immediate="true"
+                                                     icon="/images/icons/team.png"
+                                                     action="goUser"
+                                                     text="用户管理"
+                                                     disabled="#{!securityContext.userInRole['admin']}"
+                                                     rendered="#{securityContext.userInRole['admin']}"/>
+                                    <af:commandImageLink id="cil5"
+                                                         immediate="true"
+                                                         icon="/images/icons/index.png"
+                                                         action="golov"
+                                                         text="值列表"
+                                                         disabled="#{!securityContext.userInRole['admin']}"
+                                                         rendered="#{securityContext.userInRole['admin']}"/>
+                                    <af:commandImageLink id="cil6"
+                                                         immediate="true"
+                                                         icon="/images/icons/audit.png"
+                                                         action="goAudit"
+                                                         text="合同审计信息"
+                                                         disabled="#{!securityContext.userInRole['admin']}"
+                                                         rendered="#{securityContext.userInRole['admin']}"/>
+                                    <af:commandImageLink id="cil7"
+                                                         immediate="true"
+                                                         icon="/images/icons/export.png"
+                                                         action="export"
+                                                         text="导出数据"
+                                                         disabled="#{!securityContext.userInRole['admin']}"
+                                                         rendered="#{securityContext.userInRole['admin']}"/>
+                                </af:panelList>
+                            </af:showDetailItem>
+                        </af:panelAccordion>
+                    </f:facet>
+                    <f:facet name="globalLinks">
+                        <af:panelGroupLayout id="pgl2" layout="horizontal">
+                            <af:commandImageLink text="主页" id="cl2" icon="/images/icons/home.gif"/>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:commandImageLink text="登出" id="cil3" icon="/images/icons/fix.png"
+                                                 action="logout"/>
+                            <af:spacer width="10" height="10" id="s3"/>
+                            <af:commandImageLink text="修改密码" id="cil17"
+                                                 icon="/images/icons/update.png"
+                                                 action="changePassword"/>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:menuBar id="mb1">
+                                <af:menu text="帮助" id="m2" icon="/images/icons/help.png">
+                                    <af:goMenuItem text="00-登录及修改密码" id="gmi1" destination="/help/00.pdf"
+                                                   targetFrame="_blank" icon="/images/icons/file.png"/>
+                                    <af:goMenuItem text="01-创建新合同" id="gmi2" destination="/help/01.pdf"
+                                                   targetFrame="_blank" icon="/images/icons/file.png"/>
+                                    <af:goMenuItem text="02-合同查询和管理" id="gmi3" destination="/help/02.pdf"
+                                                   targetFrame="_blank" icon="/images/icons/file.png"/>
+                                </af:menu>
+                            </af:menuBar>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="status">
+                        <af:panelGroupLayout id="pgl1" layout="horizontal" halign="end">
+                            <af:outputText value="#{'Welcome '}#{securityContext.userName}" id="aot1"
+                                                 inlineStyle="font-weight:bold;"/>
+                            
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="globalToolbar"/>
+                    <f:facet name="globalSearch"/>
+                    <f:facet name="globalTabs"/>
+                    <f:facet name="welcome">
+                        <af:region value="#{bindings.welcomeflow1.regionModel}" id="r1"/>
+                    </f:facet>
+                    <f:facet name="innerToolbar"/>
+                    <f:attribute name="brandingTitle" value="合同收款管理系统"/>
+                    <f:attribute name="logoImagePath" value="/images/Logo.gif"/>
+                    <f:attribute name="headerSplitterPosition" value="40"/>
+                    <f:attribute name="legalAreaPosition" value="20"/>
+                    <f:attribute name="navSplitterPosition" value="180"/>
+                    <f:attribute name="globalAreaSplitterPosition" value="1"/>
+                    <f:attribute name="headerSplitterDisabled" value="false"/>
+                    <f:attribute name="navSplitterDisabled" value="false"/>
+                    <f:attribute name="statusWidth" value="150px"/>
+                </af:pageTemplate>
+            </af:form>
+            <af:clientListener type="load" method="disableContextMenu"/>
+            
+        </af:document>
+    </f:view>
+</jsp:root>

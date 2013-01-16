@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">SettlementRpt</property>
+      <property
+         name="page">/pages/report/SettlementRpt.jspx</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>SettlementRpt&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">195.24707</property>
+      <property
+         name="x">498.0</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">SelectContract</property>
+      <property
+         name="page">/pages/report/SelectContract.jspx</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>SelectContract&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">192.59766</property>
+      <property
+         name="x">248.0</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View3"
+      to="View2">
+      <property
+         name="fromOutcome">runReport</property>
+      <property
+         name="sdm:polyPoints">R46,289.0552,188.74707,457.0,191.39648,L46</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View2"
+      to="View3">
+      <property
+         name="fromOutcome">chooseContract</property>
+      <property
+         name="sdm:polyPoints">L54,456.9448,198.39648,289.0,195.74707,R54</property>
+   </ControlFlowCase>
+</SDM>

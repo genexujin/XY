@@ -1,0 +1,649 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="发票申请审核" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:popup childCreation="deferred" autoCancel="disabled" id="p1" binding="#{InvoiceApprvalBean.popup}">
+                    <af:panelWindow id="pw1"
+                                    contentHeight="400"
+                                    contentWidth="650" stretchChildren="first"
+                                    modal="true">
+                        <af:panelBox text="请确认" id="pb3" background="medium">
+                            <f:facet name="toolbar"/>
+                            <af:panelHeader text="您确认要做以下操作吗？" id="ph3">
+                                <f:facet name="context"/>
+                                <f:facet name="menuBar"/>
+                                <f:facet name="toolbar"/>
+                                <f:facet name="legend"/>
+                                <f:facet name="info"/>
+                                <af:panelGroupLayout id="pgl1" layout="vertical">
+                                    <af:panelList id="pl2">
+                                        <af:activeOutputText value="#{viewScope.InvoiceApprvalBean.popupTitle}" id="aot1"/>
+                                    </af:panelList>
+                                    <af:separator id="s1"/>
+                                    <af:panelFormLayout id="pfl4" rows="5"
+                                                        rendered="#{viewScope.InvoiceApprvalBean.action != 'approveAll'}">
+                                        <af:inputText value="#{bindings.FullName.inputValue}"
+                                                      label="#{bindings.FullName.hints.label}"
+                                                      required="#{bindings.FullName.hints.mandatory}"
+                                                      columns="#{bindings.FullName.hints.displayWidth}"
+                                                      maximumLength="#{bindings.FullName.hints.precision}"
+                                                      shortDesc="#{bindings.FullName.hints.tooltip}" id="it2"
+                                                      readOnly="true">
+                                            <f:validator binding="#{bindings.FullName.validator}"/>
+                                        </af:inputText>
+                                        <af:panelLabelAndMessage label="#{bindings.PaymentName.hints.label}"
+                                                                 id="plam45">
+                                            <af:outputText value="#{bindings.PaymentName.inputValue}" id="ot11"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:inputDate value="#{bindings.RequestDate.inputValue}"
+                                                      label="#{bindings.RequestDate.hints.label}"
+                                                      required="#{bindings.RequestDate.hints.mandatory}"
+                                                      columns="#{bindings.RequestDate.hints.displayWidth}"
+                                                      shortDesc="#{bindings.RequestDate.hints.tooltip}" id="id1"
+                                                      readOnly="true">
+                                            <f:validator binding="#{bindings.RequestDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.RequestDate.format}"/>
+                                        </af:inputDate>
+                                        <af:inputText value="#{bindings.Amount.inputValue}"
+                                                      label="#{bindings.Amount.hints.label}"
+                                                      required="#{bindings.Amount.hints.mandatory}"
+                                                      columns="#{bindings.Amount.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Amount.hints.precision}"
+                                                      shortDesc="#{bindings.Amount.hints.tooltip}" id="it3"
+                                                      readOnly="true">
+                                            <f:validator binding="#{bindings.Amount.validator}"/>
+                                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Amount.format}"
+                                            maxFractionDigits="7"/>
+                                        </af:inputText>
+                                        <af:panelLabelAndMessage label="#{bindings.AuthName.hints.label}" id="plam43">
+                                            <af:outputText value="#{bindings.AuthName.inputValue}" id="ot3"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{bindings.ContractNo.hints.label}" id="plam44">
+                                            <af:outputText value="#{bindings.ContractNo.inputValue}" id="ot10"/>
+                                        </af:panelLabelAndMessage>
+                                        <f:facet name="footer"/>
+                                        <af:panelLabelAndMessage label="#{bindings.PaymentPlanInvoiceDate.hints.label}"
+                                                                 id="plam46">
+                                            <af:outputText value="#{bindings.PaymentPlanInvoiceDate.inputValue}"
+                                                           id="ot12">
+                                                <af:convertDateTime pattern="#{bindings.PaymentPlanInvoiceDate.format}"/>
+                                            </af:outputText>
+                                        </af:panelLabelAndMessage>
+                                        <af:inputText value="#{bindings.Memo.inputValue}"
+                                                      label="#{bindings.Memo.hints.label}"
+                                                      required="#{bindings.Memo.hints.mandatory}"
+                                                      columns="#{bindings.Memo.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Memo.hints.precision}"
+                                                      shortDesc="#{bindings.Memo.hints.tooltip}" id="it5"
+                                                      readOnly="true">
+                                            <f:validator binding="#{bindings.Memo.validator}"/>
+                                        </af:inputText>
+                                        <af:panelLabelAndMessage label="#{bindings.ShipMnftNo.hints.label}" id="plam47">
+                                            <af:outputText value="#{bindings.ShipMnftNo.inputValue}" id="ot13"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelFormLayout>
+                                    <af:separator id="s2"/>
+                                    <af:inputText value="#{bindings.DeptHeadMemo.inputValue}"
+                                                  label="#{bindings.DeptHeadMemo.hints.label}"
+                                                  required="#{bindings.DeptHeadMemo.hints.mandatory}"
+                                                  columns="#{bindings.DeptHeadMemo.hints.displayWidth}"
+                                                  maximumLength="#{bindings.DeptHeadMemo.hints.precision}"
+                                                  shortDesc="#{bindings.DeptHeadMemo.hints.tooltip}" id="it6"
+                                                  rendered="#{securityContext.userInRole['design_director']}" rows="3"
+                                                  binding="#{InvoiceApprvalBean.designMemo}">
+                                        <f:validator binding="#{bindings.DeptHeadMemo.validator}"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.MrktHeadMemo.inputValue}"
+                                                  label="#{bindings.MrktHeadMemo.hints.label}"
+                                                  required="#{bindings.MrktHeadMemo.hints.mandatory}"
+                                                  columns="#{bindings.MrktHeadMemo.hints.displayWidth}"
+                                                  maximumLength="#{bindings.MrktHeadMemo.hints.precision}"
+                                                  shortDesc="#{bindings.MrktHeadMemo.hints.tooltip}" id="it4"
+                                                  rendered="#{securityContext.userInRole['marketing_director']}"
+                                                  binding="#{InvoiceApprvalBean.marketingMemo}">
+                                        <f:validator binding="#{bindings.MrktHeadMemo.validator}"/>
+                                    </af:inputText>
+                                    <af:separator id="s3"/>
+                                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                        <af:commandButton text="确定" id="cb1" icon="/images/icons/check.png"
+                                                          action="#{InvoiceApprvalBean.confirm}"/>
+                                        <af:commandButton text="取消" id="cb2" icon="/images/icons/undo.png"
+                                                          action="#{InvoiceApprvalBean.cancel}" immediate="true"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelHeader>
+                        </af:panelBox>
+                    </af:panelWindow>
+                </af:popup>
+                <af:panelStretchLayout id="psl1" topHeight="100px" startWidth="0px" bottomHeight="0px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox text="发票申请列表" id="pb2" background="medium" showDisclosure="false">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t4">
+                                    <af:commandToolbarButton id="ctb4"
+                                                             text="返回主页面"
+                                                             icon="/images/icons/home.gif"
+                                                             action="return"
+                                                             rendered="#{pageFlowScope.browse=='yes'}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelSplitter id="ps1" positionedFromEnd="true"
+                                              splitterPosition="400">
+                                <f:facet name="first">
+                                    <af:panelCollection id="pc1">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t2">
+                                                <af:commandToolbarButton text="通过"
+                                                                         id="ctb1"
+                                                                         icon="/images/icons/check.png"
+                                                                         action="#{InvoiceApprvalBean.setApproveAction}"
+                                                                         rendered="#{pageFlowScope.browse!='yes'}"
+                                                                         binding="#{InvoiceApprvalBean.okBtn}"
+                                                                         disabled="true"/>
+                                                <af:commandToolbarButton text="全部通过"
+                                                                         id="ctb3"
+                                                                         icon="/images/icons/make.png"
+                                                                         action="#{InvoiceApprvalBean.setApproveAllAction}"
+                                                                         rendered="#{pageFlowScope.browse!='yes'}"
+                                                                         binding="#{InvoiceApprvalBean.allOkBtn}"
+                                                                         disabled="true"/>
+                                                <af:commandToolbarButton text="退回"
+                                                                         id="ctb2"
+                                                                         icon="/images/icons/remove_file.png"
+                                                                         action="#{InvoiceApprvalBean.setRejectAction}"
+                                                                         rendered="#{pageFlowScope.browse!='yes'}"
+                                                                         binding="#{InvoiceApprvalBean.rejectBtn}"
+                                                                         disabled="true"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.InvoiceRequisitionView.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.InvoiceRequisitionView.rangeSize}"
+                                                  emptyText="#{bindings.InvoiceRequisitionView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.InvoiceRequisitionView.rangeSize}"
+                                                  rowBandingInterval="1"
+                                                  rowSelection="single" id="t3"
+                                                  selectionListener="#{InvoiceApprvalBean.onSelect}"
+                                                  binding="#{InvoiceApprvalBean.table}"
+                                                  filterModel="#{bindings.InvoiceRequisitionViewQuery.queryDescriptor}"
+                                                  queryListener="#{bindings.InvoiceRequisitionViewQuery.processQuery}"
+                                                  filterVisible="false"
+                                                  varStatus="vs">
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.ContractNo.name}"
+                                                       filterable="true"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.ContractNo.label}"
+                                                       id="c9">
+                                                <af:outputText value="#{row.ContractNo}"
+                                                               id="ot59"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.AuthName1.name}"
+                                                       filterable="true"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.AuthName1.label}"
+                                                       id="c14" width="150">
+                                                <af:outputText value="#{row.AuthName1}"
+                                                               id="ot60"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.ShipMnftNo.name}"
+                                                       filterable="true"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.ShipMnftNo.label}"
+                                                       id="c17">
+                                                <af:outputText value="#{row.ShipMnftNo}"
+                                                               id="ot58"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.PaymentName.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.PaymentName.label}"
+                                                       id="c7" width="85"
+                                                       filterable="true">
+                                                <af:outputText value="#{row.PaymentName}"
+                                                               id="ot7"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.Amount.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.Amount.label}"
+                                                       id="c3" width="85"
+                                                       filterable="true">
+                                                <af:outputText value="#{row.Amount}"
+                                                               id="ot5">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.InvoiceRequisitionView.hints.Amount.format}"
+                                                                      maxFractionDigits="7"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.FullName.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.FullName.label}"
+                                                       id="c1" width="55">
+                                                <af:outputText value="#{row.FullName}"
+                                                               id="ot64"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.RequestDate.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.RequestDate.label}"
+                                                       id="c2" width="65"
+                                                       filterable="true">
+                                                <af:outputText value="#{row.RequestDate}"
+                                                               id="ot4">
+                                                    <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.RequestDate.format}"/>
+                                                </af:outputText>
+                                                <f:facet name="filter">
+                                                    <af:inputDate value="#{vs.filterCriteria.RequestDate}"
+                                                                  id="id2">
+                                                        <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.RequestDate.format}"/>
+                                                    </af:inputDate>
+                                                </f:facet>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.PaymentPlanDate.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.PaymentPlanDate.label}"
+                                                       id="c6" width="96"
+                                                       filterable="true">
+                                                <af:outputText value="#{row.PaymentPlanDate}"
+                                                               id="ot8">
+                                                    <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.PaymentPlanDate.format}"/>
+                                                </af:outputText>
+                                                <f:facet name="filter">
+                                                    <af:inputDate value="#{vs.filterCriteria.PaymentPlanDate}"
+                                                                  id="id3">
+                                                        <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.PaymentPlanDate.format}"/>
+                                                    </af:inputDate>
+                                                </f:facet>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.PaymentPlanInvoiceDate.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.PaymentPlanInvoiceDate.label}"
+                                                       id="c5" width="77"
+                                                       filterable="true">
+                                                <af:outputText value="#{row.PaymentPlanInvoiceDate}"
+                                                               id="ot9">
+                                                    <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.PaymentPlanInvoiceDate.format}"/>
+                                                </af:outputText>
+                                                <f:facet name="filter">
+                                                    <af:inputDate value="#{vs.filterCriteria.PaymentPlanInvoiceDate}"
+                                                                  id="id4">
+                                                        <af:convertDateTime pattern="#{bindings.InvoiceRequisitionView.hints.PaymentPlanInvoiceDate.format}"/>
+                                                    </af:inputDate>
+                                                </f:facet>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.Department.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.Department.label}"
+                                                       id="c13" width="80"
+                                                       filterable="true">
+                                                <af:outputText value="#{row.Department}"
+                                                               id="ot15"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.Memo.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.Memo.label}"
+                                                       id="c4" width="50"
+                                                       filterable="true">
+                                                <af:outputText value="#{row.Memo}"
+                                                               id="ot6"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceRequisitionView.hints.Status.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.InvoiceRequisitionView.hints.Status.label}"
+                                                       id="c8"
+                                                       filterable="true">
+                                                <af:outputText value="#{row.Status}"
+                                                               id="ot14"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </f:facet>
+                                <f:facet name="second">
+                                    <af:panelTabbed id="pt1">
+                                        <af:showDetailItem id="sdi1"
+                                                           stretchChildren="first"
+                                                           text="合同基本信息"
+                                                           partialTriggers="pc1:t3">
+                                            <af:panelHeader text="合同基本信息"
+                                                            id="ph1"
+                                                            type="default"
+                                                            messageType="info">
+                                                <f:facet name="context"/>
+                                                <f:facet name="menuBar"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="legend"/>
+                                                <f:facet name="info"/>
+                                                <af:panelFormLayout id="pfl1"
+                                                                    binding="#{InvoiceApprvalBean.contractForm}">
+                                                    <af:panelLabelAndMessage label="#{bindings.ContractNo.hints.label}"
+                                                                             id="plam1">
+                                                        <af:outputText value="#{bindings.ContractNo.inputValue}"
+                                                                       id="ot16"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ProjectName.hints.label}"
+                                                                             id="plam2">
+                                                        <af:outputText value="#{bindings.ProjectName.inputValue}"
+                                                                       id="ot17"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.AuthName.hints.label}"
+                                                                             id="plam3">
+                                                        <af:outputText value="#{bindings.AuthName.inputValue}"
+                                                                       id="ot18"/>
+                                                        <af:commandImageLink id="cil2"
+                                                                             icon="/images/icons/find.png"
+                                                                             action="checkCustomer"
+                                                                             useWindow="true"
+                                                                             windowHeight="300"
+                                                                             windowWidth="250"
+                                                                             windowEmbedStyle="inlineDocument"
+                                                                             windowModalityType="applicationModal"
+                                                                             partialTriggers="pc1:t3">
+                                                            <af:setActionListener from="#{bindings.CustomerId.inputValue}"
+                                                                                  to="#{pageFlowScope.customerId}"/>
+                                                        </af:commandImageLink>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ContractEntity.hints.label}"
+                                                                             id="plam4">
+                                                        <af:outputText value="#{bindings.ContractEntity.inputValue}"
+                                                                       id="ot19"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.DesignDept.hints.label}"
+                                                                             id="plam5">
+                                                        <af:outputText value="#{bindings.DesignDept.inputValue}"
+                                                                       id="ot20"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.DesignPhase.hints.label}"
+                                                                             id="plam6">
+                                                        <af:outputText value="#{bindings.DesignPhase.inputValue}"
+                                                                       id="ot21"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.FirstDesignFee.hints.label}"
+                                                                             id="plam7">
+                                                        <af:outputText value="#{bindings.FirstDesignFee.inputValue}"
+                                                                       id="ot22">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.FirstDesignFee.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ContractMemo.hints.label}"
+                                                                             id="plam8">
+                                                        <af:outputText value="#{bindings.ContractMemo.inputValue}"
+                                                                       id="ot23"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipModel.hints.label}"
+                                                                             id="plam9">
+                                                        <af:outputText value="#{bindings.ShipModel.inputValue}"
+                                                                       id="ot24"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipNoInternal1.hints.label}"
+                                                                             id="plam10">
+                                                        <af:outputText value="#{bindings.ShipNoInternal1.inputValue}"
+                                                                       id="ot25"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.TotalAmount.hints.label}"
+                                                                             id="plam11">
+                                                        <af:outputText value="#{bindings.TotalAmount.inputValue}"
+                                                                       id="ot26">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.TotalAmount.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.CustomerContactName.hints.label}"
+                                                                             id="plam48">
+                                                        <af:outputFormatted value="#{bindings.CustomerContactName.inputValue}"
+                                                                            id="of1"/>
+                                                        <af:commandImageLink
+                                                                             id="cil1"
+                                                                             icon="/images/icons/find.png"
+                                                                             action="checkContact"
+                                                                             useWindow="true"
+                                                                             windowHeight="300"
+                                                                             windowWidth="250"
+                                                                             windowEmbedStyle="inlineDocument"
+                                                                             windowModalityType="applicationModal"
+                                                                             partialTriggers="pc1:t3">
+                                                            <af:setActionListener from="#{bindings.CustomerContactor.inputValue}"
+                                                                                  to="#{pageFlowScope.contactId}"/>
+                                                        </af:commandImageLink>
+                                                    </af:panelLabelAndMessage>
+                                                </af:panelFormLayout>
+                                            </af:panelHeader>
+                                        </af:showDetailItem>
+                                        <af:showDetailItem id="sdi2"
+                                                           stretchChildren="first"
+                                                           text="关联船号信息"
+                                                           partialTriggers="pc1:t3">
+                                            <af:panelHeader text="船号信息" id="ph2"
+                                                            messageType="info">
+                                                <f:facet name="context"/>
+                                                <f:facet name="menuBar"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="legend"/>
+                                                <f:facet name="info"/>
+                                                <af:panelFormLayout id="pfl2"
+                                                                    binding="#{InvoiceApprvalBean.lineForm}">
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipMnftNo.hints.label}"
+                                                                             id="plam12">
+                                                        <af:outputText value="#{bindings.ShipMnftNo.inputValue}"
+                                                                       id="ot27"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipName.hints.label}"
+                                                                             id="plam13">
+                                                        <af:outputText value="#{bindings.ShipName.inputValue}"
+                                                                       id="ot28"
+                                                                       partialTriggers="pc1:t3"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.Memo1.hints.label}"
+                                                                             id="plam14">
+                                                        <af:outputText value="#{bindings.Memo1.inputValue}"
+                                                                       id="ot29"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipBroker.hints.label}"
+                                                                             id="plam15">
+                                                        <af:outputText value="#{bindings.ShipBroker.inputValue}"
+                                                                       id="ot30"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.BrokerType.hints.label}"
+                                                                             id="plam16">
+                                                        <af:outputText value="#{bindings.BrokerType.inputValue}"
+                                                                       id="ot31"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipOwner.hints.label}"
+                                                                             id="plam17">
+                                                        <af:outputText value="#{bindings.ShipOwner.inputValue}"
+                                                                       id="ot32"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.OwnerType.hints.label}"
+                                                                             id="plam18">
+                                                        <af:outputText value="#{bindings.OwnerType.inputValue}"
+                                                                       id="ot33"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipPlant.hints.label}"
+                                                                             id="plam19">
+                                                        <af:outputText value="#{bindings.ShipPlant.inputValue}"
+                                                                       id="ot34"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.PlantType.hints.label}"
+                                                                             id="plam20">
+                                                        <af:outputText value="#{bindings.PlantType.inputValue}"
+                                                                       id="ot35"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ContractType.hints.label}"
+                                                                             id="plam21">
+                                                        <af:outputText value="#{bindings.ContractType.inputValue}"
+                                                                       id="ot36"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.WorkStartDate.hints.label}"
+                                                                             id="plam22">
+                                                        <af:outputText value="#{bindings.WorkStartDate.inputValue}"
+                                                                       id="ot37">
+                                                            <af:convertDateTime pattern="#{bindings.WorkStartDate.format}"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.FgCompletionDate.hints.label}"
+                                                                             id="plam23">
+                                                        <af:outputText value="#{bindings.FgCompletionDate.inputValue}"
+                                                                       id="ot38">
+                                                            <af:convertDateTime pattern="#{bindings.FgCompletionDate.format}"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ImoNo.hints.label}"
+                                                                             id="plam24">
+                                                        <af:outputText value="#{bindings.ImoNo.inputValue}"
+                                                                       id="ot39"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipClsfctSociety.hints.label}"
+                                                                             id="plam25">
+                                                        <af:outputText value="#{bindings.ShipClsfctSociety.inputValue}"
+                                                                       id="ot40"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipNoInternal.hints.label}"
+                                                                             id="plam26">
+                                                        <af:outputText value="#{bindings.ShipNoInternal.inputValue}"
+                                                                       id="ot41"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ShipPrice.hints.label}"
+                                                                             id="plam27">
+                                                        <af:outputText value="#{bindings.ShipPrice.inputValue}"
+                                                                       id="ot42">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.ShipPrice.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.SignOffDate.hints.label}"
+                                                                             id="plam28">
+                                                        <af:outputText value="#{bindings.SignOffDate.inputValue}"
+                                                                       id="ot43">
+                                                            <af:convertDateTime pattern="#{bindings.SignOffDate.format}"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ExchangeRate.hints.label}"
+                                                                             id="plam29">
+                                                        <af:outputText value="#{bindings.ExchangeRate.inputValue}"
+                                                                       id="ot44">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.ExchangeRate.format}"
+                                                                              maxFractionDigits="7"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.Currency.hints.label}"
+                                                                             id="plam30">
+                                                        <af:outputText value="#{bindings.Currency.inputValue}"
+                                                                       id="ot45"/>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.EffectiveDate.hints.label}"
+                                                                             id="plam31">
+                                                        <af:outputText value="#{bindings.EffectiveDate.inputValue}"
+                                                                       id="ot46">
+                                                            <af:convertDateTime pattern="#{bindings.EffectiveDate.format}"/>
+                                                        </af:outputText>
+                                                    </af:panelLabelAndMessage>
+                                                </af:panelFormLayout>
+                                            </af:panelHeader>
+                                        </af:showDetailItem>
+                                        <af:showDetailItem text="审核信息"
+                                                           id="sdi3"
+                                                           partialTriggers="pc1:t3">
+                                            <af:panelFormLayout id="pfl3"
+                                                                binding="#{InvoiceApprvalBean.historyForm}">
+                                                <af:panelLabelAndMessage label="#{bindings.Requestor.hints.label}"
+                                                                         id="plam32">
+                                                    <af:outputText value="#{bindings.Requestor.inputValue}"
+                                                                   id="ot47"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.RequestDate.hints.label}"
+                                                                         id="plam33">
+                                                    <af:outputText value="#{bindings.RequestDate.inputValue}"
+                                                                   id="ot48">
+                                                        <af:convertDateTime pattern="#{bindings.RequestDate.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.Memo.hints.label}"
+                                                                         id="plam34">
+                                                    <af:outputText value="#{bindings.Memo.inputValue}"
+                                                                   id="ot49"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.DeptHeadApprover.hints.label}"
+                                                                         id="plam35">
+                                                    <af:outputText value="#{bindings.DeptHeadApprover.inputValue}"
+                                                                   id="ot50"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.DeptHeadOutcome.hints.label}"
+                                                                         id="plam36">
+                                                    <af:outputText value="#{bindings.DeptHeadOutcome.inputValue}"
+                                                                   id="ot51"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.DeptHeadDate.hints.label}"
+                                                                         id="plam37">
+                                                    <af:outputText value="#{bindings.DeptHeadDate.inputValue}"
+                                                                   id="ot52">
+                                                        <af:convertDateTime pattern="#{bindings.DeptHeadDate.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.DeptHeadMemo.hints.label}"
+                                                                         id="plam38">
+                                                    <af:outputText value="#{bindings.DeptHeadMemo.inputValue}"
+                                                                   id="ot53"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.MrktHeadApprover.hints.label}"
+                                                                         id="plam39">
+                                                    <af:outputText value="#{bindings.MrktHeadApprover.inputValue}"
+                                                                   id="ot54"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.MrktHeadOutcome.hints.label}"
+                                                                         id="plam40">
+                                                    <af:outputText value="#{bindings.MrktHeadOutcome.inputValue}"
+                                                                   id="ot55"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.MrktHeadMemo.hints.label}"
+                                                                         id="plam41">
+                                                    <af:outputText value="#{bindings.MrktHeadMemo.inputValue}"
+                                                                   id="ot56"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.MrktHeadDate.hints.label}"
+                                                                         id="plam42">
+                                                    <af:outputText value="#{bindings.MrktHeadDate.inputValue}"
+                                                                   id="ot57">
+                                                        <af:convertDateTime pattern="#{bindings.MrktHeadDate.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                            </af:panelFormLayout>
+                                        </af:showDetailItem>
+                                    </af:panelTabbed>
+                                </f:facet>
+                            </af:panelSplitter>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelBox text="发票申请审核" id="pb1" background="medium" showDisclosure="false"
+                                     rendered="#{pageFlowScope.browse!='yes'}">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t1">
+                                    <af:commandToolbarButton id="ctb5"
+                                                             text="返回主页面"
+                                                             icon="/images/icons/home.gif"
+                                                             action="return"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelList id="pl1">
+                                <af:outputText id="ot1" value="请选择一个或者多个发票申请进行审核操作。" inlineStyle="font-size:small;"/>
+                                <af:outputText id="ot2" value="在市场部主任审核完成后，合同管理员可以在系统中创建发票。"
+                                               inlineStyle="font-size:small;"/>
+                                
+                            </af:panelList>
+                        </af:panelBox>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

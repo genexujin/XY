@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="DynPayStatusPrintPagePageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Rpt_DynPayStatusByYear" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="Rpt_DynPayStatusByYearIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="Rpt_DynPayStatusByYearIterator"
+          id="Rpt_DynPayStatusByYear">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.DynamicPaymentStatusByYear"
+                      Name="Rpt_DynPayStatusByYear0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ProjectName"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="DesignDept"/>
+          <Item Value="ProjectManager"/>
+          <Item Value="RegionManager"/>
+          <Item Value="Paidamount"/>
+          <Item Value="Paidno"/>
+          <Item Value="Intactamount"/>
+          <Item Value="Intactno"/>
+          <Item Value="Invoicedamount"/>
+          <Item Value="Invoicedno"/>
+          <Item Value="Pay1"/>
+          <Item Value="Pay2"/>
+          <Item Value="Pay3"/>
+          <Item Value="Pay4"/>
+          <Item Value="Pay5"/>
+          <Item Value="Pay6"/>
+          <Item Value="Pay7"/>
+          <Item Value="Pay8"/>
+          <Item Value="AuthName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="MgrSearchViewPageDef"
+                Package="pages.search">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SearchContractByMgrIdView" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="SearchContractByMgrIdViewIterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchContractByMgrIdViewIterator" id="ImplicitViewCriteriaQuery" TrackQueryPerformed="Page"/>
+    <iterator Binds="ChildContract3" RangeSize="25" DataControl="CoreModuleDataControl" id="ChildContract3Iterator"/>
+    <page path="pages.search.BaseSearchPageDef" id="ptb1" Refresh="ifNeeded"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchContractByMgrIdViewIterator" id="SearchContractByMgrIdView">
+      <nodeDefinition DefName="com.xy.scpms.model.query.search.SearchContractByMgrIdView"
+                      Name="SearchContractByMgrIdView0">
+        <AttrNames>
+          <Item Value="AgreementImgUrl"/>
+          <Item Value="AuthName"/>
+          <Item Value="AuthType"/>
+          <Item Value="AuthorizerType"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractType"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="CustomerContactor"/>
+          <Item Value="CustomerId"/>
+          <Item Value="Deleted"/>
+          <Item Value="DesignDept"/>
+          <Item Value="DesignPhase"/>
+          <Item Value="FirstDesignFee"/>
+          <Item Value="Id"/>
+          <Item Value="Memo"/>
+          <Item Value="ParentContractId"/>
+          <Item Value="ParentContractNo"/>
+          <Item Value="ProjectManager"/>
+          <Item Value="ProjectName"/>
+          <Item Value="RefinedFlag"/>
+          <Item Value="RegionManager"/>
+          <Item Value="ShipModel"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="Status"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="PrjMgrLastname"/>
+          <Item Value="PrjMgrFirstname"/>
+          <Item Value="PrjMgrUsername"/>
+          <Item Value="RgMgrLastname"/>
+          <Item Value="RgMgrFirstname"/>
+          <Item Value="RgMgrUsername"/>
+          <Item Value="PrjMgrFullName"/>
+          <Item Value="RgMgrFullName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ChildContract3Iterator" id="ChildContract3">
+      <nodeDefinition DefName="com.xy.scpms.model.query.search.SearchContractByMgrIdView" Name="ChildContract30">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="AuthName"/>
+          <Item Value="ContractEntity"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction IterBinding="SearchContractByMgrIdViewIterator" id="setMgrIdBind" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setMgrIdBind" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.SearchContractByMgrIdView">
+      <NamedData NDName="value" NDValue="#{securityContext.userName}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

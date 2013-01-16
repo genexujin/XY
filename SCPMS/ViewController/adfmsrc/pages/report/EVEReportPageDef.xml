@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="EVEReportPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <page path="pages.report.ReportTemplatePageDef" id="ptb1"
+          Refresh="ifNeeded"/>
+    <iterator Binds="Rpt_EVEReport" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="Rpt_EVEReportIterator"/>
+    <searchRegion Binds="Rpt_EVEReportIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Rpt_EVEReportQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="Rpt_EVEReportIterator" id="Rpt_EVEReport">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.EVEReport"
+                      Name="Rpt_EVEReport0">
+        <AttrNames>
+          <Item Value="Dept"/>
+          <Item Value="YrCrtCnt"/>
+          <Item Value="MthCrtCnt"/>
+          <Item Value="MthAmtTotal"/>
+          <Item Value="YrAmtTotal"/>
+          <Item Value="ContractTarget"/>
+          <Item Value="AmtPer"/>
+          <Item Value="YrTotalPaid"/>
+          <Item Value="MthTotalPaid"/>
+          <Item Value="PaymentTarget"/>
+          <Item Value="PayPer"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

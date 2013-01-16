@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="user-flow">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>UserReport</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>UserBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.UserBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="Users">
+      <page>/pages/users/Users.jspx</page>
+    </view>
+    <task-flow-return id="return">
+      <outcome>
+        <name>return</name>
+      </outcome>
+    </task-flow-return>
+    <view id="UserReport">
+      <page>/pages/users/UserReport.jspx</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>return</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>Users</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>report</from-outcome>
+        <to-activity-id>UserReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>UserReport</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>Users</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

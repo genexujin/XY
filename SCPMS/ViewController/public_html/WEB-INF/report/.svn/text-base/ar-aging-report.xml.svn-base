@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ar-aging-report">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>clearRowSet</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name>ReportBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.flow.backing.ReportBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="AgingReport">
+      <page>/pages/report/AgingReport.jspx</page>
+    </view>
+    <view id="AgingReportPrint">
+      <page>/pages/report/AgingReportPrint.jspx</page>
+    </view>
+    <method-call id="runReport">
+      <method>#{bindings.runReportCriteria.execute}</method>
+      <outcome>
+        <fixed-outcome>runReportCriteria</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="clearRowSet">
+      <method>#{bindings.clearRowSet.execute}</method>
+      <outcome>
+        <fixed-outcome>clearRowSet</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>AgingReport</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>print</from-outcome>
+        <to-activity-id>AgingReportPrint</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>run</from-outcome>
+        <to-activity-id>runReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>AgingReportPrint</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>report</from-outcome>
+        <to-activity-id>AgingReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>runReport</from-activity-id>
+      <control-flow-case id="__8">
+        <to-activity-id>AgingReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>clearRowSet</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>clearRowSet</from-outcome>
+        <to-activity-id>AgingReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

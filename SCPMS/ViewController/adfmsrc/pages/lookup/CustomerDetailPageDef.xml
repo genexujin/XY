@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="CustomerDetailPageDef"
+                Package="pages.lookup">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Customers" RangeSize="25" DataControl="CoreModuleDataControl" id="CustomersIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="CustomersIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CustomerName">
+      <AttrNames>
+        <Item Value="CustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CustomerBillAddress">
+      <AttrNames>
+        <Item Value="CustomerBillAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CustomerShiptoAddress">
+      <AttrNames>
+        <Item Value="CustomerShiptoAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CustomerContactPerson">
+      <AttrNames>
+        <Item Value="CustomerContactPerson"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CustomerCode">
+      <AttrNames>
+        <Item Value="CustomerCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CustomerType">
+      <AttrNames>
+        <Item Value="CustomerType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="Region">
+      <AttrNames>
+        <Item Value="Region"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CustomerLevel">
+      <AttrNames>
+        <Item Value="CustomerLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="ParentGroup">
+      <AttrNames>
+        <Item Value="ParentGroup"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="PrimaryShipType">
+      <AttrNames>
+        <Item Value="PrimaryShipType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="ShipGroupLevel">
+      <AttrNames>
+        <Item Value="ShipGroupLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="PostCode">
+      <AttrNames>
+        <Item Value="PostCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="RecentAction">
+      <AttrNames>
+        <Item Value="RecentAction"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="Owner">
+      <AttrNames>
+        <Item Value="Owner"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

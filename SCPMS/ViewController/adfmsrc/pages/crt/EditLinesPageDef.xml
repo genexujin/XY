@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.60.13" id="EditLinesPageDef"
+                Package="pages.crt">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ShipOfContract" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ShipOfContractIterator"/>
+    <searchRegion Binds="ShipOfContractIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ShipOfContractQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ShipOfContractIterator" id="ShipOfContract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractLineView"
+                      Name="ShipOfContract0">
+        <AttrNames>
+          <Item Value="LineNo"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ShipPlant"/>
+          <Item Value="ShipOwner"/>
+          <Item Value="ShipBroker"/>
+          <Item Value="ShipClsfctSociety"/>
+          <Item Value="ShipName"/>
+          <Item Value="ImoNo"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="ContractType"/>
+          <Item Value="SignOffDate"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="AbandonDate"/>
+          <Item Value="Status"/>
+          <Item Value="Memo"/>
+          <Item Value="Price"/>
+          <Item Value="WorkStartDate"/>
+          <Item Value="FgCompletionDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="createLike" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createLike"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="CoreModuleDataControl.ShipOfContract"
+                  ReturnName="data.CoreModuleDataControl.methodResults.createLike_CoreModuleDataControl_ShipOfContract_createLike_result"/>
+    <action IterBinding="ShipOfContractIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="CoreModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="CoreModuleDataControl"/>
+  </bindings>
+</pageDefinition>

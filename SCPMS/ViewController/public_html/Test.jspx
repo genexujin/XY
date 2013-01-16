@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document title="Test.jspx" id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelStretchLayout id="psl1">
+          <f:facet name="center">
+           
+              <af:panelTabbed id="pt1">
+                <af:showDetailItem text="employee" id="sdi1" stretchChildren="first">
+                  <af:table value="#{bindings.Users.collectionModel}" var="row" rows="#{bindings.Users.rangeSize}"
+                            emptyText="#{bindings.Users.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Users.rangeSize}" rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.Users.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.Users.collectionModel.makeCurrent}" rowSelection="single"
+                            id="t1">
+                    <af:column sortProperty="#{bindings.Users.hints.Username.name}" sortable="true"
+                               headerText="#{bindings.Users.hints.Username.label}" id="c1">
+                      <af:outputText value="#{row.Username}" id="ot1"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.Users.hints.Firstname.name}" sortable="true"
+                               headerText="#{bindings.Users.hints.Firstname.label}" id="c2">
+                      <af:outputText value="#{row.Firstname}" id="ot2"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.Users.hints.Lastname.name}" sortable="true"
+                               headerText="#{bindings.Users.hints.Lastname.label}" id="c3">
+                      <af:outputText value="#{row.Lastname}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.Users.hints.UDescription.name}" sortable="true"
+                               headerText="#{bindings.Users.hints.UDescription.label}" id="c4">
+                      <af:outputText value="#{row.UDescription}" id="ot4"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.Users.hints.Department.name}" sortable="true"
+                               headerText="#{bindings.Users.hints.Department.label}" id="c5">
+                      <af:outputText value="#{row.Department}" id="ot5"/>
+                    </af:column>
+                  </af:table>
+                </af:showDetailItem>
+                <af:showDetailItem text="contract" id="sdi2">
+                <af:table value="#{bindings.Contract.collectionModel}" var="row" rows="#{bindings.Contract.rangeSize}"
+                          emptyText="#{bindings.Contract.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Contract.rangeSize}" rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.Contract.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Contract.collectionModel.makeCurrent}" rowSelection="single"
+                          id="t2">
+                  <af:column sortProperty="#{bindings.Contract.hints.AgreementImgUrl.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.AgreementImgUrl.label}" id="c6">
+                    <af:outputText value="#{row.AgreementImgUrl}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.AuthType.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.AuthType.label}" id="c7">
+                    <af:selectOneChoice value="#{row.bindings.AuthType.inputValue}"
+                                        label="#{row.bindings.AuthType.label}"
+                                        required="#{bindings.Contract.hints.AuthType.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.AuthType.tooltip}" readOnly="true"
+                                        id="soc1">
+                      <f:selectItems value="#{row.bindings.AuthType.items}" id="si1"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.AuthorizerType.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.AuthorizerType.label}" id="c8">
+                    <af:selectOneChoice value="#{row.bindings.AuthorizerType.inputValue}"
+                                        label="#{row.bindings.AuthorizerType.label}"
+                                        required="#{bindings.Contract.hints.AuthorizerType.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.AuthorizerType.tooltip}" readOnly="true"
+                                        id="soc2">
+                      <f:selectItems value="#{row.bindings.AuthorizerType.items}" id="si2"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ContractEntity.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ContractEntity.label}" id="c9">
+                    <af:selectOneChoice value="#{row.bindings.ContractEntity.inputValue}"
+                                        label="#{row.bindings.ContractEntity.label}"
+                                        required="#{bindings.Contract.hints.ContractEntity.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.ContractEntity.tooltip}" readOnly="true"
+                                        id="soc3">
+                      <f:selectItems value="#{row.bindings.ContractEntity.items}" id="si3"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ContractNo.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ContractNo.label}" id="c10">
+                    <af:outputText value="#{row.ContractNo}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ContractType.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ContractType.label}" id="c11">
+                    <af:outputText value="#{row.ContractType}" id="ot8"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CreatedAt.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CreatedAt.label}" id="c12">
+                    <af:outputText value="#{row.CreatedAt}" id="ot9">
+                      <af:convertDateTime pattern="#{bindings.Contract.hints.CreatedAt.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CreatedBy.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CreatedBy.label}" id="c13">
+                    <af:outputText value="#{row.CreatedBy}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CustomerContactor.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CustomerContactor.label}" id="c14">
+                    <af:outputText value="#{row.CustomerContactor}" id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.Deleted.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.Deleted.label}" id="c15">
+                    <af:outputText value="#{row.Deleted}" id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.DesignDept.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.DesignDept.label}" id="c16">
+                    <af:selectOneChoice value="#{row.bindings.DesignDept.inputValue}"
+                                        label="#{row.bindings.DesignDept.label}"
+                                        required="#{bindings.Contract.hints.DesignDept.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.DesignDept.tooltip}" readOnly="true"
+                                        id="soc4">
+                      <f:selectItems value="#{row.bindings.DesignDept.items}" id="si4"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.DesignPhase.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.DesignPhase.label}" id="c17">
+                    <af:selectOneChoice value="#{row.bindings.DesignPhase.inputValue}"
+                                        label="#{row.bindings.DesignPhase.label}"
+                                        required="#{bindings.Contract.hints.DesignPhase.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.DesignPhase.tooltip}" readOnly="true"
+                                        id="soc5">
+                      <f:selectItems value="#{row.bindings.DesignPhase.items}" id="si5"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.FirstDesignFee.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.FirstDesignFee.label}" id="c18">
+                    <af:outputText value="#{row.FirstDesignFee}" id="ot13">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.Contract.hints.FirstDesignFee.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.Id.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.Id.label}" id="c19">
+                    <af:outputText value="#{row.Id}" id="ot14">
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.Contract.hints.Id.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.Memo.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.Memo.label}" id="c20">
+                    <af:outputText value="#{row.Memo}" id="ot15"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ParentContractId.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ParentContractId.label}" id="c21">
+                    <af:outputText value="#{row.ParentContractId}" id="ot16">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.Contract.hints.ParentContractId.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ProjectManager.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ProjectManager.label}" id="c22">
+                    <af:selectOneChoice value="#{row.bindings.ProjectManager.inputValue}"
+                                        label="#{row.bindings.ProjectManager.label}"
+                                        required="#{bindings.Contract.hints.ProjectManager.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.ProjectManager.tooltip}" readOnly="true"
+                                        id="soc6">
+                      <f:selectItems value="#{row.bindings.ProjectManager.items}" id="si6"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ProjectName.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ProjectName.label}" id="c23">
+                    <af:outputText value="#{row.ProjectName}" id="ot17"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.RegionManager.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.RegionManager.label}" id="c24">
+                    <af:selectOneChoice value="#{row.bindings.RegionManager.inputValue}"
+                                        label="#{row.bindings.RegionManager.label}"
+                                        required="#{bindings.Contract.hints.RegionManager.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.RegionManager.tooltip}" readOnly="true"
+                                        id="soc7">
+                      <f:selectItems value="#{row.bindings.RegionManager.items}" id="si7"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ShipModel.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ShipModel.label}" id="c25">
+                    <af:selectOneChoice value="#{row.bindings.ShipModel.inputValue}"
+                                        label="#{row.bindings.ShipModel.label}"
+                                        required="#{bindings.Contract.hints.ShipModel.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.ShipModel.tooltip}" readOnly="true"
+                                        id="soc8">
+                      <f:selectItems value="#{row.bindings.ShipModel.items}" id="si8"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ShipNoInternal.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ShipNoInternal.label}" id="c26">
+                    <af:outputText value="#{row.ShipNoInternal}" id="ot18"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.Status.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.Status.label}" id="c27">
+                    <af:selectOneChoice value="#{row.bindings.Status.inputValue}" label="#{row.bindings.Status.label}"
+                                        required="#{bindings.Contract.hints.Status.mandatory}"
+                                        shortDesc="#{bindings.Contract.hints.Status.tooltip}" readOnly="true" id="soc9">
+                      <f:selectItems value="#{row.bindings.Status.items}" id="si9"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.AuthName.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.AuthName.label}" id="c28">
+                    <af:outputText value="#{row.AuthName}" id="ot19"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.TotalAmount.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.TotalAmount.label}" id="c29">
+                    <af:outputText value="#{row.TotalAmount}" id="ot20">
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.Contract.hints.TotalAmount.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.RefinedFlag.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.RefinedFlag.label}" id="c30">
+                    <af:outputText value="#{row.RefinedFlag}" id="ot21"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CustomerId.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CustomerId.label}" id="c31">
+                    <af:outputText value="#{row.CustomerId}" id="ot22"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CustomerContactName.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CustomerContactName.label}" id="c32">
+                    <af:outputText value="#{row.CustomerContactName}" id="ot23"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.ParentContractNo.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.ParentContractNo.label}" id="c33">
+                    <af:outputText value="#{row.ParentContractNo}" id="ot24"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.PrjLastname.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.PrjLastname.label}" id="c34">
+                    <af:outputText value="#{row.PrjLastname}" id="ot25"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.PrjUsername.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.PrjUsername.label}" id="c35">
+                    <af:outputText value="#{row.PrjUsername}" id="ot26"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.PrjFirstname.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.PrjFirstname.label}" id="c36">
+                    <af:outputText value="#{row.PrjFirstname}" id="ot27"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.RegLastname.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.RegLastname.label}" id="c37">
+                    <af:outputText value="#{row.RegLastname}" id="ot28"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.Username1.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.Username1.label}" id="c38">
+                    <af:outputText value="#{row.Username1}" id="ot29"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.RegFirstname.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.RegFirstname.label}" id="c39">
+                    <af:outputText value="#{row.RegFirstname}" id="ot30"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CreatorLastname.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CreatorLastname.label}" id="c40">
+                    <af:outputText value="#{row.CreatorLastname}" id="ot31"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CreatorUsername.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CreatorUsername.label}" id="c41">
+                    <af:outputText value="#{row.CreatorUsername}" id="ot32"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CreatorFirstname.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CreatorFirstname.label}" id="c42">
+                    <af:outputText value="#{row.CreatorFirstname}" id="ot33"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.PrjFullName.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.PrjFullName.label}" id="c43">
+                    <af:outputText value="#{row.PrjFullName}" id="ot34"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.RegFullName.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.RegFullName.label}" id="c44">
+                    <af:outputText value="#{row.RegFullName}" id="ot35"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.CreatorFullName.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.CreatorFullName.label}" id="c45">
+                    <af:outputText value="#{row.CreatorFullName}" id="ot36"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.UnitWeight.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.UnitWeight.label}" id="c46">
+                    <af:outputText value="#{row.UnitWeight}" id="ot37">
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.Contract.hints.UnitWeight.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.TotalWeight.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.TotalWeight.label}" id="c47">
+                    <af:outputText value="#{row.TotalWeight}" id="ot38">
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.Contract.hints.TotalWeight.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.Contract.hints.TotalCompleteWeight.name}" sortable="true"
+                             headerText="#{bindings.Contract.hints.TotalCompleteWeight.label}" id="c48">
+                    <af:outputText value="#{row.TotalCompleteWeight}" id="ot39">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.Contract.hints.TotalCompleteWeight.format}"/>
+                    </af:outputText>
+                  </af:column>
+                </af:table>
+              </af:showDetailItem>
+              </af:panelTabbed>
+            
+            <!-- id="af_one_column_stretched"   -->
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

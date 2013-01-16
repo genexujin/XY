@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="PaymentNoticesPageDef"
+                Package="pages.invoice">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PaymentNotification" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="PaymentNotificationIterator"/>
+    <searchRegion Criteria="queryForm"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="PaymentNotificationIterator" id="queryFormQuery"/>
+     <taskFlow id="browsecontractbtf1" taskFlowId="/WEB-INF/lookup/browse-contract-btf.xml#browse-contract-btf"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded">
+      <parameters>
+        <parameter id="contractId" value="#{bindings.HeaderId.inputValue}"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings>
+    <tree IterBinding="PaymentNotificationIterator" id="PaymentNotification">
+      <nodeDefinition DefName="com.xy.scpms.model.query.PaymentNotification"
+                      Name="PaymentNotification0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="PaymentDate"/>
+          <Item Value="PaymentMemo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ContractNo">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ProjectName">
+      <AttrNames>
+        <Item Value="ProjectName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="AuthName">
+      <AttrNames>
+        <Item Value="AuthName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="AuthType">
+      <AttrNames>
+        <Item Value="AuthType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="AuthorizerType">
+      <AttrNames>
+        <Item Value="AuthorizerType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ContractEntity">
+      <AttrNames>
+        <Item Value="ContractEntity"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PaymentNotificationIterator" StaticList="false"
+          Uses="LOV_ContractType1" id="ContractType1" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="CustomerContactName">
+      <AttrNames>
+        <Item Value="CustomerContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PaymentNotificationIterator" StaticList="false"
+          Uses="LOV_DesignDept" id="DesignDept" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="PaymentNotificationIterator" StaticList="false"
+          Uses="LOV_DesignPhase" id="DesignPhase" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="FirstDesignFee">
+      <AttrNames>
+        <Item Value="FirstDesignFee"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ParentContractId">
+      <AttrNames>
+        <Item Value="ParentContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ParentContractNo">
+      <AttrNames>
+        <Item Value="ParentContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ProjectManager">
+      <AttrNames>
+        <Item Value="ProjectManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="RegionManager">
+      <AttrNames>
+        <Item Value="RegionManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ShipModel">
+      <AttrNames>
+        <Item Value="ShipModel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ContractShipNoInternal">
+      <AttrNames>
+        <Item Value="ContractShipNoInternal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ContractStatus">
+      <AttrNames>
+        <Item Value="ContractStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="UnitWeight">
+      <AttrNames>
+        <Item Value="UnitWeight"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ContractMemo">
+      <AttrNames>
+        <Item Value="ContractMemo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="LineNo">
+      <AttrNames>
+        <Item Value="LineNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ShipMnftNo">
+      <AttrNames>
+        <Item Value="ShipMnftNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ShipName">
+      <AttrNames>
+        <Item Value="ShipName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ShipPlant">
+      <AttrNames>
+        <Item Value="ShipPlant"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="PlantType">
+      <AttrNames>
+        <Item Value="PlantType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ShipOwner">
+      <AttrNames>
+        <Item Value="ShipOwner"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="OwnerType">
+      <AttrNames>
+        <Item Value="OwnerType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ShipBroker">
+      <AttrNames>
+        <Item Value="ShipBroker"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="BrokerType">
+      <AttrNames>
+        <Item Value="BrokerType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ContractType">
+      <AttrNames>
+        <Item Value="ContractType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ImoNo">
+      <AttrNames>
+        <Item Value="ImoNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ShipClsfctSociety">
+      <AttrNames>
+        <Item Value="ShipClsfctSociety"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="ShipPrice">
+      <AttrNames>
+        <Item Value="ShipPrice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="Currency">
+      <AttrNames>
+        <Item Value="Currency"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ExchangeRate">
+      <AttrNames>
+        <Item Value="ExchangeRate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="Price">
+      <AttrNames>
+        <Item Value="Price"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="SignOffDate">
+      <AttrNames>
+        <Item Value="SignOffDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="EffectiveDate">
+      <AttrNames>
+        <Item Value="EffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="FgCompletionDate">
+      <AttrNames>
+        <Item Value="FgCompletionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="WorkStartDate">
+      <AttrNames>
+        <Item Value="WorkStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ShipNoInternal">
+      <AttrNames>
+        <Item Value="ShipNoInternal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="ShipBuildCrtEftDate">
+      <AttrNames>
+        <Item Value="ShipBuildCrtEftDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="LineMemo">
+      <AttrNames>
+        <Item Value="LineMemo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="setPaymentNotification"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setPaymentNotification"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="low" NDValue="#{viewScope.PaymentNoticeBean.low}"
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="high" NDValue="#{viewScope.PaymentNoticeBean.high}"
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="userRole" NDValue="#{sessionScope.role}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="dept" NDValue="#{sessionScope.userDept}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="userName" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="HeaderId">
+      <AttrNames>
+        <Item Value="HeaderId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

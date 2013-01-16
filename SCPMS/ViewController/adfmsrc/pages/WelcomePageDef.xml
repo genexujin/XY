@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="WelcomePageDef" Package="pages">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ApprovalInProcess" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="ApprovalInProcessIterator"/>
+    <iterator Binds="InvoiceNotificaitonView" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="InvoiceNotificaitonViewIterator"/>
+    <iterator Binds="InvoiceRequisitionView" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="InvoiceRequisitionViewIterator"/>
+    <iterator Binds="PaymentNotification" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="PaymentNotificationIterator"/>
+    <searchRegion Binds="InvoiceNotificaitonViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvoiceNotificaitonViewQuery"/>
+    <searchRegion Binds="ApprovalInProcessIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ApprovalInProcessQuery"/>
+    <searchRegion Binds="InvoiceRequisitionViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvoiceRequisitionViewQuery"/>
+    <searchRegion Binds="PaymentNotificationIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PaymentNotificationQuery"/>
+    <taskFlow id="browsecontractbtf1" taskFlowId="/WEB-INF/lookup/browse-contract-btf.xml#browse-contract-btf"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded">
+      <parameters>
+        <parameter id="contractId" value="#{viewScope.WelcomeBean.contracId}"/>
+      </parameters>
+    </taskFlow>
+    <iterator Binds="MonthlyEffectiveRpt1" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="MonthlyEffectiveRpt1Iterator"/>
+    <searchRegion Binds="MonthlyEffectiveRpt1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="MonthlyEffectiveRpt1Query"/>
+    <iterator Binds="MonthlyPaymentRpt1" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="MonthlyPaymentRpt1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ApprovalInProcessIterator" id="ApprovalInProcess">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ApprovalInProcessView"
+                      Name="ApprovalInProcess0">
+        <AttrNames>
+          <Item Value="Type"/>
+          <Item Value="AuthName"/>
+          <Item Value="ProjectName"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="FullName"/>
+          <Item Value="ContractId"/>
+          <Item Value="ContractNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <eventBinding id="eventBinding" Listener="javax.faces.event.ActionListener">
+      <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
+        <event name="AIPEvent" customPayLoad="#{viewScope.contractId}"
+               eventType="Action Event"/>
+      </events>
+    </eventBinding>
+    <tree IterBinding="InvoiceNotificaitonViewIterator"
+          id="InvoiceNotificaitonView">
+      <nodeDefinition DefName="com.xy.scpms.model.query.InvoiceNotificaitonView"
+                      Name="InvoiceNotificaitonView0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="AuthName"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="Day2due"/>
+          <Item Value="Status1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="InvoiceRequisitionViewIterator"
+          id="InvoiceRequisitionView">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.InvoiceRequisitionView"
+                      Name="InvoiceRequisitionView0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="AuthName1"/>
+          <Item Value="ProjectName"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="Amount"/>
+          <Item Value="FullName"/>
+          <Item Value="RequestDate"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="Status1"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="LinePaymentDetailView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.xy.scpms.model.query.LinePaymentDetailView"
+                      Name="InvoiceRequisitionView1">
+        <AttrNames>
+          <Item Value="CreatedAt"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="Deleted"/>
+          <Item Value="Id"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="InvoiceBatchId"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="LineId"/>
+          <Item Value="Memo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="Status"/>
+          <Item Value="TotalPayment"/>
+          <Item Value="Variance"/>
+          <Item Value="AbandonDate"/>
+          <Item Value="AbandonFlag"/>
+          <Item Value="BrokerType"/>
+          <Item Value="ContractType"/>
+          <Item Value="CreatedAt1"/>
+          <Item Value="CreatedBy1"/>
+          <Item Value="Currency"/>
+          <Item Value="Deleted1"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="ExchangeRate"/>
+          <Item Value="FgCompletionDate"/>
+          <Item Value="FourContractBatch"/>
+          <Item Value="HeaderId"/>
+          <Item Value="Id1"/>
+          <Item Value="ImoNo"/>
+          <Item Value="LineNo"/>
+          <Item Value="Memo1"/>
+          <Item Value="OwnerType"/>
+          <Item Value="PlantType"/>
+          <Item Value="Price"/>
+          <Item Value="ShipBroker"/>
+          <Item Value="ShipClsfctSociety"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ShipName"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="ShipOwner"/>
+          <Item Value="ShipPlant"/>
+          <Item Value="ShipPrice"/>
+          <Item Value="SignOffDate"/>
+          <Item Value="Status1"/>
+          <Item Value="WorkStartDate"/>
+          <Item Value="AgreementImgUrl"/>
+          <Item Value="AuthName"/>
+          <Item Value="AuthType"/>
+          <Item Value="AuthorizerType"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractType1"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="CustomerContactor"/>
+          <Item Value="CustomerId"/>
+          <Item Value="Deleted2"/>
+          <Item Value="DesignDept"/>
+          <Item Value="DesignPhase"/>
+          <Item Value="FirstDesignFee"/>
+          <Item Value="Id2"/>
+          <Item Value="ContractMemo"/>
+          <Item Value="ParentContractId"/>
+          <Item Value="ParentContractNo"/>
+          <Item Value="ProjectManager"/>
+          <Item Value="ProjectName"/>
+          <Item Value="RefinedFlag"/>
+          <Item Value="RegionManager"/>
+          <Item Value="ShipModel"/>
+          <Item Value="ShipNoInternal1"/>
+          <Item Value="ContractStatus"/>
+          <Item Value="TotalAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <eventBinding id="eventBinding1"
+                  Listener="javax.faces.event.ActionListener">
+      <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
+        <event name="InvAppEvent" eventType="Action Event"/>
+      </events>
+    </eventBinding>
+    <methodAction id="getDeptById" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getDeptById"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Users"
+                  ReturnName="data.CoreModuleDataControl.methodResults.getDeptById_CoreModuleDataControl_Users_getDeptById_result">
+      <NamedData NDName="username" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <eventBinding id="appReqEvtBinding"
+                  Listener="javax.faces.event.ActionListener">
+      <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
+        <event name="approveReqEvt" eventType="Action Event"/>
+      </events>
+    </eventBinding>
+    <attributeValues IterBinding="InvoiceNotificaitonViewIterator"
+                     id="ContractId">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="InvoiceNotificaitonViewIterator"
+                     id="DesignDept">
+      <AttrNames>
+        <Item Value="DesignDept"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="InvoiceNotificaitonViewIterator"
+                     id="PaymentPlanAmount">
+      <AttrNames>
+        <Item Value="PaymentPlanAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="InvoiceNotificaitonViewIterator"
+                     id="PaymentId">
+      <AttrNames>
+        <Item Value="PaymentId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="quickCreateInvoiceRequisition"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="quickCreateInvoiceRequisition"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="payments" NDType="java.util.HashMap"/>
+    </methodAction>
+    <attributeValues IterBinding="InvoiceNotificaitonViewIterator"
+                     id="ContractLineId">
+      <AttrNames>
+        <Item Value="ContractLineId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="PaymentNotificationIterator" id="PaymentNotification">
+      <nodeDefinition DefName="com.xy.scpms.model.query.PaymentNotification"
+                      Name="PaymentNotification0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="AuthName"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="DesignDept"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <eventBinding id="eventBinding2"
+                  Listener="javax.faces.event.ActionListener">
+      <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
+        <event name="paymentNotificationEvt" eventType="Action Event"/>
+      </events>
+    </eventBinding>
+    <eventBinding id="eventBinding3"
+                  Listener="javax.faces.event.ActionListener">
+      <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
+        <event name="crtAprvEvent" eventType="Action Event"/>
+      </events>
+    </eventBinding>
+    <methodAction id="createInvoiceRequisition"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createInvoiceRequisition"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.CoreModuleDataControl.methodResults.createInvoiceRequisition_CoreModuleDataControl_dataProvider_createInvoiceRequisition_result">
+      <NamedData NDName="payments"
+                 NDValue="#{viewScope.PaymentNodesBean.paymentsMap}"
+                 NDType="java.util.HashMap"/>
+    </methodAction>
+    <attributeValues IterBinding="PaymentNotificationIterator"
+                     id="PaymentPlanDate">
+      <AttrNames>
+        <Item Value="PaymentPlanDate"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <attributeValues IterBinding="ApprovalInProcessIterator" id="ContractIdAIP">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="aipActionExecute"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="aipActionExecute"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="contractId"
+                 NDValue="#{bindings.ContractIdAIP.inputValue}"
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="action" NDValue="#{viewScope.WelcomeBean.approveType}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="userName" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="comments"
+                 NDValue="#{viewScope.WelcomeBean.memoInput.value}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="InvoiceRequisitionViewIterator"
+                  id="setReqApproved" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setReqApproved"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.InvoiceRequisitionView">
+      <NamedData NDName="id" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <methodAction IterBinding="InvoiceRequisitionViewIterator"
+                  id="setReqRejected" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setReqRejected"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.InvoiceRequisitionView">
+      <NamedData NDName="id" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <attributeValues IterBinding="InvoiceRequisitionViewIterator" id="InvReqId">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="InvoiceRequisitionViewIterator" id="InvReqContractId">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentNotificationIterator" id="PaymentHeaderId">
+      <AttrNames>
+        <Item Value="HeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="MonthlyEffectiveRpt1Iterator" id="MonthlyEffectiveRpt1">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.MonthlyEffectiveRpt" Name="MonthlyEffectiveRpt10">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ProjectName"/>
+          <Item Value="AuthName"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="Price"/>
+          <Item Value="DesignDept"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MonthlyEffectiveRpt1Iterator" id="MthEffId">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="MonthlyPaymentRpt1Iterator" id="MonthlyPaymentRpt1">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.MonthlyPaymentRpt" Name="MonthlyPaymentRpt10">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ProjectName"/>
+          <Item Value="AuthName"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentDate"/>
+          <Item Value="TotalPayment"/>
+          <Item Value="DesignDept"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MonthlyPaymentRpt1Iterator" id="MthPayId">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="setAIPCriteria" InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setAIPCriteria" IsViewObjectMethod="false">
+      <NamedData NDName="userRole" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+  <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
+    <event name="approveContractEvent" eventType="Action Event"/>
+    <event name="AIPEvent" customPayLoad="#{viewScope.contractId}"
+           eventType="Action Event"/>
+    <event name="InvAppEvent" eventType="Action Event"/>
+    <event name="ApproveInvReqEvent" eventType="Action Event"/>
+    <event name="approveReqEvt" eventType="Action Event"/>
+    <event name="paymentNotificationEvt" eventType="Action Event"/>
+    <event name="crtAprvEvent" eventType="Action Event"/>
+  </events>
+</pageDefinition>

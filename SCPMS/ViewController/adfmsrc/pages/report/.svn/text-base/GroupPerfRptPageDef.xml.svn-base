@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="GroupPerfRptPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AuthorizerTypePerfRpt1" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="AuthorizerTypePerfRpt1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="AuthorizerTypePerfRpt1Iterator" id="AuthorizerTypePerfRpt1">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.AuthorizerTypePerfRpt" Name="AuthorizerTypePerfRpt10">
+        <AttrNames>
+          <Item Value="AuthorizerType"/>
+          <Item Value="AuthType"/>
+          <Item Value="EffAmount"/>
+          <Item Value="PaidAmount"/>
+          <Item Value="NumOfShip"/>
+          <Item Value="TotalNewWeight"/>
+          <Item Value="TotalFgWeight"/>
+          <Item Value="PaymentCredit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="clearRowSet" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearRowSet"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.AuthorizerTypePerfRpt1"
+                  ReturnName="data.CoreModuleDataControl.methodResults.clearRowSet_CoreModuleDataControl_AuthorizerTypePerfRpt1_clearRowSet_result"/>
+    <action id="Rollback" InstanceName="CoreModuleDataControl" DataControl="CoreModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <methodAction IterBinding="AuthorizerTypePerfRpt1Iterator" id="doQuery" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="doQuery" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl" InstanceName="data.CoreModuleDataControl.AuthorizerTypePerfRpt1"
+                  ReturnName="data.CoreModuleDataControl.methodResults.doQuery_CoreModuleDataControl_AuthorizerTypePerfRpt1_doQuery_result">
+      <NamedData NDName="start" NDValue="#{pageFlowScope.startDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="end" NDValue="#{pageFlowScope.endDate}" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

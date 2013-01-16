@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ContractAttachment"
+  Version="11.1.2.60.17"
+  DBObjectType="table"
+  DBObjectName="CONTRACT_ATTACHMENT"
+  AliasName="ContractAttachment"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.xy.scpms.model.common.BaseEntity">
+  <DesignTime>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_superClass" Value="com.xy.scpms.model.common.BaseEntity"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="CONTRACT_ATTACHMENT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="SEQ"
+          Value="ATTACHMENT_SEQ"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ContractId"
+    IsNotNull="true"
+    ColumnName="CONTRACT_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="CONTRACT_ATTACHMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FileName"
+    Precision="200"
+    ColumnName="FILE_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_ATTACHMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractAttachment.FileName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="FileLink"
+    Precision="500"
+    ColumnName="FILE_LINK"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_ATTACHMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractAttachment.FileLink_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="20"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_ATTACHMENT"
+    HistoryColumn="UserHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractAttachment.CreatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="FileDesc"
+    Precision="200"
+    ColumnName="FILE_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_ATTACHMENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractAttachment.FileDesc_LABEL"/>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreationDate"
+    ColumnName="CREATION_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="CONTRACT_ATTACHMENT"
+    HistoryColumn="DateHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractAttachment.CreationDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Deleted"
+    Precision="1"
+    ColumnName="DELETED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_ATTACHMENT"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Contract"
+    Association="com.xy.scpms.model.assoc.ContractAttachmentContrFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.ContractAttachmentContrFk1Assoc.Contract"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.ContractAttachmentContrFk1Assoc.ContractAttachment"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="ContractAttachmentPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CONTRACT_ATTACHMENT_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractAttachment.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0022381">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0022381"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractAttachment.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0022382">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0022382"/>
+      <Attr Name="_checkCondition" Value='"CONTRACT_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractAttachment.ContractId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ContractAttachmentContrFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="CONTRACT_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CONTRACT_ATTACHMENT_CONTR_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractAttachment.ContractId"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

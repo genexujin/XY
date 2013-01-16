@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ARAgingReport"
+  Version="11.1.2.60.17"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.xy.scpms.model.reports.ARAgingReportImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentInterface="com.xy.scpms.model.reports.common.ARAgingReport"
+  ClientProxyName="com.xy.scpms.model.reports.client.ARAgingReportClient"
+  RowClass="com.xy.scpms.model.reports.ARAgingReportRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_objectSuperClassName"
+      Value="com.xy.scpms.model.common.NoAutoQueryView"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.reports.ARAgingReport_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="month"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <Variable
+    Name="year"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <SQLQuery><![CDATA[select DESIGN_DEPT design_dept,
+nvl(intact_total,0) intact_total,
+nvl(frozen_total,0) frozen_total,
+nvl(inv_total,0) inv_total,
+nvl(pay_total,0) pay_total,
+nvl(ar_total,0) ar_total,
+nvl(inv90,0) inv90,
+nvl(inv180,0) inv180,
+nvl(inv365,0) inv365,
+nvl(inv730,0) inv730,
+nvl(inv1095,0) inv1095
+from ( select lov.lookup_value design_dept, 
+intact.total intact_total,
+frozen.total frozen_total,
+inv.Plan_Total inv_total,
+pay.Plan_Total pay_total,
+ar.total ar_total,
+ar90.invoice_amount inv90,
+ar180.invoice_amount inv180,
+ar365.invoice_amount inv365,
+ar730.invoice_amount inv730,
+ar1095.invoice_amount inv1095
+from 
+(select design_dept, sum(totalamount) total from v$intact_pay_dept where mth <= :month and yr<=:year group by design_dept) intact,
+(select design_dept, sum(totalamount) total from v$frozen_pay_dept where mth <= :month and yr<=:year group by design_dept) frozen,
+(select design_dept,Plan_Total from v$plan_inv_dept where mth = :month+1 and yr=:year) inv,
+(select design_dept,Plan_Total from v$plan_pay_dept where mth = :month+1 and yr=:year) pay,
+(select design_dept, sum(totalamount) total from v$inv_dept where mth<=:month and yr<=:year group by design_dept) ar,
+v$ar_90 ar90,
+v$ar_180 ar180,
+v$ar_365 ar365,
+v$ar_730 ar730,
+v$ar_1095 ar1095,
+lov
+where 
+lov.lookup_code='DEPT_NAMES'
+and lov.lookup_value = intact.design_dept (+)
+and lov.lookup_value = frozen.design_dept (+)
+and lov.lookup_value = inv.design_dept(+)
+and lov.lookup_value = pay.design_dept(+)
+and lov.lookup_value = ar.design_dept(+)
+and lov.lookup_value = ar90.design_dept (+)
+and lov.lookup_value = ar180.design_dept (+)
+and lov.lookup_value = ar365.design_dept (+)
+and lov.lookup_value = ar730.design_dept (+)
+and lov.lookup_value = ar1095.design_dept (+)) Union
+(select '全院(不含南通SDARI)' design_dept,
+nvl(sum(intact.total),0) intact_total,
+nvl(sum(frozen.total),0) frozen_total,
+nvl(sum(inv.Plan_Total),0) inv_total,
+nvl(sum(pay.Plan_Total),0) pay_total,
+nvl(sum(ar.total),0) ar_total,
+nvl(sum(ar90.invoice_amount),0) inv90,
+nvl(sum(ar180.invoice_amount),0) inv180,
+nvl(sum(ar365.invoice_amount),0) inv365,
+nvl(sum(ar730.invoice_amount),0) inv730,
+nvl(sum(ar1095.invoice_amount),0) inv1095
+from 
+(select design_dept, sum(totalamount) total from v$intact_pay_dept where mth <= :month and yr<=:year group by design_dept) intact,
+(select design_dept, sum(totalamount) total from v$frozen_pay_dept where mth <= :month and yr<=:year group by design_dept) frozen,
+(select design_dept,Plan_Total from v$plan_inv_dept where mth = :month+1 and yr=:year) inv,
+(select design_dept,Plan_Total from v$plan_pay_dept where mth = :month+1 and yr=:year) pay,
+(select design_dept, sum(totalamount) total from v$inv_dept where mth<=:month and yr<=:year group by design_dept) ar,
+v$ar_90 ar90,
+v$ar_180 ar180,
+v$ar_365 ar365,
+v$ar_730 ar730,
+v$ar_1095 ar1095,
+lov
+where 
+lov.lookup_code='DEPT_NAMES'
+and lov.lookup_code!='南通斯达瑞'
+and lov.lookup_value = intact.design_dept (+)
+and lov.lookup_value = frozen.design_dept (+)
+and lov.lookup_value = inv.design_dept(+)
+and lov.lookup_value = pay.design_dept(+)
+and lov.lookup_value = ar.design_dept(+)
+and lov.lookup_value = ar90.design_dept (+)
+and lov.lookup_value = ar180.design_dept (+)
+and lov.lookup_value = ar365.design_dept (+)
+and lov.lookup_value = ar730.design_dept (+)
+and lov.lookup_value = ar1095.design_dept (+)) order by intact_total]]></SQLQuery>
+  <ViewAttribute
+    Name="DesignDept"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESIGN_DEPT"
+    Expression="DESIGN_DEPT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.DesignDept_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IntactTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INTACT_TOTAL"
+    Expression="INTACT_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.IntactTotal_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FrozenTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="FROZEN_TOTAL"
+    Expression="FROZEN_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.FrozenTotal_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INV_TOTAL"
+    Expression="INV_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.InvTotal_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PayTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="PAY_TOTAL"
+    Expression="PAY_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.PayTotal_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ArTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="AR_TOTAL"
+    Expression="AR_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.ArTotal_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Inv90"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INV90"
+    Expression="INV90"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.Inv90_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Inv180"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INV180"
+    Expression="INV180"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.Inv180_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Inv365"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INV365"
+    Expression="INV365"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.Inv365_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Inv730"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INV730"
+    Expression="INV730"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.Inv730_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Inv1095"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INV1095"
+    Expression="INV1095"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.ARAgingReport.Inv1095_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="DesignDept"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="runReportCriteria"
+      MethodName="runReportCriteria">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="month"
+        Type="oracle.jbo.domain.Number"/>
+      <Parameter
+        Name="year"
+        Type="oracle.jbo.domain.Number"/>
+    </Method>
+    <Method
+      Name="clearRowSet"
+      MethodName="clearRowSet">
+      <Return
+        Type="void"/>
+    </Method>
+  </ClientInterface>
+</ViewObject>

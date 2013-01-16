@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="CustomerSearchPageDef"
+                Package="customer">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Customers" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="CustomersIterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="CustomersIterator" id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CustomersIterator" id="Customers">
+      <nodeDefinition DefName="com.xy.scpms.model.query.CustomerView"
+                      Name="Customers0">
+        <AttrNames>
+          <Item Value="CustomerCode"/>
+          <Item Value="CustomerName"/>
+          <Item Value="CustomerType"/>
+          <Item Value="Region"/>
+          <Item Value="CustomerLevel"/>
+          <Item Value="Owner"/>
+          <Item Value="ParentGroup"/>
+          <Item Value="PrimaryShipType"/>
+          <Item Value="ShipGroupLevel"/>
+          <Item Value="RecentAction"/>
+          <Item Value="CustomerBillAddress"/>
+          <Item Value="CustomerShiptoAddress"/>
+          <Item Value="PostCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction IterBinding="CustomersIterator" id="setQueryType"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setQueryType" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Customers">
+      <NamedData NDName="type" NDValue="#{pageFlowScope.CustomerBean.custType}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="CustomersIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomersIterator" id="CustomerName">
+      <AttrNames>
+        <Item Value="CustomerName"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

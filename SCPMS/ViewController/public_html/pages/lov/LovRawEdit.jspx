@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="LovRawEdit.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox text="值列表编辑（该管理功能需要系统管理员处理，请勿随意更改记录）" id="pb1" background="medium">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                    <af:commandToolbarButton id="ctb3" icon="/images/icons/filesave (2).png" text="保存"
+                                                             action="#{GlobalBean.commit}"/>
+                                    <af:commandToolbarButton actionListener="#{bindings.Rollback.execute}"
+                                                             disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                                             id="ctb4" icon="/images/icons/undo.png" text="取消">
+                                        <af:resetActionListener/>
+                                    </af:commandToolbarButton>
+                                    <af:commandToolbarButton id="ctb5" text="返回主页" icon="/images/icons/home.png"
+                                                             action="return"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t2">
+                                        <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}"
+                                                                 text="添加新值"
+                                                                 disabled="#{!bindings.CreateInsert.enabled}"
+                                                                 id="ctb1" icon="/images/icons/add.png"/>
+                                        <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                                                 text="删除" disabled="#{!bindings.Delete.enabled}"
+                                                                 immediate="true" id="ctb2"
+                                                                 icon="/images/icons/delete.png"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.Lov.collectionModel}" var="row"
+                                          rows="#{bindings.Lov.rangeSize}"
+                                          emptyText="#{bindings.Lov.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Lov.rangeSize}" rowBandingInterval="1"
+                                          filterModel="#{bindings.LovQuery.queryDescriptor}"
+                                          queryListener="#{bindings.LovQuery.processQuery}" filterVisible="true"
+                                          varStatus="vs" selectedRowKeys="#{bindings.Lov.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.Lov.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1" partialTriggers="::ctb1 ::ctb2">
+                                    <af:column sortProperty="#{bindings.Lov.hints.Id.name}" filterable="true"
+                                               sortable="true" headerText="#{bindings.Lov.hints.Id.label}" id="c1">
+                                        <af:inputText value="#{row.bindings.Id.inputValue}"
+                                                      label="#{bindings.Lov.hints.Id.label}"
+                                                      required="#{bindings.Lov.hints.Id.mandatory}"
+                                                      columns="#{bindings.Lov.hints.Id.displayWidth}"
+                                                      maximumLength="#{bindings.Lov.hints.Id.precision}"
+                                                      shortDesc="#{bindings.Lov.hints.Id.tooltip}" id="it1">
+                                            <f:validator binding="#{row.bindings.Id.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Lov.hints.Id.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Lov.hints.LookupCode.name}" filterable="true"
+                                               sortable="true" headerText="#{bindings.Lov.hints.LookupCode.label}"
+                                               id="c2" width="140">
+                                        <af:inputText value="#{row.bindings.LookupCode.inputValue}"
+                                                      label="#{bindings.Lov.hints.LookupCode.label}"
+                                                      required="#{bindings.Lov.hints.LookupCode.mandatory}"
+                                                      columns="#{bindings.Lov.hints.LookupCode.displayWidth}"
+                                                      maximumLength="#{bindings.Lov.hints.LookupCode.precision}"
+                                                      shortDesc="#{bindings.Lov.hints.LookupCode.tooltip}" id="it2">
+                                            <f:validator binding="#{row.bindings.LookupCode.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Lov.hints.LookupValue.name}" filterable="true"
+                                               sortable="true" headerText="#{bindings.Lov.hints.LookupValue.label}"
+                                               id="c3">
+                                        <af:inputText value="#{row.bindings.LookupValue.inputValue}"
+                                                      label="#{bindings.Lov.hints.LookupValue.label}"
+                                                      required="#{bindings.Lov.hints.LookupValue.mandatory}"
+                                                      columns="#{bindings.Lov.hints.LookupValue.displayWidth}"
+                                                      maximumLength="#{bindings.Lov.hints.LookupValue.precision}"
+                                                      shortDesc="#{bindings.Lov.hints.LookupValue.tooltip}" id="it3">
+                                            <f:validator binding="#{row.bindings.LookupValue.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

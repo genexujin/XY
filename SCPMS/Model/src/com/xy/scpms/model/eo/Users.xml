@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Users"
+  Version="11.1.2.60.17"
+  DBObjectType="table"
+  DBObjectName="USERS"
+  AliasName="Users"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="Username"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="USERNAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USERS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.Users.Username_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Password"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="PASSWORD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.Users.Password_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Firstname"
+    Precision="50"
+    ColumnName="FIRSTNAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.Users.Firstname_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Lastname"
+    Precision="50"
+    ColumnName="LASTNAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.Users.Lastname_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="UDescription"
+    Precision="200"
+    ColumnName="U_DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.Users.UDescription_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Department"
+    Precision="20"
+    ColumnName="DEPARTMENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.Users.Department_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="FullName"
+    Precision="80"
+    ColumnName="FULL_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsQueriable="false"
+    IsPersistent="false">
+    <TransientExpression><![CDATA[Lastname+Firstname]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.Users.FullName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="Groupmembers"
+    Association="com.xy.scpms.model.assoc.GroupmembersUsersFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.GroupmembersUsersFk1Assoc.Groupmembers"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.GroupmembersUsersFk1Assoc.Users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="PrjMgrContractAccessor"
+    Association="com.xy.scpms.model.assoc.ContractPrjMgrAssoc"
+    AssociationEnd="com.xy.scpms.model.assoc.ContractPrjMgrAssoc.PrjMgrContractAccessor"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.ContractPrjMgrAssoc.PrjMgrAccessor"
+    Type="com.xy.scpms.model.eo.ContractImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="RegionContractAccessor"
+    Association="com.xy.scpms.model.assoc.ContractRgMgrAssoc"
+    AssociationEnd="com.xy.scpms.model.assoc.ContractRgMgrAssoc.RegionContractAccessor"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.ContractRgMgrAssoc.RegionMgrAccessor"
+    Type="com.xy.scpms.model.eo.ContractImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Contract"
+    Association="com.xy.scpms.model.assoc.ContractCreatorAssoc"
+    AssociationEnd="com.xy.scpms.model.assoc.ContractCreatorAssoc.Contract"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.ContractCreatorAssoc.Users"
+    Type="com.xy.scpms.model.eo.ContractImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ApprovalInProcess"
+    Association="com.xy.scpms.model.assoc.AIPCreatorAssoc"
+    AssociationEnd="com.xy.scpms.model.assoc.AIPCreatorAssoc.ApprovalInProcess"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.AIPCreatorAssoc.Users"
+    Type="com.xy.scpms.model.common.BaseEntity"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="ApprovalInProcess1"
+    Association="com.xy.scpms.model.assoc.AIPApproverAssoc"
+    AssociationEnd="com.xy.scpms.model.assoc.AIPApproverAssoc.ApprovalInProcess1"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.AIPApproverAssoc.Users1"
+    Type="com.xy.scpms.model.common.BaseEntity"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="InvoiceRequisition"
+    Association="com.xy.scpms.model.assoc.InvReqUserAssoc"
+    AssociationEnd="com.xy.scpms.model.assoc.InvReqUserAssoc.InvoiceRequisition"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.InvReqUserAssoc.Users"
+    Type="com.xy.scpms.model.eo.InvoiceRequisitionImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="SysC0012342">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012342"/>
+      <Attr Name="_checkCondition" Value='"USERNAME" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.Users.Username"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012343">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012343"/>
+      <Attr Name="_checkCondition" Value='"PASSWORD" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.Users.Password"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="UsersPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="USERS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.Users.Username"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

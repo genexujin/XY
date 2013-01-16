@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report
+END
+RunReportPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/home/!svn/ver/15/trunk/OM/ViewController/adfmsrc/pages/report/RunReportPageDef.xml
+END
+AgingReportPrintPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/AgingReportPrintPageDef.xml
+END
+SetupDeptPerfTargetPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/SetupDeptPerfTargetPageDef.xml
+END
+DynPayStatusPrintPagePageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/DynPayStatusPrintPagePageDef.xml
+END
+CustPerfRptPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/home/!svn/ver/15/trunk/OM/ViewController/adfmsrc/pages/report/CustPerfRptPageDef.xml
+END
+EVEGraphicViewPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/EVEGraphicViewPageDef.xml
+END
+DynPayStatusReportPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/DynPayStatusReportPageDef.xml
+END
+EVEHistoryTableViewPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/EVEHistoryTableViewPageDef.xml
+END
+ReportPrintTemplatePageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/ReportPrintTemplatePageDef.xml
+END
+PayForecastRptPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/13/trunk/OM/ViewController/adfmsrc/pages/report/PayForecastRptPageDef.xml
+END
+RegMgrRptPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/home/!svn/ver/15/trunk/OM/ViewController/adfmsrc/pages/report/RegMgrRptPageDef.xml
+END
+AgingReportPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/AgingReportPageDef.xml
+END
+ReportTemplatePageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/ReportTemplatePageDef.xml
+END
+SelectContractPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/11/trunk/OM/ViewController/adfmsrc/pages/report/SelectContractPageDef.xml
+END
+GroupPerfRptPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/home/!svn/ver/15/trunk/OM/ViewController/adfmsrc/pages/report/GroupPerfRptPageDef.xml
+END
+SettlementRptPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/home/!svn/ver/15/trunk/OM/ViewController/adfmsrc/pages/report/SettlementRptPageDef.xml
+END
+InvForecastRptPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/13/trunk/OM/ViewController/adfmsrc/pages/report/InvForecastRptPageDef.xml
+END
+EVEReportPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/EVEReportPageDef.xml
+END
+ShipDeliveryRptPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/10/trunk/OM/ViewController/adfmsrc/pages/report/ShipDeliveryRptPageDef.xml
+END
+EveReportPrintPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/report/EveReportPrintPageDef.xml
+END
+InvForecastPrintPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/home/!svn/ver/10/trunk/OM/ViewController/adfmsrc/pages/report/InvForecastPrintPageDef.xml
+END

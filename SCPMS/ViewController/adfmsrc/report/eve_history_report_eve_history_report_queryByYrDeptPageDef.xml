@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17"
+                id="eve_history_report_eve_history_report_queryByYrDeptPageDef"
+                Package="report" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="queryByYrDept" RequiresUpdateModel="true" Action="invokeMethod"
+            MethodName="queryByYrDept" IsViewObjectMethod="true"
+            DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.PaymentHistoryView">
+      <NamedData NDName="dept" NDValue="#{pageFlowScope.dept}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="start" NDValue="#{pageFlowScope.startYr}"
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="end" NDValue="#{pageFlowScope.endYr}"
+                 NDType="oracle.jbo.domain.Number"/>
+    </action>
+  </bindings>
+</pageDefinition>

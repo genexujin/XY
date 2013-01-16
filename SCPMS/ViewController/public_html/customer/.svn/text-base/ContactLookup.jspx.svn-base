@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="选择联系人" id="d1">
+         <af:resource type="javascript">
+                  function handleTableDoubleClick(evt) {
+                      var table = evt.getSource();
+                      AdfCustomEvent.queue(table, "TableDoubleClickEvent",{},true);
+                      evt.cancel();
+                  }
+             </af:resource>
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="center">
+                        <af:panelBox text="联系人列表:请输入查询条件, 可以使用百分号'%'来进行模糊搜索。" id="pb1" background="medium">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t2">
+                                        <af:commandToolbarButton id="ctb2" text="选择当前客户" icon="/images/icons/check.png"
+                                                                 action="#{pageFlowScope.CustomerBean.selectContact}"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.CustomerContacts.collectionModel}" var="row"
+                                          rows="#{bindings.CustomerContacts.rangeSize}"
+                                          emptyText="#{bindings.CustomerContacts.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.CustomerContacts.rangeSize}" rowBandingInterval="0"
+                                          filterModel="#{bindings.CustomerContactsQuery.queryDescriptor}"
+                                          queryListener="#{bindings.CustomerContactsQuery.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.CustomerContacts.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.CustomerContacts.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1">
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.Name.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.Name.label}" id="c1"
+                                               width="100" align="center">
+                                        <af:outputText value="#{row.Name}" id="ot1"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.Title.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.Title.label}" id="c2"
+                                               width="100" align="center">
+                                        <af:outputText value="#{row.Title}" id="ot2"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.Department.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.Department.label}" id="c3"
+                                               width="100" align="center">
+                                        <af:outputText value="#{row.Department}" id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.ImportantLevel.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.ImportantLevel.label}"
+                                               id="c4" width="60" align="center">
+                                        <af:outputText value="#{row.ImportantLevel}" id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.Memo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.Memo.label}" id="c5"
+                                               align="center">
+                                        <af:outputText value="#{row.Memo}" id="ot5"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.Mobile.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.Mobile.label}" id="c6"
+                                               width="100" align="center">
+                                        <af:outputText value="#{row.Mobile}" id="ot6"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.OfficePhone.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.OfficePhone.label}"
+                                               id="c7" width="100" align="center">
+                                        <af:outputText value="#{row.OfficePhone}" id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.OfficeFax.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.OfficeFax.label}" id="c8"
+                                               width="100" align="center">
+                                        <af:outputText value="#{row.OfficeFax}" id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.HomePhone.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.HomePhone.label}" id="c9"
+                                               width="100" align="center">
+                                        <af:outputText value="#{row.HomePhone}" id="ot9"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.Email.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.Email.label}" id="c10"
+                                               width="100" align="center">
+                                        <af:outputText value="#{row.Email}" id="ot10"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.Im.name}" sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.Im.label}" id="c11"
+                                               width="60" align="center">
+                                        <af:outputText value="#{row.Im}" id="ot11"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.CustomerContacts.hints.Address.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.CustomerContacts.hints.Address.label}" id="c12"
+                                               align="center">
+                                        <af:outputText value="#{row.Address}" id="ot12"/>
+                                    </af:column>
+                                     <af:clientListener method="handleTableDoubleClick"
+                                                       type="dblClick"/>
+                                    <af:serverListener type="TableDoubleClickEvent"
+                                                       method="#{pageFlowScope.CustomerBean.selectContact}"/>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                        <!-- id="af_one_column_stretched"   -->
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,1458 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="合同变更" id="d1">
+            <af:messages id="m1"/>
+            <af:resource type="javascript">
+             function disableContextMenu(){
+         document.oncontextmenu=function(){return false};
+         
+        }
+              function showUploadBtn(evt){
+                  var btn = AdfPage.PAGE.findComponentByAbsoluteId('ctb14');
+                  btn.disabled=false;
+              }
+              function enforcePreventUserInput(evt) {
+                  var popup = AdfPage.PAGE.findComponentByAbsoluteId('p5');
+                  if (popup != null) {
+                      AdfPage.PAGE.addBusyStateListener(popup, handleBusyState);
+                      evt.preventUserInput();
+                  }
+              }
+
+              function handleBusyState(evt) {
+                  var popup = AdfPage.PAGE.findComponentByAbsoluteId('p5');
+                  if (popup != null) {
+                      if (evt.isBusy()) {
+                          popup.show();
+                      }
+                      else {
+                          popup.hide();
+                          AdfPage.PAGE.removeBusyStateListener(popup, handleBusyState);
+                      }
+                  }
+              }
+            </af:resource>
+            <af:form id="f1" usesUpload="true">
+                <af:panelStretchLayout id="psl1" topHeight="80px" endWidth="0px"
+                                       startWidth="0px" bottomHeight="0px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox text="PanelBox1" id="pb2" showHeader="never" background="medium"
+                                     clientComponent="true">
+                            <f:facet name="toolbar"/>
+                            <af:panelTabbed id="pt1" styleClass="AFStretchWidth">
+                                <af:showDetailItem text="合同基本信息" id="sdi1">
+                                    <af:panelGroupLayout id="pgl4" layout="scroll">
+                                        <af:separator id="s1"/>
+                                        <af:panelHeader text="基本信息" id="ph1" messageType="info">
+                                            <f:facet name="context"/>
+                                            <f:facet name="menuBar"/>
+                                            <f:facet name="toolbar"/>
+                                            <f:facet name="legend"/>
+                                            <f:facet name="info"/>
+                                            <af:panelFormLayout id="pfl1" rows="3" maxColumns="4">
+                                                <af:inputText value="#{bindings.ContractNo.inputValue}"
+                                                              label="#{bindings.ContractNo.hints.label}"
+                                                              required="#{bindings.ContractNo.hints.mandatory}"
+                                                              columns="#{bindings.ContractNo.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ContractNo.hints.precision}"
+                                                              shortDesc="#{bindings.ContractNo.hints.tooltip}" id="it7"
+                                                              disabled="#{viewScope.UpdateBean.disabled}">
+                                                    <f:validator binding="#{bindings.ContractNo.validator}"/>
+                                                </af:inputText>
+                                                <af:selectOneChoice value="#{bindings.ContractEntity.inputValue}"
+                                                                    label="#{bindings.ContractEntity.label}"
+                                                                    required="#{bindings.ContractEntity.hints.mandatory}"
+                                                                    shortDesc="#{bindings.ContractEntity.hints.tooltip}"
+                                                                    id="soc7" contentStyle="width:12em;"
+                                                                    disabled="#{viewScope.UpdateBean.disabled}">
+                                                    <f:selectItems value="#{bindings.ContractEntity.items}" id="si10"/>
+                                                </af:selectOneChoice>
+                                                <af:inputText value="#{bindings.ProjectName.inputValue}"
+                                                              label="#{bindings.ProjectName.hints.label}"
+                                                              required="#{bindings.ProjectName.hints.mandatory}"
+                                                              columns="#{bindings.ProjectName.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ProjectName.hints.precision}"
+                                                              shortDesc="#{bindings.ProjectName.hints.tooltip}"
+                                                              id="it6" rows="2">
+                                                    <f:validator binding="#{bindings.ProjectName.validator}"/>
+                                                </af:inputText>
+                                                <af:selectOneChoice value="#{bindings.DesignDept.inputValue}"
+                                                                    label="#{bindings.DesignDept.label}"
+                                                                    required="#{bindings.DesignDept.hints.mandatory}"
+                                                                    shortDesc="#{bindings.DesignDept.hints.tooltip}"
+                                                                    id="soc10" contentStyle="width:12em;"
+                                                                    disabled="#{viewScope.UpdateBean.disabled}"
+                                                                    autoSubmit="true">
+                                                    <f:selectItems value="#{bindings.DesignDept.items}" id="si7"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.ProjectManager.inputValue}"
+                                                                    label="#{bindings.ProjectManager.label}"
+                                                                    shortDesc="#{bindings.ProjectManager.hints.tooltip}"
+                                                                    id="soc9"
+                                                                    contentStyle="width:12em;"
+                                                                    readOnly="false"
+                                                                    disabled="#{viewScope.UpdateBean.disabled}"
+                                                                    partialTriggers="soc10">
+                                                    <f:selectItems value="#{bindings.ProjectManager.items}"
+                                                                   id="si8"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.DesignPhase.inputValue}"
+                                                                    label="#{bindings.DesignPhase.label}"
+                                                                    required="#{bindings.DesignPhase.hints.mandatory}"
+                                                                    shortDesc="#{bindings.DesignPhase.hints.tooltip}"
+                                                                    id="soc8" contentStyle="width:12em;">
+                                                    <f:selectItems value="#{bindings.DesignPhase.items}" id="si71"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.RegionManager.inputValue}"
+                                                                    label="#{bindings.RegionManager.label}"
+                                                                    required="#{bindings.RegionManager.hints.mandatory}"
+                                                                    shortDesc="#{bindings.RegionManager.hints.tooltip}"
+                                                                    id="soc15" contentStyle="width:12em;"
+                                                                    disabled="#{viewScope.UpdateBean.disabled}">
+                                                    <f:selectItems value="#{bindings.RegionManager.items}" id="si9"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.ShipModel.inputValue}"
+                                                                    label="#{bindings.ShipModel.label}"
+                                                                    required="#{bindings.ShipModel.hints.mandatory}"
+                                                                    shortDesc="#{bindings.ShipModel.hints.tooltip}"
+                                                                    id="soc11" contentStyle="width:12em;">
+                                                    <f:selectItems value="#{bindings.ShipModel.items}" id="si91"/>
+                                                </af:selectOneChoice>
+                                                <af:inputText value="#{bindings.ShipNoInternal.inputValue}"
+                                                              label="#{bindings.ShipNoInternal.hints.label}"
+                                                              required="#{bindings.ShipNoInternal.hints.mandatory}"
+                                                              columns="#{bindings.ShipNoInternal.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ShipNoInternal.hints.precision}"
+                                                              shortDesc="#{bindings.ShipNoInternal.hints.tooltip}"
+                                                              id="it1">
+                                                    <f:validator binding="#{bindings.ShipNoInternal.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.FirstDesignFee.inputValue}"
+                                                              label="#{bindings.FirstDesignFee.hints.label}"
+                                                              required="#{bindings.ContractType.inputValue!='协议'}"
+                                                              columns="#{bindings.FirstDesignFee.hints.displayWidth}"
+                                                              maximumLength="#{bindings.FirstDesignFee.hints.precision}"
+                                                              shortDesc="#{bindings.FirstDesignFee.hints.tooltip}"
+                                                              id="it4">
+                                                    <f:validator binding="#{bindings.FirstDesignFee.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.FirstDesignFee.format}"
+                                                                      maxFractionDigits="7"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.ParentContractNo.inputValue}"
+                                                              label="#{bindings.ParentContractNo.hints.label}"
+                                                              required="#{bindings.ParentContractNo.hints.mandatory}"
+                                                              columns="#{bindings.ParentContractNo.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ParentContractNo.hints.precision}"
+                                                              shortDesc="#{bindings.ParentContractNo.hints.tooltip}"
+                                                              id="it10" disabled="true"
+                                                              rendered="#{bindings.ParentContractNo.inputValue != null}">
+                                                    <f:validator binding="#{bindings.ParentContractNo.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.ContractType.inputValue}"
+                                                              label="#{bindings.ContractType.hints.label}"
+                                                              required="#{bindings.ContractType.hints.mandatory}"
+                                                              columns="#{bindings.ContractType.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ContractType.hints.precision}"
+                                                              shortDesc="#{bindings.ContractType.hints.tooltip}"
+                                                              id="it3"
+                                                              disabled="true">
+                                                    <f:validator binding="#{bindings.ContractType.validator}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                        </af:panelHeader>
+                                        <af:separator id="s2"/>
+                                        <af:panelHeader text="客户信息" id="ph2" messageType="info">
+                                            <f:facet name="context"/>
+                                            <f:facet name="menuBar"/>
+                                            <f:facet name="toolbar"/>
+                                            <f:facet name="legend"/>
+                                            <f:facet name="info"/>
+                                            <af:panelFormLayout id="pfl2" rows="2" maxColumns="4">
+                                                <af:selectOneChoice value="#{bindings.AuthType.inputValue}"
+                                                                    label="#{bindings.AuthType.label}"
+                                                                    required="#{bindings.AuthType.hints.mandatory}"
+                                                                    shortDesc="#{bindings.AuthType.hints.tooltip}"
+                                                                    id="soc12" contentStyle="width:12em;"
+                                                                    disabled="#{viewScope.UpdateBean.disabled}"
+                                                                    autoSubmit="true">
+                                                    <f:selectItems value="#{bindings.AuthType.items}" id="si101"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.AuthorizerType.inputValue}"
+                                                                    label="#{bindings.AuthorizerType.label}"
+                                                                    required="#{bindings.AuthorizerType.hints.mandatory}"
+                                                                    shortDesc="#{bindings.AuthorizerType.hints.tooltip}"
+                                                                    id="soc13" contentStyle="width:12em;"
+                                                                    partialTriggers="soc12">
+                                                    <f:selectItems value="#{bindings.AuthorizerType.items}" id="si11"/>
+                                                </af:selectOneChoice>
+                                                <af:panelGroupLayout id="pgl9"
+                                                                     halign="start"
+                                                                     valign="middle"
+                                                                     layout="horizontal">
+                                                    <af:inputText value="#{bindings.AuthName.inputValue}"
+                                                                  label="#{bindings.AuthName.hints.label}"
+                                                                  required="#{bindings.AuthName.hints.mandatory}"
+                                                                  columns="#{bindings.AuthName.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.AuthName.hints.precision}"
+                                                                  shortDesc="#{bindings.AuthName.hints.tooltip}"
+                                                                  id="it29"
+                                                                  binding="#{UpdateBean.authInput}"
+                                                                  readOnly="true">
+                                                        <f:validator binding="#{bindings.AuthName.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="20"
+                                                               height="10"
+                                                               id="s4"/>
+                                                    <af:commandImageLink id="cil2"
+                                                                         icon="/images/icons/find.png"
+                                                                         action="#{UpdateBean.startCustomerSelection}"
+                                                                         useWindow="true"
+                                                                         windowEmbedStyle="inlineDocument"
+                                                                         windowModalityType="applicationModal"
+                                                                         windowHeight="500"
+                                                                         windowWidth="800"
+                                                                         returnListener="#{UpdateBean.onSelectCustomerReturn}"
+                                                                         immediate="true"
+                                                                         partialSubmit="true"
+                                                                         disabled="#{bindings.AuthType.inputValue eq 0}"
+                                                                         partialTriggers="soc12"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl10" layout="horizontal">
+                                                <af:inputText label="客户联系人" id="it13" readOnly="true" binding="#{UpdateBean.contactInput}"
+                                        value="#{bindings.CustomerContactName.inputValue}"/>
+                                                 <af:spacer width="20"
+                                                               height="10"
+                                                               id="s6"/>
+                                                    <af:commandImageLink id="cil1"
+                                                                         icon="/images/icons/find.png"
+                                                                         action="#{UpdateBean.startContactSelection}"
+                                                                         useWindow="true"
+                                                                         windowEmbedStyle="inlineDocument"
+                                                                         windowModalityType="applicationModal"
+                                                                         windowHeight="300"
+                                                                         windowWidth="600"
+                                                                         returnListener="#{UpdateBean.onSelectContactReturn}"
+                                                                         immediate="true"
+                                                                         partialSubmit="true"
+                                                                         disabled="#{bindings.AuthType.inputValue eq 0}"
+                                                                         partialTriggers="soc12"/>
+                                                    <!--af:inputListOfValues id="customerContactNameId"
+                                                                          popupTitle="#{bindings.CustomerContactName.hints.label}"
+                                                                          value="#{bindings.CustomerContactName.inputValue}"
+                                                                          label="#{bindings.CustomerContactName.hints.label}"
+                                                                          model="#{bindings.CustomerContactName.listOfValuesModel}"
+                                                                          required="#{bindings.CustomerContactName.hints.mandatory}"
+                                                                          columns="#{bindings.CustomerContactName.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.CustomerContactName.hints.tooltip}"
+                                                                          binding="#{UpdateBean.contactsLov}"
+                                                                          clientComponent="true"
+                                                                          launchPopupListener="#{UpdateBean.onLovLaunch}"
+                                                                          disabled="#{bindings.AuthName.inputValue==null}">
+                                                        <f:validator binding="#{bindings.CustomerContactName.validator}"/>
+                                                    </af:inputListOfValues-->
+                                                </af:panelGroupLayout>
+                                            </af:panelFormLayout>
+                                        </af:panelHeader>
+                                        <af:separator id="s3"/>
+                                        <af:panelHeader text="其他信息" id="ph3" messageType="info">
+                                            <f:facet name="context"/>
+                                            <f:facet name="menuBar"/>
+                                            <f:facet name="toolbar"/>
+                                            <f:facet name="legend"/>
+                                            <f:facet name="info"/>
+                                            <af:panelFormLayout id="pfl3" rows="3">
+                                                <af:inputText value="#{bindings.Memo.inputValue}"
+                                                              label="#{bindings.Memo.hints.label}"
+                                                              required="#{bindings.Memo.hints.mandatory}"
+                                                              columns="#{bindings.Memo.hints.displayWidth}"
+                                                              maximumLength="#{bindings.Memo.hints.precision}"
+                                                              shortDesc="#{bindings.Memo.hints.tooltip}" id="it2"
+                                                              rows="2">
+                                                    <f:validator binding="#{bindings.Memo.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.CreatorFullName.inputValue}"
+                                                              label="#{bindings.CreatorFullName.hints.label}"
+                                                              required="#{bindings.CreatorFullName.hints.mandatory}"
+                                                              columns="#{bindings.CreatorFullName.hints.displayWidth}"
+                                                              maximumLength="#{bindings.CreatorFullName.hints.precision}"
+                                                              shortDesc="#{bindings.CreatorFullName.hints.tooltip}" id="it8"
+                                                              readOnly="false" disabled="true">
+                                                    <f:validator binding="#{bindings.CreatedBy.validator}"/>
+                                                </af:inputText>
+                                                <af:inputDate value="#{bindings.CreatedAt.inputValue}"
+                                                              label="#{bindings.CreatedAt.hints.label}"
+                                                              required="#{bindings.CreatedAt.hints.mandatory}"
+                                                              shortDesc="#{bindings.CreatedAt.hints.tooltip}" id="id5"
+                                                              disabled="true">
+                                                    <f:validator binding="#{bindings.CreatedAt.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.CreatedAt.format}"/>
+                                                </af:inputDate>
+                                                <af:inputText value="#{bindings.Status.inputValue}"
+                                                              label="#{bindings.Status.hints.label}"
+                                                              required="#{bindings.Status.hints.mandatory}"
+                                                              columns="#{bindings.Status.hints.displayWidth}"
+                                                              maximumLength="#{bindings.Status.hints.precision}"
+                                                              shortDesc="#{bindings.Status.hints.tooltip}" id="it9"
+                                                              disabled="#{not securityContext.userInRole['contractor']}">
+                                                    <f:validator binding="#{bindings.Status.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.TotalAmount.inputValue}"
+                                                              label="#{bindings.TotalAmount.hints.label}"
+                                                              required="#{bindings.TotalAmount.hints.mandatory}"
+                                                              columns="#{bindings.TotalAmount.hints.displayWidth}"
+                                                              maximumLength="#{bindings.TotalAmount.hints.precision}"
+                                                              shortDesc="#{bindings.TotalAmount.hints.tooltip}" id="it5"
+                                                              disabled="true" partialTriggers="ctb6">
+                                                    <f:validator binding="#{bindings.TotalAmount.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.TotalAmount.format}"
+                                                                      maxFractionDigits="7"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.UnitWeight.inputValue}"
+                                                              label="#{bindings.UnitWeight.hints.label}"
+                                                              required="#{bindings.UnitWeight.hints.mandatory}"
+                                                              columns="#{bindings.UnitWeight.hints.displayWidth}"
+                                                              maximumLength="#{bindings.UnitWeight.hints.precision}"
+                                                              shortDesc="#{bindings.UnitWeight.hints.tooltip}"
+                                                              id="it12">
+                                                    <f:validator binding="#{bindings.UnitWeight.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.UnitWeight.format}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                        </af:panelHeader>
+                                    </af:panelGroupLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem id="sdi2" text="合同详细信息" stretchChildren="first">
+                                    <af:panelSplitter id="ps1"
+                                                      splitterPosition="250"
+                                                      orientation="vertical"
+                                                      positionedFromEnd="true">
+                                        <f:facet name="first">
+                                            <af:panelHeader text="船号" id="ph4"
+                                                            messageType="confirmation">
+                                                <f:facet name="menuBar"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t10">
+                                                        <f:facet name="context"/>
+                                                        <af:outputText value="深红色：已弃船"
+                                                                       id="ot3"
+                                                                       inlineStyle="font-size:smaller;"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <f:facet name="legend"/>
+                                                <f:facet name="info"/>
+                                                <af:panelCollection id="pc1">
+                                                    <f:facet name="menus"/>
+                                                    <f:facet name="toolbar">
+                                                        <af:toolbar id="t3">
+                                                            <af:commandToolbarButton text="添加"
+                                                                                     id="ctb2"
+                                                                                     icon="/images/icons/add.png"
+                                                                                     actionListener="#{bindings.createLike.execute}"
+                                                                                     disabled="#{!bindings.createLike.enabled}"/>
+                                                            <af:commandToolbarButton text="移除"
+                                                                                     id="ctb3"
+                                                                                     icon="/images/icons/delete.png"
+                                                                                     immediate="true"
+                                                                                     action="#{UpdateBean.setRemoveLine}"
+                                                                                     binding="#{UpdateBean.positionButton}"/>
+                                                            <af:commandToolbarButton text="弃船"
+                                                                                     id="ctb7"
+                                                                                     icon="/images/icons/clear.png"
+                                                                                     action="#{UpdateBean.abandonLine}"/>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <f:facet name="statusbar">
+                                                        <af:panelGroupLayout id="pgl13" layout="horizontal"
+                                                                             inlineStyle="width:400px;" halign="center"
+                                                                             valign="bottom">
+                                                            <af:outputText value="本合同共计船只#{bindings.ShipOfContract.estimatedRowCount}艘" id="ot4"
+                                                                           partialTriggers="ctb2 ctb3"
+                                                                           inlineStyle="color:rgb(66,66,66); font-weight:bold;"/>
+                                                            <af:spacer width="10" height="10" id="s7"/>
+                                                            <af:outputText value="当前船号状态： #{bindings.LineStatus.inputValue}"
+                                                                           id="ot2"
+                                                                           inlineStyle="color:rgb(66,66,66); font-weight:bold;"
+                                                                           partialTriggers="t1"/>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <af:table value="#{bindings.ShipOfContract.collectionModel}"
+                                                              var="row"
+                                                              rows="#{bindings.ShipOfContract.rangeSize}"
+                                                              emptyText="#{bindings.ShipOfContract.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                              fetchSize="#{bindings.ShipOfContract.rangeSize}"
+                                                              rowBandingInterval="1"
+                                                              filterModel="#{bindings.ShipOfContractQuery.queryDescriptor}"
+                                                              queryListener="#{bindings.ShipOfContractQuery.processQuery}"
+                                                              filterVisible="false"
+                                                              varStatus="vs"
+                                                              selectedRowKeys="#{bindings.ShipOfContract.collectionModel.selectedRow}"
+                                                              selectionListener="#{bindings.ShipOfContract.collectionModel.makeCurrent}"
+                                                              rowSelection="single"
+                                                              id="t1"
+                                                              partialTriggers="::ctb2 ::ctb3 :::ctb16"
+                                                              binding="#{UpdateBean.lineTable}"
+                                                              editingMode="clickToEdit">
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.LineNo.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.LineNo.label}"
+                                                                   id="c5"
+                                                                   width="35"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:outputText value="#{row.LineNo}"
+                                                                           shortDesc="#{bindings.ShipOfContract.hints.LineNo.tooltip}"
+                                                                           id="ot1">
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.ShipOfContract.hints.LineNo.format}"/>
+                                                            </af:outputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipMnftNo.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipMnftNo.label}"
+                                                                   id="c9"
+                                                                   width="110"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}"
+                                                                   rendered="#{bindings.ContractType.inputValue!='协议'}"
+                                                                   frozen="true">
+                                                            <af:inputText value="#{row.bindings.ShipMnftNo.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.ShipMnftNo.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.ShipMnftNo.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.ShipMnftNo.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.ShipMnftNo.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.ShipMnftNo.tooltip}"
+                                                                          id="it11"
+                                                                          disabled="#{viewScope.UpdateBean.agreement}">
+                                                                <f:validator binding="#{row.bindings.ShipMnftNo.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.Price.name}"
+                                                                   filterable="true" sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.Price.label}"
+                                                                   id="c13" width="57" frozen="true"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputText value="#{row.bindings.Price.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.Price.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.Price.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.Price.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.Price.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.Price.tooltip}"
+                                                                          id="it22" readOnly="true" disabled="false">
+                                                                <f:validator binding="#{row.bindings.Price.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.ShipOfContract.hints.Price.format}"
+                                                                                  maxFractionDigits="7"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipPlant.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipPlant.label}"
+                                                                   id="c16"
+                                                                   width="150"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputListOfValues id="shipPlantId"
+                                                                                  popupTitle="Search and Select: #{bindings.ShipOfContract.hints.ShipPlant.label}"
+                                                                                  value="#{row.bindings.ShipPlant.inputValue}"
+                                                                                  model="#{row.bindings.ShipPlant.listOfValuesModel}"
+                                                                                  required="#{bindings.ShipOfContract.hints.ShipPlant.mandatory}"
+                                                                                  columns="#{bindings.ShipOfContract.hints.ShipPlant.displayWidth}"
+                                                                                  shortDesc="#{bindings.ShipOfContract.hints.ShipPlant.tooltip}"
+                                                                                  launchPopupListener="#{UpdateBean.onPlantLovLaunch}"
+                                                                                  readOnly="#{viewScope.UpdateBean.plant}">
+                                                                <f:validator binding="#{row.bindings.ShipPlant.validator}"/>
+                                                            </af:inputListOfValues>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.PlantType.name}"
+                                                                   filterable="true"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.ShipOfContract.hints.PlantType.label}"
+                                                                   id="c1"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:selectOneChoice value="#{row.bindings.PlantType.inputValue}"
+                                                                                label="#{row.bindings.PlantType.label}"
+                                                                                required="#{bindings.ShipOfContract.hints.PlantType.mandatory}"
+                                                                                shortDesc="#{bindings.ShipOfContract.hints.PlantType.tooltip}"
+                                                                                id="soc1">
+                                                                <f:selectItems value="#{row.bindings.PlantType.items}"
+                                                                               id="si3"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipOwner.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipOwner.label}"
+                                                                   id="c2"
+                                                                   width="150"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputListOfValues id="shipOwnerId"
+                                                                                  popupTitle="Search and Select: #{bindings.ShipOfContract.hints.ShipOwner.label}"
+                                                                                  value="#{row.bindings.ShipOwner.inputValue}"
+                                                                                  model="#{row.bindings.ShipOwner.listOfValuesModel}"
+                                                                                  required="#{bindings.ShipOfContract.hints.ShipOwner.mandatory}"
+                                                                                  columns="#{bindings.ShipOfContract.hints.ShipOwner.displayWidth}"
+                                                                                  shortDesc="#{bindings.ShipOfContract.hints.ShipOwner.tooltip}"
+                                                                                  launchPopupListener="#{UpdateBean.onOwnerLovLaunch}"
+                                                                                  readOnly="#{viewScope.UpdateBean.owner}">
+                                                                <f:validator binding="#{row.bindings.ShipOwner.validator}"/>
+                                                            </af:inputListOfValues>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.OwnerType.name}"
+                                                                   filterable="true"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.ShipOfContract.hints.OwnerType.label}"
+                                                                   id="c20"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:selectOneChoice value="#{row.bindings.OwnerType.inputValue}"
+                                                                                label="#{row.bindings.OwnerType.label}"
+                                                                                required="#{bindings.ShipOfContract.hints.OwnerType.mandatory}"
+                                                                                shortDesc="#{bindings.ShipOfContract.hints.OwnerType.tooltip}"
+                                                                                id="soc4">
+                                                                <f:selectItems value="#{row.bindings.OwnerType.items}"
+                                                                               id="si1"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipBroker.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipBroker.label}"
+                                                                   id="c15"
+                                                                   width="150"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputListOfValues id="shipBrokerId"
+                                                                                  popupTitle="Search and Select: #{bindings.ShipOfContract.hints.ShipBroker.label}"
+                                                                                  value="#{row.bindings.ShipBroker.inputValue}"
+                                                                                  model="#{row.bindings.ShipBroker.listOfValuesModel}"
+                                                                                  required="#{bindings.ShipOfContract.hints.ShipBroker.mandatory}"
+                                                                                  columns="#{bindings.ShipOfContract.hints.ShipBroker.displayWidth}"
+                                                                                  shortDesc="#{bindings.ShipOfContract.hints.ShipBroker.tooltip}"
+                                                                                  launchPopupListener="#{UpdateBean.onBrokerLovLaunch}"
+                                                                                  readOnly="#{viewScope.UpdateBean.broker}">
+                                                                <f:validator binding="#{row.bindings.ShipBroker.validator}"/>
+                                                            </af:inputListOfValues>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.BrokerType.name}"
+                                                                   filterable="true"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.ShipOfContract.hints.BrokerType.label}"
+                                                                   id="c22"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:selectOneChoice value="#{row.bindings.BrokerType.inputValue}"
+                                                                                label="#{row.bindings.BrokerType.label}"
+                                                                                required="#{bindings.ShipOfContract.hints.BrokerType.mandatory}"
+                                                                                shortDesc="#{bindings.ShipOfContract.hints.BrokerType.tooltip}"
+                                                                                id="soc2">
+                                                                <f:selectItems value="#{row.bindings.BrokerType.items}"
+                                                                               id="si4"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipClsfctSociety.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipClsfctSociety.label}"
+                                                                   id="c6"
+                                                                   width="110"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:selectOneChoice value="#{row.bindings.ShipClsfctSociety.inputValue}"
+                                                                                label="#{row.bindings.ShipClsfctSociety.label}"
+                                                                                required="#{bindings.ShipOfContract.hints.ShipClsfctSociety.mandatory}"
+                                                                                shortDesc="#{bindings.ShipOfContract.hints.ShipClsfctSociety.tooltip}"
+                                                                                id="soc5">
+                                                                <f:selectItems value="#{row.bindings.ShipClsfctSociety.items}"
+                                                                               id="si5"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipName.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipName.label}"
+                                                                   id="c18"
+                                                                   width="97"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputText value="#{row.bindings.ShipName.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.ShipName.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.ShipName.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.ShipName.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.ShipName.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.ShipName.tooltip}"
+                                                                          id="it15"
+                                                                          disabled="#{viewScope.UpdateBean.agreement}">
+                                                                <f:validator binding="#{row.bindings.ShipName.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipNoInternal.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipNoInternal.label}"
+                                                                   id="c11"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputText value="#{row.bindings.ShipNoInternal.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.ShipNoInternal.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.ShipNoInternal.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.ShipNoInternal.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.ShipNoInternal.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.ShipNoInternal.tooltip}"
+                                                                          id="it17"
+                                                                          disabled="#{viewScope.UpdateBean.agreement}">
+                                                                <f:validator binding="#{row.bindings.ShipNoInternal.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.Memo.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.Memo.label}"
+                                                                   id="c26"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputText value="#{row.bindings.Memo.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.Memo.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.Memo.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.Memo.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.Memo.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.Memo.tooltip}"
+                                                                          id="it20">
+                                                                <f:validator binding="#{row.bindings.Memo.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.SignOffDate.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.SignOffDate.label}"
+                                                                   id="c3"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputDate value="#{row.bindings.SignOffDate.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.SignOffDate.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.SignOffDate.mandatory}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.SignOffDate.tooltip}"
+                                                                          id="id1">
+                                                                <f:validator binding="#{row.bindings.SignOffDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.SignOffDate.format}"/>
+                                                            </af:inputDate>
+                                                            <f:facet name="filter">
+                                                                <af:inputDate value="#{vs.filterCriteria.SignOffDate}"
+                                                                              id="id7">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.SignOffDate.format}"/>
+                                                                </af:inputDate>
+                                                            </f:facet>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.EffectiveDate.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.EffectiveDate.label}"
+                                                                   id="c17"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputDate value="#{row.bindings.EffectiveDate.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.EffectiveDate.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.EffectiveDate.mandatory}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.EffectiveDate.tooltip}"
+                                                                          id="id2">
+                                                                <f:validator binding="#{row.bindings.EffectiveDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.EffectiveDate.format}"/>
+                                                            </af:inputDate>
+                                                            <f:facet name="filter">
+                                                                <af:inputDate value="#{vs.filterCriteria.EffectiveDate}"
+                                                                              id="id3">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.EffectiveDate.format}"/>
+                                                                </af:inputDate>
+                                                            </f:facet>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.WorkStartDate.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.WorkStartDate.label}"
+                                                                   id="c8"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputDate value="#{row.bindings.WorkStartDate.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.WorkStartDate.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.WorkStartDate.mandatory}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.WorkStartDate.tooltip}"
+                                                                          id="id8"
+                                                                          disabled="#{viewScope.UpdateBean.agreement}">
+                                                                <f:validator binding="#{row.bindings.WorkStartDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.WorkStartDate.format}"/>
+                                                            </af:inputDate>
+                                                            <f:facet name="filter">
+                                                                <af:inputDate value="#{vs.filterCriteria.WorkStartDate}"
+                                                                              id="id13">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.WorkStartDate.format}"/>
+                                                                </af:inputDate>
+                                                            </f:facet>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.FgCompletionDate.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.FgCompletionDate.label}"
+                                                                   id="c4"
+                                                                   width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputDate value="#{row.bindings.FgCompletionDate.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.FgCompletionDate.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.FgCompletionDate.mandatory}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.FgCompletionDate.tooltip}"
+                                                                          id="id4"
+                                                                          disabled="#{viewScope.UpdateBean.agreement}">
+                                                                <f:validator binding="#{row.bindings.FgCompletionDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.FgCompletionDate.format}"/>
+                                                            </af:inputDate>
+                                                            <f:facet name="filter">
+                                                                <af:inputDate value="#{vs.filterCriteria.FgCompletionDate}"
+                                                                              id="id6">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.FgCompletionDate.format}"/>
+                                                                </af:inputDate>
+                                                            </f:facet>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.name}"
+                                                                   filterable="true"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.label}"
+                                                                   id="c35"
+                                                                   inlineStyle="#{viewScope.BrowseBean.lineColor}">
+                                                            <f:facet name="filter">
+                                                                <af:inputDate value="#{vs.filterCriteria.ShipBuildCrtEftDate}"
+                                                                              id="id9">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.format}"/>
+                                                                </af:inputDate>
+                                                            </f:facet>
+                                                            <af:inputDate value="#{row.bindings.ShipBuildCrtEftDate.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.displayWidth}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.tooltip}"
+                                                                          id="id14">
+                                                                <f:validator binding="#{row.bindings.ShipBuildCrtEftDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.format}"/>
+                                                            </af:inputDate>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.Currency.name}"
+                                                                   filterable="true" sortable="false"
+                                                                   headerText="#{bindings.ShipOfContract.hints.Currency.label}"
+                                                                   id="c19" width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:selectOneChoice value="#{row.bindings.Currency.inputValue}"
+                                                                                label="#{row.bindings.Currency.label}"
+                                                                                required="#{bindings.ShipOfContract.hints.Currency.mandatory}"
+                                                                                shortDesc="#{bindings.ShipOfContract.hints.Currency.tooltip}"
+                                                                                id="soc3">
+                                                                <f:selectItems value="#{row.bindings.Currency.items}"
+                                                                               id="si2"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ExchangeRate.name}"
+                                                                   filterable="true" sortable="false"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ExchangeRate.label}"
+                                                                   id="c14" width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputText value="#{row.bindings.ExchangeRate.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.ExchangeRate.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.ExchangeRate.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.ExchangeRate.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.ExchangeRate.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.ExchangeRate.tooltip}"
+                                                                          id="it18">
+                                                                <f:validator binding="#{row.bindings.ExchangeRate.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.ShipOfContract.hints.ExchangeRate.format}"
+                                                                                  maxFractionDigits="7"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipPrice.name}"
+                                                                   filterable="true" sortable="false"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ShipPrice.label}"
+                                                                   id="c21" width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputText value="#{row.bindings.ShipPrice.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.ShipPrice.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.ShipPrice.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.ShipPrice.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.ShipPrice.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.ShipPrice.tooltip}"
+                                                                          id="it19">
+                                                                <f:validator binding="#{row.bindings.ShipPrice.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.ShipOfContract.hints.ShipPrice.format}"
+                                                                                  maxFractionDigits="7"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ImoNo.name}"
+                                                                   filterable="true" sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ImoNo.label}"
+                                                                   id="c12" width="105"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputText value="#{row.bindings.ImoNo.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.ImoNo.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.ImoNo.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.ImoNo.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.ImoNo.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.ImoNo.tooltip}"
+                                                                          id="it16"
+                                                                          disabled="#{viewScope.UpdateBean.agreement}">
+                                                                <f:validator binding="#{row.bindings.ImoNo.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.ContractType.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.ContractType.label}"
+                                                                   id="c10"
+                                                                   width="75"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:selectOneChoice value="#{row.bindings.ContractType.inputValue}"
+                                                                                label="#{row.bindings.ContractType.label}"
+                                                                                required="#{bindings.ShipOfContract.hints.ContractType.mandatory}"
+                                                                                shortDesc="#{bindings.ShipOfContract.hints.ContractType.tooltip}"
+                                                                                id="soc6">
+                                                                <f:selectItems value="#{row.bindings.ContractType.items}"
+                                                                               id="si6"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.ShipOfContract.hints.Status.name}"
+                                                                   filterable="true"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.ShipOfContract.hints.Status.label}"
+                                                                   id="c7"
+                                                                   width="55"
+                                                                   inlineStyle="#{viewScope.UpdateBean.lineColor}">
+                                                            <af:inputText value="#{row.bindings.Status.inputValue}"
+                                                                          label="#{bindings.ShipOfContract.hints.Status.label}"
+                                                                          required="#{bindings.ShipOfContract.hints.Status.mandatory}"
+                                                                          columns="#{bindings.ShipOfContract.hints.Status.displayWidth}"
+                                                                          maximumLength="#{bindings.ShipOfContract.hints.Status.precision}"
+                                                                          shortDesc="#{bindings.ShipOfContract.hints.Status.tooltip}"
+                                                                          id="it21"
+                                                                          disabled="true">
+                                                                <f:validator binding="#{row.bindings.Status.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelCollection>
+                                            </af:panelHeader>
+                                        </f:facet>
+                                        <f:facet name="second">
+                                            <af:panelHeader text="收款节点" id="ph5"
+                                                            messageType="confirmation">
+                                                <f:facet name="context"/>
+                                                <f:facet name="menuBar"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="legend"/>
+                                                <f:facet name="info"/>
+                                                <af:panelCollection id="pc2">
+                                                    <f:facet name="menus"/>
+                                                    <f:facet name="toolbar">
+                                                        <af:toolbar id="t8">
+                                                            <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}"
+                                                                                     text="添加"
+                                                                                     disabled="#{!bindings.CreateInsert.enabled}"
+                                                                                     id="ctb9"
+                                                                                     icon="/images/icons/add.png"/>
+                                                            <af:commandToolbarButton text="删除"
+                                                                                     id="ctb15"
+                                                                                     icon="/images/icons/delete.png"
+                                                                                     immediate="true"
+                                                                                     action="#{UpdateBean.setRemovePayment}"/>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <f:facet name="statusbar"/>
+                                                    <af:table value="#{bindings.PaymentOfShip.collectionModel}"
+                                                              var="row"
+                                                              rows="#{bindings.PaymentOfShip.rangeSize}"
+                                                              emptyText="#{bindings.PaymentOfShip.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                              fetchSize="#{bindings.PaymentOfShip.rangeSize}"
+                                                              rowBandingInterval="0"
+                                                              selectedRowKeys="#{bindings.PaymentOfShip.collectionModel.selectedRow}"
+                                                              selectionListener="#{bindings.PaymentOfShip.collectionModel.makeCurrent}"
+                                                              rowSelection="single"
+                                                              id="t7"
+                                                              partialTriggers=":::pc1:t1 ::ctb9 ::ctb15 :::ctb16"
+                                                              binding="#{UpdateBean.paymentTable}">
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.PaymentName.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.PaymentName.label}"
+                                                                   id="c27"
+                                                                   width="130">
+                                                            <af:inputListOfValues id="paymentNameId"
+                                                                                  popupTitle="Search and Select: #{bindings.PaymentOfShip.hints.PaymentName.label}"
+                                                                                  value="#{row.bindings.PaymentName.inputValue}"
+                                                                                  model="#{row.bindings.PaymentName.listOfValuesModel}"
+                                                                                  required="#{bindings.PaymentOfShip.hints.PaymentName.mandatory}"
+                                                                                  columns="#{bindings.PaymentOfShip.hints.PaymentName.displayWidth}"
+                                                                                  shortDesc="#{bindings.PaymentOfShip.hints.PaymentName.tooltip}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.label}"
+                                                                   id="c28">
+                                                            <af:inputText value="#{row.bindings.PaymentPlanAmount.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.displayWidth}"
+                                                                          maximumLength="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.precision}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.tooltip}"
+                                                                          id="it23">
+                                                                <f:validator binding="#{row.bindings.PaymentPlanAmount.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.format}"
+                                                                                  maxFractionDigits="7"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.label}"
+                                                                   id="c29">
+                                                            <af:inputDate value="#{row.bindings.PaymentPlanInvoiceDate.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.displayWidth}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.tooltip}"
+                                                                          id="id10">
+                                                                <f:validator binding="#{row.bindings.PaymentPlanInvoiceDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.format}"/>
+                                                            </af:inputDate>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.Memo.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.Memo.label}"
+                                                                   id="c30">
+                                                            <af:inputText value="#{row.bindings.Memo.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.Memo.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.Memo.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.Memo.displayWidth}"
+                                                                          maximumLength="#{bindings.PaymentOfShip.hints.Memo.precision}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.Memo.tooltip}"
+                                                                          id="it24">
+                                                                <f:validator binding="#{row.bindings.Memo.validator}"/>
+                                                                <af:showPopupBehavior popupId="::p7"
+                                                                                      triggerType="dblClick"
+                                                                                      align="endAfter"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.Status.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.Status.label}"
+                                                                   id="c31">
+                                                            <af:selectOneChoice value="#{row.bindings.Status.inputValue}"
+                                                                                label="#{row.bindings.Status.label}"
+                                                                                required="#{bindings.PaymentOfShip.hints.Status.mandatory}"
+                                                                                shortDesc="#{bindings.PaymentOfShip.hints.Status.tooltip}"
+                                                                                id="soc14"
+                                                                                readOnly="#{not securityContext.userInRole['contractor']}">
+                                                                <f:selectItems value="#{row.bindings.Status.items}"
+                                                                               id="si12"/>
+                                                            </af:selectOneChoice>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.PaymentPlanDate.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.PaymentPlanDate.label}"
+                                                                   id="c34">
+                                                            <af:inputDate value="#{row.bindings.PaymentPlanDate.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.PaymentPlanDate.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.PaymentPlanDate.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.PaymentPlanDate.displayWidth}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.PaymentPlanDate.tooltip}"
+                                                                          id="id12">
+                                                                <f:validator binding="#{row.bindings.PaymentPlanDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.PaymentOfShip.hints.PaymentPlanDate.format}"/>
+                                                            </af:inputDate>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.Ems.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.Ems.label}"
+                                                                   id="c36">
+                                                            <af:inputText value="#{row.bindings.Ems.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.Ems.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.Ems.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.Ems.displayWidth}"
+                                                                          maximumLength="#{bindings.PaymentOfShip.hints.Ems.precision}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.Ems.tooltip}"
+                                                                          id="it32"
+                                                                          readOnly="#{not securityContext.userInRole['contractor']}">
+                                                                <f:validator binding="#{row.bindings.Ems.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.PaymentDate.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.PaymentDate.label}"
+                                                                   id="c37">
+                                                            <af:inputDate value="#{row.bindings.PaymentDate.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.PaymentDate.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.PaymentDate.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.PaymentDate.displayWidth}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.PaymentDate.tooltip}"
+                                                                          id="id16"
+                                                                          readOnly="#{not securityContext.userInRole['contractor']}">
+                                                                <f:validator binding="#{row.bindings.PaymentDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.PaymentOfShip.hints.PaymentDate.format}"/>
+                                                            </af:inputDate>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.TotalPayment.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.TotalPayment.label}"
+                                                                   id="c41">
+                                                            <af:inputText value="#{row.bindings.TotalPayment.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.TotalPayment.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.TotalPayment.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.TotalPayment.displayWidth}"
+                                                                          maximumLength="#{bindings.PaymentOfShip.hints.TotalPayment.precision}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.TotalPayment.tooltip}"
+                                                                          id="it31"
+                                                                          readOnly="#{not securityContext.userInRole['contractor']}">
+                                                                <f:validator binding="#{row.bindings.TotalPayment.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.PaymentOfShip.hints.TotalPayment.format}"
+                                                                                  maxFractionDigits="7"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.Variance.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.Variance.label}"
+                                                                   id="c38">
+                                                            <af:inputText value="#{row.bindings.Variance.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.Variance.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.Variance.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.Variance.displayWidth}"
+                                                                          maximumLength="#{bindings.PaymentOfShip.hints.Variance.precision}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.Variance.tooltip}"
+                                                                          id="it14"
+                                                                          readOnly="#{not securityContext.userInRole['contractor']}">
+                                                                <f:validator binding="#{row.bindings.Variance.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.InvoiceNumber.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.InvoiceNumber.label}"
+                                                                   id="c39">
+                                                            <af:inputText value="#{row.bindings.InvoiceNumber.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.InvoiceNumber.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.InvoiceNumber.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.InvoiceNumber.displayWidth}"
+                                                                          maximumLength="#{bindings.PaymentOfShip.hints.InvoiceNumber.precision}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.InvoiceNumber.tooltip}"
+                                                                          id="it30"
+                                                                          readOnly="#{not securityContext.userInRole['contractor']}">
+                                                                <f:validator binding="#{row.bindings.InvoiceNumber.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.InvoiceDate.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.InvoiceDate.label}"
+                                                                   id="c42">
+                                                            <af:inputDate value="#{row.bindings.InvoiceDate.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.InvoiceDate.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.InvoiceDate.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.InvoiceDate.displayWidth}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.InvoiceDate.tooltip}"
+                                                                          id="id15"
+                                                                          readOnly="#{not securityContext.userInRole['contractor']}">
+                                                                <f:validator binding="#{row.bindings.InvoiceDate.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.PaymentOfShip.hints.InvoiceDate.format}"/>
+                                                            </af:inputDate>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.InvoiceAmount.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.InvoiceAmount.label}"
+                                                                   id="c40">
+                                                            <af:inputText value="#{row.bindings.InvoiceAmount.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.InvoiceAmount.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.InvoiceAmount.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.InvoiceAmount.displayWidth}"
+                                                                          maximumLength="#{bindings.PaymentOfShip.hints.InvoiceAmount.precision}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.InvoiceAmount.tooltip}"
+                                                                          id="it25"
+                                                                          readOnly="#{not securityContext.userInRole['contractor']}">
+                                                                <f:validator binding="#{row.bindings.InvoiceAmount.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.PaymentOfShip.hints.InvoiceAmount.format}"
+                                                                                  maxFractionDigits="7"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.CreatedBy.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.CreatedBy.label}"
+                                                                   id="c32">
+                                                            <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.CreatedBy.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.CreatedBy.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.CreatedBy.displayWidth}"
+                                                                          maximumLength="#{bindings.PaymentOfShip.hints.CreatedBy.precision}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.CreatedBy.tooltip}"
+                                                                          id="it26"
+                                                                          disabled="true">
+                                                                <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PaymentOfShip.hints.CreatedAt.name}"
+                                                                   sortable="true"
+                                                                   headerText="#{bindings.PaymentOfShip.hints.CreatedAt.label}"
+                                                                   id="c33">
+                                                            <af:inputDate value="#{row.bindings.CreatedAt.inputValue}"
+                                                                          label="#{bindings.PaymentOfShip.hints.CreatedAt.label}"
+                                                                          required="#{bindings.PaymentOfShip.hints.CreatedAt.mandatory}"
+                                                                          columns="#{bindings.PaymentOfShip.hints.CreatedAt.displayWidth}"
+                                                                          shortDesc="#{bindings.PaymentOfShip.hints.CreatedAt.tooltip}"
+                                                                          id="id11"
+                                                                          disabled="true">
+                                                                <f:validator binding="#{row.bindings.CreatedAt.validator}"/>
+                                                                <af:convertDateTime pattern="#{bindings.PaymentOfShip.hints.CreatedAt.format}"/>
+                                                            </af:inputDate>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <af:popup childCreation="deferred" autoCancel="disabled" id="p7"
+                                                              binding="#{UpdateBean.memoPopup}">
+                                                        <af:panelWindow id="pw5" resize="on" closeIconVisible="false"
+                                                                        stretchChildren="none" modal="true"
+                                                                        contentWidth="350" contentHeight="100">
+                                                            <af:panelGroupLayout id="pgl12">
+                                                                <af:inputText value="#{bindings.Memo1.inputValue}"
+                                                                              label="#{bindings.Memo1.hints.label}"
+                                                                              required="#{bindings.Memo1.hints.mandatory}"
+                                                                              columns="50"
+                                                                              maximumLength="#{bindings.Memo1.hints.precision}"
+                                                                              shortDesc="#{bindings.Memo1.hints.tooltip}"
+                                                                              id="it33" rows="4">
+                                                                    <f:validator binding="#{bindings.Memo1.validator}"/>
+                                                                </af:inputText>
+                                                                <af:commandButton text="确定" id="cb4"
+                                                                                  action="#{UpdateBean.closeMemoPopup}"
+                                                                                  icon="/images/icons/check.png"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelWindow>
+                                                    </af:popup>
+                                                </af:panelCollection>
+                                            </af:panelHeader>
+                                        </f:facet>
+                                    </af:panelSplitter>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="合同文本及附件" id="sdi3" stretchChildren="first">
+                                    <af:panelHeader text="合同文本" id="ph6" messageType="confirmation" type="default">
+                                        <f:facet name="context"/>
+                                        <f:facet name="menuBar"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="legend"/>
+                                        <f:facet name="info"/>
+                                        <af:separator id="s8"/>
+                                        <af:panelFormLayout id="pfl4" rows="1">
+                                            <af:panelGroupLayout id="pgl1" layout="horizontal">
+                                                <af:commandToolbarButton id="ctb19"
+                                                                         icon="/images/icons/find.png"
+                                                                         text="查看已上传合同"
+                                                                         binding="#{UploadBean.browseBtn}"
+                                                                         disabled="#{bindings.AgreementImgUrl.inputValue eq null}">
+                                                    <af:showPopupBehavior popupId="p4"
+                                                                          triggerType="action"
+                                                                          alignId="pb2"/>
+                                                </af:commandToolbarButton>
+                                                <af:commandToolbarButton text="删除" id="ctb20"
+                                                                         icon="/images/icons/delete.png"
+                                                                         binding="#{UploadBean.delBtn}"
+                                                                         disabled="#{bindings.AgreementImgUrl.inputValue eq null}"
+                                                                         partialSubmit="true">
+                                                    <af:showPopupBehavior popupId="p6" triggerType="action"
+                                                                          align="afterEnd"/>
+                                                </af:commandToolbarButton>
+                                                <af:spacer width="20"
+                                                           height="10" id="s5"/>
+                                                <af:inputFile id="if1" label="上传合同文本"
+                                                              showRequired="false"
+                                                              valueChangeListener="#{viewScope.UploadBean.fileUploaded}"
+                                                              value="#{viewScope.UploadBean.file}"
+                                                              autoSubmit="false"
+                                                              disabled="#{bindings.AgreementImgUrl.inputValue!=null}"
+                                                              binding="#{UploadBean.uploadInput}">
+                                                    <af:clientListener method="showUploadBtn"
+                                                                       type="click"/>
+                                                </af:inputFile>
+                                                <af:commandToolbarButton text="上传" id="ctb14"
+                                                                         icon="/images/icons/file_upload.png"
+                                                                         action="#{UploadBean.doUpload}"
+                                                                         partialTriggers="if1"
+                                                                         binding="#{UploadBean.uploadBtn}"
+                                                                         clientComponent="true"
+                                                                         disabled="#{bindings.AgreementImgUrl.inputValue!=null}"
+                                                                         partialSubmit="true">
+                                                    <af:clientListener method="enforcePreventUserInput"
+                                                                       type="action"/>
+                                                </af:commandToolbarButton>
+                                                <af:popup childCreation="immediate"
+                                                          autoCancel="disabled"
+                                                          id="p5"
+                                                          contentDelivery="immediate">
+                                                    <af:dialog id="d2"
+                                                               type="none"
+                                                               title="上传中请等待..."
+                                                               closeIconVisible="false">
+                                                        <af:panelGroupLayout id="pgl8"
+                                                                             layout="vertical"
+                                                                             halign="center">
+                                                            <af:image source="/images/logo.png"
+                                                                      id="i1"/>
+                                                            <af:image source="/images/animbar.gif"
+                                                                      id="i2"
+                                                                      inlineStyle="width:140px;"/>
+                                                            <af:outputText value="上传中请等待..."
+                                                                           id="ot11"/>
+                                                        </af:panelGroupLayout>
+                                                    </af:dialog>
+                                                </af:popup>
+                                                <af:popup childCreation="deferred" autoCancel="disabled" id="p6"
+                                                          binding="#{UploadBean.overwirtePopup}">
+                                                    <af:dialog id="d3" closeIconVisible="false" title="请确认"
+                                                               dialogListener="#{UploadBean.confirmOverwrite}"
+                                                               type="yesNo">
+                                                        <f:facet name="buttonBar"/>
+                                                        <af:outputText value="合同文本已存在，如需删除请确认！请注意，此操作不可恢复！" id="ot5"
+                                                                       inlineStyle="font-size:130%;"/>
+                                                    </af:dialog>
+                                                </af:popup>
+                                                <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                                                          binding="#{UploadBean.browsePopup}">
+                                                    <af:panelWindow id="pw4" contentHeight="600" contentWidth="800"
+                                                                    modal="true" resize="on" title="合同文本">
+                                                        <af:panelGroupLayout id="pgl11" layout="scroll">
+                                                            <af:forEach items="#{viewScope.UploadBean.imageList}"
+                                                                        var="row">
+                                                                <af:image source="#{row}" id="ai1"/>
+                                                            </af:forEach>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelWindow>
+                                                </af:popup>
+                                            </af:panelGroupLayout>
+                                        </af:panelFormLayout>
+                                    </af:panelHeader>
+                                    <af:separator id="s9"/>
+                                    <af:panelHeader text="其他附件" id="ph7" messageType="confirmation">
+                                        <f:facet name="context"/>
+                                        <f:facet name="menuBar"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="legend"/>
+                                        <f:facet name="info"/>
+                                        <af:separator id="s10"/>
+                                        <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+                                            <f:facet name="menus"/>
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t9">
+                                                    <af:commandToolbarButton text="添加附件" id="ctb10"
+                                                                             icon="/images/icons/add.png"
+                                                                             action="#{UploadBean.addNewAttachment}"/>
+                                                    <af:commandToolbarButton id="ctb11" text="删除附件"
+                                                                             icon="/images/icons/delete.png"
+                                                                             immediate="true"
+                                                                             action="#{UpdateBean.setRemoveAttachment}"/>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <f:facet name="statusbar"/>
+                                            <af:table value="#{bindings.AttachmentOfContract.collectionModel}" var="row"
+                                                      rows="#{bindings.AttachmentOfContract.rangeSize}"
+                                                      emptyText="#{bindings.AttachmentOfContract.viewable ? '暂无附件。' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.AttachmentOfContract.rangeSize}"
+                                                      rowBandingInterval="0"
+                                                      selectedRowKeys="#{bindings.AttachmentOfContract.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.AttachmentOfContract.collectionModel.makeCurrent}"
+                                                      rowSelection="single" id="t2"
+                                                      partialTriggers=":::pc2:ctb15 ::ctb10 :::ctb16 :::ctb12 :::ctb13">
+                                                <af:column sortProperty="#{bindings.AttachmentOfContract.hints.FileName.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.AttachmentOfContract.hints.FileName.label}"
+                                                           id="c23">
+                                                    <af:outputText value="#{row.FileName}" id="ot48"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.AttachmentOfContract.hints.FileDesc.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.AttachmentOfContract.hints.FileDesc.label}"
+                                                           id="c24">
+                                                    <af:outputText value="#{row.FileDesc}" id="ot50"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.AttachmentOfContract.hints.FileLink.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.AttachmentOfContract.hints.FileLink.label}"
+                                                           id="c25">
+                                                    <af:commandButton text="下载文件" id="cb1"
+                                                                      binding="#{BrowseBean.downloadButton}">
+                                                        <af:fileDownloadActionListener method="#{viewScope.BrowseBean.download}"
+                                                                                       filename="#{row.FileName}"/>
+                                                        <af:clientAttribute name="filePath" value="#{row.FileLink}"/>
+                                                    </af:commandButton>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.AttachmentOfContract.hints.CreatedBy.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.AttachmentOfContract.hints.CreatedBy.label}"
+                                                           id="c46">
+                                                    <af:outputText value="#{row.CreatedBy}" id="ot61"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.AttachmentOfContract.hints.CreationDate.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.AttachmentOfContract.hints.CreationDate.label}"
+                                                           id="c47">
+                                                    <af:outputText value="#{row.CreationDate}" id="ot62">
+                                                        <af:convertDateTime pattern="#{bindings.AttachmentOfContract.hints.CreationDate.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                            </af:table>
+                                        </af:panelCollection>
+                                    </af:panelHeader>
+                                    <af:popup id="p1" binding="#{viewScope.UploadBean.popup}">
+                                        <af:panelWindow id="pw1" modal="true" resize="on" contentWidth="500">
+                                            <af:panelHeader text="上传附件" id="ph8">
+                                                <f:facet name="context"/>
+                                                <f:facet name="menuBar"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="legend"/>
+                                                <f:facet name="info"/>
+                                                <af:panelFormLayout id="pfl5">
+                                                    <af:inputText value="#{bindings.FileDesc.inputValue}"
+                                                                  label="#{bindings.FileDesc.hints.label}"
+                                                                  required="#{bindings.FileDesc.hints.mandatory}"
+                                                                  columns="#{bindings.FileDesc.hints.displayWidth}"
+                                                                  maximumLength="#{bindings.FileDesc.hints.precision}"
+                                                                  shortDesc="#{bindings.FileDesc.hints.tooltip}"
+                                                                  id="it27">
+                                                        <f:validator binding="#{bindings.FileDesc.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelFormLayout>
+                                                <af:panelFormLayout id="pfl6">
+                                                    <f:facet name="footer">
+                                                        <af:group id="g1">
+                                                            <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                                                <af:commandToolbarButton text="上传文件" id="ctb12"
+                                                                                         icon="/images/icons/file_upload.png"
+                                                                                         action="#{viewScope.UploadBean.submit}"
+                                                                                         partialTriggers="if2"
+                                                                                         binding="#{UploadBean.attUpldBtn}"/>
+                                                                <af:commandToolbarButton text="关闭" id="ctb13"
+                                                                                         icon="/images/icons/update.png"
+                                                                                         action="#{viewScope.UploadBean.close}"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:group>
+                                                    </f:facet>
+                                                    <af:panelGroupLayout id="pgl5" layout="horizontal">
+                                                        <af:inputFile id="if2" label="选择文件"
+                                                                      value="#{viewScope.UploadBean.attachment}"
+                                                                      valueChangeListener="#{UploadBean.onAttachmentSelected}"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelFormLayout>
+                                            </af:panelHeader>
+                                        </af:panelWindow>
+                                    </af:popup>
+                                </af:showDetailItem>
+                            </af:panelTabbed>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end">
+                        <af:popup id="p3" binding="#{UpdateBean.approvalPopup}">
+                            <af:panelWindow id="pw3" modal="true" closeIconVisible="false" stretchChildren="first">
+                                <af:panelBox text="请确认" id="pb5">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelHeader text="确认修改/弃船吗？" id="panelHeader1">
+                                        <f:facet name="context"/>
+                                        <f:facet name="menuBar"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="legend"/>
+                                        <f:facet name="info"/>
+                                        <af:separator id="separator1"/>
+                                        <af:panelGroupLayout id="pgl7" layout="vertical">
+                                            <af:panelList id="pl1">
+                                                <af:outputText value="1 保存当前合同及相关所有信息（船号、收款节点）" id="outputText1"/>
+                                                <af:outputText value="2. 提交当前合同至合同管理员审核" id="outputText2"/>
+                                                <af:outputText value="3. 合同管理员审核完成后由市场营销主任审核" id="outputText3"/>
+                                                <af:outputText value="4. 审核全部通过后修改、弃船操作生效。" id="ot23"/>
+                                            </af:panelList>
+                                            <af:inputText label="备注" id="it28" rows="2"
+                                                          binding="#{UpdateBean.memoInput}"/>
+                                            <af:separator id="separator2"/>
+                                            <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                                <af:commandButton text="确认提交" id="cb2"
+                                                                  icon="/images/icons/ico_person.gif"
+                                                                  action="#{UpdateBean.submitForApproval}"/>
+                                                <af:commandButton text="取消" id="cb3" icon="/images/icons/undo.png"
+                                                                  action="#{UpdateBean.cancelApproval}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelHeader>
+                                </af:panelBox>
+                            </af:panelWindow>
+                        </af:popup>
+                    </f:facet>
+                    <f:facet name="top">
+                        <af:panelBox id="pb1" showDisclosure="false" background="medium"
+                                     text="变更合同">
+                            <f:facet name="toolbar"/>
+                            <af:toolbox id="t5">
+                                <af:outputText value="可进行以下操作：" id="ot70"
+                                               inlineStyle="font-size:small; font-weight:bold;"/>
+                                <af:toolbar id="t6">
+                                    <af:commandToolbarButton text="保存" id="ctb6" icon="/images/icons/filesave.png"
+                                                             action="#{UpdateBean.saveAll}"/>
+                                    <af:commandToolbarButton text="删除"
+                                                             disabled="#{viewScope.UpdateBean.disabled}" immediate="true"
+                                                             id="ctb8" icon="/images/icons/delete.png"
+                                                             action="#{UpdateBean.setRemoveContract}"/>
+                                    <af:commandToolbarButton text="提交审核" id="ctb1"
+                                                             icon="/images/icons/actor.png">
+                                        <af:showPopupBehavior popupId="p3" triggerType="click"/>
+                                    </af:commandToolbarButton>
+                                    <af:commandToolbarButton
+                                                             immediate="true" id="ctb18" icon="/images/icons/undo.png"
+                                                             text="取消" action="#{UpdateBean.undo}">
+                                        <af:resetActionListener/>
+                                    </af:commandToolbarButton>
+                                    <af:spacer width="10" height="10" id="s11"/>
+                                    <af:commandToolbarButton id="ctb21" text="返回浏览页面"
+                                                             icon="/images/icons/previous.png"
+                                                             actionListener="#{bindings.Rollback.execute}"
+                                                             action="browse" immediate="true">
+                                        <af:resetActionListener/>
+                                    </af:commandToolbarButton>
+                                    <af:commandToolbarButton id="ctb4" text="返回搜索页面"
+                                                             icon="/images/icons/search_sourcepath.png"
+                                                             actionListener="#{bindings.Rollback.execute}" action="search"
+                                                             immediate="true">
+                                        <af:resetActionListener/>
+                                    </af:commandToolbarButton>
+                                    <af:commandToolbarButton id="ctb5" text="返回主页面" icon="/images/icons/home.gif"
+                                                             actionListener="#{bindings.Rollback.execute}"
+                                                             immediate="true" action="return">
+                                        <af:resetActionListener/>
+                                    </af:commandToolbarButton>
+                                    <af:spacer width="10" height="30" id="s19"/>
+                                    <af:outputText value="当前合同号： #{bindings.ContractNo.inputValue}" id="ot80"
+                                                   inlineStyle="color:Blue; font-size:small;"/>
+                                    <af:spacer width="10" height="10" id="s18"/>
+                                    <af:outputText value="当前项目名称： #{bindings.ProjectName.inputValue}"
+                                                   inlineStyle="color:Blue; font-size:small;" id="ot83"/>
+                                </af:toolbar>
+                            </af:toolbox>
+                        </af:panelBox>
+                    </f:facet>
+                </af:panelStretchLayout>
+                <af:popup childCreation="deferred" autoCancel="disabled" id="p2" binding="#{UpdateBean.confrmPopup}">
+                    <af:panelWindow id="pw2" contentHeight="50" contentWidth="200" title="是否删除该条记录？">
+                        <af:panelFormLayout id="pfl7">
+                            <f:facet name="footer">
+                                <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                    <af:commandToolbarButton text="确定" id="ctb16" icon="/images/icons/check.png"
+                                                             action="#{UpdateBean.removeRecords}" immediate="true"/>
+                                    <af:commandToolbarButton id="ctb17" text="取消" icon="/images/icons/undo.png"
+                                                             action="#{UpdateBean.cancelDelete}" immediate="true"/>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                        </af:panelFormLayout>
+                    </af:panelWindow>
+                </af:popup>
+            </af:form>
+            <af:clientListener type="load" method="disableContextMenu"/>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FourTechContractLineAssoc"
+  Version="11.1.2.60.17">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="LinkedFourTechContract"
+    Cardinality="1"
+    Source="true"
+    Owner="com.xy.scpms.model.eo.FourTechContract"
+    LockLevel="NONE"
+    ExposedAccessor="false">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="LinkedFourTechContract"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.FourTechContract.Id"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="ContractLines"
+    Cardinality="-1"
+    Owner="com.xy.scpms.model.eo.ContractLine">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="ContractLines"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractLine.FourContractBatch"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

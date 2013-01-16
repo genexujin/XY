@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="CreateFourTechPageDef"
+                Package="pages.fourtech">
+  <parameters/>
+  <executables>
+  <variableIterator id="variables"/>
+    <iterator Binds="ContractLine" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ContractLineIterator"/>
+    <searchRegion Binds="ContractLineIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ContractLineQuery"/>
+    <iterator id="FourTechContractIterator" Binds="FourTechContract"
+              DataControl="CoreModuleDataControl" RangeSize="25" Refresh="ifNeeded"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ContractLineIterator" id="ContractLine">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractLineView"
+                      Name="ContractLine0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ShipName"/>
+          <Item Value="ShipPlant"/>
+          <Item Value="ShipOwner"/>
+          <Item Value="ShipBroker"/>
+          <Item Value="ShipClsfctSociety"/>
+          <Item Value="ImoNo"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="ContractType"/>
+          <Item Value="SignOffDate"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="AbandonDate"/>
+          <Item Value="Status"/>
+          <Item Value="Memo"/>
+          <Item Value="Price"/>
+          <Item Value="WorkStartDate"/>
+          <Item Value="FgCompletionDate"/>
+          <Item Value="AbandonFlag"/>
+          <Item Value="BrokerType"/>
+          <Item Value="Currency"/>
+          <Item Value="ExchangeRate"/>
+          <Item Value="OwnerType"/>
+          <Item Value="PlantType"/>
+          <Item Value="ShipPrice"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedAt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FourTechContractIterator" id="ContractNo1">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FourTechContractIterator" id="Amount">
+      <AttrNames>
+        <Item Value="Amount"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="FourTechContractIterator" StaticList="false"
+          Uses="LOV_Type" id="Type" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="FourTechContractIterator" id="RegNo">
+      <AttrNames>
+        <Item Value="RegNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FourTechContractIterator" id="SentDate">
+      <AttrNames>
+        <Item Value="SentDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FourTechContractIterator" id="RcvDate">
+      <AttrNames>
+        <Item Value="RcvDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FourTechContractIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FourTechContractIterator" id="RegDate">
+      <AttrNames>
+        <Item Value="RegDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FourTechContractIterator" id="Memo">
+      <AttrNames>
+        <Item Value="Memo"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <attributeValues IterBinding="ContractLineIterator" id="HeaderId">
+      <AttrNames>
+        <Item Value="HeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractLineIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractLineIterator" id="ShipMnftNo">
+      <AttrNames>
+        <Item Value="ShipMnftNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractLineIterator" id="ContractNo">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findBlankFourTechLines"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBlankFourTechLines"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.CoreModuleDataControl.methodResults.findBlankFourTechLines_CoreModuleDataControl_dataProvider_findBlankFourTechLines_result"/>
+    <attributeValues IterBinding="FourTechContractIterator" id="FilePath">
+      <AttrNames>
+        <Item Value="FilePath"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="createFourTech"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createFourTech"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="linesId" NDType="java.util.List"/>
+    </methodAction>
+    <methodAction id="saveFourTech"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="saveFourTech"
+                  IsViewObjectMethod="false"/>
+  </bindings>
+</pageDefinition>

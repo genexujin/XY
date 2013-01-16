@@ -1,0 +1,51 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">Welcome</property>
+      <property
+         name="start">false</property>
+      <property
+         name="page">/pages/Welcome.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Welcome&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="thumbnailExpanded">false</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">379.39648</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">540.5</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">prepareDashboard</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>prepareDashboard&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">189.44824</property>
+      <property
+         name="x">178.01074</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View2">
+      <property
+         name="fromOutcome">setAIPCriteria</property>
+      <property
+         name="sdm:polyPoints">R50,219.01074,189.09766,432.0,379.0459,L50</property>
+   </ControlFlowCase>
+</SDM>

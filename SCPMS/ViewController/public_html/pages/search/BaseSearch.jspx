@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <af:pageTemplateDef var="attrs" definition="private">
+        <af:panelStretchLayout id="pt_psl1" topHeight="230px">
+            <f:facet name="bottom"/>
+            <f:facet name="center">
+               
+                    <af:panelSplitter id="pt_ps1" positionedFromEnd="true">
+                        <f:facet name="first">
+                           
+                                <af:panelCollection id="pc1">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t2">
+                                            <af:commandToolbarButton text="打开" id="ctb1" icon="/images/icons/open.png"
+                                                                     actionListener="#{bindings.findContractById.execute}"
+                                                                     action="#{viewScope.SearchBean.openContract}"
+                                                                     binding="#{viewScope.SearchBean.openBtn}"
+                                                                     disabled="true"/>
+                                    <af:commandToolbarButton text="导出" id="pt_ctb1" icon="/images/icons/export.png">
+                                        <af:exportCollectionActionListener type="excelHTML" exportedId="t1"/>
+                                    </af:commandToolbarButton>
+                                </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="statusbar"/>
+                                    <af:facetRef facetName="resultPanel"/>
+                        </af:panelCollection>
+                            
+                        </f:facet>
+                        <f:facet name="second">
+                        <af:panelHeader text="相关合同" id="pt_ph1">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:facetRef facetName="infoPanel"/>
+                        </af:panelHeader>
+                    </f:facet>
+                    </af:panelSplitter>
+                
+            </f:facet>
+            <f:facet name="start"/>
+            <f:facet name="end"/>
+            <f:facet name="top">
+                <af:panelBox text="合同查询" id="pb1" showDisclosure="false" background="medium">
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t3">
+                            <af:commandToolbarButton text="返回主页" id="commandToolbarButton1"
+                                                     icon="/images/icons/home.gif" action="return"
+                                                     actionListener="#{bindings.Rollback.execute}"/>
+                        </af:toolbar>
+                    </f:facet>
+                    <af:facetRef facetName="queryPanel"/>
+                </af:panelBox>
+            </f:facet>
+        </af:panelStretchLayout>
+        <af:xmlContent>
+            <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+                <display-name>BaseSearch</display-name>
+                <facet>
+                    <facet-name>queryPanel</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>resultPanel</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>
+                        infoPanel
+                    </facet-name>
+                </facet>
+            </component>
+        </af:xmlContent>
+    </af:pageTemplateDef>
+</jsp:root>

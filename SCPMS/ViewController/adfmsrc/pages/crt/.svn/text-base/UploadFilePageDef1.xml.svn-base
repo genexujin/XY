@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.60.13" id="UploadFilePageDef1"
+                Package="pages.crt">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="ContractIterator" Binds="Contract"
+              DataControl="CoreModuleDataControl" RangeSize="25"/>
+    <iterator Binds="AttachmentOfContract" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="AttachmentOfContractIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ContractIterator" id="ContractNo">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttachmentOfContractIterator" id="FileDesc">
+      <AttrNames>
+        <Item Value="FileDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="AttachmentOfContractIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="AttachmentOfContractIterator" id="CreateInsertAttachment"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="AttachmentOfContractIterator" id="AttachmentOfContract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractAttachmentView"
+                      Name="AttachmentOfContract0">
+        <AttrNames>
+          <Item Value="FileName"/>
+          <Item Value="FileDesc"/>
+          <Item Value="FileLink"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="CoreModuleDataControl"/>
+    <attributeValues IterBinding="AttachmentOfContractIterator" id="FileName">
+      <AttrNames>
+        <Item Value="FileName"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="CoreModuleDataControl" DataControl="CoreModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction IterBinding="ContractIterator" id="sumTotal" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sumTotal" IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Contract"/>
+    <attributeValues IterBinding="AttachmentOfContractIterator" id="FileLink">
+      <AttrNames>
+        <Item Value="FileLink"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="AgreementImgUrl">
+      <AttrNames>
+        <Item Value="AgreementImgUrl"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

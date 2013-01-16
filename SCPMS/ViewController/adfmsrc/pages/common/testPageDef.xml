@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="testPageDef" Package="pages.common">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="FourTechContract" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="FourTechContractIterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="FourTechContractIterator"
+                  id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="FourTechContractIterator" id="FourTechContract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.FourTechContractView"
+                      Name="FourTechContract0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContractNo"/>
+          <Item Value="Amount"/>
+          <Item Value="Type"/>
+          <Item Value="RegNo"/>
+          <Item Value="SentDate"/>
+          <Item Value="RcvDate"/>
+          <Item Value="SubmitDate"/>
+          <Item Value="RegDate"/>
+          <Item Value="Creator"/>
+          <Item Value="CreationDate"/>
+          <Item Value="Memo"/>
+          <Item Value="FilePath"/>
+          <Item Value="ContractId"/>
+          <Item Value="LineId"/>
+          <Item Value="Deleted"/>
+          <Item Value="LineContractNo"/>
+          <Item Value="LineShipMnftNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

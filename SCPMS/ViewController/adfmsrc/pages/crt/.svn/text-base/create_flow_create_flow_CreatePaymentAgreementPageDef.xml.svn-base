@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.60.13"
+                id="create_flow_create_flow_CreatePaymentAgreementPageDef"
+                Package="pages.crt" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="createPaymentAgreement" RequiresUpdateModel="true"
+            Action="invokeMethod" MethodName="createPaymentAgreement"
+            IsViewObjectMethod="false" DataControl="CoreModuleDataControl"
+            InstanceName="CoreModuleDataControl.dataProvider"/>
+  </bindings>
+</pageDefinition>

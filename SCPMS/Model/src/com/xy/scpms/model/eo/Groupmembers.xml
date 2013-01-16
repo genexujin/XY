@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Groupmembers"
+  Version="11.1.2.60.17"
+  DBObjectType="table"
+  DBObjectName="GROUPMEMBERS"
+  AliasName="Groupmembers"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="GName"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="G_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="GROUPMEMBERS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="GMember"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="G_MEMBER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="GROUPMEMBERS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Groups"
+    Association="com.xy.scpms.model.assoc.GroupmembersGroupsFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.GroupmembersGroupsFk1Assoc.Groups"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.GroupmembersGroupsFk1Assoc.Groupmembers"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Users"
+    Association="com.xy.scpms.model.assoc.GroupmembersUsersFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.GroupmembersUsersFk1Assoc.Users"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.GroupmembersUsersFk1Assoc.Groupmembers"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="GroupmembersPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="GROUPMEMBERS_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.Groupmembers.GName"/>
+      <Item Value="com.xy.scpms.model.eo.Groupmembers.GMember"/>
+    </AttrArray>
+  </Key>
+</Entity>

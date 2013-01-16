@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="HomePageDef"
+                Package="com.xy.scpms.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <page path="oracle.ui.pattern.dynamicShell.model.dynamicTabShellDefinition" id="ptb1" Refresh="ifNeeded"/>
+    <iterator id="UsersIterator" Binds="Users" DataControl="CoreModuleDataControl" RangeSize="25"/>
+    <taskFlow id="welcomeflow1" taskFlowId="/WEB-INF/wlc/welcome-flow.xml#welcome-flow" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded">
+      <parameters>
+        <parameter id="userRole" value="#{viewScope.MenuBean.role}"/>
+        <parameter id="dept" value="#{viewScope.MenuBean.dept}"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings>
+    <methodAction id="handleAIPEvent" InstanceName="data.DashboardEventHandler.dataProvider"
+                  DataControl="DashboardEventHandler" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="handleAIPEvent" IsViewObjectMethod="false">
+      <NamedData NDName="id" NDValue="" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <methodAction id="getDeptById" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getDeptById"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Users"
+                  ReturnName="data.CoreModuleDataControl.methodResults.getDeptById_CoreModuleDataControl_Users_getDeptById_result"
+                  IterBinding="UsersIterator">
+      <NamedData NDName="username" NDValue="#{securityContext.userName}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="handleApproveReqEvent"
+                  InstanceName="data.DashboardEventHandler.dataProvider"
+                  DataControl="DashboardEventHandler" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="handleApproveReqEvent"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="handleInvReqEvent"
+                  InstanceName="data.DashboardEventHandler.dataProvider"
+                  DataControl="DashboardEventHandler" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="handleInvReqEvent"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="handlePayNotEvent"
+                  InstanceName="data.DashboardEventHandler.dataProvider"
+                  DataControl="DashboardEventHandler" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="handlePayNotEvent"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="handleCrtAprvReqEvent"
+                  InstanceName="data.DashboardEventHandler.dataProvider"
+                  DataControl="DashboardEventHandler" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="handleCrtAprvReqEvent"
+                  IsViewObjectMethod="false"/>
+  </bindings>
+  <eventMap xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
+    <event name="AIPEvent">
+      <producer region="*">
+        <consumer region="" handler="handleAIPEvent">
+          <parameters>
+            <parameter name="id" value="#{payLoad}"/>
+          </parameters>
+        </consumer>
+      </producer>
+    </event>
+    <event name="InvAppEvent">
+      <producer region="welcomeflow1.WelcomePageDef.eventBinding1">
+        <consumer region="" handler="handleInvReqEvent"/>
+      </producer>
+    </event>
+    <event name="approveReqEvt">
+      <producer region="*">
+        <consumer region="" handler="handleApproveReqEvent"/>
+      </producer>
+    </event>
+    <event name="paymentNotificationEvt">
+      <producer region="*">
+        <consumer region="" handler="handlePayNotEvent"/>
+      </producer>
+    </event>
+    <event name="crtAprvEvent">
+      <producer region="welcomeflow1.WelcomePageDef.eventBinding3">
+        <consumer region="" handler="handleCrtAprvReqEvent"/>
+      </producer>
+    </event>
+  </eventMap>
+</pageDefinition>

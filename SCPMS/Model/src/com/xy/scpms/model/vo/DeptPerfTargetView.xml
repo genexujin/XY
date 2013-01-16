@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DeptPerfTargetView"
+  Version="11.1.2.60.17"
+  SelectList="DeptPerfTarget.ID, 
+       DeptPerfTarget.FISCAL_YEAR, 
+       DeptPerfTarget.DEPT, 
+       DeptPerfTarget.CONTRACT_TARGET, 
+       DeptPerfTarget.PAYMENT_TARGET, 
+       DeptPerfTarget.CREATION_DATE, 
+       DeptPerfTarget.CREATED_BY"
+  FromList="OM.DEPT_PERF_TARGET DeptPerfTarget"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <ViewAccessor
+    Name="ListOfDepts"
+    ViewObjectName="com.xy.scpms.model.vo.LovView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="DEPT_NAMES"
+      FullName="com.xy.scpms.model.vo.LovView.DEPT_NAMES"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ListOfFY"
+    ViewObjectName="com.xy.scpms.model.vo.LovView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="FISCAL_YEAR"
+      FullName="com.xy.scpms.model.vo.LovView.FISCAL_YEAR"/>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Dept"
+    ListVOName="ListOfDepts"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Dept"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FiscalYear"
+    ListVOName="ListOfFY"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FiscalYear"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="DeptPerfTarget"
+    Entity="com.xy.scpms.model.eo.DeptPerfTarget"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="DeptPerfTarget"
+    AliasName="ID"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="FiscalYear"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FiscalYear"
+    EntityUsage="DeptPerfTarget"
+    AliasName="FISCAL_YEAR"
+    LOVName="LOV_FiscalYear">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Dept"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Dept"
+    EntityUsage="DeptPerfTarget"
+    AliasName="DEPT"
+    LOVName="LOV_Dept">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContractTarget"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ContractTarget"
+    EntityUsage="DeptPerfTarget"
+    AliasName="CONTRACT_TARGET"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="PaymentTarget"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PaymentTarget"
+    EntityUsage="DeptPerfTarget"
+    AliasName="PAYMENT_TARGET"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="DeptPerfTarget"
+    AliasName="CREATION_DATE"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="DeptPerfTarget"
+    AliasName="CREATED_BY"
+    IsQueriable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

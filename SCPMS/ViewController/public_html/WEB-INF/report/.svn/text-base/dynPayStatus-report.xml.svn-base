@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="dynPayStatus-report">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>clearRowSet</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>DynPayStatusReportBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.DynPayStatusReportBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="DynPayStatusReport">
+      <page>/pages/report/DynPayStatusReport.jspx</page>
+    </view>
+    <view id="PrintPage">
+      <page>/pages/report/DynPayStatusPrintPage.jspx</page>
+    </view>
+    <method-call id="clearRowSet">
+      <method>#{bindings.clearRowSet.execute}</method>
+      <outcome>
+        <fixed-outcome>clearRowSet</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>DynPayStatusReport</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>print</from-outcome>
+        <to-activity-id>PrintPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>PrintPage</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>report</from-outcome>
+        <to-activity-id>DynPayStatusReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>clearRowSet</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>clearRowSet</from-outcome>
+        <to-activity-id>DynPayStatusReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="BrowsePageDef"
+                Package="pages.task">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Contract" RangeSize="25" DataControl="CoreModuleDataControl" id="ContractIterator"/>
+    <iterator id="AttachmentOfContractIterator" Binds="AttachmentOfContract" DataControl="CoreModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="ShipOfContractIterator" Binds="ShipOfContract" DataControl="CoreModuleDataControl" RangeSize="25"/>
+    <iterator id="ApprovalHistoryIterator" Binds="ApprovalHistory" DataControl="CoreModuleDataControl" RangeSize="25"/>
+    <iterator id="PaymentOfShipIterator" Binds="PaymentOfShip" DataControl="CoreModuleDataControl" RangeSize="25"/>
+    <searchRegion id="ShipOfContractQuery" Binds="ShipOfContractIterator"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_AuthType" id="AuthType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_AuthorizerType" id="AuthorizerType"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_ContractEntity" id="ContractEntity"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ContractIterator" id="ContractNo">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="ContractType">
+      <AttrNames>
+        <Item Value="ContractType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatedAt">
+      <AttrNames>
+        <Item Value="CreatedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_DesignDept" id="DesignDept"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_DesignPhase" id="DesignPhase"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ContractIterator" id="FirstDesignFee">
+      <AttrNames>
+        <Item Value="FirstDesignFee"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Memo">
+      <AttrNames>
+        <Item Value="Memo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="ProjectName">
+      <AttrNames>
+        <Item Value="ProjectName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_ShipModel" id="ShipModel" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ContractIterator" id="ShipNoInternal">
+      <AttrNames>
+        <Item Value="ShipNoInternal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="AuthName">
+      <AttrNames>
+        <Item Value="AuthName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CustomerContactName">
+      <AttrNames>
+        <Item Value="CustomerContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="PrjFullName">
+      <AttrNames>
+        <Item Value="PrjFullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="RegFullName">
+      <AttrNames>
+        <Item Value="RegFullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatorFullName">
+      <AttrNames>
+        <Item Value="CreatorFullName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ShipOfContractIterator" id="ShipOfContract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractLineView" Name="ShipOfContract0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="HeaderId"/>
+          <Item Value="LineNo"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ShipPlant"/>
+          <Item Value="ShipOwner"/>
+          <Item Value="ShipBroker"/>
+          <Item Value="ShipClsfctSociety"/>
+          <Item Value="ShipName"/>
+          <Item Value="ImoNo"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="ContractType"/>
+          <Item Value="SignOffDate"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="AbandonDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="Deleted"/>
+          <Item Value="Status"/>
+          <Item Value="Memo"/>
+          <Item Value="Price"/>
+          <Item Value="WorkStartDate"/>
+          <Item Value="FgCompletionDate"/>
+          <Item Value="AbandonFlag"/>
+          <Item Value="BrokerType"/>
+          <Item Value="Currency"/>
+          <Item Value="ExchangeRate"/>
+          <Item Value="FourContractBatch"/>
+          <Item Value="OwnerType"/>
+          <Item Value="PlantType"/>
+          <Item Value="ShipPrice"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ApprovalHistoryIterator" id="ApprovalHistory">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ApprovalInProcessView" Name="ApprovalHistory0">
+        <AttrNames>
+          <Item Value="Seq"/>
+          <Item Value="Type"/>
+          <Item Value="FullName1"/>
+          <Item Value="Outcome"/>
+          <Item Value="Memo"/>
+          <Item Value="ApprovalDate"/>
+          <Item Value="ApprovalRole"/>
+          <Item Value="FullName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AttachmentOfContractIterator" id="AttachmentOfContract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractAttachmentView" Name="AttachmentOfContract0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContractId"/>
+          <Item Value="FileName"/>
+          <Item Value="FileLink"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="FileDesc"/>
+          <Item Value="CreationDate"/>
+          <Item Value="Deleted"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="PaymentOfShipIterator" id="PaymentOfShip">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractLinePaymentsView" Name="PaymentOfShip0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="LineId"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="Deleted"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="Status"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="TotalPayment"/>
+          <Item Value="Variance"/>
+          <Item Value="Memo"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="InvoiceBatchId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="aipActionExecute" InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="aipActionExecute" IsViewObjectMethod="false">
+      <NamedData NDName="contractId" NDValue="#{bindings.Id.inputValue}" NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="action" NDValue="#{viewScope.ApprovalBean.approveType}" NDType="java.lang.String"/>
+      <NamedData NDName="userName" NDValue="#{securityContext.userName}" NDType="java.lang.String"/>
+      <NamedData NDName="comments" NDValue="#{viewScope.ApprovalBean.memoInput.value}" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="ContractIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="AgreementImgUrl">
+      <AttrNames>
+        <Item Value="AgreementImgUrl"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

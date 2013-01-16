@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="lookup-customer">
+    <default-activity id="__1">CustomerLookup</default-activity>
+    <return-value-definition id="__9">
+      <name id="__8">customerId</name>
+      <value>#{pageFlowScope.customerId}</value>
+    </return-value-definition>
+    <return-value-definition id="__11">
+      <name id="__10">customerName</name>
+      <value>#{pageFlowScope.customerName}</value>
+    </return-value-definition>
+    <return-value-definition id="__12">
+      <name id="__13">selectOrCancelFlag</name>
+      <value>#{pageFlowScope.selectOrCancelFlag}</value>
+    </return-value-definition>
+    <managed-bean id="__17">
+      <managed-bean-name id="__15">LookupCustomerBean</managed-bean-name>
+      <managed-bean-class id="__16">com.xy.scpms.view.page.LookupCustomerBean</managed-bean-class>
+      <managed-bean-scope id="__14">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="CustomerLookup">
+      <page>/pages/lookup/CustomerLookup.jsff</page>
+    </view>
+    <task-flow-return id="return">
+      <outcome id="__2">
+        <name>return</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__3">
+      <from-activity-id id="__4">CustomerLookup</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__7">return</from-outcome>
+        <to-activity-id id="__6">return</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

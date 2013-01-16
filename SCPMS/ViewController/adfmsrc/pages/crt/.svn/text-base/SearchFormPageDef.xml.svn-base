@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.60.13" id="SearchFormPageDef"
+                Package="pages.crt">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Contract" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ContractIterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="ContractIterator" id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ContractIterator" id="Contract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractView"
+                      Name="Contract0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ProjectName"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="AuthName"/>
+          <Item Value="AuthType"/>
+          <Item Value="AuthorizerType"/>
+          <Item Value="CustomerContactName"/>
+          <Item Value="ContractType"/>
+          <Item Value="ProjectManager"/>
+          <Item Value="RegionManager"/>
+          <Item Value="CustomerContactor"/>
+          <Item Value="DesignDept"/>
+          <Item Value="DesignPhase"/>
+          <Item Value="FirstDesignFee"/>
+          <Item Value="Memo"/>
+          <Item Value="ShipModel"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="Status"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="CreatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="ContractIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

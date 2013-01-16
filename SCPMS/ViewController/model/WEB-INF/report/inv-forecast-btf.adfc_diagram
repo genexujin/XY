@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">InvForecastRpt</property>
+      <property
+         name="page">/pages/report/InvForecastRpt.jspx</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>InvForecastRpt&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">202.59766</property>
+      <property
+         name="x">228.0</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">InvForecastPrint</property>
+      <property
+         name="page">/pages/report/InvForecastPrint.jspx</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>InvForecastPrint&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">204.5459</property>
+      <property
+         name="x">442.0</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="View3">
+      <property
+         name="fromOutcome">print</property>
+      <property
+         name="sdm:polyPoints">R46,269.05167,198.74707,401.0,200.69531,L46</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View3"
+      to="View2">
+      <property
+         name="fromOutcome">report</property>
+      <property
+         name="sdm:polyPoints">L54,400.94833,207.69531,269.0,205.74707,R54</property>
+   </ControlFlowCase>
+</SDM>

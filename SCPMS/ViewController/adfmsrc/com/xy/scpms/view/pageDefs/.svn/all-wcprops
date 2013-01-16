@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/com/xy/scpms/view/pageDefs
+END
+HomePageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/home/!svn/ver/6/trunk/OM/ViewController/adfmsrc/com/xy/scpms/view/pageDefs/HomePageDef.xml
+END
+LoginPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/com/xy/scpms/view/pageDefs/LoginPageDef.xml
+END
+login_errorPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/com/xy/scpms/view/pageDefs/login_errorPageDef.xml
+END

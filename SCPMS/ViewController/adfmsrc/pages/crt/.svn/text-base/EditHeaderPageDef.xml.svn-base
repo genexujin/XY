@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.60.13" id="EditHeaderPageDef"
+                Package="pages.crt">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Contract" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ContractIterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_AuthType"
+          id="AuthType" DTSupportsMRU="false"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_AuthorizerType" id="AuthorizerType" DTSupportsMRU="false"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_ContractEntity" id="ContractEntity" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="ContractIterator" id="ContractNo">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatedAt">
+      <AttrNames>
+        <Item Value="CreatedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_CustomerContactor" id="CustomerContactor"
+          DTSupportsMRU="false"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_DesignDept" id="DesignDept" DTSupportsMRU="false"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_DesignPhase" id="DesignPhase" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="ContractIterator" id="FirstDesignFee">
+      <AttrNames>
+        <Item Value="FirstDesignFee"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Memo">
+      <AttrNames>
+        <Item Value="Memo"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_ProjectManager" id="ProjectManager" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="ContractIterator" id="ProjectName">
+      <AttrNames>
+        <Item Value="ProjectName"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="ContractIterator"
+                  Uses="LOV_AuthName" id="AuthName"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_RegionManager" id="RegionManager" DTSupportsMRU="false"/>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_ShipModel"
+          id="ShipModel" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="ContractIterator" id="ShipNoInternal">
+      <AttrNames>
+        <Item Value="ShipNoInternal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="CoreModuleDataControl"/>
+    <attributeValues IterBinding="ContractIterator" id="ContractType1">
+      <AttrNames>
+        <Item Value="ContractType"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="CoreModuleDataControl"/>
+  </bindings>
+</pageDefinition>

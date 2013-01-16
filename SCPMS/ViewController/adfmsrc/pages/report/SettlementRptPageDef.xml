@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="SettlementRptPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="UrgeSettlementRpt1" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="UrgeSettlementRpt1Iterator"/>
+    <iterator id="InvoicedNotPaid1Iterator" Binds="InvoicedNotPaid1" DataControl="CoreModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="UrgeSettlementRpt1Iterator" id="UrgeSettlementRpt1">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.UrgeSettlementRpt" Name="UrgeSettlementRpt10">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ProjectName"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="Status"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="PaymentDate"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="TotalPaid"/>
+          <Item Value="TotalInvoiced"/>
+          <Item Value="Aging"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="InvoicedNotPaid1Iterator" id="TotalInvoicedNotPaid">
+      <AttrNames>
+        <Item Value="TotalInvoicedNotPaid"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

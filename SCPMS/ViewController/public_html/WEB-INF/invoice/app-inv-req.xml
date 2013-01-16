@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="app-inv-req">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>checkIfFromDashboard</default-activity>
+    <input-parameter-definition id="__1">
+      <name>deptName</name>
+      <value>#{sessionScope.userDept}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__2">
+      <name>browse</name>
+      <value>#{pageFlowScope.browse}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name>userRole</name>
+      <value>#{sessionScope.userRole}</value>
+    </input-parameter-definition>
+    <managed-bean id="__12">
+      <managed-bean-name>InvoiceApprvalBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.InvoiceApprvalBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="PendingInvReq">
+      <page>/pages/invoice/PendingInvReq.jspx</page>
+    </view>
+    <router id="checkIfFromDashboard">
+      <case id="__10">
+        <expression>#{pageFlowScope.browse=='yes'}</expression>
+        <outcome>filterByUserName</outcome>
+      </case>
+      <default-outcome>fromMenu</default-outcome>
+    </router>
+    <method-call id="findPendingInvReq">
+      <method>#{bindings.findPendingInvReq.execute}</method>
+      <outcome>
+        <fixed-outcome>findPendingInvReq</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findPendingInvReqbyPaymentId">
+      <method>#{bindings.findPendingInvReqbyUserName.execute}</method>
+      <outcome>
+        <fixed-outcome>findPendingInvReqbyPaymentId</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="search-contact-byId">
+      <task-flow-reference>
+        <document>/WEB-INF/customer/search-contact-byId.xml</document>
+        <id>search-contact-byId</id>
+      </task-flow-reference>
+      <input-parameter id="__17">
+        <name>contactId</name>
+        <value>#{pageFlowScope.contactId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="search-customer-byId">
+      <task-flow-reference>
+        <document>/WEB-INF/customer/search-customer-byId.xml</document>
+        <id>search-customer-byId</id>
+      </task-flow-reference>
+      <input-parameter id="__16">
+        <name>customerId</name>
+        <value>#{pageFlowScope.customerId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>checkIfFromDashboard</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>fromMenu</from-outcome>
+        <to-activity-id>findPendingInvReq</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>filterByUserName</from-outcome>
+        <to-activity-id>findPendingInvReqbyPaymentId</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>findPendingInvReq</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>findPendingInvReq</from-outcome>
+        <to-activity-id>PendingInvReq</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>findPendingInvReqbyPaymentId</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>findPendingInvReqbyPaymentId</from-outcome>
+        <to-activity-id>PendingInvReq</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>PendingInvReq</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>checkCustomer</from-outcome>
+        <to-activity-id>search-customer-byId</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__15">
+        <from-outcome>checkContact</from-outcome>
+        <to-activity-id>search-contact-byId</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

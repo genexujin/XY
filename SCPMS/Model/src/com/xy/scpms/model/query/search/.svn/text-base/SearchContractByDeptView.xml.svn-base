@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SearchContractByDeptView"
+  Version="11.1.2.60.17"
+  Extends="com.xy.scpms.model.query.search.SearchContractBaseView"
+  Where="(Contract.PROJECT_MANAGER = PrjMgr.USERNAME) AND (Contract.REGION_MANAGER = RgMgr.USERNAME) AND (UPPER(Contract.DELETED) != 'Y') AND (Contract.DESIGN_DEPT = :deptBind)"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.query.search.SearchContractByDeptView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="deptBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

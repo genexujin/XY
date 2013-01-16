@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="TestPageDef" Package="pages.test">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Contract" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ContractIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ContractIterator" id="AgreementImgUrl">
+      <AttrNames>
+        <Item Value="AgreementImgUrl"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_AuthType"
+          id="AuthType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_AuthorizerType" id="AuthorizerType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_ContractEntity" id="ContractEntity" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ContractIterator" id="ContractNo">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="ContractType">
+      <AttrNames>
+        <Item Value="ContractType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatedAt">
+      <AttrNames>
+        <Item Value="CreatedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CustomerContactor">
+      <AttrNames>
+        <Item Value="CustomerContactor"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Deleted">
+      <AttrNames>
+        <Item Value="Deleted"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_DesignDept" id="DesignDept" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_DesignPhase" id="DesignPhase" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ContractIterator" id="FirstDesignFee">
+      <AttrNames>
+        <Item Value="FirstDesignFee"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Memo">
+      <AttrNames>
+        <Item Value="Memo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="ParentContractId">
+      <AttrNames>
+        <Item Value="ParentContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_ProjectManager" id="ProjectManager" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ContractIterator" id="ProjectName">
+      <AttrNames>
+        <Item Value="ProjectName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_RegionManager" id="RegionManager" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_ShipModel"
+          id="ShipModel" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ContractIterator" id="ShipNoInternal">
+      <AttrNames>
+        <Item Value="ShipNoInternal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="AuthName">
+      <AttrNames>
+        <Item Value="AuthName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="RefinedFlag">
+      <AttrNames>
+        <Item Value="RefinedFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CustomerId">
+      <AttrNames>
+        <Item Value="CustomerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CustomerContactName">
+      <AttrNames>
+        <Item Value="CustomerContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="ParentContractNo">
+      <AttrNames>
+        <Item Value="ParentContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="PrjLastname">
+      <AttrNames>
+        <Item Value="PrjLastname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="PrjUsername">
+      <AttrNames>
+        <Item Value="PrjUsername"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="PrjFirstname">
+      <AttrNames>
+        <Item Value="PrjFirstname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="RegLastname">
+      <AttrNames>
+        <Item Value="RegLastname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Username1">
+      <AttrNames>
+        <Item Value="Username1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="RegFirstname">
+      <AttrNames>
+        <Item Value="RegFirstname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatorLastname">
+      <AttrNames>
+        <Item Value="CreatorLastname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatorUsername">
+      <AttrNames>
+        <Item Value="CreatorUsername"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatorFirstname">
+      <AttrNames>
+        <Item Value="CreatorFirstname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="PrjFullName">
+      <AttrNames>
+        <Item Value="PrjFullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="RegFullName">
+      <AttrNames>
+        <Item Value="RegFullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatorFullName">
+      <AttrNames>
+        <Item Value="CreatorFullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="UnitWeight">
+      <AttrNames>
+        <Item Value="UnitWeight"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="TotalWeight">
+      <AttrNames>
+        <Item Value="TotalWeight"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="TotalCompleteWeight">
+      <AttrNames>
+        <Item Value="TotalCompleteWeight"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

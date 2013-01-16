@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="LovsPageDef" Package="pages.lov">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DesignPhase" RangeSize="25"
+              DataControl="LovModuleDataControl" id="DesignPhaseIterator"/>
+    <iterator Binds="PaymentName" RangeSize="25"
+              DataControl="LovModuleDataControl" id="PaymentNameIterator"/>
+    <iterator Binds="AuthType" RangeSize="25" DataControl="LovModuleDataControl"
+              id="AuthTypeIterator"/>
+    <iterator Binds="AuthorizerType" RangeSize="25"
+              DataControl="LovModuleDataControl" id="AuthorizerTypeIterator"/>
+    <iterator Binds="ShipType" RangeSize="25" DataControl="LovModuleDataControl"
+              id="ShipTypeIterator"/>
+    <iterator Binds="OwnerType" RangeSize="25"
+              DataControl="LovModuleDataControl" id="OwnerTypeIterator"/>
+    <iterator Binds="BrokerType" RangeSize="25"
+              DataControl="LovModuleDataControl" id="BrokerTypeIterator"/>
+    <iterator Binds="PlantType" RangeSize="25"
+              DataControl="LovModuleDataControl" id="PlantTypeIterator"/>
+  </executables>
+  <bindings>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="LovModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="LovModuleDataControl"/>
+    <tree IterBinding="DesignPhaseIterator" id="DesignPhase">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView"
+                      Name="DesignPhase0">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ShipTypeIterator" id="ShipType">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView" Name="ShipType0">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="PaymentNameIterator" id="PaymentName">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView"
+                      Name="PaymentName0">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AuthTypeIterator" id="AuthType">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView" Name="AuthType0">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ShipTypeIterator" id="ShipType1">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView" Name="ShipType10">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="PaymentNameIterator" id="PaymentName1">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView"
+                      Name="PaymentName10">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AuthorizerTypeIterator" id="AuthorizerType">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView"
+                      Name="AuthorizerType0">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="OwnerTypeIterator" id="OwnerType">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView" Name="OwnerType0">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="BrokerTypeIterator" id="BrokerType">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView"
+                      Name="BrokerType0">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="PlantTypeIterator" id="PlantType">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.LovView" Name="PlantType0">
+        <AttrNames>
+          <Item Value="LookupValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DesignPhaseIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="AuthTypeIterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="ShipTypeIterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="PaymentNameIterator" id="Delete3"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="AuthorizerTypeIterator" id="Delete4"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="OwnerTypeIterator" id="Delete5"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="PlantTypeIterator" id="Delete6"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="BrokerTypeIterator" id="Delete7"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <methodAction id="createLov"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createLov"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="lookupCode" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

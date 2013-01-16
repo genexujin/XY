@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="AgingReportPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <page path="pages.report.ReportTemplatePageDef" id="ptb1"
+          Refresh="ifNeeded"/>
+    <iterator Binds="Rpt_ARAgingReport" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="Rpt_ARAgingReportIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="Rpt_ARAgingReportIterator" id="Rpt_ARAgingReport">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.ARAgingReport"
+                      Name="Rpt_ARAgingReport0">
+        <AttrNames>
+          <Item Value="DesignDept"/>
+          <Item Value="IntactTotal"/>
+          <Item Value="FrozenTotal"/>
+          <Item Value="PayTotal"/>
+          <Item Value="InvTotal"/>
+          <Item Value="ArTotal"/>
+          <Item Value="Inv90"/>
+          <Item Value="Inv180"/>
+          <Item Value="Inv365"/>
+          <Item Value="Inv730"/>
+          <Item Value="Inv1095"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

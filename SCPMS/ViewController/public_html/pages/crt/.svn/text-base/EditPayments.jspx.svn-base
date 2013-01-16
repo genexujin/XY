@@ -1,0 +1,441 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document id="d1">
+            <af:form id="f1">
+                <af:panelSplitter id="ps1" positionedFromEnd="true" splitterPosition="100" collapsed="true">
+                    <f:facet name="first">
+                        <af:panelStretchLayout id="psl1" topHeight="90px">
+                            <f:facet name="bottom"/>
+                            <f:facet name="center">
+                                <af:panelBox text="收款节点信息" id="pb1" background="medium" showDisclosure="false">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelSplitter id="ps2" orientation="vertical">
+                                        <f:facet name="first">
+                                            <af:panelStretchLayout id="psl2" topHeight="20px">
+                                                <f:facet name="bottom"/>
+                                                <f:facet name="center">
+                                                    <af:panelCollection id="pc1">
+                                                        <f:facet name="menus"/>
+                                                        <f:facet name="toolbar"/>
+                                                        <f:facet name="statusbar">
+                                                            <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                                                                 inlineStyle="width:200px;">
+                                                                <af:outputText value="本合同共计船只#{bindings.ShipOfContract.estimatedRowCount}艘"
+                                                                               id="ot4" 
+                                                                               inlineStyle="font-size:120%; font-weight:bold; text-align:left;"/>
+                                                            </af:panelGroupLayout>
+                                                        </f:facet>
+                                                        <af:table value="#{bindings.ShipOfContract.collectionModel}"
+                                                                  var="row" rows="#{bindings.ShipOfContract.rangeSize}"
+                                                                  emptyText="#{bindings.ShipOfContract.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                                  fetchSize="#{bindings.ShipOfContract.rangeSize}"
+                                                                  rowBandingInterval="1"
+                                                                  filterModel="#{bindings.ShipOfContractQuery.queryDescriptor}"
+                                                                  queryListener="#{bindings.ShipOfContractQuery.processQuery}"
+                                                                  filterVisible="false" varStatus="vs"
+                                                                  selectedRowKeys="#{bindings.ShipOfContract.collectionModel.selectedRow}"
+                                                                  selectionListener="#{bindings.ShipOfContract.collectionModel.makeCurrent}"
+                                                                  rowSelection="single" id="t2"
+                                                                  partialTriggers=":::ctb5 :::pc2:t3" autoHeightRows="10">
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.LineNo.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.LineNo.label}"
+                                                                       id="c2" width="30">
+                                                                <af:outputText value="#{row.LineNo}" id="ot26">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.ShipOfContract.hints.LineNo.format}"/>
+                                                                </af:outputText>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.Price.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.Price.label}"
+                                                                       id="c6">
+                                                                <af:outputText value="#{row.Price}" id="ot6">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.ShipOfContract.hints.Price.format}"
+                                                                                      maxFractionDigits="7"/>
+                                                                </af:outputText>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipMnftNo.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipMnftNo.label}"
+                                                                       id="c1"
+                                                                       rendered="#{not pageFlowScope.CreationFlowBean.agreement}">
+                                                                <af:outputText value="#{row.ShipMnftNo}" id="ot11"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipPlant.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipPlant.label}"
+                                                                       id="c3">
+                                                                <af:outputText value="#{row.ShipPlant}" id="ot10"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.PlantType.name}"
+                                                                       filterable="true" sortable="false"
+                                                                       headerText="#{bindings.ShipOfContract.hints.PlantType.label}"
+                                                                       id="c27">
+                                                                <af:outputText value="#{row.PlantType}" id="ot23"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipOwner.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipOwner.label}"
+                                                                       id="c5">
+                                                                <af:outputText value="#{row.ShipOwner}" id="ot16"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.OwnerType.name}"
+                                                                       filterable="true" sortable="false"
+                                                                       headerText="#{bindings.ShipOfContract.hints.OwnerType.label}"
+                                                                       id="c26">
+                                                                <af:outputText value="#{row.OwnerType}" id="ot20"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipBroker.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipBroker.label}"
+                                                                       id="c17">
+                                                                <af:outputText value="#{row.ShipBroker}" id="ot3"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.BrokerType.name}"
+                                                                       filterable="true" sortable="false"
+                                                                       headerText="#{bindings.ShipOfContract.hints.BrokerType.label}"
+                                                                       id="c28">
+                                                                <af:outputText value="#{row.BrokerType}" id="ot21"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.SignOffDate.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.SignOffDate.label}"
+                                                                       id="c16">
+                                                                <af:outputText value="#{row.SignOffDate}" id="ot7">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.SignOffDate.format}"/>
+                                                                </af:outputText>
+                                                                <f:facet name="filter">
+                                                                    <af:inputDate value="#{vs.filterCriteria.SignOffDate}"
+                                                                                  id="id1">
+                                                                        <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.SignOffDate.format}"/>
+                                                                    </af:inputDate>
+                                                                </f:facet>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.EffectiveDate.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.EffectiveDate.label}"
+                                                                       id="c9">
+                                                                <af:outputText value="#{row.EffectiveDate}" id="ot9">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.EffectiveDate.format}"/>
+                                                                </af:outputText>
+                                                                <f:facet name="filter">
+                                                                    <af:inputDate value="#{vs.filterCriteria.EffectiveDate}"
+                                                                                  id="id5">
+                                                                        <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.EffectiveDate.format}"/>
+                                                                    </af:inputDate>
+                                                                </f:facet>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.WorkStartDate.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.WorkStartDate.label}"
+                                                                       id="c11">
+                                                                <af:outputText value="#{row.WorkStartDate}" id="ot12">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.WorkStartDate.format}"/>
+                                                                </af:outputText>
+                                                                <f:facet name="filter">
+                                                                    <af:inputDate value="#{vs.filterCriteria.WorkStartDate}"
+                                                                                  id="id3">
+                                                                        <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.WorkStartDate.format}"/>
+                                                                    </af:inputDate>
+                                                                </f:facet>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.FgCompletionDate.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.FgCompletionDate.label}"
+                                                                       id="c7">
+                                                                <af:outputText value="#{row.FgCompletionDate}"
+                                                                               id="ot17">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.FgCompletionDate.format}"/>
+                                                                </af:outputText>
+                                                                <f:facet name="filter">
+                                                                    <af:inputDate value="#{vs.filterCriteria.FgCompletionDate}"
+                                                                                  id="id2">
+                                                                        <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.FgCompletionDate.format}"/>
+                                                                    </af:inputDate>
+                                                                </f:facet>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.name}"
+                                                                       filterable="true" sortable="false"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.label}"
+                                                                       id="c29">
+                                                                <af:outputText value="#{row.ShipBuildCrtEftDate}"
+                                                                               id="ot24">
+                                                                    <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.format}"/>
+                                                                </af:outputText>
+                                                                <f:facet name="filter">
+                                                                    <af:inputDate value="#{vs.filterCriteria.ShipBuildCrtEftDate}"
+                                                                                  id="id4">
+                                                                        <af:convertDateTime pattern="#{bindings.ShipOfContract.hints.ShipBuildCrtEftDate.format}"/>
+                                                                    </af:inputDate>
+                                                                </f:facet>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipClsfctSociety.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipClsfctSociety.label}"
+                                                                       id="c8">
+                                                                <af:outputText value="#{row.ShipClsfctSociety}"
+                                                                               id="ot8"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipName.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipName.label}"
+                                                                       id="c13">
+                                                                <af:outputText value="#{row.ShipName}" id="ot1"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ImoNo.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ImoNo.label}"
+                                                                       id="c10">
+                                                                <af:outputText value="#{row.ImoNo}" id="ot15"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.Currency.name}"
+                                                                       filterable="true" sortable="false"
+                                                                       headerText="#{bindings.ShipOfContract.hints.Currency.label}"
+                                                                       id="c25">
+                                                                <af:outputText value="#{row.Currency}" id="ot22"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ExchangeRate.name}"
+                                                                       filterable="true" sortable="false"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ExchangeRate.label}"
+                                                                       id="c18">
+                                                                <af:outputText value="#{row.ExchangeRate}" id="ot19">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.ShipOfContract.hints.ExchangeRate.format}"/>
+                                                                </af:outputText>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipPrice.name}"
+                                                                       filterable="true" sortable="false"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipPrice.label}"
+                                                                       id="c23">
+                                                                <af:outputText value="#{row.ShipPrice}" id="ot25">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.ShipOfContract.hints.ShipPrice.format}"
+                                                                                      maxFractionDigits="7"/>
+                                                                </af:outputText>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ShipNoInternal.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ShipNoInternal.label}"
+                                                                       id="c14">
+                                                                <af:outputText value="#{row.ShipNoInternal}" id="ot14"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.ContractType.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.ContractType.label}"
+                                                                       id="c4">
+                                                                <af:outputText value="#{row.ContractType}" id="ot13"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.Status.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.Status.label}"
+                                                                       id="c12">
+                                                                <af:outputText value="#{row.Status}" id="ot5"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.ShipOfContract.hints.Memo.name}"
+                                                                       filterable="true" sortable="true"
+                                                                       headerText="#{bindings.ShipOfContract.hints.Memo.label}"
+                                                                       id="c15">
+                                                                <af:outputText value="#{row.Memo}" id="ot18"/>
+                                                            </af:column>
+                                                        </af:table>
+                                                    </af:panelCollection>
+                                                </f:facet>
+                                                <f:facet name="start"/>
+                                                <f:facet name="end"/>
+                                                <f:facet name="top">
+                                                    <af:panelHeader text="请选择一个船号" id="ph1">
+                                                        <f:facet name="context"/>
+                                                        <f:facet name="menuBar"/>
+                                                        <f:facet name="toolbar"/>
+                                                        <f:facet name="legend"/>
+                                                        <f:facet name="info"/>
+                                                    </af:panelHeader>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                        </f:facet>
+                                        <f:facet name="second">
+                                            <af:panelStretchLayout id="psl3" topHeight="20px">
+                                                <f:facet name="bottom"/>
+                                                <f:facet name="center">
+                                                    <af:panelCollection id="pc2">
+                                                        <f:facet name="menus"/>
+                                                        <f:facet name="toolbar">
+                                                            <af:toolbar id="t4">
+                                                                <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}"
+                                                                                         text="新收款节点"
+                                                                                         disabled="#{!bindings.CreateInsert.enabled}"
+                                                                                         id="ctb2"
+                                                                                         icon="/images/icons/add.png"/>
+                                                                <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                                                                         text="删除节点"
+                                                                                         disabled="#{!bindings.Delete.enabled}"
+                                                                                         id="ctb3"
+                                                                                         icon="/images/icons/delete.png"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                        <f:facet name="statusbar"/>
+                                                        <af:table value="#{bindings.PaymentOfShip.collectionModel}"
+                                                                  var="row" rows="#{bindings.PaymentOfShip.rangeSize}"
+                                                                  emptyText="#{bindings.PaymentOfShip.viewable ? '暂无收款节点。' : 'Access Denied.'}"
+                                                                  fetchSize="#{bindings.PaymentOfShip.rangeSize}"
+                                                                  rowBandingInterval="0"
+                                                                  selectedRowKeys="#{bindings.PaymentOfShip.collectionModel.selectedRow}"
+                                                                  selectionListener="#{bindings.PaymentOfShip.collectionModel.makeCurrent}"
+                                                                  rowSelection="single" id="t3"
+                                                                  partialTriggers="::ctb2 ::ctb3 :::pc1:t2">
+                                                            <af:column sortProperty="#{bindings.PaymentOfShip.hints.PaymentName.name}"
+                                                                       sortable="true"
+                                                                       headerText="#{bindings.PaymentOfShip.hints.PaymentName.label}"
+                                                                       id="c19" width="150">
+                                                                <af:inputListOfValues id="paymentNameId"
+                                                                                      popupTitle=" #{bindings.PaymentOfShip.hints.PaymentName.label}"
+                                                                                      value="#{row.bindings.PaymentName.inputValue}"
+                                                                                      model="#{row.bindings.PaymentName.listOfValuesModel}"
+                                                                                      required="#{bindings.PaymentOfShip.hints.PaymentName.mandatory}"
+                                                                                      columns="#{bindings.PaymentOfShip.hints.PaymentName.displayWidth}"
+                                                                                      shortDesc="#{bindings.PaymentOfShip.hints.PaymentName.tooltip}"
+                                                                                      showRequired="true">
+                                                                    <f:validator validatorId="javax.faces.Required"/>
+                                                                </af:inputListOfValues>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.name}"
+                                                                       sortable="true"
+                                                                       headerText="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.label}"
+                                                                       id="c20">
+                                                                <af:inputDate value="#{row.bindings.PaymentPlanInvoiceDate.inputValue}"
+                                                                              label="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.label}"
+                                                                              required="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.mandatory}"
+                                                                              shortDesc="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.tooltip}"
+                                                                              id="id6">
+                                                                    <f:validator binding="#{row.bindings.PaymentPlanInvoiceDate.validator}"/>
+                                                                    <af:convertDateTime pattern="#{bindings.PaymentOfShip.hints.PaymentPlanInvoiceDate.format}"/>
+                                                                </af:inputDate>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.name}"
+                                                                       sortable="true"
+                                                                       headerText="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.label}"
+                                                                       id="c21">
+                                                                <af:inputText value="#{row.bindings.PaymentPlanAmount.inputValue}"
+                                                                              label="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.label}"
+                                                                              required="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.mandatory}"
+                                                                              columns="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.displayWidth}"
+                                                                              maximumLength="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.precision}"
+                                                                              shortDesc="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.tooltip}"
+                                                                              id="it1">
+                                                                    <f:validator binding="#{row.bindings.PaymentPlanAmount.validator}"/>
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.PaymentOfShip.hints.PaymentPlanAmount.format}"
+                                                                                      maxFractionDigits="7"/>
+                                                                </af:inputText>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.PaymentOfShip.hints.Memo.name}"
+                                                                       sortable="true"
+                                                                       headerText="#{bindings.PaymentOfShip.hints.Memo.label}"
+                                                                       id="c22">
+                                                                <af:inputText value="#{row.bindings.Memo.inputValue}"
+                                                                              label="#{bindings.PaymentOfShip.hints.Memo.label}"
+                                                                              required="#{bindings.PaymentOfShip.hints.Memo.mandatory}"
+                                                                              columns="#{bindings.PaymentOfShip.hints.Memo.displayWidth}"
+                                                                              maximumLength="#{bindings.PaymentOfShip.hints.Memo.precision}"
+                                                                              shortDesc="#{bindings.PaymentOfShip.hints.Memo.tooltip}"
+                                                                              id="it2">
+                                                                    <f:validator binding="#{row.bindings.Memo.validator}"/>
+                                                                    <af:showPopupBehavior triggerType="dblClick"
+                                                                                          align="endAfter"
+                                                                                          popupId="::p7"/>
+                                                                </af:inputText>
+                                                            </af:column>
+                                                        </af:table>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p7"
+                                                                  binding="#{LineBean.memoInput}">
+                                                            <af:panelWindow id="pw5" resize="on"
+                                                                            closeIconVisible="false"
+                                                                            stretchChildren="none" modal="true"
+                                                                            contentWidth="350" contentHeight="100">
+                                                                <af:panelGroupLayout id="pgl12">
+                                                                    <af:inputText value="#{bindings.Memo.inputValue}"
+                                                                                  label="#{bindings.Memo.hints.label}"
+                                                                                  required="#{bindings.Memo.hints.mandatory}"
+                                                                                  columns="50"
+                                                                                  maximumLength="#{bindings.Memo.hints.precision}"
+                                                                                  shortDesc="#{bindings.Memo.hints.tooltip}"
+                                                                                  id="it33" rows="4">
+                                                                        <f:validator binding="#{bindings.Memo.validator}"/>
+                                                                    </af:inputText>
+                                                                    <af:commandButton text="确定" id="cb4"
+                                                                                      action="#{LineBean.closeMemoPopup}"
+                                                                                      icon="/images/icons/check.png"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelWindow>
+                                                        </af:popup>
+                                                    </af:panelCollection>
+                                                </f:facet>
+                                                <f:facet name="start"/>
+                                                <f:facet name="end"/>
+                                                <f:facet name="top">
+                                                    <af:panelHeader text="输入收款节点信息" id="ph2">
+                                                        <f:facet name="context"/>
+                                                        <f:facet name="menuBar"/>
+                                                        <f:facet name="toolbar"/>
+                                                        <f:facet name="legend"/>
+                                                        <f:facet name="info"/>
+                                                    </af:panelHeader>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                        </f:facet>
+                                    </af:panelSplitter>
+                                </af:panelBox>
+                            </f:facet>
+                            <f:facet name="start"/>
+                            <f:facet name="end"/>
+                            <f:facet name="top">
+                                <af:panelBox text="新建#{pageFlowScope.CreationFlowBean.agreement?'协议':'合同'}流程" id="pb2"
+                                             background="medium" showDisclosure="false">
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="toolbar1">
+                                            <af:commandToolbarButton text="返回主页" id="commandToolbarButton1"
+                                                                     icon="/images/icons/home.gif" action="return"
+                                                                     actionListener="#{bindings.Rollback.execute}"
+                                                                     immediate="true"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                        <af:messages id="m1" partialTriggers="ctb5"/>
+                                        <af:panelGroupLayout id="pgl1" layout="horizontal">
+                                            <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                                                      id="t1"/>
+                                            <af:trainButtonBar value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                                                               id="tbb1"/>
+                                            <af:commandToolbarButton text="保存工作" id="ctb5"
+                                                                     icon="/images/icons/filesave.png"
+                                                                     action="#{HeaderBean.save}"/>
+                                            <af:commandToolbarButton text="取消并退出" id="ctb1"
+                                                                     icon="/images/icons/undo.png"
+                                                                     actionListener="#{bindings.Rollback.execute}"
+                                                                     disabled="#{!bindings.Rollback.enabled}"
+                                                                     immediate="true" action="return">
+                                                <af:resetActionListener/>
+                                            </af:commandToolbarButton>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl3">
+                                            <af:panelList id="pl2">
+                                                <af:outputText value="请按照系统流程来创建合同信息，顺序为：合同头部 -> 合同船号 -> 船号节点 -> 确认提交审批"
+                                                               id="ot2" inlineStyle="font-family:'Microsoft YaHei';"/>
+                                            </af:panelList>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelBox>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </f:facet>
+                    <f:facet name="second"/>
+                </af:panelSplitter>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

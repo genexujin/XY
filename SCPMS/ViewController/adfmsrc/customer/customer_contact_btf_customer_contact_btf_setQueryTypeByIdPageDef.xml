@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17"
+                id="customer_contact_btf_customer_contact_btf_setQueryTypeByIdPageDef" Package="customer"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="setQueryTypeById" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setQueryTypeById"
+            IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.CustomerContacts"
+            ReturnName="data.CoreModuleDataControl.methodResults.setQueryTypeById_CoreModuleDataControl_CustomerContacts_setQueryTypeById_result">
+      <NamedData NDName="id" NDValue="#{pageFlowScope.contactId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

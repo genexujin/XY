@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SearchContractByMgrIdView"
+  Version="11.1.2.60.17"
+  Extends="com.xy.scpms.model.query.search.SearchContractBaseView"
+  Where="(Contract.PROJECT_MANAGER = PrjMgr.USERNAME) AND (Contract.REGION_MANAGER = RgMgr.USERNAME) AND ((Contract.PROJECT_MANAGER = :MgrIdBind) OR (Contract.REGION_MANAGER = :MgrIdBind)) AND (UPPER(Contract.DELETED) != 'Y')"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="com.xy.scpms.model.query.search.SearchContractByMgrIdViewImpl"
+  ComponentInterface="com.xy.scpms.model.query.search.common.SearchContractByMgrIdView"
+  ClientProxyName="com.xy.scpms.model.query.search.client.SearchContractByMgrIdViewClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.query.search.SearchContractByMgrIdView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="MgrIdBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="setMgrIdBind"
+      MethodName="setMgrIdBind">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="value"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</ViewObject>

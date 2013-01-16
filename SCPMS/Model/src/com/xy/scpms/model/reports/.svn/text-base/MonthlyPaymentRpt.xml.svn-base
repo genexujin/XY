@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MonthlyPaymentRpt"
+  Version="11.1.2.60.17"
+  SelectList="Contract.CONTRACT_NO, 
+       Contract.PROJECT_NAME, 
+       Contract.AUTH_NAME, 
+       ContractLine.SHIP_MNFT_NO, 
+       ContractLinePayments.PAYMENT_NAME, 
+       ContractLinePayments.PAYMENT_DATE, 
+       ContractLinePayments.TOTAL_PAYMENT, 
+       ContractLinePayments.ID, 
+       ContractLine.ID AS ID1, 
+       Contract.ID AS ID2, 
+       Contract.DESIGN_DEPT, 
+       Contract.REGION_MANAGER, 
+       Contract.PROJECT_MANAGER"
+  FromList="CONTRACT_LINE_PAYMENTS ContractLinePayments, CONTRACT_LINE ContractLine, CONTRACT Contract"
+  Where="(ContractLinePayments.LINE_ID = ContractLine.ID) AND (ContractLine.HEADER_ID = Contract.ID)
+AND Contract.deleted ='N'
+AND ContractLine.deleted ='N'
+AND ContractLinePayments.deleted ='N'
+AND ContractLinePayments.payment_date BETWEEN TRUNC (SYSDATE, 'MM') AND (ADD_MONTHS(TRUNC (SYSDATE, 'MM'),1))"
+  OrderBy="Contract.CONTRACT_NO,ContractLine.SHIP_MNFT_NO,ContractLinePayments.PAYMENT_NAME"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  ComponentClass="com.xy.scpms.model.reports.MonthlyPaymentRptImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.reports.MonthlyPaymentRpt_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="dept"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="MgrId"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[adf.context.securityContext.userName]]></TransientExpression>
+  </Variable>
+  <EntityUsage
+    Name="ContractLinePayments"
+    Entity="com.xy.scpms.model.eo.ContractLinePayments"
+    ReadOnly="true"
+    DeleteParticipant="false"/>
+  <EntityUsage
+    Name="ContractLine"
+    Entity="com.xy.scpms.model.eo.ContractLine"
+    Association="com.xy.scpms.model.assoc.ContractLinePaymentsCoFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.ContractLinePaymentsCoFk1Assoc.ContractLine"
+    SourceUsage="com.xy.scpms.model.reports.MonthlyPaymentRpt.ContractLinePayments"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="com.xy.scpms.model.eo.ContractLinePayments.LineId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="com.xy.scpms.model.eo.ContractLine.Id"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <EntityUsage
+    Name="Contract"
+    Entity="com.xy.scpms.model.eo.Contract"
+    Association="com.xy.scpms.model.assoc.ContractLineContractFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.ContractLineContractFk1Assoc.Contract"
+    SourceUsage="com.xy.scpms.model.reports.MonthlyPaymentRpt.ContractLine"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="com.xy.scpms.model.eo.ContractLine.HeaderId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="com.xy.scpms.model.eo.Contract.Id"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <ViewAttribute
+    Name="ContractNo"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ContractNo"
+    EntityUsage="Contract"
+    AliasName="CONTRACT_NO"/>
+  <ViewAttribute
+    Name="ProjectName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ProjectName"
+    EntityUsage="Contract"
+    AliasName="PROJECT_NAME"/>
+  <ViewAttribute
+    Name="AuthName"
+    PrecisionRule="true"
+    EntityAttrName="AuthName"
+    EntityUsage="Contract"
+    AliasName="AUTH_NAME"/>
+  <ViewAttribute
+    Name="ShipMnftNo"
+    PrecisionRule="true"
+    EntityAttrName="ShipMnftNo"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_MNFT_NO"/>
+  <ViewAttribute
+    Name="PaymentName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PaymentName"
+    EntityUsage="ContractLinePayments"
+    AliasName="PAYMENT_NAME"/>
+  <ViewAttribute
+    Name="PaymentDate"
+    PrecisionRule="true"
+    EntityAttrName="PaymentDate"
+    EntityUsage="ContractLinePayments"
+    AliasName="PAYMENT_DATE"/>
+  <ViewAttribute
+    Name="TotalPayment"
+    PrecisionRule="true"
+    EntityAttrName="TotalPayment"
+    EntityUsage="ContractLinePayments"
+    AliasName="TOTAL_PAYMENT"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ContractLinePayments"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="LineId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ContractLine"
+    AliasName="ID1"/>
+  <ViewAttribute
+    Name="ContractId"
+    IsQueriable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Contract"
+    AliasName="ID2"/>
+  <ViewAttribute
+    Name="DesignDept"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DesignDept"
+    EntityUsage="Contract"
+    AliasName="DESIGN_DEPT"/>
+  <ViewAttribute
+    Name="RegionManager"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RegionManager"
+    EntityUsage="Contract"
+    AliasName="REGION_MANAGER"/>
+  <ViewAttribute
+    Name="ProjectManager"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ProjectManager"
+    EntityUsage="Contract"
+    AliasName="PROJECT_MANAGER"/>
+  <ViewCriteria
+    Name="findByDept"
+    ViewObjectName="com.xy.scpms.model.reports.MonthlyPaymentRpt"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="MonthlyPaymentRptCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DesignDept"
+        ViewAttribute="DesignDept"
+        Operator="="
+        Conjunction="AND"
+        Value=":dept"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByMgrId"
+    ViewObjectName="com.xy.scpms.model.reports.MonthlyPaymentRpt"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="MonthlyPaymentRptCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="RegionManager"
+        ViewAttribute="RegionManager"
+        Operator="="
+        Conjunction="AND"
+        Value=":MgrId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ProjectManager"
+        ViewAttribute="ProjectManager"
+        Operator="="
+        Conjunction="OR"
+        Value=":MgrId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="打印预览" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:pageTemplate viewId="/pages/report/ReportPrintTemplate.jspx"
+                                 value="#{bindings.ptb1}" id="pt1">
+                    <f:facet name="content">
+                        <af:table value="#{bindings.Rpt_ARAgingReport.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.Rpt_ARAgingReport.rangeSize}"
+                                  emptyText="#{bindings.Rpt_ARAgingReport.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.Rpt_ARAgingReport.rangeSize}"
+                                  rowBandingInterval="0" id="t1"
+                                  styleClass="AFStretchWidth">
+                             <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.DesignDept.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Rpt_ARAgingReport.hints.DesignDept.label}"
+                                               id="c1" align="center"
+                                        width="150">
+                                        <af:outputText value="#{row.DesignDept}"
+                                                       id="ot1"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.IntactTotal.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Rpt_ARAgingReport.hints.IntactTotal.label}"
+                                               id="c2" align="center">
+                                        <af:outputText value="#{row.IntactTotal}"
+                                                       id="ot2">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_ARAgingReport.hints.IntactTotal.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.FrozenTotal.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Rpt_ARAgingReport.hints.FrozenTotal.label}"
+                                               id="c3" align="center">
+                                        <af:outputText value="#{row.FrozenTotal}"
+                                                       id="ot3">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_ARAgingReport.hints.FrozenTotal.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.PayTotal.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Rpt_ARAgingReport.hints.PayTotal.label}"
+                                               id="c4" align="center">
+                                        <af:outputText value="#{row.PayTotal}"
+                                                       id="ot4">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_ARAgingReport.hints.PayTotal.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.InvTotal.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Rpt_ARAgingReport.hints.InvTotal.label}"
+                                               id="c5" align="center">
+                                        <af:outputText value="#{row.InvTotal}"
+                                                       id="ot5">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_ARAgingReport.hints.InvTotal.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.ArTotal.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.Rpt_ARAgingReport.hints.ArTotal.label}"
+                                               id="c6" align="center">
+                                        <af:outputText value="#{row.ArTotal}"
+                                                       id="ot6">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_ARAgingReport.hints.ArTotal.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="账龄" id="c7"
+                                               align="center">
+                                        <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.Inv90.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.Rpt_ARAgingReport.hints.Inv90.label}"
+                                                   id="c8" align="center">
+                                            <af:outputText value="#{row.Inv90}"
+                                                           id="ot7">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Rpt_ARAgingReport.hints.Inv90.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.Inv180.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.Rpt_ARAgingReport.hints.Inv180.label}"
+                                                   id="c9" align="center">
+                                            <af:outputText value="#{row.Inv180}"
+                                                           id="ot8">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Rpt_ARAgingReport.hints.Inv180.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.Inv365.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.Rpt_ARAgingReport.hints.Inv365.label}"
+                                                   id="c10" align="center">
+                                            <af:outputText value="#{row.Inv365}"
+                                                           id="ot9">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Rpt_ARAgingReport.hints.Inv365.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.Inv730.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.Rpt_ARAgingReport.hints.Inv730.label}"
+                                                   id="c11" align="center">
+                                            <af:outputText value="#{row.Inv730}"
+                                                           id="ot10">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Rpt_ARAgingReport.hints.Inv730.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.Rpt_ARAgingReport.hints.Inv1095.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.Rpt_ARAgingReport.hints.Inv1095.label}"
+                                                   id="c12" align="center">
+                                            <af:outputText value="#{row.Inv1095}"
+                                                           id="ot11">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Rpt_ARAgingReport.hints.Inv1095.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:outputText>
+                                        </af:column>
+                                    </af:column>
+                        </af:table>
+                    </f:facet>
+                    <f:facet name="title">
+                        <af:outputFormatted value="#{pageFlowScope.year}年#{pageFlowScope.month}月计划收费开票及账龄一览表（试用版）" id="of1"
+                                            styleClass="AFBrandingBarTitle"
+                                            inlineStyle="font-size:xx-large;"/>
+                    </f:facet>
+                </af:pageTemplate>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

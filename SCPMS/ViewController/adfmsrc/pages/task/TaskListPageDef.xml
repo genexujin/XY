@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="TaskListPageDef"
+                Package="pages.task">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ApprovalInProcess" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="ApprovalInProcessIterator"/>
+    <searchRegion Binds="ApprovalInProcessIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ApprovalInProcessQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ApprovalInProcessIterator" id="ApprovalInProcess">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ApprovalInProcessView" Name="ApprovalInProcess0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ContractEntity"/>
+          <Item Value="AuthName"/>
+          <Item Value="Type"/>
+          <Item Value="ProjectName"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="ContractType"/>
+          <Item Value="ApprovalDate"/>
+          <Item Value="ApprovalRole"/>
+          <Item Value="FullName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="ApprovalInProcessIterator" id="ContractId">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findContractById" InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findContractById" IsViewObjectMethod="false"
+                  ReturnName="data.CoreModuleDataControl.methodResults.findContractById_CoreModuleDataControl_dataProvider_findContractById_result">
+      <NamedData NDName="id" NDValue="#{bindings.ContractId.inputValue}" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <attributeValues IterBinding="ApprovalInProcessIterator" id="Type">
+      <AttrNames>
+        <Item Value="Type"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.60.13" id="DataBindings" SeparateXMLFiles="false"
+             Package="com.xy.scpms.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+    <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
+             className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/Index.jspx" usageId="com_xy_scpms_view_IndexPageDef"/>
+    <page path="/WEB-INF/crt/create-flow.xml#create-flow@CreateNewContract"
+          usageId="com_xy_scpms_view_create_flow_create_flow_CreateNewContractPageDef"/>
+    <page path="/WEB-INF/crt/create-flow.xml#create-flow@CreateSubContract"
+          usageId="com_xy_scpms_view_create_flow_create_flow_CreateSubContractPageDef"/>
+    <page path="/WEB-INF/crt/create-flow.xml#create-flow@CreatePaymentAgreement"
+          usageId="com_xy_scpms_view_create_flow_create_flow_CreatePaymentAgreementPageDef"/>
+  
+    <page path="/pages/crt/Confirmation.jspx"
+          usageId="com_xy_scpms_view_ConfirmationPageDef1"/>
+    <page path="/pages/crt/EditHeader.jspx"
+          usageId="com_xy_scpms_view_EditHeaderPageDef1"/>
+    <page path="/pages/crt/EditLines.jspx"
+          usageId="com_xy_scpms_view_EditLinesPageDef1"/>
+    <page path="/pages/crt/EditPayments.jspx"
+          usageId="com_xy_scpms_view_EditPaymentsPageDef1"/>
+    <page path="/pages/crt/UploadFile.jspx"
+          usageId="com_xy_scpms_view_UploadFilePageDef1"/>
+    <page path="/pages/crt/SearchForm.jspx"
+          usageId="com_xy_scpms_view_SearchFormPageDef"/>
+    <page path="/pages/search/BaseSearch.jspx" usageId="com_xy_scpms_view_BaseSearchPageDef"/>
+    <page path="/pages/search/SearchAllView.jspx" usageId="com_xy_scpms_view_SearchAllViewPageDef"/>
+    <page path="/pages/search/BrowseContract.jspx" usageId="com_xy_scpms_view_BrowseContractPageDef"/>
+    <page path="/pages/search/UpdateContract.jspx" usageId="com_xy_scpms_view_UpdateContractPageDef"/>
+    <page path="/WEB-INF/task/task-flow.xml#task-flow@setApplyCriteria"
+          usageId="com_xy_scpms_view_task_flow_task_flow_methodCall1PageDef"/>
+    <page path="/pages/task/TaskList.jspx" usageId="com_xy_scpms_view_TaskListPageDef"/>
+    <page path="/pages/task/Approval.jspx" usageId="com_xy_scpms_view_BrowsePageDef"/>
+    <page path="/Home.jspx" usageId="com_xy_scpms_view_HomePageDef"/>
+    <page path="/WEB-INF/task/task-flow.xml#task-flow@findContractById"
+          usageId="com_xy_scpms_view_task_flow_task_flow_findContractByIdPageDef"/>
+    <page path="/pages/Welcome.jsff" usageId="com_xy_scpms_view_WelcomePageDef"/>
+    <page path="/WEB-INF/wlc/welcome-flow.xml#welcome-flow@prepareDashboard"
+          usageId="com_xy_scpms_view_welcome_flow_welcome_flow_setAIPCriteriaPageDef"/>
+    <page path="/WEB-INF/invoice/invoice-flow.xml#invoice-flow@setInoiveNotificationDay"
+          usageId="com_xy_scpms_view_invoice_flow_invoice_flow_setInoiveNotificationDayPageDef"/>
+    <page path="/pages/invoice/InvoiceNotification.jspx" usageId="com_xy_scpms_view_InvoiceNotificationPageDef"/>
+    <page path="/pages/invoice/Requisitions.jspx" usageId="com_xy_scpms_view_RequisitionsPageDef"/>
+    <page path="/pages/invoice/PendingInvReq.jspx" usageId="com_xy_scpms_view_PendingInvReqPageDef"/>
+    <page path="/WEB-INF/invoice/app-inv-req.xml#app-inv-req@findPendingInvReq"
+          usageId="com_xy_scpms_view_app_inv_req_app_inv_req_findPendingInvReqPageDef"/>
+    <page path="/WEB-INF/invoice/app-inv-req.xml#app-inv-req@findPendingInvReqbyPaymentId"
+          usageId="com_xy_scpms_view_app_inv_req_app_inv_req_findPendingInvReqbyPaymentIdPageDef"/>
+    <page path="/pages/invoice/PaymentBatches.jspx"
+          usageId="com_xy_scpms_view_PaymentBatchesPageDef"/>
+    <page path="/pages/invoice/CreateEditBatch.jspx"
+          usageId="com_xy_scpms_view_CreateEditBatchPageDef"/>
+    <page path="/pages/invoice/BatchPrintable.jspx"
+          usageId="com_xy_scpms_view_BatchPrintablePageDef"/>
+    <page path="/invoice/InvoiceEntry.jspx"
+          usageId="com_xy_scpms_view_InvoiceEntryPageDef"/>
+    <page path="/pages/invoice/PaymentEntry.jspx"
+          usageId="com_xy_scpms_view_PaymentEntryPageDef"/>
+    <page path="/WEB-INF/invoice/payment-flow.xml#payment-flow@findInvoicedPaymentNodes"
+          usageId="com_xy_scpms_view_payment_flow_payment_flow_findInvoicedPaymentNodesPageDef"/>
+    <page path="/pages/fourtech/Browse.jspx"
+          usageId="com_xy_scpms_view_BrowsePageDef1"/>
+    <page path="/WEB-INF/crt/four-tech.xml#four-tech@findBlankFourTechLines"
+          usageId="com_xy_scpms_view_four_tech_four_tech_findBlankFourTechLinesPageDef"/>
+    <page path="/pages/fourtech/ChooseLine.jspx"
+          usageId="com_xy_scpms_view_ChooseLinePageDef"/>
+    <page path="/pages/common/test.jspx"
+          usageId="com_xy_scpms_view_testPageDef"/>
+    <page path="/pages/fourtech/FourTechList.jspx"
+          usageId="com_xy_scpms_view_FourTechListPageDef"/>
+    <page path="/pages/fourtech/CreateFourTech.jspx"
+          usageId="com_xy_scpms_view_CreateFourTechPageDef"/>
+    <page path="/pages/users/Users.jspx"
+          usageId="com_xy_scpms_view_UsersPageDef"/>
+    <page path="/pages/lov/Lovs.jspx" usageId="com_xy_scpms_view_LovsPageDef"/>
+    <page path="/pages/audit/ContractHistory.jspx"
+          usageId="com_xy_scpms_view_ContractHistoryPageDef"/>
+    <page path="/pages/export/DataExport.jspx"
+          usageId="com_xy_scpms_view_DataExportPageDef"/>
+    <page path="/Login.jspx" usageId="com_xy_scpms_view_LoginPageDef"/>
+    <page path="/login_error.jspx"
+          usageId="com_xy_scpms_view_login_errorPageDef"/>
+    <page path="/customer/CustomerSearch.jspx"
+          usageId="com_xy_scpms_view_CustomerSearchPageDef"/>
+    <page path="/WEB-INF/customer/search-customer-byId.xml#search-customer-byId@setViewCriteria"
+          usageId="com_xy_scpms_view_search_customer_byId_search_customer_byId_setViewCriteriaPageDef"/>
+    <page path="/customer/customerDetail.jspx"
+          usageId="com_xy_scpms_view_customerDetailPageDef"/>
+    <page path="/WEB-INF/customer/search-contact-byId.xml#search-contact-byId@SetCriteria"
+          usageId="com_xy_scpms_view_search_contact_byId_search_contact_byId_SetCriteriaPageDef"/>
+    <page path="/customer/ContactDetail.jspx"
+          usageId="com_xy_scpms_view_ContactDetailPageDef"/>
+    <page path="/WEB-INF/customer/customer.xml#customer@setQueryType"
+          usageId="com_xy_scpms_view_customer_customer_setQueryTypePageDef"/>
+    <page path="/pages/report/SetupDeptPerfTarget.jspx"
+          usageId="com_xy_scpms_view_SetupDeptPerfTargetPageDef"/>
+    <page path="/pages/report/DynPayStatusReport.jspx"
+          usageId="com_xy_scpms_view_DynPayStatusReportPageDef"/>
+    <page path="/pages/report/DynPayStatusPrintPage.jspx"
+          usageId="com_xy_scpms_view_DynPayStatusPrintPagePageDef"/>
+    <page path="/pages/report/ReportTemplate.jspx"
+          usageId="com_xy_scpms_view_ReportTemplatePageDef"/>
+    <page path="/pages/report/AgingReport.jspx"
+          usageId="com_xy_scpms_view_AgingReportPageDef"/>
+    <page path="/WEB-INF/report/ar-aging-report.xml#ar-aging-report@runReport"
+          usageId="com_xy_scpms_view_ar_aging_report_ar_aging_report_runReportPageDef"/>
+    <page path="/pages/report/ReportPrintTemplate.jspx"
+          usageId="com_xy_scpms_view_ReportPrintTemplatePageDef"/>
+    <page path="/pages/report/AgingReportPrint.jspx"
+          usageId="com_xy_scpms_view_AgingReportPrintPageDef"/>
+    <page path="/WEB-INF/report/eve-report.xml#eve-report@runReportCriteria"
+          usageId="com_xy_scpms_view_eve_report_eve_report_runReportCriteriaPageDef"/>
+    <page path="/pages/report/EVEReport.jspx"
+          usageId="com_xy_scpms_view_EVEReportPageDef"/>
+    <page path="/pages/report/EveReportPrint.jspx"
+          usageId="com_xy_scpms_view_EveReportPrintPageDef"/>
+    <page path="/WEB-INF/invoice/payNote-flow.xml#payNote-flow@setPayNoticeParam"
+          usageId="com_xy_scpms_view_payNote_flow_payNote_flow_methodCall1PageDef"/>
+    <page path="/pages/invoice/PaymentNotices.jspx"
+          usageId="com_xy_scpms_view_PaymentNoticesPageDef"/>
+    <page path="/pages/report/PrjMgrReport.jspx"
+          usageId="com_xy_scpms_view_RunReportPageDef"/>
+    <page path="/pages/report/RegMgrRpt.jspx"
+          usageId="com_xy_scpms_view_RegMgrRptPageDef"/>
+    <page path="/pages/report/CustPerfRpt.jspx"
+          usageId="com_xy_scpms_view_CustPerfRptPageDef"/>
+    <page path="/WEB-INF/report/ar-aging-report.xml#ar-aging-report@clearRowSet"
+          usageId="com_xy_scpms_view_ar_aging_report_ar_aging_report_clearRowSetPageDef"/>
+    <page path="/WEB-INF/report/cust-perf-report.xml#cust-perf-report@clearRowSet"
+          usageId="com_xy_scpms_view_cust_perf_report_cust_perf_report_clearRowSetPageDef"/>
+    <page path="/WEB-INF/report/dynPayStatus-report.xml#dynPayStatus-report@clearRowSet"
+          usageId="com_xy_scpms_view_dynPayStatus_report_dynPayStatus_report_clearRowSetPageDef"/>
+    <page path="/WEB-INF/report/eve-report.xml#eve-report@clearRowSet"
+          usageId="com_xy_scpms_view_eve_report_eve_report_clearRowSetPageDef"/>
+    <page path="/WEB-INF/report/prjmgr-perf-report.xml#prjmgr-perf-report@clearRowSet"
+          usageId="com_xy_scpms_view_prjmgr_perf_report_prjmgr_perf_report_clearRowSetPageDef"/>
+    <page path="/WEB-INF/report/regmgr-perf-report.xml#regmgr-perf-report@clearRowSet"
+          usageId="com_xy_scpms_view_regmgr_perf_report_regmgr_perf_report_clearRowSetPageDef"/>
+    <page path="/pages/report/EVEHistoryTableView.jspx"
+          usageId="com_xy_scpms_view_EVEHistoryTableViewPageDef"/>
+    <page path="/pages/report/EVEGraphicView.jspx"
+          usageId="com_xy_scpms_view_EVEGraphicViewPageDef"/>
+    <page path="/WEB-INF/report/eve-history-report.xml#eve-history-report@queryByYrDept"
+          usageId="com_xy_scpms_view_eve_history_report_eve_history_report_queryByYrDeptPageDef"/>
+    <page path="/WEB-INF/report/eve-history-report.xml#eve-history-report@clearRowSet"
+          usageId="com_xy_scpms_view_eve_history_report_eve_history_report_clearRowSetPageDef"/>
+    <page path="/WEB-INF/user/change-password-flow.xml#change-password-flow@queryByUserName"
+          usageId="com_xy_scpms_view_change_password_flow_change_password_flow_queryByUserNamePageDef"/>
+    <page path="/pages/users/ChangePassword.jspx"
+          usageId="com_xy_scpms_view_ChangePasswordPageDef"/>
+    <page path="/WEB-INF/invoice/payment-flow.xml#payment-flow@findPaidPaymentNodes"
+          usageId="com_xy_scpms_view_payment_flow_payment_flow_findPaidPaymentNodesPageDef"/>
+    <page path="/WEB-INF/invoice/payment-flow.xml#payment-flow@findPaidVarPaymentNodes"
+          usageId="com_xy_scpms_view_payment_flow_payment_flow_findPaidVarPaymentNodesPageDef"/>
+    <page path="/WEB-INF/invoice/payment-flow.xml#payment-flow@findPartialPaymentNodes"
+          usageId="com_xy_scpms_view_payment_flow_payment_flow_findPartialPaymentNodesPageDef"/>
+    <page path="/pages/users/UserReport.jspx"
+          usageId="com_xy_scpms_view_UserReportPageDef"/>
+    <page path="/pages/test/Test.jspx" usageId="com_xy_scpms_view_TestPageDef"/>
+    <page path="/WEB-INF/customer/lookup-contact.xml#lookup-contact@setQueryTypeByCustomerId"
+          usageId="com_xy_scpms_view_lookup_contact_lookup_contact_setQueryTypeByCustomerIdPageDef"/>
+    <page path="/customer/ContactLookup.jspx" usageId="com_xy_scpms_view_ContactLookupPageDef"/>
+    <page path="/pages/lov/LovRawEdit.jspx" usageId="com_xy_scpms_view_LovRawEditPageDef"/>
+    <page path="/WEB-INF/customer/customer-contact-btf.xml#customer-contact-btf@setQueryTypeById"
+          usageId="com_xy_scpms_view_customer_contact_btf_customer_contact_btf_setQueryTypeByIdPageDef"/>
+    <page path="/pages/lookup/ContactDetail.jsff" usageId="com_xy_scpms_view_ContactDetailPageDef1"/>
+    <page path="/WEB-INF/customer/customer-btf.xml#customer-btf@setQueryTypeById"
+          usageId="com_xy_scpms_view_customer_btf_customer_btf_setQueryTypeByIdPageDef"/>
+    <page path="/pages/lookup/CustomerDetail.jsff" usageId="com_xy_scpms_view_CustomerDetailPageDef"/>
+    <page path="/WEB-INF/lookup/browse-contract-btf.xml#browse-contract-btf@findById"
+          usageId="com_xy_scpms_view_browse_contract_btf_browse_contract_btf_findByIdPageDef"/>
+    <page path="/pages/lookup/ContractDetail.jsff" usageId="com_xy_scpms_view_ContractDetailPageDef"/>
+    <page path="/pages/report/InvForecastPrint.jspx" usageId="com_xy_scpms_view_InvForecastPrintPageDef"/>
+    <page path="/pages/report/InvForecastRpt.jspx" usageId="com_xy_scpms_view_InvForecastRptPageDef"/>
+    <page path="/pages/report/PayForecastRpt.jspx" usageId="com_xy_scpms_view_PayForecastRptPageDef"/>
+    <page path="/WEB-INF/report/ship-delivery-btf.xml#ship-delivery@clearRowSet"
+          usageId="com_xy_scpms_view_ship_delivery_btf_ship_delivery_clearRowSetPageDef"/>
+    <page path="/pages/report/ShipDeliveryRpt.jspx" usageId="com_xy_scpms_view_ShipDeliveryRptPageDef"/>
+    <page path="/pages/report/SettlementRpt.jspx" usageId="com_xy_scpms_view_SettlementRptPageDef"/>
+    <page path="/pages/report/SelectContract.jspx" usageId="com_xy_scpms_view_SelectContractPageDef"/>
+    <page path="/WEB-INF/report/group-perf-report.xml#group-perf-report@clearRowSet"
+          usageId="com_xy_scpms_view_group_perf_report_group_perf_report_clearRowSetPageDef"/>
+    <page path="/pages/report/GroupPerfRpt.jspx" usageId="com_xy_scpms_view_GroupPerfRptPageDef"/>
+    <page path="/Test.jspx" usageId="com_xy_scpms_view_TestPageDef1"/>
+  </pageMap>
+  <pageDefinitionUsages>
+
+    <page id="com_xy_scpms_view_create_flow_create_flow_CreateNewContractPageDef"
+          path="pages.crt.create_flow_create_flow_CreateNewContractPageDef"/>
+    <page id="com_xy_scpms_view_create_flow_create_flow_CreateSubContractPageDef"
+          path="pages.crt.create_flow_create_flow_CreateSubContractPageDef"/>
+    <page id="com_xy_scpms_view_create_flow_create_flow_CreatePaymentAgreementPageDef"
+          path="pages.crt.create_flow_create_flow_CreatePaymentAgreementPageDef"/>
+    <page id="com_xy_scpms_view_ConfirmationPageDef1"
+          path="pages.crt.ConfirmationPageDef1"/>
+    <page id="com_xy_scpms_view_EditHeaderPageDef1"
+          path="pages.crt.EditHeaderPageDef1"/>
+    <page id="com_xy_scpms_view_EditLinesPageDef1"
+          path="pages.crt.EditLinesPageDef1"/>
+    <page id="com_xy_scpms_view_EditPaymentsPageDef1"
+          path="pages.crt.EditPaymentsPageDef1"/>
+    <page id="com_xy_scpms_view_UploadFilePageDef1"
+          path="pages.crt.UploadFilePageDef1"/>
+    <page id="com_xy_scpms_view_SearchFormPageDef"
+          path="pages.crt.SearchFormPageDef"/>
+    <page id="com_xy_scpms_view_SearchViewPageDef"
+          path="pages.search.SearchViewPageDef"/>
+    <page id="com_xy_scpms_view_BaseSearchPageDef" path="pages.search.BaseSearchPageDef"/>
+    <page id="com_xy_scpms_view_SearchAllViewPageDef" path="pages.search.SearchAllViewPageDef"/>
+    <page id="com_xy_scpms_view_BrowseContractPageDef" path="pages.search.BrowseContractPageDef"/>
+    <page id="com_xy_scpms_view_UpdateContractPageDef" path="pages.search.UpdateContractPageDef"/>
+    <page id="com_xy_scpms_view_task_flow_task_flow_methodCall1PageDef"
+          path="task.task_flow_task_flow_methodCall1PageDef"/>
+    <page id="com_xy_scpms_view_TaskListPageDef" path="pages.task.TaskListPageDef"/>
+    <page id="com_xy_scpms_view_BrowsePageDef" path="pages.task.BrowsePageDef"/>
+    <page id="com_xy_scpms_view_HomePageDef" path="com.xy.scpms.view.pageDefs.HomePageDef"/>
+    <page id="com_xy_scpms_view_task_flow_task_flow_findContractByIdPageDef"
+          path="task.task_flow_task_flow_findContractByIdPageDef"/>
+    <page id="com_xy_scpms_view_welcome_flow_welcome_flow_setAIPCriteriaPageDef"
+          path="wlc.welcome_flow_welcome_flow_setAIPCriteriaPageDef"/>
+    <page id="com_xy_scpms_view_WelcomePageDef" path="pages.WelcomePageDef"/>
+    <page id="com_xy_scpms_view_invoice_flow_invoice_flow_setInoiveNotificationDayPageDef"
+          path="invoice.invoice_flow_invoice_flow_setInoiveNotificationDayPageDef"/>
+    <page id="com_xy_scpms_view_InvoiceNotificationPageDef" path="invoice.InvoiceNotificationPageDef"/>
+    <page id="com_xy_scpms_view_RequisitionsPageDef" path="pages.invoice.RequisitionsPageDef"/>
+    <page id="com_xy_scpms_view_PendingInvReqPageDef" path="pages.invoice.PendingInvReqPageDef"/>
+    <page id="com_xy_scpms_view_app_inv_req_app_inv_req_findPendingInvReqPageDef"
+          path="invoice.app_inv_req_app_inv_req_findPendingInvReqPageDef"/>
+    <page id="com_xy_scpms_view_app_inv_req_app_inv_req_findPendingInvReqbyPaymentIdPageDef"
+          path="invoice.app_inv_req_app_inv_req_findPendingInvReqbyPaymentIdPageDef"/>
+    <page id="com_xy_scpms_view_PaymentBatchesPageDef"
+          path="pages.invoice.PaymentBatchesPageDef"/>
+    <page id="com_xy_scpms_view_CreateEditBatchPageDef"
+          path="pages.invoice.CreateEditBatchPageDef"/>
+    <page id="com_xy_scpms_view_BatchPrintablePageDef"
+          path="pages.invoice.BatchPrintablePageDef"/>
+    <page id="com_xy_scpms_view_InvoiceEntryPageDef"
+          path="invoice.InvoiceEntryPageDef"/>
+    <page id="com_xy_scpms_view_PaymentEntryPageDef"
+          path="pages.invoice.PaymentEntryPageDef"/>
+    <page id="com_xy_scpms_view_payment_flow_payment_flow_findInvoicedPaymentNodesPageDef"
+          path="invoice.payment_flow_payment_flow_findInvoicedPaymentNodesPageDef"/>
+    <page id="com_xy_scpms_view_BrowsePageDef1"
+          path="pages.4tech.BrowsePageDef"/>
+    <page id="com_xy_scpms_view_four_tech_four_tech_findBlankFourTechLinesPageDef"
+          path="A4tech.four_tech_four_tech_findBlankFourTechLinesPageDef"/>
+    <page id="com_xy_scpms_view_ChooseLinePageDef"
+          path="pages.4tech.ChooseLinePageDef"/>
+    <page id="com_xy_scpms_view_testPageDef" path="pages.common.testPageDef"/>
+    <page id="com_xy_scpms_view_FourTechListPageDef"
+          path="pages.fourtech.FourTechListPageDef"/>
+    <page id="com_xy_scpms_view_CreateFourTechPageDef"
+          path="pages.fourtech.CreateFourTechPageDef"/>
+    <page id="com_xy_scpms_view_UsersPageDef" path="pages.users.UsersPageDef"/>
+    <page id="com_xy_scpms_view_LovsPageDef" path="pages.lov.LovsPageDef"/>
+    <page id="com_xy_scpms_view_ContractHistoryPageDef"
+          path="pages.audit.ContractHistoryPageDef"/>
+    <page id="com_xy_scpms_view_DataExportPageDef"
+          path="export.DataExportPageDef"/>
+    <page id="com_xy_scpms_view_LoginPageDef"
+          path="com.xy.scpms.view.pageDefs.LoginPageDef"/>
+    <page id="com_xy_scpms_view_login_errorPageDef"
+          path="com.xy.scpms.view.pageDefs.login_errorPageDef"/>
+    <page id="com_xy_scpms_view_CustomerSearchPageDef"
+          path="customer.CustomerSearchPageDef"/>
+    <page id="com_xy_scpms_view_search_customer_byId_search_customer_byId_setViewCriteriaPageDef"
+          path="customer.search_customer_byId_search_customer_byId_setViewCriteriaPageDef"/>
+    <page id="com_xy_scpms_view_customerDetailPageDef"
+          path="customer.customerDetailPageDef"/>
+    <page id="com_xy_scpms_view_search_contact_byId_search_contact_byId_SetCriteriaPageDef"
+          path="customer.search_contact_byId_search_contact_byId_SetCriteriaPageDef"/>
+    <page id="com_xy_scpms_view_ContactDetailPageDef"
+          path="customer.ContactDetailPageDef"/>
+    <page id="com_xy_scpms_view_customer_customer_setQueryTypePageDef"
+          path="customer.customer_customer_setQueryTypePageDef"/>
+    <page id="com_xy_scpms_view_SetupDeptPerfTargetPageDef"
+          path="pages.report.SetupDeptPerfTargetPageDef"/>
+    <page id="com_xy_scpms_view_DynPayStatusReportPageDef"
+          path="pages.report.DynPayStatusReportPageDef"/>
+    <page id="com_xy_scpms_view_DynPayStatusPrintPagePageDef"
+          path="pages.report.DynPayStatusPrintPagePageDef"/>
+    <page id="com_xy_scpms_view_ReportTemplatePageDef"
+          path="pages.report.ReportTemplatePageDef"/>
+    <page id="com_xy_scpms_view_AgingReportPageDef"
+          path="pages.report.AgingReportPageDef"/>
+    <page id="com_xy_scpms_view_ar_aging_report_ar_aging_report_runReportPageDef"
+          path="report.ar_aging_report_ar_aging_report_runReportPageDef"/>
+    <page id="com_xy_scpms_view_ReportPrintTemplatePageDef"
+          path="pages.report.ReportPrintTemplatePageDef"/>
+    <page id="com_xy_scpms_view_AgingReportPrintPageDef"
+          path="pages.report.AgingReportPrintPageDef"/>
+    <page id="com_xy_scpms_view_eve_report_eve_report_runReportCriteriaPageDef"
+          path="report.eve_report_eve_report_runReportCriteriaPageDef"/>
+    <page id="com_xy_scpms_view_EVEReportPageDef"
+          path="pages.report.EVEReportPageDef"/>
+    <page id="com_xy_scpms_view_EveReportPrintPageDef"
+          path="pages.report.EveReportPrintPageDef"/>
+    <page id="com_xy_scpms_view_payNote_flow_payNote_flow_methodCall1PageDef"
+          path="invoice.payNote_flow_payNote_flow_methodCall1PageDef"/>
+    <page id="com_xy_scpms_view_PaymentNoticesPageDef"
+          path="pages.invoice.PaymentNoticesPageDef"/>
+    <page id="com_xy_scpms_view_RunReportPageDef"
+          path="pages.report.RunReportPageDef"/>
+    <page id="com_xy_scpms_view_RegMgrRptPageDef"
+          path="pages.report.RegMgrRptPageDef"/>
+    <page id="com_xy_scpms_view_CustPerfRptPageDef"
+          path="pages.report.CustPerfRptPageDef"/>
+    <page id="com_xy_scpms_view_ar_aging_report_ar_aging_report_clearRowSetPageDef"
+          path="report.ar_aging_report_ar_aging_report_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_cust_perf_report_cust_perf_report_clearRowSetPageDef"
+          path="report.cust_perf_report_cust_perf_report_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_dynPayStatus_report_dynPayStatus_report_clearRowSetPageDef"
+          path="report.dynPayStatus_report_dynPayStatus_report_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_eve_report_eve_report_clearRowSetPageDef"
+          path="report.eve_report_eve_report_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_prjmgr_perf_report_prjmgr_perf_report_clearRowSetPageDef"
+          path="report.prjmgr_perf_report_prjmgr_perf_report_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_regmgr_perf_report_regmgr_perf_report_clearRowSetPageDef"
+          path="report.regmgr_perf_report_regmgr_perf_report_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_EVEHistoryTableViewPageDef"
+          path="pages.report.EVEHistoryTableViewPageDef"/>
+    <page id="com_xy_scpms_view_EVEGraphicViewPageDef"
+          path="pages.report.EVEGraphicViewPageDef"/>
+    <page id="com_xy_scpms_view_eve_history_report_eve_history_report_queryByYrDeptPageDef"
+          path="report.eve_history_report_eve_history_report_queryByYrDeptPageDef"/>
+    <page id="com_xy_scpms_view_eve_history_report_eve_history_report_clearRowSetPageDef"
+          path="report.eve_history_report_eve_history_report_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_change_password_flow_change_password_flow_queryByUserNamePageDef"
+          path="user.change_password_flow_change_password_flow_queryByUserNamePageDef"/>
+    <page id="com_xy_scpms_view_ChangePasswordPageDef"
+          path="pages.users.ChangePasswordPageDef"/>
+    <page id="com_xy_scpms_view_payment_flow_payment_flow_findPaidPaymentNodesPageDef"
+          path="invoice.payment_flow_payment_flow_findPaidPaymentNodesPageDef"/>
+    <page id="com_xy_scpms_view_payment_flow_payment_flow_findPaidVarPaymentNodesPageDef"
+          path="invoice.payment_flow_payment_flow_findPaidVarPaymentNodesPageDef"/>
+    <page id="com_xy_scpms_view_payment_flow_payment_flow_findPartialPaymentNodesPageDef"
+          path="invoice.payment_flow_payment_flow_findPartialPaymentNodesPageDef"/>
+    <page id="com_xy_scpms_view_UserReportPageDef"
+          path="pages.users.UserReportPageDef"/>
+    <page id="com_xy_scpms_view_TestPageDef" path="pages.test.TestPageDef"/>
+    <page id="com_xy_scpms_view_lookup_contact_lookup_contact_setQueryTypeByCustomerIdPageDef"
+          path="customer.lookup_contact_lookup_contact_setQueryTypeByCustomerIdPageDef"/>
+    <page id="com_xy_scpms_view_ContactLookupPageDef" path="customer.ContactLookupPageDef"/>
+    <page id="com_xy_scpms_view_LovRawEditPageDef" path="pages.lov.LovRawEditPageDef"/>
+    <page id="com_xy_scpms_view_customer_contact_btf_customer_contact_btf_setQueryTypeByIdPageDef"
+          path="customer.customer_contact_btf_customer_contact_btf_setQueryTypeByIdPageDef"/>
+    <page id="com_xy_scpms_view_ContactDetailPageDef1" path="pages.lookup.ContactDetailPageDef"/>
+    <page id="com_xy_scpms_view_customer_btf_customer_btf_setQueryTypeByIdPageDef"
+          path="customer.customer_btf_customer_btf_setQueryTypeByIdPageDef"/>
+    <page id="com_xy_scpms_view_CustomerDetailPageDef" path="pages.lookup.CustomerDetailPageDef"/>
+    <page id="com_xy_scpms_view_browse_contract_btf_browse_contract_btf_findByIdPageDef"
+          path="lookup.browse_contract_btf_browse_contract_btf_findByIdPageDef"/>
+    <page id="com_xy_scpms_view_ContractDetailPageDef" path="pages.lookup.ContractDetailPageDef"/>
+    <page id="com_xy_scpms_view_InvForecastPrintPageDef" path="pages.report.InvForecastPrintPageDef"/>
+    <page id="com_xy_scpms_view_InvForecastRptPageDef" path="pages.report.InvForecastRptPageDef"/>
+    <page id="com_xy_scpms_view_PayForecastRptPageDef" path="pages.report.PayForecastRptPageDef"/>
+    <page id="com_xy_scpms_view_ship_delivery_btf_ship_delivery_clearRowSetPageDef"
+          path="report.ship_delivery_btf_ship_delivery_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_ShipDeliveryRptPageDef" path="pages.report.ShipDeliveryRptPageDef"/>
+    <page id="com_xy_scpms_view_SettlementRptPageDef" path="pages.report.SettlementRptPageDef"/>
+    <page id="com_xy_scpms_view_SelectContractPageDef" path="pages.report.SelectContractPageDef"/>
+    <page id="com_xy_scpms_view_group_perf_report_group_perf_report_clearRowSetPageDef"
+          path="report.group_perf_report_group_perf_report_clearRowSetPageDef"/>
+    <page id="com_xy_scpms_view_GroupPerfRptPageDef" path="pages.report.GroupPerfRptPageDef"/>
+    <page id="com_xy_scpms_view_TestPageDef1" path="com.xy.scpms.view.pageDefs.TestPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="DashboardEventHandler" path="com.xy.scpms.view.DashboardEventHandler"/>
+    <BC4JDataControl id="CoreModuleDataControl" Package="com.xy.scpms.model.biz"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="CoreModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="LovModuleDataControl" Package="com.xy.scpms.model.biz"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="LovModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

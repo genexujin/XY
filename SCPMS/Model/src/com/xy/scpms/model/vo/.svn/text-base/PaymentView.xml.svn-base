@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PaymentView"
+  Version="11.1.1.60.13"
+  SelectList="Payment.ID, 
+       Payment.INVOICE_ID, 
+       Payment.PAYMENT_AMOUNT, 
+       Payment.PAYMENT_DATE, 
+       Payment.CREATED_BY, 
+       Payment.CREATION_DATE, 
+       Payment.MEMO"
+  FromList="PAYMENT Payment"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="Payment"
+    Entity="com.xy.scpms.model.eo.Payment"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Payment"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="InvoiceId"
+    PrecisionRule="true"
+    EntityAttrName="InvoiceId"
+    EntityUsage="Payment"
+    AliasName="INVOICE_ID"/>
+  <ViewAttribute
+    Name="PaymentAmount"
+    PrecisionRule="true"
+    EntityAttrName="PaymentAmount"
+    EntityUsage="Payment"
+    AliasName="PAYMENT_AMOUNT"/>
+  <ViewAttribute
+    Name="PaymentDate"
+    PrecisionRule="true"
+    EntityAttrName="PaymentDate"
+    EntityUsage="Payment"
+    AliasName="PAYMENT_DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="Payment"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="Payment"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="Memo"
+    PrecisionRule="true"
+    EntityAttrName="Memo"
+    EntityUsage="Payment"
+    AliasName="MEMO"/>
+</ViewObject>

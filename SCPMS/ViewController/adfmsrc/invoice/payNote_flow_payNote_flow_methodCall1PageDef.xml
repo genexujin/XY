@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17"
+                id="payNote_flow_payNote_flow_methodCall1PageDef"
+                Package="invoice" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="setPaymentNotification" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setPaymentNotification"
+                  IsViewObjectMethod="false" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.dataProvider">
+      <NamedData NDName="low" NDValue="#{null}"
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="high" NDValue="#{null}"
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="userRole" NDValue="#{sessionScope.role}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="dept" NDValue="#{sessionScope.userDept}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="userName" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

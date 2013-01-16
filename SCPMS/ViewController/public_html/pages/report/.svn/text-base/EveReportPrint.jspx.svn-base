@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="EveReportPrint.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:pageTemplate viewId="/pages/report/ReportPrintTemplate.jspx"
+                                 value="#{bindings.ptb1}" id="pt1">
+                    <f:facet name="content">
+                        <af:table value="#{bindings.Rpt_EVEReport.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.Rpt_EVEReport.rangeSize}"
+                                  emptyText="#{bindings.Rpt_EVEReport.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.Rpt_EVEReport.rangeSize}"
+                                  rowBandingInterval="0" id="t1"
+                                  styleClass="AFStretchWidth">
+                           <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.Dept.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Rpt_EVEReport.hints.Dept.label}"
+                                           id="c1" align="center" width="140">
+                                    <af:outputText value="#{row.Dept}"
+                                                   id="ot1"/>
+                                </af:column>
+                                <af:column headerText="合同数" id="c13"
+                                           align="center">
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.YrCrtCnt.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.YrCrtCnt.label}"
+                                               id="c6" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.YrCrtCnt}"
+                                                       id="ot6">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.YrCrtCnt.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.MthCrtCnt.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.MthCrtCnt.label}"
+                                               id="c7" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.MthCrtCnt}"
+                                                       id="ot7">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.MthCrtCnt.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:column>
+                                <af:column id="c14"
+                                           align="center" headerText="合同额">
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.YrAmtTotal.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.YrAmtTotal.label}"
+                                               id="c5" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.YrAmtTotal}"
+                                                       id="ot5">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.YrAmtTotal.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.MthAmtTotal.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.MthAmtTotal.label}"
+                                               id="c4" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.MthAmtTotal}"
+                                                       id="ot4">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.MthAmtTotal.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.ContractTarget.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.ContractTarget.label}"
+                                               id="c2" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.ContractTarget}"
+                                                       id="ot2">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.ContractTarget.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.AmtPer.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.AmtPer.label}"
+                                               id="c10" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.AmtPer}%"
+                                                       id="ot10">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.AmtPer.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:column>
+                                <af:column headerText="合同收费" id="c12"
+                                           align="center">
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.YrTotalPaid.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.YrTotalPaid.label}"
+                                               id="c9" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.YrTotalPaid}"
+                                                       id="ot9">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.YrTotalPaid.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.MthTotalPaid.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.MthTotalPaid.label}"
+                                               id="c8" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.MthTotalPaid}"
+                                                       id="ot8">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.MthTotalPaid.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.PaymentTarget.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.PaymentTarget.label}"
+                                               id="c3" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.PaymentTarget}"
+                                                       id="ot3">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.PaymentTarget.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Rpt_EVEReport.hints.PayPer.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Rpt_EVEReport.hints.PayPer.label}"
+                                               id="c11" width="70"
+                                               align="center">
+                                        <af:outputText value="#{row.PayPer}"
+                                                       id="ot11">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Rpt_EVEReport.hints.PayPer.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:column>
+                        </af:table>
+                    </f:facet>
+                    <f:facet name="title">
+                        <af:outputFormatted value="#{pageFlowScope.year}年#{pageFlowScope.month}合同额及收费表"
+                                            id="of1"
+                                            styleClass="AFBrandingBarTitle"
+                                            inlineStyle="font-size:xx-large;"/>
+                    </f:facet>
+                </af:pageTemplate>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

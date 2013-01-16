@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17"
+                id="ar_aging_report_ar_aging_report_clearRowSetPageDef"
+                Package="report" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="clearRowSet" RequiresUpdateModel="true" Action="invokeMethod"
+            MethodName="clearRowSet" IsViewObjectMethod="true"
+            DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.Rpt_ARAgingReport"
+            ReturnName="data.CoreModuleDataControl.methodResults.clearRowSet_CoreModuleDataControl_Rpt_ARAgingReport_clearRowSet_result"/>
+  </bindings>
+</pageDefinition>

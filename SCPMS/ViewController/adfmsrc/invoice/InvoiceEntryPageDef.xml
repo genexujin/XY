@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="InvoiceEntryPageDef"
+                Package="invoice">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="InvoiceBatches" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="InvoiceBatchesIterator"/>
+    <iterator Binds="LinePaymentsOfBatch" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="LinePaymentsOfBatchIterator"/>
+    <searchRegion Binds="InvoiceBatchesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InvoiceBatchesQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="InvoiceBatchesIterator" id="InvoiceBatches">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.InvoiceBatchView"
+                      Name="InvoiceBatches0">
+        <AttrNames>
+          <Item Value="BatchName"/>
+          <Item Value="InvNum"/>
+          <Item Value="Memo"/>
+          <Item Value="CreationDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="LinePaymentsOfBatchIterator" id="LinePaymentsOfBatch">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractLinePaymentsView"
+                      Name="LinePaymentsOfBatch0">
+        <AttrNames>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="Ems"/>
+          <Item Value="PaymentName"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="CoreModuleDataControl"/>
+    <action id="Commit" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

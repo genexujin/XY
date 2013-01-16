@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">ContactLookup</property>
+      <property
+         name="page">/customer/ContactLookup.jspx</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>ContactLookup&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">171.24707</property>
+      <property
+         name="pageFragment">false</property>
+      <property
+         name="x">292.0</property>
+   </View>
+   <TaskFlowReturn
+      id="TaskFlowReturn3">
+      <property
+         name="activityId">return</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>return&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  return&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">188.24707</property>
+      <property
+         name="x">507.0</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="TaskFlowReturn3">
+      <property
+         name="fromOutcome">return</property>
+      <property
+         name="sdm:polyPoints">R50,333.0,170.89648,466.0,187.89648,L50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall5">
+      <property
+         name="activityId">setQueryTypeByCustomerId</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>setQueryTypeByCustomerId&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">-7.551758</property>
+      <property
+         name="x">125.694336</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="MethodCall5"
+      to="View2">
+      <property
+         name="fromOutcome">setQueryTypeByCustomerId</property>
+      <property
+         name="sdm:polyPoints">B50,125.694336,46.097656,251.0,170.89648,L50</property>
+   </ControlFlowCase>
+</SDM>

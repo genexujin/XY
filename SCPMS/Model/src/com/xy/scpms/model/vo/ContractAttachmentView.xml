@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ContractAttachmentView"
+  Version="11.1.2.60.17"
+  SelectList="ContractAttachment.ID, 
+       ContractAttachment.CONTRACT_ID, 
+       ContractAttachment.FILE_NAME, 
+       ContractAttachment.FILE_LINK, 
+       ContractAttachment.CREATED_BY, 
+       ContractAttachment.FILE_DESC, 
+       ContractAttachment.CREATION_DATE, 
+       ContractAttachment.DELETED"
+  FromList="CONTRACT_ATTACHMENT ContractAttachment"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  Where="ContractAttachment.DELETED&lt;>'Y'">
+  <EntityUsage
+    Name="ContractAttachment"
+    Entity="com.xy.scpms.model.eo.ContractAttachment"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ContractAttachment"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="ContractId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ContractId"
+    EntityUsage="ContractAttachment"
+    AliasName="CONTRACT_ID"/>
+  <ViewAttribute
+    Name="FileName"
+    PrecisionRule="true"
+    EntityAttrName="FileName"
+    EntityUsage="ContractAttachment"
+    AliasName="FILE_NAME"/>
+  <ViewAttribute
+    Name="FileLink"
+    PrecisionRule="true"
+    EntityAttrName="FileLink"
+    EntityUsage="ContractAttachment"
+    AliasName="FILE_LINK"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="ContractAttachment"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="FileDesc"
+    PrecisionRule="true"
+    EntityAttrName="FileDesc"
+    EntityUsage="ContractAttachment"
+    AliasName="FILE_DESC"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="ContractAttachment"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Deleted"
+    PrecisionRule="true"
+    EntityAttrName="Deleted"
+    EntityUsage="ContractAttachment"
+    AliasName="DELETED"/>
+</ViewObject>

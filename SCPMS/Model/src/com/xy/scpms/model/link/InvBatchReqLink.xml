@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvBatchReqLink"
+  Version="11.1.2.60.17"
+  EntityAssociation="com.xy.scpms.model.assoc.InvBatchReqAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.link.InvBatchReqLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="InvoiceBatchView"
+    Cardinality="1"
+    Source="true"
+    Owner="com.xy.scpms.model.vo.InvoiceBatchView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="InvoiceBatchView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.vo.InvoiceBatchView.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="InvoiceRequisitionView"
+    Cardinality="-1"
+    Owner="com.xy.scpms.model.vo.InvoiceRequisitionView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="InvoiceRequisitionView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.vo.InvoiceRequisitionView.BatchId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

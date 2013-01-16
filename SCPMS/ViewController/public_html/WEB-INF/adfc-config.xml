@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-call id="create-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/crt/create-flow.xml</document>
+      <id>create-flow</id>
+    </task-flow-reference>
+    <input-parameter id="__10">
+      <name>creationType</name>
+      <value>#{viewScope.MenuBean.createType}</value>
+    </input-parameter>
+  </task-flow-call>
+  <task-flow-call id="search-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/search/search-flow.xml</document>
+      <id>search-flow</id>
+    </task-flow-reference>
+    <input-parameter id="__12">
+      <name>dept</name>
+      <value>#{viewScope.MenuBean.dept}</value>
+    </input-parameter>
+  </task-flow-call>
+  <task-flow-call id="task-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/task/task-flow.xml</document>
+      <id>task-flow</id>
+    </task-flow-reference>
+    <input-parameter id="__5">
+      <name>contractId</name>
+      <value>#{viewScope.contractId}</value>
+    </input-parameter>
+    <input-parameter id="__6">
+      <name>userRole</name>
+      <value>#{viewScope.MenuBean.userRole}</value>
+    </input-parameter>
+  </task-flow-call>
+  <view id="Home">
+    <page>/Home.jspx</page>
+  </view>
+  <task-flow-call id="invoice-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/invoice/invoice-flow.xml</document>
+      <id>invoice-flow</id>
+    </task-flow-reference>
+    <input-parameter id="__17">
+      <name>userRole</name>
+      <value>#{viewScope.MenuBean.role}</value>
+    </input-parameter>
+  </task-flow-call>
+  <task-flow-call id="app-inv-req">
+    <task-flow-reference>
+      <document>/WEB-INF/invoice/app-inv-req.xml</document>
+      <id>app-inv-req</id>
+    </task-flow-reference>
+    <input-parameter id="__19">
+      <name>userRole</name>
+      <value>#{viewScope.MenuBean.role}</value>
+    </input-parameter>
+    <input-parameter id="__20">
+      <name>deptName</name>
+      <value>#{viewScope.MenuBean.dept}</value>
+    </input-parameter>
+    <input-parameter id="__21">
+      <name>paymentId</name>
+      <value>#{viewScope.paymentId}</value>
+    </input-parameter>
+    <input-parameter id="__22">
+      <name>browse</name>
+      <value>#{pageFlowScope.browse}</value>
+    </input-parameter>
+  </task-flow-call>
+  <task-flow-call id="inv-batch">
+    <task-flow-reference>
+      <document>/WEB-INF/invoice/inv-batch.xml</document>
+      <id>inv-batch</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="inv-entry">
+    <task-flow-reference>
+      <document>/WEB-INF/invoice/inv-entry.xml</document>
+      <id>inv-entry</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="payment-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/invoice/payment-flow.xml</document>
+      <id>payment-flow</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="four-tech">
+    <task-flow-reference>
+      <document>/WEB-INF/crt/four-tech.xml</document>
+      <id>four-tech</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="user-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/user/user-flow.xml</document>
+      <id>user-flow</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="lov-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/lov/lov-flow.xml</document>
+      <id>lov-flow</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="audit-trail">
+    <task-flow-reference>
+      <document>/WEB-INF/audit/audit-trail.xml</document>
+      <id>audit-trail</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <view id="DataExport">
+    <page>/pages/export/DataExport.jspx</page>
+  </view>
+  <url-view id="logout">
+    <url>/contract/adfAuthentication?logout=true&amp;end_url=/contract/faces/Home</url>
+  </url-view>
+  <task-flow-call id="report-setup-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/report/report-setup-flow.xml</document>
+      <id>report-setup-flow</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="dynPayStatus-report">
+    <task-flow-reference>
+      <document>/WEB-INF/report/dynPayStatus-report.xml</document>
+      <id>dynPayStatus-report</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="ar-aging-report">
+    <task-flow-reference>
+      <document>/WEB-INF/report/ar-aging-report.xml</document>
+      <id>ar-aging-report</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="eve-report">
+    <task-flow-reference>
+      <document>/WEB-INF/report/eve-report.xml</document>
+      <id>eve-report</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="payNote-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/invoice/payNote-flow.xml</document>
+      <id>payNote-flow</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="prjmgr-perf-report">
+    <task-flow-reference>
+      <document>/WEB-INF/report/prjmgr-perf-report.xml</document>
+      <id>prjmgr-perf-report</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="regmgr-perf-report">
+    <task-flow-reference>
+      <document>/WEB-INF/report/regmgr-perf-report.xml</document>
+      <id>regmgr-perf-report</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="cust-perf-report">
+    <task-flow-reference>
+      <document>/WEB-INF/report/cust-perf-report.xml</document>
+      <id>cust-perf-report</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="eve-history-report">
+    <task-flow-reference>
+      <document>/WEB-INF/report/eve-history-report.xml</document>
+      <id>eve-history-report</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="change-password-flow">
+    <task-flow-reference>
+      <document>/WEB-INF/user/change-password-flow.xml</document>
+      <id>change-password-flow</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="inv-forecast-btf">
+    <task-flow-reference>
+      <document>/WEB-INF/report/inv-forecast-btf.xml</document>
+      <id>inv-forecast-btf</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="pay-forecast-btf">
+    <task-flow-reference>
+      <document>/WEB-INF/report/pay-forecast-btf.xml</document>
+      <id>pay-forecast-btf</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="ship-delivery">
+    <task-flow-reference>
+      <document>/WEB-INF/report/ship-delivery-btf.xml</document>
+      <id>ship-delivery</id>
+    </task-flow-reference>
+    <input-parameter id="__49">
+      <name>dept</name>
+      <value>#{viewScope.MenuBean.dept}</value>
+    </input-parameter>
+  </task-flow-call>
+  <task-flow-call id="urge-settlement-btf">
+    <task-flow-reference>
+      <document>/WEB-INF/report/urge-settlement-btf.xml</document>
+      <id>urge-settlement-btf</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <task-flow-call id="group-perf-report">
+    <task-flow-reference>
+      <document>/WEB-INF/report/group-perf-report.xml</document>
+      <id>group-perf-report</id>
+    </task-flow-reference>
+  </task-flow-call>
+  <view id="Login">
+    <page>/Login.jspx</page>
+    <bookmark/>
+  </view>
+  <control-flow-rule id="__7">
+    <from-activity-id>Home</from-activity-id>
+    <control-flow-case id="__8">
+      <from-outcome>goCreate</from-outcome>
+      <to-activity-id>create-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__9">
+      <from-outcome>goSearch</from-outcome>
+      <to-activity-id>search-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__11">
+      <from-outcome>goTask</from-outcome>
+      <to-activity-id>task-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__13">
+      <from-outcome>goInvoice</from-outcome>
+      <to-activity-id>invoice-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__18">
+      <from-outcome>goApproveInv</from-outcome>
+      <to-activity-id>app-inv-req</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__23">
+      <from-outcome>goInvBatch</from-outcome>
+      <to-activity-id>inv-batch</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__24">
+      <from-outcome>goInvEntry</from-outcome>
+      <to-activity-id>inv-entry</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__25">
+      <from-outcome>goPaymentEntry</from-outcome>
+      <to-activity-id>payment-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__26">
+      <from-outcome>goFourtech</from-outcome>
+      <to-activity-id>four-tech</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__27">
+      <from-outcome>goUser</from-outcome>
+      <to-activity-id>user-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__28">
+      <from-outcome>golov</from-outcome>
+      <to-activity-id>lov-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__29">
+      <from-outcome>goAudit</from-outcome>
+      <to-activity-id>audit-trail</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__30">
+      <from-outcome>export</from-outcome>
+      <to-activity-id>DataExport</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__33">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>logout</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__31">
+      <from-outcome>goSetupDeptTgt</from-outcome>
+      <to-activity-id>report-setup-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__32">
+      <from-outcome>dynRpt</from-outcome>
+      <to-activity-id>dynPayStatus-report</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__35">
+      <from-outcome>agingRpt</from-outcome>
+      <to-activity-id>ar-aging-report</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__36">
+      <from-outcome>eveRpt</from-outcome>
+      <to-activity-id>eve-report</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__37">
+      <from-outcome>goPayNot</from-outcome>
+      <to-activity-id>payNote-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__38">
+      <from-outcome>prjRpt</from-outcome>
+      <to-activity-id>prjmgr-perf-report</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__39">
+      <from-outcome>regRpt</from-outcome>
+      <to-activity-id>regmgr-perf-report</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__40">
+      <from-outcome>custRpt</from-outcome>
+      <to-activity-id>cust-perf-report</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__41">
+      <from-outcome>eveGraphic</from-outcome>
+      <to-activity-id>eve-history-report</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__42">
+      <from-outcome>changePassword</from-outcome>
+      <to-activity-id>change-password-flow</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__47">
+      <from-outcome>invForRpt</from-outcome>
+      <to-activity-id>inv-forecast-btf</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__46">
+      <from-outcome>payForRpt</from-outcome>
+      <to-activity-id>pay-forecast-btf</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__48">
+      <from-outcome>shipDevRpt</from-outcome>
+      <to-activity-id>ship-delivery</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__50">
+      <from-outcome>urge</from-outcome>
+      <to-activity-id>urge-settlement-btf</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__51">
+      <from-outcome>grpPerf</from-outcome>
+      <to-activity-id>group-perf-report</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__43">
+    <from-activity-id>DataExport</from-activity-id>
+    <control-flow-case id="__44">
+      <from-outcome>home</from-outcome>
+      <to-activity-id>Home</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__1">
+    <managed-bean-name id="__3">MenuBean</managed-bean-name>
+    <managed-bean-class id="__2">com.xy.scpms.view.backing.MenuBean</managed-bean-class>
+    <managed-bean-scope id="__4">view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__14">
+    <managed-bean-name>SearchBean</managed-bean-name>
+    <managed-bean-class>com.xy.scpms.view.flow.backing.SearchBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__15">
+    <managed-bean-name>ConstantsBean</managed-bean-name>
+    <managed-bean-class>com.xy.scpms.view.Constants</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__16">
+    <managed-bean-name>CodesBean</managed-bean-name>
+    <managed-bean-class>com.xy.scpms.model.utils.Codes</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__34">
+    <managed-bean-name>ReportBean</managed-bean-name>
+    <managed-bean-class>com.xy.scpms.view.flow.backing.ReportBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__45">
+    <managed-bean-name>GlobalBean</managed-bean-name>
+    <managed-bean-class>com.xy.scpms.view.backing.GlobalBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

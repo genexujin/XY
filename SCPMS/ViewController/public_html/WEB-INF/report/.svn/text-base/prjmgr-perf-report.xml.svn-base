@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="prjmgr-perf-report">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>clearRowSet</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>MicsReportBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.MicsReportBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__2">
+      <managed-bean-name>MenuBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.backing.MenuBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="PrjManagerReport">
+      <page>/pages/report/PrjMgrReport.jspx</page>
+    </view>
+    <method-call id="clearRowSet">
+      <method>#{bindings.clearRowSet.execute}</method>
+      <outcome>
+        <fixed-outcome>clearRowSet</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>clearRowSet</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>clearRowSet</from-outcome>
+        <to-activity-id>PrjManagerReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

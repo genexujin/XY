@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="DynPayStatusReportPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Rpt_DynPayStatusByYear" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="Rpt_DynPayStatusByYearIterator"/>
+    <searchRegion Binds="Rpt_DynPayStatusByYearIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Rpt_DynPayStatusByYearQuery"/>
+    <iterator id="LovDeptsIterator" Binds="LovDepts"
+              DataControl="CoreModuleDataControl" RangeSize="25"/>
+    <iterator id="LovFYIterator" Binds="LovFY"
+              DataControl="CoreModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="Rpt_DynPayStatusByYearIterator"
+          id="Rpt_DynPayStatusByYear">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.DynamicPaymentStatusByYear"
+                      Name="Rpt_DynPayStatusByYear0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="ProjectName"/>
+          <Item Value="AuthName"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="ProjectManager"/>
+          <Item Value="RegionManager"/>
+          <Item Value="Paidamount"/>
+          <Item Value="Paidno"/>
+          <Item Value="Intactamount"/>
+          <Item Value="Intactno"/>
+          <Item Value="Invoicedamount"/>
+          <Item Value="Invoicedno"/>
+          <Item Value="Pay1"/>
+          <Item Value="Pay2"/>
+          <Item Value="Pay3"/>
+          <Item Value="Pay4"/>
+          <Item Value="Pay5"/>
+          <Item Value="Pay6"/>
+          <Item Value="Pay7"/>
+          <Item Value="Pay8"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list ListOperMode="navigation" IterBinding="LovFYIterator"
+          ListIter="LovFYIterator" id="listOfFY">
+      <AttrNames>
+        <Item Value="LookupValue"/>
+      </AttrNames>
+    </list>
+    <methodAction IterBinding="Rpt_DynPayStatusByYearIterator" id="setdept"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setdept" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Rpt_DynPayStatusByYear"
+                  ReturnName="data.CoreModuleDataControl.methodResults.setdept_CoreModuleDataControl_Rpt_DynPayStatusByYear_setdept_result">
+      <NamedData NDName="value" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="Rpt_DynPayStatusByYearIterator" id="setyearBind"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setyearBind" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Rpt_DynPayStatusByYear">
+      <NamedData NDName="value" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <attributeValues IterBinding="LovFYIterator" id="selectedFY">
+      <AttrNames>
+        <Item Value="LookupValue"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LovDeptsIterator" id="selectedDept">
+      <AttrNames>
+        <Item Value="LookupValue"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="Rpt_DynPayStatusByYearIterator"
+                  id="applyDeptCriteria" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="applyDeptCriteria"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Rpt_DynPayStatusByYear"/>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

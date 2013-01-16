@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FourTechSeq"
+  Version="11.1.2.60.17"
+  DBObjectType="TABLE"
+  DBObjectName="OM.FOUR_TECH_SEQ"
+  AliasName="FourTechSeq"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.xy.scpms.model.common.BaseEntity">
+  <DesignTime>
+    <Attr Name="_superClass" Value="com.xy.scpms.model.common.BaseEntity"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="OM.FOUR_TECH_SEQ"
+    PrimaryKey="true">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="SEQ"
+          Value="FOUR_TECH_SEQ_SEQ"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Year"
+    ColumnName="YEAR"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="OM.FOUR_TECH_SEQ"/>
+  <Attribute
+    Name="Type"
+    Precision="20"
+    ColumnName="TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="OM.FOUR_TECH_SEQ">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Seq"
+    ColumnName="SEQ"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="OM.FOUR_TECH_SEQ"/>
+  <Key
+    Name="FourTechSeqPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="FOUR_TECH_SEQ_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.FourTechSeq.Id"/>
+    </AttrArray>
+  </Key>
+</Entity>

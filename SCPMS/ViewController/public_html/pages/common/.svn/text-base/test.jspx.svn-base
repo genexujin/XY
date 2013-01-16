@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document title="test.jspx" id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelStretchLayout id="psl1">
+          <f:facet name="center">
+            <af:panelGroupLayout layout="scroll" id="pgl1">
+              <af:commandButton text="commandButton 1" id="cb1" action="test"/>
+              <f:verbatim>
+                tsttesttest
+              </f:verbatim>
+              <af:panelGroupLayout layout="vertical" id="pgl2">
+                <af:panelHeader text="FourTechContract" id="ph1">
+                  <af:query id="qryId1" headerText="Search" disclosed="true"
+                            value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                            model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                            queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                            queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                            resultComponentId="::resId1"/>
+                </af:panelHeader>
+                <af:table value="#{bindings.FourTechContract.collectionModel}"
+                          var="row"
+                          rows="#{bindings.FourTechContract.rangeSize}"
+                          emptyText="#{bindings.FourTechContract.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.FourTechContract.rangeSize}"
+                          rowBandingInterval="0" id="resId1">
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.Id.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.Id.label}"
+                             id="resId1c1">
+                    <af:outputText value="#{row.Id}" id="ot1">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FourTechContract.hints.Id.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.ContractNo.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.ContractNo.label}"
+                             id="resId1c2">
+                    <af:outputText value="#{row.ContractNo}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.Amount.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.Amount.label}"
+                             id="resId1c3">
+                    <af:outputText value="#{row.Amount}" id="ot3">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FourTechContract.hints.Amount.format}"
+                                        maxFractionDigits="7"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.Type.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.Type.label}"
+                             id="resId1c4">
+                    <af:selectOneChoice value="#{row.bindings.Type.inputValue}"
+                                        label="#{row.bindings.Type.label}"
+                                        required="#{bindings.FourTechContract.hints.Type.mandatory}"
+                                        shortDesc="#{bindings.FourTechContract.hints.Type.tooltip}"
+                                        readOnly="true" id="soc1">
+                      <f:selectItems value="#{row.bindings.Type.items}"
+                                     id="si1"/>
+                    </af:selectOneChoice>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.RegNo.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.RegNo.label}"
+                             id="resId1c5">
+                    <af:outputText value="#{row.RegNo}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.SentDate.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.SentDate.label}"
+                             id="resId1c6">
+                    <af:outputText value="#{row.SentDate}" id="ot5">
+                      <af:convertDateTime pattern="#{bindings.FourTechContract.hints.SentDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.RcvDate.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.RcvDate.label}"
+                             id="resId1c7">
+                    <af:outputText value="#{row.RcvDate}" id="ot6">
+                      <af:convertDateTime pattern="#{bindings.FourTechContract.hints.RcvDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.SubmitDate.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.SubmitDate.label}"
+                             id="resId1c8">
+                    <af:outputText value="#{row.SubmitDate}" id="ot7">
+                      <af:convertDateTime pattern="#{bindings.FourTechContract.hints.SubmitDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.RegDate.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.RegDate.label}"
+                             id="resId1c9">
+                    <af:outputText value="#{row.RegDate}" id="ot8">
+                      <af:convertDateTime pattern="#{bindings.FourTechContract.hints.RegDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.Creator.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.Creator.label}"
+                             id="resId1c10">
+                    <af:outputText value="#{row.Creator}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.CreationDate.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.CreationDate.label}"
+                             id="resId1c11">
+                    <af:outputText value="#{row.CreationDate}" id="ot10">
+                      <af:convertDateTime pattern="#{bindings.FourTechContract.hints.CreationDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.Memo.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.Memo.label}"
+                             id="resId1c12">
+                    <af:outputText value="#{row.Memo}" id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.FilePath.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.FilePath.label}"
+                             id="resId1c13">
+                    <af:outputText value="#{row.FilePath}" id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.ContractId.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.ContractId.label}"
+                             id="resId1c14">
+                    <af:outputText value="#{row.ContractId}" id="ot13">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FourTechContract.hints.ContractId.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.LineId.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.LineId.label}"
+                             id="resId1c15">
+                    <af:outputText value="#{row.LineId}" id="ot14">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.FourTechContract.hints.LineId.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.Deleted.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.Deleted.label}"
+                             id="resId1c16">
+                    <af:outputText value="#{row.Deleted}" id="ot15"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.LineContractNo.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.LineContractNo.label}"
+                             id="resId1c17">
+                    <af:outputText value="#{row.LineContractNo}" id="ot16"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.FourTechContract.hints.LineShipMnftNo.name}"
+                             sortable="false"
+                             headerText="#{bindings.FourTechContract.hints.LineShipMnftNo.label}"
+                             id="resId1c18">
+                    <af:outputText value="#{row.LineShipMnftNo}" id="ot17"/>
+                  </af:column>
+                </af:table>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            <!-- id="af_one_column_stretched"   -->
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

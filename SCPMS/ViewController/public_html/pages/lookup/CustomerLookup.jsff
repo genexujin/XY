@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:panelStretchLayout id="psl1" topHeight="150px">
+    <f:facet name="center">
+      <af:panelCollection id="pc1">
+        <f:facet name="menus"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t1">
+            <af:commandToolbarButton text="选择该客户" id="ctb1"
+                                     icon="/images/icons/check.png"
+                                     action="#{backingBeanScope.LookupCustomerBean.select}">
+              <af:setActionListener from="#{'submit'}"
+                                    to="#{pageFlowScope.selectOrCancelFlag}"/>
+            </af:commandToolbarButton>
+            <af:commandToolbarButton text="返回" id="ctb2"
+                                     icon="/images/icons/undo.png"
+                                     action="#{backingBeanScope.LookupCustomerBean.cancel}">
+              <af:setActionListener from="#{'cancel'}"
+                                    to="#{pageFlowScope.selectOrCancelFlag}"/>
+            </af:commandToolbarButton>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="statusbar"/>
+        <af:table value="#{bindings.Customers.collectionModel}" var="row"
+                  rows="#{bindings.Customers.rangeSize}"
+                  emptyText="#{bindings.Customers.viewable ? '没有查到数据。' : '访问被拒绝。'}"
+                  fetchSize="#{bindings.Customers.rangeSize}"
+                  rowBandingInterval="1"
+                  filterModel="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                  queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                  filterVisible="false" varStatus="vs"
+                  selectedRowKeys="#{bindings.Customers.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.Customers.collectionModel.makeCurrent}"
+                  rowSelection="single" id="resId1"
+                  binding="#{backingBeanScope.LookupCustomerBean.customerTable}">
+          <af:column sortProperty="CustomerName" filterable="true"
+                     sortable="true"
+                     headerText="#{bindings.Customers.hints.CustomerName.label}"
+                     id="resId1c1" width="105">
+            <af:outputText value="#{row.CustomerName}" id="ot12"/>
+          </af:column>
+          <af:column sortProperty="CustomerBillAddress" sortable="true"
+                     headerText="#{bindings.Customers.hints.CustomerBillAddress.label}"
+                     id="resId1c2" width="104">
+            <af:outputText value="#{row.CustomerBillAddress}" id="ot8"/>
+          </af:column>
+          <af:column sortProperty="CustomerShiptoAddress" sortable="true"
+                     headerText="#{bindings.Customers.hints.CustomerShiptoAddress.label}"
+                     id="resId1c3" width="106">
+            <af:outputText value="#{row.CustomerShiptoAddress}" id="ot10"/>
+          </af:column>
+          <af:column sortProperty="CustomerContactPerson" sortable="true"
+                     headerText="#{bindings.Customers.hints.CustomerContactPerson.label}"
+                     id="resId1c4" width="105">
+            <af:outputText value="#{row.CustomerContactPerson}" id="ot6"/>
+          </af:column>
+          <af:column sortProperty="CustomerCode" filterable="true"
+                     sortable="true"
+                     headerText="#{bindings.Customers.hints.CustomerCode.label}"
+                     id="resId1c5" width="105">
+            <af:outputText value="#{row.CustomerCode}" id="ot11"/>
+          </af:column>
+          <af:column sortProperty="CustomerType" filterable="true"
+                     sortable="true"
+                     headerText="#{bindings.Customers.hints.CustomerType.label}"
+                     id="resId1c6" width="105">
+            <af:outputText value="#{row.CustomerType}" id="ot4"/>
+          </af:column>
+          <af:column sortProperty="Region" filterable="true" sortable="true"
+                     headerText="#{bindings.Customers.hints.Region.label}"
+                     id="resId1c7" width="51">
+            <af:outputText value="#{row.Region}" id="ot7"/>
+          </af:column>
+          <af:column sortProperty="CustomerLevel" filterable="true"
+                     sortable="true"
+                     headerText="#{bindings.Customers.hints.CustomerLevel.label}"
+                     id="resId1c8">
+            <af:outputText value="#{row.CustomerLevel}" id="ot2"/>
+          </af:column>
+          <af:column sortProperty="ParentGroup" filterable="true"
+                     sortable="true"
+                     headerText="#{bindings.Customers.hints.ParentGroup.label}"
+                     id="resId1c9">
+            <af:outputText value="#{row.ParentGroup}" id="ot13"/>
+          </af:column>
+          <af:column sortProperty="PrimaryShipType" sortable="true"
+                     headerText="#{bindings.Customers.hints.PrimaryShipType.label}"
+                     id="resId1c10">
+            <af:outputText value="#{row.PrimaryShipType}" id="ot9"/>
+          </af:column>
+          <af:column sortProperty="ShipGroupLevel" sortable="true"
+                     headerText="#{bindings.Customers.hints.ShipGroupLevel.label}"
+                     id="resId1c11">
+            <af:outputText value="#{row.ShipGroupLevel}" id="ot3"/>
+          </af:column>
+          <af:column sortProperty="PostCode" sortable="true"
+                     headerText="#{bindings.Customers.hints.PostCode.label}"
+                     id="resId1c12">
+            <af:outputText value="#{row.PostCode}" id="ot1"/>
+          </af:column>
+          <af:column sortProperty="RecentAction" sortable="true"
+                     headerText="#{bindings.Customers.hints.RecentAction.label}"
+                     id="resId1c13">
+            <af:outputText value="#{row.RecentAction}" id="ot5"/>
+          </af:column>
+        </af:table>
+      </af:panelCollection>
+      <!-- id="af_one_column_stretched"   -->
+    </f:facet>
+    <f:facet name="top">
+      <af:panelGroupLayout layout="vertical" id="pgl1">
+        <af:query id="qryId1" headerText="请输入查询条件" disclosed="true"
+                  value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                  model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                  queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                  queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                  resultComponentId="::pc1:resId1" rows="2" maxColumns="4"
+                  displayMode="simple"/>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:LookupCustomerBean-->
+</jsp:root>

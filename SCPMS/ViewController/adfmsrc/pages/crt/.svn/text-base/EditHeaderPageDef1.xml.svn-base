@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.60.13" id="EditHeaderPageDef1"
+                Package="pages.crt" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Contract" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ContractIterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_AuthType"
+          id="AuthType" DTSupportsMRU="false"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_AuthorizerType" id="AuthorizerType" DTSupportsMRU="false"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_ContractEntity" id="ContractEntity" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="ContractIterator" id="ContractNo">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatedAt">
+      <AttrNames>
+        <Item Value="CreatedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_DesignDept" id="DesignDept" DTSupportsMRU="false"/>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_DesignPhase" id="DesignPhase" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="ContractIterator" id="FirstDesignFee">
+      <AttrNames>
+        <Item Value="FirstDesignFee"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Memo">
+      <AttrNames>
+        <Item Value="Memo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="ProjectName">
+      <AttrNames>
+        <Item Value="ProjectName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContractIterator" StaticList="false" Uses="LOV_ShipModel"
+          id="ShipModel" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="ContractIterator" id="ShipNoInternal">
+      <AttrNames>
+        <Item Value="ShipNoInternal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="ContractType1">
+      <AttrNames>
+        <Item Value="ContractType"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="CoreModuleDataControl"/>
+    <attributeValues IterBinding="ContractIterator" id="ParentContractNo">
+      <AttrNames>
+        <Item Value="ParentContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="CoreModuleDataControl" DataControl="CoreModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="sumTotal" RequiresUpdateModel="true" Action="invokeMethod" MethodName="sumTotal"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Contract"/>
+    <attributeValues IterBinding="ContractIterator" id="AuthName">
+      <AttrNames>
+        <Item Value="AuthName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CustomerId">
+      <AttrNames>
+        <Item Value="CustomerId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="ContractIterator"
+                  Uses="LOV_CustomerContactName" id="CustomerContactName"/>
+    <attributeValues IterBinding="ContractIterator" id="UnitWeight">
+      <AttrNames>
+        <Item Value="UnitWeight"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="setcustIdBind" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setcustIdBind"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.CustomerContacts">
+      <NamedData NDName="value" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_RegionManager" id="RegionManager" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction IterBinding="ContractIterator" id="setCurrentRowCustomerId"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setCurrentRowCustomerId" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Contract">
+      <NamedData NDName="id" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="ContractIterator" id="setContactNull"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setContactNull" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Contract"/>
+    <methodAction IterBinding="ContractIterator" id="refreshCustomerContactVA"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="refreshCustomerContactVA"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Contract">
+      <NamedData NDName="id" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="ContractIterator" StaticList="false"
+          Uses="LOV_ProjectManager" id="ProjectManager1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ContractIterator" id="CustomerContactor">
+      <AttrNames>
+        <Item Value="CustomerContactor"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="ContractIterator" id="changeCustomer" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="changeCustomer" IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Contract"/>
+  </bindings>
+</pageDefinition>

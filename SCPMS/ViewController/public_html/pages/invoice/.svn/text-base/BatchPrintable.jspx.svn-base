@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="发票打印" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="center">
+                        <af:panelBox text="打印发票批" id="pb1"
+                                     background="medium" showDisclosure="false">
+                            <f:facet name="toolbar">
+                                <af:group id="g1">
+                                    <af:toolbar id="t1">
+                                        <af:commandToolbarButton id="ctb1"
+                                                                 text="打印视图"
+                                                                 icon="/images/icons/print.png">
+                                            <af:showPrintablePageBehavior/>
+                                        </af:commandToolbarButton>
+                                        <af:commandToolbarButton text="返回发票批创建"
+                                                                 id="ctb3"
+                                                                 icon="/images/icons/cuecard.png"
+                                                                 action="back"/>
+                                        <af:commandToolbarButton text="返回发票批浏览"
+                                                                 id="ctb2"
+                                                                 icon="/images/icons/cuecard.png"
+                                                                 action="goBrowse"/>
+                                        <af:commandToolbarButton id="ctb5"
+                                                                 text="返回主页面"
+                                                                 icon="/images/icons/home.gif"
+                                                                 action="return"/>
+                                    </af:toolbar>
+                                </af:group>
+                            </f:facet>
+                            <af:panelStretchLayout id="psl2" topHeight="80px">
+                                <f:facet name="bottom"/>
+                                <f:facet name="center">
+                                    <af:panelHeader text="收款节点"
+                                                    id="ph2">
+                                        <f:facet name="context"/>
+                                        <f:facet name="menuBar"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="legend"/>
+                                        <f:facet name="info"/>
+                                        <af:table value="#{bindings.InvReqOfBatch.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.InvReqOfBatch.rangeSize}"
+                                                  emptyText="#{bindings.InvReqOfBatch.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.InvReqOfBatch.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  id="t2">
+                                            <af:column id="c13"
+                                                       headerText="发票号"/>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.FullName.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.FullName.label}"
+                                                       id="c1" width="50">
+                                                <af:outputText value="#{row.FullName}"
+                                                               id="ot7"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.Department.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.Department.label}"
+                                                       id="c2" width="80">
+                                                <af:outputText value="#{row.Department}"
+                                                               id="ot8"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.AuthName1.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.AuthName1.label}"
+                                                       id="c9" width="150">
+                                                <af:outputText value="#{row.AuthName1}"
+                                                               id="ot14"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.ShipMnftNo.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.ShipMnftNo.label}"
+                                                       id="c7" width="100">
+                                                <af:outputText value="#{row.ShipMnftNo}"
+                                                               id="ot13"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.PaymentName.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.PaymentName.label}"
+                                                       id="c6" width="80">
+                                                <af:outputText value="#{row.PaymentName}"
+                                                               id="ot12"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.ContractEntity.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.ContractEntity.label}"
+                                                       id="c12" width="130">
+                                                <af:outputText value="#{row.ContractEntity}"
+                                                               id="ot18"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.CustomerContactName.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.CustomerContactName.label}"
+                                                       id="c11" width="80">
+                                                <af:outputText value="#{row.CustomerContactName}"
+                                                               id="ot17"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.Amount.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.Amount.label}"
+                                                       id="c4" width="100">
+                                                <af:outputText value="#{row.Amount}"
+                                                               id="ot10">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.InvReqOfBatch.hints.Amount.format}"
+                                                                      maxFractionDigits="7"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.ContractNo.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.ContractNo.label}"
+                                                       id="c10" width="100">
+                                                <af:outputText value="#{row.ContractNo}"
+                                                               id="ot16"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.RequestDate.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.RequestDate.label}"
+                                                       id="c3" width="70">
+                                                <af:outputText value="#{row.RequestDate}"
+                                                               id="ot9">
+                                                    <af:convertDateTime pattern="#{bindings.InvReqOfBatch.hints.RequestDate.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvReqOfBatch.hints.Memo.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvReqOfBatch.hints.Memo.label}"
+                                                       id="c5" width="50">
+                                                <af:outputText value="#{row.Memo}"
+                                                               id="ot11"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelHeader>
+                                </f:facet>
+                                <f:facet name="start"/>
+                                <f:facet name="end"/>
+                                <f:facet name="top">
+                                    <af:panelHeader text="发票批" id="ph1">
+                                        <f:facet name="context"/>
+                                        <f:facet name="menuBar"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="legend"/>
+                                        <f:facet name="info"/>
+                                        <af:panelFormLayout id="pfl1" rows="2"
+                                                            maxColumns="3"
+                                                            inlineStyle="font-size:large;"
+                                                            styleClass="font-size:large;"
+                                                            labelWidth="100"
+                                                            fieldWidth="200">
+                                            <af:panelLabelAndMessage label="#{bindings.BatchName.hints.label}"
+                                                                     id="plam1"
+                                                                     inlineStyle="font-size:small;">
+                                                <af:outputText value="#{bindings.BatchName.inputValue}"
+                                                               id="ot1"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.InvNum.hints.label}"
+                                                                     id="plam2"
+                                                                     inlineStyle="font-size:small;">
+                                                <af:outputText value="#{bindings.InvNum.inputValue}"
+                                                               id="ot2">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.InvNum.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.Status.hints.label}"
+                                                                     id="plam3"
+                                                                     inlineStyle="font-size:small;">
+                                                <af:outputText value="#{bindings.Status.inputValue}"
+                                                               id="ot3"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.Memo.hints.label}"
+                                                                     id="plam4"
+                                                                     inlineStyle="font-size:small;">
+                                                <af:outputText value="#{bindings.Memo.inputValue}"
+                                                               id="ot4"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.CreatedBy.hints.label}"
+                                                                     id="plam5"
+                                                                     inlineStyle="font-size:small;">
+                                                <af:outputText value="#{bindings.CreatedBy.inputValue}"
+                                                               id="ot5"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.CreationDate.hints.label}"
+                                                                     id="plam6"
+                                                                     inlineStyle="font-size:small;">
+                                                <af:outputText value="#{bindings.CreationDate.inputValue}"
+                                                               id="ot6">
+                                                    <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                        </af:panelFormLayout>
+                                    </af:panelHeader>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:panelBox>
+                        <!-- id="af_one_column_stretched"   -->
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="CreateEditBatch.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" topHeight="80px">
+                    <f:facet name="center">
+                        
+                            <af:panelBox text="可选收款节点" id="pb2"
+                                         background="medium"
+                                         showDisclosure="false">
+                                <f:facet name="toolbar">
+                                <af:toolbar id="t4">
+                                    <af:commandToolbarButton text="返回发票批浏览"
+                                                             id="ctb2"
+                                                             icon="/images/icons/cuecard.png"
+                                                             action="back"/>
+                                </af:toolbar>
+                            </f:facet>
+                                <af:panelCollection id="pc1">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t3">
+                                        <af:commandToolbarButton text="创建发票批"
+                                                                 id="ctb1"
+                                                                 icon="/images/icons/new_ena.png"
+                                                                 action="#{CreateBatchBean.createBatch}"/>
+                                    </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.InvReq4Batch.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.InvReq4Batch.rangeSize}"
+                                          emptyText="#{bindings.InvReq4Batch.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.InvReq4Batch.rangeSize}"
+                                          rowBandingInterval="0"
+                                          rowSelection="multiple" id="t1"
+                                          binding="#{CreateBatchBean.table}">
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.PaymentName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.PaymentName.label}"
+                                               id="c7" width="50">
+                                        <af:outputText value="#{row.PaymentName}"
+                                                       id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.AuthName1.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.AuthName1.label}"
+                                               id="c21" width="150">
+                                        <af:outputText value="#{row.AuthName1}"
+                                                       id="ot6"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.ContractNo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.ContractNo.label}"
+                                               id="c23" width="50">
+                                        <af:outputText value="#{row.ContractNo}"
+                                                       id="ot23"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.ContractEntity.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.ContractEntity.label}"
+                                               id="c22" width="100">
+                                        <af:outputText value="#{row.ContractEntity}"
+                                                       id="ot22"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.ShipMnftNo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.ShipMnftNo.label}"
+                                               id="c19" width="80">
+                                        <af:outputText value="#{row.ShipMnftNo}"
+                                                       id="ot19"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.PaymentPlanAmount.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.PaymentPlanAmount.label}"
+                                               id="c13" width="100">
+                                        <af:outputText value="#{row.PaymentPlanAmount}"
+                                                       id="ot13">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.InvReq4Batch.hints.PaymentPlanAmount.format}"
+                                                              maxFractionDigits="7"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.FullName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.FullName.label}"
+                                               id="c8" width="50">
+                                        <af:outputText value="#{row.FullName}"
+                                                       id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.RequestDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.RequestDate.label}"
+                                               id="c9" width="60">
+                                        <af:outputText value="#{row.RequestDate}"
+                                                       id="ot9">
+                                            <af:convertDateTime pattern="#{bindings.InvReq4Batch.hints.RequestDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.Department.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.Department.label}"
+                                               id="c12" width="100">
+                                        <af:outputText value="#{row.Department}"
+                                                       id="ot12"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.PaymentPlanDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.PaymentPlanDate.label}"
+                                               id="c14" width="80">
+                                        <af:outputText value="#{row.PaymentPlanDate}"
+                                                       id="ot14">
+                                            <af:convertDateTime pattern="#{bindings.InvReq4Batch.hints.PaymentPlanDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.PaymentPlanInvoiceDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.PaymentPlanInvoiceDate.label}"
+                                               id="c15" width="80">
+                                        <af:outputText value="#{row.PaymentPlanInvoiceDate}"
+                                                       id="ot15">
+                                            <af:convertDateTime pattern="#{bindings.InvReq4Batch.hints.PaymentPlanInvoiceDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.Status.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.Status.label}"
+                                               id="c16" width="50">
+                                        <af:outputText value="#{row.Status}"
+                                                       id="ot16"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.InvReq4Batch.hints.Memo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.InvReq4Batch.hints.Memo.label}"
+                                               id="c11">
+                                        <af:outputText value="#{row.Memo}"
+                                                       id="ot11"/>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                            </af:panelBox>
+                        
+                        <!-- id="af_one_column_stretched"   -->
+                    </f:facet>
+                    <f:facet name="top">
+                        <af:panelBox text="新建发票批" id="pb1" background="medium"
+                                     showDisclosure="false">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t2">
+                                    <af:commandToolbarButton id="ctb5"
+                                                             text="返回主页面"
+                                                             icon="/images/icons/home.gif"
+                                                             action="return"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelList id="pl1">
+                                <af:outputText value="选择一个或者多个收款节点，点击‘创建发票批’在弹出窗口中输入发票批号及备注。" id="ot1"
+                                               inlineStyle="font-size:medium;"/>
+                            </af:panelList>
+                        </af:panelBox>
+                    </f:facet>
+                </af:panelStretchLayout>
+                <af:popup childCreation="deferred" autoCancel="disabled"
+                          id="p1" binding="#{CreateBatchBean.popup}">
+                    <af:panelWindow id="pw1" modal="true" contentHeight="250"
+                                    contentWidth="350" stretchChildren="first"
+                                    resize="on">
+                        <af:panelBox text="确认创建发票批" id="pb3"
+                                     background="medium">
+                            <f:facet name="toolbar"/>
+                            <af:separator id="s1"/>
+                            <af:panelFormLayout id="pfl1">
+                                <af:inputText value="#{bindings.BatchName.inputValue}"
+                                              label="#{bindings.BatchName.hints.label}"
+                                              required="#{bindings.BatchName.hints.mandatory}"
+                                              columns="#{bindings.BatchName.hints.displayWidth}"
+                                              maximumLength="#{bindings.BatchName.hints.precision}"
+                                              shortDesc="#{bindings.BatchName.hints.tooltip}"
+                                              id="it1">
+                                    <f:validator binding="#{bindings.BatchName.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Memo.inputValue}"
+                                              label="#{bindings.Memo.hints.label}"
+                                              required="#{bindings.Memo.hints.mandatory}"
+                                              columns="#{bindings.Memo.hints.displayWidth}"
+                                              maximumLength="#{bindings.Memo.hints.precision}"
+                                              shortDesc="#{bindings.Memo.hints.tooltip}"
+                                              id="it2" rows="3">
+                                    <f:validator binding="#{bindings.Memo.validator}"/>
+                                </af:inputText>
+                                <af:panelLabelAndMessage label="#{bindings.InvNum.hints.label}"
+                                                         id="plam1">
+                                    <af:outputText value="#{bindings.InvNum.inputValue}"
+                                                   id="ot2">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.InvNum.format}"
+                                                          maxFractionDigits="7"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Status.hints.label}"
+                                                         id="plam2">
+                                    <af:outputText value="#{bindings.Status.inputValue}"
+                                                   id="ot3"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.CreatedBy.hints.label}"
+                                                         id="plam3">
+                                    <af:outputText value="#{bindings.CreatedBy.inputValue}"
+                                                   id="ot4"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.CreationDate.hints.label}"
+                                                         id="plam4">
+                                    <af:outputText value="#{bindings.CreationDate.inputValue}"
+                                                   id="ot5">
+                                        <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <f:facet name="footer">
+                                    <af:group id="g1">
+                                        <af:panelGroupLayout id="pgl1"
+                                                             layout="horizontal">
+                                            <af:commandButton text="确定并打印"
+                                                              id="cb3"
+                                                              icon="/images/icons/print.png"
+                                                              action="#{CreateBatchBean.confirmAndPrint}"/>
+                                            <af:commandButton id="cb1"
+                                                              text="确定创建"
+                                                              icon="/images/icons/check.png"
+                                                              action="#{CreateBatchBean.confirm}"/>
+                                            <af:commandButton id="cb2" text="取消"
+                                                              icon="/images/icons/undo.png"
+                                                              action="#{CreateBatchBean.cancel}"
+                                                              immediate="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:group>
+                                </f:facet>
+                            </af:panelFormLayout>
+                        </af:panelBox>
+                    </af:panelWindow>
+                </af:popup>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

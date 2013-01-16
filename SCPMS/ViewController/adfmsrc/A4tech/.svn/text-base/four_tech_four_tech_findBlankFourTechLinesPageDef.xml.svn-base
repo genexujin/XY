@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17"
+                id="four_tech_four_tech_findBlankFourTechLinesPageDef"
+                Package="A4tech" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="findBlankFourTechLines" RequiresUpdateModel="true"
+            Action="invokeMethod" MethodName="findBlankFourTechLines"
+            IsViewObjectMethod="false" DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.dataProvider"/>
+  </bindings>
+</pageDefinition>

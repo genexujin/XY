@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="urge-settlement-btf">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>SelectContract</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>UrgeSettleBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.UrgeSettleBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+      <managed-bean-name>SearchBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.flow.backing.SearchBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="SettlementRpt">
+      <page>/pages/report/SettlementRpt.jspx</page>
+    </view>
+    <view id="SelectContract">
+      <page>/pages/report/SelectContract.jspx</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>SelectContract</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>runReport</from-outcome>
+        <to-activity-id>SettlementRpt</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>SettlementRpt</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>chooseContract</from-outcome>
+        <to-activity-id>SelectContract</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

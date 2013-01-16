@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="PaymentEntryPageDef"
+                Package="pages.invoice">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PaymentEntryView" RangeSize="25"
+              DataControl="CoreModuleDataControl"
+              id="PaymentEntryViewIterator"/>
+    <searchRegion Binds="PaymentEntryViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PaymentEntryViewQuery"/>
+  </executables>
+  <bindings>
+    <action id="Commit" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ContractNo">
+      <AttrNames>
+        <Item Value="ContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="AuthName">
+      <AttrNames>
+        <Item Value="AuthName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ProjectName">
+      <AttrNames>
+        <Item Value="ProjectName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="AuthType">
+      <AttrNames>
+        <Item Value="AuthType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="AuthorizerType">
+      <AttrNames>
+        <Item Value="AuthorizerType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ContractEntity">
+      <AttrNames>
+        <Item Value="ContractEntity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator"
+                     id="CustomerContactName">
+      <AttrNames>
+        <Item Value="CustomerContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="DesignDept">
+      <AttrNames>
+        <Item Value="DesignDept"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="DesignPhase">
+      <AttrNames>
+        <Item Value="DesignPhase"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="FirstDesignFee">
+      <AttrNames>
+        <Item Value="FirstDesignFee"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ProjectManager">
+      <AttrNames>
+        <Item Value="ProjectManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="RegionManager">
+      <AttrNames>
+        <Item Value="RegionManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ShipModel">
+      <AttrNames>
+        <Item Value="ShipModel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator"
+                     id="ShipNoInternal1">
+      <AttrNames>
+        <Item Value="ShipNoInternal1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="Status2">
+      <AttrNames>
+        <Item Value="Status2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="UnitWeight">
+      <AttrNames>
+        <Item Value="UnitWeight"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="Memo2">
+      <AttrNames>
+        <Item Value="Memo2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ShipMnftNo">
+      <AttrNames>
+        <Item Value="ShipMnftNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ShipPrice">
+      <AttrNames>
+        <Item Value="ShipPrice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ShipOwner">
+      <AttrNames>
+        <Item Value="ShipOwner"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="OwnerType">
+      <AttrNames>
+        <Item Value="OwnerType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ShipBroker">
+      <AttrNames>
+        <Item Value="ShipBroker"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="BrokerType">
+      <AttrNames>
+        <Item Value="BrokerType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ShipPlant">
+      <AttrNames>
+        <Item Value="ShipPlant"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="PlantType">
+      <AttrNames>
+        <Item Value="PlantType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="Currency">
+      <AttrNames>
+        <Item Value="Currency"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ExchangeRate">
+      <AttrNames>
+        <Item Value="ExchangeRate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="Price">
+      <AttrNames>
+        <Item Value="Price"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ImoNo">
+      <AttrNames>
+        <Item Value="ImoNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="Memo1">
+      <AttrNames>
+        <Item Value="Memo1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PaymentEntryViewIterator" id="ContractType">
+      <AttrNames>
+        <Item Value="ContractType"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findInvoicedNodes"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findInvoicedNodes"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="findPaidPaymentNodes"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPaidPaymentNodes"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="findPartialPaymentNodes"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPartialPaymentNodes"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="findPaidVarPaymentNodes"
+                  InstanceName="data.CoreModuleDataControl.dataProvider"
+                  DataControl="CoreModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPaidVarPaymentNodes"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="PaymentEntryViewIterator" id="PaymentEntryView">
+      <nodeDefinition DefName="com.xy.scpms.model.query.PaymentEntryView"
+                      Name="PaymentEntryView0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="AuthName"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ProjectName"/>
+          <Item Value="PaymentName"/>
+          <Item Value="TotalPayment"/>
+          <Item Value="PaymentDate"/>
+          <Item Value="Variance"/>
+          <Item Value="Status"/>
+          <Item Value="Memo"/>
+          <Item Value="InvoiceAmount"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="InvoiceNumber"/>
+          <Item Value="PaymentPlanAmount"/>
+          <Item Value="PaymentPlanDate"/>
+          <Item Value="PaymentPlanInvoiceDate"/>
+          <Item Value="Ems"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

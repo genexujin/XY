@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ContractLinePayments"
+  Version="11.1.2.60.17"
+  DBObjectType="table"
+  DBObjectName="CONTRACT_LINE_PAYMENTS"
+  AliasName="ContractLinePayments"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.xy.scpms.model.eo.ContractLinePaymentsImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_superClass" Value="com.xy.scpms.model.common.BaseEntity"/>
+    <Attr Name="_codeGenFlag2" Value="Init|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="TotalAmtOfLine"
+    ViewObjectName="com.xy.scpms.model.query.TotalAmtOfLineView">
+    <ParameterMap>
+      <PIMap Variable="lineIdBind">
+        <TransientExpression><![CDATA[LineId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="MasterLine"
+    ViewObjectName="com.xy.scpms.model.vo.ContractLineView">
+    <ViewCriteriaUsage
+      Name="findByPK"
+      FullName="com.xy.scpms.model.vo.ContractLineView.findByPK"/>
+    <ParameterMap>
+      <PIMap Variable="idBind">
+        <TransientExpression><![CDATA[LineId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ChangeHistoryView"
+    ViewObjectName="com.xy.scpms.model.vo.ChangeHistoryView"
+    RowLevelBinds="true"/>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="CONTRACT_LINE_PAYMENTS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="SEQ"
+          Value="CONTRACT_PAYMENT_SEQ"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="LineId"
+    IsNotNull="true"
+    ColumnName="LINE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PaymentName"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="PAYMENT_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.PaymentName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PaymentPlanDate"
+    ColumnName="PAYMENT_PLAN_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.PaymentPlanDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PaymentPlanAmount"
+    ColumnName="PAYMENT_PLAN_AMOUNT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.PaymentPlanAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Deleted"
+    Precision="2"
+    ColumnName="DELETED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_LINE_PAYMENTS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.Deleted_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="20"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_LINE_PAYMENTS"
+    HistoryColumn="UserHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.CreatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreatedAt"
+    ColumnName="CREATED_AT"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="CONTRACT_LINE_PAYMENTS"
+    HistoryColumn="DateHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.CreatedAt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PaymentPlanInvoiceDate"
+    ColumnName="PAYMENT_PLAN_INVOICE_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.PaymentPlanInvoiceDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Status"
+    Precision="100"
+    ColumnName="STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.Status_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="InvoiceDate"
+    ColumnName="INVOICE_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.InvoiceDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="InvoiceAmount"
+    ColumnName="INVOICE_AMOUNT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.InvoiceAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="TotalPayment"
+    ColumnName="TOTAL_PAYMENT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.TotalPayment_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Variance"
+    Precision="200"
+    ColumnName="VARIANCE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.Variance_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Memo"
+    Precision="500"
+    ColumnName="MEMO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.Memo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="InvoiceNumber"
+    Precision="100"
+    ColumnName="INVOICE_NUMBER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.InvoiceNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="InvoiceBatchId"
+    ColumnName="INVOICE_BATCH_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.InvoiceBatchId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PaymentDate"
+    ColumnName="PAYMENT_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.PaymentDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Ems"
+    Precision="50"
+    ColumnName="EMS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONTRACT_LINE_PAYMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.eo.ContractLinePayments.Ems_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="ContractLine"
+    Association="com.xy.scpms.model.assoc.ContractLinePaymentsCoFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.ContractLinePaymentsCoFk1Assoc.ContractLine"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.ContractLinePaymentsCoFk1Assoc.ContractLinePayments"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="InvoiceBatch"
+    Association="com.xy.scpms.model.assoc.BatchInvoiceFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.BatchInvoiceFk1Assoc.InvoiceBatch"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.BatchInvoiceFk1Assoc.ContractLinePayments"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Payment"
+    Association="com.xy.scpms.model.assoc.PaymentInvoiceFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.PaymentInvoiceFk1Assoc.Payment"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.PaymentInvoiceFk1Assoc.ContractLinePayments"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="InvoiceRequisition"
+    Association="com.xy.scpms.model.assoc.LnPymtInvAppAssoc"
+    AssociationEnd="com.xy.scpms.model.assoc.LnPymtInvAppAssoc.InvoiceRequisition"
+    AssociationOtherEnd="com.xy.scpms.model.assoc.LnPymtInvAppAssoc.ContractLinePayments"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="ContractLinePaymentsPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CONTRACT_LINE_PAYMENTS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractLinePayments.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012436">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012436"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractLinePayments.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012437">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012437"/>
+      <Attr Name="_checkCondition" Value='"LINE_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractLinePayments.LineId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012438">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012438"/>
+      <Attr Name="_checkCondition" Value='"PAYMENT_NAME" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractLinePayments.PaymentName"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012439">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012439"/>
+      <Attr Name="_checkCondition" Value='"PAYMENT_PLAN_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractLinePayments.PaymentPlanDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="BatchInvoiceFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="INVOICE_BATCH_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="BATCH_INVOICE_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractLinePayments.InvoiceBatchId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ContractLinePaymentsCoFk1">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="CONTRACT_LINE_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CONTRACT_LINE_PAYMENTS_CO_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.ContractLinePayments.LineId"/>
+    </AttrArray>
+  </Key>
+  <validation:ExpressionValidationBean
+    Name="ContractLinePayments_Rule_0"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="_U5FC5_U987B_U8F93_U5165_U5DEE"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[source.testPaymentVariance()]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ContractLinePayments_Rule_1"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:OnCondition><![CDATA[TotalPayment!=null]]></validation:OnCondition>
+    <validation:MsgIds>
+      <validation:Item
+        Value="_U6536_U6B3E_U65E5_U671F_U4E0D"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[PaymentPlanDate!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

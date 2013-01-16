@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <af:pageTemplateDef var="attrs" definition="private">
+        <af:xmlContent>
+            <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+                <display-name>ReportPrintTemplate</display-name>
+                <facet>
+                    <facet-name>content</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>
+                        title
+                    </facet-name>
+                </facet>
+            </component>
+        </af:xmlContent>
+        <af:panelStretchLayout id="psl1">
+            <f:facet name="center">
+                <af:panelGroupLayout id="pgl1" layout="vertical">
+                    <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                         halign="center">
+                        <af:facetRef facetName="title"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl3" layout="horizontal"
+                                         halign="center">
+                        <af:outputText value="导出日期： #{viewScope.ReportBean.currentDate}"
+                                       id="ot4"
+                                       inlineStyle="font-family:'Microsoft YaHei';"/>
+                    </af:panelGroupLayout>
+                    <af:facetRef facetName="content"/>
+                </af:panelGroupLayout>
+                <!-- id="af_one_column_stretched"   -->
+            </f:facet>
+            <f:facet name="top">
+                <af:toolbar id="t2">
+                    <af:commandToolbarButton text="打印" id="ctb1"
+                                             icon="/images/icons/print.png">
+                        <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandToolbarButton text="返回" id="ctb2" action="report"
+                                             icon="/images/icons/previous.png"/>
+                </af:toolbar>
+            </f:facet>
+        </af:panelStretchLayout>
+    </af:pageTemplateDef>
+</jsp:root>

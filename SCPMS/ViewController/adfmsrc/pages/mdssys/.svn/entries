@@ -1,0 +1,28 @@
+10
+
+dir
+3
+http://192.168.0.16/svn/home/trunk/OM/ViewController/adfmsrc/pages/mdssys
+http://192.168.0.16/svn/home
+
+
+
+2012-03-14T12:20:20.252400Z
+3
+gene
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+280419c2-73ae-d346-b51a-3d349305db42
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ship-delivery">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>clearRowSet</default-activity>
+    <input-parameter-definition id="__1">
+      <name>dept</name>
+      <value>#{pageFlowScope.dept}</value>
+      <required/>
+    </input-parameter-definition>
+    <view id="ShipDeliveryRpt">
+      <page>/pages/report/ShipDeliveryRpt.jspx</page>
+    </view>
+    <method-call id="clearRowSet">
+      <method>#{bindings.clearRowSet.execute}</method>
+      <outcome>
+        <fixed-outcome>clearRowSet</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>clearRowSet</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>clearRowSet</from-outcome>
+        <to-activity-id>ShipDeliveryRpt</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

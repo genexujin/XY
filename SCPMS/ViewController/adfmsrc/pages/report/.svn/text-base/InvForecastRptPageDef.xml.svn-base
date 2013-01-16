@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="InvForecastRptPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="InvoiceForecastRpt1" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="InvoiceForecastRpt1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="InvoiceForecastRpt1Iterator" id="InvoiceForecastRpt1">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.InvoiceForecastRpt" Name="InvoiceForecastRpt10">
+        <AttrNames>
+          <Item Value="DeptName"/>
+          <Item Value="BefTotal"/>
+          <Item Value="JanTotal"/>
+          <Item Value="FebTotal"/>
+          <Item Value="MarTotal"/>
+          <Item Value="AprTotal"/>
+          <Item Value="MayTotal"/>
+          <Item Value="JunTotal"/>
+          <Item Value="JulTotal"/>
+          <Item Value="AugTotal"/>
+          <Item Value="SepTotal"/>
+          <Item Value="OctTotal"/>
+          <Item Value="NovTotal"/>
+          <Item Value="DebTotal"/>
+          <Item Value="Q1Total"/>
+          <Item Value="Q2Total"/>
+          <Item Value="Q3Total"/>
+          <Item Value="Q4Total"/>
+          <Item Value="AftTotal"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" InstanceName="CoreModuleDataControl" DataControl="CoreModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

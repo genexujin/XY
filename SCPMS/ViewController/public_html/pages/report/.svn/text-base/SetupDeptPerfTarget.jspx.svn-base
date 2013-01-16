@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="部门合同收款指标" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelSplitter orientation="vertical" splitterPosition="140"
+                                  id="ps1">
+                    <f:facet name="first">
+                        
+                            <af:panelBox text="各部门合同收款指标管理" id="pb1"
+                                         background="medium"
+                                         showDisclosure="false">
+                                <f:facet name="toolbar">
+                                <af:toolbar id="t1">
+                                    <af:commandToolbarButton text="返回主页面"
+                                                             id="ctb4"
+                                                             icon="/images/icons/home.gif"
+                                                             action="return"
+                                                             actionListener="#{bindings.Rollback.execute}"
+                                                             immediate="true">
+                                        <af:checkUncommittedDataBehavior/>
+                                    </af:commandToolbarButton>
+                                </af:toolbar>
+                            </f:facet>
+                                <af:query id="qryId1" headerText="请输入搜索条件"
+                                          value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                                          model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                                          queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                                          queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                                          rows="1" maxColumns="5"
+                                          displayMode="compact"
+                                          modeChangeVisible="false"
+                                          saveQueryMode="hidden"
+                                          resultComponentId="::pc1:t2"
+                                          disclosed="true"/>
+                            </af:panelBox>
+                        
+                    </f:facet>
+                    <f:facet name="second">
+                       
+                            <af:panelBox text="合同收款指标列表" id="pb2"
+                                         background="medium"
+                                         showDisclosure="false">
+                                <f:facet name="toolbar"/>
+                                <af:panelCollection id="pc1">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar">
+                                    <af:toolbar id="t3">
+                                        <af:commandToolbarButton text="保存"
+                                                                 id="ctb3"
+                                                                 actionListener="#{bindings.Commit.execute}"
+                                                                 disabled="#{!bindings.Commit.enabled}"
+                                                                 icon="/images/icons/filesave.png"/>
+                                        <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}"
+                                                                 text="添加"
+                                                                 disabled="#{!bindings.CreateInsert.enabled}"
+                                                                 id="ctb1"
+                                                                 icon="/images/icons/new_ena.png"/>
+                                        <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                                                 text="删除"
+                                                                 disabled="#{!bindings.Delete.enabled}"
+                                                                 immediate="true"
+                                                                 id="ctb2"
+                                                                 icon="/images/icons/delete.png"/>
+                                        <af:commandToolbarButton text="导出"
+                                                                 id="ctb5"
+                                                                 icon="/images/icons/export.png">
+                                            <af:exportCollectionActionListener type="excelHTML"
+                                                                               exportedId="t2"
+                                                                               title="部门指标"/>
+                                        </af:commandToolbarButton>
+                                    </af:toolbar>
+                                </f:facet>
+                                    <f:facet name="statusbar"/>
+                                    <af:table value="#{bindings.DeptPerfTarget.collectionModel}"
+                                              var="row"
+                                              rows="#{bindings.DeptPerfTarget.rangeSize}"
+                                              emptyText="#{bindings.DeptPerfTarget.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.DeptPerfTarget.rangeSize}"
+                                              rowBandingInterval="1"
+                                              filterModel="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                                              queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                                              filterVisible="false"
+                                              varStatus="vs"
+                                              selectedRowKeys="#{bindings.DeptPerfTarget.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.DeptPerfTarget.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="t2"
+                                              partialTriggers="::ctb1 ::ctb2"
+                                              editingMode="clickToEdit">
+                                        <af:column sortProperty="#{bindings.DeptPerfTarget.hints.FiscalYear.name}"
+                                                   filterable="true"
+                                                   sortable="true"
+                                                   headerText="#{bindings.DeptPerfTarget.hints.FiscalYear.label}"
+                                                   id="c1">
+                                            <af:selectOneChoice value="#{row.bindings.FiscalYear.inputValue}"
+                                                                label="#{row.bindings.FiscalYear.label}"
+                                                                required="#{bindings.DeptPerfTarget.hints.FiscalYear.mandatory}"
+                                                                shortDesc="#{bindings.DeptPerfTarget.hints.FiscalYear.tooltip}"
+                                                                id="soc1"
+                                                                autoSubmit="false">
+                                                <f:selectItems value="#{row.bindings.FiscalYear.items}"
+                                                               id="si1"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.DeptPerfTarget.hints.Dept.name}"
+                                                   filterable="true"
+                                                   sortable="true"
+                                                   headerText="#{bindings.DeptPerfTarget.hints.Dept.label}"
+                                                   id="c2">
+                                            <af:selectOneChoice value="#{row.bindings.Dept.inputValue}"
+                                                                label="#{row.bindings.Dept.label}"
+                                                                required="#{bindings.DeptPerfTarget.hints.Dept.mandatory}"
+                                                                shortDesc="#{bindings.DeptPerfTarget.hints.Dept.tooltip}"
+                                                                id="soc2">
+                                                <f:selectItems value="#{row.bindings.Dept.items}"
+                                                               id="si2"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.DeptPerfTarget.hints.ContractTarget.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.DeptPerfTarget.hints.ContractTarget.label}"
+                                                   id="c3">
+                                            <af:inputText value="#{row.bindings.ContractTarget.inputValue}"
+                                                          label="#{bindings.DeptPerfTarget.hints.ContractTarget.label}"
+                                                          required="#{bindings.DeptPerfTarget.hints.ContractTarget.mandatory}"
+                                                          columns="#{bindings.DeptPerfTarget.hints.ContractTarget.displayWidth}"
+                                                          maximumLength="#{bindings.DeptPerfTarget.hints.ContractTarget.precision}"
+                                                          shortDesc="#{bindings.DeptPerfTarget.hints.ContractTarget.tooltip}"
+                                                          id="it1"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{row.bindings.ContractTarget.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.DeptPerfTarget.hints.ContractTarget.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.DeptPerfTarget.hints.PaymentTarget.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.DeptPerfTarget.hints.PaymentTarget.label}"
+                                                   id="c4">
+                                            <af:inputText value="#{row.bindings.PaymentTarget.inputValue}"
+                                                          label="#{bindings.DeptPerfTarget.hints.PaymentTarget.label}"
+                                                          required="#{bindings.DeptPerfTarget.hints.PaymentTarget.mandatory}"
+                                                          columns="#{bindings.DeptPerfTarget.hints.PaymentTarget.displayWidth}"
+                                                          maximumLength="#{bindings.DeptPerfTarget.hints.PaymentTarget.precision}"
+                                                          shortDesc="#{bindings.DeptPerfTarget.hints.PaymentTarget.tooltip}"
+                                                          id="it2"
+                                                          autoSubmit="false">
+                                                <f:validator binding="#{row.bindings.PaymentTarget.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.DeptPerfTarget.hints.PaymentTarget.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.DeptPerfTarget.hints.CreationDate.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.DeptPerfTarget.hints.CreationDate.label}"
+                                                   id="c5">
+                                            <af:outputText value="#{row.CreationDate}"
+                                                           id="ot1">
+                                                <af:convertDateTime pattern="#{bindings.DeptPerfTarget.hints.CreationDate.format}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.DeptPerfTarget.hints.CreatedBy.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.DeptPerfTarget.hints.CreatedBy.label}"
+                                                   id="c6">
+                                            <af:outputText value="#{row.CreatedBy}"
+                                                           id="ot2"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelBox>
+                        
+                        <!-- id="af_one_column_header_stretched_with_splitter"   -->
+                    </f:facet>
+                </af:panelSplitter>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

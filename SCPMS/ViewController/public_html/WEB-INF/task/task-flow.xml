@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="task-flow">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>CheckIfComeFromDashboard</default-activity>
+    <input-parameter-definition id="__5">
+      <name>contractId</name>
+      <value>#{pageFlowScope.contractId}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__1">
+      <name>userRole</name>
+      <value>#{sessionScope.userRole}</value>
+      <required/>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>TaskListBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.TaskListBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__19">
+      <managed-bean-name>BrowseBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.BrowseBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__20">
+      <managed-bean-name>ApprovalBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.ApprovalBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__12">
+      <managed-bean-name>UploadBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.UploadBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="TaskList">
+      <page>/pages/task/TaskList.jspx</page>
+    </view>
+    <method-call id="setApplyCriteria">
+      <method>#{bindings.setAIPCriteria.execute}</method>
+      <outcome>
+        <fixed-outcome>setAIPCriteria</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="Approval">
+      <page>/pages/task/Approval.jspx</page>
+    </view>
+    <router id="CheckIfComeFromDashboard">
+      <case id="__9">
+        <expression>#{pageFlowScope.contractId !=null}</expression>
+        <outcome>goOpen</outcome>
+      </case>
+      <default-outcome>goSearchFirst</default-outcome>
+    </router>
+    <method-call id="findContractById">
+      <method>#{bindings.findContractById.execute}</method>
+      <outcome>
+        <fixed-outcome>findContractById</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>setApplyCriteria</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>setAIPCriteria</from-outcome>
+        <to-activity-id>TaskList</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>TaskList</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>open</from-outcome>
+        <to-activity-id>Approval</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>Approval</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome>taskList</from-outcome>
+        <to-activity-id>setApplyCriteria</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>CheckIfComeFromDashboard</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>goSearchFirst</from-outcome>
+        <to-activity-id>setApplyCriteria</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>goOpen</from-outcome>
+        <to-activity-id>findContractById</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>findContractById</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>findContractById</from-outcome>
+        <to-activity-id>Approval</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="payNote-flow">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>setPayNoticeParam</default-activity>
+    <managed-bean id="__6">
+      <managed-bean-name>PaymentNoticeBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.PaymentNoticeBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <task-flow-call id="search-customer-byId">
+      <task-flow-reference>
+        <document>/WEB-INF/customer/search-customer-byId.xml</document>
+        <id>search-customer-byId</id>
+      </task-flow-reference>
+      <input-parameter id="__9">
+        <name>customerId</name>
+        <value>#{pageFlowScope.customerId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="search-contact-byId">
+      <task-flow-reference>
+        <document>/WEB-INF/customer/search-contact-byId.xml</document>
+        <id>search-contact-byId</id>
+      </task-flow-reference>
+      <input-parameter id="__8">
+        <name>contactId</name>
+        <value>#{pageFlowScope.contactId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <view id="PaymentNotices">
+      <page>/pages/invoice/PaymentNotices.jspx</page>
+    </view>
+    <method-call id="setPayNoticeParam">
+      <method>#{bindings.setPaymentNotification.execute}</method>
+      <outcome>
+        <fixed-outcome>setPaymentNotification</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>setPayNoticeParam</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>setPaymentNotification</from-outcome>
+        <to-activity-id>PaymentNotices</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>PaymentNotices</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>checkContract</from-outcome>
+        <to-activity-id>search-contact-byId</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>checkCustomer</from-outcome>
+        <to-activity-id>search-customer-byId</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

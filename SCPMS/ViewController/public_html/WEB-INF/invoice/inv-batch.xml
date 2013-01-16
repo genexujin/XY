@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="inv-batch">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>PaymentBatches</default-activity>
+    <managed-bean id="__12">
+      <managed-bean-name>InvBatchBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.InvBatchBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__15">
+      <managed-bean-name>CreateBatchBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.CreateBatchBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="PaymentBatches">
+      <page>/pages/invoice/PaymentBatches.jspx</page>
+    </view>
+    <view id="CreateEditBatch">
+      <page>/pages/invoice/CreateEditBatch.jspx</page>
+    </view>
+    <view id="BatchPrintable">
+      <page>/pages/invoice/BatchPrintable.jspx</page>
+    </view>
+    <control-flow-rule id="__3">
+      <from-activity-id>CreateEditBatch</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>PaymentBatches</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>BatchPrintable</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>CreateEditBatch</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>goBrowse</from-outcome>
+        <to-activity-id>PaymentBatches</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>PaymentBatches</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>new</from-outcome>
+        <to-activity-id>CreateEditBatch</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>print</from-outcome>
+        <to-activity-id>BatchPrintable</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

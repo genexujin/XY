@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17"
+                id="app_inv_req_app_inv_req_findPendingInvReqPageDef" Package="invoice" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="findPendingInvReq" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findPendingInvReq"
+                  IsViewObjectMethod="false" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.dataProvider">
+      <NamedData NDName="dept" NDValue="#{sessionScope.userDept}" NDType="java.lang.String"/>
+      <NamedData NDName="userRole" NDValue="#{sessionScope.userRole}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

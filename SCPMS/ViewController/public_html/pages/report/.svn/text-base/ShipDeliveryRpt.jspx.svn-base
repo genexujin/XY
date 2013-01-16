@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="ShipDeliveryRpt.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" topHeight="100px">
+                    <f:facet name="center">
+                        <af:panelBox id="pb2" background="medium" text="报表输出结果">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t1">
+                                        <af:commandToolbarButton id="ctb2" icon="/images/icons/print.png" text="打印预览页面">
+                                            <af:showPrintablePageBehavior/>
+                                        </af:commandToolbarButton>
+                                        <af:commandToolbarButton id="ctb3" text="导出" icon="/images/icons/export.png">
+                                            <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                                                               filename="InvForecast.xls"/>
+                                        </af:commandToolbarButton>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.ShipDeliveryRpt1.collectionModel}" var="row"
+                                          rows="#{bindings.ShipDeliveryRpt1.rangeSize}"
+                                          emptyText="#{bindings.ShipDeliveryRpt1.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.ShipDeliveryRpt1.rangeSize}" rowBandingInterval="0"
+                                          id="t2" partialTriggers=":::ctb1">
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ContractNo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ContractNo.label}" id="c1">
+                                        <af:outputText value="#{row.ContractNo}" id="ot1"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ProjectName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ProjectName.label}"
+                                               id="c2">
+                                        <af:outputText value="#{row.ProjectName}" id="ot2"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ShipMnftNo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ShipMnftNo.label}" id="c3">
+                                        <af:outputText value="#{row.ShipMnftNo}" id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ShipName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ShipName.label}" id="c4">
+                                        <af:outputText value="#{row.ShipName}" id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ShipOwner.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ShipOwner.label}" id="c5">
+                                        <af:outputText value="#{row.ShipOwner}" id="ot5"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ShipPlant.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ShipPlant.label}" id="c6">
+                                        <af:outputText value="#{row.ShipPlant}" id="ot6"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ShipBroker.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ShipBroker.label}" id="c7">
+                                        <af:outputText value="#{row.ShipBroker}" id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ShipClsfctSociety.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ShipClsfctSociety.label}"
+                                               id="c8">
+                                        <af:outputText value="#{row.ShipClsfctSociety}" id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ImoNo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ImoNo.label}" id="c9">
+                                        <af:outputText value="#{row.ImoNo}" id="ot9"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ShipVersion.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ShipVersion.label}"
+                                               id="c10">
+                                        <af:outputText value="#{row.ShipVersion}" id="ot10"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.ShipNoInternal.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.ShipNoInternal.label}"
+                                               id="c11">
+                                        <af:outputText value="#{row.ShipNoInternal}" id="ot11"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.DesignDept.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.DesignDept.label}"
+                                               id="c12">
+                                        <af:outputText value="#{row.DesignDept}" id="ot12"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.PrjMgrName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.PrjMgrName.label}"
+                                               id="c13">
+                                        <af:outputText value="#{row.PrjMgrName}" id="ot13"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.RegMgrName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.RegMgrName.label}"
+                                               id="c14">
+                                        <af:outputText value="#{row.RegMgrName}" id="ot14"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.EffectiveDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.EffectiveDate.label}"
+                                               id="c15">
+                                        <af:outputText value="#{row.EffectiveDate}" id="ot15">
+                                            <af:convertDateTime pattern="#{bindings.ShipDeliveryRpt1.hints.EffectiveDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ShipDeliveryRpt1.hints.FgCompletionDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ShipDeliveryRpt1.hints.FgCompletionDate.label}"
+                                               id="c16">
+                                        <af:outputText value="#{row.FgCompletionDate}" id="ot16">
+                                            <af:convertDateTime pattern="#{bindings.ShipDeliveryRpt1.hints.FgCompletionDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                        <!-- id="af_one_column_stretched"   -->
+                    </f:facet>
+                    <f:facet name="top">
+                        <af:panelBox text="请输入报表查询条件" id="pb1" background="medium">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                    <af:commandToolbarButton text="返回主页" id="commandToolbarButton1"
+                                                             icon="/images/icons/home.gif" action="return"
+                                                             actionListener="#{bindings.Rollback.execute}"
+                                                             immediate="true"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:panelFormLayout id="pfl1" rows="1" maxColumns="5" labelWidth="70">
+                                <f:facet name="footer"/>
+                                <af:inputDate label="起始日期" id="id1" autoSubmit="false"
+                                              value="#{pageFlowScope.startDate}"/>
+                                <af:inputDate label="结束日期" id="id2" value="#{pageFlowScope.endDate}"
+                                              autoSubmit="false"/>
+                                <af:commandToolbarButton text="运算并生成报表" id="ctb1" icon="/images/icons/graph.png"
+                                                         actionListener="#{bindings.runReport.execute}">
+                                    <af:setActionListener from="#{'yes'}" to="#{pageFlowScope.hasRun}"/>
+                                </af:commandToolbarButton>
+                            </af:panelFormLayout>
+                        </af:panelBox>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

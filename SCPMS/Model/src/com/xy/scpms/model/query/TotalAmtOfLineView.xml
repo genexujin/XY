@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TotalAmtOfLineView"
+  Version="11.1.1.60.13"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.query.TotalAmtOfLineView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="lineIdBind"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <SQLQuery>
+    <![CDATA[SELECT 
+    SUM(CONTRACT_LINE_PAYMENTS.PAYMENT_PLAN_AMOUNT) 
+FROM 
+    CONTRACT_LINE_PAYMENTS 
+WHERE 
+    CONTRACT_LINE_PAYMENTS.LINE_ID = :lineIdBind AND CONTRACT_LINE_PAYMENTS.DELETED = 'N']]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="TotalAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SUM(CONTRACT_LINE_PAYMENTS.PAYMENT_PLAN_AMOUNT)"
+    Expression="SUM(CONTRACT_LINE_PAYMENTS.PAYMENT_PLAN_AMOUNT)"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

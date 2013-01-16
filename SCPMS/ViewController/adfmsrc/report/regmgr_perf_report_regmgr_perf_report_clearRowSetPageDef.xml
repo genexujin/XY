@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17"
+                id="regmgr_perf_report_regmgr_perf_report_clearRowSetPageDef"
+                Package="report" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="clearRowSet" RequiresUpdateModel="true" Action="invokeMethod"
+            MethodName="clearRowSet" IsViewObjectMethod="true"
+            DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.Rpt_RegMgrPerf"/>
+  </bindings>
+</pageDefinition>

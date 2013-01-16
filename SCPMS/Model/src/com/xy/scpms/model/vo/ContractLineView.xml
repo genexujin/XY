@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ContractLineView"
+  Version="11.1.2.60.17"
+  SelectList="ContractLine.ID, 
+       ContractLine.HEADER_ID, 
+       ContractLine.LINE_NO, 
+       ContractLine.SHIP_MNFT_NO, 
+       ContractLine.SHIP_PLANT, 
+       ContractLine.SHIP_OWNER, 
+       ContractLine.SHIP_BROKER, 
+       ContractLine.SHIP_CLSFCT_SOCIETY, 
+       ContractLine.SHIP_NAME, 
+       ContractLine.IMO_NO, 
+       ContractLine.SHIP_NO_INTERNAL, 
+       ContractLine.CONTRACT_TYPE, 
+       ContractLine.SIGN_OFF_DATE, 
+       ContractLine.EFFECTIVE_DATE, 
+       ContractLine.ABANDON_DATE, 
+       ContractLine.CREATED_BY, 
+       ContractLine.CREATED_AT, 
+       ContractLine.DELETED, 
+       ContractLine.STATUS, 
+       ContractLine.MEMO, 
+       ContractLine.PRICE, 
+       ContractLine.WORK_START_DATE, 
+       ContractLine.FG_COMPLETION_DATE, 
+       ContractLine.ABANDON_FLAG, 
+       ContractLine.BROKER_TYPE, 
+       ContractLine.CURRENCY, 
+       ContractLine.EXCHANGE_RATE, 
+       ContractLine.FOUR_CONTRACT_BATCH, 
+       ContractLine.OWNER_TYPE, 
+       ContractLine.PLANT_TYPE, 
+       ContractLine.SHIP_PRICE, 
+       Contract.CONTRACT_NO, 
+       Contract.ID AS ID1, 
+       ContractLine.SHIP_BUILD_CRT_EFT_DATE"
+  FromList="CONTRACT_LINE ContractLine, CONTRACT Contract"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  Where="ContractLine.HEADER_ID = Contract.ID
+AND ContractLine.Deleted &lt;> 'Y'"
+  RowClass="com.xy.scpms.model.vo.ContractLineViewRowImpl"
+  ComponentClass="com.xy.scpms.model.vo.ContractLineViewImpl"
+  FetchMode="FETCH_ALL"
+  RangeSize="-1"
+  FetchSize="30"
+  OrderBy="ContractLine.LINE_NO">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|Prog|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="idBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="headerIdBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="idvar"
+    Kind="viewcriteria"
+    Type="oracle.jbo.domain.Number"/>
+  <ViewAccessor
+    Name="ShipSocietyTypes"
+    ViewObjectName="com.xy.scpms.model.vo.LovView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SHIP_SOCIETY_TYPE"
+      FullName="com.xy.scpms.model.vo.LovView.SHIP_SOCIETY_TYPE"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PlantTypes"
+    ViewObjectName="com.xy.scpms.model.vo.LovView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="PLANT_TYPE"
+      FullName="com.xy.scpms.model.vo.LovView.PLANT_TYPE"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="OwnerTypes"
+    ViewObjectName="com.xy.scpms.model.vo.LovView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="OWNER_TYPE"
+      FullName="com.xy.scpms.model.vo.LovView.OWNER_TYPE"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="BrokerTypes"
+    ViewObjectName="com.xy.scpms.model.vo.LovView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="BROKER_TYPE"
+      FullName="com.xy.scpms.model.vo.LovView.BROKER_TYPE"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractValueTypes"
+    ViewObjectName="com.xy.scpms.model.vo.LovView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="CONTRACT_VALUE_TYPE"
+      FullName="com.xy.scpms.model.vo.LovView.CONTRACT_VALUE_TYPE"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CurrencyTypes"
+    ViewObjectName="com.xy.scpms.model.vo.LovView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="CURRENCY_TYPE"
+      FullName="com.xy.scpms.model.vo.LovView.CURRENCY_TYPE"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="Plants"
+    ViewObjectName="com.xy.scpms.model.query.CustomerView">
+    <ViewCriteriaUsage
+      Name="filterByType"
+      FullName="com.xy.scpms.model.query.CustomerView.filterByType"/>
+    <ParameterMap>
+      <PIMap Variable="custType">
+        <TransientExpression><![CDATA["船厂"]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="Owners"
+    ViewObjectName="com.xy.scpms.model.query.CustomerView">
+    <ViewCriteriaUsage
+      Name="filterByType"
+      FullName="com.xy.scpms.model.query.CustomerView.filterByType"/>
+    <ParameterMap>
+      <PIMap Variable="custType">
+        <TransientExpression><![CDATA["船东"]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="Broker"
+    ViewObjectName="com.xy.scpms.model.query.CustomerView">
+    <ViewCriteriaUsage
+      Name="filterByType"
+      FullName="com.xy.scpms.model.query.CustomerView.filterByType"/>
+    <ParameterMap>
+      <PIMap Variable="custType">
+        <TransientExpression><![CDATA["中间商"]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_ShipClsfctSociety"
+    ListVOName="ShipSocietyTypes"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ShipClsfctSociety"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_BrokerType"
+    ListVOName="BrokerTypes"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BrokerType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OwnerType"
+    ListVOName="OwnerTypes"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    MRUCount="0"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
+    <AttrArray Name="AttrNames">
+      <Item Value="OwnerType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PlantType"
+    ListVOName="PlantTypes"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PlantType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ContractType"
+    ListVOName="ContractValueTypes"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ContractType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Currency"
+    ListVOName="CurrencyTypes"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Currency"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ShipPlant"
+    ListVOName="Plants"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ShipPlant"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CustomerName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CustomerCode"/>
+      <Item Value="CustomerName"/>
+      <Item Value="CustomerLevel"/>
+      <Item Value="CustomerType"/>
+      <Item Value="ParentGroup"/>
+      <Item Value="Region"/>
+      <Item Value="RecentAction"/>
+      <Item Value="PrimaryShipType"/>
+      <Item Value="ShipGroupLevel"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ShipOwner"
+    ListVOName="Owners"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ShipOwner"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CustomerName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CustomerName"/>
+      <Item Value="CustomerCode"/>
+      <Item Value="CustomerLevel"/>
+      <Item Value="ParentGroup"/>
+      <Item Value="Region"/>
+      <Item Value="CustomerType"/>
+      <Item Value="RecentAction"/>
+      <Item Value="PrimaryShipType"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ShipBroker"
+    ListVOName="Broker"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ShipBroker"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CustomerName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CustomerName"/>
+      <Item Value="CustomerCode"/>
+      <Item Value="Region"/>
+      <Item Value="CustomerLevel"/>
+      <Item Value="CustomerType"/>
+      <Item Value="ParentGroup"/>
+      <Item Value="PrimaryShipType"/>
+      <Item Value="RecentAction"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <EntityUsage
+    Name="ContractLine"
+    Entity="com.xy.scpms.model.eo.ContractLine"/>
+  <EntityUsage
+    Name="Contract"
+    Entity="com.xy.scpms.model.eo.Contract"
+    Association="com.xy.scpms.model.assoc.ContractLineContractFk1Assoc"
+    AssociationEnd="com.xy.scpms.model.assoc.ContractLineContractFk1Assoc.Contract"
+    SourceUsage="com.xy.scpms.model.vo.ContractLineView.ContractLine"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="com.xy.scpms.model.eo.ContractLine.HeaderId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="com.xy.scpms.model.eo.Contract.Id"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ContractLine"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="HeaderId"
+    PrecisionRule="true"
+    EntityAttrName="HeaderId"
+    EntityUsage="ContractLine"
+    AliasName="HEADER_ID"/>
+  <ViewAttribute
+    Name="LineNo"
+    PrecisionRule="true"
+    EntityAttrName="LineNo"
+    EntityUsage="ContractLine"
+    AliasName="LINE_NO"/>
+  <ViewAttribute
+    Name="ShipMnftNo"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ShipMnftNo"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_MNFT_NO"/>
+  <ViewAttribute
+    Name="ShipPlant"
+    PrecisionRule="true"
+    EntityAttrName="ShipPlant"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_PLANT"
+    LOVName="LOV_ShipPlant">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.vo.ContractLineView.ShipPlant_LABEL"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipOwner"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ShipOwner"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_OWNER"
+    LOVName="LOV_ShipOwner">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipBroker"
+    PrecisionRule="true"
+    EntityAttrName="ShipBroker"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_BROKER"
+    LOVName="LOV_ShipBroker">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipClsfctSociety"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ShipClsfctSociety"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_CLSFCT_SOCIETY"
+    LOVName="LOV_ShipClsfctSociety">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ShipName"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_NAME"/>
+  <ViewAttribute
+    Name="ImoNo"
+    PrecisionRule="true"
+    EntityAttrName="ImoNo"
+    EntityUsage="ContractLine"
+    AliasName="IMO_NO"/>
+  <ViewAttribute
+    Name="ShipNoInternal"
+    PrecisionRule="true"
+    EntityAttrName="ShipNoInternal"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_NO_INTERNAL"/>
+  <ViewAttribute
+    Name="ContractType"
+    PrecisionRule="true"
+    EntityAttrName="ContractType"
+    EntityUsage="ContractLine"
+    AliasName="CONTRACT_TYPE"
+    LOVName="LOV_ContractType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SignOffDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="SignOffDate"
+    EntityUsage="ContractLine"
+    AliasName="SIGN_OFF_DATE"/>
+  <ViewAttribute
+    Name="EffectiveDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="EffectiveDate"
+    EntityUsage="ContractLine"
+    AliasName="EFFECTIVE_DATE"/>
+  <ViewAttribute
+    Name="AbandonDate"
+    PrecisionRule="true"
+    EntityAttrName="AbandonDate"
+    EntityUsage="ContractLine"
+    AliasName="ABANDON_DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="ContractLine"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="CreatedAt"
+    PrecisionRule="true"
+    EntityAttrName="CreatedAt"
+    EntityUsage="ContractLine"
+    AliasName="CREATED_AT"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Deleted"
+    PrecisionRule="true"
+    EntityAttrName="Deleted"
+    EntityUsage="ContractLine"
+    AliasName="DELETED"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="ContractLine"
+    AliasName="STATUS"/>
+  <ViewAttribute
+    Name="Memo"
+    PrecisionRule="true"
+    EntityAttrName="Memo"
+    EntityUsage="ContractLine"
+    AliasName="MEMO"/>
+  <ViewAttribute
+    Name="Price"
+    PrecisionRule="true"
+    EntityAttrName="Price"
+    EntityUsage="ContractLine"
+    AliasName="PRICE"/>
+  <ViewAttribute
+    Name="WorkStartDate"
+    PrecisionRule="true"
+    EntityAttrName="WorkStartDate"
+    EntityUsage="ContractLine"
+    AliasName="WORK_START_DATE"/>
+  <ViewAttribute
+    Name="FgCompletionDate"
+    PrecisionRule="true"
+    EntityAttrName="FgCompletionDate"
+    EntityUsage="ContractLine"
+    AliasName="FG_COMPLETION_DATE"/>
+  <ViewAttribute
+    Name="AbandonFlag"
+    PrecisionRule="true"
+    EntityAttrName="AbandonFlag"
+    EntityUsage="ContractLine"
+    AliasName="ABANDON_FLAG"/>
+  <ViewAttribute
+    Name="BrokerType"
+    PrecisionRule="true"
+    EntityAttrName="BrokerType"
+    EntityUsage="ContractLine"
+    AliasName="BROKER_TYPE"
+    LOVName="LOV_BrokerType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Currency"
+    PrecisionRule="true"
+    EntityAttrName="Currency"
+    EntityUsage="ContractLine"
+    AliasName="CURRENCY"
+    LOVName="LOV_Currency">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExchangeRate"
+    PrecisionRule="true"
+    EntityAttrName="ExchangeRate"
+    EntityUsage="ContractLine"
+    AliasName="EXCHANGE_RATE"/>
+  <ViewAttribute
+    Name="FourContractBatch"
+    PrecisionRule="true"
+    EntityAttrName="FourContractBatch"
+    EntityUsage="ContractLine"
+    AliasName="FOUR_CONTRACT_BATCH"/>
+  <ViewAttribute
+    Name="OwnerType"
+    PrecisionRule="true"
+    EntityAttrName="OwnerType"
+    EntityUsage="ContractLine"
+    AliasName="OWNER_TYPE"
+    LOVName="LOV_OwnerType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PlantType"
+    PrecisionRule="true"
+    EntityAttrName="PlantType"
+    EntityUsage="ContractLine"
+    AliasName="PLANT_TYPE"
+    LOVName="LOV_PlantType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipPrice"
+    PrecisionRule="true"
+    EntityAttrName="ShipPrice"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_PRICE"/>
+  <ViewAttribute
+    Name="ContractNo"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ContractNo"
+    EntityUsage="Contract"
+    AliasName="CONTRACT_NO"/>
+  <ViewAttribute
+    Name="ContractId"
+    IsQueriable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Contract"
+    AliasName="ID1"/>
+  <ViewAttribute
+    Name="ShipBuildCrtEftDate"
+    PrecisionRule="true"
+    EntityAttrName="ShipBuildCrtEftDate"
+    EntityUsage="ContractLine"
+    AliasName="SHIP_BUILD_CRT_EFT_DATE"/>
+  <ViewCriteria
+    Name="findByPK"
+    ViewObjectName="com.xy.scpms.model.vo.ContractLineView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow28"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":idvar"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByContractId"
+    ViewObjectName="com.xy.scpms.model.vo.ContractLineView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow44"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="HeaderId"
+        ViewAttribute="HeaderId"
+        Operator="="
+        Conjunction="AND"
+        Value=":headerIdBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="fourTechIsBlank"
+    ViewObjectName="com.xy.scpms.model.vo.ContractLineView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ContractLineViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="FourContractBatch"
+        ViewAttribute="FourContractBatch"
+        Operator="ISBLANK"
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="Payments"
+    ViewLink="com.xy.scpms.model.link.ContractLinePaymentsCoFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="FourTechContractView"
+    ViewLink="com.xy.scpms.model.link.ContractLineFourTechLink"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

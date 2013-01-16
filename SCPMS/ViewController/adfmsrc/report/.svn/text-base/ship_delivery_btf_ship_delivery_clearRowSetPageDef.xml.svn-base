@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17"
+                id="ship_delivery_btf_ship_delivery_clearRowSetPageDef" Package="report" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="clearRowSet" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearRowSet"
+            IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.ShipDeliveryRpt1"/>
+  </bindings>
+</pageDefinition>

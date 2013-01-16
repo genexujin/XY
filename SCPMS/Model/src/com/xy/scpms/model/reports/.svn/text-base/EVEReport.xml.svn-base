@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="EVEReport"
+  Version="11.1.2.60.17"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.xy.scpms.model.reports.EVEReportImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  OrderBy='"YR_AMT_TOTAL"'
+  ComponentInterface="com.xy.scpms.model.reports.common.EVEReport"
+  ClientProxyName="com.xy.scpms.model.reports.client.EVEReportClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_objectSuperClassName"
+      Value="com.xy.scpms.model.common.NoAutoQueryView"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.xy.scpms.model.reports.EVEReport_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="month"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <Variable
+    Name="year"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <SQLQuery><![CDATA[select dept dept,
+contract_target contract_target,
+payment_target payment_target,
+mthcrtamttotal mth_amt_total,
+yrcrtamttotal yr_amt_total,
+yrcrtcnttotal yr_crt_cnt,
+mthcrtcnttotal mth_crt_cnt,
+mth_total_paid mth_total_paid,
+yr_total_paid yr_total_paid,
+ROUND((yrcrtamttotal/contract_target)*100,2) amt_per,
+ROUND((yr_total_paid/payment_target)*100,2) pay_per
+from
+((select  targets.dept, targets.contract_target, targets.payment_target,
+nvl(mthCrtAmt.total,0) mthCrtAmtTotal,
+nvl(yrCrtAmt.yr_total,0) yrCrtAmtTotal,
+nvl(mthCrtCnt.no_of_contract,0) mthCrtCntTotal,
+nvl(yrCrtCnt.yr_count,0) yrCrtCntTotal,
+nvl(mthPaid.mth_total_paid,0) mth_total_paid,
+nvl(yrPaid.yr_total_paid,0) yr_total_paid
+from 
+(select dept,contract_target, payment_target from dept_perf_target where fiscal_year=:year) targets,
+(select design_dept, total from v$effective_total_dept where mth=:month and yr=:year) mthCrtAmt,
+(select design_dept, sum(total) yr_total from v$effective_total_dept where mth<=:month and yr=:year group by design_dept) yrCrtAmt,
+(select design_dept, no_of_contract from v$effective_contract_dept where mth=:month and yr=:year) mthCrtCnt,
+(select design_dept, sum(no_of_contract) yr_count from v$effective_contract_dept where mth<=:month and yr=:year group by design_dept) yrCrtCnt,
+(select design_dept, total_payment mth_total_paid from v$paid_total_dept where mth=:month and yr=:year) mthPaid,
+(select design_dept, sum(total_payment) yr_total_paid from v$paid_total_dept where yr=:year group by design_dept) yrPaid
+where targets.dept = mthCrtAmt.design_dept (+)
+and targets.dept = yrCrtAmt.design_dept (+)
+and targets.dept = mthCrtCnt.design_dept (+)
+and targets.dept = yrCrtCnt.design_dept (+)
+and targets.dept = mthPaid.design_dept (+)
+and targets.dept = yrPaid.design_dept (+))
+union
+(select  '全院(不含南通SDARI)', sum(targets.contract_target) contract_target, sum(targets.payment_target) payment_target,
+nvl(sum(mthCrtAmt.total),0) mthCrtAmtTotal,
+nvl(sum(yrCrtAmt.yr_total),0) yrCrtAmtTotal,
+nvl(sum(mthCrtCnt.no_of_contract),0) mthCrtCntTotal,
+nvl(sum(yrCrtCnt.yr_count),0) yrCrtCntTotal,
+nvl(sum(mthPaid.mth_total_paid),0) mth_total_paid,
+nvl(sum(yrPaid.yr_total_paid),0) yr_total_paid
+from 
+(select dept,contract_target, payment_target from dept_perf_target where fiscal_year=:year) targets,
+(select design_dept, total from v$effective_total_dept where mth=:month and yr=:year) mthCrtAmt,
+(select design_dept, sum(total) yr_total from v$effective_total_dept where mth<=:month and yr=:year group by design_dept) yrCrtAmt,
+(select design_dept, no_of_contract from v$effective_contract_dept where mth=:month and yr=:year) mthCrtCnt,
+(select design_dept, sum(no_of_contract) yr_count from v$effective_contract_dept where mth<=:month and yr=:year group by design_dept) yrCrtCnt,
+(select design_dept, total_payment mth_total_paid from v$paid_total_dept where mth=:month and yr=:year) mthPaid,
+(select design_dept, sum(total_payment) yr_total_paid from v$paid_total_dept where yr=:year group by design_dept) yrPaid
+where targets.dept = mthCrtAmt.design_dept (+)
+and targets.dept = yrCrtAmt.design_dept (+)
+and targets.dept = mthCrtCnt.design_dept (+)
+and targets.dept = yrCrtCnt.design_dept (+)
+and targets.dept = mthPaid.design_dept (+)
+and targets.dept = yrPaid.design_dept (+)
+and targets.dept!='南通斯达瑞'
+))]]></SQLQuery>
+  <ViewAttribute
+    Name="Dept"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEPT"
+    Expression="DEPT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.Dept_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContractTarget"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="CONTRACT_TARGET"
+    Expression="CONTRACT_TARGET"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.ContractTarget_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PaymentTarget"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="PAYMENT_TARGET"
+    Expression="PAYMENT_TARGET"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.PaymentTarget_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MthAmtTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="MTH_AMT_TOTAL"
+    Expression="MTH_AMT_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.MthAmtTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="YrAmtTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="YR_AMT_TOTAL"
+    Expression="YR_AMT_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.YrAmtTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="YrCrtCnt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="YR_CRT_CNT"
+    Expression="YR_CRT_CNT"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.YrCrtCnt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MthCrtCnt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="MTH_CRT_CNT"
+    Expression="MTH_CRT_CNT"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.MthCrtCnt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MthTotalPaid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="MTH_TOTAL_PAID"
+    Expression="MTH_TOTAL_PAID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.MthTotalPaid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="YrTotalPaid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="YR_TOTAL_PAID"
+    Expression="YR_TOTAL_PAID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.YrTotalPaid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AmtPer"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="AMT_PER"
+    Expression="AMT_PER"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.AmtPer_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PayPer"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="PAY_PER"
+    Expression="PAY_PER"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.xy.scpms.model.reports.EVEReport.PayPer_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Dept"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.xy.scpms.model.ModelBundle"/>
+  </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="runReportCriteria"
+      MethodName="runReportCriteria">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="month"
+        Type="oracle.jbo.domain.Number"/>
+      <Parameter
+        Name="year"
+        Type="oracle.jbo.domain.Number"/>
+    </Method>
+    <Method
+      Name="clearRowSet"
+      MethodName="clearRowSet">
+      <Return
+        Type="void"/>
+    </Method>
+  </ClientInterface>
+</ViewObject>

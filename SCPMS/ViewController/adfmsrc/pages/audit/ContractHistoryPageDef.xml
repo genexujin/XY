@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="ContractHistoryPageDef"
+                Package="pages.audit">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ChangeHistory" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ChangeHistoryIterator"/>
+    <searchRegion Criteria="byContractNo"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="ChangeHistoryIterator" id="byContractNoQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ChangeHistoryIterator" id="ChangeHistory">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ChangeHistoryView"
+                      Name="ChangeHistory0">
+        <AttrNames>
+          <Item Value="ContractNo"/>
+          <Item Value="Operation"/>
+          <Item Value="TableName"/>
+          <Item Value="ColumnName"/>
+          <Item Value="ChangeBy"/>
+          <Item Value="ChangeDate"/>
+          <Item Value="NewValue"/>
+          <Item Value="OldValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="pay-forecast-btf">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>PayForecastRpt</default-activity>
+    <view id="PayForecastRpt">
+      <page>/pages/report/PayForecastRpt.jspx</page>
+    </view>
+  </task-flow-definition>
+</adfc-config>

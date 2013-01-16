@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/invoice
+END
+BatchPrintablePageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/invoice/BatchPrintablePageDef.xml
+END
+PaymentEntryPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/invoice/PaymentEntryPageDef.xml
+END
+RequisitionsPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/invoice/RequisitionsPageDef.xml
+END
+PaymentNoticesPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/8/trunk/OM/ViewController/adfmsrc/pages/invoice/PaymentNoticesPageDef.xml
+END
+PendingInvReqPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/invoice/PendingInvReqPageDef.xml
+END
+CreateEditBatchPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/invoice/CreateEditBatchPageDef.xml
+END
+PaymentBatchesPageDef.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/home/!svn/ver/3/trunk/OM/ViewController/adfmsrc/pages/invoice/PaymentBatchesPageDef.xml
+END

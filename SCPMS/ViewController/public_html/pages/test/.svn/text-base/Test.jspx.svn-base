@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="Test.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelFormLayout id="pfl1">
+                            <af:panelLabelAndMessage label="#{bindings.AgreementImgUrl.hints.label}"
+                                                     id="plam1">
+                                <af:outputText value="#{bindings.AgreementImgUrl.inputValue}"
+                                               id="ot1"/>
+                            </af:panelLabelAndMessage>
+                            <af:selectOneChoice value="#{bindings.AuthType.inputValue}"
+                                                label="#{bindings.AuthType.label}"
+                                                required="#{bindings.AuthType.hints.mandatory}"
+                                                shortDesc="#{bindings.AuthType.hints.tooltip}"
+                                                readOnly="true" id="soc1">
+                                <f:selectItems value="#{bindings.AuthType.items}"
+                                               id="si1"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.AuthorizerType.inputValue}"
+                                                label="#{bindings.AuthorizerType.label}"
+                                                required="#{bindings.AuthorizerType.hints.mandatory}"
+                                                shortDesc="#{bindings.AuthorizerType.hints.tooltip}"
+                                                readOnly="true" id="soc2">
+                                <f:selectItems value="#{bindings.AuthorizerType.items}"
+                                               id="si2"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.ContractEntity.inputValue}"
+                                                label="#{bindings.ContractEntity.label}"
+                                                required="#{bindings.ContractEntity.hints.mandatory}"
+                                                shortDesc="#{bindings.ContractEntity.hints.tooltip}"
+                                                readOnly="true" id="soc3">
+                                <f:selectItems value="#{bindings.ContractEntity.items}"
+                                               id="si3"/>
+                            </af:selectOneChoice>
+                            <af:panelLabelAndMessage label="#{bindings.ContractNo.hints.label}"
+                                                     id="plam2">
+                                <af:outputText value="#{bindings.ContractNo.inputValue}"
+                                               id="ot2"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.ContractType.hints.label}"
+                                                     id="plam3">
+                                <af:outputText value="#{bindings.ContractType.inputValue}"
+                                               id="ot3"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CreatedAt.hints.label}"
+                                                     id="plam4">
+                                <af:outputText value="#{bindings.CreatedAt.inputValue}"
+                                               id="ot4">
+                                    <af:convertDateTime pattern="#{bindings.CreatedAt.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CreatedBy.hints.label}"
+                                                     id="plam5">
+                                <af:outputText value="#{bindings.CreatedBy.inputValue}"
+                                               id="ot5"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CustomerContactor.hints.label}"
+                                                     id="plam6">
+                                <af:outputText value="#{bindings.CustomerContactor.inputValue}"
+                                               id="ot6"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Deleted.hints.label}"
+                                                     id="plam7">
+                                <af:outputText value="#{bindings.Deleted.inputValue}"
+                                               id="ot7"/>
+                            </af:panelLabelAndMessage>
+                            <af:selectOneChoice value="#{bindings.DesignDept.inputValue}"
+                                                label="#{bindings.DesignDept.label}"
+                                                required="#{bindings.DesignDept.hints.mandatory}"
+                                                shortDesc="#{bindings.DesignDept.hints.tooltip}"
+                                                readOnly="true" id="soc4">
+                                <f:selectItems value="#{bindings.DesignDept.items}"
+                                               id="si4"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.DesignPhase.inputValue}"
+                                                label="#{bindings.DesignPhase.label}"
+                                                required="#{bindings.DesignPhase.hints.mandatory}"
+                                                shortDesc="#{bindings.DesignPhase.hints.tooltip}"
+                                                readOnly="true" id="soc5">
+                                <f:selectItems value="#{bindings.DesignPhase.items}"
+                                               id="si5"/>
+                            </af:selectOneChoice>
+                            <af:panelLabelAndMessage label="#{bindings.FirstDesignFee.hints.label}"
+                                                     id="plam8">
+                                <af:outputText value="#{bindings.FirstDesignFee.inputValue}"
+                                               id="ot8">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.FirstDesignFee.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Id.hints.label}"
+                                                     id="plam9">
+                                <af:outputText value="#{bindings.Id.inputValue}"
+                                               id="ot9">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.Id.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Memo.hints.label}"
+                                                     id="plam10">
+                                <af:outputText value="#{bindings.Memo.inputValue}"
+                                               id="ot10"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.ParentContractId.hints.label}"
+                                                     id="plam11">
+                                <af:outputText value="#{bindings.ParentContractId.inputValue}"
+                                               id="ot11">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.ParentContractId.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:selectOneChoice value="#{bindings.ProjectManager.inputValue}"
+                                                label="#{bindings.ProjectManager.label}"
+                                                required="#{bindings.ProjectManager.hints.mandatory}"
+                                                shortDesc="#{bindings.ProjectManager.hints.tooltip}"
+                                                readOnly="true" id="soc6">
+                                <f:selectItems value="#{bindings.ProjectManager.items}"
+                                               id="si6"/>
+                            </af:selectOneChoice>
+                            <af:panelLabelAndMessage label="#{bindings.ProjectName.hints.label}"
+                                                     id="plam12">
+                                <af:outputText value="#{bindings.ProjectName.inputValue}"
+                                               id="ot12"/>
+                            </af:panelLabelAndMessage>
+                            <af:selectOneChoice value="#{bindings.RegionManager.inputValue}"
+                                                label="#{bindings.RegionManager.label}"
+                                                required="#{bindings.RegionManager.hints.mandatory}"
+                                                shortDesc="#{bindings.RegionManager.hints.tooltip}"
+                                                readOnly="true" id="soc7">
+                                <f:selectItems value="#{bindings.RegionManager.items}"
+                                               id="si7"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.ShipModel.inputValue}"
+                                                label="#{bindings.ShipModel.label}"
+                                                required="#{bindings.ShipModel.hints.mandatory}"
+                                                shortDesc="#{bindings.ShipModel.hints.tooltip}"
+                                                readOnly="true" id="soc8">
+                                <f:selectItems value="#{bindings.ShipModel.items}"
+                                               id="si8"/>
+                            </af:selectOneChoice>
+                            <af:panelLabelAndMessage label="#{bindings.ShipNoInternal.hints.label}"
+                                                     id="plam13">
+                                <af:outputText value="#{bindings.ShipNoInternal.inputValue}"
+                                               id="ot13"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Status.hints.label}"
+                                                     id="plam14">
+                                <af:outputText value="#{bindings.Status.inputValue}"
+                                               id="ot14"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.AuthName.hints.label}"
+                                                     id="plam15">
+                                <af:outputText value="#{bindings.AuthName.inputValue}"
+                                               id="ot15"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.TotalAmount.hints.label}"
+                                                     id="plam16">
+                                <af:outputText value="#{bindings.TotalAmount.inputValue}"
+                                               id="ot16">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.TotalAmount.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.RefinedFlag.hints.label}"
+                                                     id="plam17">
+                                <af:outputText value="#{bindings.RefinedFlag.inputValue}"
+                                               id="ot17"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CustomerId.hints.label}"
+                                                     id="plam18">
+                                <af:outputText value="#{bindings.CustomerId.inputValue}"
+                                               id="ot18"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CustomerContactName.hints.label}"
+                                                     id="plam19">
+                                <af:outputText value="#{bindings.CustomerContactName.inputValue}"
+                                               id="ot19"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.ParentContractNo.hints.label}"
+                                                     id="plam20">
+                                <af:outputText value="#{bindings.ParentContractNo.inputValue}"
+                                               id="ot20"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.PrjLastname.hints.label}"
+                                                     id="plam21">
+                                <af:outputText value="#{bindings.PrjLastname.inputValue}"
+                                               id="ot21"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.PrjUsername.hints.label}"
+                                                     id="plam22">
+                                <af:outputText value="#{bindings.PrjUsername.inputValue}"
+                                               id="ot22"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.PrjFirstname.hints.label}"
+                                                     id="plam23">
+                                <af:outputText value="#{bindings.PrjFirstname.inputValue}"
+                                               id="ot23"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.RegLastname.hints.label}"
+                                                     id="plam24">
+                                <af:outputText value="#{bindings.RegLastname.inputValue}"
+                                               id="ot24"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Username1.hints.label}"
+                                                     id="plam25">
+                                <af:outputText value="#{bindings.Username1.inputValue}"
+                                               id="ot25"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.RegFirstname.hints.label}"
+                                                     id="plam26">
+                                <af:outputText value="#{bindings.RegFirstname.inputValue}"
+                                               id="ot26"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CreatorLastname.hints.label}"
+                                                     id="plam27">
+                                <af:outputText value="#{bindings.CreatorLastname.inputValue}"
+                                               id="ot27"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CreatorUsername.hints.label}"
+                                                     id="plam28">
+                                <af:outputText value="#{bindings.CreatorUsername.inputValue}"
+                                               id="ot28"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CreatorFirstname.hints.label}"
+                                                     id="plam29">
+                                <af:outputText value="#{bindings.CreatorFirstname.inputValue}"
+                                               id="ot29"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.PrjFullName.hints.label}"
+                                                     id="plam30">
+                                <af:outputText value="#{bindings.PrjFullName.inputValue}"
+                                               id="ot30"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.RegFullName.hints.label}"
+                                                     id="plam31">
+                                <af:outputText value="#{bindings.RegFullName.inputValue}"
+                                               id="ot31"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.CreatorFullName.hints.label}"
+                                                     id="plam32">
+                                <af:outputText value="#{bindings.CreatorFullName.inputValue}"
+                                               id="ot32"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.UnitWeight.hints.label}"
+                                                     id="plam33">
+                                <af:outputText value="#{bindings.UnitWeight.inputValue}"
+                                               id="ot33">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.UnitWeight.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.TotalWeight.hints.label}"
+                                                     id="plam34">
+                                <af:outputText value="#{bindings.TotalWeight.inputValue}"
+                                               id="ot34">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.TotalWeight.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.TotalCompleteWeight.hints.label}"
+                                                     id="plam35">
+                                <af:outputText value="#{bindings.TotalCompleteWeight.inputValue}"
+                                               id="ot35">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.TotalCompleteWeight.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17" id="ContactLookupPageDef"
+                Package="customer">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CustomerContacts" RangeSize="25" DataControl="CoreModuleDataControl"
+              id="CustomerContactsIterator"/>
+    <searchRegion Binds="CustomerContactsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="CustomerContactsQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CustomerContactsIterator" id="CustomerContacts">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.CustomerContactsView" Name="CustomerContacts0">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Title"/>
+          <Item Value="Department"/>
+          <Item Value="ImportantLevel"/>
+          <Item Value="Memo"/>
+          <Item Value="Mobile"/>
+          <Item Value="OfficePhone"/>
+          <Item Value="OfficeFax"/>
+          <Item Value="HomePhone"/>
+          <Item Value="Email"/>
+          <Item Value="Im"/>
+          <Item Value="Address"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="CustomerContactsIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomerContactsIterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

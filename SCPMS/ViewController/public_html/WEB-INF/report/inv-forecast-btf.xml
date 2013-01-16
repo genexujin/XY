@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="inv-forecast-btf">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>InvForecastRpt</default-activity>
+    <view id="InvForecastRpt">
+      <page>/pages/report/InvForecastRpt.jspx</page>
+    </view>
+    <view id="InvForecastPrint">
+      <page>/pages/report/InvForecastPrint.jspx</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>InvForecastRpt</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>print</from-outcome>
+        <to-activity-id>InvForecastPrint</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>InvForecastPrint</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>report</from-outcome>
+        <to-activity-id>InvForecastRpt</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

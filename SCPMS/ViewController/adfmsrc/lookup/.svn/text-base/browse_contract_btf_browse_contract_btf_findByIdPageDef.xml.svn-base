@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.17"
+                id="browse_contract_btf_browse_contract_btf_findByIdPageDef" Package="lookup" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="findById" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findById"
+            IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+            InstanceName="data.CoreModuleDataControl.Contract">
+      <NamedData NDName="id" NDValue="#{pageFlowScope.contractId}" NDType="oracle.jbo.domain.Number"/>
+    </action>
+  </bindings>
+</pageDefinition>

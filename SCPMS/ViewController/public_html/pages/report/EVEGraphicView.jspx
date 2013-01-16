@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="EVEGraphicView.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+               <af:panelStretchLayout id="psl1">
+            <f:facet name="center">
+                <af:panelGroupLayout id="pgl1" layout="vertical">
+                    <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                         halign="center">
+                                <af:outputFormatted value="#{pageFlowScope.startYr}年至#{pageFlowScope.endYr}年,#{pageFlowScope.dept}部门合同额及收费表对比报表"
+                                                    id="of1"
+                                                    styleClass="AFBrandingBarTitle"
+                                                    inlineStyle="font-size:large;"/>
+                            </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl3" layout="horizontal"
+                                         halign="center">
+                        <af:outputText value="导出日期： #{viewScope.ReportBean.currentDate}"
+                                       id="ot4"
+                                       inlineStyle="font-family:'Microsoft YaHei';"/>
+                    </af:panelGroupLayout>
+                            <dvt:pivotTable id="pt1"
+                                            value="#{bindings.PaymentHistoryView.pivotTableModel}"
+                                            var="cellData"
+                                            varStatus="cellStatus"
+                                            summary="Pivot分析表"
+                                            modelName="pt1Model"
+                                            styleClass="AFStretchWidth">
+                                <dvt:headerCell>
+                                    <af:switcher facetName="#{cellData.layerName}"
+                                                 defaultFacet="Default" id="s1">
+                                        <f:facet name="DataLayer">
+                                            <af:outputText value="#{cellData.label}"
+                                                           id="ot1"/>
+                                        </f:facet>
+                                        <f:facet name="Month">
+                                            <af:outputText value="#{cellData.dataValue}"
+                                                           id="ot2"/>
+                                        </f:facet>
+                                        <f:facet name="Year">
+                                            <af:outputText value="#{cellData.dataValue}"
+                                                           id="ot14"/>
+                                        </f:facet>
+                                        <f:facet name="Default">
+                                            <af:outputText value="#{cellData.dataValue}"
+                                                           id="ot5"/>
+                                        </f:facet>
+                                    </af:switcher>
+                                </dvt:headerCell>
+                                <dvt:dataCell>
+                                    <af:switcher facetName="#{cellStatus.members.DataLayer.value}"
+                                                 defaultFacet="Default" id="s2">
+                                        <f:facet name="ContractAmount">
+                                            <af:outputText value="#{cellData.dataValue}"
+                                                           id="ot6">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.PaymentHistoryView.hints.ContractAmount.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:outputText>
+                                        </f:facet>
+                                        <f:facet name="PaymentAmount">
+                                            <af:outputText value="#{cellData.dataValue}"
+                                                           id="ot7">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.PaymentHistoryView.hints.PaymentAmount.format}"
+                                                                  maxFractionDigits="7"/>
+                                            </af:outputText>
+                                        </f:facet>
+                                        <f:facet name="Default">
+                                            <af:outputText value="#{cellData.dataValue}"
+                                                           id="ot8"/>
+                                        </f:facet>
+                                    </af:switcher>
+                                </dvt:dataCell>
+                            </dvt:pivotTable>
+                            <dvt:lineGraph id="graph1"
+                                           value="#{bindings.PaymentHistoryView1.graphModel}"
+                                           subType="LINE_VERT_ABS"
+                                           shortDesc="图形"
+                                           threeDEffect="false">
+                                <dvt:background>
+                                    <dvt:specialEffects/>
+                                </dvt:background>
+                                <dvt:graphPlotArea/>
+                                <dvt:seriesSet>
+                                    <dvt:series/>
+                                </dvt:seriesSet>
+                                <dvt:o1Axis/>
+                                <dvt:y1Axis/>
+                                <dvt:legendArea automaticPlacement="AP_NEVER"/>
+                            </dvt:lineGraph>
+                        </af:panelGroupLayout>
+                <!-- id="af_one_column_stretched"   -->
+            </f:facet>
+            <f:facet name="top">
+                <af:toolbar id="t2">
+                    <af:commandToolbarButton text="打印" id="ctb1"
+                                             icon="/images/icons/print.png">
+                        <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandToolbarButton text="返回" id="ctb2" action="table"
+                                             icon="/images/icons/previous.png"/>
+                </af:toolbar>
+            </f:facet>
+        </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

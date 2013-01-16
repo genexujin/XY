@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.60.13" id="CustomerLookupPageDef"
+                Package="pages.lookup">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Customers" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="CustomersIterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="CustomersIterator" id="ImplicitViewCriteriaQuery"/>
+    <iterator id="ContractIterator" Binds="Contract"
+              DataControl="CoreModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CustomersIterator" id="Customers">
+      <nodeDefinition DefName="com.xy.scpms.model.query.CustomerView"
+                      Name="Customers0">
+        <AttrNames>
+          <Item Value="CustomerName"/>
+          <Item Value="CustomerBillAddress"/>
+          <Item Value="CustomerShiptoAddress"/>
+          <Item Value="CustomerContactPerson"/>
+          <Item Value="CustomerCode"/>
+          <Item Value="CustomerType"/>
+          <Item Value="Region"/>
+          <Item Value="CustomerLevel"/>
+          <Item Value="ParentGroup"/>
+          <Item Value="PrimaryShipType"/>
+          <Item Value="ShipGroupLevel"/>
+          <Item Value="PostCode"/>
+          <Item Value="RecentAction"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="ContractIterator" id="AuthName">
+      <AttrNames>
+        <Item Value="AuthName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ContractIterator" id="CustomerId">
+      <AttrNames>
+        <Item Value="CustomerId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

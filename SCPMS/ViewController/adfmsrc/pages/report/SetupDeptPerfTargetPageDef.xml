@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="SetupDeptPerfTargetPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DeptPerfTarget" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="DeptPerfTargetIterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="DeptPerfTargetIterator"
+                  id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DeptPerfTargetIterator" id="DeptPerfTarget">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.DeptPerfTargetView"
+                      Name="DeptPerfTarget0">
+        <AttrNames>
+          <Item Value="FiscalYear"/>
+          <Item Value="Dept"/>
+          <Item Value="ContractTarget"/>
+          <Item Value="PaymentTarget"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DeptPerfTargetIterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="DeptPerfTargetIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="CoreModuleDataControl"/>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

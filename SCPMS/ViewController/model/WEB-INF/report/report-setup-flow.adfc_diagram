@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <TaskFlowReturn
+      id="TaskFlowReturn2">
+      <property
+         name="activityId">return</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>return&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  return&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">205.94824</property>
+      <property
+         name="x">521.0</property>
+   </TaskFlowReturn>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule3">
+      <property
+         name="activityId">*</property>
+      <property
+         name="y">45.29883</property>
+      <property
+         name="x">458.0</property>
+   </WildcardControlFlowRule>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="WildcardControlFlowRule3"
+      to="TaskFlowReturn2">
+      <property
+         name="fromOutcome">return</property>
+      <property
+         name="sdm:polyPoints">B50,458.0,87.94824,521.0,151.59766,T50</property>
+   </ControlFlowCase>
+   <View
+      id="View5">
+      <property
+         name="activityId">Messages</property>
+      <property
+         name="page">/pages/common/Messages.jspx</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Messages&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">true</property>
+      <property
+         name="y">369.74707</property>
+      <property
+         name="x">523.5</property>
+   </View>
+   <View
+      id="View6">
+      <property
+         name="activityId">SetupDeptPerfTarget</property>
+      <property
+         name="page">/pages/report/SetupDeptPerfTarget.jspx</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>SetupDeptPerfTarget&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">188.59766</property>
+      <property
+         name="x">186.0</property>
+   </View>
+</SDM>

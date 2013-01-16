@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="ContractHistory.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" topHeight="100px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox text="变更历史记录" id="pb2" background="medium">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t2">
+                                        <af:commandToolbarButton text="导出"
+                                                                 id="ctb1"
+                                                                 icon="/images/icons/export.png">
+                                            <af:exportCollectionActionListener type="excelHTML"
+                                                                               exportedId="t1"/>
+                                        </af:commandToolbarButton>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.ChangeHistory.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.ChangeHistory.rangeSize}"
+                                          emptyText="#{bindings.ChangeHistory.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.ChangeHistory.rangeSize}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.ChangeHistory.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.ChangeHistory.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1">
+                                    <af:column sortProperty="#{bindings.ChangeHistory.hints.ContractNo.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ChangeHistory.hints.ContractNo.label}"
+                                               id="c1">
+                                        <af:outputText value="#{row.ContractNo}"
+                                                       id="ot1"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ChangeHistory.hints.Operation.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ChangeHistory.hints.Operation.label}"
+                                               id="c2">
+                                        <af:outputText value="#{row.Operation}"
+                                                       id="ot2"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ChangeHistory.hints.TableName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ChangeHistory.hints.TableName.label}"
+                                               id="c3">
+                                        <af:outputText value="#{row.TableName}"
+                                                       id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ChangeHistory.hints.ColumnName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ChangeHistory.hints.ColumnName.label}"
+                                               id="c4">
+                                        <af:outputText value="#{row.ColumnName}"
+                                                       id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ChangeHistory.hints.ChangeBy.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ChangeHistory.hints.ChangeBy.label}"
+                                               id="c5">
+                                        <af:outputText value="#{row.ChangeBy}"
+                                                       id="ot5"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ChangeHistory.hints.ChangeDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ChangeHistory.hints.ChangeDate.label}"
+                                               id="c6">
+                                        <af:outputText value="#{row.ChangeDate}"
+                                                       id="ot6">
+                                            <af:convertDateTime pattern="#{bindings.ChangeHistory.hints.ChangeDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ChangeHistory.hints.NewValue.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ChangeHistory.hints.NewValue.label}"
+                                               id="c7">
+                                        <af:outputText value="#{row.NewValue}"
+                                                       id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.ChangeHistory.hints.OldValue.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.ChangeHistory.hints.OldValue.label}"
+                                               id="c8">
+                                        <af:outputText value="#{row.OldValue}"
+                                                       id="ot8"/>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelBox text="合同变更历史查询" id="pb1"
+                                     background="medium">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                    <af:commandToolbarButton text="返回主页"
+                                                             id="ctb3"
+                                                             icon="/images/icons/home.gif"
+                                                             action="return"
+                                                             actionListener="#{bindings.Rollback.execute}"
+                                                             immediate="true"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:query id="qryId1" headerText="请输入查询条件"
+                                      disclosed="true"
+                                      value="#{bindings.byContractNoQuery.queryDescriptor}"
+                                      model="#{bindings.byContractNoQuery.queryModel}"
+                                      queryListener="#{bindings.byContractNoQuery.processQuery}"
+                                      queryOperationListener="#{bindings.byContractNoQuery.processQueryOperation}"
+                                      displayMode="simple"
+                                      saveQueryMode="hidden"
+                                      modeChangeVisible="false"
+                                      resultComponentId="::pc1:t1"/>
+                        </af:panelBox>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

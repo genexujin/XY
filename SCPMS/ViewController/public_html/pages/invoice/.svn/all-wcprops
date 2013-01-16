@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/pages/invoice
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/pages/invoice/readme.txt
+END
+BatchPrintable.jspx
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/pages/invoice/BatchPrintable.jspx
+END
+PaymentEntry.jspx
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/pages/invoice/PaymentEntry.jspx
+END
+InvoiceNotification.jspx
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/home/!svn/ver/8/trunk/OM/ViewController/public_html/pages/invoice/InvoiceNotification.jspx
+END
+Requisitions.jspx
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/pages/invoice/Requisitions.jspx
+END
+PaymentNotices.jspx
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/home/!svn/ver/8/trunk/OM/ViewController/public_html/pages/invoice/PaymentNotices.jspx
+END
+PendingInvReq.jspx
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/pages/invoice/PendingInvReq.jspx
+END
+CreateEditBatch.jspx
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/pages/invoice/CreateEditBatch.jspx
+END
+PaymentBatches.jspx
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/home/!svn/ver/3/trunk/OM/ViewController/public_html/pages/invoice/PaymentBatches.jspx
+END

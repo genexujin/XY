@@ -1,0 +1,518 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="PaymentNotices.jspx" id="d1">
+        <af:resource type="javascript">
+              function disableContextMenu() {
+                  document.oncontextmenu = function () {
+                      return false
+                  };
+
+              }
+            </af:resource>
+            <af:resource type="javascript">
+                  function openContract(evt) {
+
+                      var source = evt.getSource();
+
+                   AdfCustomEvent.queue(source, "openContract", 
+          {
+          },
+true);
+          
+
+                      evt.cancel();
+
+                  }
+            </af:resource>
+            <af:messages id="m1"/>
+            <af:form id="f1">
+            <af:popup childCreation="immediate" autoCancel="disabled" id="p5"
+                      binding="#{PaymentNoticeBean.contractDetailPopup}">
+                    <af:panelWindow id="pw4" contentHeight="600" contentWidth="800" stretchChildren="first"
+                                    modal="true">
+                        <af:region value="#{bindings.browsecontractbtf1.regionModel}" id="r1"/>
+                    </af:panelWindow>
+                </af:popup>
+                <af:panelStretchLayout id="psl1" topHeight="180px"
+                                       bottomHeight="0px" startWidth="0px"
+                                       endWidth="0px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelBox id="pb2"
+                                     background="medium" text="收款提醒列表">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t4"/>
+                            </f:facet>
+                            <af:panelSplitter id="ps1" positionedFromEnd="true"
+                                              splitterPosition="300">
+                                <f:facet name="first">
+                                    <af:panelCollection id="pc1">
+                                        <f:facet name="menus">
+                                            <af:menu text="到期时间" id="m2"
+                                                     icon="/images/icons/history.png">
+                                                <af:commandMenuItem text="30天（默认）"
+                                                                    id="cmi1"
+                                                                    actionListener="#{viewScope.PaymentNoticeBean.below30}"
+                                                                    icon="/images/icons/green_dot.png"/>
+                                                <af:commandMenuItem text="31-60天"
+                                                                    id="cmi2"
+                                                                    actionListener="#{viewScope.PaymentNoticeBean.btw31and60}"
+                                                                    icon="/images/icons/green_dot.png"/>
+                                                <af:commandMenuItem text="61-90天"
+                                                                    id="cmi3"
+                                                                    actionListener="#{viewScope.PaymentNoticeBean.btw61and90}"
+                                                                    icon="/images/icons/green_dot.png"/>
+                                                <af:commandMenuItem text=">=91天"
+                                                                    id="cmi4"
+                                                                    actionListener="#{viewScope.PaymentNoticeBean.abv91}"
+                                                                    icon="/images/icons/green_dot.png"/>
+                                                <af:commandMenuItem text="所有"
+                                                                    id="cmi5"
+                                                                    actionListener="#{viewScope.PaymentNoticeBean.all}"/>
+                                            </af:menu>
+                                        </f:facet>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t1">
+                                                <af:commandToolbarButton text="导出"
+                                                                         id="ctb1"
+                                                                         icon="/images/icons/export.png"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.PaymentNotification.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.PaymentNotification.rangeSize}"
+                                                  emptyText="#{bindings.PaymentNotification.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.PaymentNotification.rangeSize}"
+                                                  rowBandingInterval="1"
+                                                  filterModel="#{bindings.queryFormQuery.queryDescriptor}"
+                                                  queryListener="#{bindings.queryFormQuery.processQuery}"
+                                                  filterVisible="false"
+                                                  varStatus="vs"
+                                                  selectedRowKeys="#{bindings.PaymentNotification.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.PaymentNotification.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t2"
+                                                  binding="#{PaymentNoticeBean.table}">
+                                            <af:serverListener type="openContract"
+                                                               method="#{PaymentNoticeBean.openContract}"/><af:clientListener type="dblClick" method="openContract"/>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.ContractNo.name}"
+                                                       filterable="true" sortable="false"
+                                                       headerText="#{bindings.PaymentNotification.hints.ContractNo.label}"
+                                                       id="c5">
+                                                <af:inputText value="#{row.bindings.ContractNo.inputValue}"
+                                                              label="#{bindings.PaymentNotification.hints.ContractNo.label}"
+                                                              required="#{bindings.PaymentNotification.hints.ContractNo.mandatory}"
+                                                              columns="#{bindings.PaymentNotification.hints.ContractNo.displayWidth}"
+                                                              maximumLength="#{bindings.PaymentNotification.hints.ContractNo.precision}"
+                                                              shortDesc="#{bindings.PaymentNotification.hints.ContractNo.tooltip}"
+                                                              id="it1">
+                                                    <f:validator binding="#{row.bindings.ContractNo.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.PaymentName.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.PaymentNotification.hints.PaymentName.label}"
+                                                       id="c1" align="center" width="70">
+                                                <af:outputText value="#{row.PaymentName}" id="ot1"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.PaymentPlanDate.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.PaymentNotification.hints.PaymentPlanDate.label}"
+                                                       id="c2" align="center" width="70">
+                                                <af:outputText value="#{row.PaymentPlanDate}" id="ot2">
+                                                    <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.PaymentPlanDate.format}"/>
+                                                </af:outputText>
+                                                <f:facet name="filter">
+                                                    <af:inputDate value="#{vs.filterCriteria.PaymentPlanDate}" id="id2">
+                                                        <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.PaymentPlanDate.format}"/>
+                                                    </af:inputDate>
+                                                </f:facet>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.PaymentPlanAmount.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.PaymentNotification.hints.PaymentPlanAmount.label}"
+                                                       id="c3" align="center" width="70">
+                                                <af:outputText value="#{row.PaymentPlanAmount}" id="ot3">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.PaymentNotification.hints.PaymentPlanAmount.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.InvoiceAmount.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.PaymentNotification.hints.InvoiceAmount.label}"
+                                                       id="c4" align="center" width="70">
+                                                <af:outputText value="#{row.InvoiceAmount}" id="ot4">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.PaymentNotification.hints.InvoiceAmount.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.InvoiceDate.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.PaymentNotification.hints.InvoiceDate.label}"
+                                                       id="c6" align="center" width="70">
+                                                <af:outputText value="#{row.InvoiceDate}" id="ot6">
+                                                    <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.InvoiceDate.format}"/>
+                                                </af:outputText>
+                                                <f:facet name="filter">
+                                                    <af:inputDate value="#{vs.filterCriteria.InvoiceDate}" id="id3">
+                                                        <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.InvoiceDate.format}"/>
+                                                    </af:inputDate>
+                                                </f:facet>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.InvoiceNumber.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.PaymentNotification.hints.InvoiceNumber.label}"
+                                                       id="c7" align="center" width="70">
+                                                <af:outputText value="#{row.InvoiceNumber}" id="ot7"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.PaymentDate.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.PaymentNotification.hints.PaymentDate.label}"
+                                                       id="c8" align="center" width="70">
+                                                <af:outputText value="#{row.PaymentDate}" id="ot8">
+                                                    <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.PaymentDate.format}"/>
+                                                </af:outputText>
+                                                <f:facet name="filter">
+                                                    <af:inputDate value="#{vs.filterCriteria.PaymentDate}" id="id1">
+                                                        <af:convertDateTime pattern="#{bindings.PaymentNotification.hints.PaymentDate.format}"/>
+                                                    </af:inputDate>
+                                                </f:facet>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PaymentNotification.hints.PaymentMemo.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.PaymentNotification.hints.PaymentMemo.label}"
+                                                       id="c9" align="center">
+                                                <af:outputText value="#{row.PaymentMemo}" id="ot9"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </f:facet>
+                                <f:facet name="second">
+                                    <af:panelTabbed id="pt1">
+                                        <af:showDetailItem
+                                                           id="sdi1"
+                                                           stretchChildren="first"
+                                                           text="合同基本信息">
+                                            <af:panelFormLayout id="pfl1"
+                                                                partialTriggers="pc1:t2">
+                                                <af:panelLabelAndMessage label="#{bindings.ContractNo.hints.label}"
+                                                                         id="plam1">
+                                                    <af:outputText value="#{bindings.ContractNo.inputValue}"
+                                                                   id="ot10"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ProjectName.hints.label}"
+                                                                         id="plam2">
+                                                    <af:outputText value="#{bindings.ProjectName.inputValue}"
+                                                                   id="ot11"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.AuthName.hints.label}"
+                                                                         id="plam3">
+                                                    <af:outputText value="#{bindings.AuthName.inputValue}"
+                                                                   id="ot12"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.AuthType.hints.label}"
+                                                                         id="plam4">
+                                                    <af:outputText value="#{bindings.AuthType.inputValue}"
+                                                                   id="ot13"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.AuthorizerType.hints.label}"
+                                                                         id="plam5">
+                                                    <af:outputText value="#{bindings.AuthorizerType.inputValue}"
+                                                                   id="ot14"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ContractEntity.hints.label}"
+                                                                         id="plam6">
+                                                    <af:outputText value="#{bindings.ContractEntity.inputValue}"
+                                                                   id="ot15"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:selectOneChoice value="#{bindings.ContractType1.inputValue}"
+                                                                    label="#{bindings.ContractType1.label}"
+                                                                    required="#{bindings.ContractType1.hints.mandatory}"
+                                                                    shortDesc="#{bindings.ContractType1.hints.tooltip}"
+                                                                    readOnly="true"
+                                                                    id="soc1">
+                                                    <f:selectItems value="#{bindings.ContractType1.items}"
+                                                                   id="si1"/>
+                                                </af:selectOneChoice>
+                                                <af:panelLabelAndMessage label="#{bindings.CustomerContactName.hints.label}"
+                                                                         id="plam7">
+                                                    <af:outputText value="#{bindings.CustomerContactName.inputValue}"
+                                                                   id="ot16"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:selectOneChoice value="#{bindings.DesignDept.inputValue}"
+                                                                    label="#{bindings.DesignDept.label}"
+                                                                    required="#{bindings.DesignDept.hints.mandatory}"
+                                                                    shortDesc="#{bindings.DesignDept.hints.tooltip}"
+                                                                    readOnly="true"
+                                                                    id="soc2">
+                                                    <f:selectItems value="#{bindings.DesignDept.items}"
+                                                                   id="si2"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice value="#{bindings.DesignPhase.inputValue}"
+                                                                    label="#{bindings.DesignPhase.label}"
+                                                                    required="#{bindings.DesignPhase.hints.mandatory}"
+                                                                    shortDesc="#{bindings.DesignPhase.hints.tooltip}"
+                                                                    readOnly="true"
+                                                                    id="soc3">
+                                                    <f:selectItems value="#{bindings.DesignPhase.items}"
+                                                                   id="si3"/>
+                                                </af:selectOneChoice>
+                                                <af:panelLabelAndMessage label="#{bindings.FirstDesignFee.hints.label}"
+                                                                         id="plam8">
+                                                    <af:outputText value="#{bindings.FirstDesignFee.inputValue}"
+                                                                   id="ot17">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.FirstDesignFee.format}"
+                                                                          maxFractionDigits="7"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ParentContractId.hints.label}"
+                                                                         id="plam9">
+                                                    <af:outputText value="#{bindings.ParentContractId.inputValue}"
+                                                                   id="ot18">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.ParentContractId.format}"
+                                                                          maxFractionDigits="7"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ParentContractNo.hints.label}"
+                                                                         id="plam10">
+                                                    <af:outputText value="#{bindings.ParentContractNo.inputValue}"
+                                                                   id="ot19"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ProjectManager.hints.label}"
+                                                                         id="plam11">
+                                                    <af:outputText value="#{bindings.ProjectManager.inputValue}"
+                                                                   id="ot20"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.RegionManager.hints.label}"
+                                                                         id="plam12">
+                                                    <af:outputText value="#{bindings.RegionManager.inputValue}"
+                                                                   id="ot21"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipModel.hints.label}"
+                                                                         id="plam13">
+                                                    <af:outputText value="#{bindings.ShipModel.inputValue}"
+                                                                   id="ot22"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ContractShipNoInternal.hints.label}"
+                                                                         id="plam14">
+                                                    <af:outputText value="#{bindings.ContractShipNoInternal.inputValue}"
+                                                                   id="ot23"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ContractStatus.hints.label}"
+                                                                         id="plam15">
+                                                    <af:outputText value="#{bindings.ContractStatus.inputValue}"
+                                                                   id="ot24"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.TotalAmount.hints.label}"
+                                                                         id="plam16">
+                                                    <af:outputText value="#{bindings.TotalAmount.inputValue}"
+                                                                   id="ot25">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.TotalAmount.format}"
+                                                                          maxFractionDigits="7"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.UnitWeight.hints.label}"
+                                                                         id="plam17">
+                                                    <af:outputText value="#{bindings.UnitWeight.inputValue}"
+                                                                   id="ot26">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.UnitWeight.format}"
+                                                                          maxFractionDigits="7"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ContractMemo.hints.label}"
+                                                                         id="plam18">
+                                                    <af:outputText value="#{bindings.ContractMemo.inputValue}"
+                                                                   id="ot27"/>
+                                                </af:panelLabelAndMessage>
+                                            </af:panelFormLayout>
+                                        </af:showDetailItem>
+                                        <af:showDetailItem text="合同详细信息"
+                                                           id="sdi2">
+                                            <af:panelFormLayout id="pfl2"
+                                                                partialTriggers="pc1:t2">
+                                                <af:panelLabelAndMessage label="#{bindings.LineNo.hints.label}"
+                                                                         id="plam19">
+                                                    <af:outputText value="#{bindings.LineNo.inputValue}"
+                                                                   id="ot28">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.LineNo.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipMnftNo.hints.label}"
+                                                                         id="plam20">
+                                                    <af:outputText value="#{bindings.ShipMnftNo.inputValue}"
+                                                                   id="ot29"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipName.hints.label}"
+                                                                         id="plam21">
+                                                    <af:outputText value="#{bindings.ShipName.inputValue}"
+                                                                   id="ot30"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipPlant.hints.label}"
+                                                                         id="plam22">
+                                                    <af:outputText value="#{bindings.ShipPlant.inputValue}"
+                                                                   id="ot31"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.PlantType.hints.label}"
+                                                                         id="plam23">
+                                                    <af:outputText value="#{bindings.PlantType.inputValue}"
+                                                                   id="ot32"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipOwner.hints.label}"
+                                                                         id="plam24">
+                                                    <af:outputText value="#{bindings.ShipOwner.inputValue}"
+                                                                   id="ot33"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.OwnerType.hints.label}"
+                                                                         id="plam25">
+                                                    <af:outputText value="#{bindings.OwnerType.inputValue}"
+                                                                   id="ot34"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipBroker.hints.label}"
+                                                                         id="plam26">
+                                                    <af:outputText value="#{bindings.ShipBroker.inputValue}"
+                                                                   id="ot35"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.BrokerType.hints.label}"
+                                                                         id="plam27">
+                                                    <af:outputText value="#{bindings.BrokerType.inputValue}"
+                                                                   id="ot36"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ContractType.hints.label}"
+                                                                         id="plam28">
+                                                    <af:outputText value="#{bindings.ContractType.inputValue}"
+                                                                   id="ot37"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ImoNo.hints.label}"
+                                                                         id="plam29">
+                                                    <af:outputText value="#{bindings.ImoNo.inputValue}"
+                                                                   id="ot38"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipClsfctSociety.hints.label}"
+                                                                         id="plam30">
+                                                    <af:outputText value="#{bindings.ShipClsfctSociety.inputValue}"
+                                                                   id="ot39"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipPrice.hints.label}"
+                                                                         id="plam31">
+                                                    <af:outputText value="#{bindings.ShipPrice.inputValue}"
+                                                                   id="ot40">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.ShipPrice.format}"
+                                                                          maxFractionDigits="7"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.Currency.hints.label}"
+                                                                         id="plam32">
+                                                    <af:outputText value="#{bindings.Currency.inputValue}"
+                                                                   id="ot41"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ExchangeRate.hints.label}"
+                                                                         id="plam33">
+                                                    <af:outputText value="#{bindings.ExchangeRate.inputValue}"
+                                                                   id="ot42">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.ExchangeRate.format}"
+                                                                          maxFractionDigits="7"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.Price.hints.label}"
+                                                                         id="plam34">
+                                                    <af:outputText value="#{bindings.Price.inputValue}"
+                                                                   id="ot43">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.Price.format}"
+                                                                          maxFractionDigits="7"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.SignOffDate.hints.label}"
+                                                                         id="plam35">
+                                                    <af:outputText value="#{bindings.SignOffDate.inputValue}"
+                                                                   id="ot44">
+                                                        <af:convertDateTime pattern="#{bindings.SignOffDate.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.EffectiveDate.hints.label}"
+                                                                         id="plam36">
+                                                    <af:outputText value="#{bindings.EffectiveDate.inputValue}"
+                                                                   id="ot45">
+                                                        <af:convertDateTime pattern="#{bindings.EffectiveDate.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.FgCompletionDate.hints.label}"
+                                                                         id="plam37">
+                                                    <af:outputText value="#{bindings.FgCompletionDate.inputValue}"
+                                                                   id="ot46">
+                                                        <af:convertDateTime pattern="#{bindings.FgCompletionDate.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.WorkStartDate.hints.label}"
+                                                                         id="plam38">
+                                                    <af:outputText value="#{bindings.WorkStartDate.inputValue}"
+                                                                   id="ot47">
+                                                        <af:convertDateTime pattern="#{bindings.WorkStartDate.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipNoInternal.hints.label}"
+                                                                         id="plam39">
+                                                    <af:outputText value="#{bindings.ShipNoInternal.inputValue}"
+                                                                   id="ot48"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.ShipBuildCrtEftDate.hints.label}"
+                                                                         id="plam40">
+                                                    <af:outputText value="#{bindings.ShipBuildCrtEftDate.inputValue}"
+                                                                   id="ot49">
+                                                        <af:convertDateTime pattern="#{bindings.ShipBuildCrtEftDate.format}"/>
+                                                    </af:outputText>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage label="#{bindings.LineMemo.hints.label}"
+                                                                         id="plam41">
+                                                    <af:outputText value="#{bindings.LineMemo.inputValue}"
+                                                                   id="ot50"/>
+                                                </af:panelLabelAndMessage>
+                                            </af:panelFormLayout>
+                                        </af:showDetailItem>
+                                    </af:panelTabbed>
+                                </f:facet>
+                            </af:panelSplitter>
+                        </af:panelBox>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelBox id="pb1"
+                                     background="medium" text="收款提醒查询">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                    <af:commandToolbarButton id="ctb5"
+                                                             text="返回主页面"
+                                                             icon="/images/icons/home.gif"
+                                                             action="return"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:query id="qryId1" headerText="请输入查询条件"
+                                      disclosed="true"
+                                      value="#{bindings.queryFormQuery.queryDescriptor}"
+                                      model="#{bindings.queryFormQuery.queryModel}"
+                                      queryListener="#{PaymentNoticeBean.onQuery}"
+                                      queryOperationListener="#{bindings.queryFormQuery.processQueryOperation}"
+                                      saveQueryMode="hidden" rows="1"
+                                      maxColumns="6"
+                                      resultComponentId="::pc1:t2"
+                                      modeChangeVisible="false"/>
+                        </af:panelBox>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+            <af:clientListener type="load" method="disableContextMenu"/>
+        </af:document>
+    </f:view>
+</jsp:root>

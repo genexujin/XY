@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Lov"
+  Version="11.1.1.60.13"
+  DBObjectType="table"
+  DBObjectName="LOV"
+  AliasName="Lov"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.xy.scpms.model.common.BaseEntity">
+  <DesignTime>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_superClass" Value="com.xy.scpms.model.common.BaseEntity"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LOV"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="SEQ"
+          Value="LOV_SEQ"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="LookupCode"
+    IsNotNull="true"
+    Precision="100"
+    ColumnName="LOOKUP_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOV">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LookupValue"
+    IsNotNull="true"
+    Precision="200"
+    ColumnName="LOOKUP_VALUE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOV">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="LovPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="LOV_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.Lov.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0022313">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0022313"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.Lov.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0022314">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0022314"/>
+      <Attr Name="_checkCondition" Value='"LOOKUP_CODE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.Lov.LookupCode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0022315">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0022315"/>
+      <Attr Name="_checkCondition" Value='"LOOKUP_VALUE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.xy.scpms.model.eo.Lov.LookupValue"/>
+    </AttrArray>
+  </Key>
+</Entity>

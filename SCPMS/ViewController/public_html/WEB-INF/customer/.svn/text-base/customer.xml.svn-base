@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="customer">
+    <default-activity>setQueryType</default-activity>
+    <input-parameter-definition id="__1">
+      <name>customerType</name>
+      <value>#{pageFlowScope.CustomerBean.custType}</value>
+      <required/>
+    </input-parameter-definition>
+    <return-value-definition id="__2">
+      <name>customerId</name>
+      <value>#{pageFlowScope.CustomerBean.custId}</value>
+    </return-value-definition>
+    <return-value-definition id="__3">
+      <name>customerName</name>
+      <value>#{pageFlowScope.CustomerBean.custName}</value>
+    </return-value-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>CustomerBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.backing.CustomerBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="CustomerSearch">
+      <page>/customer/CustomerSearch.jspx</page>
+    </view>
+    <task-flow-return id="return">
+      <outcome>
+        <name>return</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="setQueryType">
+      <method>#{bindings.setQueryType.execute}</method>
+      <outcome>
+        <fixed-outcome>setQueryType</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__5">
+      <from-activity-id>CustomerSearch</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>return</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>setQueryType</from-activity-id>
+      <control-flow-case id="__8">
+        <to-activity-id>CustomerSearch</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

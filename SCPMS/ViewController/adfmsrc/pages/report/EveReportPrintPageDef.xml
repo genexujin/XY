@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="EveReportPrintPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <page path="pages.report.ReportPrintTemplatePageDef" id="ptb1"
+          Refresh="ifNeeded"/>
+    <iterator Binds="Rpt_EVEReport" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="Rpt_EVEReportIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="Rpt_EVEReportIterator" id="Rpt_EVEReport">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.EVEReport"
+                      Name="Rpt_EVEReport0">
+        <AttrNames>
+          <Item Value="Dept"/>
+          <Item Value="ContractTarget"/>
+          <Item Value="PaymentTarget"/>
+          <Item Value="MthAmtTotal"/>
+          <Item Value="YrAmtTotal"/>
+          <Item Value="YrCrtCnt"/>
+          <Item Value="MthCrtCnt"/>
+          <Item Value="MthTotalPaid"/>
+          <Item Value="YrTotalPaid"/>
+          <Item Value="AmtPer"/>
+          <Item Value="PayPer"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

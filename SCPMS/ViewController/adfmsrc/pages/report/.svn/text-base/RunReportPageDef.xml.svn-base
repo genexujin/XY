@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.2.60.17" id="RunReportPageDef"
+                Package="pages.report">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Rpt_PrjMgrPerf" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="Rpt_PrjMgrPerfIterator"/>
+    <searchRegion Binds="Rpt_PrjMgrPerfIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Rpt_PrjMgrPerfQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="doQuery" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="doQuery" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Rpt_PrjMgrPerf">
+      <NamedData NDName="start" NDValue="#{pageFlowScope.startDate}"
+                 NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="end" NDValue="#{pageFlowScope.endDate}"
+                 NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dept" NDValue="#{pageFlowScope.dept}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="mgrId" NDValue="#{pageFlowScope.user}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="Rpt_PrjMgrPerfIterator" id="Rpt_PrjMgrPerf">
+      <nodeDefinition DefName="com.xy.scpms.model.reports.PrjMgrPerfRpt" Name="Rpt_PrjMgrPerf0">
+        <AttrNames>
+          <Item Value="ProjectManager"/>
+          <Item Value="Lastname"/>
+          <Item Value="EffAmount"/>
+          <Item Value="PaidAmount"/>
+          <Item Value="NumOfShip"/>
+          <Item Value="TotalNewWeight"/>
+          <Item Value="TotalFgWeight"/>
+          <Item Value="PaymentCredit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" InstanceName="CoreModuleDataControl"
+            DataControl="CoreModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

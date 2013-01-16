@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.xy.scpms.model.biz.CoreModule">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="com.xy.scpms.model.Model" name="CoreModuleLocal" ApplicationName="com.xy.scpms.model.biz.CoreModule">
+         <Database jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="com.xy.scpms.model.biz.CoreModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/OMDS"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="CoreModuleShared" DeployPlatform="LOCAL" JDBCName="OM" jbo.project="com.xy.scpms.model.Model" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory" ApplicationName="com.xy.scpms.model.biz.CoreModule">
+         <AM-Pooling jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="1"/>
+         <Security AppModuleJndiName="com.xy.scpms.model.biz.CoreModule"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="com.xy.scpms.model.biz.LovModule">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="com.xy.scpms.model.Model" name="LovModuleLocal" ApplicationName="com.xy.scpms.model.biz.LovModule">
+         <Database jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="com.xy.scpms.model.biz.LovModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/OMDS"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="LovModuleShared" ApplicationName="com.xy.scpms.model.biz.LovModule" DeployPlatform="LOCAL" jbo.project="com.xy.scpms.model.Model">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Security AppModuleJndiName="com.xy.scpms.model.biz.LovModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/OMDS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

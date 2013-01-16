@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="inv-entry">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>InvoiceEntry</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>InvoiceEntryBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.InvoiceEntryBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="InvoiceEntry">
+      <page>/invoice/InvoiceEntry.jspx</page>
+    </view>
+  </task-flow-definition>
+</adfc-config>

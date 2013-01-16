@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="eve-report">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>clearRowSet</default-activity>
+    <managed-bean id="__8">
+      <managed-bean-name>ReportBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.flow.backing.ReportBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="EVEReport">
+      <page>/pages/report/EVEReport.jspx</page>
+    </view>
+    <view id="EveReportPrint">
+      <page>/pages/report/EveReportPrint.jspx</page>
+    </view>
+    <method-call id="runReportCriteria">
+      <method>#{bindings.runReportCriteria.execute}</method>
+      <outcome>
+        <fixed-outcome>runReportCriteria</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="clearRowSet">
+      <method>#{bindings.clearRowSet.execute}</method>
+      <outcome>
+        <fixed-outcome>clearRowSet</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>EVEReport</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>print</from-outcome>
+        <to-activity-id>EveReportPrint</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>run</from-outcome>
+        <to-activity-id>runReportCriteria</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>EveReportPrint</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>report</from-outcome>
+        <to-activity-id>EVEReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>runReportCriteria</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>runReportCriteria</from-outcome>
+        <to-activity-id>EVEReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>clearRowSet</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>clearRowSet</from-outcome>
+        <to-activity-id>EVEReport</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

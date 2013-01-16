@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.60.13" id="EditLinesPageDef1"
+                Package="pages.crt" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ShipOfContract" RangeSize="25"
+              DataControl="CoreModuleDataControl" id="ShipOfContractIterator"/>
+    <searchRegion Binds="ShipOfContractIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ShipOfContractQuery"/>
+    <iterator id="ContractIterator" Binds="Contract"
+              DataControl="CoreModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ShipOfContractIterator" id="ShipOfContract">
+      <nodeDefinition DefName="com.xy.scpms.model.vo.ContractLineView"
+                      Name="ShipOfContract0">
+        <AttrNames>
+          <Item Value="LineNo"/>
+          <Item Value="ShipMnftNo"/>
+          <Item Value="ShipPlant"/>
+          <Item Value="PlantType"/>
+          <Item Value="ShipOwner"/>
+          <Item Value="OwnerType"/>
+          <Item Value="ShipBroker"/>
+          <Item Value="BrokerType"/>
+          <Item Value="ShipClsfctSociety"/>
+          <Item Value="ShipName"/>
+          <Item Value="ImoNo"/>
+          <Item Value="ShipNoInternal"/>
+          <Item Value="Currency"/>
+          <Item Value="ExchangeRate"/>
+          <Item Value="ShipPrice"/>
+          <Item Value="Memo"/>
+          <Item Value="SignOffDate"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="WorkStartDate"/>
+          <Item Value="FgCompletionDate"/>
+          <Item Value="ShipBuildCrtEftDate"/>
+          <Item Value="ContractType"/>
+          <Item Value="Price"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="createLike" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createLike"
+                  IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="CoreModuleDataControl.ShipOfContract"
+                  ReturnName="data.CoreModuleDataControl.methodResults.createLike_CoreModuleDataControl_ShipOfContract_createLike_result"/>
+    <action IterBinding="ShipOfContractIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="CoreModuleDataControl"/>
+    <methodAction IterBinding="ContractIterator" id="sumTotal" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sumTotal" IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Contract"/>
+    <action id="Commit" InstanceName="CoreModuleDataControl" DataControl="CoreModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction IterBinding="ContractIterator" id="sumTotal1" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sumTotal" IsViewObjectMethod="true" DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.Contract"/>
+    <attributeValues IterBinding="ContractIterator" id="AuthType">
+      <AttrNames>
+        <Item Value="AuthType"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="ShipOfContractIterator" id="removeFromList"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="removeFromList" IsViewObjectMethod="true"
+                  DataControl="CoreModuleDataControl"
+                  InstanceName="data.CoreModuleDataControl.ShipOfContract"/>
+  </bindings>
+</pageDefinition>

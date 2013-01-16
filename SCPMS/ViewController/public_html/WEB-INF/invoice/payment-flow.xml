@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="payment-flow">
+    <template-reference>
+      <document>/WEB-INF/base-flow.xml</document>
+      <id>base-flow</id>
+    </template-reference>
+    <default-activity>findInvoicedPaymentNodes</default-activity>
+    <managed-bean id="__3">
+      <managed-bean-name>InvoiceEntryBean</managed-bean-name>
+      <managed-bean-class>com.xy.scpms.view.page.InvoiceEntryBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="PaymentEntry">
+      <page>/pages/invoice/PaymentEntry.jspx</page>
+    </view>
+    <method-call id="findInvoicedPaymentNodes">
+      <method>#{bindings.findInvoicedNodes.execute}</method>
+      <outcome>
+        <fixed-outcome>findInvoicedPaymentNodes</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findPaidPaymentNodes">
+      <method>#{bindings.findPaidPaymentNodes.execute}</method>
+      <outcome>
+        <fixed-outcome>findPaidPaymentNodes</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findPaidVarPaymentNodes">
+      <method>#{bindings.findPaidVarPaymentNodes.execute}</method>
+      <outcome>
+        <fixed-outcome>findPaidVarPaymentNodes</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findPartialPaymentNodes">
+      <method>#{bindings.findPartialPaymentNodes.execute}</method>
+      <outcome>
+        <fixed-outcome>findPartialPaymentNodes</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>findInvoicedPaymentNodes</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>findInvoicedPaymentNodes</from-outcome>
+        <to-activity-id>PaymentEntry</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>PaymentEntry</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>invoiced</from-outcome>
+        <to-activity-id>findInvoicedPaymentNodes</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>paid</from-outcome>
+        <to-activity-id>findPaidPaymentNodes</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>varPaid</from-outcome>
+        <to-activity-id>findPaidVarPaymentNodes</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome>partial</from-outcome>
+        <to-activity-id>findPartialPaymentNodes</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>findPaidPaymentNodes</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>findPaidPaymentNodes</from-outcome>
+        <to-activity-id>PaymentEntry</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>findPaidVarPaymentNodes</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>findPaidVarPaymentNodes</from-outcome>
+        <to-activity-id>PaymentEntry</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>findPartialPaymentNodes</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>findPartialPaymentNodes</from-outcome>
+        <to-activity-id>PaymentEntry</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>
