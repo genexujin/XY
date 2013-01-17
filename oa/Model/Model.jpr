@@ -75,6 +75,8 @@
          <string v="XML"/>
       </list>
    </hash>
+   <value n="oracle.jbo.extends.entityRow" v="edu.hp.model.common.BaseEntity"/>
+   <value n="oracle.jbo.extends.viewObj" v="edu.hp.model.common.BaseView"/>
    <value n="oracle.jbo.SavedPreferences" v="true"/>
    <hash n="oracle.jdeveloper.compiler.OjcConfiguration">
       <list n="copyRes">

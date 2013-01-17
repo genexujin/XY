@@ -5,12 +5,12 @@ public class SMSManager {
 
 
     //发送SMS
-    public int sendSMS(String[] mobiles, String messageContent, int priority) {
+    public static int sendSMS(String[] mobiles, String messageContent, int priority) {
 
         return SingletonSMSClient.getClient().sendSMS(mobiles, messageContent, priority);
     }
     
-    public double checkBalance(){
+    public static double checkBalance(){
         double result=0;
         
         try {

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ClassroomCalendar"
+  Version="11.1.2.62.76"
+  DBObjectType="table"
+  DBObjectName="CLASSROOM_CALENDAR"
+  AliasName="ClassroomCalendar"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="Id"
+    ColumnName="ID"
+    SQLType="VARCHAR"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="CLASSROOM_CALENDAR"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ActTitle"
+    Precision="200"
+    ColumnName="ACT_TITLE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ActStartTime"
+    ColumnName="ACT_START_TIME"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CLASSROOM_CALENDAR"/>
+  <Attribute
+    Name="ActEndTime"
+    ColumnName="ACT_END_TIME"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CLASSROOM_CALENDAR"/>
+  <Attribute
+    Name="UserId"
+    Precision="20"
+    ColumnName="USER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UserDisplayName"
+    Precision="20"
+    ColumnName="USER_DISPLAY_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="NumOfPeople"
+    ColumnName="NUM_OF_PEOPLE"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="CLASSROOM_CALENDAR"/>
+  <Attribute
+    Name="Classroom"
+    Precision="50"
+    ColumnName="CLASSROOM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Comments"
+    Precision="200"
+    ColumnName="COMMENTS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedAt"
+    ColumnName="CREATED_AT"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CLASSROOM_CALENDAR"/>
+  <Attribute
+    Name="BatchNo"
+    Precision="20"
+    ColumnName="BATCH_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BatchId"
+    Precision="20"
+    ColumnName="BATCH_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="ClassroomBatchReservation"
+    Association="edu.hp.model.eo.asso.ClsRmBthClsCalAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.ClsRmBthClsCalAssoc.ClassroomBatchReservation"
+    AssociationOtherEnd="edu.hp.model.eo.asso.ClsRmBthClsCalAssoc.BatchInstances"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="ClassroomCalendarPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CLASSROOM_CALENDAR_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.ClassroomCalendar.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_ClassroomCalendar">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="CLASSROOM_BATCH_RESERVATI_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_CLASSROOM_CALENDAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.ClassroomCalendar.BatchId"/>
+    </AttrArray>
+  </Key>
+</Entity>

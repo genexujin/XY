@@ -20,6 +20,10 @@
     Name="RepairCallsAppModule"
     FullName="edu.hp.model.biz.RepairCallsAppModule"
     SharedScope="0"/>
+  <AppModuleUsage
+    Name="NotificationModule1"
+    FullName="edu.hp.model.biz.NotificationModule"
+    SharedScope="0"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

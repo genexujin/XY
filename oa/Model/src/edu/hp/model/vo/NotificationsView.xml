@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NotificationsView"
+  Version="11.1.2.62.76"
+  SelectList="Notifications.ID, 
+       Notifications.CATEGORY, 
+       Notifications.TITLE, 
+       Notifications.CONTENT, 
+       Notifications.EVENT_DATE, 
+       Notifications.IS_SMS_SENT, 
+       Notifications.TO_ROLE_ID, 
+       Notifications.PRIORITY"
+  FromList="NOTIFICATIONS Notifications"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.NotificationsViewImpl"
+  RowClass="edu.hp.model.vo.NotificationsViewRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <EntityUsage
+    Name="Notifications"
+    Entity="edu.hp.model.eo.Notifications"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Notifications"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="Category"
+    PrecisionRule="true"
+    EntityAttrName="Category"
+    EntityUsage="Notifications"
+    AliasName="CATEGORY"/>
+  <ViewAttribute
+    Name="Title"
+    PrecisionRule="true"
+    EntityAttrName="Title"
+    EntityUsage="Notifications"
+    AliasName="TITLE"/>
+  <ViewAttribute
+    Name="Content"
+    PrecisionRule="true"
+    EntityAttrName="Content"
+    EntityUsage="Notifications"
+    AliasName="CONTENT"/>
+  <ViewAttribute
+    Name="EventDate"
+    PrecisionRule="true"
+    EntityAttrName="EventDate"
+    EntityUsage="Notifications"
+    AliasName="EVENT_DATE"/>
+  <ViewAttribute
+    Name="IsSmsSent"
+    PrecisionRule="true"
+    EntityAttrName="IsSmsSent"
+    EntityUsage="Notifications"
+    AliasName="IS_SMS_SENT"/>
+  <ViewAttribute
+    Name="ToRoleId"
+    PrecisionRule="true"
+    EntityAttrName="ToRoleId"
+    EntityUsage="Notifications"
+    AliasName="TO_ROLE_ID"/>
+  <ViewAttribute
+    Name="Priority"
+    PrecisionRule="true"
+    EntityAttrName="Priority"
+    EntityUsage="Notifications"
+    AliasName="PRIORITY"/>
+</ViewObject>

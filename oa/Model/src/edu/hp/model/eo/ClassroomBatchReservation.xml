@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ClassroomBatchReservation"
+  Version="11.1.2.62.76"
+  DBObjectType="table"
+  DBObjectName="CLASSROOM_BATCH_RESERVATION"
+  AliasName="ClassroomBatchReservation"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="Id"
+    ColumnName="ID"
+    SQLType="VARCHAR"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BatchNo"
+    IsUnique="true"
+    Precision="20"
+    ColumnName="BATCH_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ActTitle"
+    Precision="200"
+    ColumnName="ACT_TITLE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ActStartTime"
+    ColumnName="ACT_START_TIME"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CLASSROOM_BATCH_RESERVATION"/>
+  <Attribute
+    Name="ActEndTime"
+    ColumnName="ACT_END_TIME"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CLASSROOM_BATCH_RESERVATION"/>
+  <Attribute
+    Name="UserId"
+    Precision="20"
+    ColumnName="USER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UserDisplayName"
+    Precision="20"
+    ColumnName="USER_DISPLAY_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="NumOfPeople"
+    ColumnName="NUM_OF_PEOPLE"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="CLASSROOM_BATCH_RESERVATION"/>
+  <Attribute
+    Name="Classroom"
+    Precision="20"
+    ColumnName="CLASSROOM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Comments"
+    Precision="200"
+    ColumnName="COMMENTS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BatchEffectiveDate"
+    ColumnName="BATCH_EFFECTIVE_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CLASSROOM_BATCH_RESERVATION"/>
+  <Attribute
+    Name="BatchExpireDate"
+    ColumnName="BATCH_EXPIRE_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CLASSROOM_BATCH_RESERVATION"/>
+  <Attribute
+    Name="RecurrenceType"
+    Precision="20"
+    ColumnName="RECURRENCE_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FstWkMon"
+    Precision="1"
+    ColumnName="FST_WK_MON"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FstWkTue"
+    Precision="1"
+    ColumnName="FST_WK_TUE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FstWkWed"
+    Precision="1"
+    ColumnName="FST_WK_WED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FstWkThu"
+    Precision="1"
+    ColumnName="FST_WK_THU"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FstWkFri"
+    Precision="1"
+    ColumnName="FST_WK_FRI"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FstWkSat"
+    Precision="1"
+    ColumnName="FST_WK_SAT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FstWkSun"
+    Precision="1"
+    ColumnName="FST_WK_SUN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SndWkMon"
+    Precision="1"
+    ColumnName="SND_WK_MON"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SndWkTue"
+    Precision="1"
+    ColumnName="SND_WK_TUE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SndWkWed"
+    Precision="1"
+    ColumnName="SND_WK_WED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SndWkThu"
+    Precision="1"
+    ColumnName="SND_WK_THU"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SndWkFri"
+    Precision="1"
+    ColumnName="SND_WK_FRI"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SndWkSat"
+    Precision="1"
+    ColumnName="SND_WK_SAT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SndWkSun"
+    Precision="1"
+    ColumnName="SND_WK_SUN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="BatchInstances"
+    Association="edu.hp.model.eo.asso.ClsRmBthClsCalAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.ClsRmBthClsCalAssoc.BatchInstances"
+    AssociationOtherEnd="edu.hp.model.eo.asso.ClsRmBthClsCalAssoc.ClassroomBatchReservation"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="ClassroomBatchReservatiPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CLASSROOM_BATCH_RESERVATI_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.ClassroomBatchReservation.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ClassroomBatchReservatiUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CLASSROOM_BATCH_RESERVATI_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.ClassroomBatchReservation.BatchNo"/>
+    </AttrArray>
+  </Key>
+</Entity>

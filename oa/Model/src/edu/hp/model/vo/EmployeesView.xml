@@ -31,7 +31,8 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  FetchMode="FETCH_AS_NEEDED">
   <EntityUsage
     Name="Employees"
     Entity="edu.hp.model.eo.Employees"/>

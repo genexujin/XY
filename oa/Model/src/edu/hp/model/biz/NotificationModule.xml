@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NotificationModule"
+  Version="11.1.2.62.76"
+  ClearCacheOnRollback="true"
+  ComponentClass="edu.hp.model.biz.NotificationModuleImpl">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.biz.NotificationModule_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewUsage
+    Name="Notifications"
+    ViewObjectName="edu.hp.model.vo.NotificationsView"/>
+  <ViewUsage
+    Name="Roles"
+    ViewObjectName="edu.hp.model.vo.RolesView"/>
+  <ViewUsage
+    Name="EmployeesOfRole"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"/>
+  <ViewLinkUsage
+    Name="UserRoleViewLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.UserRoleViewLink"
+    SrcViewUsageName="edu.hp.model.biz.NotificationModule.Roles"
+    DstViewUsageName="edu.hp.model.biz.NotificationModule.EmployeesOfRole"
+    Reversed="true"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</AppModule>

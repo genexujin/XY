@@ -5,18 +5,20 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="RolesView"
   Version="11.1.2.62.76"
-  SelectList="Roles.ROLE_ID, 
-       Roles.ROLE_NAME, 
-       Roles.ROLE_DESC, 
-       Roles.CREATED_AT, 
-       Roles.CREATED_BY, 
-       Roles.LAST_UPDATED_AT, 
-       Roles.LAST_UPDATED_BY"
-  FromList="ROLES Roles"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.vo.RolesViewRowImpl"
+  ComponentClass="edu.hp.model.vo.RolesViewImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="roleId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="Roles"
     Entity="edu.hp.model.eo.Roles"/>
@@ -26,7 +28,8 @@
     PrecisionRule="true"
     EntityAttrName="RoleId"
     EntityUsage="Roles"
-    AliasName="ROLE_ID"/>
+    AliasName="ROLE_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="RoleName"
     PrecisionRule="true"
@@ -63,6 +66,42 @@
     EntityAttrName="LastUpdatedBy"
     EntityUsage="Roles"
     AliasName="LAST_UPDATED_BY"/>
+  <ViewCriteria
+    Name="queryById"
+    ViewObjectName="edu.hp.model.vo.RolesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="RolesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="RoleId"
+        ViewAttribute="RoleId"
+        Operator="="
+        Conjunction="AND"
+        Value=":roleId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="EmployeesVA"
     ViewLink="edu.hp.model.vo.link.UserRoleViewLink"
