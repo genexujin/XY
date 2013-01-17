@@ -9,7 +9,8 @@
   DBObjectName="CLASSROOM_BATCH_RESERVATION"
   AliasName="ClassroomBatchReservation"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.common.BaseEntity">
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -34,10 +35,17 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ActTitle"
@@ -46,10 +54,17 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.ActTitle_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ActStartTime"
@@ -57,14 +72,30 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_BATCH_RESERVATION"/>
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.ActStartTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="ActEndTime"
     ColumnName="ACT_END_TIME"
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_BATCH_RESERVATION"/>
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.ActEndTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="UserId"
     Precision="20"
@@ -88,6 +119,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.UserDisplayName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="NumOfPeople"
@@ -95,7 +132,15 @@
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="CLASSROOM_BATCH_RESERVATION"/>
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.NumOfPeople_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Classroom"
     Precision="20"
@@ -103,10 +148,17 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.Classroom_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Comments"
@@ -119,6 +171,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.Comments_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="BatchEffectiveDate"
@@ -126,14 +184,30 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_BATCH_RESERVATION"/>
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchEffectiveDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="BatchExpireDate"
     ColumnName="BATCH_EXPIRE_DATE"
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_BATCH_RESERVATION"/>
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchExpireDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="RecurrenceType"
     Precision="20"
@@ -141,10 +215,17 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.RecurrenceType_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FstWkMon"
@@ -157,6 +238,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.FstWkMon_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FstWkTue"
@@ -169,6 +256,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.FstWkTue_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FstWkWed"
@@ -181,6 +274,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.FstWkWed_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FstWkThu"
@@ -193,6 +292,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.FstWkThu_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FstWkFri"
@@ -205,6 +310,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.FstWkFri_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FstWkSat"
@@ -217,6 +328,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.FstWkSat_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="FstWkSun"
@@ -229,6 +346,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.FstWkSun_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="SndWkMon"
@@ -241,6 +364,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.SndWkMon_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="SndWkTue"
@@ -253,6 +382,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.SndWkTue_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="SndWkWed"
@@ -265,6 +400,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.SndWkWed_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="SndWkThu"
@@ -277,6 +418,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.SndWkThu_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="SndWkFri"
@@ -289,6 +436,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.SndWkFri_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="SndWkSat"
@@ -301,6 +454,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.SndWkSat_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="SndWkSun"
@@ -312,6 +471,36 @@
     TableName="CLASSROOM_BATCH_RESERVATION">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.SndWkSun_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="LocationId"
+    Precision="20"
+    ColumnName="LOCATION_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LocationName"
+    Precision="20"
+    ColumnName="LOCATION_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
   <AccessorAttribute
@@ -341,4 +530,8 @@
       <Item Value="edu.hp.model.eo.ClassroomBatchReservation.BatchNo"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

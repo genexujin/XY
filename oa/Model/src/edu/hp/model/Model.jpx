@@ -15,6 +15,7 @@
     <Attr Name="_appModuleNames1" Value="edu.hp.model.biz.RootAppModule"/>
     <Attr Name="_appModuleNames2" Value="edu.hp.model.biz.RepairCallsAppModule"/>
     <Attr Name="_appModuleNames3" Value="edu.hp.model.biz.NotificationModule"/>
+    <Attr Name="_appModuleNames4" Value="edu.hp.model.biz.ClassRmModule"/>
   </DesignTime>
   <Containee
     Name="biz"

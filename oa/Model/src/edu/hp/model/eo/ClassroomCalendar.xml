@@ -9,7 +9,8 @@
   DBObjectName="CLASSROOM_CALENDAR"
   AliasName="ClassroomCalendar"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.common.BaseEntity">
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -33,10 +34,17 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_CALENDAR">
+    TableName="CLASSROOM_CALENDAR"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.ActTitle_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ActStartTime"
@@ -44,14 +52,30 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_CALENDAR"/>
+    TableName="CLASSROOM_CALENDAR"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.ActStartTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="ActEndTime"
     ColumnName="ACT_END_TIME"
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_CALENDAR"/>
+    TableName="CLASSROOM_CALENDAR"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.ActEndTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="UserId"
     Precision="20"
@@ -75,6 +99,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.UserDisplayName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="NumOfPeople"
@@ -82,7 +112,15 @@
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="CLASSROOM_CALENDAR"/>
+    TableName="CLASSROOM_CALENDAR"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.NumOfPeople_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Classroom"
     Precision="50"
@@ -90,10 +128,17 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_CALENDAR">
+    TableName="CLASSROOM_CALENDAR"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.Classroom_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Comments"
@@ -106,6 +151,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.Comments_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="CreatedAt"
@@ -113,11 +164,37 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_CALENDAR"/>
+    TableName="CLASSROOM_CALENDAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.CreatedAt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="BatchNo"
     Precision="20"
     ColumnName="BATCH_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.BatchNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="BatchId"
+    Precision="20"
+    ColumnName="BATCH_ID"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
@@ -127,9 +204,21 @@
     </DesignTime>
   </Attribute>
   <Attribute
-    Name="BatchId"
+    Name="LocationName"
     Precision="20"
-    ColumnName="BATCH_ID"
+    ColumnName="LOCATION_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LocationId"
+    Precision="20"
+    ColumnName="LOCATION_ID"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
@@ -167,4 +256,8 @@
       <Item Value="edu.hp.model.eo.ClassroomCalendar.BatchId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

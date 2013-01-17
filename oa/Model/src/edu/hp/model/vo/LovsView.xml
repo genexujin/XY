@@ -21,7 +21,12 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.common.BaseView">
+  <Variable
+    Name="locationId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="Lovs"
     Entity="edu.hp.model.eo.Lovs"/>
@@ -31,7 +36,8 @@
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Lovs"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="Code"
     PrecisionRule="true"
@@ -98,4 +104,47 @@
     EntityAttrName="FlexCol3"
     EntityUsage="Lovs"
     AliasName="FLEX_COL3"/>
+  <ViewCriteria
+    Name="ClsRmList"
+    ViewObjectName="edu.hp.model.vo.LovsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LovsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="LovsViewCriteria_LovsViewCriteria_row_0_Code"
+        ViewAttribute="Code"
+        Operator="="
+        Conjunction="AND"
+        Value="ClsRm"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="FlexCol1"
+        ViewAttribute="FlexCol1"
+        Operator="="
+        Conjunction="AND"
+        Value=":locationId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
 </ViewObject>

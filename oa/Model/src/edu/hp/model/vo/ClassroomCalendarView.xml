@@ -14,12 +14,67 @@
        ClassroomCalendar.NUM_OF_PEOPLE, 
        ClassroomCalendar.CLASSROOM, 
        ClassroomCalendar.COMMENTS, 
-       ClassroomCalendar.CREATED_AT"
+       ClassroomCalendar.CREATED_AT, 
+       ClassroomCalendar.LOCATION_ID, 
+       ClassroomCalendar.LOCATION_NAME"
   FromList="CLASSROOM_CALENDAR ClassroomCalendar"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.common.BaseView">
+  <ViewAccessor
+    Name="Locations"
+    ViewObjectName="edu.hp.model.vo.LocationsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ClsRmList"
+    ViewObjectName="edu.hp.model.vo.LovsView"
+    FetchMode="FETCH_AS_NEEDED">
+    <ViewCriteriaUsage
+      Name="ClsRmList"
+      FullName="edu.hp.model.vo.LovsView.ClsRmList"/>
+    <ParameterMap>
+      <PIMap Variable="locationId">
+        <TransientExpression><![CDATA[LocationId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_LocationName"
+    ListVOName="Locations"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LocationName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LocationName"/>
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LocationName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Classroom"
+    ListVOName="ClsRmList"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Classroom"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="ClassroomCalendar"
     Entity="edu.hp.model.eo.ClassroomCalendar"/>
@@ -29,7 +84,8 @@
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="ClassroomCalendar"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="ActTitle"
     PrecisionRule="true"
@@ -71,7 +127,19 @@
     PrecisionRule="true"
     EntityAttrName="Classroom"
     EntityUsage="ClassroomCalendar"
-    AliasName="CLASSROOM"/>
+    AliasName="CLASSROOM"
+    LOVName="LOV_Classroom">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="LocationId"/>
+    </Dependencies>
+  </ViewAttribute>
   <ViewAttribute
     Name="Comments"
     PrecisionRule="true"
@@ -84,6 +152,26 @@
     EntityAttrName="CreatedAt"
     EntityUsage="ClassroomCalendar"
     AliasName="CREATED_AT"/>
+  <ViewAttribute
+    Name="LocationId"
+    PrecisionRule="true"
+    EntityAttrName="LocationId"
+    EntityUsage="ClassroomCalendar"
+    AliasName="LOCATION_ID"/>
+  <ViewAttribute
+    Name="LocationName"
+    PrecisionRule="true"
+    EntityAttrName="LocationName"
+    EntityUsage="ClassroomCalendar"
+    AliasName="LOCATION_NAME"
+    LOVName="LOV_LocationName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="ClassroomBatchReservationVA"
     ViewLink="edu.hp.model.vo.link.ClsRmBthClsCalLink"

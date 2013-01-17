@@ -39,6 +39,12 @@
   <ViewUsage
     Name="UserMenus"
     ViewObjectName="edu.hp.model.vo.query.security.UserMenuQuery"/>
+  <ViewUsage
+    Name="LovsView"
+    ViewObjectName="edu.hp.model.vo.LovsView"/>
+  <ViewUsage
+    Name="Locations"
+    ViewObjectName="edu.hp.model.vo.LocationsView"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"
