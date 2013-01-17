@@ -11,7 +11,7 @@ public class SMSManager {
     }
     
     public double checkBalance(){
-        double result;
+        double result=0;
         
         try {
             result = SingletonSMSClient.getClient().getBalance();
