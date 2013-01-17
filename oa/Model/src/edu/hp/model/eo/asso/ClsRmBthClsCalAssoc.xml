@@ -13,8 +13,6 @@
     Cardinality="1"
     Source="true"
     Owner="edu.hp.model.eo.ClassroomBatchReservation"
-    CascadeDelete="true"
-    DeleteContainee="true"
     LockLevel="NONE">
     <DesignTime>
       <Attr Name="_aggregation" Value="0"/>
@@ -29,8 +27,7 @@
   <AssociationEnd
     Name="BatchInstances"
     Cardinality="-1"
-    Owner="edu.hp.model.eo.ClassroomCalendar"
-    HasOwner="true">
+    Owner="edu.hp.model.eo.ClassroomCalendar">
     <DesignTime>
       <Attr Name="_aggregation" Value="0"/>
       <Attr Name="_finderName" Value="BatchInstances"/>

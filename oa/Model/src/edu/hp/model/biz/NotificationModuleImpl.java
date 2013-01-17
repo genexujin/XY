@@ -1,5 +1,6 @@
 package edu.hp.model.biz;
 
+import edu.hp.model.common.BaseView;
 import edu.hp.model.sms.SMSManager;
 import edu.hp.model.vo.NotificationsViewImpl;
 
@@ -125,4 +126,6 @@ public class NotificationModuleImpl extends ApplicationModuleImpl {
     public ViewLinkImpl getUserRoleViewLink1() {
         return (ViewLinkImpl)findViewLink("UserRoleViewLink1");
     }
+
+
 }

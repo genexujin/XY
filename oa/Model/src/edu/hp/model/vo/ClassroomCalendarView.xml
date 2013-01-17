@@ -129,16 +129,16 @@
     EntityUsage="ClassroomCalendar"
     AliasName="CLASSROOM"
     LOVName="LOV_Classroom">
+    <Dependencies>
+      <Item
+        Value="LocationId"/>
+    </Dependencies>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
-    <Dependencies>
-      <Item
-        Value="LocationId"/>
-    </Dependencies>
   </ViewAttribute>
   <ViewAttribute
     Name="Comments"
