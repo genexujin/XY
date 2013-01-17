@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="my-repair-call">
+    <default-activity>my_repair_call</default-activity>
+    <view id="my_repair_call">
+      <page>/pages/repair-call/my_repair_call.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

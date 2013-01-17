@@ -11,12 +11,14 @@
     <page path="/pages/main/Report.jsf" usageId="edu_hp_view_ReportPageDef"/>
     <page path="/pages/main/System.jsf" usageId="edu_hp_view_SystemPageDef"/>
     <page path="/pages/main/Admin.jsf" usageId="edu_hp_view_AdminPageDef"/>
+    <page path="/repair-call/my_repair_call.jsff" usageId="edu_hp_view_my_repair_callPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
     <page id="edu_hp_view_ReportPageDef" path="pages.main.ReportPageDef"/>
     <page id="edu_hp_view_SystemPageDef" path="pages.main.SystemPageDef"/>
     <page id="edu_hp_view_AdminPageDef" path="pages.main.AdminPageDef"/>
+    <page id="edu_hp_view_my_repair_callPageDef" path="repair_call.my_repair_callPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"
