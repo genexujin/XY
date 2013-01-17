@@ -50,7 +50,25 @@
 --------------------------------------------------------
 
    CREATE SEQUENCE  "OA"."REPAIR_CALLS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
-  
+   
+--------------------------------------------------------
+--  DDL for Sequence PURCHASE_ORDERS_SEQ
+--------------------------------------------------------
+   
+   CREATE SEQUENCE  "OA"."PURCHASE_ORDERS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;  
+   
+--------------------------------------------------------
+--  DDL for Sequence PURCHASE_ORDER_LINES_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "OA"."PURCHASE_ORDER_LINES_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+
+--------------------------------------------------------
+--  DDL for Sequence PURCHASE_ORDER_HISTORYS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "OA"."PURCHASE_ORDER_HISTORYS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+
 --------------------------------------------------------
 --  DDL for Table ANNOUNCEMENTS
 --------------------------------------------------------
@@ -210,6 +228,7 @@
 
   CREATE TABLE "OA"."REPAIR_CALLS" 
    (	"CALL_ID" VARCHAR2(20 BYTE), 
+	"CALL_READABLE_ID" VARCHAR2(30 BYTE),
 	"CALLER_ID" VARCHAR2(20 BYTE), 
 	"CALLEE_ID" VARCHAR2(20 BYTE), 
 	"LOCATION_ID" VARCHAR2(20 BYTE), 
@@ -227,6 +246,55 @@
 	"REASON_LEVEL_2" VARCHAR2(40 BYTE), 
 	"REASON_LEVEL_3" VARCHAR2(40 BYTE), 
 	"REASON_DETAIL" VARCHAR2(500 BYTE)
+   ) ;
+   
+--------------------------------------------------------
+--  DDL for Table PURCHASE_ORDERS
+--------------------------------------------------------
+
+  CREATE TABLE "OA"."PURCHASE_ORDERS" 
+   (	"ORDER_ID" VARCHAR2(20 BYTE), 
+	"ORDER_READABLE_ID" VARCHAR2(30 BYTE), 
+	"SUBMITTER_ID" VARCHAR2(20 BYTE), 
+	"CREATE_BY" VARCHAR2(20 BYTE), 
+	"CREATE_AT" DATE, 
+	"LAST_UPDATED_BY" VARCHAR2(20 BYTE), 
+	"LAST_UPDATED_AT" DATE, 
+	"STATE" VARCHAR2(20 BYTE), 
+	"SUBMIT_TOTAL" NUMBER(12,2), 
+	"VERIFY_TOTAL" NUMBER(12,2), 
+	"ORACLE_NOTE" VARCHAR2(500 BYTE)
+   ) ;
+   
+--------------------------------------------------------
+--  DDL for Table PURCHASE_ORDER_LINES
+--------------------------------------------------------
+
+  CREATE TABLE "OA"."PURCHASE_ORDER_LINES" 
+   (	"ORDER_LINE_ID" VARCHAR2(20 BYTE), 
+	"ITEM_ID" VARCHAR2(20 BYTE), 
+	"ITEM_DESCRIPTION" VARCHAR2(200 BYTE), 
+	"SUBMIT_QUANTITY" NUMBER, 
+	"SUBMIT_UNIT" VARCHAR2(20 BYTE), 
+	"SUBMIT_PRICE" NUMBER(12,2), 
+	"SUBMIT_TOTAL" NUMBER(12,2), 
+	"EXPECTED_DATE" DATE, 
+	"SUBMIT_NOTE" VARCHAR2(500 BYTE), 
+	"STATE" VARCHAR2(20 BYTE), 
+	"PURCHASE_QUANTITY" NUMBER, 
+	"ACTUAL_PRICE" NUMBER(12,2), 
+	"ACTUAL_TOTAL" NUMBER(12,2), 
+	"VERIFY_NOTE" VARCHAR2(500 BYTE), 
+	"RECEIVE_QUANTITY" NUMBER
+   ) ;
+   
+--------------------------------------------------------
+--  DDL for Table PURCHASE_ORDER_HISTORYS
+--------------------------------------------------------
+
+  CREATE TABLE "OA"."PURCHASE_ORDER_HISTORYS" 
+   (	"ORDER_HISTORY_ID" VARCHAR2(20 BYTE), 
+	"ORDER_HISTORY_DETAIL" VARCHAR2(100 BYTE)
    ) ;
    
 REM INSERTING into OA.ANNOUNCEMENTS
@@ -362,6 +430,25 @@ Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','2
   CREATE UNIQUE INDEX "OA"."REPAIR_CALLS_PK" ON "OA"."REPAIR_CALLS" ("CALL_ID") ;
   
 --------------------------------------------------------
+--  DDL for Index PURCHASE_ORDERS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDERS_PK" ON "OA"."PURCHASE_ORDERS" ("ORDER_ID");
+  
+--------------------------------------------------------
+--  DDL for Index PURCHASE_ORDER_ITEMS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDER_ITEMS_PK" ON "OA"."PURCHASE_ORDER_LINES" ("ORDER_LINE_ID");
+
+--------------------------------------------------------
+--  DDL for Index PURCHASE_ORDER_HISTORYS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDER_HISTORYS_PK" ON "OA"."PURCHASE_ORDER_HISTORYS" ("ORDER_HISTORY_ID");
+  
+  
+--------------------------------------------------------
 --  Constraints for Table DEPARTMENTS
 --------------------------------------------------------
 
@@ -432,6 +519,29 @@ Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','2
 
   ALTER TABLE "OA"."REPAIR_CALLS" ADD CONSTRAINT "REPAIR_CALLS_PK" PRIMARY KEY ("CALL_ID") ENABLE;
   ALTER TABLE "OA"."REPAIR_CALLS" MODIFY ("CALL_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."REPAIR_CALLS" MODIFY ("CALL_READABLE_ID" NOT NULL ENABLE);
+
+--------------------------------------------------------
+--  Constraints for Table PURCHASE_ORDERS
+--------------------------------------------------------
+
+  ALTER TABLE "OA"."PURCHASE_ORDERS" ADD CONSTRAINT "PURCHASE_ORDERS_PK" PRIMARY KEY ("ORDER_ID") ENABLE;
+  ALTER TABLE "OA"."PURCHASE_ORDERS" MODIFY ("ORDER_READABLE_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."PURCHASE_ORDERS" MODIFY ("ORDER_ID" NOT NULL ENABLE);
+  
+--------------------------------------------------------
+--  Constraints for Table PURCHASE_ORDER_LINES
+--------------------------------------------------------
+
+  ALTER TABLE "OA"."PURCHASE_ORDER_LINES" ADD CONSTRAINT "PURCHASE_ORDER_ITEMS_PK" PRIMARY KEY ("ORDER_LINE_ID") ENABLE;
+  ALTER TABLE "OA"."PURCHASE_ORDER_LINES" MODIFY ("ORDER_LINE_ID" NOT NULL ENABLE);
+
+--------------------------------------------------------
+--  Constraints for Table PURCHASE_ORDER_HISTORYS
+--------------------------------------------------------
+
+  ALTER TABLE "OA"."PURCHASE_ORDER_HISTORYS" ADD CONSTRAINT "PURCHASE_ORDER_HISTORYS_PK" PRIMARY KEY ("ORDER_HISTORY_ID") ENABLE;
+  ALTER TABLE "OA"."PURCHASE_ORDER_HISTORYS" MODIFY ("ORDER_HISTORY_ID" NOT NULL ENABLE);
   
 --------------------------------------------------------
 --  DDL for Trigger ANNOUNCEMENTS_TRG
@@ -552,13 +662,72 @@ ALTER TRIGGER "OA"."ROLES_TRG" ENABLE;
 
   CREATE OR REPLACE TRIGGER "OA"."REPAIR_CALLS_TRG" BEFORE INSERT ON "OA"."REPAIR_CALLS"
 FOR EACH ROW 
+declare
+  seqid varchar2(20);
 BEGIN
   <<COLUMN_SEQUENCES>>
   BEGIN
     IF :NEW.CALL_ID IS NULL THEN
-      SELECT REPAIR_CALLS_SEQ.NEXTVAL INTO :NEW.CALL_ID FROM DUAL;
+      SELECT REPAIR_CALLS_SEQ.NEXTVAL INTO seqid FROM DUAL;
+      SELECT seqid INTO :NEW.CALL_ID FROM DUAL;
+      SELECT 'BX-' || seqid INTO :NEW.CALL_READABLE_ID FROM DUAL;
     END IF;
   END COLUMN_SEQUENCES;
 END;
 /
 ALTER TRIGGER "OA"."REPAIR_CALLS_TRG" ENABLE;
+
+--------------------------------------------------------
+--  DDL for Trigger PURCHASE_ORDERS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDERS_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDERS"
+FOR EACH ROW 
+declare
+  seqid varchar2(20);
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.ORDER_ID IS NULL THEN
+      SELECT PURCHASE_ORDERS_SEQ.NEXTVAL INTO seqid FROM DUAL;
+      SELECT seqid INTO :NEW.ORDER_ID FROM DUAL;
+      SELECT 'CG-' || seqid INTO :NEW.ORDER_READABLE_ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "OA"."PURCHASE_ORDERS_TRG" ENABLE;
+
+--------------------------------------------------------
+--  DDL for Trigger PURCHASE_ORDER_LINES_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDER_LINES_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDER_LINES"
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.ORDER_LINE_ID IS NULL THEN
+      SELECT PURCHASE_ORDER_LINES_SEQ.NEXTVAL INTO :NEW.ORDER_LINE_ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "OA"."PURCHASE_ORDER_LINES_TRG" ENABLE;
+
+--------------------------------------------------------
+--  DDL for Trigger PURCHASE_ORDER_HISTORYS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDER_HISTORYS_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDER_HISTORYS" 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.ORDER_HISTORY_ID IS NULL THEN
+      SELECT PURCHASE_ORDER_HISTORYS_SEQ.NEXTVAL INTO :NEW.ORDER_HISTORY_ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "OA"."PURCHASE_ORDER_HISTORYS_TRG" ENABLE;
