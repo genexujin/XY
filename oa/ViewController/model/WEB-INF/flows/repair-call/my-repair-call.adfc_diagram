@@ -7,7 +7,7 @@
       <property
          name="activityId">my_repair_call</property>
       <property
-         name="page">/pages/repair-call/my_repair_call.jsff</property>
+         name="page">/pages/repair-call/MyRepairCall.jsff</property>
       <property
          name="start">true</property>
       <property
@@ -17,8 +17,8 @@
       <property
          name="y">207.94824</property>
       <property
-         name="x">463.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">463.0</property>
    </View>
 </SDM>

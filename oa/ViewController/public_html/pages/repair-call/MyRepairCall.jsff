@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:pageTemplate viewId="/oracle/ui/pattern/dynamicShell/dynamicTabShell.jspx" value="#{bindings.ptb1}" id="pt1">
+        <f:facet name="copyright"/>
+        <f:facet name="about"/>
+        <f:facet name="navigation"/>
+        <f:facet name="globalLinks"/>
+        <f:facet name="status"/>
+        <f:facet name="globalToolbar"/>
+        <f:facet name="globalSearch"/>
+        <f:facet name="globalTabs"/>
+        <f:facet name="welcome"/>
+        <f:facet name="innerToolbar"/>
+    </af:pageTemplate>
+</ui:composition>

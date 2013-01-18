@@ -61,4 +61,9 @@
     <managed-bean-class>edu.hp.view.security.LoginUser</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
+  <managed-bean id="__12">
+    <managed-bean-name>MyRepairCallBean</managed-bean-name>
+    <managed-bean-class>edu.hp.view.bean.repaircall.MyRepairCallBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
 </adfc-config>
