@@ -2,8 +2,6 @@ package edu.hp.model.vo.query.classrm;
 
 import edu.hp.model.common.BaseView;
 
-import java.util.ArrayList;
-
 import oracle.jbo.domain.Array;
 
 
@@ -18,8 +16,7 @@ public class ClassroomQueryImpl extends BaseView {
      * This is the default constructor (do not remove).
      */
     public ClassroomQueryImpl() {
-        super();
-        this.setclsRmNos(new Array(new ArrayList()));
+       
     }
 
     /**
