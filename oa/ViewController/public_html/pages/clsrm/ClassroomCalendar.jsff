@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelSplitter orientation="horizontal" splitterPosition="152" id="ps1"
+                      binding="#{viewScope.clsCalBean.spliter}">
+        <f:facet name="first">
+            <af:panelGroupLayout id="pgl1" layout="vertical">
+                <af:outputText value="说明：1. 单击日历空白处可以添加新的预定" id="ot1"/>
+                <af:outputText value="2. 请在下方教室过滤条件中设置需要显示在日历上的教室" id="ot2"/>
+                <af:selectOneChoice value="#{bindings.Locations.inputValue}" label="#{bindings.Locations.label}"
+                                    required="#{bindings.Locations.hints.mandatory}"
+                                    shortDesc="#{bindings.Locations.hints.tooltip}" id="soc1" autoSubmit="true"
+                                    valueChangeListener="#{viewScope.clsCalBean.locationChange}">
+                    <f:selectItems value="#{bindings.Locations.items}" id="si1"/>
+                </af:selectOneChoice>
+                <af:panelGroupLayout id="pgl3" layout="scroll" binding="#{viewScope.clsCalBean.clarmGrpLayout}">
+                    <af:forEach items="#{viewScope.clsCalBean.providerList}" var="provider">
+                        <af:panelGroupLayout layout="horizontal" id="pgl2">
+                            <af:inputColor id="ic1" compact="true" simple="true" autoSubmit="true"
+                                           label="#{provider.displayName}"
+                                           valueChangeListener="#{viewScope.clsCalBean.providerColorChange}"
+                                           value="#{viewScope.clsCalBean.providerData[provider].color}" width="4"
+                                           colorData="#{viewScope.clsCalBean.colorData}" customVisible="false"
+                                           defaultVisible="false" lastUsedVisible="false">
+                                <f:attribute name="providerId" value="#{provider.id}"/>
+                            </af:inputColor>
+                            <!-- Bug 8973571 : facelets doesn't handle clientId generation correctly,
+               removing attribute id="sbc1" on selectBooleanCheckbox until fixed. -->
+                            <af:selectBooleanCheckbox id="sbc1" autoSubmit="true"
+                                                      valueChangeListener="#{viewScope.clsCalBean.providerEnabledChange}"
+                                                      text="#{provider.displayName}"
+                                                      value="#{viewScope.clsCalBean.providerData[provider].enabled}"/>
+                            <af:outputText value="#{provider.noOfPpl}座" id="ot3"/>
+                        </af:panelGroupLayout>
+                    </af:forEach>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="second">
+            <af:calendar value="#{bindings.ClassroomCalendar.calendarModel}" id="c1"
+                         binding="#{viewScope.clsCalBean.calendar}">
+                <f:facet name="contextMenu">
+                    <af:popup id="p2">
+                        <af:menu id="m2">
+                            <af:commandMenuItem text="新建预定" id="cmi3" icon="/images/icons/new_ena.png">
+                                <af:showPopupBehavior popupId="create" triggerType="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>
+                    </af:popup>
+                </f:facet>
+                <f:facet name="activityContextMenu">
+                    <af:popup id="p1">
+                        <af:menu id="m1">
+                            <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png">
+                                <af:showPopupBehavior popupId="edit" triggerType="action"/>
+                            </af:commandMenuItem>
+                            <af:commandMenuItem text="删除" id="cmi2" icon="/images/icons/delete_ena.png">
+                                <af:showPopupBehavior popupId="delete" triggerType="action"/>
+                            </af:commandMenuItem>
+                        </af:menu>
+                    </af:popup>
+                </f:facet>
+                <f:facet name="activityDetail">
+                    <af:popup id="edit" contentDelivery="lazyUncached">
+                        <af:dialog rendered="#{calendarBean.currActivity == null}" id="d3"
+                                   title="无预订信息">
+                            <af:outputText value="该预订信息已经不存在" id="ot7"/>
+                        </af:dialog>
+                        <!-- don't render if the activity is null -->
+                        <af:dialog title="#{calendarBean.currActivity.title}" type="okCancel"
+                                   dialogListener="#{viewScope.clsCalBean.editDialogListener}"
+                                   rendered="#{calendarBean.currActivity != null}" id="d4">
+                            <af:outputText value="预订详情："
+                                           id="ot8"/>
+                            <af:panelFormLayout id="pfl2" rows="10" inlineStyle="width:450px;">
+                                <af:selectOneChoice value="#{bindings.LocationName.inputValue}"
+                                                    label="#{bindings.LocationName.label}"
+                                                    required="#{bindings.LocationName.hints.mandatory}"
+                                                    shortDesc="#{bindings.LocationName.hints.tooltip}" id="soc4"
+                                                    autoSubmit="true">
+                                    <f:selectItems value="#{bindings.LocationName.items}" id="si4"/>
+                                </af:selectOneChoice>
+                                <af:selectOneChoice value="#{bindings.Classroom.inputValue}"
+                                                    label="#{bindings.Classroom.label}"
+                                                    required="#{bindings.Classroom.hints.mandatory}"
+                                                    shortDesc="#{bindings.Classroom.hints.tooltip}" id="soc5"
+                                                    partialTriggers="soc2">
+                                    <f:selectItems value="#{bindings.Classroom.items}" id="si5"/>
+                                </af:selectOneChoice>
+                                <af:inputListOfValues id="ilov1"
+                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
+                                                      value="#{bindings.UserDisplayName.inputValue}"
+                                                      label="#{bindings.UserDisplayName.hints.label}"
+                                                      model="#{bindings.UserDisplayName.listOfValuesModel}"
+                                                      required="#{bindings.UserDisplayName.hints.mandatory}"
+                                                      columns="#{bindings.UserDisplayName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.UserDisplayName.hints.tooltip}">
+                                    <f:validator binding="#{bindings.UserDisplayName.validator}"/>
+                                </af:inputListOfValues>
+                                <af:inputText value="#{bindings.ActTitle.inputValue}"
+                                              label="#{bindings.ActTitle.hints.label}"
+                                              required="#{bindings.ActTitle.hints.mandatory}"
+                                              columns="#{bindings.ActTitle.hints.displayWidth}"
+                                              maximumLength="#{bindings.ActTitle.hints.precision}"
+                                              shortDesc="#{bindings.ActTitle.hints.tooltip}" id="it4">
+                                    <f:validator binding="#{bindings.ActTitle.validator}"/>
+                                </af:inputText>
+                                <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
+                                                       label="#{bindings.NumOfPeople.hints.label}"
+                                                       required="#{bindings.NumOfPeople.hints.mandatory}"
+                                                       columns="#{bindings.NumOfPeople.hints.displayWidth}"
+                                                       shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="ins1">
+                                    <f:validator binding="#{bindings.NumOfPeople.validator}"/>
+                                </af:inputNumberSpinbox>
+                                <af:separator id="s3"/>
+                                <af:inputDate value="#{bindings.ActStartTime.inputValue}"
+                                              label="#{bindings.ActStartTime.hints.label}"
+                                              required="#{bindings.ActStartTime.hints.mandatory}"
+                                              columns="#{bindings.ActStartTime.hints.displayWidth}"
+                                              shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id3">
+                                    <f:validator binding="#{bindings.ActStartTime.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.ActStartTime.format}" type="both"/>
+                                </af:inputDate>
+                                <af:inputDate value="#{bindings.ActEndTime.inputValue}"
+                                              label="#{bindings.ActEndTime.hints.label}"
+                                              required="#{bindings.ActEndTime.hints.mandatory}"
+                                              columns="#{bindings.ActEndTime.hints.displayWidth}"
+                                              shortDesc="#{bindings.ActEndTime.hints.tooltip}" id="id4">
+                                    <f:validator binding="#{bindings.ActEndTime.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="both"/>
+                                </af:inputDate>
+                                <af:separator id="s7"/>
+                                <af:inputText value="#{bindings.Comments.inputValue}"
+                                              label="#{bindings.Comments.hints.label}"
+                                              required="#{bindings.Comments.hints.mandatory}"
+                                              columns="#{bindings.Comments.hints.displayWidth}"
+                                              maximumLength="#{bindings.Comments.hints.precision}"
+                                              shortDesc="#{bindings.Comments.hints.tooltip}" id="it5" rows="3">
+                                    <f:validator binding="#{bindings.Comments.validator}"/>
+                                </af:inputText>
+                            </af:panelFormLayout>
+                        </af:dialog>
+                    </af:popup>
+                </f:facet>
+                <f:facet name="activityDelete">
+                    <af:popup id="delete" contentDelivery="lazyUncached">
+                        <!-- don't render if the activity is null -->
+                        <af:dialog dialogListener="#{viewScope.clsCalBean.deleteListener}"
+                                   title="#{calendarBean.currActivity.title}" affirmativeTextAndAccessKey="Yes"
+                                   cancelTextAndAccessKey="No" rendered="#{calendarBean.currActivity != null}" id="d2">
+                            <af:outputText value="请注意：该操作无法恢复！"
+                                           id="ot4"/>
+                            <af:spacer height="20" id="s4"/>
+                            <af:outputText value="您确认要删除该预订吗？" id="ot5"/>
+                            
+                        </af:dialog>
+                    </af:popup>
+                </f:facet>
+                <f:facet name="create">
+                    <af:popup id="create" contentDelivery="lazyUncached"
+                              popupFetchListener="#{viewScope.clsCalBean.createPopupListener}">
+                        <af:dialog title="新预订" type="okCancel"
+                                   dialogListener="#{viewScope.clsCalBean.createDialogListener}"
+                                   id="d5">
+                            <af:outputText value="请正确填写教室预订信息！"
+                                           id="ot9"/>
+                            <af:panelFormLayout id="pfl1" rows="10" inlineStyle="width:450px;">
+                                <af:selectOneChoice value="#{bindings.LocationName.inputValue}"
+                                                    label="#{bindings.LocationName.label}"
+                                                    required="#{bindings.LocationName.hints.mandatory}"
+                                                    shortDesc="#{bindings.LocationName.hints.tooltip}" id="soc2"
+                                                    autoSubmit="true">
+                                    <f:selectItems value="#{bindings.LocationName.items}" id="si2"/>
+                                </af:selectOneChoice>
+                                <af:selectOneChoice value="#{bindings.Classroom.inputValue}"
+                                                    label="#{bindings.Classroom.label}"
+                                                    required="#{bindings.Classroom.hints.mandatory}"
+                                                    shortDesc="#{bindings.Classroom.hints.tooltip}" id="soc3"
+                                                    partialTriggers="soc2">
+                                    <f:selectItems value="#{bindings.Classroom.items}" id="si3"/>
+                                </af:selectOneChoice>
+                                <af:inputListOfValues id="userDisplayNameId"
+                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
+                                                      value="#{bindings.UserDisplayName.inputValue}"
+                                                      label="#{bindings.UserDisplayName.hints.label}"
+                                                      model="#{bindings.UserDisplayName.listOfValuesModel}"
+                                                      required="#{bindings.UserDisplayName.hints.mandatory}"
+                                                      columns="#{bindings.UserDisplayName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.UserDisplayName.hints.tooltip}">
+                                    <f:validator binding="#{bindings.UserDisplayName.validator}"/>
+                                </af:inputListOfValues>
+                                <af:inputText value="#{bindings.ActTitle.inputValue}"
+                                              label="#{bindings.ActTitle.hints.label}"
+                                              required="#{bindings.ActTitle.hints.mandatory}"
+                                              columns="#{bindings.ActTitle.hints.displayWidth}"
+                                              maximumLength="#{bindings.ActTitle.hints.precision}"
+                                              shortDesc="#{bindings.ActTitle.hints.tooltip}" id="it1">
+                                    <f:validator binding="#{bindings.ActTitle.validator}"/>
+                                </af:inputText>
+                                <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
+                                                       label="#{bindings.NumOfPeople.hints.label}"
+                                                       required="#{bindings.NumOfPeople.hints.mandatory}"
+                                                       columns="#{bindings.NumOfPeople.hints.displayWidth}"
+                                                       shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it2">
+                                    <f:validator binding="#{bindings.NumOfPeople.validator}"/>
+                                </af:inputNumberSpinbox>
+                                <af:separator id="s1"/>
+                                <af:inputDate value="#{bindings.ActStartTime.inputValue}"
+                                              label="#{bindings.ActStartTime.hints.label}"
+                                              required="#{bindings.ActStartTime.hints.mandatory}"
+                                              columns="#{bindings.ActStartTime.hints.displayWidth}"
+                                              shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id1">
+                                    <f:validator binding="#{bindings.ActStartTime.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.ActStartTime.format}" type="both"/>
+                                </af:inputDate>
+                                <af:inputDate value="#{bindings.ActEndTime.inputValue}"
+                                              label="#{bindings.ActEndTime.hints.label}"
+                                              required="#{bindings.ActEndTime.hints.mandatory}"
+                                              columns="#{bindings.ActEndTime.hints.displayWidth}"
+                                              shortDesc="#{bindings.ActEndTime.hints.tooltip}" id="id2">
+                                    <f:validator binding="#{bindings.ActEndTime.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="both"/>
+                                </af:inputDate>
+                                <af:separator id="s2"/>
+                                <af:inputText value="#{bindings.Comments.inputValue}"
+                                              label="#{bindings.Comments.hints.label}"
+                                              required="#{bindings.Comments.hints.mandatory}"
+                                              columns="#{bindings.Comments.hints.displayWidth}"
+                                              maximumLength="#{bindings.Comments.hints.precision}"
+                                              shortDesc="#{bindings.Comments.hints.tooltip}" id="it3" rows="3">
+                                    <f:validator binding="#{bindings.Comments.validator}"/>
+                                </af:inputText>
+                            </af:panelFormLayout>
+                        </af:dialog>
+                    </af:popup>
+                </f:facet>
+                
+                <f:facet name="activityHover">
+              <af:popup contentDelivery="lazyUncached" id="p3">
+                <!-- don't render if the activity is null -->
+                <af:noteWindow inlineStyle="width:300px"
+                               rendered="#{calendarBean.currActivity != null}"
+                               id="nw1">
+                  <af:outputText value="教室预订信息："
+                                 id="ot6"/>
+                  <af:spacer height="20" id="s5"/>
+                  
+                </af:noteWindow>
+              </af:popup>
+            </f:facet>
+            </af:calendar>
+            <!-- id="af_twocol_left_sidebar_split_stretched"   -->
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

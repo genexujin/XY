@@ -50,6 +50,14 @@
     </DesignTime>
   </Containee>
   <Containee
+    Name="classrm"
+    PackageName="edu.hp.model.vo.query.classrm"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
     Name="security"
     PackageName="edu.hp.model.vo.query.security"
     ObjectType="JboPackage">

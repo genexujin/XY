@@ -19,8 +19,20 @@
     Name="ClassroomCalendar"
     ViewObjectName="edu.hp.model.vo.ClassroomCalendarView"/>
   <ViewUsage
-    Name="LovsView"
+    Name="Classrooms"
+    ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomQuery"/>
+  <ViewUsage
+    Name="Locations"
+    ViewObjectName="edu.hp.model.vo.LocationsView"/>
+  <ViewUsage
+    Name="ClassroomOfLocation"
     ViewObjectName="edu.hp.model.vo.LovsView"/>
+  <ViewLinkUsage
+    Name="LocClsRmViewLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.LocClsRmViewLink"
+    SrcViewUsageName="edu.hp.model.biz.ClassRmModule.Locations"
+    DstViewUsageName="edu.hp.model.biz.ClassRmModule.ClassroomOfLocation"
+    Reversed="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

@@ -85,4 +85,9 @@
     EntityAttrName="LastUpdatedBy"
     EntityUsage="Locations"
     AliasName="LAST_UPDATED_BY"/>
+  <ViewLinkAccessor
+    Name="Classrooms"
+    ViewLink="edu.hp.model.vo.link.LocClsRmViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>

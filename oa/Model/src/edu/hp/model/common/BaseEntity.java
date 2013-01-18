@@ -2,21 +2,11 @@ package edu.hp.model.common;
 
 
 import edu.hp.view.security.LoginUser;
-
 import edu.hp.view.utils.utils.JSFUtils;
 
-import javax.faces.context.FacesContext;
-
-import javax.servlet.http.HttpSession;
-
-import oracle.jbo.AttributeList;
-import oracle.jbo.Row;
-import oracle.jbo.ViewObject;
 import oracle.jbo.server.EntityImpl;
-import oracle.jbo.server.EntityRowSetImpl;
-import oracle.jbo.server.SequenceImpl;
 import oracle.jbo.server.TransactionEvent;
-import oracle.jbo.server.ViewAccessorDef;
+
 
 public class BaseEntity extends EntityImpl {
 

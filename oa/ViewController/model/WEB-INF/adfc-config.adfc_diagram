@@ -106,7 +106,7 @@
       <property
          name="fromOutcome">System</property>
       <property
-         name="sdm:polyPoints">B69,299.30487,269.1494,L50</property>
+         name="sdm:polyPoints">B64,296.5,269.1494,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"

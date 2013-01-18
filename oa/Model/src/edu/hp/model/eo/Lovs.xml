@@ -9,7 +9,8 @@
   DBObjectName="LOVS"
   AliasName="Lovs"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.common.BaseEntity">
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -156,6 +157,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.Lovs.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_Lovs">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="LOCATIONS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_LOVS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.Lovs.FlexCol1"/>
     </AttrArray>
   </Key>
 </Entity>

@@ -5,6 +5,8 @@
     <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
              className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
     <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+    <factory className="oracle.adfinternal.view.faces.model.binding.ExtendedFacesBindingDefFactoryImpl"
+             nameSpace="http://xmlns.oracle.com/adf/faces/binding"/>
   </definitionFactories>
   <pageMap>
     <page path="/pages/main/Home.jsf" usageId="edu_hp_view_HomePageDef"/>
@@ -12,6 +14,7 @@
     <page path="/pages/main/System.jsf" usageId="edu_hp_view_SystemPageDef"/>
     <page path="/pages/main/Admin.jsf" usageId="edu_hp_view_AdminPageDef"/>
     <page path="/repair-call/my_repair_call.jsff" usageId="edu_hp_view_my_repair_callPageDef"/>
+    <page path="/pages/clsrm/ClassroomCalendar.jsff" usageId="edu_hp_view_ClassroomCalendarPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -19,6 +22,7 @@
     <page id="edu_hp_view_SystemPageDef" path="pages.main.SystemPageDef"/>
     <page id="edu_hp_view_AdminPageDef" path="pages.main.AdminPageDef"/>
     <page id="edu_hp_view_my_repair_callPageDef" path="repair_call.my_repair_callPageDef"/>
+    <page id="edu_hp_view_ClassroomCalendarPageDef" path="pages.clsrm.ClassroomCalendarPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"
@@ -30,6 +34,11 @@
                      FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
                      SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
                      SupportsSortCollection="true" Configuration="RootAppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="ClassRmModuleDataControl" Package="edu.hp.model.biz"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="ClassRmModuleLocal" syncMode="Immediate"
                      xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
   </dataControlUsages>
 </Application>

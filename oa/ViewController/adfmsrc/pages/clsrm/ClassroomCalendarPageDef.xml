@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="ClassroomCalendarPageDef"
+                Package="pages.clsrm">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.ClassRmModule.ClassroomCalendar" DataControl="RootAppModuleDataControl" RangeSize="-1"
+              id="ClassroomCalendarIterator"/>
+    <iterator Binds="Root.ClassRmModule.Classrooms" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ClassroomsIterator"/>
+    <iterator Binds="Root.ClassRmModule.Locations" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="LocationsIterator"/>
+    <iterator Binds="Root.ClassRmModule.ClassroomOfLocation" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ClassroomOfLocationIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ClassroomCalendarIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="startDate" NDValue="#{bindings.ClassroomCalendar.startDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="endDate" NDValue="#{bindings.ClassroomCalendar.endDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="timeZone" NDValue="#{bindings.ClassroomCalendar.timeZoneId}" NDType="java.lang.String"/>
+    </action>
+    <calendar IterBinding="ClassroomCalendarIterator" id="ClassroomCalendar"
+              xmlns="http://xmlns.oracle.com/adf/faces/binding" ActionBindingName="ExecuteWithParams">
+      <nodeDefinition DefName="edu.hp.model.vo.ClassroomCalendarView">
+        <AttrNames>
+          <Item Type="id" Value="Id"/>
+          <Item Type="providerId" Value="ClassroomId"/>
+          <Item Type="title" Value="ActTitle"/>
+          <Item Type="location" Value="Classroom"/>
+          <Item Type="startTime" Value="ActStartTime"/>
+          <Item Type="endTime" Value="ActEndTime"/>
+          <Item Type="tags" Value="ClassroomId"/>
+          <Item Type="custom" Value="UserDisplayName"/>
+          <Item Type="custom" Value="NumOfPeople"/>
+          <Item Type="custom" Value="Comments"/>
+          <Item Type="custom" Value="Id"/>
+          <Item Type="custom" Value="LocationId"/>
+          <Item Type="custom" Value="UserId"/>
+          <Item Type="custom" Value="ActEndTime"/>
+          <Item Type="custom" Value="ActStartTime"/>
+          <Item Type="custom" Value="ActTitle"/>
+          <Item Type="custom" Value="Classroom"/>
+          <Item Type="custom" Value="CreatedAt"/>
+          <Item Type="custom" Value="LocationName"/>
+        </AttrNames>
+      </nodeDefinition>
+      <providerDefinition IterBindingName="ClassroomsIterator">
+        <AttrNames>
+          <Item Type="id" Value="Id"/>
+          <Item Type="displayName" Value="Value"/>
+        </AttrNames>
+      </providerDefinition>
+    </calendar>
+    <list IterBinding="LocationsIterator" ListOperMode="navigation" ListIter="LocationsIterator" id="Locations"
+          DTSupportsMRU="true" SelectItemValueMode="ListIndex">
+      <AttrNames>
+        <Item Value="LocationName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ClassroomOfLocationIterator" ListOperMode="multiSelect" ListIter="ClassroomOfLocationIterator"
+          id="ClassroomOfLocation" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Value"/>
+      </ListDisplayAttrNames>
+    </list>
+    <table IterBinding="ClassroomOfLocationIterator" id="clsrmOfLoc">
+      <AttrNames>
+        <Item Value="Code"/>
+        <Item Value="CreatedAt"/>
+        <Item Value="CreatedBy"/>
+        <Item Value="FlexCol1"/>
+        <Item Value="FlexCol2"/>
+        <Item Value="FlexCol3"/>
+        <Item Value="Id"/>
+        <Item Value="LastUpdatedAt"/>
+        <Item Value="LastUpdatedBy"/>
+        <Item Value="LovDesc"/>
+        <Item Value="ParentCode"/>
+        <Item Value="Value"/>
+      </AttrNames>
+    </table>
+    <listOfValues StaticList="false" IterBinding="ClassroomCalendarIterator" Uses="LOV_UserDisplayName"
+                  id="UserDisplayName"/>
+    <list IterBinding="ClassroomCalendarIterator" StaticList="false" Uses="LOV_LocationName" id="LocationName"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ClassroomCalendarIterator" StaticList="false" Uses="LOV_Classroom" id="Classroom"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ClassroomCalendarIterator" id="ActTitle">
+      <AttrNames>
+        <Item Value="ActTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClassroomCalendarIterator" id="NumOfPeople">
+      <AttrNames>
+        <Item Value="NumOfPeople"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClassroomCalendarIterator" id="ActStartTime">
+      <AttrNames>
+        <Item Value="ActStartTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClassroomCalendarIterator" id="ActEndTime">
+      <AttrNames>
+        <Item Value="ActEndTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClassroomCalendarIterator" id="Comments">
+      <AttrNames>
+        <Item Value="Comments"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="ClassroomCalendarIterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.ClassRmModule.ClassroomCalendar"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

@@ -3,9 +3,9 @@ package edu.hp.view.bean.session;
 import edu.hp.view.security.LoginUserMenu;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class LoginUserMenuBean {
+
+public class LoginUserMenuBean{
     
     public ArrayList<LoginUserMenu> sysPurMenus;
     public ArrayList<LoginUserMenu> sysClsRmMenus;

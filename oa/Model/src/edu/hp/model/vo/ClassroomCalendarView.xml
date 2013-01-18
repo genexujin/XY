@@ -16,13 +16,30 @@
        ClassroomCalendar.COMMENTS, 
        ClassroomCalendar.CREATED_AT, 
        ClassroomCalendar.LOCATION_ID, 
-       ClassroomCalendar.LOCATION_NAME"
+       ClassroomCalendar.LOCATION_NAME, 
+       ClassroomCalendar.CLASSROOM_ID"
   FromList="CLASSROOM_CALENDAR ClassroomCalendar"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
   ComponentClass="edu.hp.model.common.BaseView">
+  <Variable
+    Name="startDate"
+    Kind="viewcriteria"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="endDate"
+    Kind="viewcriteria"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="timeZone"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="userId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="Locations"
     ViewObjectName="edu.hp.model.vo.LocationsView"
@@ -40,6 +57,10 @@
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
+  <ViewAccessor
+    Name="Employees"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_LocationName"
     ListVOName="Locations"
@@ -70,10 +91,37 @@
     <AttrArray Name="AttrNames">
       <Item Value="Classroom"/>
     </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ClassroomId"/>
+    </AttrArray>
     <AttrArray Name="ListAttrNames">
       <Item Value="Value"/>
+      <Item Value="Id"/>
     </AttrArray>
     <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UserDisplayName"
+    ListVOName="Employees"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UserDisplayName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayName"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
   </ListBinding>
   <EntityUsage
     Name="ClassroomCalendar"
@@ -115,7 +163,15 @@
     PrecisionRule="true"
     EntityAttrName="UserDisplayName"
     EntityUsage="ClassroomCalendar"
-    AliasName="USER_DISPLAY_NAME"/>
+    AliasName="USER_DISPLAY_NAME"
+    LOVName="LOV_UserDisplayName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="NumOfPeople"
     PrecisionRule="true"
@@ -169,13 +225,61 @@
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="edu.hp.model.vo.ClassroomCalendarView.LocationName_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="ClassroomId"
+    PrecisionRule="true"
+    EntityAttrName="ClassroomId"
+    EntityUsage="ClassroomCalendar"
+    AliasName="CLASSROOM_ID"/>
+  <ViewCriteria
+    Name="findByUser"
+    ViewObjectName="edu.hp.model.vo.ClassroomCalendarView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ClassroomCalendarViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="UserId"
+        ViewAttribute="UserId"
+        Operator="="
+        Conjunction="AND"
+        Value=":userId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="ClassroomBatchReservationVA"
     ViewLink="edu.hp.model.vo.link.ClsRmBthClsCalLink"
     Type="oracle.jbo.Row"
     Reversed="true"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

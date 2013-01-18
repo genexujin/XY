@@ -1,6 +1,8 @@
 package edu.hp.view.security;
 
 
+import edu.hp.view.utils.utils.Constants;
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -13,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import edu.hp.view.utils.utils.Constants;
 
 public class SecurityFilter implements Filter {
     private FilterConfig _filterConfig = null;
@@ -30,7 +31,7 @@ public class SecurityFilter implements Filter {
                                                                                                      ServletException {
         HttpSession session = ((HttpServletRequest)request).getSession();
 
-        LoginUser loginUser = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
+        Object loginUser = session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
 
         if (loginUser == null) {
             ((HttpServletResponse)response).sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login.jsp");

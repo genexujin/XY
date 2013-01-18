@@ -32,7 +32,52 @@
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
-  FetchMode="FETCH_AS_NEEDED">
+  FetchMode="FETCH_AS_NEEDED"
+  ComponentClass="edu.hp.model.common.BaseView">
+  <ViewAccessor
+    Name="Managers"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Departments"
+    ViewObjectName="edu.hp.model.vo.DepartmentsView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_MgrId"
+    ListVOName="Managers"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="MgrId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DeptId"
+    ListVOName="Departments"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DeptId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DeptId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DeptName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="Employees"
     Entity="edu.hp.model.eo.Employees"/>
@@ -49,7 +94,8 @@
     PrecisionRule="true"
     EntityAttrName="Password"
     EntityUsage="Employees"
-    AliasName="PASSWORD"/>
+    AliasName="PASSWORD"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="FirstName"
     PrecisionRule="true"
@@ -73,13 +119,29 @@
     PrecisionRule="true"
     EntityAttrName="MgrId"
     EntityUsage="Employees"
-    AliasName="MGR_ID"/>
+    AliasName="MGR_ID"
+    LOVName="LOV_MgrId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="DeptId"
     PrecisionRule="true"
     EntityAttrName="DeptId"
     EntityUsage="Employees"
-    AliasName="DEPT_ID"/>
+    AliasName="DEPT_ID"
+    LOVName="LOV_DeptId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Email"
     PrecisionRule="true"
@@ -146,7 +208,8 @@
     PrecisionRule="true"
     EntityAttrName="LastUpdatedAt"
     EntityUsage="Employees"
-    AliasName="LAST_UPDATED_AT"/>
+    AliasName="LAST_UPDATED_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="CreatedBy"
     PrecisionRule="true"
@@ -158,7 +221,8 @@
     PrecisionRule="true"
     EntityAttrName="CreatedAt"
     EntityUsage="Employees"
-    AliasName="CREATED_AT"/>
+    AliasName="CREATED_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="Title"
     PrecisionRule="true"
@@ -173,6 +237,25 @@
     EntityUsage="Employees"
     AliasName="ID"
     IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="DisplayName"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[LastName+FirstName]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="FirstName"/>
+      <Item
+        Value="LastName"/>
+    </Dependencies>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="RolesVA"
     ViewLink="edu.hp.model.vo.link.UserRoleViewLink"
