@@ -170,6 +170,8 @@
             <hash n="libraryDependencies">
                <value n="IncludeLibrariesFromOtherContainers" v="true"/>
             </hash>
+            <value n="platformType" v="GLASSFISH"/>
+            <value n="platformVersion" v="3.1.0.0"/>
             <value n="profileClass" v="oracle.jdeveloper.deploy.war.WarProfile"/>
             <value n="profileName" v="OA_ViewController_webapp"/>
          </hash>
