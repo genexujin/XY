@@ -121,5 +121,7 @@
     <action IterBinding="ClassroomCalendarIterator" id="CreateInsert"
             InstanceName="RootAppModuleDataControl.Root.ClassRmModule.ClassroomCalendar"
             DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <list IterBinding="ClassroomCalendarIterator" StaticList="false" Uses="LOV_UserDisplayName" id="UserDisplayName1"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

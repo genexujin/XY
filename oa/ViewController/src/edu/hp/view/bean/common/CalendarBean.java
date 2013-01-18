@@ -115,7 +115,7 @@ public class CalendarBean{
     }
 
     public void createDialogListener(DialogEvent dialogEvent) {
-        if(dialogEvent.getOutcome().equals(dialogEvent.Outcome.ok)){
+        if(dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)){
             doCommit();
         }else{
             doRollback();

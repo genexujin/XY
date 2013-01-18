@@ -34,6 +34,7 @@
                         </af:panelGroupLayout>
                     </af:forEach>
                 </af:panelGroupLayout>
+                <af:messages id="m3"/>
             </af:panelGroupLayout>
         </f:facet>
         <f:facet name="second">
@@ -164,7 +165,34 @@
                                    id="d5">
                             <af:outputText value="请正确填写教室预订信息！"
                                            id="ot9"/>
-                            <af:panelFormLayout id="pfl1" rows="10" inlineStyle="width:450px;">
+                            <af:panelFormLayout id="pfl3" rows="2" labelAlignment="start">
+                                <af:inputDate value="#{bindings.ActStartTime.inputValue}"
+                                              label="#{bindings.ActStartTime.hints.label}"
+                                              required="#{bindings.ActStartTime.hints.mandatory}"
+                                              columns="#{bindings.ActStartTime.hints.displayWidth}"
+                                              shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id1">
+                                    <f:validator binding="#{bindings.ActStartTime.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.ActStartTime.format}" type="both"/>
+                                </af:inputDate>
+                                <af:inputText value="#{bindings.ActTitle.inputValue}"
+                                              label="#{bindings.ActTitle.hints.label}"
+                                              required="#{bindings.ActTitle.hints.mandatory}"
+                                              columns="#{bindings.ActTitle.hints.displayWidth}"
+                                              maximumLength="#{bindings.ActTitle.hints.precision}"
+                                              shortDesc="#{bindings.ActTitle.hints.tooltip}" id="it2">
+                                    <f:validator binding="#{bindings.ActTitle.validator}"/>
+                                </af:inputText>
+                                <af:inputDate value="#{bindings.ActEndTime.inputValue}"
+                                              label="#{bindings.ActEndTime.hints.label}"
+                                              required="#{bindings.ActEndTime.hints.mandatory}"
+                                              columns="#{bindings.ActEndTime.hints.displayWidth}"
+                                              shortDesc="#{bindings.ActEndTime.hints.tooltip}" id="id2">
+                                    <f:validator binding="#{bindings.ActEndTime.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="both"/>
+                                </af:inputDate>
+                            </af:panelFormLayout>
+                            <af:separator id="s1"/>
+                            <af:panelFormLayout id="pfl1" rows="2">
                                 <af:selectOneChoice value="#{bindings.LocationName.inputValue}"
                                                     label="#{bindings.LocationName.label}"
                                                     required="#{bindings.LocationName.hints.mandatory}"
@@ -179,55 +207,29 @@
                                                     partialTriggers="soc2">
                                     <f:selectItems value="#{bindings.Classroom.items}" id="si3"/>
                                 </af:selectOneChoice>
-                                <af:inputListOfValues id="userDisplayNameId"
-                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
-                                                      value="#{bindings.UserDisplayName.inputValue}"
-                                                      label="#{bindings.UserDisplayName.hints.label}"
-                                                      model="#{bindings.UserDisplayName.listOfValuesModel}"
-                                                      required="#{bindings.UserDisplayName.hints.mandatory}"
-                                                      columns="#{bindings.UserDisplayName.hints.displayWidth}"
-                                                      shortDesc="#{bindings.UserDisplayName.hints.tooltip}">
-                                    <f:validator binding="#{bindings.UserDisplayName.validator}"/>
-                                </af:inputListOfValues>
-                                <af:inputText value="#{bindings.ActTitle.inputValue}"
-                                              label="#{bindings.ActTitle.hints.label}"
-                                              required="#{bindings.ActTitle.hints.mandatory}"
-                                              columns="#{bindings.ActTitle.hints.displayWidth}"
-                                              maximumLength="#{bindings.ActTitle.hints.precision}"
-                                              shortDesc="#{bindings.ActTitle.hints.tooltip}" id="it1">
-                                    <f:validator binding="#{bindings.ActTitle.validator}"/>
-                                </af:inputText>
+                                <af:selectOneChoice value="#{bindings.UserDisplayName1.inputValue}"
+                                                    label="#{bindings.UserDisplayName1.label}"
+                                                    required="#{bindings.UserDisplayName1.hints.mandatory}"
+                                                    shortDesc="#{bindings.UserDisplayName1.hints.tooltip}" id="soc6">
+                                    <f:selectItems value="#{bindings.UserDisplayName1.items}" id="si6"/>
+                                </af:selectOneChoice>
                                 <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
                                                        label="#{bindings.NumOfPeople.hints.label}"
                                                        required="#{bindings.NumOfPeople.hints.mandatory}"
                                                        columns="#{bindings.NumOfPeople.hints.displayWidth}"
-                                                       shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it2">
+                                                       shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it1">
                                     <f:validator binding="#{bindings.NumOfPeople.validator}"/>
                                 </af:inputNumberSpinbox>
-                                <af:separator id="s1"/>
-                                <af:inputDate value="#{bindings.ActStartTime.inputValue}"
-                                              label="#{bindings.ActStartTime.hints.label}"
-                                              required="#{bindings.ActStartTime.hints.mandatory}"
-                                              columns="#{bindings.ActStartTime.hints.displayWidth}"
-                                              shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id1">
-                                    <f:validator binding="#{bindings.ActStartTime.validator}"/>
-                                    <af:convertDateTime pattern="#{bindings.ActStartTime.format}" type="both"/>
-                                </af:inputDate>
-                                <af:inputDate value="#{bindings.ActEndTime.inputValue}"
-                                              label="#{bindings.ActEndTime.hints.label}"
-                                              required="#{bindings.ActEndTime.hints.mandatory}"
-                                              columns="#{bindings.ActEndTime.hints.displayWidth}"
-                                              shortDesc="#{bindings.ActEndTime.hints.tooltip}" id="id2">
-                                    <f:validator binding="#{bindings.ActEndTime.validator}"/>
-                                    <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="both"/>
-                                </af:inputDate>
-                                <af:separator id="s2"/>
+                            </af:panelFormLayout>
+                            <af:separator id="s2"/>
+                            <af:panelFormLayout id="pfl4">
                                 <af:inputText value="#{bindings.Comments.inputValue}"
                                               label="#{bindings.Comments.hints.label}"
                                               required="#{bindings.Comments.hints.mandatory}"
                                               columns="#{bindings.Comments.hints.displayWidth}"
                                               maximumLength="#{bindings.Comments.hints.precision}"
-                                              shortDesc="#{bindings.Comments.hints.tooltip}" id="it3" rows="3">
+                                              shortDesc="#{bindings.Comments.hints.tooltip}" id="it3"
+                                              contentStyle="width:240px;">
                                     <f:validator binding="#{bindings.Comments.validator}"/>
                                 </af:inputText>
                             </af:panelFormLayout>

@@ -136,7 +136,15 @@
         Operator="="
         Conjunction="AND"
         Value="ClsRm"
-        Required="Optional"/>     
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="FlexCol1"
+        ViewAttribute="FlexCol1"
+        Operator="="
+        Conjunction="AND"
+        Value=":locationId"
+        IsBindVarValue="true"
+        Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
 </ViewObject>

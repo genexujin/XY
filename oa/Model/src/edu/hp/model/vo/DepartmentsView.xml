@@ -5,67 +5,42 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="DepartmentsView"
   Version="11.1.2.62.76"
-  SelectList="Departments.DEPT_ID, 
-       Departments.DEPT_NAME, 
-       Departments.LOCATION_ID, 
-       Departments.MGR_ID, 
-       Departments.CREATED_AT, 
+  SelectList="Departments.CREATED_AT, 
        Departments.CREATED_BY, 
+       Departments.DEPT_ID, 
+       Departments.DEPT_NAME, 
        Departments.LAST_UPDATED_AT, 
-       Departments.LAST_UPDATED_BY"
+       Departments.LAST_UPDATED_BY, 
+       Departments.LOCATION_ID, 
+       Departments.MGR_ID"
   FromList="DEPARTMENTS Departments"
   BindingStyle="OracleName"
   CustomQuery="false"
   ComponentClass="edu.hp.model.common.BaseView"
   PageIterMode="Full"
   UseGlueCode="false">
-  <ViewAccessor
-    Name="Locations"
-    ViewObjectName="edu.hp.model.vo.LocationsView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="Employees"
-    ViewObjectName="edu.hp.model.vo.EmployeesView"
-    RowLevelBinds="true"/>
-  <ListBinding
-    Name="LOV_LocationId"
-    ListVOName="Locations"
-    ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="LocationId"/>
-    </AttrArray>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="LocationId"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="LocationName"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_MgrId"
-    ListVOName="Employees"
-    ListRangeSize="-1"
-    ComboRowCountHint="10"
-    NullValueFlag="none"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="MgrId"/>
-    </AttrArray>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="DisplayName"/>
-    </AttrArray>
-    <DisplayCriteria
-      Hint="showAndExecute"/>
-  </ListBinding>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.DepartmentsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
   <EntityUsage
     Name="Departments"
     Entity="edu.hp.model.eo.Departments"/>
+  <ViewAttribute
+    Name="CreatedAt"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="CreatedAt"
+    EntityUsage="Departments"
+    AliasName="CREATED_AT"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="Departments"
+    AliasName="CREATED_BY"/>
   <ViewAttribute
     Name="DeptId"
     IsNotNull="true"
@@ -80,47 +55,8 @@
     EntityUsage="Departments"
     AliasName="DEPT_NAME"/>
   <ViewAttribute
-    Name="LocationId"
-    PrecisionRule="true"
-    EntityAttrName="LocationId"
-    EntityUsage="Departments"
-    AliasName="LOCATION_ID"
-    LOVName="LOV_LocationId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="MgrId"
-    PrecisionRule="true"
-    EntityAttrName="MgrId"
-    EntityUsage="Departments"
-    AliasName="MGR_ID"
-    LOVName="LOV_MgrId">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="input_text_lov"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="CreatedAt"
-    PrecisionRule="true"
-    EntityAttrName="CreatedAt"
-    EntityUsage="Departments"
-    AliasName="CREATED_AT"/>
-  <ViewAttribute
-    Name="CreatedBy"
-    PrecisionRule="true"
-    EntityAttrName="CreatedBy"
-    EntityUsage="Departments"
-    AliasName="CREATED_BY"/>
-  <ViewAttribute
     Name="LastUpdatedAt"
+    IsUpdateable="false"
     PrecisionRule="true"
     EntityAttrName="LastUpdatedAt"
     EntityUsage="Departments"
@@ -131,4 +67,20 @@
     EntityAttrName="LastUpdatedBy"
     EntityUsage="Departments"
     AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LocationId"
+    PrecisionRule="true"
+    EntityAttrName="LocationId"
+    EntityUsage="Departments"
+    AliasName="LOCATION_ID"/>
+  <ViewAttribute
+    Name="MgrId"
+    PrecisionRule="true"
+    EntityAttrName="MgrId"
+    EntityUsage="Departments"
+    AliasName="MGR_ID"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

@@ -10,16 +10,16 @@ import oracle.jbo.server.TransactionEvent;
 
 public class BaseEntity extends EntityImpl {
 
-//    public void remove() {
-//
-//        String entityName = getEntityDef().getName();
-//        if (entityName.equals("Lov")) {
-//            super.remove();
-//        } else {
-//            setAttribute("Deleted", "Y");
-//            super.remove();
-//        }
-//    }
+    //    public void remove() {
+    //
+    //        String entityName = getEntityDef().getName();
+    //        if (entityName.equals("Lov")) {
+    //            super.remove();
+    //        } else {
+    //            setAttribute("Deleted", "Y");
+    //            super.remove();
+    //        }
+    //    }
 
     /**
      * avoid deleting records
@@ -35,33 +35,39 @@ public class BaseEntity extends EntityImpl {
             // TODO: Add catch code
             e1.printStackTrace();
         }
-        
-        if (operation == DML_INSERT ) {
-            if(user!=null)
-                this.setAttribute("CreatedBy", user.getDisplayName());
+
+        if (this.getEntityDef().getAttributeIndexOf("CreatedBy") > 0) {
+
+            if (operation == DML_INSERT) {
+                if (user != null)
+                    this.setAttribute("CreatedBy", user.getDisplayName());
+            }
+
         }
-        
-        if(user!=null) this.setAttribute("LastUpdatedBy", user.getDisplayName());
+
+        if (this.getEntityDef().getAttributeIndexOf("LastUpdatedBy") > 0) {
+            if (user != null)
+                this.setAttribute("LastUpdatedBy", user.getDisplayName());
+        }
 
         super.doDML(operation, e);
     }
 
-    
 
-//    protected void create(AttributeList attributeList) {
-//        super.create(attributeList);
-//        String seq =
-//            (String)this.getStructureDef().findAttributeDef("Id").getProperty("SEQ");
-//
-//        SequenceImpl s = new SequenceImpl(seq, getDBTransaction());
-//        setAttribute("Id", s.getSequenceNumber());
-//
-//    }
+    //    protected void create(AttributeList attributeList) {
+    //        super.create(attributeList);
+    //        String seq =
+    //            (String)this.getStructureDef().findAttributeDef("Id").getProperty("SEQ");
+    //
+    //        SequenceImpl s = new SequenceImpl(seq, getDBTransaction());
+    //        setAttribute("Id", s.getSequenceNumber());
+    //
+    //    }
 
 
-//    @Override
-//    public void afterCommit(TransactionEvent transactionEvent) {
-//        super.afterCommit(transactionEvent);
-//
-//    }
+    //    @Override
+    //    public void afterCommit(TransactionEvent transactionEvent) {
+    //        super.afterCommit(transactionEvent);
+    //
+    //    }
 }
