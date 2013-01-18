@@ -1,19 +1,16 @@
 package edu.hp.view.bean.main;
 
 import edu.hp.view.bean.session.LoginUserMenuBean;
-
 import edu.hp.view.security.LoginUser;
 import edu.hp.view.security.LoginUserMenu;
-import edu.hp.view.utils.utils.ADFUtils;
-import edu.hp.view.utils.utils.Constants;
-import edu.hp.view.utils.utils.JSFUtils;
+import edu.hp.view.utils.ADFUtils;
+import edu.hp.view.utils.JSFUtils;
+import edu.hp.view.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import java.util.Iterator;
 import java.util.List;
-
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -33,6 +30,7 @@ import oracle.jbo.Row;
 
 import oracle.ui.pattern.dynamicShell.Tab;
 import oracle.ui.pattern.dynamicShell.TabContext;
+
 
 public class UITabBean {
 
@@ -107,7 +105,7 @@ public class UITabBean {
         menus.setSysMealMenus(new ArrayList<LoginUserMenu>());
         menus.setSysPurMenus(new ArrayList<LoginUserMenu>());
 
-        //椤甸潰闇�鏈塙serMenusIterator鐨勭粦瀹�
+        
         DCIteratorBinding it = ADFUtils.findIterator("UserMenusIterator");
 
         for (Row row : it.getAllRowsInRange()) {

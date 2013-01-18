@@ -1,4 +1,4 @@
-package edu.hp.view.utils.utils;
+package edu.hp.view.utils;
 
 
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public class ADFUtils {
             OperationBinding operation = findOperation("CreateInsert");
             operation.execute();
             if (!operation.getErrors().isEmpty()) {
-               JSFUtils.addFacesErrorMessage(errMsg);
+                JSFUtils.addFacesErrorMessage(errMsg);
             }
         } catch (Exception e) {
             JSFUtils.addFacesErrorMessage(errMsg);

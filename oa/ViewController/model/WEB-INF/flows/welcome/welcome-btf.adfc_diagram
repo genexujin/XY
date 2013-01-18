@@ -1,7 +1,12 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <SDM>
    <OverallProperties
-      id="OverallProperties1"/>
+      id="OverallProperties1">
+      <property
+         name="y">266.5</property>
+      <property
+         name="x">91.5</property>
+   </OverallProperties>
    <View
       id="View2">
       <property
@@ -15,10 +20,10 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">142.94824</property>
-      <property
-         name="x">245.0</property>
+         name="y">98.79883</property>
       <property
          name="pageFragment">true</property>
+      <property
+         name="x">91.5</property>
    </View>
 </SDM>

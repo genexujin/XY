@@ -1,7 +1,7 @@
 package edu.hp.view.bean.clsrm;
 
 import edu.hp.view.bean.common.CalendarBean;
-import edu.hp.view.utils.utils.ADFUtils;
+import edu.hp.view.utils.ADFUtils;
 
 import javax.faces.event.ValueChangeEvent;
 

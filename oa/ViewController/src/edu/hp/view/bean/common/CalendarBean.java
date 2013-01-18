@@ -1,6 +1,6 @@
 package edu.hp.view.bean.common;
 
-import edu.hp.view.utils.utils.ADFUtils;
+import edu.hp.view.utils.ADFUtils;
 
 import java.awt.Color;
 

@@ -3,11 +3,9 @@
    <OverallProperties
       id="OverallProperties1">
       <property
-         name="linkStyle">Orthogonal</property>
+         name="y">498.25293</property>
       <property
-         name="y">83.5</property>
-      <property
-         name="x">136.48242</property>
+         name="x">88.01758</property>
    </OverallProperties>
    <View
       id="View2">
@@ -20,12 +18,21 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">208.5</property>
+         name="y">601.6035</property>
       <property
-         name="x">-168.5</property>
+         name="x">246.53516</property>
    </View>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule3">
+      <property
+         name="activityId">*</property>
+      <property
+         name="y">343.05176</property>
+      <property
+         name="x">88.01758</property>
+   </WildcardControlFlowRule>
    <View
-      id="View3">
+      id="View4">
       <property
          name="activityId">Admin</property>
       <property
@@ -35,12 +42,12 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">245.5</property>
+         name="y">83.5</property>
       <property
-         name="x">588.5</property>
+         name="x">246.53516</property>
    </View>
    <View
-      id="View4">
+      id="View5">
       <property
          name="activityId">System</property>
       <property
@@ -50,12 +57,12 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">269.5</property>
+         name="y">256.20117</property>
       <property
-         name="x">448.5</property>
+         name="x">246.53516</property>
    </View>
    <View
-      id="View5">
+      id="View6">
       <property
          name="activityId">Report</property>
       <property
@@ -65,57 +72,48 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">232.5</property>
+         name="y">428.90234</property>
       <property
-         name="x">64.5</property>
+         name="x">246.53516</property>
    </View>
-   <WildcardControlFlowRule
-      id="WildcardControlFlowRule6">
-      <property
-         name="activityId">*</property>
-      <property
-         name="y">84.0</property>
-      <property
-         name="x">289.5</property>
-   </WildcardControlFlowRule>
    <ControlFlowCase
       islink="true"
       id="ControlFlowCase7"
-      from="WildcardControlFlowRule6"
-      to="View2">
+      from="WildcardControlFlowRule3"
+      to="View4">
       <property
-         name="fromOutcome">Home</property>
+         name="fromOutcome">Admin</property>
       <property
-         name="sdm:polyPoints">B31,279.69513,140.39943,-168.50002,140.39943,T50</property>
+         name="sdm:polyPoints">T50,88.01758,300.70117,246.53516,137.14941,B50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
       id="ControlFlowCase8"
-      from="WildcardControlFlowRule6"
-      to="View3">
+      from="WildcardControlFlowRule3"
+      to="View5">
       <property
-         name="fromOutcome">Admin</property>
+         name="fromOutcome">System</property>
       <property
-         name="sdm:polyPoints">R50,588.5,84.14943,T50</property>
+         name="sdm:polyPoints">R45,124.01758,339.70117,205.53516,255.85059,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
       id="ControlFlowCase9"
-      from="WildcardControlFlowRule6"
-      to="View4">
+      from="WildcardControlFlowRule3"
+      to="View2">
       <property
-         name="fromOutcome">System</property>
+         name="fromOutcome">Home</property>
       <property
-         name="sdm:polyPoints">B64,296.5,269.1494,L50</property>
+         name="sdm:polyPoints">B50,88.01758,385.70117,246.53516,547.2529,T50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
       id="ControlFlowCase10"
-      from="WildcardControlFlowRule6"
-      to="View5">
+      from="WildcardControlFlowRule3"
+      to="View6">
       <property
          name="fromOutcome">Report</property>
       <property
-         name="sdm:polyPoints">B50,289.5,232.14941,R50</property>
+         name="sdm:polyPoints">R55,124.01758,346.70117,205.53516,428.55176,L50</property>
    </ControlFlowCase>
 </SDM>

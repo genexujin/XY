@@ -7,11 +7,12 @@
   Version="11.1.2.62.76"
   BindingStyle="OracleName"
   CustomQuery="true"
-  ComponentClass="edu.hp.model.common.BaseView"
+  ComponentClass="edu.hp.model.vo.query.classrm.ClassroomQueryImpl"
   PageIterMode="Full"
   UseGlueCode="false">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -22,7 +23,8 @@
   <Variable
     Name="clsRmNos"
     Kind="viewcriteria"
-    Type="oracle.jbo.domain.Array"/>
+    Type="oracle.jbo.domain.Array"
+    ElemType="java.lang.String"/>
   <SQLQuery><![CDATA[SELECT 
     LOVS.ID ID, 
     LOVS.CODE CODE, 

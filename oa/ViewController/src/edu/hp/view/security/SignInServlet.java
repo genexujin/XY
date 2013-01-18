@@ -1,9 +1,9 @@
 package edu.hp.view.security;
 
-import edu.hp.view.utils.utils.Constants;
+
+import edu.hp.view.utils.Constants;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,15 +11,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 
 import javax.naming.InitialContext;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javax.sql.DataSource;
+
 
 public class SignInServlet extends HttpServlet {
     

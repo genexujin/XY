@@ -1,7 +1,7 @@
 package edu.hp.view.security;
 
 
-import edu.hp.view.utils.utils.Constants;
+import edu.hp.view.utils.Constants;
 
 import java.io.IOException;
 

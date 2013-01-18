@@ -1,4 +1,4 @@
-package edu.hp.view.utils.utils;
+package edu.hp.view.utils;
 
 
 import java.util.Iterator;
@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
-
 import javax.el.MethodExpression;
 import javax.el.ValueExpression;
 
@@ -30,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Duncan Mills
  * @author Steve Muench
  * @author Gene Xu
- * 
+ *
  */
 public class JSFUtils {
 

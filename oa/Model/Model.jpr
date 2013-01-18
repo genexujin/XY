@@ -42,41 +42,24 @@
    <list n="contentSets">
       <string v="oracle.jdeveloper.model.PathsConfiguration/javaContentSet"/>
       <string v="oracle.ide.model.ResourcePaths/resourcesContentSet"/>
-      <string v="oracle.jdeveloper.offlinedb.model.OfflineDBProjectSettings/offlineDBContentSet"/>
       <string v="oracle.mds.internal.dt.ide.MDSLibraryCustCSProvider/mdsContentSet"/>
       <string v="oracle.mds.internal.dt.ide.MDSADFLibVirtualNodeCSProvider/mdsLibVirtualNodeContentSet"/>
       <string v="oracle.jdeveloper.model.J2eeSettings/webContentSet"/>
-      <string v="oracle.bm.commonIde.data.project.ModelerProjectSettings/modelersContentSet"/>
-      <string v="oracle.adfdtinternal.model.ide.settings.ADFMSettings/adfmContentSet"/>
+      <string v="oracle.jdeveloper.offlinedb.model.OfflineDBProjectSettings/offlineDBContentSet"/>
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
+      <string v="oracle.adfdtinternal.model.ide.settings.ADFMSettings/adfmContentSet"/>
+      <string v="oracle.bm.commonIde.data.project.ModelerProjectSettings/modelersContentSet"/>
    </list>
    <value n="defaultPackage" v="edu.hp.model"/>
    <value n="jbo.JpxName" v="edu.hp.model.Model"/>
    <value n="JboProject" v="true"/>
-   <hash n="oracle.ide.model.DependencyConfiguration">
-      <list n="dependencyList">
-         <hash>
-            <hash n="dependable">
-               <url n="sourceOwnerURL" path="../OA.jws"/>
-               <url n="sourceURL" path="../ViewController/ViewController.jpr"/>
-            </hash>
-            <value n="recognizerId" v="oracle.jdeveloper.library"/>
-         </hash>
-      </list>
-   </hash>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
-         <string v="ADF_FACES"/>
          <string v="ADFbc"/>
-         <string v="JSF"/>
-         <string v="JSP"/>
          <string v="Java"/>
-         <string v="TRINIDAD"/>
          <string v="XML"/>
       </list>
    </hash>
-   <value n="oracle.jbo.extends.entityRow" v="edu.hp.model.common.BaseEntity"/>
-   <value n="oracle.jbo.extends.viewObj" v="edu.hp.model.common.BaseView"/>
    <value n="oracle.jbo.SavedPreferences" v="true"/>
    <hash n="oracle.jdeveloper.compiler.OjcConfiguration">
       <list n="copyRes">
@@ -116,7 +99,7 @@
    </hash>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
       <hash n="profileDefinitions">
-         <hash n="OA_Model_adflib">
+         <hash n="oa_Model_adflib">
             <value n="adflib-connectionDetails" v="true"/>
             <value n="adflib-nonReusablesError" v="false"/>
             <hash n="archiveOptions">
@@ -150,22 +133,22 @@
                   </hash>
                </list>
             </hash>
-            <url n="jarURL" path="deploy/OA_Model_adflib.jar"/>
+            <url n="jarURL" path="deploy/oa_Model_adflib.jar"/>
             <hash n="libraryDependencies">
                <value n="IncludeLibrariesFromOtherContainers" v="true"/>
             </hash>
             <hash n="LibraryDependencies"/>
             <value n="profileClass" v="oracle.adfdt.common.deploy.impl.AdfLibraryProfile"/>
-            <value n="profileName" v="OA_Model_adflib"/>
+            <value n="profileName" v="oa_Model_adflib"/>
          </hash>
       </hash>
       <list n="profileList">
-         <string v="OA_Model_adflib"/>
+         <string v="oa_Model_adflib"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.model.J2eeSettings">
-      <value n="j2eeWebAppName" v="OA-Model-webapp"/>
-      <value n="j2eeWebContextRoot" v="OA-Model-context-root"/>
+      <value n="j2eeWebAppName" v="oa-Model-webapp"/>
+      <value n="j2eeWebContextRoot" v="oa-Model-context-root"/>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
@@ -198,39 +181,7 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="Resource Bundle Support"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Common Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Controller Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Faces Runtime 11"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSP Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSF 2.0"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSTL 1.2"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="SMS"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Resource Bundle Variable Resolver"/>
+            <value n="id" v="Emayclient.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
@@ -240,8 +191,10 @@
                <list n="classPath">
                   <url path="../ViewController/public_html/WEB-INF/lib/emayclient.jar" jar-entry=""/>
                </list>
-               <value n="description" v="SMS"/>
-               <value n="id" v="SMS"/>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Emayclient.jar"/>
+               <value n="id" v="Emayclient.jar"/>
+               <value n="locked" v="true"/>
             </hash>
          </list>
       </hash>
@@ -275,144 +228,12 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="Resource Bundle Support"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Common Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Controller Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Faces Runtime 11"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSP Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSF 2.0"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSTL 1.2"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="SMS"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Resource Bundle Variable Resolver"/>
+            <value n="id" v="Emayclient.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectPaths">
       <url n="outputDirectory" path="classes/"/>
-   </hash>
-   <hash n="oracle.jdevimpl.webapp.facelets.libraries.ProjectFaceletsTagLibraries">
-      <list n="facelets-tag-libraries">
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF Core"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="name" v="JSF Core"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/com/sun/faces/metadata/taglib/facelets_jsf_core.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsf/core"/>
-            <value n="version" v="2.0"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF HTML"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="name" v="JSF HTML"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/com/sun/faces/metadata/taglib/html_basic.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsf/html"/>
-            <value n="version" v="2.0"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="Facelets Composite"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="name" v="Facelets Composite"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/com/sun/faces/metadata/taglib/composite.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsf/composite"/>
-            <value n="version" v="2.0"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="Facelets"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="name" v="Facelets"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/com/sun/faces/metadata/taglib/ui.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsf/facelets"/>
-            <value n="version" v="2.0"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="Mojarra Ext Utils"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="name" v="Mojarra Ext Utils"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/META-INF/mojarra_ext.taglib.xml"/>
-            <value n="URI" v="http://mojarra.dev.java.net/mojarra_ext"/>
-            <value n="version" v="2.0"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSTL"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="name" v="JSTL"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/com/sun/faces/metadata/taglib/jstl-core.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsp/jstl/core"/>
-            <value n="version" v="2.0"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSTL Functions"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="name" v="JSTL Functions"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/com/sun/faces/metadata/taglib/jstl-fn.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsp/jstl/functions"/>
-            <value n="version" v="2.0"/>
-         </hash>
-      </list>
-   </hash>
-   <hash n="oracle.jdevimpl.webapp.jsp.libraries.model.ProjectTagLibraries">
-      <list n="tag-libraries">
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF Core"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="jspVersion" v="2.1"/>
-            <value n="name" v="JSF Core"/>
-            <value n="tldURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/META-INF/jsf_core.tld"/>
-            <value n="URI" v="http://java.sun.com/jsf/core"/>
-            <value n="version" v="2.0"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF HTML"/>
-               <value n="version" v="2.0"/>
-            </hash>
-            <value n="jspVersion" v="2.1"/>
-            <value n="name" v="JSF HTML"/>
-            <value n="tldURL" v="@oracle.home@../oracle_common/modules/oracle.jsf_2.0/jsf-impl.jar!/META-INF/html_basic.tld"/>
-            <value n="URI" v="http://java.sun.com/jsf/html"/>
-            <value n="version" v="2.0"/>
-         </hash>
-      </list>
    </hash>
 </jpr:project>
