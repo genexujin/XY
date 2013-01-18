@@ -13,7 +13,7 @@
     <page path="/pages/main/Report.jsf" usageId="edu_hp_view_ReportPageDef"/>
     <page path="/pages/main/System.jsf" usageId="edu_hp_view_SystemPageDef"/>
     <page path="/pages/main/Admin.jsf" usageId="edu_hp_view_AdminPageDef"/>
-    <page path="/repair-call/my_repair_call.jsff" usageId="edu_hp_view_my_repair_callPageDef"/>
+    <page path="/pages/repair-call/my_repair_call.jsff" usageId="edu_hp_view_my_repair_callPageDef"/>
     <page path="/pages/clsrm/ClassroomCalendar.jsff" usageId="edu_hp_view_ClassroomCalendarPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
