@@ -22,9 +22,10 @@
   </Properties>
   <Variable
     Name="clsRmNos"
-    Kind="viewcriteria"
-    Type="oracle.jbo.domain.Array"
-    ElemType="java.lang.String"/>
+    Kind="where"
+    Type="java.lang.String"
+    ElemType="java.lang.String"
+    DefaultValue="NA"/>
   <SQLQuery><![CDATA[SELECT 
     LOVS.ID ID, 
     LOVS.CODE CODE, 
@@ -41,7 +42,11 @@
 FROM 
     LOVS 
 WHERE 
-   LOVS.VALUE MEMBER OF CAST(:clsRmNos AS CHARTABLETYPE)]]></SQLQuery>
+   LOVS.ID IN (select regexp_substr(:clsRmNos,'[^,]+', 1, level) 
+   from dual 
+    connect by 
+        regexp_substr(:clsRmNos, '[^,]+', 1, level) 
+            is not null)]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
