@@ -3,7 +3,7 @@
   <task-flow-definition id="my-repair-call">
     <default-activity>my_repair_call</default-activity>
     <view id="my_repair_call">
-      <page>/pages/repair-call/my_repair_call.jsff</page>
+      <page>/pages/repair-call/MyRepairCall.jsff</page>
     </view>
     <use-page-fragments/>
   </task-flow-definition>
