@@ -1,6 +1,7 @@
 package edu.hp.model.biz;
 
-import edu.hp.model.biz.common.ClassRmModule;
+import edu.hp.model.vo.ClassroomCalendarViewImpl;
+import edu.hp.model.vo.query.classrm.ClassroomCalendarConflitQueryImpl;
 import edu.hp.model.vo.query.classrm.ClassroomQueryImpl;
 
 import oracle.jbo.server.ApplicationModuleImpl;
@@ -14,7 +15,7 @@ import oracle.jbo.server.ViewObjectImpl;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class ClassRmModuleImpl extends ApplicationModuleImpl implements ClassRmModule {
+public class ClassRmModuleImpl extends ApplicationModuleImpl {
     /**
      * This is the default constructor (do not remove).
      */
@@ -35,8 +36,8 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl implements ClassRmM
      * Container's getter for ClassroomCalendar.
      * @return ClassroomCalendar
      */
-    public ViewObjectImpl getClassroomCalendar() {
-        return (ViewObjectImpl)findViewObject("ClassroomCalendar");
+    public ClassroomCalendarViewImpl getClassroomCalendar() {
+        return (ClassroomCalendarViewImpl)findViewObject("ClassroomCalendar");
     }
 
     /**
@@ -69,5 +70,13 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl implements ClassRmM
      */
     public ViewLinkImpl getLocClsRmViewLink1() {
         return (ViewLinkImpl)findViewLink("LocClsRmViewLink1");
+    }
+
+    /**
+     * Container's getter for ClassroomCalendarConflitQuery1.
+     * @return ClassroomCalendarConflitQuery1
+     */
+    public ClassroomCalendarConflitQueryImpl getConflitQuery() {
+        return (ClassroomCalendarConflitQueryImpl)findViewObject("ConflitQuery");
     }
 }

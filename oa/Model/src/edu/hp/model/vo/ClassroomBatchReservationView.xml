@@ -34,7 +34,8 @@
        ClassroomBatchReservation.SND_WK_SUN, 
        ClassroomBatchReservation.LOCATION_ID, 
        ClassroomBatchReservation.LOCATION_NAME, 
-       ClassroomBatchReservation.CLASSROOM_ID"
+       ClassroomBatchReservation.CLASSROOM_ID, 
+       ClassroomBatchReservation.ALL_DAY"
   FromList="CLASSROOM_BATCH_RESERVATION ClassroomBatchReservation"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -308,6 +309,12 @@
     EntityAttrName="ClassroomId"
     EntityUsage="ClassroomBatchReservation"
     AliasName="CLASSROOM_ID"/>
+  <ViewAttribute
+    Name="AllDay"
+    PrecisionRule="true"
+    EntityAttrName="AllDay"
+    EntityUsage="ClassroomBatchReservation"
+    AliasName="ALL_DAY"/>
   <ViewLinkAccessor
     Name="BatchInstancesVA"
     ViewLink="edu.hp.model.vo.link.ClsRmBthClsCalLink"

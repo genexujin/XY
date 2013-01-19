@@ -10,7 +10,16 @@
   AliasName="ClassroomCalendar"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  RowClass="edu.hp.model.common.BaseEntity">
+  RowClass="edu.hp.model.eo.ClassroomCalendarImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access|DML"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="ClassroomCalendarConflitQuery1"
+    ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomCalendarConflitQuery"
+    RowLevelBinds="true"/>
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -249,6 +258,25 @@
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="AllDay"
+    Precision="10"
+    ColumnName="ALL_DAY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CLASSROOM_CALENDAR"
+    DefaultValue="TIME">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ClassroomCalendar.AllDay_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="ClassroomBatchReservation"
     Association="edu.hp.model.eo.asso.ClsRmBthClsCalAssoc"
@@ -278,6 +306,22 @@
       <Item Value="edu.hp.model.eo.ClassroomCalendar.BatchId"/>
     </AttrArray>
   </Key>
+  <validation:CompareValidationBean
+    Name="ClassroomCalendar_Rule_1"
+    ResId="edu.hp.model.eo.ClassroomCalendar_Rule_1"
+    Severity="Warning"
+    OnAttribute="ActEndTime"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="GREATERTHANEQUALTO"
+    CompareValue="ActStartTime">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="ActEndTime"/>
+      <validation:Item
+        Value="ActStartTime"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

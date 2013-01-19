@@ -17,13 +17,31 @@
        ClassroomCalendar.CREATED_AT, 
        ClassroomCalendar.LOCATION_ID, 
        ClassroomCalendar.LOCATION_NAME, 
-       ClassroomCalendar.CLASSROOM_ID"
+       ClassroomCalendar.CLASSROOM_ID, 
+       ClassroomCalendar.ALL_DAY"
   FromList="CLASSROOM_CALENDAR ClassroomCalendar"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
-  ComponentClass="edu.hp.model.common.BaseView">
+  ComponentClass="edu.hp.model.vo.ClassroomCalendarViewImpl"
+  ComponentInterface="edu.hp.model.vo.common.ClassroomCalendarView"
+  ClientProxyName="edu.hp.model.vo.client.ClassroomCalendarViewClient"
+  Where="ClassroomCalendar.CLASSROOM_ID IN (select regexp_substr(:clsRmNos,'[^,]+', 1, level) 
+   from dual 
+    connect by 
+        regexp_substr(:clsRmNos, '[^,]+', 1, level) 
+            is not null)"
+  RowClass="edu.hp.model.vo.ClassroomCalendarViewRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="clsRmNos"
+    Kind="where"
+    Type="java.lang.String"
+    DefaultValue="NA"/>
   <Variable
     Name="startDate"
     Kind="viewcriteria"
@@ -204,7 +222,8 @@
     PrecisionRule="true"
     EntityAttrName="CreatedAt"
     EntityUsage="ClassroomCalendar"
-    AliasName="CREATED_AT"/>
+    AliasName="CREATED_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="LocationId"
     PrecisionRule="true"
@@ -233,6 +252,12 @@
     EntityAttrName="ClassroomId"
     EntityUsage="ClassroomCalendar"
     AliasName="CLASSROOM_ID"/>
+  <ViewAttribute
+    Name="AllDay"
+    PrecisionRule="true"
+    EntityAttrName="AllDay"
+    EntityUsage="ClassroomCalendar"
+    AliasName="ALL_DAY"/>
   <ViewCriteria
     Name="findByUser"
     ViewObjectName="edu.hp.model.vo.ClassroomCalendarView"
@@ -279,4 +304,36 @@
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="setclsRmNos"
+      MethodName="setclsRmNos">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="value"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="refreshCalendar"
+      MethodName="refreshCalendar">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="clsRmNos"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="newRow"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
+      Name="removeRow"
+      MethodName="removeRow">
+      <Return
+        Type="void"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

@@ -28,11 +28,13 @@
           <Item Type="providerId" Value="ClassroomId"/>
           <Item Type="title" Value="ActTitle"/>
           <Item Type="location" Value="Classroom"/>
+          <Item Type="timeType" Value="AllDay"/>
           <Item Type="startTime" Value="ActStartTime"/>
           <Item Type="endTime" Value="ActEndTime"/>
           <Item Type="tags" Value="ClassroomId"/>
-          <Item Type="custom" Value="UserDisplayName"/>
           <Item Type="custom" Value="NumOfPeople"/>
+          <Item Type="custom" Value="ClassroomId"/>
+          <Item Type="custom" Value="UserDisplayName"/>
           <Item Type="custom" Value="Comments"/>
           <Item Type="custom" Value="Id"/>
           <Item Type="custom" Value="LocationId"/>
@@ -43,6 +45,7 @@
           <Item Type="custom" Value="Classroom"/>
           <Item Type="custom" Value="CreatedAt"/>
           <Item Type="custom" Value="LocationName"/>
+          <Item Type="custom" Value="AllDay"/>
         </AttrNames>
       </nodeDefinition>
       <providerDefinition IterBindingName="ClassroomsIterator">
@@ -123,5 +126,36 @@
             DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
     <list IterBinding="ClassroomCalendarIterator" StaticList="false" Uses="LOV_UserDisplayName" id="UserDisplayName1"
           DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <methodAction IterBinding="ClassroomCalendarIterator" id="refreshCalendar" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="refreshCalendar" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClassroomCalendar">
+      <NamedData NDName="clsRmNos" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="ClassroomCalendarIterator" id="AllDay">
+      <AttrNames>
+        <Item Value="AllDay"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="ClassroomCalendarIterator" id="newRow" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="newRow" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClassroomCalendar"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.newRow_RootAppModuleDataControl_dataProvider_Root_ClassRmModule_ClassroomCalendar_newRow_result"/>
+    <methodAction id="ifConflict" RequiresUpdateModel="true" Action="invokeMethod" MethodName="ifConflict"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ConflitQuery"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.ifConflict_RootAppModuleDataControl_dataProvider_Root_ClassRmModule_ConflitQuery_ifConflict_result">
+      <NamedData NDName="actStartTime" NDValue="#{bindings.ActStartTime.inputValue}" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="actEndTime" NDValue="#{bindings.ActEndTime.inputValue}" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="clsRmId" NDValue="#{bindings.ClassroomId.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="ClassroomCalendarIterator" id="ClassroomId">
+      <AttrNames>
+        <Item Value="ClassroomId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="removeRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="removeRow"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClassroomCalendar"/>
   </bindings>
 </pageDefinition>

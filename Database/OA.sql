@@ -1,6 +1,7 @@
 ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
+
 --------------------------------------------------------
---  File created - Thursday-January-17-2013   
+--  File created - Saturday-January-19-2013   
 --------------------------------------------------------
   DROP TABLE "OA"."ANNOUNCEMENTS";
   DROP TABLE "OA"."CLASSROOM_BATCH_RESERVATION";
@@ -12,6 +13,10 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
   DROP TABLE "OA"."MENUS";
   DROP TABLE "OA"."NOTIFICATIONS";
   DROP TABLE "OA"."PS_TXN";
+  DROP TABLE "OA"."PURCHASE_ORDERS";
+  DROP TABLE "OA"."PURCHASE_ORDER_HISTORYS";
+  DROP TABLE "OA"."PURCHASE_ORDER_LINES";
+  DROP TABLE "OA"."REPAIR_CALLS";
   DROP TABLE "OA"."ROLES";
   DROP TABLE "OA"."ROLE_MENUS";
   DROP TABLE "OA"."ROLE_USERS";
@@ -25,6 +30,10 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
   DROP SEQUENCE "OA"."LOVS_SEQ";
   DROP SEQUENCE "OA"."NOTIFICATIONS_SEQ";
   DROP SEQUENCE "OA"."PS_TXN_SEQ";
+  DROP SEQUENCE "OA"."PURCHASE_ORDERS_SEQ";
+  DROP SEQUENCE "OA"."PURCHASE_ORDER_HISTORYS_SEQ";
+  DROP SEQUENCE "OA"."PURCHASE_ORDER_LINES_SEQ";
+  DROP SEQUENCE "OA"."REPAIR_CALLS_SEQ";
   DROP SEQUENCE "OA"."ROLES_SEQ";
   DROP SEQUENCE "OA"."TASKS_SEQ";
   DROP TYPE "OA"."CHARTABLETYPE";
@@ -50,7 +59,7 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 --  DDL for Sequence CLASSROOM_CALENDAR_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "OA"."CLASSROOM_CALENDAR_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "OA"."CLASSROOM_CALENDAR_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence DEPARTMENT_SEQ
 --------------------------------------------------------
@@ -80,7 +89,27 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 --  DDL for Sequence PS_TXN_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "OA"."PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 1101 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "OA"."PS_TXN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 50 START WITH 2151 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence PURCHASE_ORDERS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "OA"."PURCHASE_ORDERS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence PURCHASE_ORDER_HISTORYS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "OA"."PURCHASE_ORDER_HISTORYS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence PURCHASE_ORDER_LINES_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "OA"."PURCHASE_ORDER_LINES_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence REPAIR_CALLS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "OA"."REPAIR_CALLS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence ROLES_SEQ
 --------------------------------------------------------
@@ -91,32 +120,6 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 --------------------------------------------------------
 
    CREATE SEQUENCE  "OA"."TASKS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
-   
---------------------------------------------------------
--- DDL for Sequence REPAIR_CALLS_SEQ
---------------------------------------------------------
-
-   CREATE SEQUENCE "OA"."REPAIR_CALLS_SEQ" MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER NOCYCLE ;
-   
---------------------------------------------------------
--- DDL for Sequence PURCHASE_ORDERS_SEQ
---------------------------------------------------------
-   
-   CREATE SEQUENCE "OA"."PURCHASE_ORDERS_SEQ" MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER NOCYCLE ;
-   
---------------------------------------------------------
--- DDL for Sequence PURCHASE_ORDER_LINES_SEQ
---------------------------------------------------------
-
-   CREATE SEQUENCE "OA"."PURCHASE_ORDER_LINES_SEQ" MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER NOCYCLE ;
-
---------------------------------------------------------
--- DDL for Sequence PURCHASE_ORDER_HISTORYS_SEQ
---------------------------------------------------------
-
-   CREATE SEQUENCE "OA"."PURCHASE_ORDER_HISTORYS_SEQ" MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER NOCYCLE ;
-
-
 --------------------------------------------------------
 --  DDL for Table ANNOUNCEMENTS
 --------------------------------------------------------
@@ -141,8 +144,8 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
    (	"ID" VARCHAR2(20 BYTE), 
 	"BATCH_NO" VARCHAR2(20 BYTE), 
 	"ACT_TITLE" VARCHAR2(200 BYTE), 
-	"ACT_START_TIME" DATE, 
-	"ACT_END_TIME" DATE, 
+	"ACT_START_TIME" TIMESTAMP (6), 
+	"ACT_END_TIME" TIMESTAMP (6), 
 	"USER_ID" VARCHAR2(20 BYTE), 
 	"USER_DISPLAY_NAME" VARCHAR2(20 BYTE), 
 	"NUM_OF_PEOPLE" NUMBER(*,0), 
@@ -167,7 +170,8 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 	"SND_WK_SUN" VARCHAR2(1 BYTE), 
 	"LOCATION_ID" VARCHAR2(20 BYTE), 
 	"LOCATION_NAME" VARCHAR2(20 BYTE), 
-	"CLASSROOM_ID" VARCHAR2(20 BYTE)
+	"CLASSROOM_ID" VARCHAR2(20 BYTE), 
+	"ALL_DAY" VARCHAR2(10 BYTE)
    ) ;
 --------------------------------------------------------
 --  DDL for Table CLASSROOM_CALENDAR
@@ -176,8 +180,8 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
   CREATE TABLE "OA"."CLASSROOM_CALENDAR" 
    (	"ID" VARCHAR2(20 BYTE), 
 	"ACT_TITLE" VARCHAR2(200 BYTE), 
-	"ACT_START_TIME" DATE, 
-	"ACT_END_TIME" DATE, 
+	"ACT_START_TIME" TIMESTAMP (6), 
+	"ACT_END_TIME" TIMESTAMP (6), 
 	"USER_ID" VARCHAR2(20 BYTE), 
 	"USER_DISPLAY_NAME" VARCHAR2(20 BYTE), 
 	"NUM_OF_PEOPLE" NUMBER(*,0), 
@@ -188,7 +192,8 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 	"BATCH_NO" VARCHAR2(20 BYTE), 
 	"LOCATION_ID" VARCHAR2(20 BYTE), 
 	"LOCATION_NAME" VARCHAR2(20 BYTE), 
-	"CLASSROOM_ID" VARCHAR2(20 BYTE)
+	"CLASSROOM_ID" VARCHAR2(20 BYTE), 
+	"ALL_DAY" VARCHAR2(10 BYTE)
    ) ;
 --------------------------------------------------------
 --  DDL for Table DEPARTMENTS
@@ -208,7 +213,7 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 --  DDL for Table EMPLOYEES
 --------------------------------------------------------
 
-   CREATE TABLE "OA"."EMPLOYEES" 
+  CREATE TABLE "OA"."EMPLOYEES" 
    (	"USER_NAME" VARCHAR2(20 BYTE), 
 	"PASSWORD" VARCHAR2(20 BYTE), 
 	"FIRST_NAME" VARCHAR2(20 BYTE), 
@@ -308,6 +313,77 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 	"CREATION_DATE" DATE DEFAULT sysdate
    ) ;
 --------------------------------------------------------
+--  DDL for Table PURCHASE_ORDERS
+--------------------------------------------------------
+
+  CREATE TABLE "OA"."PURCHASE_ORDERS" 
+   (	"ORDER_ID" VARCHAR2(20 BYTE), 
+	"ORDER_READABLE_ID" VARCHAR2(30 BYTE), 
+	"SUBMITTER_ID" VARCHAR2(20 BYTE), 
+	"CREATE_BY" VARCHAR2(20 BYTE), 
+	"CREATE_AT" DATE, 
+	"LAST_UPDATED_BY" VARCHAR2(20 BYTE), 
+	"LAST_UPDATED_AT" DATE, 
+	"STATE" VARCHAR2(20 BYTE), 
+	"SUBMIT_TOTAL" NUMBER(12,2), 
+	"VERIFY_TOTAL" NUMBER(12,2), 
+	"ORACLE_NOTE" VARCHAR2(500 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PURCHASE_ORDER_HISTORYS
+--------------------------------------------------------
+
+  CREATE TABLE "OA"."PURCHASE_ORDER_HISTORYS" 
+   (	"ORDER_HISTORY_ID" VARCHAR2(20 BYTE), 
+	"ORDER_HISTORY_DETAIL" VARCHAR2(100 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PURCHASE_ORDER_LINES
+--------------------------------------------------------
+
+  CREATE TABLE "OA"."PURCHASE_ORDER_LINES" 
+   (	"ORDER_LINE_ID" VARCHAR2(20 BYTE), 
+	"ITEM_ID" VARCHAR2(20 BYTE), 
+	"ITEM_DESCRIPTION" VARCHAR2(200 BYTE), 
+	"SUBMIT_QUANTITY" NUMBER, 
+	"SUBMIT_UNIT" VARCHAR2(20 BYTE), 
+	"SUBMIT_PRICE" NUMBER(12,2), 
+	"SUBMIT_TOTAL" NUMBER(12,2), 
+	"EXPECTED_DATE" DATE, 
+	"SUBMIT_NOTE" VARCHAR2(500 BYTE), 
+	"STATE" VARCHAR2(20 BYTE), 
+	"PURCHASE_QUANTITY" NUMBER, 
+	"ACTUAL_PRICE" NUMBER(12,2), 
+	"ACTUAL_TOTAL" NUMBER(12,2), 
+	"VERIFY_NOTE" VARCHAR2(500 BYTE), 
+	"RECEIVE_QUANTITY" NUMBER
+   ) ;
+--------------------------------------------------------
+--  DDL for Table REPAIR_CALLS
+--------------------------------------------------------
+
+  CREATE TABLE "OA"."REPAIR_CALLS" 
+   (	"CALL_ID" VARCHAR2(20 BYTE), 
+	"CALL_READABLE_ID" VARCHAR2(30 BYTE), 
+	"CALLER_ID" VARCHAR2(20 BYTE), 
+	"CALLEE_ID" VARCHAR2(20 BYTE), 
+	"LOCATION_ID" VARCHAR2(20 BYTE), 
+	"LOCATION_DETAIL" VARCHAR2(200 BYTE), 
+	"CREATE_BY" VARCHAR2(20 BYTE), 
+	"CREATE_AT" DATE, 
+	"LAST_UPDATED_BY" VARCHAR2(20 BYTE), 
+	"LAST_UPDATED_AT" DATE, 
+	"STATE" VARCHAR2(20 BYTE), 
+	"CALL_RESULT" VARCHAR2(20 BYTE), 
+	"CALL_RESULT_DETAIL" VARCHAR2(500 BYTE), 
+	"CALL_EVAL" VARCHAR2(20 BYTE), 
+	"CALL_EVAL_DETAIL" VARCHAR2(20 BYTE), 
+	"REASON_LEVEL_1" VARCHAR2(40 BYTE), 
+	"REASON_LEVEL_2" VARCHAR2(40 BYTE), 
+	"REASON_LEVEL_3" VARCHAR2(40 BYTE), 
+	"REASON_DETAIL" VARCHAR2(500 BYTE)
+   ) ;
+--------------------------------------------------------
 --  DDL for Table ROLES
 --------------------------------------------------------
 
@@ -356,88 +432,9 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 	"EXECUTOR_ID" VARCHAR2(20 BYTE), 
 	"EXECUTOR_DISPLAY_NAME" VARCHAR2(20 BYTE)
    ) ;
-
---------------------------------------------------------
--- DDL for Table REPAIR_CALLS
---------------------------------------------------------
-
-  CREATE TABLE "OA"."REPAIR_CALLS"
-   (	"CALL_ID" VARCHAR2(20 BYTE),
-"CALL_READABLE_ID" VARCHAR2(30 BYTE),
-"CALLER_ID" VARCHAR2(20 BYTE),
-"CALLEE_ID" VARCHAR2(20 BYTE),
-"LOCATION_ID" VARCHAR2(20 BYTE),
-"LOCATION_DETAIL" VARCHAR2(200 BYTE),
-"CREATE_BY" VARCHAR2(20 BYTE),
-"CREATE_AT" DATE,
-"LAST_UPDATED_BY" VARCHAR2(20 BYTE),
-"LAST_UPDATED_AT" DATE,
-"STATE" VARCHAR2(20 BYTE),
-"CALL_RESULT" VARCHAR2(20 BYTE),
-"CALL_RESULT_DETAIL" VARCHAR2(500 BYTE),
-"CALL_EVAL" VARCHAR2(20 BYTE),
-"CALL_EVAL_DETAIL" VARCHAR2(20 BYTE),
-"REASON_LEVEL_1" VARCHAR2(40 BYTE),
-"REASON_LEVEL_2" VARCHAR2(40 BYTE),
-"REASON_LEVEL_3" VARCHAR2(40 BYTE),
-"REASON_DETAIL" VARCHAR2(500 BYTE)
-   ) ;
-   
---------------------------------------------------------
--- DDL for Table PURCHASE_ORDERS
---------------------------------------------------------
-
-  CREATE TABLE "OA"."PURCHASE_ORDERS"
-   (	"ORDER_ID" VARCHAR2(20 BYTE),
-"ORDER_READABLE_ID" VARCHAR2(30 BYTE),
-"SUBMITTER_ID" VARCHAR2(20 BYTE),
-"CREATE_BY" VARCHAR2(20 BYTE),
-"CREATE_AT" DATE,
-"LAST_UPDATED_BY" VARCHAR2(20 BYTE),
-"LAST_UPDATED_AT" DATE,
-"STATE" VARCHAR2(20 BYTE),
-"SUBMIT_TOTAL" NUMBER(12,2),
-"VERIFY_TOTAL" NUMBER(12,2),
-"ORACLE_NOTE" VARCHAR2(500 BYTE)
-   ) ;
-   
---------------------------------------------------------
--- DDL for Table PURCHASE_ORDER_LINES
---------------------------------------------------------
-
-  CREATE TABLE "OA"."PURCHASE_ORDER_LINES"
-   (	"ORDER_LINE_ID" VARCHAR2(20 BYTE),
-"ITEM_ID" VARCHAR2(20 BYTE),
-"ITEM_DESCRIPTION" VARCHAR2(200 BYTE),
-"SUBMIT_QUANTITY" NUMBER,
-"SUBMIT_UNIT" VARCHAR2(20 BYTE),
-"SUBMIT_PRICE" NUMBER(12,2),
-"SUBMIT_TOTAL" NUMBER(12,2),
-"EXPECTED_DATE" DATE,
-"SUBMIT_NOTE" VARCHAR2(500 BYTE),
-"STATE" VARCHAR2(20 BYTE),
-"PURCHASE_QUANTITY" NUMBER,
-"ACTUAL_PRICE" NUMBER(12,2),
-"ACTUAL_TOTAL" NUMBER(12,2),
-"VERIFY_NOTE" VARCHAR2(500 BYTE),
-"RECEIVE_QUANTITY" NUMBER
-   ) ;
-   
---------------------------------------------------------
--- DDL for Table PURCHASE_ORDER_HISTORYS
---------------------------------------------------------
-
-  CREATE TABLE "OA"."PURCHASE_ORDER_HISTORYS"
-   (	"ORDER_HISTORY_ID" VARCHAR2(20 BYTE),
-"ORDER_HISTORY_DETAIL" VARCHAR2(100 BYTE)
-   ) ;
-   
-   
 REM INSERTING into OA.ANNOUNCEMENTS
 REM INSERTING into OA.CLASSROOM_BATCH_RESERVATION
 REM INSERTING into OA.CLASSROOM_CALENDAR
-Insert into OA.CLASSROOM_CALENDAR (ID,ACT_TITLE,ACT_START_TIME,ACT_END_TIME,USER_ID,USER_DISPLAY_NAME,NUM_OF_PEOPLE,CLASSROOM,COMMENTS,CREATED_AT,BATCH_ID,BATCH_NO,LOCATION_ID,LOCATION_NAME,CLASSROOM_ID) values ('1','物理课',to_date('18-JAN-13','DD-MON-RR'),to_date('18-JAN-13','DD-MON-RR'),'1','徐晋',25,'教室101','123123123123123',to_date('18-JAN-13','DD-MON-RR'),null,null,'1','丽园','1');
-Insert into OA.CLASSROOM_CALENDAR (ID,ACT_TITLE,ACT_START_TIME,ACT_END_TIME,USER_ID,USER_DISPLAY_NAME,NUM_OF_PEOPLE,CLASSROOM,COMMENTS,CREATED_AT,BATCH_ID,BATCH_NO,LOCATION_ID,LOCATION_NAME,CLASSROOM_ID) values ('2','化学课',to_date('18-JAN-13','DD-MON-RR'),to_date('18-JAN-13','DD-MON-RR'),'1','徐晋',12,'教室102',null,to_date('18-JAN-13','DD-MON-RR'),null,null,'2','自忠','2');
 REM INSERTING into OA.DEPARTMENTS
 REM INSERTING into OA.EMPLOYEES
 Insert into OA.EMPLOYEES (USER_NAME,PASSWORD,FIRST_NAME,LAST_NAME,GENDER,MGR_ID,DEPT_ID,EMAIL,MOBILE,OFFICE_PHONE,HOME_PHONE,FAX,LOCATION_ID,HOME_ADDRESS,OFFICE_ADDRESS,LAST_UPDATED_BY,LAST_UPDATED_AT,CREATED_BY,CREATED_AT,TITLE,ID) values ('gene','welcome1','晋','徐','男',null,null,'gene.xujin@gmail.com','18621910893','50172665','50172665','50172665',null,'浦电路305弄','丽园路11101',null,null,null,null,'管理员','1');
@@ -475,6 +472,12 @@ REM INSERTING into OA.NOTIFICATIONS
 REM INSERTING into OA.PS_TXN
 Insert into OA.PS_TXN (ID,PARENTID,COLLID,CREATION_DATE) values (1,-1,1,to_date('13-JAN-13','DD-MON-RR'));
 Insert into OA.PS_TXN (ID,PARENTID,COLLID,CREATION_DATE) values (1,-1,101,to_date('15-JAN-13','DD-MON-RR'));
+Insert into OA.PS_TXN (ID,PARENTID,COLLID,CREATION_DATE) values (1,-1,1151,to_date('19-JAN-13','DD-MON-RR'));
+Insert into OA.PS_TXN (ID,PARENTID,COLLID,CREATION_DATE) values (1,-1,1152,to_date('19-JAN-13','DD-MON-RR'));
+REM INSERTING into OA.PURCHASE_ORDERS
+REM INSERTING into OA.PURCHASE_ORDER_HISTORYS
+REM INSERTING into OA.PURCHASE_ORDER_LINES
+REM INSERTING into OA.REPAIR_CALLS
 REM INSERTING into OA.ROLES
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY) values ('1','系统管理员','系统管理员',null,null,null,null);
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY) values ('2','采购员',null,null,null,null,null);
@@ -567,6 +570,12 @@ REM INSERTING into OA.TASKS
   CREATE UNIQUE INDEX "OA"."CLASSROOM_BATCH_RESERVATI_UK1" ON "OA"."CLASSROOM_BATCH_RESERVATION" ("BATCH_NO") 
   ;
 --------------------------------------------------------
+--  DDL for Index PURCHASE_ORDERS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDERS_PK" ON "OA"."PURCHASE_ORDERS" ("ORDER_ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index ROLE_USERS_PK
 --------------------------------------------------------
 
@@ -585,6 +594,18 @@ REM INSERTING into OA.TASKS
   CREATE UNIQUE INDEX "OA"."LOVS_PK" ON "OA"."LOVS" ("ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index PURCHASE_ORDER_ITEMS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDER_ITEMS_PK" ON "OA"."PURCHASE_ORDER_LINES" ("ORDER_LINE_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index REPAIR_CALLS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OA"."REPAIR_CALLS_PK" ON "OA"."REPAIR_CALLS" ("CALL_ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index ROLES_PK
 --------------------------------------------------------
 
@@ -597,118 +618,126 @@ REM INSERTING into OA.TASKS
   CREATE UNIQUE INDEX "OA"."MENUS_PK" ON "OA"."MENUS" ("MENU_ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index PURCHASE_ORDER_HISTORYS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDER_HISTORYS_PK" ON "OA"."PURCHASE_ORDER_HISTORYS" ("ORDER_HISTORY_ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index CLASSROOM_CALENDAR_PK
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "OA"."CLASSROOM_CALENDAR_PK" ON "OA"."CLASSROOM_CALENDAR" ("ID") 
   ;
-
---------------------------------------------------------
--- DDL for Index REPAIR_CALLS_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "OA"."REPAIR_CALLS_PK" ON "OA"."REPAIR_CALLS" ("CALL_ID") ;
-  
---------------------------------------------------------
--- DDL for Index PURCHASE_ORDERS_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDERS_PK" ON "OA"."PURCHASE_ORDERS" ("ORDER_ID");
-  
---------------------------------------------------------
--- DDL for Index PURCHASE_ORDER_ITEMS_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDER_ITEMS_PK" ON "OA"."PURCHASE_ORDER_LINES" ("ORDER_LINE_ID");
-
---------------------------------------------------------
--- DDL for Index PURCHASE_ORDER_HISTORYS_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "OA"."PURCHASE_ORDER_HISTORYS_PK" ON "OA"."PURCHASE_ORDER_HISTORYS" ("ORDER_HISTORY_ID");
 --------------------------------------------------------
 --  Constraints for Table DEPARTMENTS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."DEPARTMENTS" ADD CONSTRAINT "DEPARTMENT_PK" PRIMARY KEY ("DEPT_ID") ENABLE;
   ALTER TABLE "OA"."DEPARTMENTS" MODIFY ("DEPT_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."DEPARTMENTS" ADD CONSTRAINT "DEPARTMENT_PK" PRIMARY KEY ("DEPT_ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table ANNOUNCEMENTS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."ANNOUNCEMENTS" ADD CONSTRAINT "ANNOUNCEMENTS_PK" PRIMARY KEY ("ID") ENABLE;
   ALTER TABLE "OA"."ANNOUNCEMENTS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."ANNOUNCEMENTS" ADD CONSTRAINT "ANNOUNCEMENTS_PK" PRIMARY KEY ("ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table NOTIFICATIONS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."NOTIFICATIONS" ADD CONSTRAINT "NOTIFICATIONS_PK" PRIMARY KEY ("ID") ENABLE;
   ALTER TABLE "OA"."NOTIFICATIONS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."NOTIFICATIONS" ADD CONSTRAINT "NOTIFICATIONS_PK" PRIMARY KEY ("ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table EMPLOYEES
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."EMPLOYEES" ADD CONSTRAINT "EMPLOYEES_PK" PRIMARY KEY ("ID") ENABLE;
-  ALTER TABLE "OA"."EMPLOYEES" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "OA"."EMPLOYEES" MODIFY ("PASSWORD" NOT NULL ENABLE);
   ALTER TABLE "OA"."EMPLOYEES" MODIFY ("USER_NAME" NOT NULL ENABLE);
+  ALTER TABLE "OA"."EMPLOYEES" MODIFY ("PASSWORD" NOT NULL ENABLE);
+  ALTER TABLE "OA"."EMPLOYEES" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."EMPLOYEES" ADD CONSTRAINT "EMPLOYEES_PK" PRIMARY KEY ("ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table LOCATIONS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."LOCATIONS" ADD CONSTRAINT "LOCATIONS_PK" PRIMARY KEY ("LOCATION_ID") ENABLE;
   ALTER TABLE "OA"."LOCATIONS" MODIFY ("LOCATION_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."LOCATIONS" ADD CONSTRAINT "LOCATIONS_PK" PRIMARY KEY ("LOCATION_ID") ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PURCHASE_ORDER_LINES
+--------------------------------------------------------
+
+  ALTER TABLE "OA"."PURCHASE_ORDER_LINES" MODIFY ("ORDER_LINE_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."PURCHASE_ORDER_LINES" ADD CONSTRAINT "PURCHASE_ORDER_ITEMS_PK" PRIMARY KEY ("ORDER_LINE_ID") ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PURCHASE_ORDER_HISTORYS
+--------------------------------------------------------
+
+  ALTER TABLE "OA"."PURCHASE_ORDER_HISTORYS" MODIFY ("ORDER_HISTORY_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."PURCHASE_ORDER_HISTORYS" ADD CONSTRAINT "PURCHASE_ORDER_HISTORYS_PK" PRIMARY KEY ("ORDER_HISTORY_ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table TASKS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."TASKS" ADD CONSTRAINT "TASKS_PK" PRIMARY KEY ("ID") ENABLE;
   ALTER TABLE "OA"."TASKS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."TASKS" ADD CONSTRAINT "TASKS_PK" PRIMARY KEY ("ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table CLASSROOM_BATCH_RESERVATION
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."CLASSROOM_BATCH_RESERVATION" ADD CONSTRAINT "CLASSROOM_BATCH_RESERVATI_UK1" UNIQUE ("BATCH_NO") ENABLE;
-  ALTER TABLE "OA"."CLASSROOM_BATCH_RESERVATION" ADD CONSTRAINT "CLASSROOM_BATCH_RESERVATI_PK" PRIMARY KEY ("ID") ENABLE;
   ALTER TABLE "OA"."CLASSROOM_BATCH_RESERVATION" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."CLASSROOM_BATCH_RESERVATION" ADD CONSTRAINT "CLASSROOM_BATCH_RESERVATI_PK" PRIMARY KEY ("ID") ENABLE;
+  ALTER TABLE "OA"."CLASSROOM_BATCH_RESERVATION" ADD CONSTRAINT "CLASSROOM_BATCH_RESERVATI_UK1" UNIQUE ("BATCH_NO") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table ROLES
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."ROLES" ADD CONSTRAINT "ROLES_PK" PRIMARY KEY ("ROLE_ID") ENABLE;
   ALTER TABLE "OA"."ROLES" MODIFY ("ROLE_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."ROLES" ADD CONSTRAINT "ROLES_PK" PRIMARY KEY ("ROLE_ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table LOVS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."LOVS" ADD CONSTRAINT "LOVS_PK" PRIMARY KEY ("ID") ENABLE;
   ALTER TABLE "OA"."LOVS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."LOVS" ADD CONSTRAINT "LOVS_PK" PRIMARY KEY ("ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table MENUS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."MENUS" ADD CONSTRAINT "MENUS_PK" PRIMARY KEY ("MENU_ID") ENABLE;
   ALTER TABLE "OA"."MENUS" MODIFY ("MENU_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."MENUS" ADD CONSTRAINT "MENUS_PK" PRIMARY KEY ("MENU_ID") ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PURCHASE_ORDERS
+--------------------------------------------------------
+
+  ALTER TABLE "OA"."PURCHASE_ORDERS" MODIFY ("ORDER_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."PURCHASE_ORDERS" MODIFY ("ORDER_READABLE_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."PURCHASE_ORDERS" ADD CONSTRAINT "PURCHASE_ORDERS_PK" PRIMARY KEY ("ORDER_ID") ENABLE;
+--------------------------------------------------------
+--  Constraints for Table REPAIR_CALLS
+--------------------------------------------------------
+
+  ALTER TABLE "OA"."REPAIR_CALLS" MODIFY ("CALL_READABLE_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."REPAIR_CALLS" MODIFY ("CALL_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."REPAIR_CALLS" ADD CONSTRAINT "REPAIR_CALLS_PK" PRIMARY KEY ("CALL_ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table ROLE_USERS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."ROLE_USERS" ADD CONSTRAINT "ROLE_USERS_PK" PRIMARY KEY ("ROLE_ID", "USER_ID") ENABLE;
-  ALTER TABLE "OA"."ROLE_USERS" MODIFY ("USER_ID" NOT NULL ENABLE);
   ALTER TABLE "OA"."ROLE_USERS" MODIFY ("ROLE_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."ROLE_USERS" MODIFY ("USER_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."ROLE_USERS" ADD CONSTRAINT "ROLE_USERS_PK" PRIMARY KEY ("ROLE_ID", "USER_ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table ROLE_MENUS
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."ROLE_MENUS" ADD CONSTRAINT "ROLE_MENUS_PK" PRIMARY KEY ("ROLE_ID", "MENU_ID") ENABLE;
-  ALTER TABLE "OA"."ROLE_MENUS" MODIFY ("MENU_ID" NOT NULL ENABLE);
   ALTER TABLE "OA"."ROLE_MENUS" MODIFY ("ROLE_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."ROLE_MENUS" MODIFY ("MENU_ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."ROLE_MENUS" ADD CONSTRAINT "ROLE_MENUS_PK" PRIMARY KEY ("ROLE_ID", "MENU_ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table CLASSROOM_CALENDAR
 --------------------------------------------------------
 
-  ALTER TABLE "OA"."CLASSROOM_CALENDAR" ADD CONSTRAINT "CLASSROOM_CALENDAR_PK" PRIMARY KEY ("ID") ENABLE;
   ALTER TABLE "OA"."CLASSROOM_CALENDAR" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "OA"."CLASSROOM_CALENDAR" ADD CONSTRAINT "CLASSROOM_CALENDAR_PK" PRIMARY KEY ("ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table PS_TXN
 --------------------------------------------------------
@@ -717,36 +746,6 @@ REM INSERTING into OA.TASKS
 --------------------------------------------------------
 --  DDL for Trigger ANNOUNCEMENTS_TRG
 --------------------------------------------------------
-
---------------------------------------------------------
--- Constraints for Table REPAIR_CALLS
---------------------------------------------------------
-
-  ALTER TABLE "OA"."REPAIR_CALLS" ADD CONSTRAINT "REPAIR_CALLS_PK" PRIMARY KEY ("CALL_ID") ENABLE;
-  ALTER TABLE "OA"."REPAIR_CALLS" MODIFY ("CALL_ID" NOT NULL ENABLE);
-  ALTER TABLE "OA"."REPAIR_CALLS" MODIFY ("CALL_READABLE_ID" NOT NULL ENABLE);
-
---------------------------------------------------------
--- Constraints for Table PURCHASE_ORDERS
---------------------------------------------------------
-
-  ALTER TABLE "OA"."PURCHASE_ORDERS" ADD CONSTRAINT "PURCHASE_ORDERS_PK" PRIMARY KEY ("ORDER_ID") ENABLE;
-  ALTER TABLE "OA"."PURCHASE_ORDERS" MODIFY ("ORDER_READABLE_ID" NOT NULL ENABLE);
-  ALTER TABLE "OA"."PURCHASE_ORDERS" MODIFY ("ORDER_ID" NOT NULL ENABLE);
-  
---------------------------------------------------------
--- Constraints for Table PURCHASE_ORDER_LINES
---------------------------------------------------------
-
-  ALTER TABLE "OA"."PURCHASE_ORDER_LINES" ADD CONSTRAINT "PURCHASE_ORDER_ITEMS_PK" PRIMARY KEY ("ORDER_LINE_ID") ENABLE;
-  ALTER TABLE "OA"."PURCHASE_ORDER_LINES" MODIFY ("ORDER_LINE_ID" NOT NULL ENABLE);
-
---------------------------------------------------------
--- Constraints for Table PURCHASE_ORDER_HISTORYS
---------------------------------------------------------
-
-  ALTER TABLE "OA"."PURCHASE_ORDER_HISTORYS" ADD CONSTRAINT "PURCHASE_ORDER_HISTORYS_PK" PRIMARY KEY ("ORDER_HISTORY_ID") ENABLE;
-  ALTER TABLE "OA"."PURCHASE_ORDER_HISTORYS" MODIFY ("ORDER_HISTORY_ID" NOT NULL ENABLE);
 
   CREATE OR REPLACE TRIGGER "OA"."ANNOUNCEMENTS_TRG" BEFORE INSERT ON "OA"."ANNOUNCEMENTS"
 FOR EACH ROW 
@@ -873,6 +872,78 @@ END;
 /
 ALTER TRIGGER "OA"."NOTIFICATIONS_TRG" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger PURCHASE_ORDERS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDERS_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDERS"
+FOR EACH ROW
+declare
+  seqid varchar2(20);
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.ORDER_ID IS NULL THEN
+      SELECT PURCHASE_ORDERS_SEQ.NEXTVAL INTO seqid FROM DUAL;
+      SELECT seqid INTO :NEW.ORDER_ID FROM DUAL;
+      SELECT 'CG-' || seqid INTO :NEW.ORDER_READABLE_ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "OA"."PURCHASE_ORDERS_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PURCHASE_ORDER_HISTORYS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDER_HISTORYS_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDER_HISTORYS"
+FOR EACH ROW
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.ORDER_HISTORY_ID IS NULL THEN
+      SELECT PURCHASE_ORDER_HISTORYS_SEQ.NEXTVAL INTO :NEW.ORDER_HISTORY_ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "OA"."PURCHASE_ORDER_HISTORYS_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PURCHASE_ORDER_LINES_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDER_LINES_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDER_LINES"
+FOR EACH ROW
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.ORDER_LINE_ID IS NULL THEN
+      SELECT PURCHASE_ORDER_LINES_SEQ.NEXTVAL INTO :NEW.ORDER_LINE_ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "OA"."PURCHASE_ORDER_LINES_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger REPAIR_CALLS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "OA"."REPAIR_CALLS_TRG" BEFORE INSERT ON "OA"."REPAIR_CALLS"
+FOR EACH ROW
+declare
+  seqid varchar2(20);
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.CALL_ID IS NULL THEN
+      SELECT REPAIR_CALLS_SEQ.NEXTVAL INTO seqid FROM DUAL;
+      SELECT seqid INTO :NEW.CALL_ID FROM DUAL;
+      SELECT 'BX-' || seqid INTO :NEW.CALL_READABLE_ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "OA"."REPAIR_CALLS_TRG" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger ROLES_TRG
 --------------------------------------------------------
 
@@ -904,79 +975,3 @@ BEGIN
 END;
 /
 ALTER TRIGGER "OA"."TASKS_TRG" ENABLE;
-
---------------------------------------------------------
--- DDL for Trigger REPAIR_CALLS_TRG
---------------------------------------------------------
-
-  CREATE OR REPLACE TRIGGER "OA"."REPAIR_CALLS_TRG" BEFORE INSERT ON "OA"."REPAIR_CALLS"
-FOR EACH ROW
-declare
-  seqid varchar2(20);
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF :NEW.CALL_ID IS NULL THEN
-      SELECT REPAIR_CALLS_SEQ.NEXTVAL INTO seqid FROM DUAL;
-      SELECT seqid INTO :NEW.CALL_ID FROM DUAL;
-      SELECT 'BX-' || seqid INTO :NEW.CALL_READABLE_ID FROM DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-ALTER TRIGGER "OA"."REPAIR_CALLS_TRG" ENABLE;
-
---------------------------------------------------------
--- DDL for Trigger PURCHASE_ORDERS_TRG
---------------------------------------------------------
-
-  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDERS_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDERS"
-FOR EACH ROW
-declare
-  seqid varchar2(20);
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF :NEW.ORDER_ID IS NULL THEN
-      SELECT PURCHASE_ORDERS_SEQ.NEXTVAL INTO seqid FROM DUAL;
-      SELECT seqid INTO :NEW.ORDER_ID FROM DUAL;
-      SELECT 'CG-' || seqid INTO :NEW.ORDER_READABLE_ID FROM DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-ALTER TRIGGER "OA"."PURCHASE_ORDERS_TRG" ENABLE;
-
---------------------------------------------------------
--- DDL for Trigger PURCHASE_ORDER_LINES_TRG
---------------------------------------------------------
-
-  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDER_LINES_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDER_LINES"
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF :NEW.ORDER_LINE_ID IS NULL THEN
-      SELECT PURCHASE_ORDER_LINES_SEQ.NEXTVAL INTO :NEW.ORDER_LINE_ID FROM DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-ALTER TRIGGER "OA"."PURCHASE_ORDER_LINES_TRG" ENABLE;
-
---------------------------------------------------------
--- DDL for Trigger PURCHASE_ORDER_HISTORYS_TRG
---------------------------------------------------------
-
-  CREATE OR REPLACE TRIGGER "OA"."PURCHASE_ORDER_HISTORYS_TRG" BEFORE INSERT ON "OA"."PURCHASE_ORDER_HISTORYS"
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF :NEW.ORDER_HISTORY_ID IS NULL THEN
-      SELECT PURCHASE_ORDER_HISTORYS_SEQ.NEXTVAL INTO :NEW.ORDER_HISTORY_ID FROM DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-ALTER TRIGGER "OA"."PURCHASE_ORDER_HISTORYS_TRG" ENABLE;

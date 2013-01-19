@@ -3,6 +3,8 @@
    <OverallProperties
       id="OverallProperties1">
       <property
+         name="linkStyle">Orthogonal</property>
+      <property
          name="y">266.5</property>
       <property
          name="x">93.10156</property>
@@ -22,8 +24,8 @@
       <property
          name="y">110.44824</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">371.10156</property>
+      <property
+         name="pageFragment">true</property>
    </View>
 </SDM>

@@ -37,7 +37,13 @@ public class SecurityFilter implements Filter {
             ((HttpServletResponse)response).sendRedirect(Constants.WEB_ROOT_CONTEXT + "/login.jsp");
         } else {
 
-            chain.doFilter(request, response);
+            try {
+                chain.doFilter(request, response);
+            } catch (Exception ioe) {
+                // TODO: Add catch code
+                System.err.println(ioe.getClass());
+                System.err.println(ioe.getMessage());
+            }
 
         }
     }

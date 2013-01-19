@@ -17,12 +17,17 @@ import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.view.rich.component.rich.RichDialog;
 import oracle.adf.view.rich.component.rich.data.RichCalendar;
+import oracle.adf.view.rich.event.CalendarActivityEvent;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
+import oracle.adf.view.rich.model.CalendarActivity;
 import oracle.adf.view.rich.model.CalendarProvider;
 import oracle.adf.view.rich.util.CalendarActivityRamp;
 import oracle.adf.view.rich.util.InstanceStyles;
+
+import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
 import oracle.jbo.domain.Array;
@@ -30,17 +35,22 @@ import oracle.jbo.domain.Array;
 import org.apache.myfaces.trinidad.context.RequestContext;
 
 
-public class CalendarBean{
-
-    private List<OACalendarProvider> _providerList;
-    private Map<OACalendarProvider, ProviderData> _providerData;
-    private RichCalendar calendar;
+public class CalendarBean {
+    
+    protected RichDialog createPopup;
+    protected List<OACalendarProvider> _providerList;
+    protected Map<OACalendarProvider, ProviderData> _providerData;
+    protected RichCalendar calendar;
+    protected OACalendarActivity _currActivity;
     protected static List<Color> _defaultOrderProviderColors;
-    private Map<Set<String>, InstanceStyles> _activityStyles;
-    private List _colorData = CalendarActivityRamp.getRampColorKeys();
+    protected Map<Set<String>, InstanceStyles> _activityStyles;
+    protected List _colorData = CalendarActivityRamp.getRampColorKeys();
     protected Array showClsRmList;
+    protected String calendarIteratorName;
     protected String providerIteratorName;
     protected String locationIteratorName;
+    protected String refreshCalendarOptName;
+    protected String refreshCalendarParamName;
     protected String providerIdCol = "Id";
     protected String providerDisplayNameCol = "Value";
     protected String providerLocCol = "FlexCol1";
@@ -48,17 +58,19 @@ public class CalendarBean{
 
     public CalendarBean() {
     }
-    
-    protected void setCurrentLocation(int id){
+
+    protected void setCurrentLocation(int id) {
+
         DCIteratorBinding it = ADFUtils.findIterator(locationIteratorName);
         it.setCurrentRowIndexInRange(id);
+
     }
-    
+
     protected void reload() {
         try {
             //Set<String>[] tags = _modelBean.getTags();
             List<Color> defaultOrderProviderColors = getDefaultOrderProviderColors();
-            
+
             DCIteratorBinding it = ADFUtils.findIterator(providerIteratorName);
             if (it != null) {
 
@@ -79,7 +91,7 @@ public class CalendarBean{
 
 
                     _activityStyles = new HashMap<Set<String>, InstanceStyles>(_providerList.size());
-                    _providerData =  new HashMap<OACalendarProvider, ProviderData>();
+                    _providerData = new HashMap<OACalendarProvider, ProviderData>();
 
                     for (int i = 0; i < _providerList.size(); i++) {
                         Color color = defaultOrderProviderColors.get(i % defaultOrderProviderColors.size());
@@ -94,44 +106,60 @@ public class CalendarBean{
                     }
 
                 }
-
             }
+            if (calendar != null)
+                refreshCalendar();
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();
         }
     }
-    
-    protected void doCommit(){
-        ADFUtils.commit("预订保存成功！","预订保存失败，请核对输入的信息或联系管理员！");        
-    }
-    
-    protected void doRollback(){
-        ADFUtils.rollBack();     
-    }
-    
-    public void createPopupListener(PopupFetchEvent popupFetchEvent) {
-        ADFUtils.createInsert("创建教室预订失败，请联系管理员！");
+
+    public void activityListener(CalendarActivityEvent ae) {
+
+        CalendarActivity activity = ae.getCalendarActivity();
+        
+        if (activity == null) {
+            // no activity with that id is found in the model
+            System.out.println("No activity with event " + ae.toString());
+            setCurrActivity(null);
+            return;
+        }
+
+        setCurrActivity(new OACalendarActivity(activity));
     }
 
-    public void createDialogListener(DialogEvent dialogEvent) {
-        if(dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)){
-            doCommit();
-        }else{
-            doRollback();
-        }
+    protected void doCommit() {
+        ADFUtils.commit("预订保存成功！", "预订保存失败，请核对输入的信息或联系管理员！");
+        refreshCalendar();           
     }
-    
+
+    protected void doRollback() {
+//        DCIteratorBinding binding = ADFUtils.findIterator(calendarIteratorName);
+//        Row currentRow = binding.getCurrentRow();
+//        binding.removeCurrentRow();
+        ADFUtils.findOperation("Rollback").execute();
+        refreshCalendar();        
+    }
+
+    public void createPopupListener(PopupFetchEvent popupFetchEvent) {
+        ADFUtils.findOperation("newRow").execute();
+        //ADFUtils.createInsert("创建教室预订失败，请联系管理员！");
+        //ADFUtils.partialRefreshComponenet(createPopup);
+    }
+
+  
+
     protected void createListener(PopupFetchEvent popupFetchEvent) {
         // Add event code here...
     }
-    
-    protected void colorChange(ValueChangeEvent vce){
-        
+
+    protected void colorChange(ValueChangeEvent vce) {
+
         UIComponent component = vce.getComponent();
         String providerId = component.getAttributes().get("providerId").toString();
         // TODO - should I be creating this every time? used to use (getModelBean().getTags()[0]
-        Set <String> providerSet = new CopyOnWriteArraySet<String>();
+        Set<String> providerSet = new CopyOnWriteArraySet<String>();
         providerSet.add(providerId);
 
 
@@ -139,6 +167,54 @@ public class CalendarBean{
         InstanceStyles styles = CalendarActivityRamp.getActivityRamp(newColor);
 
         _activityStyles.put(providerSet, styles);
+
+        RequestContext adfContext = RequestContext.getCurrentInstance();
+        adfContext.addPartialTarget(calendar);
+    }
+
+    protected void providerChange(ValueChangeEvent valueChangeEvent) {
+
+        UIComponent component = valueChangeEvent.getComponent();
+        String providerId = component.getAttributes().get("providerId").toString();
+
+        Boolean newVal = (Boolean)valueChangeEvent.getNewValue();
+        
+        for (OACalendarProvider provider : _providerList) {
+
+            if (provider.getId().equals(providerId)) {
+                if (newVal)
+                    provider.setEnabled(CalendarProvider.Enabled.ENABLED);
+                else
+                    provider.setEnabled(CalendarProvider.Enabled.DISABLED);
+            }           
+        }
+        
+        refreshCalendar();
+    }
+
+
+    protected void refreshCalendar() {
+        
+        StringBuffer clsRmNos = new StringBuffer();
+
+        for (OACalendarProvider provider : _providerList) {
+
+            if (provider.getEnabled().equals(CalendarProvider.Enabled.ENABLED)) {
+                clsRmNos.append(provider.getId() + ",");
+            }
+        }
+
+        if (clsRmNos.length() > 0) {
+            clsRmNos.deleteCharAt(clsRmNos.length() - 1);
+        }else{
+            clsRmNos.append("NA");
+        }
+
+        OperationBinding refreshOp = ADFUtils.findOperation(refreshCalendarOptName);
+
+        refreshOp.getParamsMap().put(refreshCalendarParamName, clsRmNos.toString());
+
+        refreshOp.execute();
 
         RequestContext adfContext = RequestContext.getCurrentInstance();
         adfContext.addPartialTarget(calendar);
@@ -165,6 +241,22 @@ public class CalendarBean{
 
     public Map<OACalendarProvider, CalendarBean.ProviderData> getProviderData() {
         return _providerData;
+    }
+
+    public void setCurrActivity(OACalendarActivity _currActivity) {
+        this._currActivity = _currActivity;
+    }
+
+    public OACalendarActivity getCurrActivity() {
+        return _currActivity;
+    }
+
+    public void setCreatePopup(RichDialog createPopup) {
+        this.createPopup = createPopup;
+    }
+
+    public RichDialog getCreatePopup() {
+        return createPopup;
     }
 
     public static class ProviderData implements Serializable {

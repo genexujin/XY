@@ -6,9 +6,7 @@
   Name="ClassRmModule"
   Version="11.1.2.62.76"
   ClearCacheOnRollback="true"
-  ComponentClass="edu.hp.model.biz.ClassRmModuleImpl"
-  ComponentInterface="edu.hp.model.biz.common.ClassRmModule"
-  ClientProxyName="edu.hp.model.biz.client.ClassRmModuleClient">
+  ComponentClass="edu.hp.model.biz.ClassRmModuleImpl">
   <DesignTime>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
@@ -33,6 +31,9 @@
   <ViewUsage
     Name="ClassroomOfLocation"
     ViewObjectName="edu.hp.model.vo.LovsView"/>
+  <ViewUsage
+    Name="ConflitQuery"
+    ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomCalendarConflitQuery"/>
   <ViewLinkUsage
     Name="LocClsRmViewLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.LocClsRmViewLink"
@@ -43,12 +44,4 @@
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
-  <ClientInterface>
-    <Method
-      Name="initClsRmProvider"
-      MethodName="initClsRmProvider">
-      <Return
-        Type="void"/>
-    </Method>
-  </ClientInterface>
 </AppModule>
