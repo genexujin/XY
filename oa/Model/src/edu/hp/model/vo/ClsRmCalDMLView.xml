@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ClsRmCalDMLView"
+  Version="11.1.2.62.76"
+  SelectList="ClassroomCalendar.ACT_END_TIME, 
+       ClassroomCalendar.ACT_START_TIME, 
+       ClassroomCalendar.ACT_TITLE, 
+       ClassroomCalendar.ALL_DAY, 
+       ClassroomCalendar.BATCH_ID, 
+       ClassroomCalendar.BATCH_NO, 
+       ClassroomCalendar.CLASSROOM, 
+       ClassroomCalendar.CLASSROOM_ID, 
+       ClassroomCalendar.COMMENTS, 
+       ClassroomCalendar.CREATED_AT, 
+       ClassroomCalendar.ID, 
+       ClassroomCalendar.LOCATION_ID, 
+       ClassroomCalendar.LOCATION_NAME, 
+       ClassroomCalendar.NUM_OF_PEOPLE, 
+       ClassroomCalendar.USER_DISPLAY_NAME, 
+       ClassroomCalendar.USER_ID"
+  FromList="CLASSROOM_CALENDAR ClassroomCalendar"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.ClsRmCalDMLViewImpl"
+  ComponentInterface="edu.hp.model.vo.common.ClsRmCalDMLView"
+  ClientProxyName="edu.hp.model.vo.client.ClsRmCalDMLViewClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.ClsRmCalDMLView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="ClsRmList"
+    ViewObjectName="edu.hp.model.vo.LovsView">
+    <ViewCriteriaUsage
+      Name="ClsRmList"
+      FullName="edu.hp.model.vo.LovsView.ClsRmList"/>
+    <ParameterMap>
+      <PIMap Variable="locationId">
+        <TransientExpression><![CDATA[LocationId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="Locations"
+    ViewObjectName="edu.hp.model.vo.LocationsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Employees"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_Classroom"
+    ListVOName="ClsRmList"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Classroom"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ClassroomId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+      <Item Value="FlexCol2"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LocationName"
+    ListVOName="Locations"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LocationName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LocationName"/>
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LocationName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UserDisplayName"
+    ListVOName="Employees"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UserDisplayName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayName"/>
+      <Item Value="UserName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+      <Item Value="Title"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="ClassroomCalendar"
+    Entity="edu.hp.model.eo.ClassroomCalendar"/>
+  <ViewAttribute
+    Name="ActEndTime"
+    PrecisionRule="true"
+    EntityAttrName="ActEndTime"
+    EntityUsage="ClassroomCalendar"
+    AliasName="ACT_END_TIME"/>
+  <ViewAttribute
+    Name="ActStartTime"
+    PrecisionRule="true"
+    EntityAttrName="ActStartTime"
+    EntityUsage="ClassroomCalendar"
+    AliasName="ACT_START_TIME"/>
+  <ViewAttribute
+    Name="ActTitle"
+    PrecisionRule="true"
+    EntityAttrName="ActTitle"
+    EntityUsage="ClassroomCalendar"
+    AliasName="ACT_TITLE"/>
+  <ViewAttribute
+    Name="AllDay"
+    PrecisionRule="true"
+    EntityAttrName="AllDay"
+    EntityUsage="ClassroomCalendar"
+    AliasName="ALL_DAY"/>
+  <ViewAttribute
+    Name="BatchId"
+    PrecisionRule="true"
+    EntityAttrName="BatchId"
+    EntityUsage="ClassroomCalendar"
+    AliasName="BATCH_ID"/>
+  <ViewAttribute
+    Name="BatchNo"
+    PrecisionRule="true"
+    EntityAttrName="BatchNo"
+    EntityUsage="ClassroomCalendar"
+    AliasName="BATCH_NO"/>
+  <ViewAttribute
+    Name="Classroom"
+    PrecisionRule="true"
+    EntityAttrName="Classroom"
+    EntityUsage="ClassroomCalendar"
+    AliasName="CLASSROOM"
+    LOVName="LOV_Classroom">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClassroomId"
+    PrecisionRule="true"
+    EntityAttrName="ClassroomId"
+    EntityUsage="ClassroomCalendar"
+    AliasName="CLASSROOM_ID"/>
+  <ViewAttribute
+    Name="Comments"
+    PrecisionRule="true"
+    EntityAttrName="Comments"
+    EntityUsage="ClassroomCalendar"
+    AliasName="COMMENTS"/>
+  <ViewAttribute
+    Name="CreatedAt"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="CreatedAt"
+    EntityUsage="ClassroomCalendar"
+    AliasName="CREATED_AT"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="ClassroomCalendar"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="LocationId"
+    PrecisionRule="true"
+    EntityAttrName="LocationId"
+    EntityUsage="ClassroomCalendar"
+    AliasName="LOCATION_ID"/>
+  <ViewAttribute
+    Name="LocationName"
+    PrecisionRule="true"
+    EntityAttrName="LocationName"
+    EntityUsage="ClassroomCalendar"
+    AliasName="LOCATION_NAME"
+    LOVName="LOV_LocationName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NumOfPeople"
+    PrecisionRule="true"
+    EntityAttrName="NumOfPeople"
+    EntityUsage="ClassroomCalendar"
+    AliasName="NUM_OF_PEOPLE"/>
+  <ViewAttribute
+    Name="UserDisplayName"
+    PrecisionRule="true"
+    EntityAttrName="UserDisplayName"
+    EntityUsage="ClassroomCalendar"
+    AliasName="USER_DISPLAY_NAME"
+    LOVName="LOV_UserDisplayName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UserId"
+    PrecisionRule="true"
+    EntityAttrName="UserId"
+    EntityUsage="ClassroomCalendar"
+    AliasName="USER_ID"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="newRow"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userDisplayName"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</ViewObject>

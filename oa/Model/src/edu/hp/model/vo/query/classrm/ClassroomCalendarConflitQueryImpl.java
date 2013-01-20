@@ -20,9 +20,7 @@ public class ClassroomCalendarConflitQueryImpl extends ViewObjectImpl implements
     }
     
     public Boolean ifConflict(Timestamp actStartTime, Timestamp actEndTime, String clsRmId){
-        System.err.println(actStartTime);                
-        System.err.println(actEndTime);                
-        System.err.println(clsRmId);                
+        
         try {
             ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
             ensureVariableManager().setVariableValue("startQueryTime", actStartTime);

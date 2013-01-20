@@ -1,6 +1,7 @@
 package edu.hp.model.biz;
 
 import edu.hp.model.vo.ClassroomCalendarViewImpl;
+import edu.hp.model.vo.ClsRmCalDMLViewImpl;
 import edu.hp.model.vo.query.classrm.ClassroomCalendarConflitQueryImpl;
 import edu.hp.model.vo.query.classrm.ClassroomQueryImpl;
 
@@ -32,13 +33,6 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl {
         return (ViewObjectImpl)findViewObject("ClassroomBatchReservation");
     }
 
-    /**
-     * Container's getter for ClassroomCalendar.
-     * @return ClassroomCalendar
-     */
-    public ClassroomCalendarViewImpl getClassroomCalendar() {
-        return (ClassroomCalendarViewImpl)findViewObject("ClassroomCalendar");
-    }
 
     /**
      * Container's getter for Classrooms.
@@ -78,5 +72,21 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl {
      */
     public ClassroomCalendarConflitQueryImpl getConflitQuery() {
         return (ClassroomCalendarConflitQueryImpl)findViewObject("ConflitQuery");
+    }
+
+    /**
+     * Container's getter for ClsRmCalDMLView1.
+     * @return ClsRmCalDMLView1
+     */
+    public ViewObjectImpl getClsRmCalDMLView() {
+        return (ViewObjectImpl)findViewObject("ClsRmCalDMLView");
+    }
+
+    /**
+     * Container's getter for ClassroomCalenderView1.
+     * @return ClassroomCalenderView1
+     */
+    public ViewObjectImpl getCalendar() {
+        return (ViewObjectImpl)findViewObject("Calendar");
     }
 }

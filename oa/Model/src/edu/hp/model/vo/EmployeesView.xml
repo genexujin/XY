@@ -256,6 +256,43 @@
         Value="LastName"/>
     </Dependencies>
   </ViewAttribute>
+  <ViewCriteria
+    Name="findByDepartment"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EmployeesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DeptId"
+        ViewAttribute="DeptId"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="RolesVA"
     ViewLink="edu.hp.model.vo.link.UserRoleViewLink"
@@ -282,4 +319,21 @@
     ViewLink="edu.hp.model.vo.link.EmpRepairCallerViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+
+  <ViewLinkAccessor
+    Name="HelpdeskCallsForCalleeView"
+    ViewLink="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="HelpdeskCallsForCallerView"
+    ViewLink="edu.hp.model.vo.link.EmpHelpdeskCallerViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+
 </ViewObject>

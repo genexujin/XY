@@ -23,7 +23,7 @@ import oracle.jbo.server.TransactionEvent;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class ClassroomCalendarImpl extends BaseEntity {
+public class ClassroomCalendarImpl extends EntityImpl {
     /**
      * Add locking logic here.
      */
@@ -56,35 +56,35 @@ public class ClassroomCalendarImpl extends BaseEntity {
     }
 
 
-    /**
-     * Validation method for ClassroomCalendar.
-     */
-    public boolean validateTimeConflict() {
-
-        Timestamp actStartTime = this.getActStartTime();
-        Timestamp actEndTime = this.getActEndTime();
-        String clsRmId = this.getClassroomId();
-        try {
-            
-            RowSet calendarView = this.getClassroomCalendarConflitQuery1();
-            calendarView.ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
-            calendarView.ensureVariableManager().setVariableValue("startQueryTime", actStartTime);
-            calendarView.ensureVariableManager().setVariableValue("clsRoomId", clsRmId);
-            calendarView.setRangeSize(-1);
-            calendarView.executeQuery();
-
-            if (calendarView.first() !=null){
-                return false;                
-            }
-            
-        } catch (Exception e) {
-            // TODO: Add catch code
-            e.printStackTrace();
-            return false;
-        }
-        
-        return true;
-    }
+//    /**
+//     * Validation method for ClassroomCalendar.
+//     */
+//    public boolean validateTimeConflict() {
+//
+//        Timestamp actStartTime = this.getActStartTime();
+//        Timestamp actEndTime = this.getActEndTime();
+//        String clsRmId = this.getClassroomId();
+//        try {
+//            
+//            RowSet calendarView = this.getClassroomCalendarConflitQuery1();
+//            calendarView.ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
+//            calendarView.ensureVariableManager().setVariableValue("startQueryTime", actStartTime);
+//            calendarView.ensureVariableManager().setVariableValue("clsRoomId", clsRmId);
+//            calendarView.setRangeSize(-1);
+//            calendarView.executeQuery();
+//
+//            if (calendarView.first() !=null){
+//                return false;                
+//            }
+//            
+//        } catch (Exception e) {
+//            // TODO: Add catch code
+//            e.printStackTrace();
+//            return false;
+//        }
+//        
+//        return true;
+//    }
 
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. Do not modify.

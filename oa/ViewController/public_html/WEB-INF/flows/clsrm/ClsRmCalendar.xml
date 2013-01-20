@@ -5,11 +5,46 @@
     <managed-bean id="__1">
       <managed-bean-name>clsCalBean</managed-bean-name>
       <managed-bean-class>edu.hp.view.bean.clsrm.ClassroomCalendarBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+      <managed-bean-name>clsCalCrtBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.clsrm.ClsCalCrtBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <view id="ClassroomCalendar">
       <page>/pages/clsrm/ClassroomCalendar.jsff</page>
     </view>
+    <view id="CreateCalendar">
+      <page>/pages/clsrm/CreateCalendar.jsff</page>
+    </view>
+    <method-call id="CreateInsert">
+      <method>#{bindings.newRow.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>ClassroomCalendar</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>CreateInsert</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>CreateCalendar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>CreateCalendar</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>Calendar</from-outcome>
+        <to-activity-id>ClassroomCalendar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

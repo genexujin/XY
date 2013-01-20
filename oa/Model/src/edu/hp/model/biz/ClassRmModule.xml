@@ -20,9 +20,6 @@
     Name="ClassroomBatchReservation"
     ViewObjectName="edu.hp.model.vo.ClassroomBatchReservationView"/>
   <ViewUsage
-    Name="ClassroomCalendar"
-    ViewObjectName="edu.hp.model.vo.ClassroomCalendarView"/>
-  <ViewUsage
     Name="Classrooms"
     ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomQuery"/>
   <ViewUsage
@@ -34,6 +31,12 @@
   <ViewUsage
     Name="ConflitQuery"
     ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomCalendarConflitQuery"/>
+  <ViewUsage
+    Name="ClsRmCalDMLView"
+    ViewObjectName="edu.hp.model.vo.ClsRmCalDMLView"/>
+  <ViewUsage
+    Name="Calendar"
+    ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomCalenderView"/>
   <ViewLinkUsage
     Name="LocClsRmViewLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.LocClsRmViewLink"

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="ClsRmCalendar_ClsRmCalendar_CreateInsertPageDef" Package="flows.clsrm" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="newRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="newRow" IsViewObjectMethod="true"
+            DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClsRmCalDMLView"
+            ReturnName="data.RootAppModuleDataControl.methodResults.newRow_RootAppModuleDataControl_dataProvider_Root_ClassRmModule_ClsRmCalDMLView_newRow_result">
+      <NamedData NDName="userDisplayName" NDValue="#{sessionScope.LoginUserBean.displayName}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userName}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

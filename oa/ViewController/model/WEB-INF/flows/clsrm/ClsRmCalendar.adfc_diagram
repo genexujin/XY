@@ -22,10 +22,70 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">110.44824</property>
+         name="y">106.74707</property>
       <property
-         name="x">371.10156</property>
+         name="pageFragment">true</property>
+      <property
+         name="x">120.10156</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">CreateCalendar</property>
+      <property
+         name="page">/pages/clsrm/CreateCalendar.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>CreateCalendar&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">79.143555</property>
+      <property
+         name="x">527.0</property>
       <property
          name="pageFragment">true</property>
    </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="MethodCall5">
+      <property
+         name="fromOutcome">create</property>
+      <property
+         name="sdm:polyPoints">R50,224.5581,106.396484,224.5581,79.09766,L50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall5">
+      <property
+         name="activityId">CreateInsert</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>CreateInsert&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">79.44824</property>
+      <property
+         name="x">329.01465</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="MethodCall5"
+      to="View3">
+      <property
+         name="fromOutcome">CreateInsert</property>
+      <property
+         name="sdm:polyPoints">R50,428.00732,79.09766,428.00732,78.79297,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="View3"
+      to="View2">
+      <property
+         name="fromOutcome">Calendar</property>
+      <property
+         name="sdm:polyPoints">B50,527.0,160.39648,120.10156,160.39648,B50</property>
+   </ControlFlowCase>
 </SDM>

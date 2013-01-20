@@ -309,6 +309,20 @@
     AssociationOtherEnd="edu.hp.model.eo.asso.EmpRepairCallerAssoc.Caller"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="HelpdeskCallsForCallee"
+    Association="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc.HelpdeskCallsForCallee"
+    AssociationOtherEnd="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc.Callee"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="HelpdeskCallsForCaller"
+    Association="edu.hp.model.eo.asso.EmpHelpdeskCallerAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.EmpHelpdeskCallerAssoc.HelpdeskCallsForCaller"
+    AssociationOtherEnd="edu.hp.model.eo.asso.EmpHelpdeskCallerAssoc.Caller"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="EmployeesPk"
     PrimaryKey="true">

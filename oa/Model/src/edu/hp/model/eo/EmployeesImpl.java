@@ -195,7 +195,7 @@ public class EmployeesImpl extends EntityImpl {
             }
 
             public void put(EmployeesImpl obj, Object value) {
-                obj.setLastUpdatedAt((Timestamp)value);
+                obj.setAttributeInternal(index(), value);
             }
         }
         ,
@@ -215,7 +215,7 @@ public class EmployeesImpl extends EntityImpl {
             }
 
             public void put(EmployeesImpl obj, Object value) {
-                obj.setCreatedAt((Timestamp)value);
+                obj.setAttributeInternal(index(), value);
             }
         }
         ,
@@ -268,6 +268,46 @@ public class EmployeesImpl extends EntityImpl {
                 obj.setAttributeInternal(index(), value);
             }
         }
+        ,
+        RepairCallsForCallee {
+            public Object get(EmployeesImpl obj) {
+                return obj.getRepairCallsForCallee();
+            }
+
+            public void put(EmployeesImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        RepairCallsForCaller {
+            public Object get(EmployeesImpl obj) {
+                return obj.getRepairCallsForCaller();
+            }
+
+            public void put(EmployeesImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        HelpdeskCallsForCallee {
+            public Object get(EmployeesImpl obj) {
+                return obj.getHelpdeskCallsForCallee();
+            }
+
+            public void put(EmployeesImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        HelpdeskCallsForCaller {
+            public Object get(EmployeesImpl obj) {
+                return obj.getHelpdeskCallsForCaller();
+            }
+
+            public void put(EmployeesImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -295,6 +335,8 @@ public class EmployeesImpl extends EntityImpl {
             return vals;
         }
     }
+
+
     public static final int USERNAME = AttributesEnum.UserName.index();
     public static final int PASSWORD = AttributesEnum.Password.index();
     public static final int FIRSTNAME = AttributesEnum.FirstName.index();
@@ -320,11 +362,23 @@ public class EmployeesImpl extends EntityImpl {
     public static final int MGREMPLOYEE = AttributesEnum.MgrEmployee.index();
     public static final int SUBEMPLOYEES = AttributesEnum.SubEmployees.index();
     public static final int ROLES = AttributesEnum.Roles.index();
+    public static final int REPAIRCALLSFORCALLEE = AttributesEnum.RepairCallsForCallee.index();
+    public static final int REPAIRCALLSFORCALLER = AttributesEnum.RepairCallsForCaller.index();
+    public static final int HELPDESKCALLSFORCALLEE = AttributesEnum.HelpdeskCallsForCallee.index();
+    public static final int HELPDESKCALLSFORCALLER = AttributesEnum.HelpdeskCallsForCaller.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public EmployeesImpl() {
+    }
+
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("edu.hp.model.eo.Employees");
     }
 
     /**
@@ -607,13 +661,6 @@ public class EmployeesImpl extends EntityImpl {
         return (Timestamp)getAttributeInternal(LASTUPDATEDAT);
     }
 
-    /**
-     * Sets <code>value</code> as the attribute value for LastUpdatedAt.
-     * @param value value to set the LastUpdatedAt
-     */
-    public void setLastUpdatedAt(Timestamp value) {
-        setAttributeInternal(LASTUPDATEDAT, value);
-    }
 
     /**
      * Gets the attribute value for CreatedBy, using the alias name CreatedBy.
@@ -639,13 +686,6 @@ public class EmployeesImpl extends EntityImpl {
         return (Timestamp)getAttributeInternal(CREATEDAT);
     }
 
-    /**
-     * Sets <code>value</code> as the attribute value for CreatedAt.
-     * @param value value to set the CreatedAt
-     */
-    public void setCreatedAt(Timestamp value) {
-        setAttributeInternal(CREATEDAT, value);
-    }
 
     /**
      * Gets the attribute value for Title, using the alias name Title.
@@ -739,6 +779,34 @@ public class EmployeesImpl extends EntityImpl {
     }
 
     /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getRepairCallsForCallee() {
+        return (RowIterator)getAttributeInternal(REPAIRCALLSFORCALLEE);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getRepairCallsForCaller() {
+        return (RowIterator)getAttributeInternal(REPAIRCALLSFORCALLER);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getHelpdeskCallsForCallee() {
+        return (RowIterator)getAttributeInternal(HELPDESKCALLSFORCALLEE);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getHelpdeskCallsForCaller() {
+        return (RowIterator)getAttributeInternal(HELPDESKCALLSFORCALLER);
+    }
+
+    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
@@ -747,10 +815,5 @@ public class EmployeesImpl extends EntityImpl {
         return new Key(new Object[]{id});
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("edu.hp.model.eo.Employees");
-    }
+
 }

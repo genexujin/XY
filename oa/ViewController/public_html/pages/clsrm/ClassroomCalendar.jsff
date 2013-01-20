@@ -1,35 +1,38 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelSplitter orientation="horizontal" splitterPosition="152" id="ps1"
-                      binding="#{viewScope.clsCalBean.spliter}">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <af:panelSplitter orientation="horizontal" splitterPosition="152" id="ps1">
         <f:facet name="first">
             <af:panelGroupLayout id="pgl1" layout="vertical">
-                <af:outputText value="说明：1. 单击日历空白处可以添加新的预定" id="ot1"/>
-                <af:outputText value="2. 请在下方教室过滤条件中设置需要显示在日历上的教室" id="ot2"/>
+                <af:outputText value="说明：1. 鼠标放置在某一日历事件上可以查看详情" id="ot1"/>
+                <af:outputText value="2. 右键菜单可以创建、编辑、删除教室预订。" id="ot10"/>
+                <af:outputText value="3. 请在下方教室过滤条件中设置需要显示在日历上的教室" id="ot2"/>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:commandButton text="新预订" id="cb1" icon="/images/icons/new_ena.png" action="create"/>
+                <af:spacer width="10" height="10" id="s2"/>
                 <af:selectOneChoice value="#{bindings.Locations.inputValue}" label="#{bindings.Locations.label}"
                                     required="#{bindings.Locations.hints.mandatory}"
                                     shortDesc="#{bindings.Locations.hints.tooltip}" id="soc1" autoSubmit="true"
-                                    valueChangeListener="#{viewScope.clsCalBean.locationChange}">
+                                    valueChangeListener="#{pageFlowScope.clsCalBean.locationChange}">
                     <f:selectItems value="#{bindings.Locations.items}" id="si1"/>
                 </af:selectOneChoice>
-                <af:panelGroupLayout id="pgl3" layout="scroll" binding="#{viewScope.clsCalBean.clarmGrpLayout}">
-                    <af:forEach items="#{viewScope.clsCalBean.providerList}" var="provider">
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                    <af:forEach items="#{pageFlowScope.clsCalBean.providerList}" var="provider">
                         <af:panelGroupLayout layout="horizontal" id="pgl2">
                             <af:inputColor id="ic1" compact="true" simple="true" autoSubmit="true"
                                            label="#{provider.displayName}"
-                                           valueChangeListener="#{viewScope.clsCalBean.providerColorChange}"
-                                           value="#{viewScope.clsCalBean.providerData[provider].color}" width="4"
-                                           colorData="#{viewScope.clsCalBean.colorData}" customVisible="false"
+                                           valueChangeListener="#{pageFlowScope.clsCalBean.providerColorChange}"
+                                           value="#{pageFlowScope.clsCalBean.providerData[provider].color}" width="4"
+                                           colorData="#{pageFlowScope.clsCalBean.colorData}" customVisible="false"
                                            defaultVisible="false" lastUsedVisible="false">
                                 <f:attribute name="providerId" value="#{provider.id}"/>
                             </af:inputColor>
                             <!-- Bug 8973571 : facelets doesn't handle clientId generation correctly,
                removing attribute id="sbc1" on selectBooleanCheckbox until fixed. -->
                             <af:selectBooleanCheckbox id="sbc1" autoSubmit="true"
-                                                      valueChangeListener="#{viewScope.clsCalBean.providerEnabledChange}"
+                                                      valueChangeListener="#{pageFlowScope.clsCalBean.providerEnabledChange}"
                                                       text="#{provider.displayName}"
-                                                      value="#{viewScope.clsCalBean.providerData[provider].enabled}">
+                                                      value="#{pageFlowScope.clsCalBean.providerData[provider].enabled}">
                                 <f:attribute name="providerId" value="#{provider.id}"/>
                             </af:selectBooleanCheckbox>
                             <af:outputText value="#{provider.noOfPpl}座" id="ot3"/>
@@ -40,235 +43,65 @@
             </af:panelGroupLayout>
         </f:facet>
         <f:facet name="second">
-            <af:calendar value="#{bindings.ClassroomCalendar.calendarModel}" id="c1"
-                         binding="#{viewScope.clsCalBean.calendar}"
-                         activityStyles="#{viewScope.clsCalBean.activityStyles}"
-                         calendarActivityListener="#{viewScope.clsCalBean.activityListener}">
+            <af:calendar value="#{bindings.Calendar.calendarModel}" id="c1"
+                         calendarActivityListener="#{pageFlowScope.clsCalBean.activityListener}"
+                         activityStyles="#{pageFlowScope.clsCalBean.activityStyles}">
                 <f:facet name="contextMenu">
                     <af:popup id="p2">
                         <af:menu id="m2">
-                            <af:commandMenuItem text="新建预定" id="cmi3" icon="/images/icons/new_ena.png">
-                                <af:showPopupBehavior popupId="create" triggerType="action"/>
-                            </af:commandMenuItem>
+                            <af:commandMenuItem text="新建预定" id="cmi3" icon="/images/icons/new_ena.png" action="create"/>
                         </af:menu>
                     </af:popup>
                 </f:facet>
                 <f:facet name="activityContextMenu">
-                    <af:popup id="p1">
+                    <af:popup id="p1"
+                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['教室管理员'] or (pageFlowScope.clsCalBean.currActivity.customAttributes['UserId'] eq sessionScope.LoginUserBean.userName)}">
                         <af:menu id="m1">
-                            <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png">
-                                <af:showPopupBehavior popupId="edit" triggerType="action"/>
-                            </af:commandMenuItem>
+                            <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png"></af:commandMenuItem>
                             <af:commandMenuItem text="删除" id="cmi2" icon="/images/icons/delete_ena.png">
                                 <af:showPopupBehavior popupId="delete" triggerType="action"/>
                             </af:commandMenuItem>
                         </af:menu>
                     </af:popup>
                 </f:facet>
-                <f:facet name="activityDetail">
-                    <af:popup id="edit" contentDelivery="lazyUncached">
-                        <af:dialog rendered="#{calendarBean.currActivity == null}" id="d3" title="无预订信息">
-                            <af:outputText value="该预订信息已经不存在" id="ot7"/>
-                        </af:dialog>
-                        <!-- don't render if the activity is null -->
-                        <af:dialog title="#{calendarBean.currActivity.title}" type="okCancel"
-                                   dialogListener="#{viewScope.clsCalBean.editDialogListener}"
-                                   rendered="#{calendarBean.currActivity != null}" id="d4">
-                            <af:outputText value="预订详情：" id="ot8"/>
-                            <af:panelFormLayout id="pfl2" rows="10" inlineStyle="width:450px;">
-                                <af:selectOneChoice value="#{bindings.LocationName.inputValue}"
-                                                    label="#{bindings.LocationName.label}"
-                                                    required="#{bindings.LocationName.hints.mandatory}"
-                                                    shortDesc="#{bindings.LocationName.hints.tooltip}" id="soc4"
-                                                    autoSubmit="true">
-                                    <f:selectItems value="#{bindings.LocationName.items}" id="si4"/>
-                                </af:selectOneChoice>
-                                <af:selectOneChoice value="#{bindings.Classroom.inputValue}"
-                                                    label="#{bindings.Classroom.label}"
-                                                    required="#{bindings.Classroom.hints.mandatory}"
-                                                    shortDesc="#{bindings.Classroom.hints.tooltip}" id="soc5"
-                                                    partialTriggers="soc2">
-                                    <f:selectItems value="#{bindings.Classroom.items}" id="si5"/>
-                                </af:selectOneChoice>
-                                <af:inputListOfValues id="ilov1"
-                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
-                                                      value="#{bindings.UserDisplayName.inputValue}"
-                                                      label="#{bindings.UserDisplayName.hints.label}"
-                                                      model="#{bindings.UserDisplayName.listOfValuesModel}"
-                                                      required="#{bindings.UserDisplayName.hints.mandatory}"
-                                                      columns="#{bindings.UserDisplayName.hints.displayWidth}"
-                                                      shortDesc="#{bindings.UserDisplayName.hints.tooltip}">
-                                    <f:validator binding="#{bindings.UserDisplayName.validator}"/>
-                                </af:inputListOfValues>
-                                <af:inputText value="#{bindings.ActTitle.inputValue}"
-                                              label="#{bindings.ActTitle.hints.label}"
-                                              required="#{bindings.ActTitle.hints.mandatory}"
-                                              columns="#{bindings.ActTitle.hints.displayWidth}"
-                                              maximumLength="#{bindings.ActTitle.hints.precision}"
-                                              shortDesc="#{bindings.ActTitle.hints.tooltip}" id="it4">
-                                    <f:validator binding="#{bindings.ActTitle.validator}"/>
-                                </af:inputText>
-                                <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
-                                                       label="#{bindings.NumOfPeople.hints.label}"
-                                                       required="#{bindings.NumOfPeople.hints.mandatory}"
-                                                       columns="#{bindings.NumOfPeople.hints.displayWidth}"
-                                                       shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="ins1">
-                                    <f:validator binding="#{bindings.NumOfPeople.validator}"/>
-                                </af:inputNumberSpinbox>
-                                <af:separator id="s3"/>
-                                <af:inputDate value="#{bindings.ActStartTime.inputValue}"
-                                              label="#{bindings.ActStartTime.hints.label}"
-                                              required="#{bindings.ActStartTime.hints.mandatory}"
-                                              columns="#{bindings.ActStartTime.hints.displayWidth}"
-                                              shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id3">
-                                    <f:validator binding="#{bindings.ActStartTime.validator}"/>
-                                    <af:convertDateTime pattern="#{bindings.ActStartTime.format}" type="both"/>
-                                </af:inputDate>
-                                <af:inputDate value="#{bindings.ActEndTime.inputValue}"
-                                              label="#{bindings.ActEndTime.hints.label}"
-                                              required="#{bindings.ActEndTime.hints.mandatory}"
-                                              columns="#{bindings.ActEndTime.hints.displayWidth}"
-                                              shortDesc="#{bindings.ActEndTime.hints.tooltip}" id="id4">
-                                    <f:validator binding="#{bindings.ActEndTime.validator}"/>
-                                    <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="both"/>
-                                </af:inputDate>
-                                <af:separator id="s7"/>
-                                <af:inputText value="#{bindings.Comments.inputValue}"
-                                              label="#{bindings.Comments.hints.label}"
-                                              required="#{bindings.Comments.hints.mandatory}"
-                                              columns="#{bindings.Comments.hints.displayWidth}"
-                                              maximumLength="#{bindings.Comments.hints.precision}"
-                                              shortDesc="#{bindings.Comments.hints.tooltip}" id="it5" rows="3">
-                                    <f:validator binding="#{bindings.Comments.validator}"/>
-                                </af:inputText>
-                            </af:panelFormLayout>
-                        </af:dialog>
-                    </af:popup>
-                </f:facet>
                 <f:facet name="activityDelete">
-                    <af:popup id="delete" contentDelivery="lazyUncached">
+                    <af:popup id="delete" contentDelivery="lazyUncached"
+                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['教室管理员'] or (pageFlowScope.clsCalBean.currActivity.customAttributes['UserId'] eq sessionScope.LoginUserBean.userName)}">
                         <!-- don't render if the activity is null -->
-                        <af:dialog dialogListener="#{viewScope.clsCalBean.deleteListener}"
-                                   title="#{calendarBean.currActivity.title}" affirmativeTextAndAccessKey="Yes"
-                                   cancelTextAndAccessKey="No" rendered="#{calendarBean.currActivity != null}" id="d2">
+                        <af:dialog dialogListener="#{pageFlowScope.clsCalBean.deleteListener}"
+                                   title="#{pageFlowScope.clsCalBean.currActivity.title}"
+                                   affirmativeTextAndAccessKey="Yes" cancelTextAndAccessKey="No"
+                                   rendered="#{pageFlowScope.clsCalBean.currActivity != null}" id="d2">
                             <af:outputText value="请注意：该操作无法恢复！" id="ot4"/>
                             <af:spacer height="20" id="s4"/>
                             <af:outputText value="您确认要删除该预订吗？" id="ot5"/>
                         </af:dialog>
                     </af:popup>
                 </f:facet>
-                <f:facet name="create">
-                    <af:popup id="create" contentDelivery="lazyUncached"
-                              popupFetchListener="#{viewScope.clsCalBean.createPopupListener}">
-                        <af:dialog title="新预订" type="okCancel"
-                                   dialogListener="#{viewScope.clsCalBean.createDialogListener}" id="d5"
-                                   closeIconVisible="false" binding="#{viewScope.clsCalBean.createPopup}">
-                            <af:outputText value="请正确填写教室预订信息！" id="ot9"/>
-                            <af:panelFormLayout id="pfl3" rows="2" labelAlignment="start">
-                                <af:inputDate value="#{bindings.ActStartTime.inputValue}"
-                                              label="#{bindings.ActStartTime.hints.label}"
-                                              required="#{bindings.ActStartTime.hints.mandatory}"
-                                              columns="#{bindings.ActStartTime.hints.displayWidth}"
-                                              shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id1"
-                                              partialTriggers="soc7" autoSubmit="true">
-                                    <f:validator binding="#{bindings.ActStartTime.validator}"/>
-                                    <af:convertDateTime pattern="#{bindings.ActStartTime.format}" type="#{bindings.AllDay.inputValue=='ALLDAY'?'date':'both'}"/>
-                                </af:inputDate>
-                                <af:inputText value="#{bindings.ActTitle.inputValue}"
-                                              label="#{bindings.ActTitle.hints.label}"
-                                              required="#{bindings.ActTitle.hints.mandatory}"
-                                              columns="#{bindings.ActTitle.hints.displayWidth}"
-                                              maximumLength="#{bindings.ActTitle.hints.precision}"
-                                              shortDesc="#{bindings.ActTitle.hints.tooltip}" id="it2">
-                                    <f:validator binding="#{bindings.ActTitle.validator}"/>
-                                </af:inputText>
-                                <af:inputDate value="#{bindings.ActEndTime.inputValue}"
-                                              label="#{bindings.ActEndTime.hints.label}"
-                                              required="#{bindings.ActEndTime.hints.mandatory}"
-                                              columns="#{bindings.ActEndTime.hints.displayWidth}"
-                                              shortDesc="#{bindings.ActEndTime.hints.tooltip}" id="id2"
-                                              partialTriggers="soc7" autoSubmit="true">
-                                    <f:validator binding="#{bindings.ActEndTime.validator}"/>
-                                    <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="#{bindings.AllDay.inputValue=='ALLDAY'?'date':'both'}"/>
-                                </af:inputDate>
-                                <af:selectOneChoice value="#{bindings.AllDay.inputValue}"
-                                                    label="#{bindings.AllDay.label}"
-                                                    required="#{bindings.AllDay.hints.mandatory}"
-                                                    shortDesc="#{bindings.AllDay.hints.tooltip}" id="soc7"
-                                                    autoSubmit="true">
-                                    <f:selectItem itemLabel="否" itemValue="TIME" id="sit8"/>
-                                    <f:selectItem itemLabel="是" itemValue="ALLDAY" id="sit7"/>
-                                </af:selectOneChoice>
-                            </af:panelFormLayout>
-                            <af:separator id="s1"/>
-                            <af:panelFormLayout id="pfl1" rows="2">
-                                <af:selectOneChoice value="#{bindings.LocationName.inputValue}"
-                                                    label="#{bindings.LocationName.label}"
-                                                    required="#{bindings.LocationName.hints.mandatory}"
-                                                    shortDesc="#{bindings.LocationName.hints.tooltip}" id="soc2"
-                                                    autoSubmit="true">
-                                    <f:selectItems value="#{bindings.LocationName.items}" id="si2"/>
-                                </af:selectOneChoice>
-                                <af:selectOneChoice value="#{bindings.Classroom.inputValue}"
-                                                    label="#{bindings.Classroom.label}"
-                                                    required="#{bindings.Classroom.hints.mandatory}"
-                                                    shortDesc="#{bindings.Classroom.hints.tooltip}" id="soc3"
-                                                    partialTriggers="soc2">
-                                    <f:selectItems value="#{bindings.Classroom.items}" id="si3"/>
-                                </af:selectOneChoice>
-                                <af:selectOneChoice value="#{bindings.UserDisplayName1.inputValue}"
-                                                    label="#{bindings.UserDisplayName1.label}"
-                                                    required="#{bindings.UserDisplayName1.hints.mandatory}"
-                                                    shortDesc="#{bindings.UserDisplayName1.hints.tooltip}" id="soc6">
-                                    <f:selectItems value="#{bindings.UserDisplayName1.items}" id="si6"/>
-                                </af:selectOneChoice>
-                                <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
-                                                       label="#{bindings.NumOfPeople.hints.label}"
-                                                       required="#{bindings.NumOfPeople.hints.mandatory}"
-                                                       columns="#{bindings.NumOfPeople.hints.displayWidth}"
-                                                       shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it1">
-                                    <f:validator binding="#{bindings.NumOfPeople.validator}"/>
-                                </af:inputNumberSpinbox>
-                            </af:panelFormLayout>
-                            <af:separator id="s2"/>
-                            <af:panelFormLayout id="pfl4">
-                                <af:inputText value="#{bindings.Comments.inputValue}"
-                                              label="#{bindings.Comments.hints.label}"
-                                              required="#{bindings.Comments.hints.mandatory}"
-                                              columns="#{bindings.Comments.hints.displayWidth}"
-                                              maximumLength="#{bindings.Comments.hints.precision}"
-                                              shortDesc="#{bindings.Comments.hints.tooltip}" id="it3"
-                                              contentStyle="width:240px;">
-                                    <f:validator binding="#{bindings.Comments.validator}"/>
-                                </af:inputText>
-                            </af:panelFormLayout>
-                        </af:dialog>
-                    </af:popup>
-                </f:facet>
                 <f:facet name="activityHover">
                     <af:popup contentDelivery="lazyUncached" id="p3">
                         <!-- don't render if the activity is null -->
-                        <af:noteWindow inlineStyle="width:300px" rendered="#{viewScope.clsCalBean.currActivity!=null}"
-                                       id="nw1">
+                        <af:noteWindow inlineStyle="width:300px"
+                                       rendered="#{pageFlowScope.clsCalBean.currActivity!=null}" id="nw1">
                             <af:outputText value="教室预订信息：" id="ot6"/>
                             <af:spacer height="5" id="s5"/>
                             <af:panelFormLayout id="pfl5">
-                                <af:inputText label="事由:" value="#{viewScope.clsCalBean.currActivity.title}"
+                                <af:inputText label="事由:" value="#{pageFlowScope.clsCalBean.currActivity.title}"
                                               readOnly="true" id="it6"/>
-                                <af:inputDate label="开始时间:" value="#{viewScope.clsCalBean.currActivity.from}"
+                                <af:inputDate label="开始时间:" value="#{pageFlowScope.clsCalBean.currActivity.from}"
                                               readOnly="true" id="id5">
-                                    <af:convertDateTime type="#{viewScope.clsCalBean.currActivity.allDay == true ? 'date' : 'both'}"/>
+                                    <af:convertDateTime type="#{pageFlowScope.clsCalBean.currActivity.allDay == true ? 'date' : 'both'}"/>
                                 </af:inputDate>
-                                <af:inputDate label="结束时间:" value="#{viewScope.clsCalBean.currActivity.to}"
+                                <af:inputDate label="结束时间:" value="#{pageFlowScope.clsCalBean.currActivity.to}"
                                               readOnly="true" id="id6">
-                                    <af:convertDateTime type="#{viewScope.clsCalBean.currActivity.allDay == true ? 'date' : 'both'}"/>
+                                    <af:convertDateTime type="#{pageFlowScope.clsCalBean.currActivity.allDay == true ? 'date' : 'both'}"/>
                                 </af:inputDate>
                                 <af:inputText label="教室:" readOnly="true"
-                                              rendered="#{viewScope.clsCalBean.currActivity.location != null}"
-                                              value="#{viewScope.clsCalBean.currActivity.location}" id="it7"/>
+                                              rendered="#{pageFlowScope.clsCalBean.currActivity.location != null}"
+                                              value="#{pageFlowScope.clsCalBean.currActivity.location}" id="it7"/>
                                 <af:inputText label="使用人:" readOnly="true"
-                                              rendered="#{viewScope.clsCalBean.currActivity.customAttributes['UserDisplayName']!=null}"
-                                              value="#{viewScope.clsCalBean.currActivity.customAttributes['UserDisplayName']}"
+                                              rendered="#{pageFlowScope.clsCalBean.currActivity.customAttributes['UserDisplayName']!=null}"
+                                              value="#{pageFlowScope.clsCalBean.currActivity.customAttributes['UserDisplayName']}"
                                               id="it8"/>
                             </af:panelFormLayout>
                         </af:noteWindow>
