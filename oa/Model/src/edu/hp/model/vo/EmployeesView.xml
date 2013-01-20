@@ -320,10 +320,12 @@
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
 
+
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+
 
   <ViewLinkAccessor
     Name="HelpdeskCallsForCalleeView"
