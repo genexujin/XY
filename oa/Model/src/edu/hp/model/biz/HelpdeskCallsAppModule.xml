@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HelpdeskCallsAppModule"
+  Version="11.1.2.62.76"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="HelpdeskCallsView1"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"/>
+  <ViewUsage
+    Name="EmployeesView1"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"/>
+  <ViewUsage
+    Name="HelpdeskCallsView2"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"/>
+  <ViewUsage
+    Name="EmployeesView2"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"/>
+  <ViewUsage
+    Name="HelpdeskCallsView3"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"/>
+  <ViewLinkUsage
+    Name="EmpHelpdeskCalleeViewLink"
+    ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
+    SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.EmployeesView1"
+    DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.HelpdeskCallsView2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="EmpHelpdeskCallerViewLink"
+    ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCallerViewLink"
+    SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.EmployeesView2"
+    DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.HelpdeskCallsView3"
+    Reversed="false"/>
+</AppModule>

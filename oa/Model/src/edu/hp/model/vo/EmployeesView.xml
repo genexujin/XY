@@ -282,4 +282,14 @@
     ViewLink="edu.hp.model.vo.link.EmpRepairCallerViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="HelpdeskCallsForCalleeView"
+    ViewLink="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="HelpdeskCallsForCallerView"
+    ViewLink="edu.hp.model.vo.link.EmpHelpdeskCallerViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
 </ViewObject>
