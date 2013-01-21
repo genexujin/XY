@@ -27,27 +27,30 @@ public class BaseEntity extends EntityImpl {
      * @param e
      */
     protected void doDML(int operation, TransactionEvent e) {
-        String entityName = getEntityDef().getName();
-        LoginUser user = null;
-        try {
-            user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-        } catch (Exception e1) {
-            // TODO: Add catch code
-            e1.printStackTrace();
-        }
 
-        if (this.getEntityDef().getAttributeIndexOf("CreatedBy") > 0) {
+        if (operation != DML_DELETE) {
 
-            if (operation == DML_INSERT) {
-                if (user != null)
-                    this.setAttribute("CreatedBy", user.getDisplayName());
+            LoginUser user = null;
+            try {
+                user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+            } catch (Exception e1) {
+                // TODO: Add catch code
+                e1.printStackTrace();
             }
 
-        }
+            if (this.getEntityDef().getAttributeIndexOf("CreatedBy") > 0) {
 
-        if (this.getEntityDef().getAttributeIndexOf("LastUpdatedBy") > 0) {
-            if (user != null)
-                this.setAttribute("LastUpdatedBy", user.getDisplayName());
+                if (operation == DML_INSERT) {
+                    if (user != null)
+                        this.setAttribute("CreatedBy", user.getDisplayName());
+                }
+
+            }
+
+            if (this.getEntityDef().getAttributeIndexOf("LastUpdatedBy") > 0) {
+                if (user != null)
+                    this.setAttribute("LastUpdatedBy", user.getDisplayName());
+            }
         }
 
         super.doDML(operation, e);
