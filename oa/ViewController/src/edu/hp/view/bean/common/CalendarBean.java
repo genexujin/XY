@@ -19,6 +19,7 @@ import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.event.CalendarActivityEvent;
+import oracle.adf.view.rich.event.TriggerType;
 import oracle.adf.view.rich.model.CalendarActivity;
 import oracle.adf.view.rich.model.CalendarProvider;
 import oracle.adf.view.rich.util.CalendarActivityRamp;
@@ -31,11 +32,11 @@ import oracle.jbo.domain.Array;
 
 
 public class CalendarBean {
-    
-    
+
+
     protected List<OACalendarProvider> _providerList;
     protected Map<OACalendarProvider, ProviderData> _providerData;
-    
+
     protected String calendarid;
     protected OACalendarActivity _currActivity;
     protected static List<Color> _defaultOrderProviderColors;
@@ -103,7 +104,7 @@ public class CalendarBean {
 
                 }
             }
-            
+
             UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
             if (calendar != null)
                 refreshCalendar(calendar);
@@ -114,16 +115,22 @@ public class CalendarBean {
     }
 
     public void activityListener(CalendarActivityEvent ae) {
-        
+
+
         CalendarActivity activity = ae.getCalendarActivity();
-        
+
         if (activity == null) {
-            // no activity with that id is found in the model
-              setCurrActivity(null);
-            return;
+            setCurrActivity(null);
+        } else {
+            setCurrActivity(new OACalendarActivity(activity));
+        }
+        
+
+        if (!ae.getTriggerType().equals(TriggerType.HOVER)) {
+            UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+            ADFUtils.partialRefreshComponenet(calendar);
         }
 
-        setCurrActivity(new OACalendarActivity(activity));
     }
 
 
@@ -140,10 +147,10 @@ public class CalendarBean {
         InstanceStyles styles = CalendarActivityRamp.getActivityRamp(newColor);
 
         _activityStyles.put(providerSet, styles);
-        
+
         UIComponent calendar = JSFUtils.findComponent(vce.getComponent().getNamingContainer(), calendarid);
         ADFUtils.partialRefreshComponenet(calendar);
-        
+
 
     }
 
@@ -153,7 +160,7 @@ public class CalendarBean {
         String providerId = component.getAttributes().get("providerId").toString();
 
         Boolean newVal = (Boolean)valueChangeEvent.getNewValue();
-        
+
         for (OACalendarProvider provider : _providerList) {
 
             if (provider.getId().equals(providerId)) {
@@ -161,17 +168,18 @@ public class CalendarBean {
                     provider.setEnabled(CalendarProvider.Enabled.ENABLED);
                 else
                     provider.setEnabled(CalendarProvider.Enabled.DISABLED);
-            }           
+            }
         }
-        
-        UIComponent calendar = JSFUtils.findComponent(valueChangeEvent.getComponent().getNamingContainer(), calendarid);
-            
+
+        UIComponent calendar =
+            JSFUtils.findComponent(valueChangeEvent.getComponent().getNamingContainer(), calendarid);
+
         refreshCalendar(calendar);
     }
 
 
     protected void refreshCalendar(UIComponent calendar) {
-        
+
         StringBuffer clsRmNos = new StringBuffer();
 
         for (OACalendarProvider provider : _providerList) {
@@ -183,7 +191,7 @@ public class CalendarBean {
 
         if (clsRmNos.length() > 0) {
             clsRmNos.deleteCharAt(clsRmNos.length() - 1);
-        }else{
+        } else {
             clsRmNos.append("NA");
         }
 
@@ -192,7 +200,7 @@ public class CalendarBean {
         refreshOp.getParamsMap().put(refreshCalendarParamName, clsRmNos.toString());
 
         refreshOp.execute();
-        
+
         ADFUtils.partialRefreshComponenet(calendar);
     }
 
@@ -299,7 +307,6 @@ public class CalendarBean {
         return showClsRmList;
     }
 
-  
 
     public void setActivityStyles(Map<Set<String>, InstanceStyles> _activityStyles) {
         this._activityStyles = _activityStyles;

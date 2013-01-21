@@ -63,7 +63,7 @@
           <Item Type="id" Value="Id"/>
           <Item Type="providerId" Value="ClassroomId"/>
           <Item Type="title" Value="ActTitle"/>
-          <Item Type="location" Value="UserId"/>
+          <Item Type="location" Value="Classroom"/>
           <Item Type="timeType" Value="AllDay"/>
           <Item Type="startTime" Value="ActStartTime"/>
           <Item Type="endTime" Value="ActEndTime"/>

@@ -49,13 +49,13 @@
                 <f:facet name="contextMenu">
                     <af:popup id="p2">
                         <af:menu id="m2">
-                            <af:commandMenuItem text="新建预定" id="cmi3" icon="/images/icons/new_ena.png" action="create"/>
+                            <af:commandMenuItem text="新预订" id="cmi3" icon="/images/icons/new_ena.png" action="create"/>
                         </af:menu>
                     </af:popup>
                 </f:facet>
                 <f:facet name="activityContextMenu">
                     <af:popup id="p1"
-                              rendered="#{pageFlowScope.clsCalBean.editable}">
+                              rendered="#{pageFlowScope.clsCalBean.editable}" partialTriggers="::c1">
                         <af:menu id="m1">
                             <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png"
                                                 action="#{pageFlowScope.clsCalBean.doEdit}"></af:commandMenuItem>
@@ -67,7 +67,7 @@
                 </f:facet>
                 <f:facet name="activityDelete">
                     <af:popup id="delete" contentDelivery="lazyUncached"
-                              rendered="#{pageFlowScope.clsCalBean.editable}">
+                              rendered="#{pageFlowScope.clsCalBean.editable}" partialTriggers="::c1">
                         <!-- don't render if the activity is null -->
                         <af:dialog dialogListener="#{pageFlowScope.clsCalBean.deleteListener}"
                                    title="#{pageFlowScope.clsCalBean.currActivity.title}"
@@ -97,8 +97,8 @@
                                     <af:convertDateTime type="#{pageFlowScope.clsCalBean.currActivity.allDay == true ? 'date' : 'both'}"/>
                                 </af:inputDate>
                                 <af:inputText label="教室:" readOnly="true"
-                                              rendered="#{pageFlowScope.clsCalBean.currActivity.location != null}"
-                                              value="#{pageFlowScope.clsCalBean.currActivity.location}" id="it7"/>
+                                              rendered="#{pageFlowScope.clsCalBean.currActivity.customAttributes['Classroom']!=null}"
+                                              value="#{pageFlowScope.clsCalBean.currActivity.customAttributes['Classroom']}" id="it7"/>
                                 <af:inputText label="使用人:" readOnly="true"
                                               rendered="#{pageFlowScope.clsCalBean.currActivity.customAttributes['UserDisplayName']!=null}"
                                               value="#{pageFlowScope.clsCalBean.currActivity.customAttributes['UserDisplayName']}"

@@ -65,11 +65,10 @@ public class ClassroomCalendarBean extends CalendarBean {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             OperationBinding binding = ADFUtils.findOperation("deleteByPK");
             String clsRmCalId = this.getCurrActivity().getActivity().getId();
-            System.err.println("to del act id: " + clsRmCalId);
+//            System.err.println("to del act id: " + clsRmCalId);
             binding.getParamsMap().put("clsRmCalId", clsRmCalId);
             binding.execute();            
-            if (binding.getErrors().isEmpty()) {               
-               
+            if (binding.getErrors().isEmpty()) {                       
                 this._currActivity = null;
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);                    
                 refreshCalendar(calendar);
