@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="MyHelpdeskCallPageDef"
+                Package="pages.helpdesk">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HelpdeskCallsView1" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="HelpdeskCallsView1Iterator"/>
+    <!--<searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery"/>-->
+    <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery1"/>
+  </executables>
+  <bindings>
+    <!--<tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView1">
+      <nodeDefinition DefName="edu.hp.model.vo.HelpdeskCallsView" Name="HelpdeskCallsView10">
+        <AttrNames>
+          <Item Value="CallId"/>
+          <Item Value="CallReadableId"/>
+          <Item Value="CallerId"/>
+          <Item Value="CalleeId"/>
+          <Item Value="LocationId"/>
+          <Item Value="LocationDetail"/>
+          <Item Value="CreateBy"/>
+          <Item Value="CreateAt"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedAt"/>
+          <Item Value="State"/>
+          <Item Value="CallResult"/>
+          <Item Value="CallResultDetail"/>
+          <Item Value="CallEval"/>
+          <Item Value="CallEvalDetail"/>
+          <Item Value="ReasonLevel1"/>
+          <Item Value="ReasonLevel2"/>
+          <Item Value="ReasonLevel3"/>
+          <Item Value="ReasonDetail"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>-->
+    <tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView11">
+      <nodeDefinition DefName="edu.hp.model.vo.HelpdeskCallsView" Name="HelpdeskCallsView110">
+        <AttrNames>
+          <Item Value="CallReadableId"/>
+          <Item Value="CallerId"/>
+          <Item Value="CalleeId"/>
+          <Item Value="State"/>
+          <Item Value="CallResult"/>
+          <Item Value="CallEval"/>
+          <Item Value="ReasonLevel1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>
