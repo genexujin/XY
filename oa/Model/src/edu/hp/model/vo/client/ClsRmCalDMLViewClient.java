@@ -16,9 +16,22 @@ public class ClsRmCalDMLViewClient extends ViewUsageImpl implements ClsRmCalDMLV
     public ClsRmCalDMLViewClient() {
     }
 
+
+    public void deleteByPK(String clsRmCalId) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"deleteByPK",new String [] {"java.lang.String"},new Object[] {clsRmCalId});
+        return;
+    }
+
     public void newRow(String userDisplayName, String userId) {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this,"newRow",new String [] {"java.lang.String","java.lang.String"},new Object[] {userDisplayName, userId});
+        return;
+    }
+
+    public void queryByPK(String clsRmCalId) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"queryByPK",new String [] {"java.lang.String"},new Object[] {clsRmCalId});
         return;
     }
 }

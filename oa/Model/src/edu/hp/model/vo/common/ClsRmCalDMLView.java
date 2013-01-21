@@ -7,4 +7,8 @@ import oracle.jbo.ViewObject;
 // ---------------------------------------------------------------------
 public interface ClsRmCalDMLView extends ViewObject {
     void newRow(String userDisplayName, String userId);
+
+    void queryByPK(String clsRmCalId);
+
+    void deleteByPK(String clsRmCalId);
 }

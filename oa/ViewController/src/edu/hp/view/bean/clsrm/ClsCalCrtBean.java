@@ -1,16 +1,17 @@
 package edu.hp.view.bean.clsrm;
 
 import edu.hp.view.utils.ADFUtils;
-
 import edu.hp.view.utils.JSFUtils;
 
 import oracle.binding.OperationBinding;
+
 
 public class ClsCalCrtBean {
     public ClsCalCrtBean() {
     }
 
     public String save() {
+        
         if(ensureTimeConflicts()){
             ADFUtils.commit("教室预订已保存！", "预订保存失败，请核对输入的信息或联系管理员！");
         }else{

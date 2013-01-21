@@ -14,6 +14,8 @@ public class OACalendarActivity implements Serializable {
     public OACalendarActivity(CalendarActivity activity) {
         _tz = TimeZone.getDefault();
         _activity = activity;
+        //location is used as userid
+        userId = activity.getLocation();
 
         if (CalendarActivity.TimeType.ALLDAY.equals(_activity.getTimeType())) {
             _allDay = true;
@@ -121,7 +123,14 @@ public class OACalendarActivity implements Serializable {
     protected CalendarActivity _activity = null;
     private boolean _allDay = false;
     private TimeZone _tz;
+    private String userId;
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
+    public String getUserId() {
+        return userId;
+    }
 }
 

@@ -35,7 +35,7 @@
                                                       value="#{pageFlowScope.clsCalBean.providerData[provider].enabled}">
                                 <f:attribute name="providerId" value="#{provider.id}"/>
                             </af:selectBooleanCheckbox>
-                            <af:outputText value="#{provider.noOfPpl}座" id="ot3"/>
+                            <af:outputText value="(#{provider.noOfPpl}座)" id="ot3"/>
                         </af:panelGroupLayout>
                     </af:forEach>
                 </af:panelGroupLayout>
@@ -45,7 +45,7 @@
         <f:facet name="second">
             <af:calendar value="#{bindings.Calendar.calendarModel}" id="c1"
                          calendarActivityListener="#{pageFlowScope.clsCalBean.activityListener}"
-                         activityStyles="#{pageFlowScope.clsCalBean.activityStyles}">
+                         activityStyles="#{pageFlowScope.clsCalBean.activityStyles}" view="week">
                 <f:facet name="contextMenu">
                     <af:popup id="p2">
                         <af:menu id="m2">
@@ -55,9 +55,10 @@
                 </f:facet>
                 <f:facet name="activityContextMenu">
                     <af:popup id="p1"
-                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['教室管理员'] or (pageFlowScope.clsCalBean.currActivity.customAttributes['UserId'] eq sessionScope.LoginUserBean.userName)}">
+                              rendered="#{pageFlowScope.clsCalBean.editable}">
                         <af:menu id="m1">
-                            <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png"></af:commandMenuItem>
+                            <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png"
+                                                action="#{pageFlowScope.clsCalBean.doEdit}"></af:commandMenuItem>
                             <af:commandMenuItem text="删除" id="cmi2" icon="/images/icons/delete_ena.png">
                                 <af:showPopupBehavior popupId="delete" triggerType="action"/>
                             </af:commandMenuItem>
@@ -66,11 +67,10 @@
                 </f:facet>
                 <f:facet name="activityDelete">
                     <af:popup id="delete" contentDelivery="lazyUncached"
-                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['教室管理员'] or (pageFlowScope.clsCalBean.currActivity.customAttributes['UserId'] eq sessionScope.LoginUserBean.userName)}">
+                              rendered="#{pageFlowScope.clsCalBean.editable}">
                         <!-- don't render if the activity is null -->
                         <af:dialog dialogListener="#{pageFlowScope.clsCalBean.deleteListener}"
                                    title="#{pageFlowScope.clsCalBean.currActivity.title}"
-                                   affirmativeTextAndAccessKey="Yes" cancelTextAndAccessKey="No"
                                    rendered="#{pageFlowScope.clsCalBean.currActivity != null}" id="d2">
                             <af:outputText value="请注意：该操作无法恢复！" id="ot4"/>
                             <af:spacer height="20" id="s4"/>

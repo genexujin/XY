@@ -63,6 +63,7 @@
           <Item Type="id" Value="Id"/>
           <Item Type="providerId" Value="ClassroomId"/>
           <Item Type="title" Value="ActTitle"/>
+          <Item Type="location" Value="UserId"/>
           <Item Type="timeType" Value="AllDay"/>
           <Item Type="startTime" Value="ActStartTime"/>
           <Item Type="endTime" Value="ActEndTime"/>
@@ -90,6 +91,16 @@
                   MethodName="refreshCalendar" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.Calendar">
       <NamedData NDName="clsRmNos" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="queryByPK" RequiresUpdateModel="true" Action="invokeMethod" MethodName="queryByPK"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClsRmCalDMLView">
+      <NamedData NDName="clsRmCalId" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="deleteByPK" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteByPK"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClsRmCalDMLView">
+      <NamedData NDName="clsRmCalId" NDValue="" NDType="java.lang.String"/>
     </methodAction>
   </bindings>
 </pageDefinition>

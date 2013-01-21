@@ -316,22 +316,6 @@
       <Item Value="edu.hp.model.eo.ClassroomCalendar.BatchId"/>
     </AttrArray>
   </Key>
-  <validation:CompareValidationBean
-    Name="ClassroomCalendar_Rule_1"
-    ResId="edu.hp.model.eo.ClassroomCalendar_Rule_1"
-    Severity="Warning"
-    OnAttribute="ActEndTime"
-    OperandType="ATTR"
-    Inverse="false"
-    CompareType="GREATERTHANEQUALTO"
-    CompareValue="ActStartTime">
-    <validation:OnAttributes>
-      <validation:Item
-        Value="ActEndTime"/>
-      <validation:Item
-        Value="ActStartTime"/>
-    </validation:OnAttributes>
-  </validation:CompareValidationBean>
   <validation:ExpressionValidationBean
     Name="ClassroomCalendar_Rule_0"
     OperandType="EXPR"
@@ -372,6 +356,21 @@
     </validation:MsgIds>
     <validation:TransientExpression><![CDATA[LocationId!=null]]></validation:TransientExpression>
   </validation:ExpressionValidationBean>
+  <validation:CompareValidationBean
+    Name="ClassroomCalendar_Rule_1"
+    ResId="edu.hp.model.eo.ClassroomCalendar_Rule_1"
+    OnAttribute="ActEndTime"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="GREATERTHANEQUALTO"
+    CompareValue="ActStartTime">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="ActEndTime"/>
+      <validation:Item
+        Value="ActStartTime"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

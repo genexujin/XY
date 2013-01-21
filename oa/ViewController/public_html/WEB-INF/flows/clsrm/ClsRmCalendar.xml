@@ -30,6 +30,10 @@
         <from-outcome>create</from-outcome>
         <to-activity-id>CreateInsert</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>Edit</from-outcome>
+        <to-activity-id>CreateCalendar</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__4">
       <from-activity-id>CreateInsert</from-activity-id>

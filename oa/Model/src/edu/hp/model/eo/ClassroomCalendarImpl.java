@@ -1,13 +1,10 @@
 package edu.hp.model.eo;
 
-import edu.hp.model.common.BaseEntity;
-
 import java.math.BigDecimal;
 
 import java.util.Calendar;
 
 import oracle.jbo.Key;
-import oracle.jbo.Row;
 import oracle.jbo.RowSet;
 import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Timestamp;
@@ -38,53 +35,56 @@ public class ClassroomCalendarImpl extends EntityImpl {
      */
     protected void doDML(int operation, TransactionEvent e) {
 
-        if (this.getAllDay().equals("ALLDAY")) {
+        if (operation == DML_INSERT || operation == DML_UPDATE) {
 
-            Timestamp actEndTime = this.getActEndTime();
-            if (actEndTime != null) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(actEndTime.getTime());
-                calendar.set(Calendar.HOUR_OF_DAY, 23);
-                calendar.set(Calendar.MINUTE, 59);
-                calendar.set(Calendar.SECOND, 59);
-                this.setActEndTime(new Timestamp(calendar.getTimeInMillis()));
+            if (this.getAllDay().equals("ALLDAY")) {
+
+                Timestamp actEndTime = this.getActEndTime();
+                if (actEndTime != null) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(actEndTime.getTime());
+                    calendar.set(Calendar.HOUR_OF_DAY, 23);
+                    calendar.set(Calendar.MINUTE, 59);
+                    calendar.set(Calendar.SECOND, 59);
+                    this.setActEndTime(new Timestamp(calendar.getTimeInMillis()));
+                }
+
             }
-
         }
 
         super.doDML(operation, e);
     }
 
 
-//    /**
-//     * Validation method for ClassroomCalendar.
-//     */
-//    public boolean validateTimeConflict() {
-//
-//        Timestamp actStartTime = this.getActStartTime();
-//        Timestamp actEndTime = this.getActEndTime();
-//        String clsRmId = this.getClassroomId();
-//        try {
-//            
-//            RowSet calendarView = this.getClassroomCalendarConflitQuery1();
-//            calendarView.ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
-//            calendarView.ensureVariableManager().setVariableValue("startQueryTime", actStartTime);
-//            calendarView.ensureVariableManager().setVariableValue("clsRoomId", clsRmId);
-//            calendarView.setRangeSize(-1);
-//            calendarView.executeQuery();
-//
-//            if (calendarView.first() !=null){
-//                return false;                
-//            }
-//            
-//        } catch (Exception e) {
-//            // TODO: Add catch code
-//            e.printStackTrace();
-//            return false;
-//        }
-//        
-//        return true;
-//    }
+    //    /**
+    //     * Validation method for ClassroomCalendar.
+    //     */
+    //    public boolean validateTimeConflict() {
+    //
+    //        Timestamp actStartTime = this.getActStartTime();
+    //        Timestamp actEndTime = this.getActEndTime();
+    //        String clsRmId = this.getClassroomId();
+    //        try {
+    //
+    //            RowSet calendarView = this.getClassroomCalendarConflitQuery1();
+    //            calendarView.ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
+    //            calendarView.ensureVariableManager().setVariableValue("startQueryTime", actStartTime);
+    //            calendarView.ensureVariableManager().setVariableValue("clsRoomId", clsRmId);
+    //            calendarView.setRangeSize(-1);
+    //            calendarView.executeQuery();
+    //
+    //            if (calendarView.first() !=null){
+    //                return false;
+    //            }
+    //
+    //        } catch (Exception e) {
+    //            // TODO: Add catch code
+    //            e.printStackTrace();
+    //            return false;
+    //        }
+    //
+    //        return true;
+    //    }
 
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. Do not modify.
@@ -98,8 +98,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setId((DBSequence)value);
             }
-        }
-        ,
+        },
         ActTitle {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getActTitle();
@@ -108,8 +107,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setActTitle((String)value);
             }
-        }
-        ,
+        },
         ActStartTime {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getActStartTime();
@@ -118,8 +116,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setActStartTime((Timestamp)value);
             }
-        }
-        ,
+        },
         ActEndTime {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getActEndTime();
@@ -128,8 +125,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setActEndTime((Timestamp)value);
             }
-        }
-        ,
+        },
         UserId {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getUserId();
@@ -138,8 +134,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setUserId((String)value);
             }
-        }
-        ,
+        },
         UserDisplayName {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getUserDisplayName();
@@ -148,8 +143,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setUserDisplayName((String)value);
             }
-        }
-        ,
+        },
         NumOfPeople {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getNumOfPeople();
@@ -158,8 +152,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setNumOfPeople((BigDecimal)value);
             }
-        }
-        ,
+        },
         Classroom {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getClassroom();
@@ -168,8 +161,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setClassroom((String)value);
             }
-        }
-        ,
+        },
         Comments {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getComments();
@@ -178,8 +170,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setComments((String)value);
             }
-        }
-        ,
+        },
         CreatedAt {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getCreatedAt();
@@ -188,8 +179,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        }
-        ,
+        },
         BatchNo {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getBatchNo();
@@ -198,8 +188,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setBatchNo((String)value);
             }
-        }
-        ,
+        },
         BatchId {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getBatchId();
@@ -208,8 +197,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setBatchId((String)value);
             }
-        }
-        ,
+        },
         LocationName {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getLocationName();
@@ -218,8 +206,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setLocationName((String)value);
             }
-        }
-        ,
+        },
         LocationId {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getLocationId();
@@ -228,8 +215,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setLocationId((String)value);
             }
-        }
-        ,
+        },
         ClassroomId {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getClassroomId();
@@ -238,8 +224,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setClassroomId((String)value);
             }
-        }
-        ,
+        },
         AllDay {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getAllDay();
@@ -248,8 +233,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setAllDay((String)value);
             }
-        }
-        ,
+        },
         ClassroomBatchReservation {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getClassroomBatchReservation();
@@ -258,8 +242,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setClassroomBatchReservation((EntityImpl)value);
             }
-        }
-        ,
+        },
         ClassroomCalendarConflitQuery1 {
             public Object get(ClassroomCalendarImpl obj) {
                 return obj.getClassroomCalendarConflitQuery1();
@@ -268,8 +251,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             public void put(ClassroomCalendarImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        }
-        ;
+        };
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
 
@@ -637,7 +619,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(DBSequence id) {
-        return new Key(new Object[]{id});
+        return new Key(new Object[] { id });
     }
 
 

@@ -18,9 +18,9 @@ public class ClassroomCalendarConflitQueryClient extends ViewUsageImpl implement
     public ClassroomCalendarConflitQueryClient() {
     }
 
-    public Boolean ifConflict(Timestamp actStartTime, Timestamp actEndTime, String clsRmId) {
+    public Boolean ifConflict(Timestamp actStartTime, Timestamp actEndTime, String clsRmId, String actId) {
         Object _ret =
-            getApplicationModuleProxy().riInvokeExportedMethod(this,"ifConflict",new String [] {"java.sql.Timestamp","java.sql.Timestamp","java.lang.String"},new Object[] {actStartTime, actEndTime, clsRmId});
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"ifConflict",new String [] {"java.sql.Timestamp","java.sql.Timestamp","java.lang.String","java.lang.String"},new Object[] {actStartTime, actEndTime, clsRmId, actId});
         return (Boolean)_ret;
     }
 }

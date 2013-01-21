@@ -119,8 +119,7 @@ public class CalendarBean {
         
         if (activity == null) {
             // no activity with that id is found in the model
-            System.out.println("No activity with event " + ae.toString());
-            setCurrActivity(null);
+              setCurrActivity(null);
             return;
         }
 
@@ -166,7 +165,7 @@ public class CalendarBean {
         }
         
         UIComponent calendar = JSFUtils.findComponent(valueChangeEvent.getComponent().getNamingContainer(), calendarid);
-               
+            
         refreshCalendar(calendar);
     }
 

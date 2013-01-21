@@ -38,6 +38,10 @@
         ResId="edu.hp.model.vo.ClsRmCalDMLView_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="clsRmCalId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="ClsRmList"
     ViewObjectName="edu.hp.model.vo.LovsView">
@@ -248,6 +252,42 @@
     EntityAttrName="UserId"
     EntityUsage="ClassroomCalendar"
     AliasName="USER_ID"/>
+  <ViewCriteria
+    Name="findById"
+    ViewObjectName="edu.hp.model.vo.ClsRmCalDMLView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ClsRmCalDMLViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":clsRmCalId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
@@ -263,6 +303,24 @@
         Type="java.lang.String"/>
       <Parameter
         Name="userId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="queryByPK"
+      MethodName="queryByPK">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="clsRmCalId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="deleteByPK"
+      MethodName="deleteByPK">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="clsRmCalId"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>
