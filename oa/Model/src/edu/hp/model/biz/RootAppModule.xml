@@ -28,6 +28,10 @@
     Name="ClassRmModule"
     FullName="edu.hp.model.biz.ClassRmModule"
     SharedScope="0"/>
+  <AppModuleUsage
+    Name="HelpdeskCallsAppModule1"
+    FullName="edu.hp.model.biz.HelpdeskCallsAppModule"
+    SharedScope="0"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

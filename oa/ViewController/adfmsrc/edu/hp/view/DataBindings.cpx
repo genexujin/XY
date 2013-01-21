@@ -18,7 +18,7 @@
     <page path="/WEB-INF/flows/clsrm/ClsRmCalendar.xml#ClsRmCalendar@CreateInsert"
           usageId="edu_hp_view_ClsRmCalendar_ClsRmCalendar_CreateInsertPageDef"/>
     <page path="/pages/clsrm/CreateCalendar.jsff" usageId="edu_hp_view_CreateCalendarPageDef"/>
-  
+    <page path="/pages/helpdesk/MyHelpdeskCall.jsff" usageId="edu_hp_view_MyHelpdeskCallPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -30,6 +30,8 @@
     <page id="edu_hp_view_ClsRmCalendar_ClsRmCalendar_CreateInsertPageDef"
           path="flows.clsrm.ClsRmCalendar_ClsRmCalendar_CreateInsertPageDef"/>
     <page id="edu_hp_view_CreateCalendarPageDef" path="pages.clsrm.CreateCalendarPageDef"/>
+
+    <page id="edu_hp_view_MyHelpdeskCallPageDef" path="pages.helpdesk.MyHelpdeskCallPageDef"/>
 
   </pageDefinitionUsages>
   <dataControlUsages>
