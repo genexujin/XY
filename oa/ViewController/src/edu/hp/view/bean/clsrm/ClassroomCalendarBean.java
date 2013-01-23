@@ -1,6 +1,7 @@
 package edu.hp.view.bean.clsrm;
 
 import edu.hp.view.bean.common.CalendarBean;
+import edu.hp.view.bean.common.OACalendarActivity;
 import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
@@ -8,9 +9,15 @@ import edu.hp.view.utils.JSFUtils;
 import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 
+import oracle.adf.view.rich.dnd.DnDAction;
+import oracle.adf.view.rich.event.CalendarActivityDurationChangeEvent;
 import oracle.adf.view.rich.event.DialogEvent;
+import oracle.adf.view.rich.event.DropEvent;
+import oracle.adf.view.rich.model.CalendarActivity;
 
 import oracle.binding.OperationBinding;
+
+import oracle.jbo.domain.Timestamp;
 
 
 public class ClassroomCalendarBean extends CalendarBean {
@@ -39,8 +46,8 @@ public class ClassroomCalendarBean extends CalendarBean {
                 return true;
 
             String userId = this.getCurrActivity().getUserId();
-            if (userId.equals(user.getUserName())){
-                
+            if (userId.equals(user.getUserName())) {
+
                 return true;
             }
         }
@@ -65,15 +72,15 @@ public class ClassroomCalendarBean extends CalendarBean {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             OperationBinding binding = ADFUtils.findOperation("deleteByPK");
             String clsRmCalId = this.getCurrActivity().getActivity().getId();
-//            System.err.println("to del act id: " + clsRmCalId);
+            //            System.err.println("to del act id: " + clsRmCalId);
             binding.getParamsMap().put("clsRmCalId", clsRmCalId);
-            binding.execute();            
-            if (binding.getErrors().isEmpty()) {                       
+            binding.execute();
+            if (binding.getErrors().isEmpty()) {
                 this._currActivity = null;
-                UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);                    
+                UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
                 refreshCalendar(calendar);
             }
-            
+
         }
     }
 
@@ -98,5 +105,64 @@ public class ClassroomCalendarBean extends CalendarBean {
         }
 
         return "Edit";
+    }
+
+    public void calDurationChanged(CalendarActivityDurationChangeEvent ae) {
+        CalendarActivity activity = ae.getCalendarActivity();
+
+        if (activity == null) {
+
+            setCurrActivity(null);
+
+            UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+            if (calendar != null)
+                refreshCalendar(calendar);
+            return;
+        }
+
+        OACalendarActivity demoActivity = new OACalendarActivity(activity);
+        this.setCurrActivity(demoActivity);
+
+        Boolean hasNoConflict =
+            ensureTimeConflicts(new java.sql.Timestamp(demoActivity.getFrom().getTime()), new java.sql.Timestamp(demoActivity.getTo().getTime()),
+                                (String)demoActivity.getCustomAttributes().get("LocationId"), demoActivity.getId());
+        if (hasNoConflict) {
+            OperationBinding binding = ADFUtils.findOperation("updateEndTime");
+            binding.getParamsMap().put("clsRmCalId", demoActivity.getId());
+            binding.getParamsMap().put("endTime", new Timestamp(demoActivity.getTo()));
+            binding.execute();
+            if (binding.getErrors().isEmpty()) {
+                UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+                if (calendar != null)
+                    refreshCalendar(calendar);
+            } else {
+                JSFUtils.addFacesErrorMessage("时间调整失败！");
+            }
+
+        }else{
+            JSFUtils.addFacesErrorMessage("该教室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
+        }
+        //update clsrmcaldmlvo
+
+    }
+
+    protected Boolean ensureTimeConflicts(java.sql.Timestamp actStartTime, java.sql.Timestamp actEndTime,
+                                          String clsRmId, String actId) {
+
+        Boolean result = false;
+        OperationBinding binding = ADFUtils.findOperation("ifConflict");
+        binding.getParamsMap().put("actStartTime", actStartTime);
+        binding.getParamsMap().put("actEndTime", actEndTime);
+        binding.getParamsMap().put("clsRmId", clsRmId);
+        binding.getParamsMap().put("actId", actId);
+        binding.execute();
+        result = (Boolean)binding.getResult();
+        return result;
+
+    }
+
+    public DnDAction handleDrop(DropEvent dropEvent) {
+        // Add event code here...
+        return DnDAction.NONE;
     }
 }

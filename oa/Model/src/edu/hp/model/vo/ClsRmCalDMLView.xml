@@ -323,5 +323,17 @@
         Name="clsRmCalId"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="updateEndTime"
+      MethodName="updateEndTime">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="clsRmCalId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="endTime"
+        Type="oracle.jbo.domain.Timestamp"/>
+    </Method>
   </ClientInterface>
 </ViewObject>

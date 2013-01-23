@@ -102,5 +102,20 @@
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClsRmCalDMLView">
       <NamedData NDName="clsRmCalId" NDValue="" NDType="java.lang.String"/>
     </methodAction>
+    <methodAction id="updateEndTime" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateEndTime"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClsRmCalDMLView">
+      <NamedData NDName="clsRmCalId" NDType="java.lang.String"/>
+      <NamedData NDName="endTime" NDType="oracle.jbo.domain.Timestamp"/>
+    </methodAction>
+    <methodAction id="ifConflict" RequiresUpdateModel="true" Action="invokeMethod" MethodName="ifConflict"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ConflitQuery"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.ifConflict_RootAppModuleDataControl_dataProvider_Root_ClassRmModule_ConflitQuery_ifConflict_result">
+      <NamedData NDName="actStartTime" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="actEndTime" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="clsRmId" NDType="java.lang.String"/>
+      <NamedData NDName="actId" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

@@ -4,6 +4,7 @@ import edu.hp.model.common.BaseView;
 import edu.hp.model.vo.common.ClsRmCalDMLView;
 
 import oracle.jbo.Row;
+import oracle.jbo.domain.Timestamp;
 
 
 // ---------------------------------------------------------------------
@@ -17,6 +18,16 @@ public class ClsRmCalDMLViewImpl extends BaseView implements ClsRmCalDMLView {
      * This is the default constructor (do not remove).
      */
     public ClsRmCalDMLViewImpl() {
+    }
+    
+    public void updateEndTime(String clsRmCalId, Timestamp endTime){
+        this.queryByPK(clsRmCalId);
+        Row[] rows = this.getAllRowsInRange();
+        if (rows != null && rows.length > 0) {
+            //rows[0].removeFromCollection();
+            rows[0].setAttribute("ActEndTime", endTime);
+            this.getDBTransaction().commit();
+        }
     }
 
 
