@@ -35,7 +35,10 @@
                     <f:facet name="separator">
                         <af:spacer width="10px" height="5px"/>
                     </f:facet>
-                    <af:inputComboboxListOfValues label="报修原因" popupTitle="Search and Result Dialog" id="iclov1"/>
+                    <af:selectOneChoice label="#{bindings.ReasonLevel1.label}" id="iclov1" value="#{bindings.ReasonLevel1.inputValue}"
+                                        valueChangeListener="#{pageFlowScope.MyHdCallBean.reasonLevel1Changed}" autoSubmit="true">
+                        <f:selectItems value="#{bindings.ReasonLevel1.items}" id="si1"/>
+                    </af:selectOneChoice>
                     <af:inputComboboxListOfValues popupTitle="Search and Result Dialog" id="iclov3"/>
                     <af:inputComboboxListOfValues popupTitle="Search and Result Dialog" id="iclov4"/>
                     <af:inputComboboxListOfValues label="处理结果" popupTitle="Search and Result Dialog" id="iclov5"/>

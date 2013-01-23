@@ -4,12 +4,14 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="Root.HelpdeskCallsAppModule1.HelpdeskCallsView1" DataControl="RootAppModuleDataControl"
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HelpdeskCallsView" DataControl="RootAppModuleDataControl"
               RangeSize="25" id="HelpdeskCallsView1Iterator"/>
     <!--<searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery"/>-->
     <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery1"/>
+    <iterator Binds="ReasonLevel1" RangeSize="10" DataControl="HelpdeskCallsAppModuleDataControl"
+              id="ReasonLevel1Iterator"/>
   </executables>
   <bindings>
     <!--<tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView1">
@@ -50,5 +52,10 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <list ListOperMode="navigation" IterBinding="ReasonLevel1Iterator" ListIter="ReasonLevel1Iterator" id="ReasonLevel1">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
   </bindings>
 </pageDefinition>
