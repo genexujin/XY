@@ -7,30 +7,33 @@
   Version="11.1.2.62.76"
   ClearCacheOnRollback="true">
   <ViewUsage
-    Name="HelpdeskCallsView1"
+    Name="HelpdeskCallsView"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"/>
   <ViewUsage
-    Name="EmployeesView1"
+    Name="EmployeesView"
     ViewObjectName="edu.hp.model.vo.EmployeesView"/>
   <ViewUsage
-    Name="HelpdeskCallsView2"
+    Name="HelpdeskCallsViewForCallee"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"/>
   <ViewUsage
     Name="EmployeesView2"
     ViewObjectName="edu.hp.model.vo.EmployeesView"/>
   <ViewUsage
-    Name="HelpdeskCallsView3"
+    Name="HelpdeskCallsViewForCaller"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"/>
+  <ViewUsage
+    Name="ReasonLevel1"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"/>
   <ViewLinkUsage
     Name="EmpHelpdeskCalleeViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
-    SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.EmployeesView1"
-    DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.HelpdeskCallsView2"
+    SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.EmployeesView"
+    DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.HelpdeskCallsViewForCallee"
     Reversed="false"/>
   <ViewLinkUsage
     Name="EmpHelpdeskCallerViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCallerViewLink"
     SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.EmployeesView2"
-    DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.HelpdeskCallsView3"
+    DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.HelpdeskCallsViewForCaller"
     Reversed="false"/>
 </AppModule>
