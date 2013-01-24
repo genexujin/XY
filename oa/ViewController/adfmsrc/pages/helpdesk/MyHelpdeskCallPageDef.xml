@@ -12,33 +12,10 @@
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery1"/>
     <iterator Binds="ReasonLevel1" RangeSize="10" DataControl="HelpdeskCallsAppModuleDataControl"
               id="ReasonLevel1Iterator"/>
+    <iterator Binds="ReasonLevel2" RangeSize="25" DataControl="HelpdeskCallsAppModuleDataControl"
+              id="ReasonLevel2Iterator"/>
   </executables>
   <bindings>
-    <!--<tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView1">
-      <nodeDefinition DefName="edu.hp.model.vo.HelpdeskCallsView" Name="HelpdeskCallsView10">
-        <AttrNames>
-          <Item Value="CallId"/>
-          <Item Value="CallReadableId"/>
-          <Item Value="CallerId"/>
-          <Item Value="CalleeId"/>
-          <Item Value="LocationId"/>
-          <Item Value="LocationDetail"/>
-          <Item Value="CreateBy"/>
-          <Item Value="CreateAt"/>
-          <Item Value="LastUpdatedBy"/>
-          <Item Value="LastUpdatedAt"/>
-          <Item Value="State"/>
-          <Item Value="CallResult"/>
-          <Item Value="CallResultDetail"/>
-          <Item Value="CallEval"/>
-          <Item Value="CallEvalDetail"/>
-          <Item Value="ReasonLevel1"/>
-          <Item Value="ReasonLevel2"/>
-          <Item Value="ReasonLevel3"/>
-          <Item Value="ReasonDetail"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>-->
     <tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView11">
       <nodeDefinition DefName="edu.hp.model.vo.HelpdeskCallsView" Name="HelpdeskCallsView110">
         <AttrNames>
@@ -53,6 +30,12 @@
       </nodeDefinition>
     </tree>
     <list ListOperMode="navigation" IterBinding="ReasonLevel1Iterator" ListIter="ReasonLevel1Iterator" id="ReasonLevel1">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ReasonLevel2Iterator" ListOperMode="navigation" ListIter="ReasonLevel2Iterator"
+          id="ReasonLevel2" DTSupportsMRU="true" SelectItemValueMode="ListObject">
       <AttrNames>
         <Item Value="Value"/>
       </AttrNames>

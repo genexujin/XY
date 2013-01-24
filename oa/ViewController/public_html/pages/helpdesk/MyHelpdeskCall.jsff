@@ -37,9 +37,13 @@
                     </f:facet>
                     <af:selectOneChoice label="#{bindings.ReasonLevel1.label}" id="iclov1" value="#{bindings.ReasonLevel1.inputValue}"
                                         valueChangeListener="#{pageFlowScope.MyHdCallBean.reasonLevel1Changed}" autoSubmit="true">
-                        <f:selectItems value="#{bindings.ReasonLevel1.items}" id="si1"/>
+                        <f:selectItems value="#{bindings.ReasonLevel1.items}" id="soc1"/>
                     </af:selectOneChoice>
-                    <af:inputComboboxListOfValues popupTitle="Search and Result Dialog" id="iclov3"/>
+                    <af:selectOneChoice value="#{bindings.ReasonLevel2.inputValue}"
+                                        required="#{bindings.ReasonLevel2.hints.mandatory}"
+                                        shortDesc="#{bindings.ReasonLevel2.hints.tooltip}" id="soc2">
+                        <f:selectItems value="#{bindings.ReasonLevel2.items}" id="si6"/>
+                    </af:selectOneChoice>
                     <af:inputComboboxListOfValues popupTitle="Search and Result Dialog" id="iclov4"/>
                     <af:inputComboboxListOfValues label="处理结果" popupTitle="Search and Result Dialog" id="iclov5"/>
                 </af:panelGroupLayout>
