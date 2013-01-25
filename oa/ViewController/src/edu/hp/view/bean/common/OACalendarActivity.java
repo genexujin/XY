@@ -55,7 +55,7 @@ public class OACalendarActivity implements Serializable {
     }
 
     public void setFrom(Date from) {
-        //do nothing
+       //do nothing
     }
 
     public Date getFrom() {

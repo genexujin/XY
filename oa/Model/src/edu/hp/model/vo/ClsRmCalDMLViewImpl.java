@@ -19,11 +19,24 @@ public class ClsRmCalDMLViewImpl extends BaseView implements ClsRmCalDMLView {
      */
     public ClsRmCalDMLViewImpl() {
     }
-    
-    public void updateEndTime(String clsRmCalId, Timestamp endTime){
+
+    public void updateActivityTime(String clsRmCalId, Timestamp startTime, Timestamp endTime) {
         this.queryByPK(clsRmCalId);
         Row[] rows = this.getAllRowsInRange();
         if (rows != null && rows.length > 0) {
+
+            rows[0].setAttribute("ActStartTime", startTime);
+            rows[0].setAttribute("ActEndTime", endTime);
+            this.getDBTransaction().commit();
+        }
+    }
+
+    public void updateEndTime(String clsRmCalId, Timestamp endTime) {
+        this.queryByPK(clsRmCalId);
+
+        Row[] rows = this.getAllRowsInRange();
+        if (rows != null && rows.length > 0) {
+
             //rows[0].removeFromCollection();
             rows[0].setAttribute("ActEndTime", endTime);
             this.getDBTransaction().commit();

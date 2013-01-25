@@ -6,13 +6,13 @@ import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import java.util.Date;
+
 import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 
-import oracle.adf.view.rich.dnd.DnDAction;
 import oracle.adf.view.rich.event.CalendarActivityDurationChangeEvent;
 import oracle.adf.view.rich.event.DialogEvent;
-import oracle.adf.view.rich.event.DropEvent;
 import oracle.adf.view.rich.model.CalendarActivity;
 
 import oracle.binding.OperationBinding;
@@ -112,6 +112,7 @@ public class ClassroomCalendarBean extends CalendarBean {
 
         if (activity == null) {
 
+
             setCurrActivity(null);
 
             UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
@@ -124,12 +125,13 @@ public class ClassroomCalendarBean extends CalendarBean {
         this.setCurrActivity(demoActivity);
 
         Boolean hasNoConflict =
-            ensureTimeConflicts(new java.sql.Timestamp(demoActivity.getFrom().getTime()), new java.sql.Timestamp(demoActivity.getTo().getTime()),
+            ensureTimeConflicts(new java.sql.Timestamp(demoActivity.getFrom().getTime()), new java.sql.Timestamp(ae.getNewEndDate().getTime()),
                                 (String)demoActivity.getCustomAttributes().get("LocationId"), demoActivity.getId());
         if (hasNoConflict) {
+
             OperationBinding binding = ADFUtils.findOperation("updateEndTime");
             binding.getParamsMap().put("clsRmCalId", demoActivity.getId());
-            binding.getParamsMap().put("endTime", new Timestamp(demoActivity.getTo()));
+            binding.getParamsMap().put("endTime", new Timestamp(ae.getNewEndDate()));
             binding.execute();
             if (binding.getErrors().isEmpty()) {
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
@@ -139,7 +141,7 @@ public class ClassroomCalendarBean extends CalendarBean {
                 JSFUtils.addFacesErrorMessage("时间调整失败！");
             }
 
-        }else{
+        } else {
             JSFUtils.addFacesErrorMessage("该教室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
         }
         //update clsrmcaldmlvo
@@ -161,8 +163,32 @@ public class ClassroomCalendarBean extends CalendarBean {
 
     }
 
-    public DnDAction handleDrop(DropEvent dropEvent) {
-        // Add event code here...
-        return DnDAction.NONE;
+
+    protected void doUpdateCalendar(OACalendarActivity activity, Date newStart, Date newEnd) {
+
+        super.doUpdateCalendar(activity, newStart, newEnd);
+
+        Boolean hasNoConflict =
+            ensureTimeConflicts(new java.sql.Timestamp(newStart.getTime()), new java.sql.Timestamp(newEnd.getTime()),
+                                (String)activity.getCustomAttributes().get("LocationId"), activity.getId());
+        if (hasNoConflict) {
+
+            OperationBinding binding = ADFUtils.findOperation("updateActivityTime");
+            binding.getParamsMap().put("clsRmCalId", activity.getId());
+            binding.getParamsMap().put("endTime", new Timestamp(newEnd));
+            binding.getParamsMap().put("startTime", new Timestamp(newStart));
+            binding.execute();
+            if (binding.getErrors().isEmpty()) {
+                UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+                if (calendar != null)
+                    refreshCalendar(calendar);
+            } else {
+                JSFUtils.addFacesErrorMessage("时间调整失败！");
+            }
+
+        } else {
+            JSFUtils.addFacesErrorMessage("该教室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
+        }
+
     }
 }

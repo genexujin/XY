@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +20,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.view.rich.component.rich.data.RichCalendar;
+import oracle.adf.view.rich.datatransfer.DataFlavor;
+import oracle.adf.view.rich.datatransfer.Transferable;
+import oracle.adf.view.rich.dnd.CalendarDropSite;
+import oracle.adf.view.rich.dnd.DnDAction;
 import oracle.adf.view.rich.event.CalendarActivityEvent;
+import oracle.adf.view.rich.event.DropEvent;
 import oracle.adf.view.rich.event.TriggerType;
 import oracle.adf.view.rich.model.CalendarActivity;
 import oracle.adf.view.rich.model.CalendarProvider;
@@ -202,6 +210,100 @@ public class CalendarBean {
         refreshOp.execute();
 
         ADFUtils.partialRefreshComponenet(calendar);
+    }
+    
+    public DnDAction handleDrop(DropEvent dropEvent) {
+
+        Transferable transferable = dropEvent.getTransferable();
+        CalendarDropSite dropSite = (CalendarDropSite)dropEvent.getDropSite();
+        Date dropSiteDate = dropSite.getDate();
+        CalendarActivity.TimeType timeType = dropSite.getTimeType();
+
+        CalendarActivity activity =
+            (CalendarActivity)transferable.getData(DataFlavor.getDataFlavor(CalendarActivity.class));
+
+
+        _handleCalendarActivityDrop(dropEvent, dropSiteDate, activity);
+
+        return dropEvent.getProposedAction();
+    }
+
+    protected void _handleCalendarActivityDrop(DropEvent dropEvent, Date dropSiteDate, CalendarActivity activity) {
+        OACalendarActivity movingActivity = new OACalendarActivity(activity);
+
+        // If this is a timed event
+        Date startDate = movingActivity.getFrom();
+
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(startDate);
+
+        Calendar dropCal = Calendar.getInstance();
+        dropCal.setTime(dropSiteDate);
+
+        int startDayOfYear = startCal.get(Calendar.DAY_OF_YEAR);
+        int startHour = startCal.get(Calendar.HOUR_OF_DAY);
+        int startMin = startCal.get(Calendar.MINUTE);
+        int dropDayOfYear = dropCal.get(Calendar.DAY_OF_YEAR);
+        int dropHour = dropCal.get(Calendar.HOUR_OF_DAY);
+        int dropMin = dropCal.get(Calendar.MINUTE);
+        Date _proposedStartDate;
+        // move the start date to the new time
+        if (startDayOfYear != dropDayOfYear) {
+            startCal.set(Calendar.DAY_OF_YEAR, dropDayOfYear);
+            startCal.set(Calendar.YEAR, dropCal.get(Calendar.YEAR));
+            startCal.set(Calendar.MONTH, dropCal.get(Calendar.MONTH));
+        }
+
+        // move this activity to the new location
+        if (movingActivity.isAllDay()) {
+             _proposedStartDate = startCal.getTime();
+
+            // Get the original start day
+            startCal = Calendar.getInstance();
+            startCal.setTime(movingActivity.getFrom());
+            
+            // Calcuate new end day by using the new start day and the original delta            
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(movingActivity.getTo());;
+
+            long delta = endCal.getTime().getTime() - startCal.getTime().getTime();
+            Date endDate = new Date(_proposedStartDate.getTime() + delta);
+
+            // update to the new start and end day
+            doUpdateCalendar(movingActivity,_proposedStartDate,endDate);
+    
+
+        } else {
+            String view = ((RichCalendar)dropEvent.getDropComponent()).getView();
+
+            if ((RichCalendar.VIEW_DAY.equals(view) || RichCalendar.VIEW_WEEK.equals(view)) &&
+                CalendarActivity.TimeType.TIME.equals(activity.getTimeType())) {
+                if (startHour != dropHour)
+                    startCal.set(Calendar.HOUR_OF_DAY, dropHour);
+
+                if (dropMin != startMin) {
+                    if (dropMin == 0 && startMin >= 30)
+                        startCal.add(Calendar.MINUTE, -30);
+                    else if (dropMin == 30 && startMin < 30)
+                        startCal.add(Calendar.MINUTE, 30);
+                }
+            }
+
+            Date endDate = movingActivity.getTo();
+            long delta = endDate.getTime() - startDate.getTime();
+
+            startDate = startCal.getTime();
+            endDate = new Date(startDate.getTime() + delta);
+
+            doUpdateCalendar(movingActivity,startDate,endDate);
+
+        }
+
+        
+    }
+    
+    protected void doUpdateCalendar(OACalendarActivity activity, Date newStart, Date newEnd){
+        //do nothing
     }
 
     /**

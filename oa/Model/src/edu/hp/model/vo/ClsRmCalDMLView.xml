@@ -335,5 +335,20 @@
         Name="endTime"
         Type="oracle.jbo.domain.Timestamp"/>
     </Method>
+    <Method
+      Name="updateActivityTime"
+      MethodName="updateActivityTime">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="clsRmCalId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="startTime"
+        Type="oracle.jbo.domain.Timestamp"/>
+      <Parameter
+        Name="endTime"
+        Type="oracle.jbo.domain.Timestamp"/>
+    </Method>
   </ClientInterface>
 </ViewObject>

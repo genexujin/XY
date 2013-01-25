@@ -14,4 +14,6 @@ public interface ClsRmCalDMLView extends ViewObject {
     void deleteByPK(String clsRmCalId);
 
     void updateEndTime(String clsRmCalId, Timestamp endTime);
+
+    void updateActivityTime(String clsRmCalId, Timestamp startTime, Timestamp endTime);
 }

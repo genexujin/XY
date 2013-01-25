@@ -117,5 +117,12 @@
       <NamedData NDName="clsRmId" NDType="java.lang.String"/>
       <NamedData NDName="actId" NDType="java.lang.String"/>
     </methodAction>
+    <methodAction id="updateActivityTime" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateActivityTime" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.ClsRmCalDMLView">
+      <NamedData NDName="clsRmCalId" NDType="java.lang.String"/>
+      <NamedData NDName="startTime" NDType="oracle.jbo.domain.Timestamp"/>
+      <NamedData NDName="endTime" NDType="oracle.jbo.domain.Timestamp"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

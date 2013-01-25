@@ -36,6 +36,12 @@ public class ClsRmCalDMLViewClient extends ViewUsageImpl implements ClsRmCalDMLV
         return;
     }
 
+    public void updateActivityTime(String clsRmCalId, Timestamp startTime, Timestamp endTime) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"updateActivityTime",new String [] {"java.lang.String","oracle.jbo.domain.Timestamp","oracle.jbo.domain.Timestamp"},new Object[] {clsRmCalId, startTime, endTime});
+        return;
+    }
+
     public void updateEndTime(String clsRmCalId, Timestamp endTime) {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this,"updateEndTime",new String [] {"java.lang.String","oracle.jbo.domain.Timestamp"},new Object[] {clsRmCalId, endTime});

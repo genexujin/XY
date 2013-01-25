@@ -61,11 +61,7 @@
   <Containee
     Name="helpdesk"
     PackageName="edu.hp.model.vo.query.helpdesk"
-    ObjectType="JboPackage">
-    <DesignTime>
-      <Attr Name="_VO" Value="true"/>
-    </DesignTime>
-  </Containee>
+    ObjectType="JboPackage"/>
   <Containee
     Name="security"
     PackageName="edu.hp.model.vo.query.security"
