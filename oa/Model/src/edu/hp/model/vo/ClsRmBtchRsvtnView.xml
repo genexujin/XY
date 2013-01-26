@@ -3,7 +3,7 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="ClassroomBatchReservationView"
+  Name="ClsRmBtchRsvtnView"
   Version="11.1.2.62.76"
   SelectList="ClassroomBatchReservation.ID, 
        ClassroomBatchReservation.BATCH_NO, 
@@ -41,7 +41,12 @@
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
-  ComponentClass="edu.hp.model.common.BaseView">
+  ComponentClass="edu.hp.model.vo.ClsRmBtchRsvtnViewImpl"
+  RowClass="edu.hp.model.vo.ClsRmBtchRsvtnViewRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <ViewAccessor
     Name="ClsRmList"
     ViewObjectName="edu.hp.model.vo.LovsView">
@@ -57,6 +62,10 @@
   <ViewAccessor
     Name="Locations"
     ViewObjectName="edu.hp.model.vo.LocationsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Employees"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
     RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_Classroom"
@@ -100,6 +109,31 @@
       <Item Value="LocationName"/>
     </AttrArray>
     <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UserDisplayName"
+    ListVOName="Employees"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UserDisplayName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayName"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+      <Item Value="Title"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="findByDepartment"
+      Hint="showAndExecute"/>
   </ListBinding>
   <EntityUsage
     Name="ClassroomBatchReservation"
@@ -148,7 +182,15 @@
     PrecisionRule="true"
     EntityAttrName="UserDisplayName"
     EntityUsage="ClassroomBatchReservation"
-    AliasName="USER_DISPLAY_NAME"/>
+    AliasName="USER_DISPLAY_NAME"
+    LOVName="LOV_UserDisplayName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="NumOfPeople"
     PrecisionRule="true"
@@ -299,7 +341,7 @@
         <CONTROLTYPE
           Value="choice"/>
         <LABEL
-          ResId="edu.hp.model.vo.ClassroomBatchReservationView.LocationName_LABEL"/>
+          ResId="edu.hp.model.vo.ClsRmBtchRsvtnView.LocationName_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

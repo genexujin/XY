@@ -16,20 +16,20 @@
     Name="ClassroomBatchReservationVA"
     Cardinality="1"
     Source="true"
-    Owner="edu.hp.model.vo.ClassroomBatchReservationView">
+    Owner="edu.hp.model.vo.ClsRmBtchRsvtnView">
     <DesignTime>
       <Attr Name="_accessor" Value="true"/>
       <Attr Name="_finderName" Value="ClassroomBatchReservationVA"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.ClassroomBatchReservationView.Id"/>
+      <Item Value="edu.hp.model.vo.ClsRmBtchRsvtnView.Id"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ViewLinkDefEnd
     Name="BatchInstancesVA"
     Cardinality="-1"
-    Owner="edu.hp.model.vo.ClassroomCalendarView">
+    Owner="edu.hp.model.vo.ClsRmCalDMLView">
     <DesignTime>
       <Attr Name="_finderName" Value="BatchInstancesVA"/>
       <Attr Name="_isUpdateable" Value="true"/>

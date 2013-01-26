@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="batch-reservation-btf">
+    <default-activity>ClassRoomBatchReservation</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>ClsRmBatchBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.clsrm.ClsRmBatchBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="ClassRoomBatchReservation">
+      <page>/pages/clsrm/ClassRoomBatchReservation.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="ClassRoomBatchReservationPageDef" Package="pages.clsrm" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.ClassRmModule.ClsRmBtchRsvtnView" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ClsRmBtchRsvtnViewIterator"/>
+    <searchRegion Binds="ClsRmBtchRsvtnViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ClsRmBtchRsvtnViewQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ClsRmBtchRsvtnViewIterator" id="ClsRmBtchRsvtnView">
+      <nodeDefinition DefName="edu.hp.model.vo.ClsRmBtchRsvtnView" Name="ClsRmBtchRsvtnView0">
+        <AttrNames>
+          <Item Value="BatchNo"/>
+          <Item Value="AllDay"/>
+          <Item Value="ActTitle"/>
+          <Item Value="ActStartTime"/>
+          <Item Value="ActEndTime"/>
+          <Item Value="LocationName"/>
+          <Item Value="Classroom"/>
+          <Item Value="UserDisplayName"/>
+          <Item Value="NumOfPeople"/>
+          <Item Value="BatchEffectiveDate"/>
+          <Item Value="BatchExpireDate"/>
+          <Item Value="RecurrenceType"/>
+          <Item Value="Comments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues StaticList="false" IterBinding="ClsRmBtchRsvtnViewIterator" Uses="LOV_UserDisplayName"
+                  id="UserDisplayName"/>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="BatchNo">
+      <AttrNames>
+        <Item Value="BatchNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="ActTitle">
+      <AttrNames>
+        <Item Value="ActTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="AllDay">
+      <AttrNames>
+        <Item Value="AllDay"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="ActStartTime">
+      <AttrNames>
+        <Item Value="ActStartTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="ActEndTime">
+      <AttrNames>
+        <Item Value="ActEndTime"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ClsRmBtchRsvtnViewIterator" StaticList="false" Uses="LOV_LocationName" id="LocationName"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ClsRmBtchRsvtnViewIterator" StaticList="false" Uses="LOV_Classroom" id="Classroom"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="NumOfPeople">
+      <AttrNames>
+        <Item Value="NumOfPeople"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="Comments">
+      <AttrNames>
+        <Item Value="Comments"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="BatchEffectiveDate">
+      <AttrNames>
+        <Item Value="BatchEffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="BatchExpireDate">
+      <AttrNames>
+        <Item Value="BatchExpireDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="RecurrenceType">
+      <AttrNames>
+        <Item Value="RecurrenceType"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="ClsRmBtchRsvtnViewIterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="ClsRmBtchRsvtnViewIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="RootAppModuleDataControl"/>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="FstWkMon" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkMon"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="FstWkTue" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkTue"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="FstWkWed" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkWed"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="FstWkThu" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkThu"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="FstWkFri" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkFri"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="FstWkSat" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkSat"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="FstWkSun" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkSun"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="SndWkMon" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkMon"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="SndWkTue" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkTue"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="SndWkWed" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkWed"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="SndWkThu" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkThu"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="SndWkFri" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkFri"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="SndWkSat" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkSat"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ClsRmBtchRsvtnViewIterator" id="SndWkSun" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkSun"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="saveBatchOrders" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveBatchOrders"
+                  IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.saveBatchOrders_RootAppModuleDataControl_dataProvider_Root_ClassRmModule_saveBatchOrders_result"/>
+    <methodAction id="deleteCurrentBatchOrder" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteCurrentBatchOrder" IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule"/>
+  </bindings>
+</pageDefinition>

@@ -26,8 +26,7 @@ public class ClassroomCalendarConflitQueryImpl extends ViewObjectImpl implements
         
         try {
             
-            if(actStartTime.equals(actEndTime)){
-                
+            if(actStartTime.equals(actEndTime)){                
                 if (actEndTime != null) {
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTimeInMillis(actEndTime.getTime());
@@ -35,19 +34,14 @@ public class ClassroomCalendarConflitQueryImpl extends ViewObjectImpl implements
                     calendar.set(Calendar.MINUTE, 59);
                     calendar.set(Calendar.SECOND, 59);
                     actEndTime = new Timestamp(calendar.getTimeInMillis());
-                }      
-
-                
+                }                      
             }
             
             ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
             ensureVariableManager().setVariableValue("startQueryTime", actStartTime);
             ensureVariableManager().setVariableValue("clsRoomId", clsRmId);
-//            System.err.println(actStartTime);
-//            System.err.println(actEndTime);
-//            System.err.println(clsRmId);
-//            System.err.println(actId);
             ensureVariableManager().setVariableValue("actId", actId);
+            
             setRangeSize(-1);
             executeQuery();
             if (first() !=null){

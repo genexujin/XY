@@ -81,4 +81,20 @@ public class ClsRmCalDMLViewImpl extends BaseView implements ClsRmCalDMLView {
     public void setclsRmCalId(String value) {
         ensureVariableManager().setVariableValue("clsRmCalId", value);
     }
+
+    /**
+     * Returns the variable value for batchNo.
+     * @return variable value for batchNo
+     */
+    public String getbatchNo() {
+        return (String)ensureVariableManager().getVariableValue("batchNo");
+    }
+
+    /**
+     * Sets <code>value</code> for variable batchNo.
+     * @param value value to bind as batchNo
+     */
+    public void setbatchNo(String value) {
+        ensureVariableManager().setVariableValue("batchNo", value);
+    }
 }

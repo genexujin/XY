@@ -3,4 +3,8 @@
   <application>
     <default-render-kit-id>oracle.adf.rich</default-render-kit-id>
   </application>
+  <converter>
+    <converter-id>YNConverter</converter-id>
+    <converter-class>edu.hp.view.utils.YNConverter</converter-class>
+  </converter>
 </faces-config>
