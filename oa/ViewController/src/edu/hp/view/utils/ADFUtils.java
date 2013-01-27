@@ -271,6 +271,9 @@ public class ADFUtils {
      */
     public static BindingContainer getBindingContainer() {
         return (BindingContainer)JSFUtils.resolveExpression("#{bindings}");
+        
+        //Maybe another way to do this is:
+        //BindingContext.getCurrent().getCurrentBindingsEntry();
     }
 
     /**

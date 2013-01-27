@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="MyHdCall_MyHdCall_CreatePageDef" Package="flows.helpdesk" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="newRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="newRow" IsViewObjectMethod="true"
+            DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskCallsView"/>
+  </bindings>
+</pageDefinition>

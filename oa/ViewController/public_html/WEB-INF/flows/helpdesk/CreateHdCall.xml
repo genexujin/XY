@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="CreateHdCall">
+    <default-activity>CreateHelpdeskCall</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>MyHdCallBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.helpdesk.MyHelpdeskCallBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="CreateHelpdeskCall">
+      <page>/pages/helpdesk/CreateHelpdeskCall.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

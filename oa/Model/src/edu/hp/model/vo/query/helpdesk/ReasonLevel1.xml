@@ -65,6 +65,18 @@
     ViewLink="edu.hp.model.vo.link.HdReasonLevel1ToLevel2Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <LOVUIHints
+    ListType="105"
+    MRUCount="0"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    ComboAttributeCount="1">
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </LOVUIHints>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

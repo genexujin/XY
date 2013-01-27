@@ -2,6 +2,9 @@
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="MyHdCall">
     <default-activity>MyHelpdeskCall</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
     <managed-bean id="__1">
       <managed-bean-name>MyHdCallBean</managed-bean-name>
       <managed-bean-class>edu.hp.view.bean.helpdesk.MyHelpdeskCallBean</managed-bean-class>
@@ -10,6 +13,29 @@
     <view id="MyHelpdeskCall">
       <page>/pages/helpdesk/MyHelpdeskCall.jsff</page>
     </view>
+    <method-call id="Create">
+      <method>#{bindings.newRow.execute}</method>
+      <outcome>
+        <fixed-outcome>newRow</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="CreateHelpdeskCall">
+      <page>/pages/helpdesk/CreateHelpdeskCall.jsff</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>MyHelpdeskCall</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>Create</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>Create</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>newRow</from-outcome>
+        <to-activity-id>CreateHelpdeskCall</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

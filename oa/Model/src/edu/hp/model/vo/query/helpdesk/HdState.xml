@@ -3,14 +3,14 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="ReasonLevel2"
+  Name="HdState"
   Version="11.1.2.62.76"
   SelectList="Lovs.ID, 
-       Lovs.CODE, 
-       Lovs.PARENT_CODE, 
-       Lovs.VALUE"
+       Lovs.FLEX_COL1, 
+       Lovs.VALUE, 
+       Lovs.CODE"
   FromList="LOVS Lovs"
-  Where="lovs.code = 'HdRsnLv2'"
+  Where="Lovs.CODE = 'HdState'"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
@@ -18,7 +18,7 @@
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.query.helpdesk.ReasonLevel2_LABEL"/>
+        ResId="edu.hp.model.vo.query.helpdesk.HdState_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <EntityUsage
@@ -34,37 +34,33 @@
     EntityUsage="Lovs"
     AliasName="ID"/>
   <ViewAttribute
+    Name="FlexCol1"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="FlexCol1"
+    EntityUsage="Lovs"
+    AliasName="FLEX_COL1"/>
+  <ViewAttribute
+    Name="Value"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="Value"
+    EntityUsage="Lovs"
+    AliasName="VALUE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.helpdesk.HdState.Value_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
     Name="Code"
+    IsUpdateable="false"
     PrecisionRule="true"
     EntityAttrName="Code"
     EntityUsage="Lovs"
     AliasName="CODE"/>
-  <ViewAttribute
-    Name="ParentCode"
-    PrecisionRule="true"
-    EntityAttrName="ParentCode"
-    EntityUsage="Lovs"
-    AliasName="PARENT_CODE"/>
-  <ViewAttribute
-    Name="Value"
-    PrecisionRule="true"
-    EntityAttrName="Value"
-    EntityUsage="Lovs"
-    AliasName="VALUE"/>
-  <ViewLinkAccessor
-    Name="ReasonLevel1"
-    ViewLink="edu.hp.model.vo.link.HdReasonLevel1ToLevel2Link"
-    Type="oracle.jbo.Row"
-    Reversed="true"
-    IsUpdateable="false"/>
-  <LOVUIHints
-    ListType="105"
-    MRUCount="0"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
-    <DisplayCriteria/>
-  </LOVUIHints>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

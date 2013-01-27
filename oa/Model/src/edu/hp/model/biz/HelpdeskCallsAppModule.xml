@@ -24,6 +24,12 @@
   <ViewUsage
     Name="ReasonLevel1"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"/>
+  <ViewUsage
+    Name="ReasonLevel2"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"/>
+  <ViewUsage
+    Name="HdState"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdState"/>
   <ViewLinkUsage
     Name="EmpHelpdeskCalleeViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
@@ -35,5 +41,11 @@
     ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCallerViewLink"
     SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.EmployeesView2"
     DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.HelpdeskCallsViewForCaller"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="HdReasonLevel1ToLevel2Link1"
+    ViewLinkObjectName="edu.hp.model.vo.link.HdReasonLevel1ToLevel2Link"
+    SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.ReasonLevel1"
+    DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.ReasonLevel2"
     Reversed="false"/>
 </AppModule>

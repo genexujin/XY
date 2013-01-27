@@ -10,10 +10,12 @@
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery"/>-->
     <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery1"/>
-    <iterator Binds="ReasonLevel1" RangeSize="10" DataControl="HelpdeskCallsAppModuleDataControl"
+    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel1" RangeSize="10" DataControl="RootAppModuleDataControl"
               id="ReasonLevel1Iterator"/>
-    <iterator Binds="ReasonLevel2" RangeSize="25" DataControl="HelpdeskCallsAppModuleDataControl"
+    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel2" RangeSize="25" DataControl="RootAppModuleDataControl"
               id="ReasonLevel2Iterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HdState" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="HdStateIterator"/>
   </executables>
   <bindings>
     <tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView11">
@@ -36,6 +38,23 @@
     </list>
     <list IterBinding="ReasonLevel2Iterator" ListOperMode="navigation" ListIter="ReasonLevel2Iterator"
           id="ReasonLevel2" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <action IterBinding="HelpdeskCallsView1Iterator" id="QueryHepdeskCalls"
+            InstanceName="RootAppModuleDataControl.Root.HelpdeskCallsAppModule1.HelpdeskCallsView"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="RsnLv1" NDType="java.lang.String"/>
+    </action>
+    <methodAction IterBinding="HelpdeskCallsView1Iterator" id="doQuery" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="doQuery" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskCallsView">
+      <NamedData NDName="rsnLv1" NDType="java.lang.String"/>
+      <NamedData NDName="state" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="HdStateIterator" ListOperMode="navigation" ListIter="HdStateIterator" id="HdState"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject">
       <AttrNames>
         <Item Value="Value"/>
       </AttrNames>
