@@ -7,4 +7,6 @@ import oracle.jbo.ViewObject;
 // ---------------------------------------------------------------------
 public interface ClassroomCalenderView extends ViewObject {
     void refreshCalendar(String clsRmNos);
+
+    void findByUserId(boolean enabled, String userId);
 }

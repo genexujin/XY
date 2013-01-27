@@ -4,6 +4,7 @@ import edu.hp.model.biz.common.ClassRmModule;
 import edu.hp.model.vo.ClsRmBtchRsvtnViewImpl;
 import edu.hp.model.vo.ClsRmCalDMLViewImpl;
 import edu.hp.model.vo.query.classrm.ClassroomCalendarConflitQueryImpl;
+import edu.hp.model.vo.query.classrm.ClassroomCalenderViewImpl;
 import edu.hp.model.vo.query.classrm.ClassroomQueryImpl;
 
 import java.math.BigDecimal;
@@ -285,8 +286,8 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl implements ClassRmM
      * Container's getter for ClassroomCalenderView1.
      * @return ClassroomCalenderView1
      */
-    public ViewObjectImpl getCalendar() {
-        return (ViewObjectImpl)findViewObject("Calendar");
+    public ClassroomCalenderViewImpl getCalendar() {
+        return (ClassroomCalenderViewImpl)findViewObject("Calendar");
     }
 
     /**

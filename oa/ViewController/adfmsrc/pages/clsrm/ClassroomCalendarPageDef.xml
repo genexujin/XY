@@ -124,5 +124,11 @@
       <NamedData NDName="startTime" NDType="oracle.jbo.domain.Timestamp"/>
       <NamedData NDName="endTime" NDType="oracle.jbo.domain.Timestamp"/>
     </methodAction>
+    <methodAction IterBinding="CalendarIterator" id="findByUserId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findByUserId" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.Calendar">
+      <NamedData NDName="enabled" NDValue="#{pageFlowScope.clsCalBean.myView}" NDType="boolean"/>
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userName}" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

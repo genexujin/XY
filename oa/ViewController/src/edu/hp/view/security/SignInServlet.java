@@ -49,7 +49,7 @@ public class SignInServlet extends HttpServlet {
         if (userName != null && password != null && action != null && action.equals(ACTION_LOGIN)) {
             String sql =
                 "select employees.user_name," + "employees.first_name, " + "employees.last_name, " + "employees.gender," +
-                "roles.role_name " + "from employees,role_users,roles" + " where " +
+                "roles.role_name, employees.id " + " from employees,role_users,roles " + " where " +
                 " employees.id = role_users.user_id " + " and roles.role_id = role_users.role_id " +
                 " and employees.user_name = ? " + " and employees.password = ? ";
             Connection conn = null;
@@ -75,7 +75,8 @@ public class SignInServlet extends HttpServlet {
                         user.setUserName(rs.getString(1));
                         user.setDisplayName(rs.getString(3) + rs.getString(2));                        
                         user.setUserRoles(new ArrayList<String>());                       
-                        user.setIsUserInRole( new HashMap<String,Boolean>());                        
+                        user.setIsUserInRole( new HashMap<String,Boolean>());  
+                        user.setUserId(rs.getString(6));
                         first = false;
                     }
                     
