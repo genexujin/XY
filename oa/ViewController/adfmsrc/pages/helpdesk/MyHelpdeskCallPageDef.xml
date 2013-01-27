@@ -14,6 +14,8 @@
               id="ReasonLevel1Iterator"/>
     <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel2" RangeSize="25" DataControl="RootAppModuleDataControl"
               id="ReasonLevel2Iterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HdState" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="HdStateIterator"/>
   </executables>
   <bindings>
     <tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView11">
@@ -48,7 +50,14 @@
     <methodAction IterBinding="HelpdeskCallsView1Iterator" id="doQuery" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="doQuery" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskCallsView">
-      <NamedData NDName="level" NDType="java.lang.String"/>
+      <NamedData NDName="rsnLv1" NDType="java.lang.String"/>
+      <NamedData NDName="state" NDType="java.lang.String"/>
     </methodAction>
+    <list IterBinding="HdStateIterator" ListOperMode="navigation" ListIter="HdStateIterator" id="HdState"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
   </bindings>
 </pageDefinition>

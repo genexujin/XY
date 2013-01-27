@@ -15,10 +15,60 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">187.94824</property>
+         name="y">196.59766</property>
       <property
-         name="x">528.0</property>
+         name="x">292.0</property>
       <property
          name="pageFragment">true</property>
    </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">Create</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Create&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">184.84473</property>
+      <property
+         name="x">507.0</property>
+   </MethodCall>
+   <View
+      id="View4">
+      <property
+         name="activityId">CreateHelpdeskCall</property>
+      <property
+         name="page">/pages/helpdesk/CreateHelpdeskCall.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>CreateHelpdeskCall&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">186.14355</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">752.0</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View2"
+      to="MethodCall3">
+      <property
+         name="fromOutcome">create</property>
+      <property
+         name="sdm:polyPoints">R50,333.68692,196.24707,465.31308,184.49414,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="MethodCall3"
+      to="View4">
+      <property
+         name="fromOutcome">newRow</property>
+      <property
+         name="sdm:polyPoints">R50,548.6869,184.49414,710.3131,185.79297,L50</property>
+   </ControlFlowCase>
 </SDM>

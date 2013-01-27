@@ -2,6 +2,7 @@ package edu.hp.model.vo;
 
 import edu.hp.model.vo.common.HelpdeskCallsView;
 
+import oracle.jbo.Row;
 import oracle.jbo.ViewCriteria;
 import oracle.jbo.server.ViewObjectImpl;
 // ---------------------------------------------------------------------
@@ -11,6 +12,12 @@ import oracle.jbo.server.ViewObjectImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCallsView {
+    private static final String STATE_UN_SUBMITTED = "1";
+    private static final String STATE_SUBMITTED = "2";
+    private static final String STATE_PROCESSED = "3";
+    private static final String STATE_EVALUATED = "4";
+    private static final String STATE_CANCELLED = "5";
+    
     /**
      * This is the default constructor (do not remove).
      */
@@ -18,13 +25,27 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
     }
     
     
-    public void doQuery(String level){
+    public void doQuery(String rsnLv1, String state){
         this.setApplyViewCriteriaNames(null);
-        System.err.println(level);
-        ViewCriteria criteria = this.getViewCriteria("HelpdeskCallsViewCriteria");
+        
+        System.err.println("In VO: ReasonLevel1 is: " + rsnLv1);
+        ViewCriteria criteria = this.getViewCriteria("ReasonLevel1Criteria");
         this.applyViewCriteria(criteria);
-        this.setRsnLv1(level);
+        this.setRsnLv1(rsnLv1);
+        
+        System.err.println("In VO: State is: " + state);
+        ViewCriteria criteria2 = this.getViewCriteria("StateCriteria");
+        this.applyViewCriteria(criteria2);
+        this.setStateV(state);
+        
         this.executeQuery();
+    }
+    
+    public void newRow() {
+        Row newRow = this.createRow();
+        newRow.setAttribute("State", STATE_UN_SUBMITTED);
+        this.insertRow(newRow);        
+        this.setCurrentRow(newRow);
     }
 
     /**
@@ -41,5 +62,21 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
      */
     public void setRsnLv1(String value) {
         ensureVariableManager().setVariableValue("RsnLv1", value);
+    }
+
+    /**
+     * Returns the variable value for StateV.
+     * @return variable value for StateV
+     */
+    public String getStateV() {
+        return (String)ensureVariableManager().getVariableValue("StateV");
+    }
+
+    /**
+     * Sets <code>value</code> for variable StateV.
+     * @param value value to bind as StateV
+     */
+    public void setStateV(String value) {
+        ensureVariableManager().setVariableValue("StateV", value);
     }
 }

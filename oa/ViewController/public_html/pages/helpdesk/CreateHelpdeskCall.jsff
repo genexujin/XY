@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelHeader text="报修单 #{bindings.CallReadableId}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelGroupLayout id="pgl1" layout="vertical">
+          <af:panelGroupLayout id="pgl2" layout="horizontal">
+            <af:toolbar id="t1">
+              <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '1'}"
+                                       icon="/images/icons/saveall.png" actionListener="#{bindings.Commit.execute}"/>
+              <af:commandToolbarButton text="取消" id="ctb2" immediate="true" rendered="#{bindings.State.inputValue eq '1'}"
+                                       icon="/images/icons/rollback.png" actionListener="#{bindings.Rollback.execute}">
+                <af:resetActionListener/>
+              </af:commandToolbarButton>
+              <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '1'}"
+                                       actionListener="#{pageFlowScope.MyHdCallBean.submitHdCall}"/>
+              <af:commandToolbarButton text="撤消保修单" id="ctb4" rendered="#{bindings.State.inputValue eq '1'}"
+                                       actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}"/>
+            </af:toolbar>
+          </af:panelGroupLayout>
+          <af:panelFormLayout id="pfl1">
+            <f:facet name="footer"/>
+              <af:panelGroupLayout id="pgl3" layout="horizontal">
+                <af:inputText value="#{bindings.CallerId.inputValue}" label="#{bindings.CallerId.hints.label}&nbsp;&nbsp;&nbsp;"
+                              required="#{bindings.CallerId.hints.mandatory}"
+                              columns="#{bindings.CallerId.hints.displayWidth}"
+                              maximumLength="#{bindings.CallerId.hints.precision}"
+                              shortDesc="#{bindings.CallerId.hints.tooltip}" id="it1"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.CallerId.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.CalleeId.inputValue}" label="&nbsp;&nbsp;&nbsp;#{bindings.CalleeId.hints.label}"
+                              required="#{bindings.CalleeId.hints.mandatory}"
+                              columns="#{bindings.CalleeId.hints.displayWidth}"
+                              maximumLength="#{bindings.CalleeId.hints.precision}"
+                              shortDesc="#{bindings.CalleeId.hints.tooltip}" id="it2"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.CalleeId.validator}"/>
+                </af:inputText>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl5" layout="horizontal">
+                <af:inputText value="#{bindings.State.inputValue}" label="#{bindings.State.hints.label}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                              required="#{bindings.State.hints.mandatory}"
+                              columns="#{bindings.State.hints.displayWidth}"
+                              maximumLength="#{bindings.State.hints.precision}"
+                              shortDesc="#{bindings.State.hints.tooltip}" id="it5"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.State.validator}"/>
+                </af:inputText>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl4" layout="horizontal">
+                <af:inputText value="#{bindings.LocationId.inputValue}" label="#{bindings.LocationId.hints.label}"
+                              required="#{bindings.LocationId.hints.mandatory}"
+                              columns="#{bindings.LocationId.hints.displayWidth}"
+                              maximumLength="#{bindings.LocationId.hints.precision}"
+                              shortDesc="#{bindings.LocationId.hints.tooltip}" id="it3"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.LocationId.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.LocationDetail.inputValue}"
+                              label="#{bindings.LocationDetail.hints.label}"
+                              required="#{bindings.LocationDetail.hints.mandatory}"
+                              columns="#{bindings.LocationDetail.hints.displayWidth}"
+                              maximumLength="#{bindings.LocationDetail.hints.precision}"
+                              shortDesc="#{bindings.LocationDetail.hints.tooltip}" id="it4"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.LocationDetail.validator}"/>
+                </af:inputText>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl6" layout="horizontal" valign="top">
+                <af:inputText value="#{bindings.ReasonLevel1.inputValue}" label="#{bindings.ReasonLevel1.hints.label}"
+                              required="#{bindings.ReasonLevel1.hints.mandatory}"
+                              columns="#{bindings.ReasonLevel1.hints.displayWidth}"
+                              maximumLength="#{bindings.ReasonLevel1.hints.precision}"
+                              shortDesc="#{bindings.ReasonLevel1.hints.tooltip}" id="it10"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.ReasonLevel1.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.ReasonLevel2.inputValue}"
+                              required="#{bindings.ReasonLevel2.hints.mandatory}"
+                              columns="#{bindings.ReasonLevel2.hints.displayWidth}"
+                              maximumLength="#{bindings.ReasonLevel2.hints.precision}"
+                              shortDesc="#{bindings.ReasonLevel2.hints.tooltip}" id="it11"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.ReasonLevel2.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.ReasonLevel3.inputValue}"
+                              required="#{bindings.ReasonLevel3.hints.mandatory}"
+                              columns="#{bindings.ReasonLevel3.hints.displayWidth}"
+                              maximumLength="#{bindings.ReasonLevel3.hints.precision}"
+                              shortDesc="#{bindings.ReasonLevel3.hints.tooltip}" id="it12"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.ReasonLevel3.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.ReasonDetail.inputValue}"
+                              required="#{bindings.ReasonDetail.hints.mandatory}"
+                              columns="#{bindings.ReasonDetail.hints.displayWidth}"
+                              maximumLength="#{bindings.ReasonDetail.hints.precision}"
+                              shortDesc="#{bindings.ReasonDetail.hints.tooltip}" id="it13" rows="4"
+                              disabled="#{bindings.State.inputValue ne '1'}">
+                  <f:validator binding="#{bindings.ReasonDetail.validator}"/>
+                </af:inputText>
+              </af:panelGroupLayout>
+          </af:panelFormLayout>
+          <af:separator id="s1"/>
+          <af:panelFormLayout id="pfl3" rows="1"
+                              rendered="#{bindings.State.inputValue ne '1' and bindings.State.inputValue ne '5'}">
+            <af:panelGroupLayout id="pgl7" layout="horizontal" valign="top">
+              <af:inputText value="#{bindings.CallResult.inputValue}" label="#{bindings.CallResult.hints.label}"
+                            required="#{bindings.CallResult.hints.mandatory}"
+                            columns="#{bindings.CallResult.hints.displayWidth}"
+                            maximumLength="#{bindings.CallResult.hints.precision}"
+                            shortDesc="#{bindings.CallResult.hints.tooltip}" id="it6"
+                            disabled="#{bindings.State.inputValue ne '2'}">
+                <f:validator binding="#{bindings.CallResult.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.CallResultDetail.inputValue}"
+                            required="#{bindings.CallResultDetail.hints.mandatory}"
+                            columns="#{bindings.CallResultDetail.hints.displayWidth}"
+                            maximumLength="#{bindings.CallResultDetail.hints.precision}"
+                            shortDesc="#{bindings.CallResultDetail.hints.tooltip}" id="it7" rows="4"
+                            disabled="#{bindings.State.inputValue ne '2'}">
+                <f:validator binding="#{bindings.CallResultDetail.validator}"/>
+              </af:inputText>
+            </af:panelGroupLayout>
+            <f:facet name="footer">
+              <af:toolbar id="t2">
+                <af:commandToolbarButton text="处理完成" id="ctb5" rendered="#{bindings.State.inputValue eq '2'}"
+                                         actionListener="#{pageFlowScope.MyHdCallBean.processHdCall}"/>
+              </af:toolbar>
+            </f:facet>
+          </af:panelFormLayout>
+          <af:separator id="s2"/>
+          <af:panelFormLayout id="pfl4"
+                              rendered="#{bindings.State.inputValue eq '3' or bindings.State.inputValue eq '4'}">
+              <af:inputText value="#{bindings.CallEval.inputValue}" label="#{bindings.CallEval.hints.label}"
+                            required="#{bindings.CallEval.hints.mandatory}"
+                            columns="#{bindings.CallEval.hints.displayWidth}"
+                            maximumLength="#{bindings.CallEval.hints.precision}"
+                            shortDesc="#{bindings.CallEval.hints.tooltip}" id="it8"
+                            disabled="#{bindings.State.inputValue ne '3'}">
+                <f:validator binding="#{bindings.CallEval.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.CallEvalDetail.inputValue}" label="#{bindings.CallEvalDetail.hints.label}"
+                            required="#{bindings.CallEvalDetail.hints.mandatory}"
+                            columns="#{bindings.CallEvalDetail.hints.displayWidth}"
+                            maximumLength="#{bindings.CallEvalDetail.hints.precision}"
+                            shortDesc="#{bindings.CallEvalDetail.hints.tooltip}" id="it9" rows="4"
+                            disabled="#{bindings.State.inputValue ne '3'}">
+                <f:validator binding="#{bindings.CallEvalDetail.validator}"/>
+              </af:inputText>
+            <f:facet name="footer">
+              <af:toolbar id="t3">
+                <af:commandToolbarButton text="评价" id="ctb6" rendered="#{bindings.State.inputValue eq '3'}"
+                                         actionListener="#{pageFlowScope.MyHdCallBean.evaluateHdCall}"/>
+              </af:toolbar>
+            </f:facet>
+          </af:panelFormLayout>
+        </af:panelGroupLayout>        
+      </af:panelHeader>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top"/>
+  </af:panelStretchLayout>
+</ui:composition>

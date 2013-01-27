@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="CreateHelpdeskCallPageDef"
+                Package="pages.helpdesk">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HelpdeskCallsView" DataControl="RootAppModuleDataControl"
+              RangeSize="10" id="HelpdeskCallsViewIterator"/>
+  </executables>
+  <bindings>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallReadableId">
+      <AttrNames>
+        <Item Value="CallReadableId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallerId">
+      <AttrNames>
+        <Item Value="CallerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CalleeId">
+      <AttrNames>
+        <Item Value="CalleeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="LocationId">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="LocationDetail">
+      <AttrNames>
+        <Item Value="LocationDetail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="State">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallResult">
+      <AttrNames>
+        <Item Value="CallResult"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallResultDetail">
+      <AttrNames>
+        <Item Value="CallResultDetail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallEval">
+      <AttrNames>
+        <Item Value="CallEval"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallEvalDetail">
+      <AttrNames>
+        <Item Value="CallEvalDetail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonLevel1">
+      <AttrNames>
+        <Item Value="ReasonLevel1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonLevel2">
+      <AttrNames>
+        <Item Value="ReasonLevel2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonLevel3">
+      <AttrNames>
+        <Item Value="ReasonLevel3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonDetail">
+      <AttrNames>
+        <Item Value="ReasonDetail"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

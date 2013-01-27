@@ -82,34 +82,6 @@ public class MyHelpdeskCallBean {
         
     }
 
-    public void doQuery(ActionEvent actionEvent) {
-//        DCIteratorBinding it = ADFUtils.findIterator(reasonLevel1IteratorName);
-        BindingContainer bindings = ADFUtils.getBindingContainer();
-        JUCtrlListBinding rsnLv1 = (JUCtrlListBinding)bindings.get("ReasonLevel1");
-        Object object = rsnLv1.getSelectedValue();
-        int index = rsnLv1.getSelectedIndex();
-        Row row = rsnLv1.getCurrentRow();
-        DBSequence id = (DBSequence)row.getAttribute("Id");
-        System.out.println(object);
-        System.out.println(index);
-        System.out.println(id);
-                
-//        DCIteratorBinding it = ADFUtils.findIterator("HelpdeskCallsView1Iterator");
-//        JUCtrlHierBinding treeBinding = (JUCtrlHierBinding)ADFUtils.getBindingContainer().get("HelpdeskCallsView11");
-//        
-//        if (it != null) {
-//            it.setRangeSize(-1);
-//            it.executeQuery();
-//            
-//            
-//        }
-        OperationBinding binding = ADFUtils.findOperation("QueryHepdeskCalls");
-        binding.getParamsMap().put("RsnLv1", id.getValue());
-        binding.execute();
-        
-        ADFUtils.partialRefreshComponenet(resultTable);
-    }
-
     public void setResultTable(RichTable resultTable) {
         this.resultTable = resultTable;
     }
@@ -118,22 +90,52 @@ public class MyHelpdeskCallBean {
         return resultTable;
     }
 
-    public String doQuery2() {
-        BindingContainer bindings = ADFUtils.getBindingContainer();
-        JUCtrlListBinding rsnLv1 = (JUCtrlListBinding)bindings.get("ReasonLevel1");
-        Object object = rsnLv1.getSelectedValue();
-        int index = rsnLv1.getSelectedIndex();
-        Row row = rsnLv1.getCurrentRow();
-        DBSequence id = (DBSequence)row.getAttribute("Id");
-        System.out.println(id);
-        //OperationBinding binding = ADFUtils.findOperation("QueryHepdeskCalls");
-        
-        //binding.getParamsMap().put("RsnLv1", id.getValue());
+    public String doQuery() {
+        String reasonLv1Id = getLovAttrValue("ReasonLevel1", "Id");
+        System.out.println("ReasonLevel1 Id is: " + reasonLv1Id);
+        String stateValue = getLovAttrValue("HdState", "FlexCol1");
+        System.out.println("State Id is: " + stateValue);
         OperationBinding binding = ADFUtils.findOperation("doQuery");
-        binding.getParamsMap().put("level", id.getValue());
+        binding.getParamsMap().put("rsnLv1", reasonLv1Id);
+        binding.getParamsMap().put("state", stateValue);
         binding.execute();
         
         ADFUtils.partialRefreshComponenet(resultTable);
         return null;
+    }
+
+    private String getLovAttrValue(String lovBindingName, String attrName) {
+        BindingContainer bindings = ADFUtils.getBindingContainer();
+        JUCtrlListBinding binding = (JUCtrlListBinding)bindings.get(lovBindingName);
+        Row row = binding.getCurrentRow();
+        Object value = row.getAttribute(attrName);
+        if (value instanceof DBSequence) {
+            return ((DBSequence)value).getValue() + "";
+        }
+        return value.toString();
+    }
+
+    public void submitHdCall(ActionEvent actionEvent) {
+        toState("2");
+    }
+
+    public void cancelHdCall(ActionEvent actionEvent) {
+        toState("5");
+    }
+
+    public void processHdCall(ActionEvent actionEvent) {
+        toState("3");
+    }
+
+    public void evaluateHdCall(ActionEvent actionEvent) {
+        toState("4");
+    }
+    
+    private void toState(String state) {
+        DCIteratorBinding binding = ADFUtils.findIterator("HelpdeskCallsViewIterator");
+        Row row = binding.getCurrentRow();
+        row.setAttribute("State", state);
+        OperationBinding oper = ADFUtils.findOperation("Commit");
+        oper.execute();
     }
 }

@@ -27,6 +27,9 @@
   <ViewUsage
     Name="ReasonLevel2"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"/>
+  <ViewUsage
+    Name="HdState"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdState"/>
   <ViewLinkUsage
     Name="EmpHelpdeskCalleeViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"

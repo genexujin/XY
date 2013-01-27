@@ -16,9 +16,14 @@ public class HelpdeskCallsViewClient extends ViewUsageImpl implements HelpdeskCa
     public HelpdeskCallsViewClient() {
     }
 
-    public void doQuery(String level) {
+    public void doQuery(String rsnLv1, String state) {
         Object _ret =
-            getApplicationModuleProxy().riInvokeExportedMethod(this,"doQuery",new String [] {"java.lang.String"},new Object[] {level});
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"doQuery",new String [] {"java.lang.String","java.lang.String"},new Object[] {rsnLv1, state});
+        return;
+    }
+
+    public void newRow() {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this,"newRow",null,null);
         return;
     }
 }

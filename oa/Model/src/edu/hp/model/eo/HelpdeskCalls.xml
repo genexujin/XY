@@ -12,7 +12,6 @@
   UseGlueCode="false">
   <Attribute
     Name="CallId"
-    IsNotNull="true"
     Precision="20"
     ColumnName="CALL_ID"
     SQLType="VARCHAR"
@@ -26,7 +25,6 @@
   </Attribute>
   <Attribute
     Name="CallReadableId"
-    IsNotNull="true"
     Precision="30"
     ColumnName="CALL_READABLE_ID"
     SQLType="VARCHAR"

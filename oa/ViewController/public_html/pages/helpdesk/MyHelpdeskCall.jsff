@@ -14,7 +14,7 @@
                         <!--<af:commandButton text="查询" id="cb1" actionListener="#{pageFlowScope.MyHdCallBean.doQuery}"
                                           partialSubmit="false" action="#{pageFlowScope.MyHdCallBean.doQuery2}"/>-->
                         <af:commandButton text="查询" id="cb1" 
-                                          partialSubmit="false" action="#{pageFlowScope.MyHdCallBean.doQuery2}"/>
+                                          partialSubmit="false" action="#{pageFlowScope.MyHdCallBean.doQuery}"/>
                         <af:resetButton text="清空条件" id="rb1"/>
                     </af:panelGroupLayout>
                 </f:facet>
@@ -31,7 +31,11 @@
                         <af:spacer width="10px" height="5px"/>
                     </f:facet>
                     <af:inputText label="申请人" id="it2"/>
-                    <af:inputComboboxListOfValues label="状态" popupTitle="Search and Result Dialog" id="iclov2"/>
+                    <af:selectOneChoice value="#{bindings.HdState.inputValue}" label="#{bindings.HdState.label}"
+                                        required="#{bindings.HdState.hints.mandatory}"
+                                        shortDesc="#{bindings.HdState.hints.tooltip}" id="soc3">
+                        <f:selectItems value="#{bindings.HdState.items}" id="si7"/>
+                    </af:selectOneChoice>
                     <af:inputText label="受理人" id="it3"/>
                 </af:panelGroupLayout>
                 <af:panelGroupLayout id="pgl5" layout="horizontal">
@@ -67,42 +71,51 @@
         <af:spacer width="50px" height="5px"/>
         <af:panelHeader text="查询结果" id="ph2">
         <af:spacer width="50px" height="5px"/>
-            <af:table value="#{bindings.HelpdeskCallsView11.collectionModel}" var="row"
-                      rows="#{bindings.HelpdeskCallsView11.rangeSize}" width="100%" columnStretching="last"
-                      emptyText="#{bindings.HelpdeskCallsView11.viewable ? 'No data to display.' : 'Access Denied.'}"
-                      fetchSize="#{bindings.HelpdeskCallsView11.rangeSize}" rowBandingInterval="0"
-                      selectedRowKeys="#{bindings.HelpdeskCallsView11.collectionModel.selectedRow}"
-                      selectionListener="#{bindings.HelpdeskCallsView11.collectionModel.makeCurrent}"
-                      rowSelection="single" id="resId1" binding="#{pageFlowScope.MyHdCallBean.resultTable}">
-                <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallReadableId.name}" sortable="true"
-                           headerText="#{bindings.HelpdeskCallsView11.hints.CallReadableId.label}" id="resId1c1">
-                    <af:outputText value="#{row.CallReadableId}" id="ot1"/>
-                </af:column>
-                <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallerId.name}" sortable="true"
-                           headerText="#{bindings.HelpdeskCallsView11.hints.CallerId.label}" id="resId1c2">
-                    <af:outputText value="#{row.CallerId}" id="ot2"/>
-                </af:column>
-                <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CalleeId.name}" sortable="true"
-                           headerText="#{bindings.HelpdeskCallsView11.hints.CalleeId.label}" id="resId1c3">
-                    <af:outputText value="#{row.CalleeId}" id="ot3"/>
-                </af:column>
-                <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.State.name}" sortable="true"
-                           headerText="#{bindings.HelpdeskCallsView11.hints.State.label}" id="resId1c4">
-                    <af:outputText value="#{row.State}" id="ot4"/>
-                </af:column>
-                <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallResult.name}" sortable="true"
-                           headerText="#{bindings.HelpdeskCallsView11.hints.CallResult.label}" id="resId1c5">
-                    <af:outputText value="#{row.CallResult}" id="ot5"/>
-                </af:column>
-                <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallEval.name}" sortable="true"
-                           headerText="#{bindings.HelpdeskCallsView11.hints.CallEval.label}" id="resId1c6">
-                    <af:outputText value="#{row.CallEval}" id="ot6"/>
-                </af:column>
-                <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.ReasonLevel1.name}" sortable="true"
-                           headerText="#{bindings.HelpdeskCallsView11.hints.ReasonLevel1.label}" id="resId1c7">
-                    <af:outputText value="#{row.ReasonLevel1}" id="ot7"/>
-                </af:column>
-            </af:table>
+            <af:panelCollection id="pc1">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t1">
+                        <af:commandToolbarButton text="新建" id="ctb1" action="create"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.HelpdeskCallsView11.collectionModel}" var="row"
+                          rows="#{bindings.HelpdeskCallsView11.rangeSize}" width="100%" columnStretching="last"
+                          emptyText="#{bindings.HelpdeskCallsView11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.HelpdeskCallsView11.rangeSize}" rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.HelpdeskCallsView11.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.HelpdeskCallsView11.collectionModel.makeCurrent}"
+                          rowSelection="single" id="resId1" binding="#{pageFlowScope.MyHdCallBean.resultTable}">
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallReadableId.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.CallReadableId.label}" id="resId1c1">
+                        <af:outputText value="#{row.CallReadableId}" id="ot1"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallerId.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.CallerId.label}" id="resId1c2">
+                        <af:outputText value="#{row.CallerId}" id="ot2"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CalleeId.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.CalleeId.label}" id="resId1c3">
+                        <af:outputText value="#{row.CalleeId}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.State.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.State.label}" id="resId1c4">
+                        <af:outputText value="#{row.State}" id="ot4"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallResult.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.CallResult.label}" id="resId1c5">
+                        <af:outputText value="#{row.CallResult}" id="ot5"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallEval.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.CallEval.label}" id="resId1c6">
+                        <af:outputText value="#{row.CallEval}" id="ot6"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.ReasonLevel1.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.ReasonLevel1.label}" id="resId1c7">
+                        <af:outputText value="#{row.ReasonLevel1}" id="ot7"/>
+                    </af:column>
+                </af:table>
+            </af:panelCollection>
         </af:panelHeader>
     </af:panelGroupLayout>
 </ui:composition>
