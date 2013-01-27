@@ -44,7 +44,7 @@ public class CalendarBean {
 
     protected List<OACalendarProvider> _providerList;
     protected Map<OACalendarProvider, ProviderData> _providerData;
-
+    protected boolean myView = false;
     protected String calendarid;
     protected OACalendarActivity _currActivity;
     protected static List<Color> _defaultOrderProviderColors;
@@ -335,6 +335,14 @@ public class CalendarBean {
 
     public OACalendarActivity getCurrActivity() {
         return _currActivity;
+    }
+
+    public void setMyView(boolean myView) {
+        this.myView = myView;
+    }
+
+    public boolean isMyView() {
+        return myView;
     }
 
     public static class ProviderData implements Serializable {

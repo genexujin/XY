@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LoginUser {
-    
+    private String userId;
     private String userName;
     private String displayName;
     private ArrayList<String> userGroups;
@@ -49,5 +49,13 @@ public class LoginUser {
 
     public HashMap<String, Boolean> getIsUserInRole() {
         return isUserInRole;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

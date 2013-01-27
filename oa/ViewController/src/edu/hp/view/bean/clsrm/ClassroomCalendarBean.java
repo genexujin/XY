@@ -191,4 +191,13 @@ public class ClassroomCalendarBean extends CalendarBean {
         }
 
     }
+
+    public void onMyViewChange(ValueChangeEvent valueChangeEvent) {
+        Boolean newValue = (Boolean)valueChangeEvent.getNewValue();
+        OperationBinding binding = ADFUtils.findOperation("findByUserId");
+        this.setMyView(newValue);
+        binding.execute();
+        UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+        this.refreshCalendar(calendar);
+    }
 }

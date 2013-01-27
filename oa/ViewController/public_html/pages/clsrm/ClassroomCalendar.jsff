@@ -8,7 +8,12 @@
                 <af:outputText value="2. 右键菜单可以创建、编辑、删除教室预订。" id="ot10"/>
                 <af:outputText value="3. 请在下方教室过滤条件中设置需要显示在日历上的教室" id="ot2"/>
                 <af:spacer width="10" height="10" id="s1"/>
-                <af:commandButton text="新预订" id="cb1" icon="/images/icons/new_ena.png" action="create"/>
+                <af:panelGroupLayout id="pgl4" layout="horizontal">
+                    <af:commandButton text="新预订" id="cb1" icon="/images/icons/new_ena.png" action="create"/>
+                    <af:selectBooleanCheckbox id="sbc2" text="只看自己" value="#{pageFlowScope.clsCalBean.myView}"
+                                              valueChangeListener="#{pageFlowScope.clsCalBean.onMyViewChange}"
+                                              autoSubmit="true"/>
+                </af:panelGroupLayout>
                 <af:spacer width="10" height="10" id="s2"/>
                 <af:selectOneChoice value="#{bindings.Locations.inputValue}" label="#{bindings.Locations.label}"
                                     required="#{bindings.Locations.hints.mandatory}"
