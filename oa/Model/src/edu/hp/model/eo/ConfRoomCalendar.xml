@@ -9,7 +9,12 @@
   DBObjectName="CONF_ROOM_CALENDAR"
   AliasName="ConfRoomCalendar"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.eo.ConfRoomCalendarImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -349,11 +354,11 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CONF_ROOM_CALENDAR"
-    DefaultValue="未提交">
+    TableName="CONF_ROOM_CALENDAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_INITIAL]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -372,6 +377,25 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Allday"
+    Precision="20"
+    ColumnName="ALLDAY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONF_ROOM_CALENDAR"
+    DefaultValue="TIME">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ConfRoomCalendar.Allday_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Key
     Name="ConfRoomCalendarPk"

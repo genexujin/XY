@@ -2,7 +2,6 @@ package edu.hp.view.bean.conf;
 
 import edu.hp.view.bean.common.CalendarBean;
 import edu.hp.view.bean.common.OACalendarActivity;
-import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
@@ -20,8 +19,8 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.domain.Timestamp;
 
 
-public class ConfRmCalBean extends CalendarBean{
-    
+public class ConfRmCalBean extends CalendarBean {
+
     public ConfRmCalBean() {
 
         refreshCalendarOptName = "refreshCalendar";
@@ -30,30 +29,9 @@ public class ConfRmCalBean extends CalendarBean{
         this.locationIteratorName = "LocationsIterator";
         this.calendarIteratorName = "ConfRoomQueryIterator";
         this.calendarid = "c1";
+        this.moduleAdminRole = "会议室管理员";
+        locationIdFieldName = "MeetingRoomId";
         reload();
-    }
-    
-    public boolean isEditable() {
-
-        boolean result = false;
-
-        if (this.getCurrActivity() != null) {
-            LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-
-            if (user.getIsUserInRole().get("系统管理员") != null)
-                return true;
-            if (user.getIsUserInRole().get("会议室管理员") != null)
-                return true;
-
-            String userId = this.getCurrActivity().getUserId();
-            if (userId.equals(user.getUserName())) {
-
-                return true;
-            }
-        }
-
-        return result;
-
     }
 
 
@@ -108,59 +86,50 @@ public class ConfRmCalBean extends CalendarBean{
     }
 
     public void calDurationChanged(CalendarActivityDurationChangeEvent ae) {
-        CalendarActivity activity = ae.getCalendarActivity();
 
-        if (activity == null) {
+        if (this.isEditable()) {
 
-            setCurrActivity(null);
+            CalendarActivity activity = ae.getCalendarActivity();
 
-            UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
-            if (calendar != null)
-                refreshCalendar(calendar);
-            return;
-        }
+            if (activity == null) {
 
-        OACalendarActivity demoActivity = new OACalendarActivity(activity);
-        this.setCurrActivity(demoActivity);
+                setCurrActivity(null);
 
-        Boolean hasNoConflict =
-            ensureTimeConflicts(new java.sql.Timestamp(demoActivity.getFrom().getTime()), new java.sql.Timestamp(ae.getNewEndDate().getTime()),
-                                (String)demoActivity.getCustomAttributes().get("LocationId"), demoActivity.getId());
-        if (hasNoConflict) {
-
-            OperationBinding binding = ADFUtils.findOperation("updateEndTime");
-            binding.getParamsMap().put("confRmCalId", demoActivity.getId());
-            binding.getParamsMap().put("endTime", new Timestamp(ae.getNewEndDate()));
-            binding.execute();
-            if (binding.getErrors().isEmpty()) {
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
                 if (calendar != null)
                     refreshCalendar(calendar);
-            } else {
-                JSFUtils.addFacesErrorMessage("时间调整失败！");
+                return;
             }
 
-        } else {
-            JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
+            OACalendarActivity demoActivity = new OACalendarActivity(activity);
+            this.setCurrActivity(demoActivity);
+
+            Boolean hasNoConflict =
+                ensureTimeConflicts(new java.sql.Timestamp(demoActivity.getFrom().getTime()), new java.sql.Timestamp(ae.getNewEndDate().getTime()),
+                                    (String)demoActivity.getCustomAttributes().get("MeetingRoomId"),
+                                    demoActivity.getId());
+            if (hasNoConflict) {
+
+                OperationBinding binding = ADFUtils.findOperation("updateEndTime");
+                binding.getParamsMap().put("confRmCalId", demoActivity.getId());
+                binding.getParamsMap().put("endTime", new Timestamp(ae.getNewEndDate()));
+                binding.execute();
+                if (binding.getErrors().isEmpty()) {
+                    UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+                    if (calendar != null)
+                        refreshCalendar(calendar);
+                } else {
+                    JSFUtils.addFacesErrorMessage("时间调整失败！");
+                }
+
+            } else {
+                JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
+            }
+            //update clsrmcaldmlvo
         }
-        //update clsrmcaldmlvo
-
     }
 
-    protected Boolean ensureTimeConflicts(java.sql.Timestamp actStartTime, java.sql.Timestamp actEndTime,
-                                          String clsRmId, String actId) {
-
-        Boolean result = false;
-        OperationBinding binding = ADFUtils.findOperation("ifConflict");
-        binding.getParamsMap().put("actStartTime", actStartTime);
-        binding.getParamsMap().put("actEndTime", actEndTime);
-        binding.getParamsMap().put("confRmId", clsRmId);
-        binding.getParamsMap().put("actId", actId);
-        binding.execute();
-        result = (Boolean)binding.getResult();
-        return result;
-
-    }
+    
 
 
     protected void doUpdateCalendar(OACalendarActivity activity, Date newStart, Date newEnd) {

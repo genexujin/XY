@@ -33,7 +33,10 @@ public class ConfRmConflictViewImpl extends ViewObjectImpl implements ConfRmConf
     public Boolean ifConflict(Timestamp actStartTime, Timestamp actEndTime, String clsRmId, String actId){
         
         try {
-            
+            System.err.println(actStartTime);
+            System.err.println(actEndTime);
+            System.err.println(clsRmId);
+            System.err.println(actId);
             if(actStartTime.equals(actEndTime)){                
                 if (actEndTime != null) {
                     Calendar calendar = Calendar.getInstance();

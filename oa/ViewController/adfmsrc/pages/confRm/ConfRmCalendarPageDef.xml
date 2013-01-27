@@ -30,6 +30,7 @@
           <Item Type="providerId" Value="MeetingRoomId"/>
           <Item Type="title" Value="Title"/>
           <Item Type="location" Value="LocationName"/>
+          <Item Type="timeType" Value="Allday"/>
           <Item Type="startTime" Value="StartTime"/>
           <Item Type="endTime" Value="EndTime"/>
           <Item Type="tags" Value="MeetingRoomId"/>
@@ -54,6 +55,7 @@
           <Item Type="custom" Value="Title"/>
           <Item Type="custom" Value="UserDisplayName"/>
           <Item Type="custom" Value="UserId"/>
+          <Item Type="custom" Value="Allday"/>
         </AttrNames>
       </nodeDefinition>
     </calendar>

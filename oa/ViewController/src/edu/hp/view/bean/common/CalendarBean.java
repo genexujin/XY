@@ -1,11 +1,14 @@
 package edu.hp.view.bean.common;
 
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
 import java.awt.Color;
 
 import java.io.Serializable;
+
+import java.sql.Timestamp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,6 +63,9 @@ public class CalendarBean {
     protected String providerDisplayNameCol = "Value";
     protected String providerLocCol = "FlexCol1";
     protected String providerNumOfPplCol = "FlexCol2";
+    protected String superAdminRole = "系统管理员";
+    protected String moduleAdminRole;
+    protected String locationIdFieldName;
 
     public CalendarBean() {
     }
@@ -132,7 +138,7 @@ public class CalendarBean {
         } else {
             setCurrActivity(new OACalendarActivity(activity));
         }
-        
+
 
         if (!ae.getTriggerType().equals(TriggerType.HOVER)) {
             UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
@@ -211,21 +217,41 @@ public class CalendarBean {
 
         ADFUtils.partialRefreshComponenet(calendar);
     }
-    
+
     public DnDAction handleDrop(DropEvent dropEvent) {
+        if (isEditable()) {
+            System.err.println("editable!");
+            Transferable transferable = dropEvent.getTransferable();
+            CalendarDropSite dropSite = (CalendarDropSite)dropEvent.getDropSite();
+            Date dropSiteDate = dropSite.getDate();
+            CalendarActivity.TimeType timeType = dropSite.getTimeType();
 
-        Transferable transferable = dropEvent.getTransferable();
-        CalendarDropSite dropSite = (CalendarDropSite)dropEvent.getDropSite();
-        Date dropSiteDate = dropSite.getDate();
-        CalendarActivity.TimeType timeType = dropSite.getTimeType();
-
-        CalendarActivity activity =
-            (CalendarActivity)transferable.getData(DataFlavor.getDataFlavor(CalendarActivity.class));
+            CalendarActivity activity =
+                (CalendarActivity)transferable.getData(DataFlavor.getDataFlavor(CalendarActivity.class));
 
 
-        _handleCalendarActivityDrop(dropEvent, dropSiteDate, activity);
+            _handleCalendarActivityDrop(dropEvent, dropSiteDate, activity);
 
-        return dropEvent.getProposedAction();
+            return dropEvent.getProposedAction();
+        } else{
+            System.err.println("note editbale!");
+            return DnDAction.NONE;
+        }
+    }
+
+    protected Boolean ensureTimeConflicts(java.sql.Timestamp actStartTime, java.sql.Timestamp actEndTime,
+                                          String clsRmId, String actId) {
+
+        Boolean result = false;
+        OperationBinding binding = ADFUtils.findOperation("ifConflict");
+        binding.getParamsMap().put("actStartTime", actStartTime);
+        binding.getParamsMap().put("actEndTime", actEndTime);
+        binding.getParamsMap().put("clsRmId", clsRmId);
+        binding.getParamsMap().put("actId", actId);
+        binding.execute();
+        result = (Boolean)binding.getResult();
+        return result;
+
     }
 
     protected void _handleCalendarActivityDrop(DropEvent dropEvent, Date dropSiteDate, CalendarActivity activity) {
@@ -247,6 +273,7 @@ public class CalendarBean {
         int dropHour = dropCal.get(Calendar.HOUR_OF_DAY);
         int dropMin = dropCal.get(Calendar.MINUTE);
         Date _proposedStartDate;
+
         // move the start date to the new time
         if (startDayOfYear != dropDayOfYear) {
             startCal.set(Calendar.DAY_OF_YEAR, dropDayOfYear);
@@ -256,22 +283,32 @@ public class CalendarBean {
 
         // move this activity to the new location
         if (movingActivity.isAllDay()) {
-             _proposedStartDate = startCal.getTime();
+            _proposedStartDate = startCal.getTime();
 
             // Get the original start day
             startCal = Calendar.getInstance();
             startCal.setTime(movingActivity.getFrom());
-            
-            // Calcuate new end day by using the new start day and the original delta            
+
+            // Calcuate new end day by using the new start day and the original delta
             Calendar endCal = Calendar.getInstance();
-            endCal.setTime(movingActivity.getTo());;
+            endCal.setTime(movingActivity.getTo());
+
 
             long delta = endCal.getTime().getTime() - startCal.getTime().getTime();
             Date endDate = new Date(_proposedStartDate.getTime() + delta);
 
-            // update to the new start and end day
-            doUpdateCalendar(movingActivity,_proposedStartDate,endDate);
-    
+
+            Boolean hasNoConflict =
+                ensureTimeConflicts(new Timestamp(_proposedStartDate.getTime()), new Timestamp(endDate.getTime()),
+                                    (String)(movingActivity.getCustomAttributes().get(this.locationIdFieldName)),
+                                    movingActivity.getId());
+            System.err.println("here " + hasNoConflict);
+            if (hasNoConflict)
+                // update to the new start and end day
+                doUpdateCalendar(movingActivity, _proposedStartDate, endDate);
+            else
+                JSFUtils.addFacesErrorMessage("该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
+
 
         } else {
             String view = ((RichCalendar)dropEvent.getDropComponent()).getView();
@@ -295,14 +332,45 @@ public class CalendarBean {
             startDate = startCal.getTime();
             endDate = new Date(startDate.getTime() + delta);
 
-            doUpdateCalendar(movingActivity,startDate,endDate);
+            Boolean hasNoConflict =
+                ensureTimeConflicts(new Timestamp(startDate.getTime()), new Timestamp(endDate.getTime()),
+                                    (String)(movingActivity.getCustomAttributes().get(locationIdFieldName)),
+                                    movingActivity.getId());
+            System.err.println("here " + hasNoConflict);
+            if (hasNoConflict)
+                doUpdateCalendar(movingActivity, startDate, endDate);
+            else
+                JSFUtils.addFacesErrorMessage("该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
 
         }
 
-        
+
     }
-    
-    protected void doUpdateCalendar(OACalendarActivity activity, Date newStart, Date newEnd){
+
+    public boolean isEditable() {
+
+        boolean result = false;
+
+        if (this.getCurrActivity() != null) {
+            LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+
+            if (user.getIsUserInRole().get(this.superAdminRole) != null)
+                return true;
+            if (user.getIsUserInRole().get(moduleAdminRole) != null)
+                return true;
+
+            String userId = this.getCurrActivity().getUserId();
+            if (userId.equals(user.getUserName())) {
+
+                return true;
+            }
+        }
+
+        return result;
+
+    }
+
+    protected void doUpdateCalendar(OACalendarActivity activity, Date newStart, Date newEnd) {
         //do nothing
     }
 

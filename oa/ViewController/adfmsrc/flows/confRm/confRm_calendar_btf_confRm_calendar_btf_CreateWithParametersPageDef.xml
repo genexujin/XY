@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="confRm_calendar_btf_confRm_calendar_btf_CreateWithParametersPageDef" Package="flows.confRm"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="Root.ConfRmModule.ConfRoomCalendarView" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ConfRoomCalendarViewIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ConfRoomCalendarViewIterator" id="CreateWithParams" RequiresUpdateModel="true"
+            Action="createWithParams">
+      <NamedData NDName="UserId" NDType="java.lang.String" NDValue="#{sessionScope.LoginUserBean.userId}"/>
+      <NamedData NDName="UserDisplayName" NDType="java.lang.String"
+                 NDValue="#{sessionScope.LoginUserBean.displayName}"/>
+    </action>
+  </bindings>
+</pageDefinition>

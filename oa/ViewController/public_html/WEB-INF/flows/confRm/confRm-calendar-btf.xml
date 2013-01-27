@@ -7,9 +7,48 @@
       <managed-bean-class>edu.hp.view.bean.conf.ConfRmCalBean</managed-bean-class>
       <managed-bean-scope>pageFlow</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__9">
+      <managed-bean-name>confCalDetailBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.conf.ConfCalDetailBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
     <view id="ConfRmCalendar">
       <page>/pages/confRm/ConfRmCalendar.jsff</page>
     </view>
+    <method-call id="CreateWithParameters">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="ConfRmActivity">
+      <page>/pages/confRm/ConfRmActivity.jsff</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>ConfRmCalendar</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>CreateWithParameters</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>Edit</from-outcome>
+        <to-activity-id>ConfRmActivity</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>CreateWithParameters</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>CreateWithParams</from-outcome>
+        <to-activity-id>ConfRmActivity</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>ConfRmActivity</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>Calendar</from-outcome>
+        <to-activity-id>ConfRmCalendar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

@@ -25,7 +25,8 @@
        ConfRoomCalendar.SNACK_LEVEL, 
        ConfRoomCalendar.NUM_OF_PEOPLE, 
        ConfRoomCalendar.STATE, 
-       ConfRoomCalendar.PR_ID"
+       ConfRoomCalendar.PR_ID, 
+       ConfRoomCalendar.ALLDAY"
   FromList="CONF_ROOM_CALENDAR ConfRoomCalendar"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -60,6 +61,14 @@
         <TransientExpression><![CDATA[LocationId]]></TransientExpression>
       </PIMap>
     </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="SnackLevels"
+    ViewObjectName="edu.hp.model.vo.LovsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SnackLevel"
+      FullName="edu.hp.model.vo.LovsView.SnackLevel"/>
   </ViewAccessor>
   <ListBinding
     Name="LOV_UserDisplayName"
@@ -120,12 +129,29 @@
       <Item Value="MeetingRoomId"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
-      <Item Value="FlexCol1"/>
+      <Item Value="Value"/>
       <Item Value="Id"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="FlexCol1"/>
+      <Item Value="Value"/>
       <Item Value="FlexCol2"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SnackLevel"
+    ListVOName="SnackLevels"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SnackLevel"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FlexCol1"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -235,37 +261,80 @@
     PrecisionRule="true"
     EntityAttrName="NeedProjector"
     EntityUsage="ConfRoomCalendar"
-    AliasName="NEED_PROJECTOR"/>
+    AliasName="NEED_PROJECTOR">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="NeedLoudspeaker"
     PrecisionRule="true"
     EntityAttrName="NeedLoudspeaker"
     EntityUsage="ConfRoomCalendar"
-    AliasName="NEED_LOUDSPEAKER"/>
+    AliasName="NEED_LOUDSPEAKER">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="NeedBeverage"
     PrecisionRule="true"
     EntityAttrName="NeedBeverage"
     EntityUsage="ConfRoomCalendar"
-    AliasName="NEED_BEVERAGE"/>
+    AliasName="NEED_BEVERAGE">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="NeedFruits"
     PrecisionRule="true"
     EntityAttrName="NeedFruits"
     EntityUsage="ConfRoomCalendar"
-    AliasName="NEED_FRUITS"/>
+    AliasName="NEED_FRUITS">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="NeedSnacks"
     PrecisionRule="true"
     EntityAttrName="NeedSnacks"
     EntityUsage="ConfRoomCalendar"
-    AliasName="NEED_SNACKS"/>
+    AliasName="NEED_SNACKS">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="SnackLevel"
     PrecisionRule="true"
     EntityAttrName="SnackLevel"
     EntityUsage="ConfRoomCalendar"
-    AliasName="SNACK_LEVEL"/>
+    AliasName="SNACK_LEVEL"
+    LOVName="LOV_SnackLevel">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="NumOfPeople"
     PrecisionRule="true"
@@ -284,6 +353,12 @@
     EntityAttrName="PrId"
     EntityUsage="ConfRoomCalendar"
     AliasName="PR_ID"/>
+  <ViewAttribute
+    Name="Allday"
+    PrecisionRule="true"
+    EntityAttrName="Allday"
+    EntityUsage="ConfRoomCalendar"
+    AliasName="ALLDAY"/>
   <ViewCriteria
     Name="findById"
     ViewObjectName="edu.hp.model.vo.ConfRoomCalendarView"
@@ -365,6 +440,18 @@
       <Parameter
         Name="endTime"
         Type="oracle.jbo.domain.Timestamp"/>
+    </Method>
+    <Method
+      Name="newRow"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userDisplayName"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
 </ViewObject>

@@ -14,4 +14,6 @@ public interface ConfRoomCalendarView extends ViewObject {
     void updateActivityTime(String confRmCalId, Timestamp startTime, Timestamp endTime);
 
     void updateEndTime(String clsRmCalId, Timestamp endTime);
+
+    void newRow(String userDisplayName, String userId);
 }

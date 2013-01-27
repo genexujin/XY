@@ -20,6 +20,14 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
     public ConfRoomCalendarViewImpl() {
     }
     
+    public void newRow(String userDisplayName, String userId) {
+        Row newRow = this.createRow();
+        newRow.setAttribute("UserDisplayName", userDisplayName);
+        newRow.setAttribute("UserId", userId);
+        this.insertRow(newRow);
+        this.setCurrentRow(newRow);
+    }
+    
     public void updateActivityTime(String confRmCalId, Timestamp startTime, Timestamp endTime) {
         this.queryByPK(confRmCalId);
         Row[] rows = this.getAllRowsInRange();

@@ -63,7 +63,8 @@
        ConfRoomCalendar.SNACK_LEVEL, 
        ConfRoomCalendar.NUM_OF_PEOPLE, 
        ConfRoomCalendar.STATE, 
-       ConfRoomCalendar.PR_ID
+       ConfRoomCalendar.PR_ID,
+ConfRoomCalendar.ALLDAY
 FROM CONF_ROOM_CALENDAR ConfRoomCalendar
 WHERE ConfRoomCalendar.MEETING_ROOM_ID IN
   (
@@ -216,7 +217,7 @@ WHERE ConfRoomCalendar.MEETING_ROOM_ID IN
     ColumnType="TIMESTAMP"
     AliasName="START_TIME"
     Expression="START_TIME"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="EndTime"
     IsUpdateable="false"
@@ -226,7 +227,7 @@ WHERE ConfRoomCalendar.MEETING_ROOM_ID IN
     ColumnType="TIMESTAMP"
     AliasName="END_TIME"
     Expression="END_TIME"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="Comments"
     IsUpdateable="false"
@@ -367,6 +368,21 @@ WHERE ConfRoomCalendar.MEETING_ROOM_ID IN
     ColumnType="VARCHAR2"
     AliasName="PR_ID"
     Expression="PR_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Allday"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ALLDAY"
+    Expression="ALLDAY"
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
