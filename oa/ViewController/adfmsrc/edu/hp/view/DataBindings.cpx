@@ -20,6 +20,7 @@
     <page path="/pages/clsrm/CreateCalendar.jsff" usageId="edu_hp_view_CreateCalendarPageDef"/>
     <page path="/pages/helpdesk/MyHelpdeskCall.jsff" usageId="edu_hp_view_MyHelpdeskCallPageDef"/>
     <page path="/pages/clsrm/ClassRoomBatchReservation.jsff" usageId="edu_hp_view_ClassRoomBatchReservationPageDef"/>
+    <page path="/pages/confRm/ConfRmCalendar.jsff" usageId="edu_hp_view_ConfRmCalendarPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -34,6 +35,7 @@
 
     <page id="edu_hp_view_MyHelpdeskCallPageDef" path="pages.helpdesk.MyHelpdeskCallPageDef"/>
     <page id="edu_hp_view_ClassRoomBatchReservationPageDef" path="pages.clsrm.ClassRoomBatchReservationPageDef"/>
+    <page id="edu_hp_view_ConfRmCalendarPageDef" path="pages.confRm.ConfRmCalendarPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

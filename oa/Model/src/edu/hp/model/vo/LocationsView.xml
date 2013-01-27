@@ -66,7 +66,8 @@
     PrecisionRule="true"
     EntityAttrName="CreatedAt"
     EntityUsage="Locations"
-    AliasName="CREATED_AT"/>
+    AliasName="CREATED_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="CreatedBy"
     PrecisionRule="true"
@@ -78,7 +79,8 @@
     PrecisionRule="true"
     EntityAttrName="LastUpdatedAt"
     EntityUsage="Locations"
-    AliasName="LAST_UPDATED_AT"/>
+    AliasName="LAST_UPDATED_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="LastUpdatedBy"
     PrecisionRule="true"
@@ -88,6 +90,11 @@
   <ViewLinkAccessor
     Name="Classrooms"
     ViewLink="edu.hp.model.vo.link.LocClsRmViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="LovsView"
+    ViewLink="edu.hp.model.vo.link.LocConfRmLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
 </ViewObject>

@@ -189,6 +189,13 @@
     AssociationOtherEnd="edu.hp.model.eo.asso.LocClsRmAssoc.Locations"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Lovs"
+    Association="edu.hp.model.eo.asso.LocConfRmAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.LocConfRmAssoc.Lovs"
+    AssociationOtherEnd="edu.hp.model.eo.asso.LocConfRmAssoc.Locations"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="LocationsPk"
     PrimaryKey="true">

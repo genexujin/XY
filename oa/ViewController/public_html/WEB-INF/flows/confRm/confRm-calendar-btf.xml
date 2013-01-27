@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="confRm-calendar-btf">
+    <default-activity>ConfRmCalendar</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>confRmCalBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.conf.ConfRmCalBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="ConfRmCalendar">
+      <page>/pages/confRm/ConfRmCalendar.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
