@@ -11,7 +11,10 @@
                         <f:facet name="separator">
                             <af:spacer width="10px" height="5px"/>
                         </f:facet>
-                        <af:commandButton text="查询" id="cb1"/>
+                        <!--<af:commandButton text="查询" id="cb1" actionListener="#{pageFlowScope.MyHdCallBean.doQuery}"
+                                          partialSubmit="false" action="#{pageFlowScope.MyHdCallBean.doQuery2}"/>-->
+                        <af:commandButton text="查询" id="cb1" 
+                                          partialSubmit="false" action="#{pageFlowScope.MyHdCallBean.doQuery2}"/>
                         <af:resetButton text="清空条件" id="rb1"/>
                     </af:panelGroupLayout>
                 </f:facet>
@@ -70,7 +73,7 @@
                       fetchSize="#{bindings.HelpdeskCallsView11.rangeSize}" rowBandingInterval="0"
                       selectedRowKeys="#{bindings.HelpdeskCallsView11.collectionModel.selectedRow}"
                       selectionListener="#{bindings.HelpdeskCallsView11.collectionModel.makeCurrent}"
-                      rowSelection="single" id="resId1">
+                      rowSelection="single" id="resId1" binding="#{pageFlowScope.MyHdCallBean.resultTable}">
                 <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CallReadableId.name}" sortable="true"
                            headerText="#{bindings.HelpdeskCallsView11.hints.CallReadableId.label}" id="resId1c1">
                     <af:outputText value="#{row.CallReadableId}" id="ot1"/>

@@ -28,7 +28,17 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.HelpdeskCallsViewImpl"
+  ComponentInterface="edu.hp.model.vo.common.HelpdeskCallsView"
+  ClientProxyName="edu.hp.model.vo.client.HelpdeskCallsViewClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Variable
+    Name="RsnLv1"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="HelpdeskCalls"
     Entity="edu.hp.model.eo.HelpdeskCalls"/>
@@ -148,6 +158,42 @@
     EntityAttrName="ReasonDetail"
     EntityUsage="HelpdeskCalls"
     AliasName="REASON_DETAIL"/>
+  <ViewCriteria
+    Name="HelpdeskCallsViewCriteria"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HelpdeskCallsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ReasonLevel1"
+        ViewAttribute="ReasonLevel1"
+        Operator="="
+        Conjunction="AND"
+        Value=":RsnLv1"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="CalleeView"
     ViewLink="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
@@ -160,4 +206,15 @@
     Type="oracle.jbo.Row"
     Reversed="true"
     IsUpdateable="false"/>
+  <ClientInterface>
+    <Method
+      Name="doQuery"
+      MethodName="doQuery">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="level"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

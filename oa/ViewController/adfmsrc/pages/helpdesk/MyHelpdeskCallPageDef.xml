@@ -10,9 +10,9 @@
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery"/>-->
     <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery1"/>
-    <iterator Binds="ReasonLevel1" RangeSize="10" DataControl="HelpdeskCallsAppModuleDataControl"
+    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel1" RangeSize="10" DataControl="RootAppModuleDataControl"
               id="ReasonLevel1Iterator"/>
-    <iterator Binds="ReasonLevel2" RangeSize="25" DataControl="HelpdeskCallsAppModuleDataControl"
+    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel2" RangeSize="25" DataControl="RootAppModuleDataControl"
               id="ReasonLevel2Iterator"/>
   </executables>
   <bindings>
@@ -40,5 +40,15 @@
         <Item Value="Value"/>
       </AttrNames>
     </list>
+    <action IterBinding="HelpdeskCallsView1Iterator" id="QueryHepdeskCalls"
+            InstanceName="RootAppModuleDataControl.Root.HelpdeskCallsAppModule1.HelpdeskCallsView"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="RsnLv1" NDType="java.lang.String"/>
+    </action>
+    <methodAction IterBinding="HelpdeskCallsView1Iterator" id="doQuery" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="doQuery" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskCallsView">
+      <NamedData NDName="level" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>
