@@ -35,7 +35,7 @@
                                                       value="#{pageFlowScope.clsCalBean.providerData[provider].enabled}">
                                 <f:attribute name="providerId" value="#{provider.id}"/>
                             </af:selectBooleanCheckbox>
-                            <af:outputText value="(#{provider.noOfPpl}座)" id="ot3"/>
+                            <af:outputText value="#{provider.noOfPpl}" id="ot3"/>
                         </af:panelGroupLayout>
                     </af:forEach>
                 </af:panelGroupLayout>

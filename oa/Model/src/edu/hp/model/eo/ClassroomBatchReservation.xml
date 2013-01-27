@@ -10,7 +10,20 @@
   AliasName="ClassroomBatchReservation"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  RowClass="edu.hp.model.common.BaseEntity">
+  RowClass="edu.hp.model.eo.ClassroomBatchReservationImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="BatchNoSeq"
+    ViewObjectName="edu.hp.model.vo.LovsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="ClsBatchSeq"
+      FullName="edu.hp.model.vo.LovsView.ClsBatchSeq"/>
+  </ViewAccessor>
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -41,8 +54,7 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    TableName="CLASSROOM_BATCH_RESERVATION">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -60,8 +72,7 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    TableName="CLASSROOM_BATCH_RESERVATION">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
@@ -69,6 +80,8 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomBatchReservation.ActTitle_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -78,8 +91,8 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -93,8 +106,8 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    TableName="CLASSROOM_BATCH_RESERVATION">
+    <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -144,8 +157,7 @@
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    TableName="CLASSROOM_BATCH_RESERVATION">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -160,8 +172,7 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    TableName="CLASSROOM_BATCH_RESERVATION">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -187,6 +198,8 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomBatchReservation.Comments_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -196,8 +209,7 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    TableName="CLASSROOM_BATCH_RESERVATION">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -211,8 +223,7 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    TableName="CLASSROOM_BATCH_RESERVATION">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -228,7 +239,7 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="CLASSROOM_BATCH_RESERVATION"
-    IsNotNull="true">
+    DefaultValue="WEEKLY">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -241,12 +252,13 @@
   </Attribute>
   <Attribute
     Name="FstWkMon"
-    Precision="1"
     ColumnName="FST_WK_MON"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -259,12 +271,13 @@
   </Attribute>
   <Attribute
     Name="FstWkTue"
-    Precision="1"
     ColumnName="FST_WK_TUE"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -277,12 +290,13 @@
   </Attribute>
   <Attribute
     Name="FstWkWed"
-    Precision="1"
     ColumnName="FST_WK_WED"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -295,12 +309,13 @@
   </Attribute>
   <Attribute
     Name="FstWkThu"
-    Precision="1"
     ColumnName="FST_WK_THU"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -313,12 +328,13 @@
   </Attribute>
   <Attribute
     Name="FstWkFri"
-    Precision="1"
     ColumnName="FST_WK_FRI"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -331,12 +347,13 @@
   </Attribute>
   <Attribute
     Name="FstWkSat"
-    Precision="1"
     ColumnName="FST_WK_SAT"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -349,12 +366,13 @@
   </Attribute>
   <Attribute
     Name="FstWkSun"
-    Precision="1"
     ColumnName="FST_WK_SUN"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -367,12 +385,13 @@
   </Attribute>
   <Attribute
     Name="SndWkMon"
-    Precision="1"
     ColumnName="SND_WK_MON"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -385,12 +404,13 @@
   </Attribute>
   <Attribute
     Name="SndWkTue"
-    Precision="1"
     ColumnName="SND_WK_TUE"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -403,12 +423,13 @@
   </Attribute>
   <Attribute
     Name="SndWkWed"
-    Precision="1"
     ColumnName="SND_WK_WED"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -421,12 +442,13 @@
   </Attribute>
   <Attribute
     Name="SndWkThu"
-    Precision="1"
     ColumnName="SND_WK_THU"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -439,12 +461,13 @@
   </Attribute>
   <Attribute
     Name="SndWkFri"
-    Precision="1"
     ColumnName="SND_WK_FRI"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -457,12 +480,13 @@
   </Attribute>
   <Attribute
     Name="SndWkSat"
-    Precision="1"
     ColumnName="SND_WK_SAT"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -475,12 +499,13 @@
   </Attribute>
   <Attribute
     Name="SndWkSun"
-    Precision="1"
     ColumnName="SND_WK_SUN"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CLASSROOM_BATCH_RESERVATION">
+    TableName="CLASSROOM_BATCH_RESERVATION"
+    DefaultValue="N"
+    Precision="20">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -573,6 +598,126 @@
       <Item Value="edu.hp.model.eo.ClassroomBatchReservation.BatchNo"/>
     </AttrArray>
   </Key>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_0"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="BATCH_NO_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[BatchNo!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_1"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="TITLE_CANNOT_BE_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[ActTitle!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_2"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="START_DATE_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[ActStartTime!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_3"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="USER_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[UserDisplayName!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_4"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="CLASSROOM_CANNOT_BE_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[Classroom!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_5"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="BATCH_START_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[BatchEffectiveDate!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_6"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="BATCH_EXPIRE_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[BatchExpireDate!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_7"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="_U5730_U70B9_U4E0D_U80FD_U4E3A"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[LocationName!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_8"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="RECURRER_DATE_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[!(FstWkMon==null && FstWkTue==null && FstWkWed==null && FstWkThu==null && FstWkFri==null && FstWkSat==null && FstWkSun==null && SndWkMon==null && SndWkTue==null && SndWkWed==null && SndWkThu==null && SndWkFri==null && SndWkSat==null && SndWkSun==null)]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:CompareValidationBean
+    Name="ClassroomBatchReservation_Rule_9"
+    ResId="edu.hp.model.eo.ClassroomCalendar_Rule_1"
+    OnAttribute="ActEndTime"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="GREATERTHANEQUALTO"
+    CompareValue="ActStartTime">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="ActEndTime"/>
+      <validation:Item
+        Value="ActStartTime"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
+  <validation:CompareValidationBean
+    Name="ClassroomBatchReservation_Rule_10"
+    ResId="EXPIRE_LATER_THAN_EFFECTIVE"
+    OnAttribute="BatchExpireDate"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="GREATERTHANEQUALTO"
+    CompareValue="BatchEffectiveDate">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="BatchExpireDate"/>
+      <validation:Item
+        Value="BatchEffectiveDate"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

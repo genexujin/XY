@@ -6,7 +6,9 @@
   Name="ClassRmModule"
   Version="11.1.2.62.76"
   ClearCacheOnRollback="true"
-  ComponentClass="edu.hp.model.biz.ClassRmModuleImpl">
+  ComponentClass="edu.hp.model.biz.ClassRmModuleImpl"
+  ComponentInterface="edu.hp.model.biz.common.ClassRmModule"
+  ClientProxyName="edu.hp.model.biz.client.ClassRmModuleClient">
   <DesignTime>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
@@ -16,9 +18,6 @@
         ResId="edu.hp.model.biz.ClassRmModule_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
-  <ViewUsage
-    Name="ClassroomBatchReservation"
-    ViewObjectName="edu.hp.model.vo.ClassroomBatchReservationView"/>
   <ViewUsage
     Name="Classrooms"
     ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomQuery"/>
@@ -37,6 +36,16 @@
   <ViewUsage
     Name="Calendar"
     ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomCalenderView"/>
+  <ViewUsage
+    Name="ClsRmBtchRsvtnView"
+    ViewObjectName="edu.hp.model.vo.ClsRmBtchRsvtnView"/>
+  <ViewUsage
+    Name="ClsRmBatchSeqView"
+    ViewObjectName="edu.hp.model.vo.LovsView">
+    <ViewCriteriaUsage
+      Name="ClsBatchSeq"
+      FullName="edu.hp.model.vo.LovsView.ClsBatchSeq"/>
+  </ViewUsage>
   <ViewLinkUsage
     Name="LocClsRmViewLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.LocClsRmViewLink"
@@ -47,4 +56,18 @@
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="saveBatchOrders"
+      MethodName="saveBatchOrders">
+      <Return
+        Type="boolean"/>
+    </Method>
+    <Method
+      Name="deleteCurrentBatchOrder"
+      MethodName="deleteCurrentBatchOrder">
+      <Return
+        Type="void"/>
+    </Method>
+  </ClientInterface>
 </AppModule>
