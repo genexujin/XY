@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="ConfRmCalendarPageDef"
+                Package="pages.confRm">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="LocationsIterator" Binds="Root.ConfRmModule.Locations" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="ConfRoomCalendarViewIterator" Binds="Root.ConfRmModule.ConfRoomCalendarView"
+              DataControl="RootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="ConfRoomQueryIterator" Binds="Root.ConfRmModule.ConfRoomQuery" DataControl="RootAppModuleDataControl"
+              RangeSize="-1"/>
+    <iterator id="ConfRmConflictIterator" Binds="Root.ConfRmModule.ConfRmConflict"
+              DataControl="RootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="ConfRmOfLocationIterator" Binds="Root.ConfRmModule.ConfRmOfLocation"
+              DataControl="RootAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action IterBinding="ConfRoomQueryIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="startDate" NDValue="#{bindings.ConfRoomQuery.startDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="endDate" NDValue="#{bindings.ConfRoomQuery.endDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="timeZone" NDValue="#{bindings.ConfRoomQuery.timeZoneId}" NDType="java.lang.String"/>
+    </action>
+    <calendar IterBinding="ConfRoomQueryIterator" id="ConfRoomQuery" xmlns="http://xmlns.oracle.com/adf/faces/binding"
+              ActionBindingName="ExecuteWithParams">
+      <nodeDefinition DefName="edu.hp.model.vo.query.conf.ConfRoomQueryView">
+        <AttrNames>
+          <Item Type="id" Value="Id"/>
+          <Item Type="providerId" Value="MeetingRoomId"/>
+          <Item Type="title" Value="Title"/>
+          <Item Type="location" Value="LocationName"/>
+          <Item Type="timeType" Value="Allday"/>
+          <Item Type="startTime" Value="StartTime"/>
+          <Item Type="endTime" Value="EndTime"/>
+          <Item Type="tags" Value="MeetingRoomId"/>
+          <Item Type="custom" Value="Comments"/>
+          <Item Type="custom" Value="EndTime"/>
+          <Item Type="custom" Value="Id"/>
+          <Item Type="custom" Value="LocationId"/>
+          <Item Type="custom" Value="LocationName"/>
+          <Item Type="custom" Value="MeetingRoom"/>
+          <Item Type="custom" Value="MeetingRoomId"/>
+          <Item Type="custom" Value="NeedBeverage"/>
+          <Item Type="custom" Value="NeedFruits"/>
+          <Item Type="custom" Value="NeedLoudspeaker"/>
+          <Item Type="custom" Value="NeedProjector"/>
+          <Item Type="custom" Value="NeedSnacks"/>
+          <Item Type="custom" Value="NumOfPeople"/>
+          <Item Type="custom" Value="Participants"/>
+          <Item Type="custom" Value="PrId"/>
+          <Item Type="custom" Value="SnackLevel"/>
+          <Item Type="custom" Value="StartTime"/>
+          <Item Type="custom" Value="State"/>
+          <Item Type="custom" Value="Title"/>
+          <Item Type="custom" Value="UserDisplayName"/>
+          <Item Type="custom" Value="UserId"/>
+          <Item Type="custom" Value="Allday"/>
+        </AttrNames>
+      </nodeDefinition>
+    </calendar>
+    <navigationlist ListOperMode="navigation" IterBinding="LocationsIterator" id="Locations">
+      <AttrNames>
+        <Item Value="LocationName"/>
+      </AttrNames>
+    </navigationlist>
+    <methodAction IterBinding="ConfRoomQueryIterator" id="findByUserId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findByUserId" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomQuery">
+      <NamedData NDName="enabled" NDValue="#{pageFlowScope.confRmCalBean.myView}" NDType="boolean"/>
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRoomQueryIterator" id="refreshCalendar" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="refreshCalendar" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomQuery">
+      <NamedData NDName="confRmNos" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRoomCalendarViewIterator" id="queryByPK" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="queryByPK" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
+      <NamedData NDName="confRmCalId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRoomCalendarViewIterator" id="deleteByPK" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="deleteByPK" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
+      <NamedData NDName="clsRmCalId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRoomCalendarViewIterator" id="updateActivityTime" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="updateActivityTime" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
+      <NamedData NDName="confRmCalId" NDType="java.lang.String"/>
+      <NamedData NDName="startTime" NDType="oracle.jbo.domain.Timestamp"/>
+      <NamedData NDName="endTime" NDType="oracle.jbo.domain.Timestamp"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRoomCalendarViewIterator" id="updateEndTime" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="updateEndTime" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
+      <NamedData NDName="clsRmCalId" NDType="java.lang.String"/>
+      <NamedData NDName="endTime" NDType="oracle.jbo.domain.Timestamp"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRmConflictIterator" id="ifConflict" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="ifConflict" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRmConflict"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.ifConflict_RootAppModuleDataControl_dataProvider_Root_ConfRmModule_ConfRmConflict_ifConflict_result">
+      <NamedData NDName="actStartTime" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="actEndTime" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="clsRmId" NDType="java.lang.String"/>
+      <NamedData NDName="actId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

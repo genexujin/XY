@@ -18,7 +18,7 @@ public class RolesViewImpl extends BaseView {
     }
     
     public void queryById(String roleId){        
-        queryByPK("queryById","roleId",roleId);
+        queryByVC("queryById","roleId",roleId);
     }
 
     /**

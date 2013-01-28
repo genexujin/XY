@@ -1,4 +1,4 @@
-package edu.hp.view.bean.clsrm;
+package edu.hp.view.bean.conf;
 
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
@@ -6,19 +6,19 @@ import edu.hp.view.utils.JSFUtils;
 import oracle.binding.OperationBinding;
 
 
-public class ClsCalCrtBean {
-    public ClsCalCrtBean() {
+public class ConfCalDetailBean {
+    public ConfCalDetailBean() {
     }
 
     public String save() {
-        //Todo： 产生请购订单
         if(ensureTimeConflicts()){
-            ADFUtils.commit("教室预订已保存！", "预订保存失败，请核对输入的信息或联系管理员！");
+            //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
+            ADFUtils.commit("会议室预订已保存！", "会议室预订保存失败，请核对输入的信息或联系管理员！");
         }else{
-            JSFUtils.addFacesErrorMessage("该教室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
+            JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
         }
-        
         return null;
+
     }
     
     protected Boolean ensureTimeConflicts(){

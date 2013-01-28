@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="center">
+            <af:panelHeader text="编辑会议室预订信息" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelGroupLayout id="pgl1" layout="vertical">
+                    <af:panelList id="pl1">
+                        <af:outputText value="单击返回按钮返回日历界面" id="ot1"/>
+                    </af:panelList>
+                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                        <af:toolbar id="t1">
+                            <af:commandToolbarButton text="保存" id="ctb1" action="#{viewScope.confCalDetailBean.save}"
+                                                     icon="/images/icons/saveall.png"/>
+                            <af:commandToolbarButton text="取消" id="ctb3" actionListener="#{bindings.Rollback.execute}"
+                                                     icon="/images/icons/rollback.png"/>
+                            <af:commandToolbarButton text="返回日历" id="ctb4" icon="/images/icons/chooseDate.png"
+                                                     action="Calendar" actionListener="#{bindings.Rollback.execute}"/>
+                        </af:toolbar>
+                    </af:panelGroupLayout>
+                    <af:separator id="s1"/>
+                    <af:outputText value="会议基本信息" id="ot3" inlineStyle="color:Black; font-size:small;"/>
+                    <af:panelFormLayout id="pfl1" rows="4">
+                        <af:inputText value="#{bindings.Title.inputValue}" label="#{bindings.Title.hints.label}"
+                                      required="#{bindings.Title.hints.mandatory}"
+                                      columns="#{bindings.Title.hints.displayWidth}"
+                                      maximumLength="#{bindings.Title.hints.precision}"
+                                      shortDesc="#{bindings.Title.hints.tooltip}" id="it1">
+                            <f:validator binding="#{bindings.Title.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Participants.inputValue}"
+                                      label="#{bindings.Participants.hints.label}"
+                                      required="#{bindings.Participants.hints.mandatory}"
+                                      columns="#{bindings.Participants.hints.displayWidth}"
+                                      maximumLength="#{bindings.Participants.hints.precision}"
+                                      shortDesc="#{bindings.Participants.hints.tooltip}" id="it2">
+                            <f:validator binding="#{bindings.Participants.validator}"/>
+                        </af:inputText>
+                        <af:selectOneChoice value="#{bindings.LocationName.inputValue}"
+                                            label="#{bindings.LocationName.label}"
+                                            required="#{bindings.LocationName.hints.mandatory}"
+                                            shortDesc="#{bindings.LocationName.hints.tooltip}" id="soc1"
+                                            autoSubmit="true">
+                            <f:selectItems value="#{bindings.LocationName.items}" id="si1"/>
+                        </af:selectOneChoice>
+                        <af:selectOneChoice value="#{bindings.MeetingRoom.inputValue}"
+                                            label="#{bindings.MeetingRoom.label}"
+                                            required="#{bindings.MeetingRoom.hints.mandatory}"
+                                            shortDesc="#{bindings.MeetingRoom.hints.tooltip}" id="soc2"
+                                            partialTriggers="soc1">
+                            <f:selectItems value="#{bindings.MeetingRoom.items}" id="si2"/>
+                        </af:selectOneChoice>
+                        <af:selectOneRadio required="#{bindings.Allday.hints.mandatory}"
+                                           label="#{bindings.Allday.hints.label}" id="sor1"
+                                           value="#{bindings.Allday.inputValue}" layout="horizontal" autoSubmit="true"
+                                           immediate="false">
+                            <af:selectItem label="全天" value="ALLDAY" id="si4"/>
+                            <af:selectItem label="非全天" value="TIME" id="si5"/>
+                        </af:selectOneRadio>
+                        <af:inputDate value="#{bindings.StartTime.inputValue}" label="#{bindings.StartTime.hints.label}"
+                                      required="#{bindings.StartTime.hints.mandatory}"
+                                      columns="#{bindings.StartTime.hints.displayWidth}"
+                                      shortDesc="#{bindings.StartTime.hints.tooltip}" id="id1" partialTriggers="sor1">
+                            <f:validator binding="#{bindings.StartTime.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.StartTime.format}"
+                                                type="#{bindings.Allday.inputValue=='ALLDAY'?'date':'both'}"/>
+                        </af:inputDate>
+                        <af:inputDate value="#{bindings.EndTime.inputValue}" label="#{bindings.EndTime.hints.label}"
+                                      required="#{bindings.EndTime.hints.mandatory}"
+                                      columns="#{bindings.EndTime.hints.displayWidth}"
+                                      shortDesc="#{bindings.EndTime.hints.tooltip}" id="id2" partialTriggers="sor1">
+                            <f:validator binding="#{bindings.EndTime.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.EndTime.format}"
+                                                type="#{bindings.Allday.inputValue=='ALLDAY'?'date':'both'}"/>
+                        </af:inputDate>
+                        <af:inputComboboxListOfValues id="userDisplayNameId"
+                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
+                                                      value="#{bindings.UserDisplayName.inputValue}"
+                                                      label="#{bindings.UserDisplayName.hints.label}"
+                                                      model="#{bindings.UserDisplayName.listOfValuesModel}"
+                                                      required="#{bindings.UserDisplayName.hints.mandatory}"
+                                                      columns="#{bindings.UserDisplayName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.UserDisplayName.hints.tooltip}">
+                            <f:validator binding="#{bindings.UserDisplayName.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
+                                               label="#{bindings.NumOfPeople.hints.label}"
+                                               required="#{bindings.NumOfPeople.hints.mandatory}"
+                                               columns="#{bindings.NumOfPeople.hints.displayWidth}"
+                                               shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it4">
+                            <f:validator binding="#{bindings.NumOfPeople.validator}"/>
+                        </af:inputNumberSpinbox>
+                        <af:inputText value="#{bindings.Comments.inputValue}" label="#{bindings.Comments.hints.label}"
+                                      required="#{bindings.Comments.hints.mandatory}"
+                                      columns="#{bindings.Comments.hints.displayWidth}"
+                                      maximumLength="#{bindings.Comments.hints.precision}"
+                                      shortDesc="#{bindings.Comments.hints.tooltip}" id="it3" rows="3">
+                            <f:validator binding="#{bindings.Comments.validator}"/>
+                        </af:inputText>
+                        <af:selectOneChoice label="#{bindings.State.hints.label}" value="#{bindings.State.inputValue}"
+                                            id="soc4"
+                                            required="#{bindings.State.hints.mandatory}">
+                            <af:selectItem label="未提交" value="未提交" id="si6"/>
+                            <af:selectItem label="待审核" value="待审核" id="si7"/>
+                            <af:selectItem label="已审核" value="已审核" id="si8"/>
+                            <af:selectItem label="已拒绝" value="已拒绝" id="si9"/>
+                            <af:selectItem label="已取消" value="已取消" id="si10"/>
+                        </af:selectOneChoice>
+                    </af:panelFormLayout>
+                    <af:spacer width="10" height="20" id="s3"/>
+                    <af:panelGroupLayout id="pgl3" layout="horizontal">
+                        <af:outputText value="附加选项" id="ot2" inlineStyle="color:Black; font-size:small;"/>
+                        <af:spacer width="30" height="10" id="s2"/>
+                        <af:selectBooleanCheckbox value="#{bindings.NeedProjector.inputValue}"
+                                                  label="#{bindings.NeedProjector.label}"
+                                                  shortDesc="#{bindings.NeedProjector.hints.tooltip}" id="sbc1"/>
+                        <af:spacer width="20" height="10" id="s4"/>
+                        <af:selectBooleanCheckbox value="#{bindings.NeedLoudspeaker.inputValue}"
+                                                  label="#{bindings.NeedLoudspeaker.label}"
+                                                  shortDesc="#{bindings.NeedLoudspeaker.hints.tooltip}" id="sbc2"/>
+                        <af:spacer width="20" height="10" id="s5"/>
+                        <af:selectBooleanCheckbox value="#{bindings.NeedBeverage.inputValue}"
+                                                  label="#{bindings.NeedBeverage.label}"
+                                                  shortDesc="#{bindings.NeedBeverage.hints.tooltip}" id="sbc3"/>
+                        <af:spacer width="20" height="10" id="s6"/>
+                        <af:selectBooleanCheckbox value="#{bindings.NeedFruits.inputValue}"
+                                                  label="#{bindings.NeedFruits.label}"
+                                                  shortDesc="#{bindings.NeedFruits.hints.tooltip}" id="sbc4"/>
+                        <af:spacer width="20" height="10" id="s7"/>
+                        <af:selectBooleanCheckbox value="#{bindings.NeedSnacks.inputValue}"
+                                                  label="#{bindings.NeedSnacks.label}"
+                                                  shortDesc="#{bindings.NeedSnacks.hints.tooltip}" id="sbc5"/>
+                        <af:spacer width="10" height="10" id="s8"/>
+                        <af:selectOneChoice value="#{bindings.SnackLevel.inputValue}"
+                                            label="#{bindings.SnackLevel.label}"
+                                            required="#{bindings.SnackLevel.hints.mandatory}"
+                                            shortDesc="#{bindings.SnackLevel.hints.tooltip}" id="soc3">
+                            <f:selectItems value="#{bindings.SnackLevel.items}" id="si3"/>
+                        </af:selectOneChoice>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            </af:panelHeader>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

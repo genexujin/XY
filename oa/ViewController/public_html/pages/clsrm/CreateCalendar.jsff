@@ -3,7 +3,7 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <af:panelStretchLayout id="psl1">
         <f:facet name="center">
-            <af:panelHeader text="新建教室预订" id="pb1">
+            <af:panelHeader text="编辑教室预订信息" id="pb1">
                 <f:facet name="toolbar"/>
                 <af:panelGroupLayout id="pgl1" layout="vertical">
                     <af:panelList id="pl1">

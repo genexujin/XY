@@ -1,4 +1,4 @@
-package edu.hp.view.bean.clsrm;
+package edu.hp.view.bean.conf;
 
 import edu.hp.view.bean.common.CalendarBean;
 import edu.hp.view.bean.common.OACalendarActivity;
@@ -19,18 +19,18 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.domain.Timestamp;
 
 
-public class ClassroomCalendarBean extends CalendarBean {
+public class ConfRmCalBean extends CalendarBean {
 
-    public ClassroomCalendarBean() {
+    public ConfRmCalBean() {
 
         refreshCalendarOptName = "refreshCalendar";
-        refreshCalendarParamName = "clsRmNos";
-        this.providerIteratorName = "ClassroomOfLocationIterator";
+        refreshCalendarParamName = "confRmNos";
+        this.providerIteratorName = "ConfRmOfLocationIterator";
         this.locationIteratorName = "LocationsIterator";
-        this.calendarIteratorName = "CalendarIterator";
+        this.calendarIteratorName = "ConfRoomQueryIterator";
         this.calendarid = "c1";
-        this.moduleAdminRole = "教室管理员";
-        locationIdFieldName = "ClassroomId";
+        this.moduleAdminRole = "会议室管理员";
+        locationIdFieldName = "MeetingRoomId";
         reload();
     }
 
@@ -51,7 +51,7 @@ public class ClassroomCalendarBean extends CalendarBean {
             OperationBinding binding = ADFUtils.findOperation("deleteByPK");
             String clsRmCalId = this.getCurrActivity().getActivity().getId();
             //            System.err.println("to del act id: " + clsRmCalId);
-            binding.getParamsMap().put("clsRmCalId", clsRmCalId);
+            binding.getParamsMap().put("confRmCalId", clsRmCalId);
             binding.execute();
             if (binding.getErrors().isEmpty()) {
                 this._currActivity = null;
@@ -74,7 +74,7 @@ public class ClassroomCalendarBean extends CalendarBean {
     public String doEdit() {
 
         OperationBinding binding = ADFUtils.findOperation("queryByPK");
-        binding.getParamsMap().put("clsRmCalId", this.getCurrActivity().getActivity().getId());
+        binding.getParamsMap().put("confRmCalId", this.getCurrActivity().getActivity().getId());
         binding.execute();
 
         if (!binding.getErrors().isEmpty()) {
@@ -87,12 +87,11 @@ public class ClassroomCalendarBean extends CalendarBean {
 
     public void calDurationChanged(CalendarActivityDurationChangeEvent ae) {
 
-        if (isEditable()) {
+        if (this.isEditable()) {
 
             CalendarActivity activity = ae.getCalendarActivity();
 
             if (activity == null) {
-
 
                 setCurrActivity(null);
 
@@ -107,12 +106,12 @@ public class ClassroomCalendarBean extends CalendarBean {
 
             Boolean hasNoConflict =
                 ensureTimeConflicts(new java.sql.Timestamp(demoActivity.getFrom().getTime()), new java.sql.Timestamp(ae.getNewEndDate().getTime()),
-                                    (String)demoActivity.getCustomAttributes().get("ClassroomId"),
+                                    (String)demoActivity.getCustomAttributes().get("MeetingRoomId"),
                                     demoActivity.getId());
             if (hasNoConflict) {
 
                 OperationBinding binding = ADFUtils.findOperation("updateEndTime");
-                binding.getParamsMap().put("clsRmCalId", demoActivity.getId());
+                binding.getParamsMap().put("confRmCalId", demoActivity.getId());
                 binding.getParamsMap().put("endTime", new Timestamp(ae.getNewEndDate()));
                 binding.execute();
                 if (binding.getErrors().isEmpty()) {
@@ -124,15 +123,14 @@ public class ClassroomCalendarBean extends CalendarBean {
                 }
 
             } else {
-                JSFUtils.addFacesErrorMessage("该教室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
+                JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
             }
-
+            //update clsrmcaldmlvo
         }
-        //update clsrmcaldmlvo
-
     }
 
-   
+    
+
 
     protected void doUpdateCalendar(OACalendarActivity activity, Date newStart, Date newEnd) {
 
@@ -144,7 +142,7 @@ public class ClassroomCalendarBean extends CalendarBean {
         if (hasNoConflict) {
 
             OperationBinding binding = ADFUtils.findOperation("updateActivityTime");
-            binding.getParamsMap().put("clsRmCalId", activity.getId());
+            binding.getParamsMap().put("confRmCalId", activity.getId());
             binding.getParamsMap().put("endTime", new Timestamp(newEnd));
             binding.getParamsMap().put("startTime", new Timestamp(newStart));
             binding.execute();
@@ -157,7 +155,7 @@ public class ClassroomCalendarBean extends CalendarBean {
             }
 
         } else {
-            JSFUtils.addFacesErrorMessage("该教室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
+            JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
         }
 
     }

@@ -17,6 +17,7 @@
     <Attr Name="_appModuleNames3" Value="edu.hp.model.biz.NotificationModule"/>
     <Attr Name="_appModuleNames4" Value="edu.hp.model.biz.ClassRmModule"/>
     <Attr Name="_appModuleNames5" Value="edu.hp.model.biz.HelpdeskCallsAppModule"/>
+    <Attr Name="_appModuleNames6" Value="edu.hp.model.biz.ConfRmModule"/>
   </DesignTime>
   <Containee
     Name="biz"
@@ -59,9 +60,21 @@
     </DesignTime>
   </Containee>
   <Containee
+    Name="conf"
+    PackageName="edu.hp.model.vo.query.conf"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
     Name="helpdesk"
     PackageName="edu.hp.model.vo.query.helpdesk"
-    ObjectType="JboPackage"/>
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
   <Containee
     Name="security"
     PackageName="edu.hp.model.vo.query.security"

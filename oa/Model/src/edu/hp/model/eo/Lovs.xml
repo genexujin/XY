@@ -149,6 +149,13 @@
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
   </Attribute>
+  <AccessorAttribute
+    Name="Locations"
+    Association="edu.hp.model.eo.asso.LocConfRmAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.LocConfRmAssoc.Locations"
+    AssociationOtherEnd="edu.hp.model.eo.asso.LocConfRmAssoc.Lovs"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
   <Key
     Name="LovsPk"
     PrimaryKey="true">
@@ -168,6 +175,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.Lovs.FlexCol1"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_Lovs1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="LOCATIONS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_LOVS1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.Lovs.FlexCol3"/>
     </AttrArray>
   </Key>
 </Entity>

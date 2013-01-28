@@ -34,11 +34,8 @@ public class ClassroomCalendarImpl extends EntityImpl {
      * @param e the transaction event
      */
     protected void doDML(int operation, TransactionEvent e) {
-
         if (operation == DML_INSERT || operation == DML_UPDATE) {
-
             if (this.getAllDay().equals("ALLDAY")) {
-
                 Timestamp actEndTime = this.getActEndTime();
                 if (actEndTime != null) {
                     Calendar calendar = Calendar.getInstance();
@@ -48,43 +45,12 @@ public class ClassroomCalendarImpl extends EntityImpl {
                     calendar.set(Calendar.SECOND, 59);
                     this.setActEndTime(new Timestamp(calendar.getTimeInMillis()));
                 }
-
             }
         }
 
         super.doDML(operation, e);
     }
 
-
-    //    /**
-    //     * Validation method for ClassroomCalendar.
-    //     */
-    //    public boolean validateTimeConflict() {
-    //
-    //        Timestamp actStartTime = this.getActStartTime();
-    //        Timestamp actEndTime = this.getActEndTime();
-    //        String clsRmId = this.getClassroomId();
-    //        try {
-    //
-    //            RowSet calendarView = this.getClassroomCalendarConflitQuery1();
-    //            calendarView.ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
-    //            calendarView.ensureVariableManager().setVariableValue("startQueryTime", actStartTime);
-    //            calendarView.ensureVariableManager().setVariableValue("clsRoomId", clsRmId);
-    //            calendarView.setRangeSize(-1);
-    //            calendarView.executeQuery();
-    //
-    //            if (calendarView.first() !=null){
-    //                return false;
-    //            }
-    //
-    //        } catch (Exception e) {
-    //            // TODO: Add catch code
-    //            e.printStackTrace();
-    //            return false;
-    //        }
-    //
-    //        return true;
-    //    }
 
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. Do not modify.

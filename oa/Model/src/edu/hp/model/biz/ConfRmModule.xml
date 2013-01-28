@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ConfRmModule"
+  Version="11.1.2.62.76"
+  ClearCacheOnRollback="true">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.biz.ConfRmModule_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewUsage
+    Name="ConfRoomCalendarView"
+    ViewObjectName="edu.hp.model.vo.ConfRoomCalendarView"/>
+  <ViewUsage
+    Name="Locations"
+    ViewObjectName="edu.hp.model.vo.LocationsView"/>
+  <ViewUsage
+    Name="ConfRmOfLocation"
+    ViewObjectName="edu.hp.model.vo.LovsView"/>
+  <ViewUsage
+    Name="ConfRoomQuery"
+    ViewObjectName="edu.hp.model.vo.query.conf.ConfRoomQueryView"/>
+  <ViewUsage
+    Name="ConfRmConflict"
+    ViewObjectName="edu.hp.model.vo.query.conf.ConfRmConflictView"/>
+  <ViewLinkUsage
+    Name="LocConfRmLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.LocConfRmLink"
+    SrcViewUsageName="edu.hp.model.biz.ConfRmModule.Locations"
+    DstViewUsageName="edu.hp.model.biz.ConfRmModule.ConfRmOfLocation"
+    Reversed="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</AppModule>

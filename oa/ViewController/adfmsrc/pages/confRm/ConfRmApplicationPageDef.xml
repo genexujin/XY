@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="ConfRmApplicationPageDef"
+                Package="pages.confRm">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.ConfRmModule.ConfRoomCalendarView" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ConfRoomCalendarViewIterator"/>
+    <searchRegion Binds="ConfRoomCalendarViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ConfRoomCalendarViewQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ConfRoomCalendarViewIterator" id="ConfRoomCalendarView">
+      <nodeDefinition DefName="edu.hp.model.vo.ConfRoomCalendarView" Name="ConfRoomCalendarView0">
+        <AttrNames>
+          <Item Value="Title"/>
+          <Item Value="Participants"/>
+          <Item Value="UserDisplayName"/>
+          <Item Value="LocationName"/>
+          <Item Value="MeetingRoom"/>
+          <Item Value="Allday"/>
+          <Item Value="StartTime"/>
+          <Item Value="EndTime"/>
+          <Item Value="NumOfPeople"/>
+          <Item Value="State"/>
+          <Item Value="Comments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="UserId">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="LocationId">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="MeetingRoomId">
+      <AttrNames>
+        <Item Value="MeetingRoomId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="Title">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="Participants">
+      <AttrNames>
+        <Item Value="Participants"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="StartTime">
+      <AttrNames>
+        <Item Value="StartTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="EndTime">
+      <AttrNames>
+        <Item Value="EndTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="Comments">
+      <AttrNames>
+        <Item Value="Comments"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="State">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="NumOfPeople">
+      <AttrNames>
+        <Item Value="NumOfPeople"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" Uses="LOV_UserDisplayName" IterBinding="ConfRoomCalendarViewIterator"
+                  id="UserDisplayName"/>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="Allday">
+      <AttrNames>
+        <Item Value="Allday"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="UserDisplayName1">
+      <AttrNames>
+        <Item Value="UserDisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ConfRoomCalendarViewIterator" StaticList="false" Uses="LOV_LocationName" id="LocationName1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ConfRoomCalendarViewIterator" StaticList="false" Uses="LOV_MeetingRoom" id="MeetingRoom1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ConfRoomCalendarViewIterator" StaticList="false" Uses="LOV_SnackLevel" id="SnackLevel"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <button IterBinding="ConfRoomCalendarViewIterator" id="NeedProjector" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedProjector"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomCalendarViewIterator" id="NeedBeverage" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedBeverage"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomCalendarViewIterator" id="NeedLoudspeaker" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedLoudspeaker"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomCalendarViewIterator" id="NeedFruits" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedFruits"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomCalendarViewIterator" id="NeedSnacks" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedSnacks"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="deleteByPK" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteByPK"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
+      <NamedData NDName="clsRmCalId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRoomCalendarViewIterator" id="findByUserid" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findByUserid" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRoomCalendarViewIterator" id="newRow" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="newRow" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
+      <NamedData NDName="userDisplayName" NDValue="#{sessionScope.LoginUserBean.displayName}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="ifConflict" RequiresUpdateModel="true" Action="invokeMethod" MethodName="ifConflict"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRmConflict"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.ifConflict_RootAppModuleDataControl_dataProvider_Root_ConfRmModule_ConfRmConflict_ifConflict_result">
+       <NamedData NDName="actStartTime" NDValue="#{bindings.StartTime.inputValue}" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="actEndTime" NDValue="#{bindings.EndTime.inputValue}" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="clsRmId" NDValue="#{bindings.MeetingRoomId.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="actId" NDValue="#{bindings.Id.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="ConfRoomCalendarViewIterator" id="findByState" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findByState" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
+      <NamedData NDName="state" NDValue="#{viewScope.ConfRmAppBean.queryState}" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

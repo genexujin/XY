@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="confRm_application_btf_confRm_application_btf_findByStatePageDef" Package="flows.confRm"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="findByState" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByState"
+            IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView"
+            ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_ConfRmModule_ConfRoomCalendarView_findByState_result">
+      <NamedData NDName="state" NDValue="#{'待审核'}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

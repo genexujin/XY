@@ -55,7 +55,7 @@ public class ClsRmCalDMLViewImpl extends BaseView implements ClsRmCalDMLView {
     }
 
     public void queryByPK(String clsRmCalId) {
-        super.queryByPK("findById", "clsRmCalId", clsRmCalId);
+        super.queryByVC("findById", "clsRmCalId", clsRmCalId);
     }
 
     public void newRow(String userDisplayName, String userId) {
