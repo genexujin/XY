@@ -24,6 +24,18 @@ public class ConfRoomCalendarViewClient extends ViewUsageImpl implements ConfRoo
         return;
     }
 
+    public void findByState(String state) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"findByState",new String [] {"java.lang.String"},new Object[] {state});
+        return;
+    }
+
+    public void findByUserid(String userId) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"findByUserid",new String [] {"java.lang.String"},new Object[] {userId});
+        return;
+    }
+
     public void newRow(String userDisplayName, String userId) {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this,"newRow",new String [] {"java.lang.String","java.lang.String"},new Object[] {userDisplayName, userId});

@@ -115,4 +115,20 @@ public class ConfRoomQueryViewImpl extends ViewObjectImpl implements ConfRoomQue
     public void setuserId(String value) {
         ensureVariableManager().setVariableValue("userId", value);
     }
+
+    /**
+     * Returns the bind variable value for initStat.
+     * @return bind variable value for initStat
+     */
+    public String getinitStat() {
+        return (String)getNamedWhereClauseParam("initStat");
+    }
+
+    /**
+     * Sets <code>value</code> for bind variable initStat.
+     * @param value value to bind as initStat
+     */
+    public void setinitStat(String value) {
+        setNamedWhereClauseParam("initStat", value);
+    }
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="confRm-application-btf">
+    <default-activity>ifNormalUser</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__8">
+      <name>forApproval</name>
+      <value>#{pageFlowScope.forApproval}</value>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>ConfRmAppBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.conf.ConfRmAppBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="ConfRmApplication">
+      <page>/pages/confRm/ConfRmApplication.jsff</page>
+    </view>
+    <router id="ifNormalUser">
+      <case id="__7">
+        <expression>#{pageFlowScope.forApproval!='true' and (sessionScope.LoginUserBean.isUserInRole['系统管理员'] or
+                    sessionScope.LoginUserBean.isUserInRole['会议室管理员']) }</expression>
+        <outcome>adminUser</outcome>
+      </case>
+      <case id="__12">
+        <expression>#{pageFlowScope.forApproval=='true'}</expression>
+        <outcome>approvals</outcome>
+      </case>
+      <default-outcome>normalUser</default-outcome>
+    </router>
+    <method-call id="findByUserid">
+      <method>#{bindings.findByUserid.execute}</method>
+      <outcome>
+        <fixed-outcome>findByUserid</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByState">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>findByState</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>ifNormalUser</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>adminUser</from-outcome>
+        <to-activity-id>ConfRmApplication</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__4">
+        <from-outcome>normalUser</from-outcome>
+        <to-activity-id>findByUserid</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__11">
+        <from-outcome>approvals</from-outcome>
+        <to-activity-id>findByState</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>findByUserid</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>findByUserid</from-outcome>
+        <to-activity-id>ConfRmApplication</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>findByState</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>findByState</from-outcome>
+        <to-activity-id>ConfRmApplication</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -220,7 +220,7 @@ public class CalendarBean {
 
     public DnDAction handleDrop(DropEvent dropEvent) {
         if (isEditable()) {
-            System.err.println("editable!");
+            //System.err.println("editable!");
             Transferable transferable = dropEvent.getTransferable();
             CalendarDropSite dropSite = (CalendarDropSite)dropEvent.getDropSite();
             Date dropSiteDate = dropSite.getDate();
@@ -234,7 +234,7 @@ public class CalendarBean {
 
             return dropEvent.getProposedAction();
         } else{
-            System.err.println("note editbale!");
+            //System.err.println("not editbale!");
             return DnDAction.NONE;
         }
     }
@@ -302,7 +302,7 @@ public class CalendarBean {
                 ensureTimeConflicts(new Timestamp(_proposedStartDate.getTime()), new Timestamp(endDate.getTime()),
                                     (String)(movingActivity.getCustomAttributes().get(this.locationIdFieldName)),
                                     movingActivity.getId());
-            System.err.println("here " + hasNoConflict);
+            //System.err.println("here " + hasNoConflict);
             if (hasNoConflict)
                 // update to the new start and end day
                 doUpdateCalendar(movingActivity, _proposedStartDate, endDate);
@@ -336,7 +336,7 @@ public class CalendarBean {
                 ensureTimeConflicts(new Timestamp(startDate.getTime()), new Timestamp(endDate.getTime()),
                                     (String)(movingActivity.getCustomAttributes().get(locationIdFieldName)),
                                     movingActivity.getId());
-            System.err.println("here " + hasNoConflict);
+            //System.err.println("here " + hasNoConflict);
             if (hasNoConflict)
                 doUpdateCalendar(movingActivity, startDate, endDate);
             else

@@ -12,6 +12,7 @@ public class ConfCalDetailBean {
 
     public String save() {
         if(ensureTimeConflicts()){
+            //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
             ADFUtils.commit("会议室预订已保存！", "会议室预订保存失败，请核对输入的信息或联系管理员！");
         }else{
             JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");

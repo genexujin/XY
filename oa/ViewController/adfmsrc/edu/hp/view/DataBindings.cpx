@@ -31,6 +31,11 @@
     <page path="/WEB-INF/flows/confRm/confRm-calendar-btf.xml#confRm-calendar-btf@CreateWithParameters"
           usageId="edu_hp_view_confRm_calendar_btf_confRm_calendar_btf_CreateWithParametersPageDef"/>
     <page path="/pages/confRm/ConfRmActivity.jsff" usageId="edu_hp_view_ConfRmActivityPageDef"/>
+    <page path="/pages/confRm/ConfRmApplication.jsff" usageId="edu_hp_view_ConfRmApplicationPageDef"/>
+    <page path="/WEB-INF/flows/confRm/confRm-application-btf.xml#confRm-application-btf@findByUserid"
+          usageId="edu_hp_view_confRm_application_btf_confRm_application_btf_findByUseridPageDef"/>
+    <page path="/WEB-INF/flows/confRm/confRm-application-btf.xml#confRm-application-btf@findByState"
+          usageId="edu_hp_view_confRm_application_btf_confRm_application_btf_findByStatePageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -54,6 +59,11 @@
     <page id="edu_hp_view_confRm_calendar_btf_confRm_calendar_btf_CreateWithParametersPageDef"
           path="flows.confRm.confRm_calendar_btf_confRm_calendar_btf_CreateWithParametersPageDef"/>
     <page id="edu_hp_view_ConfRmActivityPageDef" path="pages.confRm.ConfRmActivityPageDef"/>
+    <page id="edu_hp_view_ConfRmApplicationPageDef" path="pages.confRm.ConfRmApplicationPageDef"/>
+    <page id="edu_hp_view_confRm_application_btf_confRm_application_btf_findByUseridPageDef"
+          path="flows.confRm.confRm_application_btf_confRm_application_btf_findByUseridPageDef"/>
+    <page id="edu_hp_view_confRm_application_btf_confRm_application_btf_findByStatePageDef"
+          path="flows.confRm.confRm_application_btf_confRm_application_btf_findByStatePageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

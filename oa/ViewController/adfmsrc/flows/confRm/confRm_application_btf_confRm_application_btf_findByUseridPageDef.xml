@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="confRm_application_btf_confRm_application_btf_findByUseridPageDef" Package="flows.confRm"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="findByUserid" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByUserid"
+            IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView"
+            ReturnName="data.RootAppModuleDataControl.methodResults.findByUserid_RootAppModuleDataControl_dataProvider_Root_ConfRmModule_ConfRoomCalendarView_findByUserid_result">
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

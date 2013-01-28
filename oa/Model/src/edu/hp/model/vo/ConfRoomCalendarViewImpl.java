@@ -19,7 +19,7 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
      */
     public ConfRoomCalendarViewImpl() {
     }
-    
+
     public void newRow(String userDisplayName, String userId) {
         Row newRow = this.createRow();
         newRow.setAttribute("UserDisplayName", userDisplayName);
@@ -27,7 +27,7 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
         this.insertRow(newRow);
         this.setCurrentRow(newRow);
     }
-    
+
     public void updateActivityTime(String confRmCalId, Timestamp startTime, Timestamp endTime) {
         this.queryByPK(confRmCalId);
         Row[] rows = this.getAllRowsInRange();
@@ -62,7 +62,15 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
     }
 
     public void queryByPK(String confRmCalId) {
-        super.queryByPK("findById", "confRmCalId", confRmCalId);
+        super.queryByVC("findById", "confRmCalId", confRmCalId);
+    }
+
+    public void findByUserid(String userId) {
+        super.queryByVC("findByUserId", "userId", userId);
+    }
+
+    public void findByState(String state) {
+        super.queryByVC("findByState", "state", state);
     }
 
     /**
@@ -79,5 +87,37 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
      */
     public void setconfRmCalId(String value) {
         ensureVariableManager().setVariableValue("confRmCalId", value);
+    }
+
+    /**
+     * Returns the variable value for userId.
+     * @return variable value for userId
+     */
+    public String getuserId() {
+        return (String)ensureVariableManager().getVariableValue("userId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable userId.
+     * @param value value to bind as userId
+     */
+    public void setuserId(String value) {
+        ensureVariableManager().setVariableValue("userId", value);
+    }
+
+    /**
+     * Returns the variable value for state.
+     * @return variable value for state
+     */
+    public String getstate() {
+        return (String)ensureVariableManager().getVariableValue("state");
+    }
+
+    /**
+     * Sets <code>value</code> for variable state.
+     * @param value value to bind as state
+     */
+    public void setstate(String value) {
+        ensureVariableManager().setVariableValue("state", value);
     }
 }

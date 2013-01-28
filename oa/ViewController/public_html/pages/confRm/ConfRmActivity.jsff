@@ -102,17 +102,19 @@
                                       shortDesc="#{bindings.Comments.hints.tooltip}" id="it3" rows="3">
                             <f:validator binding="#{bindings.Comments.validator}"/>
                         </af:inputText>
-                        <af:inputText value="#{bindings.State.inputValue}" label="#{bindings.State.hints.label}"
-                                      required="#{bindings.State.hints.mandatory}"
-                                      columns="#{bindings.State.hints.displayWidth}"
-                                      maximumLength="#{bindings.State.hints.precision}"
-                                      shortDesc="#{bindings.State.hints.tooltip}" id="it5" readOnly="true">
-                            <f:validator binding="#{bindings.State.validator}"/>
-                        </af:inputText>
+                        <af:selectOneChoice label="#{bindings.State.hints.label}" value="#{bindings.State.inputValue}"
+                                            id="soc4"
+                                            required="#{bindings.State.hints.mandatory}">
+                            <af:selectItem label="未提交" value="未提交" id="si6"/>
+                            <af:selectItem label="待审核" value="待审核" id="si7"/>
+                            <af:selectItem label="已审核" value="已审核" id="si8"/>
+                            <af:selectItem label="已拒绝" value="已拒绝" id="si9"/>
+                            <af:selectItem label="已取消" value="已取消" id="si10"/>
+                        </af:selectOneChoice>
                     </af:panelFormLayout>
                     <af:spacer width="10" height="20" id="s3"/>
                     <af:panelGroupLayout id="pgl3" layout="horizontal">
-                        <af:outputText value="附件选项" id="ot2" inlineStyle="color:Black; font-size:small;"/>
+                        <af:outputText value="附加选项" id="ot2" inlineStyle="color:Black; font-size:small;"/>
                         <af:spacer width="30" height="10" id="s2"/>
                         <af:selectBooleanCheckbox value="#{bindings.NeedProjector.inputValue}"
                                                   label="#{bindings.NeedProjector.label}"
@@ -133,6 +135,7 @@
                         <af:selectBooleanCheckbox value="#{bindings.NeedSnacks.inputValue}"
                                                   label="#{bindings.NeedSnacks.label}"
                                                   shortDesc="#{bindings.NeedSnacks.hints.tooltip}" id="sbc5"/>
+                        <af:spacer width="10" height="10" id="s8"/>
                         <af:selectOneChoice value="#{bindings.SnackLevel.inputValue}"
                                             label="#{bindings.SnackLevel.label}"
                                             required="#{bindings.SnackLevel.hints.mandatory}"

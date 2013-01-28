@@ -43,6 +43,12 @@
     Name="userId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="initStat"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_REVIEWED]]></TransientExpression>
+  </Variable>
   <SQLQuery><![CDATA[SELECT ConfRoomCalendar.ID, 
        ConfRoomCalendar.USER_ID, 
        ConfRoomCalendar.USER_DISPLAY_NAME, 
@@ -72,7 +78,8 @@ WHERE ConfRoomCalendar.MEETING_ROOM_ID IN
       regexp_substr(:confRmNos,'[^,]+', 1, level)
     FROM
       dual CONNECT BY regexp_substr(:confRmNos, '[^,]+', 1, level) IS NOT NULL
-  )]]></SQLQuery>
+  )
+AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -388,6 +395,42 @@ WHERE ConfRoomCalendar.MEETING_ROOM_ID IN
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewCriteria
+    Name="findByUserId"
+    ViewObjectName="edu.hp.model.vo.query.conf.ConfRoomQueryView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ConfRoomQueryViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="UserId"
+        ViewAttribute="UserId"
+        Operator="="
+        Conjunction="AND"
+        Value=":userId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>
