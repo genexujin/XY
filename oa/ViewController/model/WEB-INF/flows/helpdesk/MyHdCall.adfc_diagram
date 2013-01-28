@@ -1,7 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <SDM>
    <OverallProperties
-      id="OverallProperties1"/>
+      id="OverallProperties1">
+      <property
+         name="linkStyle">Orthogonal</property>
+   </OverallProperties>
    <View
       id="View2">
       <property
@@ -59,7 +62,7 @@
       <property
          name="fromOutcome">create</property>
       <property
-         name="sdm:polyPoints">R50,333.68692,196.24707,465.31308,184.49414,L50</property>
+         name="sdm:polyPoints">R50,399.5,196.24707,399.5,184.49414,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -69,6 +72,16 @@
       <property
          name="fromOutcome">newRow</property>
       <property
-         name="sdm:polyPoints">R50,548.6869,184.49414,710.3131,185.79297,L50</property>
+         name="sdm:polyPoints">R50,629.5,184.49414,629.5,185.79297,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="View2"
+      to="View4">
+      <property
+         name="fromOutcome">edit</property>
+      <property
+         name="sdm:polyPoints">T50,292.0,131.79297,752.0,131.79297,T50</property>
    </ControlFlowCase>
 </SDM>

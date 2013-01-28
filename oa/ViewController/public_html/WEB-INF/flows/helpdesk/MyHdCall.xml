@@ -28,6 +28,10 @@
         <from-outcome>create</from-outcome>
         <to-activity-id>Create</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>CreateHelpdeskCall</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__4">
       <from-activity-id>Create</from-activity-id>
