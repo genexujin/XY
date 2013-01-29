@@ -132,9 +132,11 @@ public class MyHelpdeskCallBean {
     }
     
     private void toState(String state) {
-        DCIteratorBinding binding = ADFUtils.findIterator("HelpdeskCallsViewIterator");
-        Row row = binding.getCurrentRow();
-        row.setAttribute("State", state);
+        //DCIteratorBinding binding = ADFUtils.findIterator("HelpdeskCallsViewIterator");
+        //Row row = binding.getCurrentRow();
+        //row.setAttribute("State", state);
+        ADFUtils.setBoundAttributeValue("State", state);
+//        ADFUtils.setBoundAttributeValue("CallId", 100);        
         OperationBinding oper = ADFUtils.findOperation("Commit");
         oper.execute();
     }

@@ -18,7 +18,9 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="HELPDESK_CALLS"
-    PrimaryKey="true">
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    IsUpdateable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -30,7 +32,9 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="HELPDESK_CALLS">
+    TableName="HELPDESK_CALLS"
+    RetrievedOnInsert="true"
+    IsUpdateable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="30"/>
     </DesignTime>

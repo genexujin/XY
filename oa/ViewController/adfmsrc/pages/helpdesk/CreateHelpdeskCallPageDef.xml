@@ -8,8 +8,10 @@
               RangeSize="10" id="HelpdeskCallsViewIterator"/>
   </executables>
   <bindings>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="RootAppModuleDataControl"
+            DataControl="RootAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"/>
     <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallReadableId">
       <AttrNames>
         <Item Value="CallReadableId"/>

@@ -76,6 +76,7 @@
                 <f:facet name="toolbar">
                     <af:toolbar id="t1">
                         <af:commandToolbarButton text="新建" id="ctb1" action="create"/>
+                        <af:commandToolbarButton text="Edit" id="ctb2" action="edit"/>
                     </af:toolbar>
                 </f:facet>
                 <f:facet name="statusbar"/>

@@ -145,7 +145,7 @@
                             columns="#{bindings.CallEval.hints.displayWidth}"
                             maximumLength="#{bindings.CallEval.hints.precision}"
                             shortDesc="#{bindings.CallEval.hints.tooltip}" id="it8"
-                            disabled="#{bindings.State.inputValue ne '3'}">
+                            disabled="#{bindings.State.inputValue ne '3'}" rows="1">
                 <f:validator binding="#{bindings.CallEval.validator}"/>
               </af:inputText>
               <af:inputText value="#{bindings.CallEvalDetail.inputValue}" label="#{bindings.CallEvalDetail.hints.label}"

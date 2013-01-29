@@ -42,6 +42,7 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
     }
     
     public void newRow() {
+        System.err.println("here");
         Row newRow = this.createRow();
         newRow.setAttribute("State", STATE_UN_SUBMITTED);
         this.insertRow(newRow);        
