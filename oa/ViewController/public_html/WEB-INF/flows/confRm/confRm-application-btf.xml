@@ -9,6 +9,10 @@
       <name>forApproval</name>
       <value>#{pageFlowScope.forApproval}</value>
     </input-parameter-definition>
+    <input-parameter-definition id="__17">
+      <name>actId</name>
+      <value>#{pageFlowScope.actId}</value>
+    </input-parameter-definition>
     <managed-bean id="__1">
       <managed-bean-name>ConfRmAppBean</managed-bean-name>
       <managed-bean-class>edu.hp.view.bean.conf.ConfRmAppBean</managed-bean-class>
@@ -27,6 +31,10 @@
         <expression>#{pageFlowScope.forApproval=='true'}</expression>
         <outcome>approvals</outcome>
       </case>
+      <case id="__18">
+        <expression>#{pageFlowScope.actId!=null}</expression>
+        <outcome>findByid</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findByUserid">
@@ -39,6 +47,12 @@
       <method>#{bindings.findByState.execute}</method>
       <outcome>
         <fixed-outcome>findByState</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="queryByPK">
+      <method>#{bindings.queryByPK.execute}</method>
+      <outcome>
+        <fixed-outcome>queryByPK</fixed-outcome>
       </outcome>
     </method-call>
     <control-flow-rule id="__2">
@@ -55,6 +69,10 @@
         <from-outcome>approvals</from-outcome>
         <to-activity-id>findByState</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__14">
+        <from-outcome>findByid</from-outcome>
+        <to-activity-id>queryByPK</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__5">
       <from-activity-id>findByUserid</from-activity-id>
@@ -67,6 +85,13 @@
       <from-activity-id>findByState</from-activity-id>
       <control-flow-case id="__10">
         <from-outcome>findByState</from-outcome>
+        <to-activity-id>ConfRmApplication</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>queryByPK</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>queryByPK</from-outcome>
         <to-activity-id>ConfRmApplication</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

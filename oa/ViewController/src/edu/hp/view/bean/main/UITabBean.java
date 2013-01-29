@@ -4,12 +4,11 @@ import edu.hp.view.bean.session.LoginUserMenuBean;
 import edu.hp.view.security.LoginUser;
 import edu.hp.view.security.LoginUserMenu;
 import edu.hp.view.utils.ADFUtils;
-import edu.hp.view.utils.JSFUtils;
 import edu.hp.view.utils.Constants;
+import edu.hp.view.utils.JSFUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,13 +49,7 @@ public class UITabBean {
                 (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             user = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
             JSFUtils.setExpressionValue("#{sessionScope.LoginUserBean}", user);
-            HashMap<String, Boolean> hashMap = user.getIsUserInRole();
-            Iterator<String> iterator = hashMap.keySet().iterator();
-            while (iterator.hasNext()) {
-
-                System.err.println(iterator.next());
-            }
-
+            
         }
 
     }

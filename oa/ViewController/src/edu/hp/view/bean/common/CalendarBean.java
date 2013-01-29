@@ -137,6 +137,7 @@ public class CalendarBean {
             setCurrActivity(null);
         } else {
             setCurrActivity(new OACalendarActivity(activity));
+            //System.err.println(this.getCurrActivity().getId());
         }
 
 

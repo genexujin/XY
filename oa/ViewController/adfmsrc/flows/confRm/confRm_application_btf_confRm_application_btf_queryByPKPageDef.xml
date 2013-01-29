@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="confRm_application_btf_confRm_application_btf_queryByPKPageDef" Package="flows.confRm"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="queryByPK" RequiresUpdateModel="true" Action="invokeMethod" MethodName="queryByPK"
+            IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView"
+            ReturnName="data.RootAppModuleDataControl.methodResults.queryByPK_RootAppModuleDataControl_dataProvider_Root_ConfRmModule_ConfRoomCalendarView_queryByPK_result">
+      <NamedData NDName="confRmCalId" NDValue="#{pageFlowScope.actId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

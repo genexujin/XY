@@ -103,6 +103,12 @@ public class ConfRmCalBean extends CalendarBean {
 
             OACalendarActivity demoActivity = new OACalendarActivity(activity);
             this.setCurrActivity(demoActivity);
+//            System.err.println(activity.getTitle());
+//            System.err.println(demoActivity.getId());
+//            System.err.println(demoActivity.getFrom());
+//            System.err.println(ae.getNewEndDate());
+//            System.err.println(demoActivity.getCustomAttributes().get("MeetingRoomId"));
+//            System.err.println("param ending...");
 
             Boolean hasNoConflict =
                 ensureTimeConflicts(new java.sql.Timestamp(demoActivity.getFrom().getTime()), new java.sql.Timestamp(ae.getNewEndDate().getTime()),
@@ -111,7 +117,7 @@ public class ConfRmCalBean extends CalendarBean {
             if (hasNoConflict) {
 
                 OperationBinding binding = ADFUtils.findOperation("updateEndTime");
-                binding.getParamsMap().put("confRmCalId", demoActivity.getId());
+                binding.getParamsMap().put("clsRmCalId", demoActivity.getId());
                 binding.getParamsMap().put("endTime", new Timestamp(ae.getNewEndDate()));
                 binding.execute();
                 if (binding.getErrors().isEmpty()) {

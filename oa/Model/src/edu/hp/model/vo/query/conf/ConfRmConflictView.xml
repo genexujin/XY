@@ -38,6 +38,12 @@
     Name="actId"
     Kind="where"
     Type="java.lang.String"/>
+  <Variable
+    Name="approved"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_REVIEWED]]></TransientExpression>
+  </Variable>
   <SQLQuery><![CDATA[SELECT ConfRoomCalendar.ID, 
        ConfRoomCalendar.USER_ID, 
        ConfRoomCalendar.USER_DISPLAY_NAME, 
@@ -60,7 +66,7 @@
        ConfRoomCalendar.STATE, 
        ConfRoomCalendar.PR_ID
 FROM CONF_ROOM_CALENDAR ConfRoomCalendar
-WHERE (NOT( ConfRoomCalendar.END_TIME <= :startQueryTime  OR ConfRoomCalendar.START_TIME >= :endQueryTime)) AND  ConfRoomCalendar.MEETING_ROOM_ID =:confRoomId AND ConfRoomCalendar.ID <> :actId]]></SQLQuery>
+WHERE (NOT( ConfRoomCalendar.END_TIME <= :startQueryTime  OR ConfRoomCalendar.START_TIME >= :endQueryTime)) AND  ConfRoomCalendar.MEETING_ROOM_ID =:confRoomId AND ConfRoomCalendar.ID <> :actId AND ConfRoomCalendar.STATE = :approved]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
@@ -205,7 +211,7 @@ WHERE (NOT( ConfRoomCalendar.END_TIME <= :startQueryTime  OR ConfRoomCalendar.ST
     ColumnType="TIMESTAMP"
     AliasName="START_TIME"
     Expression="START_TIME"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="EndTime"
     IsUpdateable="false"
@@ -215,7 +221,7 @@ WHERE (NOT( ConfRoomCalendar.END_TIME <= :startQueryTime  OR ConfRoomCalendar.ST
     ColumnType="TIMESTAMP"
     AliasName="END_TIME"
     Expression="END_TIME"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="Comments"
     IsUpdateable="false"
