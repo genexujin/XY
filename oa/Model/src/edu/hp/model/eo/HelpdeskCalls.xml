@@ -20,7 +20,7 @@
     TableName="HELPDESK_CALLS"
     PrimaryKey="true"
     RetrievedOnInsert="true"
-    IsUpdateable="false">
+    IsUpdateable="while_insert">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -34,7 +34,7 @@
     ColumnType="VARCHAR2"
     TableName="HELPDESK_CALLS"
     RetrievedOnInsert="true"
-    IsUpdateable="false">
+    IsUpdateable="while_insert">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="30"/>
     </DesignTime>
