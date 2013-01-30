@@ -10,7 +10,8 @@
   AliasName="ConfRoomCalendar"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  RowClass="edu.hp.model.eo.ConfRoomCalendarImpl">
+  RowClass="edu.hp.model.eo.ConfRoomCalendarImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -407,6 +408,71 @@
       <Item Value="edu.hp.model.eo.ConfRoomCalendar.Id"/>
     </AttrArray>
   </Key>
+  <validation:CompareValidationBean
+    Name="ConfRoomCalendar_Rule_0"
+    ResId="edu.hp.model.eo.ClassroomCalendar_Rule_1"
+    OnAttribute="EndTime"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="GREATERTHANEQUALTO"
+    CompareValue="StartTime">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="EndTime"/>
+      <validation:Item
+        Value="StartTime"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ConfRoomCalendar_Rule_1"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="USER_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[UserId!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ConfRoomCalendar_Rule_2"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="_U5730_U70B9_U4E0D_U80FD_U4E3A"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[LocationId!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ConfRoomCalendar_Rule_3"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="CONF_ROOM_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[MeetingRoomId!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ConfRoomCalendar_Rule_4"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="MEETING_TITLE_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[Title!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ConfRoomCalendar_Rule_5"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="PARTICIPANTS_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[Participants!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

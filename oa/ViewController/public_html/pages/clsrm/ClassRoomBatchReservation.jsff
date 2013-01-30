@@ -59,7 +59,7 @@
                         <af:column sortProperty="#{bindings.ClsRmBtchRsvtnView.hints.AllDay.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.ClsRmBtchRsvtnView.hints.AllDay.label}"
                                    id="c2">
-                            <af:outputText value="#{row.AllDay}" id="ot2"/>
+                            <af:outputText value="#{row.AllDay=='TIME'?'非全天':'全天'}" id="ot2"/>
                         </af:column>
                         <af:column sortProperty="#{bindings.ClsRmBtchRsvtnView.hints.ActTitle.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.ClsRmBtchRsvtnView.hints.ActTitle.label}"

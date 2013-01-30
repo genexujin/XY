@@ -36,6 +36,8 @@
           usageId="edu_hp_view_confRm_application_btf_confRm_application_btf_findByUseridPageDef"/>
     <page path="/WEB-INF/flows/confRm/confRm-application-btf.xml#confRm-application-btf@findByState"
           usageId="edu_hp_view_confRm_application_btf_confRm_application_btf_findByStatePageDef"/>
+    <page path="/WEB-INF/flows/confRm/confRm-application-btf.xml#confRm-application-btf@queryByPK"
+          usageId="edu_hp_view_confRm_application_btf_confRm_application_btf_queryByPKPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -64,6 +66,8 @@
           path="flows.confRm.confRm_application_btf_confRm_application_btf_findByUseridPageDef"/>
     <page id="edu_hp_view_confRm_application_btf_confRm_application_btf_findByStatePageDef"
           path="flows.confRm.confRm_application_btf_confRm_application_btf_findByStatePageDef"/>
+    <page id="edu_hp_view_confRm_application_btf_confRm_application_btf_queryByPKPageDef"
+          path="flows.confRm.confRm_application_btf_confRm_application_btf_queryByPKPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

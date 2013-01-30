@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="confRm-approval-btf">
+    <default-activity>confRm-application-btf</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <task-flow-call id="confRm-application-btf">
+      <task-flow-reference>
+        <document>/WEB-INF/flows/confRm/confRm-application-btf.xml</document>
+        <id>confRm-application-btf</id>
+      </task-flow-reference>
+      <input-parameter id="__1">
+        <name>forApproval</name>
+        <value>true</value>
+      </input-parameter>
+      <input-parameter id="__2">
+        <name>actId</name>
+        <value></value>
+      </input-parameter>
+    </task-flow-call>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

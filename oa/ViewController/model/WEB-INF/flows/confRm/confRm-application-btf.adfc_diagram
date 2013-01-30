@@ -20,9 +20,9 @@
       <property
          name="y">292.89648</property>
       <property
-         name="x">570.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">570.0</property>
    </View>
    <Router
       id="Router3">
@@ -114,5 +114,38 @@
          name="fromOutcome">approvals</property>
       <property
          name="sdm:polyPoints">R46,273.34277,292.0459,273.34277,198.09766,L50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall12">
+      <property
+         name="activityId">queryByPK</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>queryByPK&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">599.1494</property>
+      <property
+         name="x">356.5</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase13"
+      from="Router3"
+      to="MethodCall12">
+      <property
+         name="fromOutcome">findByid</property>
+      <property
+         name="sdm:polyPoints">B44,173.5,598.7988,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase14"
+      from="MethodCall12"
+      to="View2">
+      <property
+         name="fromOutcome">queryByPK</property>
+      <property
+         name="sdm:polyPoints">R50,573.5,598.7988,B56</property>
    </ControlFlowCase>
 </SDM>

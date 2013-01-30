@@ -32,6 +32,12 @@ public class ConfRmConflictViewImpl extends ViewObjectImpl implements ConfRmConf
      */
     public Boolean ifConflict(Timestamp actStartTime, Timestamp actEndTime, String clsRmId, String actId){
         
+//        System.err.println("inside vo...........");
+//        System.err.println(actStartTime);
+//        System.err.println(actEndTime);
+//        System.err.println(clsRmId);
+//        System.err.println(actId);
+        
         try {
            
             if(actStartTime.equals(actEndTime)){                
@@ -126,5 +132,21 @@ public class ConfRmConflictViewImpl extends ViewObjectImpl implements ConfRmConf
      */
     public void setactId(String value) {
         setNamedWhereClauseParam("actId", value);
+    }
+
+    /**
+     * Returns the bind variable value for approved.
+     * @return bind variable value for approved
+     */
+    public String getapproved() {
+        return (String)getNamedWhereClauseParam("approved");
+    }
+
+    /**
+     * Sets <code>value</code> for bind variable approved.
+     * @param value value to bind as approved
+     */
+    public void setapproved(String value) {
+        setNamedWhereClauseParam("approved", value);
     }
 }
