@@ -28,43 +28,31 @@
           <af:panelFormLayout id="pfl1">
             <f:facet name="footer"/>
               <af:panelGroupLayout id="pgl3" layout="horizontal">
-                <af:inputText value="#{bindings.CallerId.inputValue}" label="#{bindings.CallerId.hints.label}&nbsp;&nbsp;&nbsp;"
-                              required="#{bindings.CallerId.hints.mandatory}"
-                              columns="#{bindings.CallerId.hints.displayWidth}"
-                              maximumLength="#{bindings.CallerId.hints.precision}"
-                              shortDesc="#{bindings.CallerId.hints.tooltip}" id="it1"
-                              disabled="#{bindings.State.inputValue ne '1'}">
-                  <f:validator binding="#{bindings.CallerId.validator}"/>
-                </af:inputText>
-                <af:inputText value="#{bindings.CalleeId.inputValue}" label="&nbsp;&nbsp;&nbsp;#{bindings.CalleeId.hints.label}"
-                              required="#{bindings.CalleeId.hints.mandatory}"
-                              columns="#{bindings.CalleeId.hints.displayWidth}"
-                              maximumLength="#{bindings.CalleeId.hints.precision}"
-                              shortDesc="#{bindings.CalleeId.hints.tooltip}" id="it2"
-                              disabled="#{bindings.State.inputValue ne '1'}">
-                  <f:validator binding="#{bindings.CalleeId.validator}"/>
-                </af:inputText>
+              <af:selectOneChoice value="#{bindings.CallerId.inputValue}" label="#{bindings.CallerId.label}"
+                                  required="#{bindings.CallerId.hints.mandatory}"
+                                  shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1">
+                <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
+                                  required="#{bindings.CalleeId.hints.mandatory}"
+                                  shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2">
+                <f:selectItems value="#{bindings.CalleeId.items}" id="si2"/>
+              </af:selectOneChoice>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl5" layout="horizontal">
-                <af:inputText value="#{bindings.State.inputValue}" label="#{bindings.State.hints.label}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                              required="#{bindings.State.hints.mandatory}"
-                              columns="#{bindings.State.hints.displayWidth}"
-                              maximumLength="#{bindings.State.hints.precision}"
-                              shortDesc="#{bindings.State.hints.tooltip}" id="it5"
-                              disabled="#{bindings.State.inputValue ne '1'}">
-                  <f:validator binding="#{bindings.State.validator}"/>
-                </af:inputText>
+              <af:selectOneChoice value="#{bindings.State1.inputValue}" label="#{bindings.State1.label}"
+                                  required="#{bindings.State1.hints.mandatory}"
+                                  shortDesc="#{bindings.State1.hints.tooltip}" id="soc3" disabled="true">
+                <f:selectItems value="#{bindings.State1.items}" id="si3"/>
+              </af:selectOneChoice>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl4" layout="horizontal">
-                <af:inputText value="#{bindings.LocationId.inputValue}" label="#{bindings.LocationId.hints.label}"
-                              required="#{bindings.LocationId.hints.mandatory}"
-                              columns="#{bindings.LocationId.hints.displayWidth}"
-                              maximumLength="#{bindings.LocationId.hints.precision}"
-                              shortDesc="#{bindings.LocationId.hints.tooltip}" id="it3"
-                              disabled="#{bindings.State.inputValue ne '1'}">
-                  <f:validator binding="#{bindings.LocationId.validator}"/>
-                </af:inputText>
-                <af:inputText value="#{bindings.LocationDetail.inputValue}"
+              <af:selectOneChoice value="#{bindings.LocationId.inputValue}" label="#{bindings.LocationId.label}"
+                                  required="#{bindings.LocationId.hints.mandatory}"
+                                  shortDesc="#{bindings.LocationId.hints.tooltip}" id="soc4">
+                <f:selectItems value="#{bindings.LocationId.items}" id="si4"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.LocationDetail.inputValue}"
                               label="#{bindings.LocationDetail.hints.label}"
                               required="#{bindings.LocationDetail.hints.mandatory}"
                               columns="#{bindings.LocationDetail.hints.displayWidth}"
@@ -75,22 +63,16 @@
                 </af:inputText>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl6" layout="horizontal" valign="top">
-                <af:inputText value="#{bindings.ReasonLevel1.inputValue}" label="#{bindings.ReasonLevel1.hints.label}"
-                              required="#{bindings.ReasonLevel1.hints.mandatory}"
-                              columns="#{bindings.ReasonLevel1.hints.displayWidth}"
-                              maximumLength="#{bindings.ReasonLevel1.hints.precision}"
-                              shortDesc="#{bindings.ReasonLevel1.hints.tooltip}" id="it10"
-                              disabled="#{bindings.State.inputValue ne '1'}">
-                  <f:validator binding="#{bindings.ReasonLevel1.validator}"/>
-                </af:inputText>
-                <af:inputText value="#{bindings.ReasonLevel2.inputValue}"
-                              required="#{bindings.ReasonLevel2.hints.mandatory}"
-                              columns="#{bindings.ReasonLevel2.hints.displayWidth}"
-                              maximumLength="#{bindings.ReasonLevel2.hints.precision}"
-                              shortDesc="#{bindings.ReasonLevel2.hints.tooltip}" id="it11"
-                              disabled="#{bindings.State.inputValue ne '1'}">
-                  <f:validator binding="#{bindings.ReasonLevel2.validator}"/>
-                </af:inputText>
+              <af:selectOneChoice value="#{bindings.ReasonLevel1.inputValue}" label="#{bindings.ReasonLevel1.label}"
+                                  required="#{bindings.ReasonLevel1.hints.mandatory}"
+                                  shortDesc="#{bindings.ReasonLevel1.hints.tooltip}" id="soc5" autoSubmit="true">
+                <f:selectItems value="#{bindings.ReasonLevel1.items}" id="si5"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.ReasonLevel21.inputValue}"
+                                  required="#{bindings.ReasonLevel21.hints.mandatory}"
+                                  shortDesc="#{bindings.ReasonLevel21.hints.tooltip}" id="soc6">
+                <f:selectItems value="#{bindings.ReasonLevel21.items}" id="si6"/>
+              </af:selectOneChoice>
                 <af:inputText value="#{bindings.ReasonLevel3.inputValue}"
                               required="#{bindings.ReasonLevel3.hints.mandatory}"
                               columns="#{bindings.ReasonLevel3.hints.displayWidth}"

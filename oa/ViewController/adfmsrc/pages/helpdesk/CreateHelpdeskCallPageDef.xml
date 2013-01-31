@@ -17,21 +17,6 @@
         <Item Value="CallReadableId"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallerId">
-      <AttrNames>
-        <Item Value="CallerId"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CalleeId">
-      <AttrNames>
-        <Item Value="CalleeId"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="LocationId">
-      <AttrNames>
-        <Item Value="LocationId"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="HelpdeskCallsViewIterator" id="LocationDetail">
       <AttrNames>
         <Item Value="LocationDetail"/>
@@ -62,16 +47,6 @@
         <Item Value="CallEvalDetail"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonLevel1">
-      <AttrNames>
-        <Item Value="ReasonLevel1"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonLevel2">
-      <AttrNames>
-        <Item Value="ReasonLevel2"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonLevel3">
       <AttrNames>
         <Item Value="ReasonLevel3"/>
@@ -82,5 +57,17 @@
         <Item Value="ReasonDetail"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CallerId" id="CallerId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId" id="CalleeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_State" id="State1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_LocationId" id="LocationId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_ReasonLevel1" id="ReasonLevel1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_ReasonLevel2" id="ReasonLevel21"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

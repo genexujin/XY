@@ -47,6 +47,126 @@
     Name="ReasonLevel1_1"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EmployeesView"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="HdState"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdState"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LocationsView"
+    ViewObjectName="edu.hp.model.vo.LocationsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ReasonLevel2_1"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_CallerId"
+    ListVOName="EmployeesView"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CallerId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UserName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CalleeId"
+    ListVOName="EmployeesView"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CalleeId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UserName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_State"
+    ListVOName="HdState"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="State"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexCol1"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LocationId"
+    ListVOName="LocationsView"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LocationName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReasonLevel1"
+    ListVOName="ReasonLevel1_1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReasonLevel1"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReasonLevel2"
+    ListVOName="ReasonLevel2_1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReasonLevel2"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="HelpdeskCalls"
     Entity="edu.hp.model.eo.HelpdeskCalls"/>
@@ -56,32 +176,60 @@
     PrecisionRule="true"
     EntityAttrName="CallId"
     EntityUsage="HelpdeskCalls"
-    AliasName="CALL_ID"/>
+    AliasName="CALL_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="CallReadableId"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="CallReadableId"
     EntityUsage="HelpdeskCalls"
-    AliasName="CALL_READABLE_ID"/>
+    AliasName="CALL_READABLE_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="CallerId"
     PrecisionRule="true"
     EntityAttrName="CallerId"
     EntityUsage="HelpdeskCalls"
-    AliasName="CALLER_ID"/>
+    AliasName="CALLER_ID"
+    LOVName="LOV_CallerId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CalleeId"
     PrecisionRule="true"
     EntityAttrName="CalleeId"
     EntityUsage="HelpdeskCalls"
-    AliasName="CALLEE_ID"/>
+    AliasName="CALLEE_ID"
+    LOVName="LOV_CalleeId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="LocationId"
     PrecisionRule="true"
     EntityAttrName="LocationId"
     EntityUsage="HelpdeskCalls"
-    AliasName="LOCATION_ID"/>
+    AliasName="LOCATION_ID"
+    LOVName="LOV_LocationId">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.HelpdeskCallsView.LocationId_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="LocationDetail"
     PrecisionRule="true"
@@ -117,7 +265,15 @@
     PrecisionRule="true"
     EntityAttrName="State"
     EntityUsage="HelpdeskCalls"
-    AliasName="STATE"/>
+    AliasName="STATE"
+    LOVName="LOV_State">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CallResult"
     PrecisionRule="true"
@@ -154,13 +310,29 @@
     PrecisionRule="true"
     EntityAttrName="ReasonLevel1"
     EntityUsage="HelpdeskCalls"
-    AliasName="REASON_LEVEL_1"/>
+    AliasName="REASON_LEVEL_1"
+    LOVName="LOV_ReasonLevel1">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ReasonLevel2"
     PrecisionRule="true"
     EntityAttrName="ReasonLevel2"
     EntityUsage="HelpdeskCalls"
-    AliasName="REASON_LEVEL_2"/>
+    AliasName="REASON_LEVEL_2"
+    LOVName="LOV_ReasonLevel2">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ReasonLevel3"
     PrecisionRule="true"
