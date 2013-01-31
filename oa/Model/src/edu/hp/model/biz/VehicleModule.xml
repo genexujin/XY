@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VehicleModule"
+  Version="11.1.2.62.76"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="VehicleDML"
+    ViewObjectName="edu.hp.model.vo.VehicleCalendarView"/>
+  <ViewUsage
+    Name="Vehicles"
+    ViewObjectName="edu.hp.model.vo.LovsView">
+    <ViewCriteriaUsage
+      Name="Vehicles"
+      FullName="edu.hp.model.vo.LovsView.Vehicles"/>
+  </ViewUsage>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.biz.VehicleModule_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewUsage
+    Name="VehicleCalQuery"
+    ViewObjectName="edu.hp.model.vo.query.vehicle.VehicleCalQueryView"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</AppModule>

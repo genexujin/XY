@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="VehicleCalendarPageDef"
+                Package="pages.vehicle">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="VehicleCalQueryIterator" Binds="Root.VehicleModule.VehicleCalQuery"
+              DataControl="RootAppModuleDataControl" RangeSize="-1"/>
+    <iterator id="VehiclesIterator" Binds="Root.VehicleModule.Vehicles" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="VehicleDMLIterator" Binds="Root.VehicleModule.VehicleDML" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction IterBinding="VehicleDMLIterator" id="updateEndTime" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateEndTime" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML">
+      <NamedData NDName="vehicleActId" NDType="java.lang.String"/>
+      <NamedData NDName="endTime" NDType="oracle.jbo.domain.Timestamp"/>
+    </methodAction>
+    <methodAction IterBinding="VehicleDMLIterator" id="updateActivityTime" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="updateActivityTime" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML">
+      <NamedData NDName="vehicleActId" NDType="java.lang.String"/>
+      <NamedData NDName="startTime" NDType="oracle.jbo.domain.Timestamp"/>
+      <NamedData NDName="endTime" NDType="oracle.jbo.domain.Timestamp"/>
+    </methodAction>
+    <methodAction IterBinding="VehicleDMLIterator" id="queryByPK" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="queryByPK" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML">
+      <NamedData NDName="confRmCalId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="VehicleDMLIterator" id="deleteByPK" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteByPK" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML">
+      <NamedData NDName="vehicleActId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="VehicleCalQueryIterator" id="findByUserId" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findByUserId" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleCalQuery"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByUserId_RootAppModuleDataControl_dataProvider_Root_VehicleModule_VehicleCalQuery_findByUserId_result">
+      <NamedData NDName="enabled" NDValue="#{pageFlowScope.vehiclesCalBean.myView}" NDType="boolean"/>
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="VehicleCalQueryIterator" id="refreshCalendar" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="refreshCalendar" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleCalQuery"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.refreshCalendar_RootAppModuleDataControl_dataProvider_Root_VehicleModule_VehicleCalQuery_refreshCalendar_result">
+      <NamedData NDName="vehicleIds" NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="VehicleCalQueryIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="startDate" NDValue="#{bindings.VehicleCalQuery.startDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="endDate" NDValue="#{bindings.VehicleCalQuery.endDate}" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="timeZone" NDValue="#{bindings.VehicleCalQuery.timeZoneId}" NDType="java.lang.String"/>
+    </action>
+    <calendar IterBinding="VehicleCalQueryIterator" id="VehicleCalQuery"
+              xmlns="http://xmlns.oracle.com/adf/faces/binding" ActionBindingName="ExecuteWithParams">
+      <nodeDefinition DefName="edu.hp.model.vo.query.vehicle.VehicleCalQueryView">
+        <AttrNames>
+          <Item Type="id" Value="Id"/>
+          <Item Type="providerId" Value="VehicleId"/>
+          <Item Type="title" Value="Title"/>
+          <Item Type="location" Value="VehicleName"/>
+          <Item Type="startTime" Value="StartTime"/>
+          <Item Type="endTime" Value="EndTime"/>
+          <Item Type="tags" Value="VehicleId"/>
+          <Item Type="custom" Value="Comments"/>
+          <Item Type="custom" Value="ContactId"/>
+          <Item Type="custom" Value="ContactName"/>
+          <Item Type="custom" Value="ContactPhone"/>
+          <Item Type="custom" Value="EndTime"/>
+          <Item Type="custom" Value="Id"/>
+          <Item Type="custom" Value="NumOfPeople"/>
+          <Item Type="custom" Value="ReturnEndTime"/>
+          <Item Type="custom" Value="ReturnStartTime"/>
+          <Item Type="custom" Value="ReturnTrip"/>
+          <Item Type="custom" Value="ReturnTripEnd"/>
+          <Item Type="custom" Value="ReturnTripStart"/>
+          <Item Type="custom" Value="StartTime"/>
+          <Item Type="custom" Value="State"/>
+          <Item Type="custom" Value="Title"/>
+          <Item Type="custom" Value="TripDest"/>
+          <Item Type="custom" Value="TripStart"/>
+          <Item Type="custom" Value="UserDisplayName"/>
+          <Item Type="custom" Value="UserId"/>
+          <Item Type="custom" Value="VehicleId"/>
+          <Item Type="custom" Value="VehicleName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </calendar>
+  </bindings>
+</pageDefinition>

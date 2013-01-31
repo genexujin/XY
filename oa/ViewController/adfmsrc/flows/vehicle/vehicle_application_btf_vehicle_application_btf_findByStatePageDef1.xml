@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="vehicle_application_btf_vehicle_application_btf_findByStatePageDef1" Package="flows.vehicle"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="findByState" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByState"
+            IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML"
+            ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_VehicleModule_VehicleDML_findByState_result">
+      <NamedData NDName="state" NDValue="已审核" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

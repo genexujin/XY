@@ -36,6 +36,10 @@
     Name="ConfRmModule"
     FullName="edu.hp.model.biz.ConfRmModule"
     SharedScope="0"/>
+  <AppModuleUsage
+    Name="VehicleModule"
+    FullName="edu.hp.model.biz.VehicleModule"
+    SharedScope="0"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

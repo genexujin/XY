@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="vehicle-cal-btf">
+    <default-activity>VehicleCalendar</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>vehiclesCalBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.vehicle.VehicleCalendarBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="VehicleCalendar">
+      <page>/pages/vehicle/VehicleCalendar.jsff</page>
+    </view>
+    <method-call id="newRow">
+      <method>#{bindings.Createwithparameters.execute}</method>
+      <outcome>
+        <fixed-outcome>newRow</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="VehicleDetail">
+      <page>/pages/vehicle/VehicleDetail.jsff</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>VehicleCalendar</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>newRow</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>Edit</from-outcome>
+        <to-activity-id>VehicleDetail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>newRow</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>newRow</from-outcome>
+        <to-activity-id>VehicleDetail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>VehicleDetail</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>Calendar</from-outcome>
+        <to-activity-id>VehicleCalendar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
