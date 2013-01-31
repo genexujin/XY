@@ -124,6 +124,15 @@
               <af:outputText value="#{row.Comments}" id="ot9"/>
             </af:column>
           </af:table>
+          <af:popup id="delete" contentDelivery="lazyUncached">
+            <!-- don't render if the activity is null -->
+            <af:dialog dialogListener="#{viewScope.ConfRmAppBean.delete}" title="#{bindings.Title.inputValue}"
+                       id="d2">
+              <af:outputText value="请注意：该操作无法恢复！" id="ot12"/>
+              <af:spacer height="20" id="s13"/>
+              <af:outputText value="您确认要删除该预订吗？" id="ot15"/>
+            </af:dialog>
+          </af:popup>
         </af:panelCollection>
       </af:panelHeader>
     </f:facet>

@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="center">
+            <af:panelHeader text="编辑车辆预订信息" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelGroupLayout id="pgl1" layout="vertical">
+                    <af:panelList id="pl1">
+                        <af:outputText value="单击返回按钮返回日历界面" id="ot1"/>
+                    </af:panelList>
+                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                        <af:toolbar id="t1">
+                            <af:commandToolbarButton text="保存" id="ctb1"
+                                                     icon="/images/icons/saveall.png"
+                                                     action="#{pageFlowScope.vehiclesCalBean.save}"/>
+                            <af:commandToolbarButton text="取消" id="ctb3" actionListener="#{bindings.Rollback.execute}"
+                                                     icon="/images/icons/rollback.png"/>
+                            <af:commandToolbarButton text="返回日历" id="ctb4" icon="/images/icons/chooseDate.png"
+                                                     action="Calendar" actionListener="#{bindings.Rollback.execute}"/>
+                        </af:toolbar>
+                    </af:panelGroupLayout>
+                    <af:separator id="s1"/>
+                    <af:outputText value="车辆预订信息" id="ot3" inlineStyle="color:Black; font-size:small;"/>
+                    <af:panelFormLayout id="pfl2" rows="4">
+                        <af:inputComboboxListOfValues id="iclov1"
+                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
+                                                      value="#{bindings.UserDisplayName.inputValue}"
+                                                      label="#{bindings.UserDisplayName.hints.label}"
+                                                      model="#{bindings.UserDisplayName.listOfValuesModel}"
+                                                      required="#{bindings.UserDisplayName.hints.mandatory}"
+                                                      columns="#{bindings.UserDisplayName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.UserDisplayName.hints.tooltip}">
+                            <f:validator binding="#{bindings.UserDisplayName.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:selectOneChoice value="#{bindings.VehicleName.inputValue}"
+                                            label="#{bindings.VehicleName.label}"
+                                            required="#{bindings.VehicleName.hints.mandatory}"
+                                            shortDesc="#{bindings.VehicleName.hints.tooltip}" id="soc1">
+                            <f:selectItems value="#{bindings.VehicleName.items}" id="si2"/>
+                        </af:selectOneChoice>
+                        <af:inputText value="#{bindings.TripStart.inputValue}" label="#{bindings.TripStart.hints.label}"
+                                      required="#{bindings.TripStart.hints.mandatory}"
+                                      columns="#{bindings.TripStart.hints.displayWidth}"
+                                      maximumLength="#{bindings.TripStart.hints.precision}"
+                                      shortDesc="#{bindings.TripStart.hints.tooltip}" id="it12">
+                            <f:validator binding="#{bindings.TripStart.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.TripDest.inputValue}" label="#{bindings.TripDest.hints.label}"
+                                      required="#{bindings.TripDest.hints.mandatory}"
+                                      columns="#{bindings.TripDest.hints.displayWidth}"
+                                      maximumLength="#{bindings.TripDest.hints.precision}"
+                                      shortDesc="#{bindings.TripDest.hints.tooltip}" id="it13">
+                            <f:validator binding="#{bindings.TripDest.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Title.inputValue}" label="#{bindings.Title.hints.label}"
+                                      required="#{bindings.Title.hints.mandatory}"
+                                      columns="#{bindings.Title.hints.displayWidth}"
+                                      maximumLength="#{bindings.Title.hints.precision}"
+                                      shortDesc="#{bindings.Title.hints.tooltip}" id="it7">
+                            <f:validator binding="#{bindings.Title.validator}"/>
+                        </af:inputText>
+                        <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
+                                               label="#{bindings.NumOfPeople.hints.label}"
+                                               required="#{bindings.NumOfPeople.hints.mandatory}"
+                                               columns="#{bindings.NumOfPeople.hints.displayWidth}"
+                                               shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it16">
+                            <f:validator binding="#{bindings.NumOfPeople.validator}"/>
+                        </af:inputNumberSpinbox>
+                        <af:inputDate value="#{bindings.StartTime.inputValue}" label="#{bindings.StartTime.hints.label}"
+                                      required="#{bindings.StartTime.hints.mandatory}"
+                                      columns="#{bindings.StartTime.hints.displayWidth}"
+                                      shortDesc="#{bindings.StartTime.hints.tooltip}" id="id3">
+                            <f:validator binding="#{bindings.StartTime.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.StartTime.format}" type="both"/>
+                        </af:inputDate>
+                        <af:inputDate value="#{bindings.EndTime.inputValue}" label="#{bindings.EndTime.hints.label}"
+                                      required="#{bindings.EndTime.hints.mandatory}"
+                                      columns="#{bindings.EndTime.hints.displayWidth}"
+                                      shortDesc="#{bindings.EndTime.hints.tooltip}" id="id4">
+                            <f:validator binding="#{bindings.EndTime.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.EndTime.format}" type="both"/>
+                        </af:inputDate>
+                        <af:inputComboboxListOfValues id="contactNameId"
+                                                      popupTitle="Search and Select: #{bindings.ContactName.hints.label}"
+                                                      value="#{bindings.ContactName.inputValue}"
+                                                      label="#{bindings.ContactName.hints.label}"
+                                                      model="#{bindings.ContactName.listOfValuesModel}"
+                                                      required="#{bindings.ContactName.hints.mandatory}"
+                                                      columns="#{bindings.ContactName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.ContactName.hints.tooltip}"/>
+                        <af:inputText value="#{bindings.ContactPhone.inputValue}"
+                                      label="#{bindings.ContactPhone.hints.label}"
+                                      required="#{bindings.ContactPhone.hints.mandatory}"
+                                      columns="#{bindings.ContactPhone.hints.displayWidth}"
+                                      maximumLength="#{bindings.ContactPhone.hints.precision}"
+                                      shortDesc="#{bindings.ContactPhone.hints.tooltip}" id="it9">
+                            <f:validator binding="#{bindings.ContactPhone.validator}"/>
+                        </af:inputText>
+                        <af:selectBooleanCheckbox value="#{bindings.ReturnTrip.inputValue}"
+                                                  label="#{bindings.ReturnTrip.label}"
+                                                  shortDesc="#{bindings.ReturnTrip.hints.tooltip}" id="sbc1"
+                                                  autoSubmit="true"/>
+                    </af:panelFormLayout>
+                    <af:separator id="s2"/>
+                    <af:panelFormLayout id="pfl3" rows="1">
+                        <f:facet name="footer"/>
+                        <af:selectOneChoice label="#{bindings.State.hints.label}" value="#{bindings.State.inputValue}"
+                                            id="soc4" required="#{bindings.State.hints.mandatory}">
+                            <af:selectItem label="未提交" value="未提交" id="si6"/>
+                            <af:selectItem label="待审核" value="待审核" id="si7"/>
+                            <af:selectItem label="已审核" value="已审核" id="si8"/>
+                            <af:selectItem label="已调度" value="已调度" id="si9"/>
+                            <af:selectItem label="已拒绝" value="已拒绝" id="si10"/>
+                            <af:selectItem label="已取消" value="已取消" id="si1"/>
+                        </af:selectOneChoice>
+                        <af:inputText value="#{bindings.Comments.inputValue}" label="#{bindings.Comments.hints.label}"
+                                      required="#{bindings.Comments.hints.mandatory}"
+                                      columns="#{bindings.Comments.hints.displayWidth}"
+                                      maximumLength="#{bindings.Comments.hints.precision}"
+                                      shortDesc="#{bindings.Comments.hints.tooltip}" id="it17" rows="3">
+                            <f:validator binding="#{bindings.Comments.validator}"/>
+                        </af:inputText>
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
+            </af:panelHeader>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

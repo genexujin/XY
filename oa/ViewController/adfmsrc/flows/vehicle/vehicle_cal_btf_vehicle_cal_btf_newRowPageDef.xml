@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="vehicle_cal_btf_vehicle_cal_btf_newRowPageDef" Package="flows.vehicle" SkipValidation="true">
+    <parameters/>
+    <executables>
+        <iterator id="VehicleDMLIterator" Binds="Root.VehicleModule.VehicleDML" DataControl="RootAppModuleDataControl"
+                  RangeSize="25"/>
+    </executables>
+    <bindings>
+        <action IterBinding="VehicleDMLIterator" id="Createwithparameters"
+                InstanceName="RootAppModuleDataControl.Root.VehicleModule.VehicleDML"
+                DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createWithParams">
+            <NamedData NDName="UserId" NDType="java.lang.String" NDValue="#{sessionScope.LoginUserBean.userId}"/>
+            <NamedData NDName="UserDisplayName" NDType="java.lang.String"
+                       NDValue="#{sessionScope.LoginUserBean.displayName}"/>
+        </action>
+    </bindings>
+</pageDefinition>

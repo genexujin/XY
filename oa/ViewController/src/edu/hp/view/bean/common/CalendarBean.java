@@ -44,7 +44,7 @@ import oracle.jbo.domain.Array;
 
 public class CalendarBean {
 
-
+    protected boolean needCheckConflict = true;
     protected List<OACalendarProvider> _providerList;
     protected Map<OACalendarProvider, ProviderData> _providerData;
     protected boolean myView = false;
@@ -234,7 +234,7 @@ public class CalendarBean {
             _handleCalendarActivityDrop(dropEvent, dropSiteDate, activity);
 
             return dropEvent.getProposedAction();
-        } else{
+        } else {
             //System.err.println("not editbale!");
             return DnDAction.NONE;
         }
@@ -242,16 +242,18 @@ public class CalendarBean {
 
     protected Boolean ensureTimeConflicts(java.sql.Timestamp actStartTime, java.sql.Timestamp actEndTime,
                                           String clsRmId, String actId) {
-
-        Boolean result = false;
-        OperationBinding binding = ADFUtils.findOperation("ifConflict");
-        binding.getParamsMap().put("actStartTime", actStartTime);
-        binding.getParamsMap().put("actEndTime", actEndTime);
-        binding.getParamsMap().put("clsRmId", clsRmId);
-        binding.getParamsMap().put("actId", actId);
-        binding.execute();
-        result = (Boolean)binding.getResult();
-        return result;
+        if (needCheckConflict) {
+            Boolean result = false;
+            OperationBinding binding = ADFUtils.findOperation("ifConflict");
+            binding.getParamsMap().put("actStartTime", actStartTime);
+            binding.getParamsMap().put("actEndTime", actEndTime);
+            binding.getParamsMap().put("clsRmId", clsRmId);
+            binding.getParamsMap().put("actId", actId);
+            binding.execute();
+            result = (Boolean)binding.getResult();
+            return result;
+        }else
+            return true;
 
     }
 

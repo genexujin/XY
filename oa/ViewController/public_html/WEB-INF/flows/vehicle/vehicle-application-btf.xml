@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="vehicle-application-btf">
+    <default-activity>Router</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__13">
+      <name>fromMenu</name>
+      <value>#{pageFlowScope.fromMenu}</value>
+    </input-parameter-definition>
+    <managed-bean id="__16">
+      <managed-bean-name>vehicleApplicationBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.vehicle.VehicleApplicationBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <router id="Router">
+      <case id="__12">
+        <expression>#{pageFlowScope.fromMenu=='approver'}</expression>
+        <outcome>approver</outcome>
+      </case>
+      <case id="__14">
+        <expression>#{pageFlowScope.fromMenu=='planner'}</expression>
+        <outcome>planner</outcome>
+      </case>
+      <default-outcome>normalUser</default-outcome>
+    </router>
+    <view id="VehicleApplication">
+      <page>/pages/vehicle/VehicleApplication.jsff</page>
+    </view>
+    <method-call id="findByUserid">
+      <method>#{bindings.findByUserid.execute}</method>
+      <outcome>
+        <fixed-outcome>findByUserid</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findPendingApproval">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>findByState</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByPendingPlanning">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>findByState</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>findByUserid</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>findByUserid</from-outcome>
+        <to-activity-id>VehicleApplication</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>Router</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>normalUser</from-outcome>
+        <to-activity-id>findByUserid</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__7">
+        <from-outcome>approver</from-outcome>
+        <to-activity-id>findPendingApproval</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>planner</from-outcome>
+        <to-activity-id>findByPendingPlanning</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>findPendingApproval</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>findByState</from-outcome>
+        <to-activity-id>VehicleApplication</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>findByPendingPlanning</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>findByState</from-outcome>
+        <to-activity-id>VehicleApplication</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

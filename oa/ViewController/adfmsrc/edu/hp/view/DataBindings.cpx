@@ -38,6 +38,17 @@
           usageId="edu_hp_view_confRm_application_btf_confRm_application_btf_findByStatePageDef"/>
     <page path="/WEB-INF/flows/confRm/confRm-application-btf.xml#confRm-application-btf@queryByPK"
           usageId="edu_hp_view_confRm_application_btf_confRm_application_btf_queryByPKPageDef"/>
+    <page path="/pages/vehicle/VehicleCalendar.jsff" usageId="edu_hp_view_VehicleCalendarPageDef"/>
+    <page path="/WEB-INF/flows/vehicle/vehicle-cal-btf.xml#vehicle-cal-btf@newRow"
+          usageId="edu_hp_view_vehicle_cal_btf_vehicle_cal_btf_newRowPageDef"/>
+    <page path="/pages/vehicle/VehicleDetail.jsff" usageId="edu_hp_view_VehicleDetailPageDef"/>
+    <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@findByUserid"
+          usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByUseridPageDef"/>
+    <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@findPendingApproval"
+          usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef"/>
+    <page path="/pages/vehicle/VehicleApplication.jsff" usageId="edu_hp_view_VehicleApplicationPageDef"/>
+    <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@findByPendingPlanning"
+          usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -68,6 +79,17 @@
           path="flows.confRm.confRm_application_btf_confRm_application_btf_findByStatePageDef"/>
     <page id="edu_hp_view_confRm_application_btf_confRm_application_btf_queryByPKPageDef"
           path="flows.confRm.confRm_application_btf_confRm_application_btf_queryByPKPageDef"/>
+    <page id="edu_hp_view_VehicleCalendarPageDef" path="pages.vehicle.VehicleCalendarPageDef"/>
+    <page id="edu_hp_view_vehicle_cal_btf_vehicle_cal_btf_newRowPageDef"
+          path="flows.vehicle.vehicle_cal_btf_vehicle_cal_btf_newRowPageDef"/>
+    <page id="edu_hp_view_VehicleDetailPageDef" path="pages.vehicle.VehicleDetailPageDef"/>
+    <page id="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByUseridPageDef"
+          path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_findByUseridPageDef"/>
+    <page id="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef"
+          path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_findByStatePageDef"/>
+    <page id="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"
+          path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"/>
+    <page id="edu_hp_view_VehicleApplicationPageDef" path="pages.vehicle.VehicleApplicationPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

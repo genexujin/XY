@@ -147,8 +147,9 @@
     </button>
     <methodAction id="deleteByPK" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteByPK"
                   IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
-                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView">
-      <NamedData NDName="clsRmCalId" NDType="java.lang.String"/>
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomCalendarView"
+                  IterBinding="ConfRoomCalendarViewIterator">
+      <NamedData NDName="clsRmCalId" NDValue="#{bindings.Id.inputValue}" NDType="java.lang.String"/>
     </methodAction>
     <methodAction IterBinding="ConfRoomCalendarViewIterator" id="findByUserid" RequiresUpdateModel="true"
                   Action="invokeMethod" MethodName="findByUserid" IsViewObjectMethod="true"

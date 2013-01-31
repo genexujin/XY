@@ -4,6 +4,8 @@ import edu.hp.model.common.Constants;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import oracle.adf.view.rich.event.DialogEvent;
+
 import oracle.binding.OperationBinding;
 
 
@@ -88,6 +90,13 @@ public class ConfRmAppBean {
         result = (Boolean)binding.getResult();
         return result;
 
+    }
+    
+    public void delete(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            ADFUtils.findOperation("deleteByPK").execute();
+            JSFUtils.addFacesInformationMessage("会议室预订已删除！");
+        }
     }
 
     public void setQueryState(String queryState) {

@@ -9,4 +9,5 @@ public class Constants {
     public static final String STATE_REJECTED="已拒绝";
     public static final String STATE_CANCELED="已取消";
     public static final String STATE_PENDING_APPROVAL="待审批";
+    public static final String STATE_TRIP_PLANNED="已调度";
 }

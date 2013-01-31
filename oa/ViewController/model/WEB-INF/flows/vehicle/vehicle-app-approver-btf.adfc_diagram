@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <TaskFlowCall
+      id="TaskFlowCall2">
+      <property
+         name="taskFlowId">vehicle-application-btf</property>
+      <property
+         name="activityId">vehicle-application-btf</property>
+      <property
+         name="documentReference">/WEB-INF/flows/vehicle/vehicle-application-btf.xml</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>vehicle-application-btf&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">232.5</property>
+      <property
+         name="x">342.23926</property>
+   </TaskFlowCall>
+</SDM>

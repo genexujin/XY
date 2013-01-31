@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="VehicleApplicationPageDef"
+                Package="pages.vehicle" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.VehicleModule.VehicleDML" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="VehicleDMLIterator"/>
+    <searchRegion Binds="VehicleDMLIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="VehicleDMLQuery"/>
+  </executables>
+  <bindings>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="findByUserid" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByUserid"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByUserid_RootAppModuleDataControl_dataProvider_Root_VehicleModule_VehicleDML_findByUserid_result">
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="findByState" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByState"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_VehicleModule_VehicleDML_findByState_result">
+      <NamedData NDName="state" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="VehicleDMLIterator" id="VehicleDML">
+      <nodeDefinition DefName="edu.hp.model.vo.VehicleCalendarView" Name="VehicleDML0">
+        <AttrNames>
+          <Item Value="VehicleName"/>
+          <Item Value="Title"/>
+          <Item Value="UserDisplayName"/>
+          <Item Value="ContactName"/>
+          <Item Value="ContactPhone"/>
+          <Item Value="StartTime"/>
+          <Item Value="EndTime"/>
+          <Item Value="TripStart"/>
+          <Item Value="TripDest"/>
+          <Item Value="NumOfPeople"/>
+          <Item Value="ReturnTrip"/>
+          <Item Value="Comments"/>
+          <Item Value="State"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues StaticList="false" IterBinding="VehicleDMLIterator" Uses="LOV_UserDisplayName" id="UserDisplayName"/>
+    <listOfValues StaticList="false" IterBinding="VehicleDMLIterator" Uses="LOV_ContactName" id="ContactName"/>
+    <list IterBinding="VehicleDMLIterator" StaticList="false" Uses="LOV_VehicleName" id="VehicleName"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="VehicleDMLIterator" id="Title">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="ContactPhone">
+      <AttrNames>
+        <Item Value="ContactPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="State">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="StartTime">
+      <AttrNames>
+        <Item Value="StartTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="EndTime">
+      <AttrNames>
+        <Item Value="EndTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="TripStart">
+      <AttrNames>
+        <Item Value="TripStart"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="TripDest">
+      <AttrNames>
+        <Item Value="TripDest"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="NumOfPeople">
+      <AttrNames>
+        <Item Value="NumOfPeople"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="Comments">
+      <AttrNames>
+        <Item Value="Comments"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="UserId">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="VehicleDMLIterator" id="newRow" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="newRow" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.newRow_RootAppModuleDataControl_dataProvider_Root_VehicleModule_VehicleDML_newRow_result">
+      <NamedData NDName="userDisplayName" NDValue="#{sessionScope.LoginUserBean.displayName}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="VehicleDMLIterator" id="deleteByPK" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteByPK" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.deleteByPK_RootAppModuleDataControl_dataProvider_Root_VehicleModule_VehicleDML_deleteByPK_result">
+      <NamedData NDName="vehicleActId" NDValue="#{bindings.Id.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="UserDisplayName1">
+      <AttrNames>
+        <Item Value="UserDisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="VehicleDMLIterator" id="ReturnTrip" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ReturnTrip"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>
