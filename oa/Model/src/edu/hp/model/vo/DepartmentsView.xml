@@ -25,6 +25,52 @@
         ResId="edu.hp.model.vo.DepartmentsView_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <ViewAccessor
+    Name="Locations"
+    ViewObjectName="edu.hp.model.vo.LocationsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Employees"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_LocationId"
+    ListVOName="Locations"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LocationName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_MgrId"
+    ListVOName="Employees"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="MgrId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="findByDepartment"
+      Hint="showAndExecute"/>
+  </ListBinding>
   <EntityUsage
     Name="Departments"
     Entity="edu.hp.model.eo.Departments"/>
@@ -47,7 +93,8 @@
     PrecisionRule="true"
     EntityAttrName="DeptId"
     EntityUsage="Departments"
-    AliasName="DEPT_ID"/>
+    AliasName="DEPT_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="DeptName"
     PrecisionRule="true"
@@ -72,13 +119,29 @@
     PrecisionRule="true"
     EntityAttrName="LocationId"
     EntityUsage="Departments"
-    AliasName="LOCATION_ID"/>
+    AliasName="LOCATION_ID"
+    LOVName="LOV_LocationId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="MgrId"
     PrecisionRule="true"
     EntityAttrName="MgrId"
     EntityUsage="Departments"
-    AliasName="MGR_ID"/>
+    AliasName="MGR_ID"
+    LOVName="LOV_MgrId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

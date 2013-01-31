@@ -42,6 +42,10 @@
     Name="Departments"
     ViewObjectName="edu.hp.model.vo.DepartmentsView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Locations"
+    ViewObjectName="edu.hp.model.vo.LocationsView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_MgrId"
     ListVOName="Managers"
@@ -75,6 +79,24 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="DeptName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LocationId"
+    ListVOName="Locations"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LocationName"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -177,7 +199,15 @@
     PrecisionRule="true"
     EntityAttrName="LocationId"
     EntityUsage="Employees"
-    AliasName="LOCATION_ID"/>
+    AliasName="LOCATION_ID"
+    LOVName="LOV_LocationId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="HomeAddress"
     PrecisionRule="true"
@@ -319,14 +349,6 @@
     ViewLink="edu.hp.model.vo.link.EmpRepairCallerViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
-
-
-  <ResourceBundle>
-    <PropertiesBundle
-      PropertiesFile="edu.hp.model.ModelBundle"/>
-  </ResourceBundle>
-
-
   <ViewLinkAccessor
     Name="HelpdeskCallsForCalleeView"
     ViewLink="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
@@ -337,5 +359,8 @@
     ViewLink="edu.hp.model.vo.link.EmpHelpdeskCallerViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
-
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

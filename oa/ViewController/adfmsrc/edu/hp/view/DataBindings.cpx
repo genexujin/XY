@@ -49,6 +49,7 @@
     <page path="/pages/vehicle/VehicleApplication.jsff" usageId="edu_hp_view_VehicleApplicationPageDef"/>
     <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@findByPendingPlanning"
           usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"/>
+    <page path="/pages/admin/Departments.jsff" usageId="edu_hp_view_DepartmentsPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -90,6 +91,7 @@
     <page id="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"
           path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"/>
     <page id="edu_hp_view_VehicleApplicationPageDef" path="pages.vehicle.VehicleApplicationPageDef"/>
+    <page id="edu_hp_view_DepartmentsPageDef" path="pages.admin.DepartmentsPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"
