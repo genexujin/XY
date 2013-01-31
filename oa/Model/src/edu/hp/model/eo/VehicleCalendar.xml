@@ -204,10 +204,10 @@
     </DesignTime>
     <Properties>
       <SchemaBasedProperties>
-        <LABEL
-          ResId="edu.hp.model.eo.VehicleCalendar.ReturnTrip_LABEL"/>
         <CONTROLTYPE
           Value="check_box"/>
+        <LABEL
+          ResId="edu.hp.model.eo.VehicleCalendar.ReturnTrip_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

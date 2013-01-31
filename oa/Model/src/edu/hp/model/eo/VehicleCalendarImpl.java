@@ -4,6 +4,7 @@ import edu.hp.model.common.Constants;
 
 import oracle.jbo.Key;
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
 
@@ -22,17 +23,6 @@ public class VehicleCalendarImpl extends EntityImpl {
     }
 
     /**
-     * Validation method for VehicleCalendar.
-     */
-    public boolean validateVehicle() {
-        String state = (String)getAttribute("State");
-        String vehicleId = (String)getAttribute("VehicleId");
-        if(state!=null&&state.equals(Constants.STATE_TRIP_PLANNED)&&vehicleId==null)
-            return false;                
-        return true;
-    }
-
-    /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
@@ -47,5 +37,18 @@ public class VehicleCalendarImpl extends EntityImpl {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("edu.hp.model.eo.VehicleCalendar");
     }
+
+
+    /**
+     * Validation method for VehicleCalendar.
+     */
+    public boolean validateVehicle() {
+        String state = (String)getAttribute("State");
+        String vehicleId = (String)getAttribute("VehicleId");
+        if(state!=null&&state.equals(Constants.STATE_TRIP_PLANNED)&&vehicleId==null)
+            return false;                
+        return true;
+    }
+
 
 }
