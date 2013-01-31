@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PurchaseOrderHistorysView"
+  Version="11.1.2.62.76"
+  SelectList="PurchaseOrderHistorys.ORDER_HISTORY_ID, 
+       PurchaseOrderHistorys.ORDER_HISTORY_DETAIL, 
+       PurchaseOrderHistorys.ORDER_ID, 
+       PurchaseOrderHistorys.OPERATOR_ID, 
+       PurchaseOrderHistorys.OPERATION_DETAIL"
+  FromList="PURCHASE_ORDER_HISTORYS PurchaseOrderHistorys"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="PurchaseOrderHistorys"
+    Entity="edu.hp.model.eo.PurchaseOrderHistorys"/>
+  <ViewAttribute
+    Name="OrderHistoryId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrderHistoryId"
+    EntityUsage="PurchaseOrderHistorys"
+    AliasName="ORDER_HISTORY_ID"/>
+  <ViewAttribute
+    Name="OrderHistoryDetail"
+    PrecisionRule="true"
+    EntityAttrName="OrderHistoryDetail"
+    EntityUsage="PurchaseOrderHistorys"
+    AliasName="ORDER_HISTORY_DETAIL"/>
+  <ViewAttribute
+    Name="OrderId"
+    PrecisionRule="true"
+    EntityAttrName="OrderId"
+    EntityUsage="PurchaseOrderHistorys"
+    AliasName="ORDER_ID"/>
+  <ViewAttribute
+    Name="OperatorId"
+    PrecisionRule="true"
+    EntityAttrName="OperatorId"
+    EntityUsage="PurchaseOrderHistorys"
+    AliasName="OPERATOR_ID"/>
+  <ViewAttribute
+    Name="OperationDetail"
+    PrecisionRule="true"
+    EntityAttrName="OperationDetail"
+    EntityUsage="PurchaseOrderHistorys"
+    AliasName="OPERATION_DETAIL"/>
+</ViewObject>

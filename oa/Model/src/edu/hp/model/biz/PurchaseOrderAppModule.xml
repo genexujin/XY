@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PurchaseOrderAppModule"
+  Version="11.1.2.62.76"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="PurchaseOrderHistorysView1"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrderHistorysView"/>
+  <ViewUsage
+    Name="PurchaseOrderLinesView1"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrderLinesView"/>
+  <ViewUsage
+    Name="PurchaseOrdersView1"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"/>
+</AppModule>

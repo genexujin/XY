@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PurchaseOrderHistorys"
+  Version="11.1.2.62.76"
+  DBObjectType="table"
+  DBObjectName="PURCHASE_ORDER_HISTORYS"
+  AliasName="PurchaseOrderHistorys"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="OrderHistoryId"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="ORDER_HISTORY_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDER_HISTORYS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrderHistoryDetail"
+    Precision="100"
+    ColumnName="ORDER_HISTORY_DETAIL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDER_HISTORYS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrderId"
+    Precision="20"
+    ColumnName="ORDER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDER_HISTORYS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OperatorId"
+    Precision="20"
+    ColumnName="OPERATOR_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDER_HISTORYS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OperationDetail"
+    Precision="40"
+    ColumnName="OPERATION_DETAIL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDER_HISTORYS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="PurchaseOrder"
+    Association="edu.hp.model.eo.asso.PoPoHistoryAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.PoPoHistoryAssoc.PurchaseOrder"
+    AssociationOtherEnd="edu.hp.model.eo.asso.PoPoHistoryAssoc.PurchaseOrderHistorys"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="OperatorEmp"
+    Association="edu.hp.model.eo.asso.EmpPoHistoryAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.EmpPoHistoryAssoc.OperatorEmp"
+    AssociationOtherEnd="edu.hp.model.eo.asso.EmpPoHistoryAssoc.PurchaseOrderHistorys"
+    Type="edu.hp.model.eo.EmployeesImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="PurchaseOrderHistorysPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PURCHASE_ORDER_HISTORYS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.PurchaseOrderHistorys.OrderHistoryId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_PurchaseOrderHistorys">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EMPLOYEES_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_PURCHASE_ORDER_HISTORYS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.PurchaseOrderHistorys.OperatorId"/>
+    </AttrArray>
+  </Key>
+</Entity>

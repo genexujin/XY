@@ -323,6 +323,13 @@
     AssociationOtherEnd="edu.hp.model.eo.asso.EmpHelpdeskCallerAssoc.Caller"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="PurchaseOrders"
+    Association="edu.hp.model.eo.asso.EmpPoAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.EmpPoAssoc.PurchaseOrders"
+    AssociationOtherEnd="edu.hp.model.eo.asso.EmpPoAssoc.Submitter"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="EmployeesPk"
     PrimaryKey="true">

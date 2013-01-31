@@ -308,6 +308,16 @@ public class EmployeesImpl extends EntityImpl {
                 obj.setAttributeInternal(index(), value);
             }
         }
+        ,
+        PurchaseOrders {
+            public Object get(EmployeesImpl obj) {
+                return obj.getPurchaseOrders();
+            }
+
+            public void put(EmployeesImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -366,6 +376,7 @@ public class EmployeesImpl extends EntityImpl {
     public static final int REPAIRCALLSFORCALLER = AttributesEnum.RepairCallsForCaller.index();
     public static final int HELPDESKCALLSFORCALLEE = AttributesEnum.HelpdeskCallsForCallee.index();
     public static final int HELPDESKCALLSFORCALLER = AttributesEnum.HelpdeskCallsForCaller.index();
+    public static final int PURCHASEORDERS = AttributesEnum.PurchaseOrders.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -804,6 +815,13 @@ public class EmployeesImpl extends EntityImpl {
      */
     public RowIterator getHelpdeskCallsForCaller() {
         return (RowIterator)getAttributeInternal(HELPDESKCALLSFORCALLER);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getPurchaseOrders() {
+        return (RowIterator)getAttributeInternal(PURCHASEORDERS);
     }
 
     /**
