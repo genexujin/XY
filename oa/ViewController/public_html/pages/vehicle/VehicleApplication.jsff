@@ -136,8 +136,7 @@
                             <af:outputText value="#{row.State}" id="ot13"/>
                         </af:column>
                     </af:table>
-                    <af:popup id="delete" contentDelivery="lazyUncached"
-                              rendered="#{pageFlowScope.vehiclesCalBean.editable}">
+                    <af:popup id="delete" contentDelivery="lazyUncached">
                         <!-- don't render if the activity is null -->
                         <af:dialog dialogListener="#{viewScope.vehicleApplicationBean.delete}"
                                    title="#{bindings.Title.inputValue}" id="d2">

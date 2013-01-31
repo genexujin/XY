@@ -95,7 +95,7 @@ public class VehicleApplicationBean {
     public void delete(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             ADFUtils.findOperation("deleteByPK").execute();
-            JSFUtils.addFacesInformationMessage("车辆预定已删除！");
+            JSFUtils.addFacesInformationMessage("车辆预订已删除！");
         }
     }
 }
