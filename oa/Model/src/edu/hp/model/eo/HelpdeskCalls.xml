@@ -12,15 +12,16 @@
   UseGlueCode="false">
   <Attribute
     Name="CallId"
-    Precision="20"
     ColumnName="CALL_ID"
     SQLType="VARCHAR"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
     TableName="HELPDESK_CALLS"
     PrimaryKey="true"
     RetrievedOnInsert="true"
-    IsUpdateable="while_insert">
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>

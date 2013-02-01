@@ -465,10 +465,17 @@
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <AccessorAttribute
+
     Name="RoleUsers"
     Association="edu.hp.model.eo.asso.UserRoleDMLAssoc"
     AssociationEnd="edu.hp.model.eo.asso.UserRoleDMLAssoc.RoleUsers"
     AssociationOtherEnd="edu.hp.model.eo.asso.UserRoleDMLAssoc.Employees"
+
+    Name="PurchaseOrders"
+    Association="edu.hp.model.eo.asso.EmpPoAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.EmpPoAssoc.PurchaseOrders"
+    AssociationOtherEnd="edu.hp.model.eo.asso.EmpPoAssoc.Submitter"
+
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <Key
