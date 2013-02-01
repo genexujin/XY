@@ -43,7 +43,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="EMPLOYEES">
+    TableName="EMPLOYEES"
+    DefaultValue="welcome1">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -355,6 +356,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Employees.Title_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Id"
@@ -371,6 +378,42 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MgrName"
+    Precision="20"
+    ColumnName="MGR_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EMPLOYEES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Employees.MgrName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="DeptName"
+    Precision="20"
+    ColumnName="DEPT_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EMPLOYEES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Employees.DeptName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <AccessorAttribute
     Name="MgrEmployee"
@@ -419,6 +462,13 @@
     Association="edu.hp.model.eo.asso.EmpHelpdeskCallerAssoc"
     AssociationEnd="edu.hp.model.eo.asso.EmpHelpdeskCallerAssoc.HelpdeskCallsForCaller"
     AssociationOtherEnd="edu.hp.model.eo.asso.EmpHelpdeskCallerAssoc.Caller"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="RoleUsers"
+    Association="edu.hp.model.eo.asso.UserRoleDMLAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.UserRoleDMLAssoc.RoleUsers"
+    AssociationOtherEnd="edu.hp.model.eo.asso.UserRoleDMLAssoc.Employees"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <Key

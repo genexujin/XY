@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="0px">
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelHeader text="系统菜单维护" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t1">
+            <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png">
+              <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
+            </af:commandToolbarButton>
+            <af:commandToolbarButton id="ctb2" icon="/images/icons/undo.png" text="取消"
+                                     actionListener="#{bindings.Rollback.execute}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelCollection id="pc1">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+              <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
+                                       disabled="#{!bindings.CreateInsert.enabled}" id="ctb3"
+                                       icon="/images/icons/new.png"/>
+              <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                       disabled="#{!bindings.Delete.enabled}" id="ctb4" icon="/images/icons/delete.png"
+                                       text="删除"/>
+              <af:commandToolbarButton text="设置菜单" id="ctb6" icon="/images/icons/tree.png" action="menus"/>
+              <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
+                <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="角色" filename="Roles.xls"/>
+              </af:commandToolbarButton>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.Roles.collectionModel}" var="row" rows="#{bindings.Roles.rangeSize}"
+                    emptyText="#{bindings.Roles.viewable ? '暂无数据' : 'Access Denied.'}"
+                    fetchSize="#{bindings.Roles.rangeSize}" rowBandingInterval="1"
+                    filterModel="#{bindings.RolesQuery.queryDescriptor}"
+                    queryListener="#{bindings.RolesQuery.processQuery}" filterVisible="false" varStatus="vs"
+                    selectedRowKeys="#{bindings.Roles.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.Roles.collectionModel.makeCurrent}" rowSelection="single" id="t3"
+                    partialTriggers="::ctb3 ::ctb4" editingMode="clickToEdit">
+            <af:column sortProperty="#{bindings.Roles.hints.RoleName.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Roles.hints.RoleName.label}" id="c1">
+              <af:inputText value="#{row.bindings.RoleName.inputValue}" label="#{bindings.Roles.hints.RoleName.label}"
+                            required="#{bindings.Roles.hints.RoleName.mandatory}"
+                            columns="#{bindings.Roles.hints.RoleName.displayWidth}"
+                            maximumLength="#{bindings.Roles.hints.RoleName.precision}"
+                            shortDesc="#{bindings.Roles.hints.RoleName.tooltip}" id="it1">
+                <f:validator binding="#{row.bindings.RoleName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Roles.hints.RoleDesc.name}" sortable="true"
+                       headerText="#{bindings.Roles.hints.RoleDesc.label}" id="c2">
+              <af:inputText value="#{row.bindings.RoleDesc.inputValue}" label="#{bindings.Roles.hints.RoleDesc.label}"
+                            required="#{bindings.Roles.hints.RoleDesc.mandatory}"
+                            columns="#{bindings.Roles.hints.RoleDesc.displayWidth}"
+                            maximumLength="#{bindings.Roles.hints.RoleDesc.precision}"
+                            shortDesc="#{bindings.Roles.hints.RoleDesc.tooltip}" id="it2">
+                <f:validator binding="#{row.bindings.RoleDesc.validator}"/>
+              </af:inputText>
+            </af:column>
+          </af:table>
+          <af:popup id="confirm" contentDelivery="lazyUncached">
+            <!-- don't render if the activity is null -->
+            <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}" title="请确认操作" id="d2">
+              <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+              <af:spacer height="20" id="s4"/>
+              <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+            </af:dialog>
+          </af:popup>
+        </af:panelCollection>
+      </af:panelHeader>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top"/>
+  </af:panelStretchLayout>
+</ui:composition>

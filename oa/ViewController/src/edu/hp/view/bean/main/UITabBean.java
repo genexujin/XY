@@ -97,7 +97,7 @@ public class UITabBean {
         menus.setSysHdMenus(new ArrayList<LoginUserMenu>());
         menus.setSysMealMenus(new ArrayList<LoginUserMenu>());
         menus.setSysPurMenus(new ArrayList<LoginUserMenu>());
-
+        menus.setAdminMenus(new ArrayList<LoginUserMenu>());
         
         DCIteratorBinding it = ADFUtils.findIterator("UserMenusIterator");
 
@@ -126,6 +126,8 @@ public class UITabBean {
                 menus.getSysMealMenus().add(menu);
             } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("PUR")) {
                 menus.getSysPurMenus().add(menu);
+            }else if(menu.getMenuMasterCategory().equals("ADMIN")){
+                menus.getAdminMenus().add(menu);
             }
         }
     }

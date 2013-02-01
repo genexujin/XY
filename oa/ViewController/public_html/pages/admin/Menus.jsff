@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="0px">
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelHeader text="系统菜单维护" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t1">
+            <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png">
+              <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
+            </af:commandToolbarButton>
+            <af:commandToolbarButton id="ctb2" icon="/images/icons/undo.png" text="取消"
+                                     actionListener="#{bindings.Rollback.execute}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelCollection id="pc1">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+              <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
+                                       disabled="#{!bindings.CreateInsert.enabled}" id="ctb3"
+                                       icon="/images/icons/new.png"/>
+              <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                       disabled="#{!bindings.Delete.enabled}" id="ctb4" icon="/images/icons/delete.png"
+                                       text="删除"/>
+              <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
+                <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="菜单"
+                                                   filename="Menus.xls"/>
+              </af:commandToolbarButton>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.Menus.collectionModel}" var="row" rows="#{bindings.Menus.rangeSize}"
+                    emptyText="#{bindings.Menus.viewable ? '暂无数据。' : 'Access Denied.'}"
+                    fetchSize="#{bindings.Menus.rangeSize}" rowBandingInterval="1"
+                    filterModel="#{bindings.MenusQuery.queryDescriptor}"
+                    queryListener="#{bindings.MenusQuery.processQuery}" filterVisible="false" varStatus="vs"
+                    selectedRowKeys="#{bindings.Menus.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.Menus.collectionModel.makeCurrent}" rowSelection="single" id="t3"
+                    partialTriggers="::ctb3 ::ctb4" editingMode="clickToEdit">
+            <af:column sortProperty="#{bindings.Menus.hints.MenuId.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Menus.hints.MenuId.label}" id="c1" width="150">
+              <af:inputText value="#{row.bindings.MenuId.inputValue}" label="#{bindings.Menus.hints.MenuId.label}"
+                            required="#{bindings.Menus.hints.MenuId.mandatory}"
+                            columns="#{bindings.Menus.hints.MenuId.displayWidth}"
+                            maximumLength="#{bindings.Menus.hints.MenuId.precision}"
+                            shortDesc="#{bindings.Menus.hints.MenuId.tooltip}" id="it1">
+                <f:validator binding="#{row.bindings.MenuId.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Menus.hints.MenuName.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Menus.hints.MenuName.label}" id="c2">
+              <af:inputText value="#{row.bindings.MenuName.inputValue}" label="#{bindings.Menus.hints.MenuName.label}"
+                            required="#{bindings.Menus.hints.MenuName.mandatory}"
+                            columns="#{bindings.Menus.hints.MenuName.displayWidth}"
+                            maximumLength="#{bindings.Menus.hints.MenuName.precision}"
+                            shortDesc="#{bindings.Menus.hints.MenuName.tooltip}" id="it2">
+                <f:validator binding="#{row.bindings.MenuName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Menus.hints.MenuTaskflowUrl.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Menus.hints.MenuTaskflowUrl.label}" id="c3" width="250">
+              <af:inputText value="#{row.bindings.MenuTaskflowUrl.inputValue}"
+                            label="#{bindings.Menus.hints.MenuTaskflowUrl.label}"
+                            required="#{bindings.Menus.hints.MenuTaskflowUrl.mandatory}"
+                            columns="#{bindings.Menus.hints.MenuTaskflowUrl.displayWidth}"
+                            maximumLength="#{bindings.Menus.hints.MenuTaskflowUrl.precision}"
+                            shortDesc="#{bindings.Menus.hints.MenuTaskflowUrl.tooltip}" id="it3">
+                <f:validator binding="#{row.bindings.MenuTaskflowUrl.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Menus.hints.MenuDesc.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Menus.hints.MenuDesc.label}" id="c4">
+              <af:inputText value="#{row.bindings.MenuDesc.inputValue}" label="#{bindings.Menus.hints.MenuDesc.label}"
+                            required="#{bindings.Menus.hints.MenuDesc.mandatory}"
+                            columns="#{bindings.Menus.hints.MenuDesc.displayWidth}"
+                            maximumLength="#{bindings.Menus.hints.MenuDesc.precision}"
+                            shortDesc="#{bindings.Menus.hints.MenuDesc.tooltip}" id="it4">
+                <f:validator binding="#{row.bindings.MenuDesc.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Menus.hints.MenuMasterCategory.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Menus.hints.MenuMasterCategory.label}" id="c5">
+              <af:selectOneChoice id="soc1" label="#{bindings.Menus.hints.MenuMasterCategory.label}"
+                                  value="#{row.bindings.MenuMasterCategory.inputValue}"
+                                  shortDesc="#{bindings.Menus.hints.MenuMasterCategory.tooltip}">
+                <af:selectItem label="平台功能" value="SYS" id="si1"/>
+                <af:selectItem label="平台管理" value="ADMIN" id="si2"/>
+                <af:selectItem label="报表" value="REPORT" id="si3"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.Menus.hints.MenuCategory.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Menus.hints.MenuCategory.label}" id="c6">
+              <af:inputText value="#{row.bindings.MenuCategory.inputValue}"
+                            label="#{bindings.Menus.hints.MenuCategory.label}"
+                            required="#{bindings.Menus.hints.MenuCategory.mandatory}"
+                            columns="#{bindings.Menus.hints.MenuCategory.displayWidth}"
+                            maximumLength="#{bindings.Menus.hints.MenuCategory.precision}"
+                            shortDesc="#{bindings.Menus.hints.MenuCategory.tooltip}" id="it6">
+                <f:validator binding="#{row.bindings.MenuCategory.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Menus.hints.MenuIconUrl.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Menus.hints.MenuIconUrl.label}" id="c7">
+              <af:inputText value="#{row.bindings.MenuIconUrl.inputValue}"
+                            label="#{bindings.Menus.hints.MenuIconUrl.label}"
+                            required="#{bindings.Menus.hints.MenuIconUrl.mandatory}"
+                            columns="#{bindings.Menus.hints.MenuIconUrl.displayWidth}"
+                            maximumLength="#{bindings.Menus.hints.MenuIconUrl.precision}"
+                            shortDesc="#{bindings.Menus.hints.MenuIconUrl.tooltip}" id="it7">
+                <f:validator binding="#{row.bindings.MenuIconUrl.validator}"/>
+              </af:inputText>
+            </af:column>
+          </af:table>
+          <af:popup id="confirm" contentDelivery="lazyUncached">
+                        <!-- don't render if the activity is null -->
+                        <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}"
+                                   title="请确认操作" id="d2">
+                            <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+                            <af:spacer height="20" id="s4"/>
+                            <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+                        </af:dialog>
+                    </af:popup>
+        </af:panelCollection>
+      </af:panelHeader>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top"/>
+  </af:panelStretchLayout>
+</ui:composition>

@@ -3,40 +3,40 @@
 <!---->
 <ViewLink
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="RoleMenuViewLink"
+  Name="UserRoleDMLViewLink"
   Version="11.1.2.62.76"
-  EntityAssociation="edu.hp.model.eo.asso.RoleMenuAssoc">
+  EntityAssociation="edu.hp.model.eo.asso.UserRoleDMLAssoc">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.link.RoleMenuViewLink_LABEL"/>
+        ResId="edu.hp.model.vo.link.UserRoleDMLViewLink_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <ViewLinkDefEnd
-    Name="RolesVA"
+    Name="EmployeesDMLVA"
     Cardinality="1"
     Source="true"
-    Owner="edu.hp.model.vo.RolesView">
+    Owner="edu.hp.model.vo.EmployeesView">
     <DesignTime>
       <Attr Name="_accessor" Value="true"/>
-      <Attr Name="_finderName" Value="RolesVA"/>
+      <Attr Name="_finderName" Value="EmployeesDMLVA"/>
       <Attr Name="_isUpdateable" Value="true"/>
       <Attr Name="_minCardinality" Value="1"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.RolesView.RoleId"/>
+      <Item Value="edu.hp.model.vo.EmployeesView.Id"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ViewLinkDefEnd
-    Name="RoleMenusVA"
+    Name="RoleUsersDMLVA"
     Cardinality="-1"
-    Owner="edu.hp.model.vo.RoleMenusView">
+    Owner="edu.hp.model.vo.RoleUsersView">
     <DesignTime>
-      <Attr Name="_finderName" Value="RoleMenusVA"/>
+      <Attr Name="_finderName" Value="RoleUsersDMLVA"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.RoleMenusView.RoleId"/>
+      <Item Value="edu.hp.model.vo.RoleUsersView.UserId"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ResourceBundle>

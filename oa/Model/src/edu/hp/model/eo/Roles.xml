@@ -25,6 +25,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Roles.RoleId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="RoleName"
@@ -37,6 +43,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Roles.RoleName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="RoleDesc"
@@ -45,10 +57,17 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="ROLES">
+    TableName="ROLES"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Roles.RoleDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="CreatedAt"
@@ -56,7 +75,9 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="ROLES"/>
+    TableName="ROLES"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory"/>
   <Attribute
     Name="CreatedBy"
     Precision="20"
@@ -64,7 +85,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="ROLES">
+    TableName="ROLES"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -75,7 +97,8 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="ROLES"/>
+    TableName="ROLES"
+    HistoryColumn="DateHistory"/>
   <Attribute
     Name="LastUpdatedBy"
     Precision="20"
@@ -83,7 +106,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="ROLES">
+    TableName="ROLES"
+    IsQueriable="false">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -96,9 +120,9 @@
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <AccessorAttribute
-    Name="Menus"
+    Name="RoleMenus"
     Association="edu.hp.model.eo.asso.RoleMenuAssoc"
-    AssociationEnd="edu.hp.model.eo.asso.RoleMenuAssoc.Menus"
+    AssociationEnd="edu.hp.model.eo.asso.RoleMenuAssoc.RoleMenus"
     AssociationOtherEnd="edu.hp.model.eo.asso.RoleMenuAssoc.Roles"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
@@ -112,4 +136,8 @@
       <Item Value="edu.hp.model.eo.Roles.RoleId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

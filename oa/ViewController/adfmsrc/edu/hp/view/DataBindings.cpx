@@ -50,6 +50,11 @@
     <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@findByPendingPlanning"
           usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"/>
     <page path="/pages/admin/Departments.jsff" usageId="edu_hp_view_DepartmentsPageDef"/>
+    <page path="/pages/admin/Employees.jsff" usageId="edu_hp_view_EmployeesPageDef"/>
+    <page path="/pages/admin/Menus.jsff" usageId="edu_hp_view_MenusPageDef"/>
+    <page path="/pages/admin/Roles.jsff" usageId="edu_hp_view_RolesPageDef"/>
+    <page path="/pages/admin/RoleMenus.jsff" usageId="edu_hp_view_RoleMenusPageDef"/>
+    <page path="/pages/admin/EmployeeRoles.jsff" usageId="edu_hp_view_EmployeeRolesPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -92,6 +97,11 @@
           path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"/>
     <page id="edu_hp_view_VehicleApplicationPageDef" path="pages.vehicle.VehicleApplicationPageDef"/>
     <page id="edu_hp_view_DepartmentsPageDef" path="pages.admin.DepartmentsPageDef"/>
+    <page id="edu_hp_view_EmployeesPageDef" path="pages.admin.EmployeesPageDef"/>
+    <page id="edu_hp_view_MenusPageDef" path="pages.admin.MenusPageDef"/>
+    <page id="edu_hp_view_RolesPageDef" path="pages.admin.RolesPageDef"/>
+    <page id="edu_hp_view_RoleMenusPageDef" path="pages.admin.RoleMenusPageDef"/>
+    <page id="edu_hp_view_EmployeeRolesPageDef" path="pages.admin.EmployeeRolesPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

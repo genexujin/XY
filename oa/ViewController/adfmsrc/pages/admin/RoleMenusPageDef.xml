@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="RoleMenusPageDef"
+                Package="pages.admin">
+  <parameters/>
+ <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.Roles" DataControl="RootAppModuleDataControl" RangeSize="25" id="RolesIterator"
+              ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="RolesIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="RolesQuery"/>
+    <iterator id="MenusIterator" Binds="Root.AdminModule.Menus" DataControl="RootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.AdminModule.RoleMenus" DataControl="RootAppModuleDataControl" RangeSize="10"
+              id="RoleMenusIterator"/>
+    <iterator id="MenusOfRoleIterator" Binds="Root.AdminModule.MenusOfRole" DataControl="RootAppModuleDataControl"
+              RangeSize="25" ChangeEventPolicy="ppr"/>
+  </executables>
+  <bindings>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="RolesIterator" id="CreateInsert" InstanceName="RootAppModuleDataControl.Root.AdminModule.Roles"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="RolesIterator" id="Delete" InstanceName="RootAppModuleDataControl.Root.AdminModule.Roles"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="RolesIterator" id="Roles">
+      <nodeDefinition DefName="edu.hp.model.vo.RolesView" Name="Roles0">
+        <AttrNames>
+          <Item Value="RoleName"/>
+          <Item Value="RoleDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="RoleMenusIterator" id="newRoleMenu"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.RoleMenus" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createWithParams">
+      <NamedData NDName="RoleId" NDType="java.lang.String" NDValue="#{bindings.RoleId.inputValue}"/>
+      <NamedData NDName="MenuId" NDType="java.lang.String"/>
+    </action>
+    <methodAction IterBinding="RoleMenusIterator" id="deleteByKey" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteByKey" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.AdminModule.RoleMenus">
+      <NamedData NDName="menuId" NDValue="" NDType="java.lang.String"/>
+      <NamedData NDName="roleId" NDValue="#{bindings.RoleId.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="RolesIterator" id="RoleId">
+      <AttrNames>
+        <Item Value="RoleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RolesIterator" id="RoleName">
+      <AttrNames>
+        <Item Value="RoleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RolesIterator" id="RoleDesc">
+      <AttrNames>
+        <Item Value="RoleDesc"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

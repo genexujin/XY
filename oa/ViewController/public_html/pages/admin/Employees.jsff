@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="0px">
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelHeader text="员工信息维护" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t1">
+            <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png">
+              <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
+            </af:commandToolbarButton>
+            <af:commandToolbarButton id="ctb2" icon="/images/icons/undo.png" text="取消"
+                                     actionListener="#{bindings.Rollback.execute}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelCollection id="pc1">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+              <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
+                                       disabled="#{!bindings.CreateInsert.enabled}" id="ctb3"
+                                       icon="/images/icons/new.png"/>
+              <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
+                                       disabled="#{!bindings.Delete.enabled}" id="ctb4" icon="/images/icons/delete.png"
+                                       text="删除"/>
+              <af:commandToolbarButton id="ctb6" icon="/images/icons/actor.png" text="设置角色" action="roles"/>
+              <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
+                <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="员工信息"
+                                                   filename="Employee.xls"/>
+              </af:commandToolbarButton>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.Employees.collectionModel}" var="row" rows="#{bindings.Employees.rangeSize}"
+                    emptyText="#{bindings.Employees.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.Employees.rangeSize}" rowBandingInterval="1"
+                    filterModel="#{bindings.EmployeesQuery.queryDescriptor}"
+                    queryListener="#{bindings.EmployeesQuery.processQuery}" filterVisible="false" varStatus="vs"
+                    selectedRowKeys="#{bindings.Employees.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.Employees.collectionModel.makeCurrent}" rowSelection="single" id="t3"
+                    partialTriggers="::ctb3 ::ctb4" editingMode="clickToEdit">
+            <af:column sortProperty="#{bindings.Employees.hints.UserName.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Employees.hints.UserName.label}" id="c1" width="105">
+              <af:inputText value="#{row.bindings.UserName.inputValue}"
+                            label="#{bindings.Employees.hints.UserName.label}"
+                            required="#{bindings.Employees.hints.UserName.mandatory}"
+                            columns="#{bindings.Employees.hints.UserName.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.UserName.precision}"
+                            shortDesc="#{bindings.Employees.hints.UserName.tooltip}" id="it1" autoSubmit="true">
+                <f:validator binding="#{row.bindings.UserName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.Password.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.Password.label}" id="c2" width="103">
+              <af:inputText value="#{row.bindings.Password.inputValue}"
+                            label="#{bindings.Employees.hints.Password.label}"
+                            required="#{bindings.Employees.hints.Password.mandatory}"
+                            columns="#{bindings.Employees.hints.Password.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.Password.precision}"
+                            shortDesc="#{bindings.Employees.hints.Password.tooltip}" id="it2" secret="true"
+                            autoSubmit="true">
+                <f:validator binding="#{row.bindings.Password.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.Title.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.Title.label}" id="c3" width="107">
+              <af:inputText value="#{row.bindings.Title.inputValue}" label="#{bindings.Employees.hints.Title.label}"
+                            required="#{bindings.Employees.hints.Title.mandatory}"
+                            columns="#{bindings.Employees.hints.Title.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.Title.precision}"
+                            shortDesc="#{bindings.Employees.hints.Title.tooltip}" id="it3" autoSubmit="true">
+                <f:validator binding="#{row.bindings.Title.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.FirstName.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Employees.hints.FirstName.label}" id="c4" width="55">
+              <af:inputText value="#{row.bindings.FirstName.inputValue}"
+                            label="#{bindings.Employees.hints.FirstName.label}"
+                            required="#{bindings.Employees.hints.FirstName.mandatory}"
+                            columns="#{bindings.Employees.hints.FirstName.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.FirstName.precision}"
+                            shortDesc="#{bindings.Employees.hints.FirstName.tooltip}" id="it4" autoSubmit="true">
+                <f:validator binding="#{row.bindings.FirstName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.LastName.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Employees.hints.LastName.label}" id="c5" width="55" >
+              <af:inputText value="#{row.bindings.LastName.inputValue}"
+                            label="#{bindings.Employees.hints.LastName.label}"
+                            required="#{bindings.Employees.hints.LastName.mandatory}"
+                            columns="#{bindings.Employees.hints.LastName.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.LastName.precision}"
+                            shortDesc="#{bindings.Employees.hints.LastName.tooltip}" id="it5" autoSubmit="true">
+                <f:validator binding="#{row.bindings.LastName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.Gender.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.Gender.label}" id="c6" width="55">
+              <af:inputText value="#{row.bindings.Gender.inputValue}" label="#{bindings.Employees.hints.Gender.label}"
+                            required="#{bindings.Employees.hints.Gender.mandatory}"
+                            columns="#{bindings.Employees.hints.Gender.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.Gender.precision}"
+                            shortDesc="#{bindings.Employees.hints.Gender.tooltip}" id="it6" autoSubmit="true"> 
+                <f:validator binding="#{row.bindings.Gender.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.MgrId.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.MgrId.label}" id="c7" width="120">
+              <af:panelGroupLayout id="pgl1" layout="horizontal">
+                <af:outputText value="#{row.MgrName}" id="ot1"/>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:inputComboboxListOfValues id="mgrIdId" popupTitle="#{bindings.MgrId.hints.label}"
+                                              value="#{bindings.MgrId.inputValue}" label="#{bindings.MgrId.hints.label}"
+                                              model="#{bindings.MgrId.listOfValuesModel}"
+                                              required="#{bindings.MgrId.hints.mandatory}"
+                                              columns="#{bindings.MgrId.hints.displayWidth}"
+                                              shortDesc="#{bindings.MgrId.hints.tooltip}" contentStyle="width:100px;"
+                                              autoSubmit="true">
+                  <f:validator binding="#{bindings.MgrId.validator}"/>
+                </af:inputComboboxListOfValues>
+              </af:panelGroupLayout>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.DeptId.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.DeptId.label}" id="c8" width="55">
+              <af:selectOneChoice value="#{row.bindings.DeptId.inputValue}" label="#{row.bindings.DeptId.label}"
+                                  required="#{bindings.Employees.hints.DeptId.mandatory}"
+                                  shortDesc="#{bindings.Employees.hints.DeptId.tooltip}" id="soc2" autoSubmit="true">
+                <f:selectItems value="#{row.bindings.DeptId.items}" id="si2"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.Email.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.Email.label}" id="c9" width="100">
+              <af:inputText value="#{row.bindings.Email.inputValue}" label="#{bindings.Employees.hints.Email.label}"
+                            required="#{bindings.Employees.hints.Email.mandatory}"
+                            columns="#{bindings.Employees.hints.Email.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.Email.precision}"
+                            shortDesc="#{bindings.Employees.hints.Email.tooltip}" id="it7" autoSubmit="true">
+                <f:validator binding="#{row.bindings.Email.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.Mobile.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Employees.hints.Mobile.label}" id="c10" width="100">
+              <af:inputText value="#{row.bindings.Mobile.inputValue}" label="#{bindings.Employees.hints.Mobile.label}"
+                            required="#{bindings.Employees.hints.Mobile.mandatory}"
+                            columns="#{bindings.Employees.hints.Mobile.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.Mobile.precision}"
+                            shortDesc="#{bindings.Employees.hints.Mobile.tooltip}" id="it8" autoSubmit="true">
+                <f:validator binding="#{row.bindings.Mobile.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.OfficePhone.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.OfficePhone.label}" id="c11" width="100">
+              <af:inputText value="#{row.bindings.OfficePhone.inputValue}"
+                            label="#{bindings.Employees.hints.OfficePhone.label}"
+                            required="#{bindings.Employees.hints.OfficePhone.mandatory}"
+                            columns="#{bindings.Employees.hints.OfficePhone.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.OfficePhone.precision}"
+                            shortDesc="#{bindings.Employees.hints.OfficePhone.tooltip}" id="it9" autoSubmit="true">
+                <f:validator binding="#{row.bindings.OfficePhone.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.HomePhone.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.HomePhone.label}" id="c12">
+              <af:inputText value="#{row.bindings.HomePhone.inputValue}"
+                            label="#{bindings.Employees.hints.HomePhone.label}"
+                            required="#{bindings.Employees.hints.HomePhone.mandatory}"
+                            columns="#{bindings.Employees.hints.HomePhone.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.HomePhone.precision}"
+                            shortDesc="#{bindings.Employees.hints.HomePhone.tooltip}" id="it10" autoSubmit="true">
+                <f:validator binding="#{row.bindings.HomePhone.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.Fax.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.Fax.label}" id="c13">
+              <af:inputText value="#{row.bindings.Fax.inputValue}" label="#{bindings.Employees.hints.Fax.label}"
+                            required="#{bindings.Employees.hints.Fax.mandatory}"
+                            columns="#{bindings.Employees.hints.Fax.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.Fax.precision}"
+                            shortDesc="#{bindings.Employees.hints.Fax.tooltip}" id="it11" autoSubmit="true">
+                <f:validator binding="#{row.bindings.Fax.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.LocationId.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.LocationId.label}" id="c14">
+              <af:selectOneChoice value="#{row.bindings.LocationId.inputValue}" label="#{row.bindings.LocationId.label}"
+                                  required="#{bindings.Employees.hints.LocationId.mandatory}"
+                                  shortDesc="#{bindings.Employees.hints.LocationId.tooltip}" id="soc3">
+                <f:selectItems value="#{row.bindings.LocationId.items}" id="si3"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.HomeAddress.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.HomeAddress.label}" id="c15">
+              <af:inputText value="#{row.bindings.HomeAddress.inputValue}"
+                            label="#{bindings.Employees.hints.HomeAddress.label}"
+                            required="#{bindings.Employees.hints.HomeAddress.mandatory}"
+                            columns="#{bindings.Employees.hints.HomeAddress.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.HomeAddress.precision}"
+                            shortDesc="#{bindings.Employees.hints.HomeAddress.tooltip}" id="it12" autoSubmit="true">
+                <f:validator binding="#{row.bindings.HomeAddress.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.OfficeAddress.name}" sortable="true"
+                       headerText="#{bindings.Employees.hints.OfficeAddress.label}" id="c16">
+              <af:inputText value="#{row.bindings.OfficeAddress.inputValue}"
+                            label="#{bindings.Employees.hints.OfficeAddress.label}"
+                            required="#{bindings.Employees.hints.OfficeAddress.mandatory}"
+                            columns="#{bindings.Employees.hints.OfficeAddress.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.OfficeAddress.precision}"
+                            shortDesc="#{bindings.Employees.hints.OfficeAddress.tooltip}" id="it13" autoSubmit="true">
+                <f:validator binding="#{row.bindings.OfficeAddress.validator}"/>
+              </af:inputText>
+            </af:column>
+          </af:table>
+          <af:popup id="confirm" contentDelivery="lazyUncached">
+                        <!-- don't render if the activity is null -->
+                        <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}"
+                                   title="请确认操作" id="d2">
+                            <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+                            <af:spacer height="20" id="s4"/>
+                            <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+                        </af:dialog>
+                    </af:popup>
+        </af:panelCollection>
+      </af:panelHeader>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top"/>
+  </af:panelStretchLayout>
+</ui:composition>

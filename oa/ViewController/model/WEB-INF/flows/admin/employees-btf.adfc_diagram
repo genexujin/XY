@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">Employees</property>
+      <property
+         name="page">/pages/admin/Employees.jsff</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Employees&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">244.44824</property>
+      <property
+         name="x">201.5</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">EmployeeRoles</property>
+      <property
+         name="page">/pages/admin/EmployeeRoles.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>EmployeeRoles&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">247.59766</property>
+      <property
+         name="x">455.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="View3">
+      <property
+         name="fromOutcome">roles</property>
+      <property
+         name="sdm:polyPoints">R50,242.5,244.09766,414.0,247.24707,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View3"
+      to="View2">
+      <property
+         name="fromOutcome">emps</property>
+      <property
+         name="sdm:polyPoints">L54,413.93573,250.74707,242.5,247.59766,R54</property>
+   </ControlFlowCase>
+</SDM>

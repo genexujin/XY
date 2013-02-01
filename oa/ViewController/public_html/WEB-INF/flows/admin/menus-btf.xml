@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <task-flow-definition id="departments-btf">
+  <task-flow-definition id="menus-btf">
     <template-reference>
       <document>/WEB-INF/flows/admin/admin-btf-template.xml</document>
       <id>admin-btf-template</id>
     </template-reference>
-    <default-activity>Departments</default-activity>
-    <view id="Departments">
-      <page>/pages/admin/Departments.jsff</page>
+    <default-activity>Menus</default-activity>
+    <view id="Menus">
+      <page>/pages/admin/Menus.jsff</page>
     </view>
     <use-page-fragments/>
   </task-flow-definition>

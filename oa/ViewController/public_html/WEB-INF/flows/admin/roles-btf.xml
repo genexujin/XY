@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="roles-btf">
+    <template-reference>
+      <document>/WEB-INF/flows/admin/admin-btf-template.xml</document>
+      <id>admin-btf-template</id>
+    </template-reference>
+    <default-activity>Roles</default-activity>
+    <view id="Roles">
+      <page>/pages/admin/Roles.jsff</page>
+    </view>
+    <view id="RoleMenus">
+      <page>/pages/admin/RoleMenus.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>Roles</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>menus</from-outcome>
+        <to-activity-id>RoleMenus</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>RoleMenus</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>roles</from-outcome>
+        <to-activity-id>Roles</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

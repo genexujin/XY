@@ -3,42 +3,40 @@
 <!---->
 <Association
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="RoleMenuAssoc"
+  Name="UserRoleDMLAssoc"
   Version="11.1.2.62.76">
   <DesignTime>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <AssociationEnd
-    Name="Roles"
+    Name="Employees"
     Cardinality="1"
     Source="true"
-    Owner="edu.hp.model.eo.Roles"
-    DeleteContainee="true"
+    Owner="edu.hp.model.eo.Employees"
     LockLevel="NONE">
     <DesignTime>
       <Attr Name="_aggregation" Value="0"/>
-      <Attr Name="_finderName" Value="Roles"/>
-      <Attr Name="_foreignKey" Value="edu.hp.model.eo.Roles.RolesPk"/>
+      <Attr Name="_finderName" Value="Employees"/>
+      <Attr Name="_foreignKey" Value="edu.hp.model.eo.Employees.EmployeesPk"/>
       <Attr Name="_isUpdateable" Value="true"/>
       <Attr Name="_minCardinality" Value="1"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.eo.Roles.RoleId"/>
+      <Item Value="edu.hp.model.eo.Employees.Id"/>
     </AttrArray>
   </AssociationEnd>
   <AssociationEnd
-    Name="RoleMenus"
+    Name="RoleUsers"
     Cardinality="-1"
-    Owner="edu.hp.model.eo.RoleMenus"
-    HasOwner="true">
+    Owner="edu.hp.model.eo.RoleUsers">
     <DesignTime>
       <Attr Name="_aggregation" Value="0"/>
-      <Attr Name="_finderName" Value="RoleMenus"/>
-      <Attr Name="_foreignKey" Value="edu.hp.model.eo.RoleMenus.fk_RoleMenus"/>
+      <Attr Name="_finderName" Value="RoleUsers"/>
+      <Attr Name="_foreignKey" Value="edu.hp.model.eo.RoleUsers.fk_RoleUsers"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.eo.RoleMenus.RoleId"/>
+      <Item Value="edu.hp.model.eo.RoleUsers.UserId"/>
     </AttrArray>
   </AssociationEnd>
 </Association>

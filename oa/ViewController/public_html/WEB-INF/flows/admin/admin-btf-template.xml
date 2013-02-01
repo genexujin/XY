@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-template id="admin-btf-template">
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>AdminOperationBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.admin.AdminOperationBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <use-page-fragments/>
+  </task-flow-template>
+</adfc-config>

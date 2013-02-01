@@ -13,6 +13,8 @@ import oracle.jbo.server.ViewRowImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class RolesViewRowImpl extends ViewRowImpl {
+
+
     public static final int ENTITY_ROLES = 0;
 
     /**
@@ -99,9 +101,9 @@ public class RolesViewRowImpl extends ViewRowImpl {
             }
         }
         ,
-        MenusVA {
+        RoleMenusVA {
             public Object get(RolesViewRowImpl obj) {
-                return obj.getMenusVA();
+                return obj.getRoleMenusVA();
             }
 
             public void put(RolesViewRowImpl obj, Object value) {
@@ -135,6 +137,8 @@ public class RolesViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
+
     public static final int ROLEID = AttributesEnum.RoleId.index();
     public static final int ROLENAME = AttributesEnum.RoleName.index();
     public static final int ROLEDESC = AttributesEnum.RoleDesc.index();
@@ -143,7 +147,7 @@ public class RolesViewRowImpl extends ViewRowImpl {
     public static final int LASTUPDATEDAT = AttributesEnum.LastUpdatedAt.index();
     public static final int LASTUPDATEDBY = AttributesEnum.LastUpdatedBy.index();
     public static final int EMPLOYEESVA = AttributesEnum.EmployeesVA.index();
-    public static final int MENUSVA = AttributesEnum.MenusVA.index();
+    public static final int ROLEMENUSVA = AttributesEnum.RoleMenusVA.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -278,11 +282,12 @@ public class RolesViewRowImpl extends ViewRowImpl {
         return (RowIterator)getAttributeInternal(EMPLOYEESVA);
     }
 
+
     /**
-     * Gets the associated <code>RowIterator</code> using master-detail link MenusVA.
+     * Gets the associated <code>RowIterator</code> using master-detail link RoleMenusVA.
      */
-    public RowIterator getMenusVA() {
-        return (RowIterator)getAttributeInternal(MENUSVA);
+    public RowIterator getRoleMenusVA() {
+        return (RowIterator)getAttributeInternal(ROLEMENUSVA);
     }
 
     /**

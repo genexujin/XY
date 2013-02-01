@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="EmployeeRolesPageDef"
+                Package="pages.admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.Employees" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="EmployeesIterator"/>
+    <iterator Binds="Root.AdminModule.RoleUsers" DataControl="RootAppModuleDataControl" RangeSize="10"
+              id="RoleUsersIterator"/>
+    <iterator id="RolesOfUserIterator" Binds="Root.AdminModule.RolesOfUser" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="RolesIterator" Binds="Roles" DataControl="AdminModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="EmployeesIterator" id="DisplayName">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesIterator" id="Mobile">
+      <AttrNames>
+        <Item Value="Mobile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesIterator" id="Title">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesIterator" id="MgrName">
+      <AttrNames>
+        <Item Value="MgrName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesIterator" id="DeptName">
+      <AttrNames>
+        <Item Value="DeptName"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="EmployeesIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

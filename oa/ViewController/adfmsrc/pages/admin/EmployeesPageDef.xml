@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="EmployeesPageDef"
+                Package="pages.admin" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.Employees" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="EmployeesIterator"/>
+    <searchRegion Binds="EmployeesIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="EmployeesQuery"/>
+  </executables>
+  <bindings>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="EmployeesIterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.Employees" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="EmployeesIterator" id="Delete"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.Employees" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="EmployeesIterator" id="Employees">
+      <nodeDefinition DefName="edu.hp.model.vo.EmployeesView" Name="Employees0">
+        <AttrNames>
+          <Item Value="UserName"/>
+          <Item Value="Password"/>
+          <Item Value="Title"/>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="Gender"/>
+          <Item Value="MgrName"/>
+          <Item Value="DeptId"/>
+          <Item Value="Email"/>
+          <Item Value="Mobile"/>
+          <Item Value="OfficePhone"/>
+          <Item Value="HomePhone"/>
+          <Item Value="Fax"/>
+          <Item Value="LocationId"/>
+          <Item Value="HomeAddress"/>
+          <Item Value="OfficeAddress"/>
+          <Item Value="CreatedAt"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="DeptName"/>
+          <Item Value="DisplayName"/>
+          <Item Value="Id"/>
+          <Item Value="LastUpdatedAt"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="MgrId"/>
+          <Item Value="Photo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues StaticList="false" IterBinding="EmployeesIterator" Uses="LOV_MgrId" id="MgrId"/>
+  </bindings>
+</pageDefinition>
