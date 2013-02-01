@@ -334,17 +334,24 @@ public class EmployeesImpl extends EntityImpl {
             public Object get(EmployeesImpl obj) {
                 return obj.getRoleUsers();
 
-        PurchaseOrders {
-            public Object get(EmployeesImpl obj) {
-                return obj.getPurchaseOrders();
-
             }
 
             public void put(EmployeesImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
+        },
+        
+        PurchaseOrders {
+            public Object get(EmployeesImpl obj) {
+                return obj.getPurchaseOrders();
+
+            }
+        public void put(EmployeesImpl obj, Object value) {
+            obj.setAttributeInternal(index(), value);
         }
-        ;
+        };
+        
+        
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
 
@@ -883,7 +890,7 @@ public class EmployeesImpl extends EntityImpl {
 
     public RowIterator getRoleUsers() {
         return (RowIterator)getAttributeInternal(ROLEUSERS);
-
+    }
     public RowIterator getPurchaseOrders() {
         return (RowIterator)getAttributeInternal(PURCHASEORDERS);
 
