@@ -43,4 +43,10 @@
     EntityAttrName="CreatedBy"
     EntityUsage="RoleUsers"
     AliasName="CREATED_BY"/>
+  <ViewLinkAccessor
+    Name="EmployeesDMLVA"
+    ViewLink="edu.hp.model.vo.link.UserRoleDMLViewLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
 </ViewObject>

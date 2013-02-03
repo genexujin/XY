@@ -9,6 +9,7 @@ public class AdminBean extends UITabBean{
     private RichDocument document;
 
     public AdminBean() {
+        initMenus();
     }
 
     public TaskFlowId getDynamicTaskFlowId() {

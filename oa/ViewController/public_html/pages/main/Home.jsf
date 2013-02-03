@@ -19,8 +19,6 @@
                 <f:facet name="globalLinks">
                     <af:group id="g1">
                         <af:panelGroupLayout id="pgl4" layout="horizontal" halign="end"/>
-                        <af:outputText value="测试是否可以使用 sessionScope.LoginUserBean.isUserInRole['系统管理员'] 来判定用户juese " id="ot5"
-                                       visible="#{sessionScope.LoginUserBean.isUserInRole['系统管理员']}"/>
                     </af:group>
                 </f:facet>
                 <f:facet name="status">

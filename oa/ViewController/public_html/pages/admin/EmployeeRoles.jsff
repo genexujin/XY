@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGroupLayout id="pgl1" layout="scroll">
+        <af:panelHeader text="员工角色设置" id="ph1">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend">
+                <af:toolbar id="t1">
+                    <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png"
+                                             action="#{viewScope.AdminOperationBean.saveEmpRoles}"/>
+                    <af:commandToolbarButton text="取消" id="ctb2" icon="/images/icons/undo.png"
+                                             actionListener="#{bindings.Rollback.execute}"/>
+                    <af:commandToolbarButton text="员工列表" id="ctb3" icon="/images/icons/team.png" action="emps"
+                                             actionListener="#{bindings.Rollback.execute}"/>
+                </af:toolbar>
+            </f:facet>
+            <f:facet name="info"/>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:panelFormLayout id="pfl1" rows="2">
+                <af:panelLabelAndMessage label="#{bindings.DisplayName.hints.label}" id="plam1">
+                    <af:outputText value="#{bindings.DisplayName.inputValue}" id="ot1"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.Mobile.hints.label}" id="plam2">
+                    <af:outputText value="#{bindings.Mobile.inputValue}" id="ot2"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.Title.hints.label}" id="plam3">
+                    <af:outputText value="#{bindings.Title.inputValue}" id="ot3"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.MgrName.hints.label}" id="plam4">
+                    <af:outputText value="#{bindings.MgrName.inputValue}" id="ot4"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.DeptName.hints.label}" id="plam5">
+                    <af:outputText value="#{bindings.DeptName.inputValue}" id="ot5"/>
+                </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            <af:spacer width="10" height="10" id="s3"/>
+            <af:separator id="s4"/>
+            <af:selectManyShuttle label="角色菜单" value="#{viewScope.AdminOperationBean.selectedRoles}" id="sms1"
+                                  layout="horizontal" trailingHeader="已选菜单" leadingHeader="可选菜单"
+                                  autoSubmit="true" size="15" binding="#{viewScope.AdminOperationBean.roleMenuShuttle}">
+                <f:selectItems value="#{viewScope.AdminOperationBean.allRoles}" id="si1"/>
+            </af:selectManyShuttle>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+</ui:composition>

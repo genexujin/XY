@@ -56,7 +56,16 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="ROLE_MENUS"/>
+    TableName="ROLE_MENUS"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory"/>
+  <AccessorAttribute
+    Name="Roles"
+    Association="edu.hp.model.eo.asso.RoleMenuAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.RoleMenuAssoc.Roles"
+    AssociationOtherEnd="edu.hp.model.eo.asso.RoleMenuAssoc.RoleMenus"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
   <Key
     Name="RoleMenusPk"
     PrimaryKey="true">
@@ -66,6 +75,17 @@
     <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.RoleMenus.RoleId"/>
       <Item Value="edu.hp.model.eo.RoleMenus.MenuId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_RoleMenus">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="ROLES_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_ROLE_MENUS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.RoleMenus.RoleId"/>
     </AttrArray>
   </Key>
 </Entity>

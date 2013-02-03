@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGroupLayout id="pgl1" layout="scroll">
+        <af:panelHeader text="角色菜单权限" id="ph1">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend">
+                <af:toolbar id="t1">
+                    <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png"
+                                             action="#{viewScope.AdminOperationBean.saveRoleMenu}"/>
+                    <af:commandToolbarButton text="取消" id="ctb2" icon="/images/icons/undo.png"
+                                             actionListener="#{bindings.Rollback.execute}"/>
+                    <af:commandToolbarButton text="角色列表" id="ctb3" icon="/images/icons/team.png" action="roles"
+                                             actionListener="#{bindings.Rollback.execute}"/>
+                </af:toolbar>
+            </f:facet>
+            <f:facet name="info"/>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:panelFormLayout id="pfl1">
+                <af:panelLabelAndMessage label="#{bindings.RoleName.hints.label}" id="plam1">
+                    <af:outputText value="#{bindings.RoleName.inputValue}" id="ot1"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.RoleDesc.hints.label}" id="plam2">
+                    <af:outputText value="#{bindings.RoleDesc.inputValue}" id="ot2"/>
+                </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            <af:spacer width="10" height="10" id="s3"/>
+            <af:separator id="s4"/>
+            <af:selectManyShuttle label="角色菜单" value="#{viewScope.AdminOperationBean.selectedMenus}" id="sms1"
+                                  layout="horizontal" trailingHeader="已选菜单" leadingHeader="可选菜单"
+                                  autoSubmit="true" size="15" binding="#{viewScope.AdminOperationBean.roleMenuShuttle}">
+                <f:selectItems value="#{viewScope.AdminOperationBean.allMenus}" id="si1"/>
+            </af:selectManyShuttle>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+</ui:composition>

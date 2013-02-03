@@ -239,6 +239,26 @@ public class EmployeesImpl extends EntityImpl {
             }
         }
         ,
+        MgrName {
+            public Object get(EmployeesImpl obj) {
+                return obj.getMgrName();
+            }
+
+            public void put(EmployeesImpl obj, Object value) {
+                obj.setMgrName((String)value);
+            }
+        }
+        ,
+        DeptName {
+            public Object get(EmployeesImpl obj) {
+                return obj.getDeptName();
+            }
+
+            public void put(EmployeesImpl obj, Object value) {
+                obj.setDeptName((String)value);
+            }
+        }
+        ,
         MgrEmployee {
             public Object get(EmployeesImpl obj) {
                 return obj.getMgrEmployee();
@@ -309,16 +329,29 @@ public class EmployeesImpl extends EntityImpl {
             }
         }
         ,
-        PurchaseOrders {
+
+        RoleUsers {
             public Object get(EmployeesImpl obj) {
-                return obj.getPurchaseOrders();
+                return obj.getRoleUsers();
+
             }
 
             public void put(EmployeesImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
+        },
+        
+        PurchaseOrders {
+            public Object get(EmployeesImpl obj) {
+                return obj.getPurchaseOrders();
+
+            }
+        public void put(EmployeesImpl obj, Object value) {
+            obj.setAttributeInternal(index(), value);
         }
-        ;
+        };
+        
+        
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
 
@@ -369,6 +402,8 @@ public class EmployeesImpl extends EntityImpl {
     public static final int CREATEDAT = AttributesEnum.CreatedAt.index();
     public static final int TITLE = AttributesEnum.Title.index();
     public static final int ID = AttributesEnum.Id.index();
+    public static final int MGRNAME = AttributesEnum.MgrName.index();
+    public static final int DEPTNAME = AttributesEnum.DeptName.index();
     public static final int MGREMPLOYEE = AttributesEnum.MgrEmployee.index();
     public static final int SUBEMPLOYEES = AttributesEnum.SubEmployees.index();
     public static final int ROLES = AttributesEnum.Roles.index();
@@ -376,8 +411,8 @@ public class EmployeesImpl extends EntityImpl {
     public static final int REPAIRCALLSFORCALLER = AttributesEnum.RepairCallsForCaller.index();
     public static final int HELPDESKCALLSFORCALLEE = AttributesEnum.HelpdeskCallsForCallee.index();
     public static final int HELPDESKCALLSFORCALLER = AttributesEnum.HelpdeskCallsForCaller.index();
+    public static final int ROLEUSERS = AttributesEnum.RoleUsers.index();
     public static final int PURCHASEORDERS = AttributesEnum.PurchaseOrders.index();
-
     /**
      * This is the default constructor (do not remove).
      */
@@ -731,6 +766,38 @@ public class EmployeesImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for MgrName, using the alias name MgrName.
+     * @return the value of MgrName
+     */
+    public String getMgrName() {
+        return (String)getAttributeInternal(MGRNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for MgrName.
+     * @param value value to set the MgrName
+     */
+    public void setMgrName(String value) {
+        setAttributeInternal(MGRNAME, value);
+    }
+
+    /**
+     * Gets the attribute value for DeptName, using the alias name DeptName.
+     * @return the value of DeptName
+     */
+    public String getDeptName() {
+        return (String)getAttributeInternal(DEPTNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DeptName.
+     * @param value value to set the DeptName
+     */
+    public void setDeptName(String value) {
+        setAttributeInternal(DEPTNAME, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -820,8 +887,13 @@ public class EmployeesImpl extends EntityImpl {
     /**
      * @return the associated entity oracle.jbo.RowIterator.
      */
+
+    public RowIterator getRoleUsers() {
+        return (RowIterator)getAttributeInternal(ROLEUSERS);
+    }
     public RowIterator getPurchaseOrders() {
         return (RowIterator)getAttributeInternal(PURCHASEORDERS);
+
     }
 
     /**

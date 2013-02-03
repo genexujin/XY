@@ -14,6 +14,7 @@ public class LoginUserMenuBean{
     public ArrayList<LoginUserMenu> sysAncmtMenus;
     public ArrayList<LoginUserMenu> sysHdMenus;
     public ArrayList<LoginUserMenu> sysCarMenus;
+    public ArrayList<LoginUserMenu> adminMenus;
 
 
     public void setSysPurMenus(ArrayList<LoginUserMenu> sysPurMenus) {
@@ -70,5 +71,13 @@ public class LoginUserMenuBean{
 
     public ArrayList<LoginUserMenu> getSysCarMenus() {
         return sysCarMenus;
+    }
+
+    public void setAdminMenus(ArrayList<LoginUserMenu> adminMenus) {
+        this.adminMenus = adminMenus;
+    }
+
+    public ArrayList<LoginUserMenu> getAdminMenus() {
+        return adminMenus;
     }
 }

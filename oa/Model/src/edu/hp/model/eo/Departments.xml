@@ -10,17 +10,20 @@
   AliasName="Departments"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  RowClass="edu.hp.model.common.BaseEntity">
+  RowClass="edu.hp.model.common.BaseEntity"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <Attribute
     Name="DeptId"
-    IsNotNull="true"
-    Precision="20"
     ColumnName="DEPT_ID"
     SQLType="VARCHAR"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
     TableName="DEPARTMENTS"
-    PrimaryKey="true">
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -146,6 +149,18 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="MgrName"
+    Precision="20"
+    ColumnName="MGR_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="DEPARTMENTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
   <Key
     Name="DepartmentPk"
     PrimaryKey="true">
@@ -156,6 +171,16 @@
       <Item Value="edu.hp.model.eo.Departments.DeptId"/>
     </AttrArray>
   </Key>
+  <validation:ExpressionValidationBean
+    Name="Departments_Rule_0"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="DEPTNAME_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[DeptName!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

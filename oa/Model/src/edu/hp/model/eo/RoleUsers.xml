@@ -57,6 +57,13 @@
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
+  <AccessorAttribute
+    Name="Employees"
+    Association="edu.hp.model.eo.asso.UserRoleDMLAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.UserRoleDMLAssoc.Employees"
+    AssociationOtherEnd="edu.hp.model.eo.asso.UserRoleDMLAssoc.RoleUsers"
+    Type="edu.hp.model.eo.EmployeesImpl"
+    IsUpdateable="true"/>
   <Key
     Name="RoleUsersPk"
     PrimaryKey="true">
@@ -65,6 +72,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.RoleUsers.RoleId"/>
+      <Item Value="edu.hp.model.eo.RoleUsers.UserId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_RoleUsers">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EMPLOYEES_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_ROLE_USERS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.RoleUsers.UserId"/>
     </AttrArray>
   </Key>

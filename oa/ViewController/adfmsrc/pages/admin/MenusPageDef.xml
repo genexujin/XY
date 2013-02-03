@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="MenusPageDef"
+                Package="pages.admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.Menus" DataControl="RootAppModuleDataControl" RangeSize="25" id="MenusIterator"/>
+    <searchRegion Binds="MenusIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MenusQuery"/>
+  </executables>
+  <bindings>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="MenusIterator" id="CreateInsert" InstanceName="RootAppModuleDataControl.Root.AdminModule.Menus"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MenusIterator" id="Delete" InstanceName="RootAppModuleDataControl.Root.AdminModule.Menus"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="MenusIterator" id="Menus">
+      <nodeDefinition DefName="edu.hp.model.vo.MenusView" Name="Menus0">
+        <AttrNames>
+          <Item Value="MenuId"/>
+          <Item Value="MenuName"/>
+          <Item Value="MenuTaskflowUrl"/>
+          <Item Value="MenuDesc"/>
+          <Item Value="MenuMasterCategory"/>
+          <Item Value="MenuCategory"/>
+          <Item Value="MenuIconUrl"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

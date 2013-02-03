@@ -13,7 +13,21 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.RoleMenusViewImpl"
+  ComponentInterface="edu.hp.model.vo.common.RoleMenusView"
+  ClientProxyName="edu.hp.model.vo.client.RoleMenusViewClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Variable
+    Name="menuId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="roleId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="RoleMenus"
     Entity="edu.hp.model.eo.RoleMenus"/>
@@ -42,5 +56,84 @@
     PrecisionRule="true"
     EntityAttrName="CreatedAt"
     EntityUsage="RoleMenus"
-    AliasName="CREATED_AT"/>
+    AliasName="CREATED_AT"
+    IsUpdateable="false"/>
+  <ViewCriteria
+    Name="findByKey"
+    ViewObjectName="edu.hp.model.vo.RoleMenusView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="RoleMenusViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="RoleId"
+        ViewAttribute="RoleId"
+        Operator="="
+        Conjunction="AND"
+        Value=":roleId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="MenuId"
+        ViewAttribute="MenuId"
+        Operator="="
+        Conjunction="AND"
+        Value=":menuId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="RolesVA"
+    ViewLink="edu.hp.model.vo.link.RoleMenuViewLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ClientInterface>
+    <Method
+      Name="deleteByKey"
+      MethodName="deleteByKey">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="menuId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="roleId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ClientInterface>
+    <Method
+      Name="deleteByKey"
+      MethodName="deleteByKey">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="menuId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="roleId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

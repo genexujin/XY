@@ -20,9 +20,7 @@
     <page path="/pages/clsrm/CreateCalendar.jsff" usageId="edu_hp_view_CreateCalendarPageDef"/>
     <page path="/pages/helpdesk/MyHelpdeskCall.jsff" usageId="edu_hp_view_MyHelpdeskCallPageDef"/>
     <page path="/pages/clsrm/ClassRoomBatchReservation.jsff" usageId="edu_hp_view_ClassRoomBatchReservationPageDef"/>
-
     <page path="/pages/confRm/ConfRmCalendar.jsff" usageId="edu_hp_view_ConfRmCalendarPageDef"/>
-
     <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@Create"
           usageId="edu_hp_view_MyHdCall_MyHdCall_CreatePageDef"/>
     <page path="/pages/helpdesk/CreateHelpdeskCall.jsff" usageId="edu_hp_view_CreateHelpdeskCallPageDef"/>
@@ -52,6 +50,12 @@
     <page path="/pages/po/MyPo.jsff" usageId="edu_hp_view_MyPoPageDef"/>
     <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@Create" usageId="edu_hp_view_MyPo_MyPo_CreatePageDef"/>
     <page path="/pages/po/CreatePo.jsff" usageId="edu_hp_view_CreatePoPageDef"/>
+    <page path="/pages/admin/Departments.jsff" usageId="edu_hp_view_DepartmentsPageDef"/>
+    <page path="/pages/admin/Employees.jsff" usageId="edu_hp_view_EmployeesPageDef"/>
+    <page path="/pages/admin/Menus.jsff" usageId="edu_hp_view_MenusPageDef"/>
+    <page path="/pages/admin/Roles.jsff" usageId="edu_hp_view_RolesPageDef"/>
+    <page path="/pages/admin/RoleMenus.jsff" usageId="edu_hp_view_RoleMenusPageDef"/>
+    <page path="/pages/admin/EmployeeRoles.jsff" usageId="edu_hp_view_EmployeeRolesPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -63,15 +67,11 @@
     <page id="edu_hp_view_ClsRmCalendar_ClsRmCalendar_CreateInsertPageDef"
           path="flows.clsrm.ClsRmCalendar_ClsRmCalendar_CreateInsertPageDef"/>
     <page id="edu_hp_view_CreateCalendarPageDef" path="pages.clsrm.CreateCalendarPageDef"/>
-
     <page id="edu_hp_view_MyHelpdeskCallPageDef" path="pages.helpdesk.MyHelpdeskCallPageDef"/>
     <page id="edu_hp_view_ClassRoomBatchReservationPageDef" path="pages.clsrm.ClassRoomBatchReservationPageDef"/>
-
     <page id="edu_hp_view_ConfRmCalendarPageDef" path="pages.confRm.ConfRmCalendarPageDef"/>
-
     <page id="edu_hp_view_MyHdCall_MyHdCall_CreatePageDef" path="flows.helpdesk.MyHdCall_MyHdCall_CreatePageDef"/>
-    <page id="edu_hp_view_CreateHelpdeskCallPageDef" path="pages.helpdesk.CreateHelpdeskCallPageDef"/>
-    
+    <page id="edu_hp_view_CreateHelpdeskCallPageDef" path="pages.helpdesk.CreateHelpdeskCallPageDef"/>    
     <page id="edu_hp_view_confRm_calendar_btf_confRm_calendar_btf_CreateWithParametersPageDef"
           path="flows.confRm.confRm_calendar_btf_confRm_calendar_btf_CreateWithParametersPageDef"/>
     <page id="edu_hp_view_ConfRmActivityPageDef" path="pages.confRm.ConfRmActivityPageDef"/>
@@ -96,6 +96,12 @@
     <page id="edu_hp_view_MyPoPageDef" path="pages.po.MyPoPageDef"/>
     <page id="edu_hp_view_MyPo_MyPo_CreatePageDef" path="flows.po.MyPo_MyPo_CreatePageDef"/>
     <page id="edu_hp_view_CreatePoPageDef" path="pages.po.CreatePoPageDef"/>
+    <page id="edu_hp_view_DepartmentsPageDef" path="pages.admin.DepartmentsPageDef"/>
+    <page id="edu_hp_view_EmployeesPageDef" path="pages.admin.EmployeesPageDef"/>
+    <page id="edu_hp_view_MenusPageDef" path="pages.admin.MenusPageDef"/>
+    <page id="edu_hp_view_RolesPageDef" path="pages.admin.RolesPageDef"/>
+    <page id="edu_hp_view_RoleMenusPageDef" path="pages.admin.RoleMenusPageDef"/>
+    <page id="edu_hp_view_EmployeeRolesPageDef" path="pages.admin.EmployeeRolesPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

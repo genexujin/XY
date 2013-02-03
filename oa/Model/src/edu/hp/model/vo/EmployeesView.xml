@@ -26,7 +26,9 @@
        Employees.CREATED_BY, 
        Employees.CREATED_AT, 
        Employees.TITLE, 
-       Employees.ID"
+       Employees.ID, 
+       Employees.MGR_NAME, 
+       Employees.DEPT_NAME"
   FromList="EMPLOYEES Employees"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -42,6 +44,10 @@
     Name="Departments"
     ViewObjectName="edu.hp.model.vo.DepartmentsView"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Locations"
+    ViewObjectName="edu.hp.model.vo.LocationsView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_MgrId"
     ListVOName="Managers"
@@ -52,8 +58,12 @@
     <AttrArray Name="AttrNames">
       <Item Value="MgrId"/>
     </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="MgrName"/>
+    </AttrArray>
     <AttrArray Name="ListAttrNames">
       <Item Value="Id"/>
+      <Item Value="DisplayName"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="DisplayName"/>
@@ -70,11 +80,33 @@
     <AttrArray Name="AttrNames">
       <Item Value="DeptId"/>
     </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="DeptName"/>
+    </AttrArray>
     <AttrArray Name="ListAttrNames">
       <Item Value="DeptId"/>
+      <Item Value="DeptName"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="DeptName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LocationId"
+    ListVOName="Locations"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LocationId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LocationName"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -113,14 +145,16 @@
     PrecisionRule="true"
     EntityAttrName="Gender"
     EntityUsage="Employees"
-    AliasName="GENDER"/>
+    AliasName="GENDER"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="MgrId"
     PrecisionRule="true"
     EntityAttrName="MgrId"
     EntityUsage="Employees"
     AliasName="MGR_ID"
-    LOVName="LOV_MgrId">
+    LOVName="LOV_MgrId"
+    IsQueriable="false">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -134,7 +168,8 @@
     EntityAttrName="DeptId"
     EntityUsage="Employees"
     AliasName="DEPT_ID"
-    LOVName="LOV_DeptId">
+    LOVName="LOV_DeptId"
+    IsQueriable="false">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -147,7 +182,8 @@
     PrecisionRule="true"
     EntityAttrName="Email"
     EntityUsage="Employees"
-    AliasName="EMAIL"/>
+    AliasName="EMAIL"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Mobile"
     PrecisionRule="true"
@@ -159,37 +195,51 @@
     PrecisionRule="true"
     EntityAttrName="OfficePhone"
     EntityUsage="Employees"
-    AliasName="OFFICE_PHONE"/>
+    AliasName="OFFICE_PHONE"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="HomePhone"
     PrecisionRule="true"
     EntityAttrName="HomePhone"
     EntityUsage="Employees"
-    AliasName="HOME_PHONE"/>
+    AliasName="HOME_PHONE"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Fax"
     PrecisionRule="true"
     EntityAttrName="Fax"
     EntityUsage="Employees"
-    AliasName="FAX"/>
+    AliasName="FAX"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="LocationId"
     PrecisionRule="true"
     EntityAttrName="LocationId"
     EntityUsage="Employees"
-    AliasName="LOCATION_ID"/>
+    AliasName="LOCATION_ID"
+    LOVName="LOV_LocationId"
+    IsQueriable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="HomeAddress"
     PrecisionRule="true"
     EntityAttrName="HomeAddress"
     EntityUsage="Employees"
-    AliasName="HOME_ADDRESS"/>
+    AliasName="HOME_ADDRESS"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="OfficeAddress"
     PrecisionRule="true"
     EntityAttrName="OfficeAddress"
     EntityUsage="Employees"
-    AliasName="OFFICE_ADDRESS"/>
+    AliasName="OFFICE_ADDRESS"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Photo"
     IsQueriable="false"
@@ -202,33 +252,38 @@
     PrecisionRule="true"
     EntityAttrName="LastUpdatedBy"
     EntityUsage="Employees"
-    AliasName="LAST_UPDATED_BY"/>
+    AliasName="LAST_UPDATED_BY"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="LastUpdatedAt"
     PrecisionRule="true"
     EntityAttrName="LastUpdatedAt"
     EntityUsage="Employees"
     AliasName="LAST_UPDATED_AT"
-    IsUpdateable="false"/>
+    IsUpdateable="false"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="CreatedBy"
     PrecisionRule="true"
     EntityAttrName="CreatedBy"
     EntityUsage="Employees"
-    AliasName="CREATED_BY"/>
+    AliasName="CREATED_BY"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="CreatedAt"
     PrecisionRule="true"
     EntityAttrName="CreatedAt"
     EntityUsage="Employees"
     AliasName="CREATED_AT"
-    IsUpdateable="false"/>
+    IsUpdateable="false"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Title"
     PrecisionRule="true"
     EntityAttrName="Title"
     EntityUsage="Employees"
-    AliasName="TITLE"/>
+    AliasName="TITLE"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="Id"
     IsNotNull="true"
@@ -236,7 +291,8 @@
     EntityAttrName="Id"
     EntityUsage="Employees"
     AliasName="ID"
-    IsUpdateable="while_insert"/>
+    IsUpdateable="while_insert"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="DisplayName"
     IsUpdateable="false"
@@ -246,7 +302,8 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     AliasName="VIEW_ATTR"
-    SQLType="VARCHAR">
+    SQLType="VARCHAR"
+    IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[LastName+FirstName]]></TransientExpression>
     <Dependencies>
@@ -255,7 +312,27 @@
       <Item
         Value="LastName"/>
     </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.EmployeesView.DisplayName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="MgrName"
+    PrecisionRule="true"
+    EntityAttrName="MgrName"
+    EntityUsage="Employees"
+    AliasName="MGR_NAME"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="DeptName"
+    PrecisionRule="true"
+    EntityAttrName="DeptName"
+    EntityUsage="Employees"
+    AliasName="DEPT_NAME"
+    IsQueriable="false"/>
   <ViewCriteria
     Name="findByDepartment"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
@@ -319,14 +396,6 @@
     ViewLink="edu.hp.model.vo.link.EmpRepairCallerViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
-
-
-  <ResourceBundle>
-    <PropertiesBundle
-      PropertiesFile="edu.hp.model.ModelBundle"/>
-  </ResourceBundle>
-
-
   <ViewLinkAccessor
     Name="HelpdeskCallsForCalleeView"
     ViewLink="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
@@ -337,5 +406,20 @@
     ViewLink="edu.hp.model.vo.link.EmpHelpdeskCallerViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
-
+  <ViewLinkAccessor
+    Name="RoleUsersDMLVA"
+    ViewLink="edu.hp.model.vo.link.UserRoleDMLViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <LOVUIHints
+    ListType="113"
+    MRUCount="0"
+    ListRangeSize="10"
+    NullValueFlag="none">
+    <DisplayCriteria/>
+  </LOVUIHints>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

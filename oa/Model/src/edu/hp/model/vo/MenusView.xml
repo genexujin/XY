@@ -70,10 +70,4 @@
     EntityAttrName="MenuMasterCategory"
     EntityUsage="Menus"
     AliasName="MENU_MASTER_CATEGORY"/>
-  <ViewLinkAccessor
-    Name="RolesVA"
-    ViewLink="edu.hp.model.vo.link.RoleMenuViewLink"
-    Type="oracle.jbo.RowIterator"
-    Reversed="true"
-    IsUpdateable="false"/>
 </ViewObject>

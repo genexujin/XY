@@ -10,7 +10,15 @@
   PageIterMode="Full"
   UseGlueCode="false"
   RowClass="edu.hp.model.vo.RolesViewRowImpl"
-  ComponentClass="edu.hp.model.vo.RolesViewImpl">
+  ComponentClass="edu.hp.model.vo.RolesViewImpl"
+  SelectList="Roles.ROLE_ID, 
+       Roles.ROLE_NAME, 
+       Roles.ROLE_DESC, 
+       Roles.CREATED_AT, 
+       Roles.CREATED_BY, 
+       Roles.LAST_UPDATED_AT, 
+       Roles.LAST_UPDATED_BY"
+  FromList="ROLES Roles">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -41,31 +49,36 @@
     PrecisionRule="true"
     EntityAttrName="RoleDesc"
     EntityUsage="Roles"
-    AliasName="ROLE_DESC"/>
+    AliasName="ROLE_DESC"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="CreatedAt"
     PrecisionRule="true"
     EntityAttrName="CreatedAt"
     EntityUsage="Roles"
-    AliasName="CREATED_AT"/>
+    AliasName="CREATED_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="CreatedBy"
     PrecisionRule="true"
     EntityAttrName="CreatedBy"
     EntityUsage="Roles"
-    AliasName="CREATED_BY"/>
+    AliasName="CREATED_BY"
+    IsQueriable="false"/>
   <ViewAttribute
     Name="LastUpdatedAt"
     PrecisionRule="true"
     EntityAttrName="LastUpdatedAt"
     EntityUsage="Roles"
-    AliasName="LAST_UPDATED_AT"/>
+    AliasName="LAST_UPDATED_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="LastUpdatedBy"
     PrecisionRule="true"
     EntityAttrName="LastUpdatedBy"
     EntityUsage="Roles"
-    AliasName="LAST_UPDATED_BY"/>
+    AliasName="LAST_UPDATED_BY"
+    IsQueriable="false"/>
   <ViewCriteria
     Name="queryById"
     ViewObjectName="edu.hp.model.vo.RolesView"
@@ -109,7 +122,7 @@
     Reversed="true"
     IsUpdateable="false"/>
   <ViewLinkAccessor
-    Name="MenusVA"
+    Name="RoleMenusVA"
     ViewLink="edu.hp.model.vo.link.RoleMenuViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>

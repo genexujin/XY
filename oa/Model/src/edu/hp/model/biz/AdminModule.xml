@@ -10,9 +10,6 @@
     Name="Menus"
     ViewObjectName="edu.hp.model.vo.MenusView"/>
   <ViewUsage
-    Name="RoleMenus"
-    ViewObjectName="edu.hp.model.vo.RoleMenusView"/>
-  <ViewUsage
     Name="RoleUsers"
     ViewObjectName="edu.hp.model.vo.RoleUsersView"/>
   <ViewUsage
@@ -25,18 +22,6 @@
     Name="Subordinates"
     ViewObjectName="edu.hp.model.vo.EmployeesView"/>
   <ViewUsage
-    Name="RolesOfEmp"
-    ViewObjectName="edu.hp.model.vo.RolesView"/>
-  <ViewUsage
-    Name="EmpsInRole"
-    ViewObjectName="edu.hp.model.vo.EmployeesView"/>
-  <ViewUsage
-    Name="RolesOfMenu"
-    ViewObjectName="edu.hp.model.vo.RolesView"/>
-  <ViewUsage
-    Name="MenusOfRole"
-    ViewObjectName="edu.hp.model.vo.MenusView"/>
-  <ViewUsage
     Name="UserMenus"
     ViewObjectName="edu.hp.model.vo.query.security.UserMenuQuery"/>
   <ViewUsage
@@ -45,6 +30,18 @@
   <ViewUsage
     Name="Locations"
     ViewObjectName="edu.hp.model.vo.LocationsView"/>
+  <ViewUsage
+    Name="Departments"
+    ViewObjectName="edu.hp.model.vo.DepartmentsView"/>
+  <ViewUsage
+    Name="MenusOfRole"
+    ViewObjectName="edu.hp.model.vo.RoleMenusView"/>
+  <ViewUsage
+    Name="RoleMenus"
+    ViewObjectName="edu.hp.model.vo.RoleMenusView"/>
+  <ViewUsage
+    Name="RolesOfUser"
+    ViewObjectName="edu.hp.model.vo.RoleUsersView"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"
@@ -52,27 +49,15 @@
     DstViewUsageName="edu.hp.model.biz.AdminModule.Subordinates"
     Reversed="false"/>
   <ViewLinkUsage
-    Name="UserRoleViewLink1"
-    ViewLinkObjectName="edu.hp.model.vo.link.UserRoleViewLink"
-    SrcViewUsageName="edu.hp.model.biz.AdminModule.Employees"
-    DstViewUsageName="edu.hp.model.biz.AdminModule.RolesOfEmp"
-    Reversed="false"/>
-  <ViewLinkUsage
-    Name="UserRoleViewLink2"
-    ViewLinkObjectName="edu.hp.model.vo.link.UserRoleViewLink"
-    SrcViewUsageName="edu.hp.model.biz.AdminModule.Roles"
-    DstViewUsageName="edu.hp.model.biz.AdminModule.EmpsInRole"
-    Reversed="true"/>
-  <ViewLinkUsage
     Name="RoleMenuViewLink1"
-    ViewLinkObjectName="edu.hp.model.vo.link.RoleMenuViewLink"
-    SrcViewUsageName="edu.hp.model.biz.AdminModule.Menus"
-    DstViewUsageName="edu.hp.model.biz.AdminModule.RolesOfMenu"
-    Reversed="true"/>
-  <ViewLinkUsage
-    Name="RoleMenuViewLink2"
     ViewLinkObjectName="edu.hp.model.vo.link.RoleMenuViewLink"
     SrcViewUsageName="edu.hp.model.biz.AdminModule.Roles"
     DstViewUsageName="edu.hp.model.biz.AdminModule.MenusOfRole"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="UserRoleDMLViewLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.UserRoleDMLViewLink"
+    SrcViewUsageName="edu.hp.model.biz.AdminModule.Employees"
+    DstViewUsageName="edu.hp.model.biz.AdminModule.RolesOfUser"
     Reversed="false"/>
 </AppModule>
