@@ -15,12 +15,105 @@
        PurchaseOrders.STATE, 
        PurchaseOrders.SUBMIT_TOTAL, 
        PurchaseOrders.VERIFY_TOTAL, 
-       PurchaseOrders.ORDER_NOTE"
+       PurchaseOrders.ORDER_NOTE, 
+       PurchaseOrders.ITEM_CATEGORY_ID"
   FromList="PURCHASE_ORDERS PurchaseOrders"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.PurchaseOrdersViewImpl"
+  ComponentInterface="edu.hp.model.vo.common.PurchaseOrdersView"
+  ClientProxyName="edu.hp.model.vo.client.PurchaseOrdersViewClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Variable
+    Name="OdRdId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="OrStateId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="ItCatgId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="submitDateFm"
+    Kind="viewcriteria"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="submitDateTo"
+    Kind="viewcriteria"
+    Type="oracle.jbo.domain.Date"/>
+  <ViewAccessor
+    Name="PoState"
+    ViewObjectName="edu.hp.model.vo.query.po.PoState"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EmployeesView"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ItemCategory"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_State"
+    ListVOName="PoState"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="State"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexCol1"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SubmitterId"
+    ListVOName="EmployeesView"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SubmitterId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ItemCategoryId"
+    ListVOName="ItemCategory"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ItemCategoryId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="PurchaseOrders"
     Entity="edu.hp.model.eo.PurchaseOrders"/>
@@ -30,20 +123,30 @@
     PrecisionRule="true"
     EntityAttrName="OrderId"
     EntityUsage="PurchaseOrders"
-    AliasName="ORDER_ID"/>
+    AliasName="ORDER_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="OrderReadableId"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="OrderReadableId"
     EntityUsage="PurchaseOrders"
-    AliasName="ORDER_READABLE_ID"/>
+    AliasName="ORDER_READABLE_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="SubmitterId"
     PrecisionRule="true"
     EntityAttrName="SubmitterId"
     EntityUsage="PurchaseOrders"
-    AliasName="SUBMITTER_ID"/>
+    AliasName="SUBMITTER_ID"
+    LOVName="LOV_SubmitterId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CreateBy"
     PrecisionRule="true"
@@ -73,7 +176,15 @@
     PrecisionRule="true"
     EntityAttrName="State"
     EntityUsage="PurchaseOrders"
-    AliasName="STATE"/>
+    AliasName="STATE"
+    LOVName="LOV_State">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="SubmitTotal"
     PrecisionRule="true"
@@ -92,4 +203,232 @@
     EntityAttrName="OrderNote"
     EntityUsage="PurchaseOrders"
     AliasName="ORDER_NOTE"/>
+  <ViewAttribute
+    Name="ItemCategoryId"
+    PrecisionRule="true"
+    EntityAttrName="ItemCategoryId"
+    EntityUsage="PurchaseOrders"
+    AliasName="ITEM_CATEGORY_ID"
+    LOVName="LOV_ItemCategoryId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="OrderReadableIdCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="OrderReadableId"
+        ViewAttribute="OrderReadableId"
+        Operator="="
+        Conjunction="AND"
+        Value=":OdRdId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="OrderStateCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="OrderStateCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="State"
+        ViewAttribute="State"
+        Operator="="
+        Conjunction="AND"
+        Value=":OrStateId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="ItemCategoryCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ItemCategoryId"
+        ViewAttribute="ItemCategoryId"
+        Operator="="
+        Conjunction="AND"
+        Value=":ItCatgId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="SubmitDateFromCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="PurchaseOrdersViewCriteria_PurchaseOrdersViewCriteria_row_0_CreateAt"
+        ViewAttribute="CreateAt"
+        Operator="AFTER"
+        Conjunction="AND"
+        Value=":submitDateFm"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="SubmitDateToCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="PurchaseOrdersViewCriteria_PurchaseOrdersViewCriteria_row_0_CreateAt"
+        ViewAttribute="CreateAt"
+        Operator="BEFORE"
+        Conjunction="AND"
+        Value=":submitDateTo"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="PurchaseOrderLines"
+    ViewLink="edu.hp.model.vo.link.PoToPoLineLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientInterface>
+    <Method
+      Name="doQuery"
+      MethodName="doQuery">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="oRdId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="state"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="category"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="submitDateFrom"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="submitDateTo"
+        Type="oracle.jbo.domain.Date"/>
+    </Method>
+    <Method
+      Name="newRow"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

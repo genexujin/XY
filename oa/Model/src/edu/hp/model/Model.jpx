@@ -18,8 +18,9 @@
     <Attr Name="_appModuleNames4" Value="edu.hp.model.biz.ClassRmModule"/>
     <Attr Name="_appModuleNames5" Value="edu.hp.model.biz.HelpdeskCallsAppModule"/>
     <Attr Name="_appModuleNames6" Value="edu.hp.model.biz.ConfRmModule"/>
-    <Attr Name="_appModuleNames7" Value="edu.hp.model.biz.PurchaseOrderAppModule"/>
     <Attr Name="_appModuleNames7" Value="edu.hp.model.biz.VehicleModule"/>
+    <Attr Name="_appModuleNames7" Value="edu.hp.model.biz.VehicleModule"/>
+    <Attr Name="_appModuleNames8" Value="edu.hp.model.biz.PurchaseOrderAppModule"/>
   </DesignTime>
   <Containee
     Name="biz"
@@ -72,6 +73,14 @@
   <Containee
     Name="helpdesk"
     PackageName="edu.hp.model.vo.query.helpdesk"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="po"
+    PackageName="edu.hp.model.vo.query.po"
     ObjectType="JboPackage">
     <DesignTime>
       <Attr Name="_VO" Value="true"/>

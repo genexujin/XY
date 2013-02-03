@@ -7,12 +7,39 @@
   Version="11.1.2.62.76"
   ClearCacheOnRollback="true">
   <ViewUsage
-    Name="PurchaseOrderHistorysView1"
+    Name="PurchaseOrderHistorysView"
     ViewObjectName="edu.hp.model.vo.PurchaseOrderHistorysView"/>
   <ViewUsage
-    Name="PurchaseOrderLinesView1"
+    Name="PurchaseOrderLinesView2"
     ViewObjectName="edu.hp.model.vo.PurchaseOrderLinesView"/>
   <ViewUsage
-    Name="PurchaseOrdersView1"
+    Name="PurchaseOrdersView"
     ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"/>
+  <ViewUsage
+    Name="ItemCategory1"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"/>
+  <ViewUsage
+    Name="ItemCategory"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"/>
+  <ViewUsage
+    Name="Item"
+    ViewObjectName="edu.hp.model.vo.query.po.Item"/>
+  <ViewUsage
+    Name="PurchaseOrderLinesView"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrderLinesView"/>
+  <ViewUsage
+    Name="PoState"
+    ViewObjectName="edu.hp.model.vo.query.po.PoState"/>
+  <ViewLinkUsage
+    Name="ItemCategoryToItemLink"
+    ViewLinkObjectName="edu.hp.model.vo.link.ItemCategoryToItemLink"
+    SrcViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.ItemCategory"
+    DstViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.Item"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="PoToPoLineLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"
+    SrcViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.PurchaseOrdersView"
+    DstViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.PurchaseOrderLinesView"
+    Reversed="false"/>
 </AppModule>

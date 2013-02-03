@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="CreatePoPageDef"
+                Package="pages.po">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrdersView" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="PurchaseOrdersViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderLinesView" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="PurchaseOrderLinesViewIterator" ChangeEventPolicy="ppr"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="OrderId">
+      <AttrNames>
+        <Item Value="OrderId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="OrderReadableId">
+      <AttrNames>
+        <Item Value="OrderReadableId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PurchaseOrdersViewIterator" StaticList="false" Uses="LOV_SubmitterId" id="SubmitterId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="CreateBy">
+      <AttrNames>
+        <Item Value="CreateBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="CreateAt">
+      <AttrNames>
+        <Item Value="CreateAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="LastUpdatedAt">
+      <AttrNames>
+        <Item Value="LastUpdatedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PurchaseOrdersViewIterator" StaticList="false" Uses="LOV_State" id="State"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="SubmitTotal">
+      <AttrNames>
+        <Item Value="SubmitTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="VerifyTotal">
+      <AttrNames>
+        <Item Value="VerifyTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="OrderNote">
+      <AttrNames>
+        <Item Value="OrderNote"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="ItemCategoryId">
+      <AttrNames>
+        <Item Value="ItemCategoryId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="PurchaseOrderLinesViewIterator" id="PurchaseOrderLinesView">
+      <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrderLinesView" Name="PurchaseOrderLinesView0">
+        <AttrNames>
+          <Item Value="OrderLineId"/>
+          <Item Value="ItemId"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="SubmitQuantity"/>
+          <Item Value="SubmitUnit"/>
+          <Item Value="SubmitPrice"/>
+          <Item Value="SubmitTotal"/>
+          <Item Value="ExpectedDate"/>
+          <Item Value="SubmitNote"/>
+          <Item Value="State"/>
+          <Item Value="PurchaseQuantity"/>
+          <Item Value="ActualPrice"/>
+          <Item Value="ActualTotal"/>
+          <Item Value="VerifyNote"/>
+          <Item Value="ReceiveQuantity"/>
+          <Item Value="OrderId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="PurchaseOrdersViewIterator" StaticList="false" Uses="LOV_ItemCategoryId" id="ItemCategoryId1"
+          DTSupportsMRU="true" SelectItemValueMode="ListIndex"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

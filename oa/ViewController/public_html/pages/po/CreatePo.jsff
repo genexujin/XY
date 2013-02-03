@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGroupLayout layout="vertical" id="pgl1">
+        <af:panelHeader text="订单" id="ph1">
+            <af:panelFormLayout id="pfl1" rows="5">
+                <af:selectOneChoice value="#{bindings.SubmitterId.inputValue}" label="申请人"
+                                    required="#{bindings.SubmitterId.hints.mandatory}"
+                                    shortDesc="#{bindings.SubmitterId.hints.tooltip}" readOnly="true" id="soc1">
+                    <f:selectItems value="#{bindings.SubmitterId.items}" id="si1"/>
+                </af:selectOneChoice>
+                <af:inputDate value="#{bindings.CreateAt.inputValue}" id="ot4" label="提交日期" columns="20">
+                </af:inputDate>
+                <af:selectOneChoice value="#{bindings.ItemCategoryId1.inputValue}"  autoSubmit="true"
+                                    label="采购类别" valueChangeListener="#{pageFlowScope.MyPoBean.itemCategoryChanged}"
+                                    required="#{bindings.ItemCategoryId1.hints.mandatory}"
+                                    shortDesc="#{bindings.ItemCategoryId1.hints.tooltip}" id="soc3">
+                    <f:selectItems value="#{bindings.ItemCategoryId1.items}" id="si3"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{bindings.SubmitTotal.inputValue}" id="ot7" label="预算总金额" />
+                <af:inputText value="#{bindings.VerifyTotal.inputValue}" id="ot8" label="审核总金额" />
+                <af:selectOneChoice value="#{bindings.State.inputValue}" label="订单状态"
+                                    required="#{bindings.State.hints.mandatory}"
+                                    shortDesc="#{bindings.State.hints.tooltip}" id="soc2">
+                    <f:selectItems value="#{bindings.State.items}" id="si2"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{bindings.OrderNote.inputValue}" id="ot9" label="备注" rows="5"/>
+                
+                <f:facet name="footer">
+                    <af:panelGroupLayout layout="horizontal" id="pgl2">
+                        <f:facet name="separator">
+                            <af:spacer width="5" height="1" id="s1"/>
+                        </f:facet>
+                        <af:commandButton text="保存" partialSubmit="true" id="cb1" actionListener="#{bindings.Commit.execute}"/>
+                        <af:commandButton text="取消" partialSubmit="true" id="rb1" actionListener="#{bindings.Rollback.execute}" immediate="true"/>
+                        <af:commandButton text="提交" partialSubmit="true" id="cb2" actionListener="#{pageFlowScope.MyPoBean.submitPo}"/>
+                        <af:commandButton text="审核" partialSubmit="true" id="cb3" actionListener="#{pageFlowScope.MyPoBean.verifyPo}"/>
+                        <af:commandButton text="审批" partialSubmit="true" id="cb4" actionListener="#{pageFlowScope.MyPoBean.approvePo}"/>
+                        <af:commandButton text="拒绝" partialSubmit="true" id="cb5" actionListener="#{pageFlowScope.MyPoBean.rejectPo}"/>
+                        <af:commandButton text="撤消" partialSubmit="true" id="cb6" actionListener="#{pageFlowScope.MyPoBean.cancelPo}"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:panelFormLayout>
+        </af:panelHeader>
+        <af:panelHeader text="订单行" id="ph2">
+            <af:table rows="#{bindings.PurchaseOrderLinesView.rangeSize}"
+                      fetchSize="#{bindings.PurchaseOrderLinesView.rangeSize}"
+                      emptyText="#{bindings.PurchaseOrderLinesView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      var="row" value="#{bindings.PurchaseOrderLinesView.collectionModel}" rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.PurchaseOrderLinesView.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.PurchaseOrderLinesView.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t1">
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.OrderLineId.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.OrderLineId.name}" sortable="false"
+                           id="c1">
+                    <af:outputText value="#{row.OrderLineId}" id="ot11">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.PurchaseOrderLinesView.hints.OrderLineId.format}"/>
+                    </af:outputText>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ItemId.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemId.name}" sortable="false" id="c2">
+                    <af:outputText value="#{row.ItemId}" id="ot12"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ItemDescription.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemDescription.name}" sortable="false"
+                           id="c3">
+                    <af:outputText value="#{row.ItemDescription}" id="ot13"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitQuantity.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitQuantity.name}" sortable="false"
+                           id="c4">
+                    <af:outputText value="#{row.SubmitQuantity}" id="ot14"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitUnit.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitUnit.name}" sortable="false"
+                           id="c5">
+                    <af:outputText value="#{row.SubmitUnit}" id="ot15"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.name}" sortable="false"
+                           id="c6">
+                    <af:outputText value="#{row.SubmitPrice}" id="ot16"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitTotal.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitTotal.name}" sortable="false"
+                           id="c7">
+                    <af:outputText value="#{row.SubmitTotal}" id="ot17"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.name}" sortable="false"
+                           id="c8">
+                    <af:outputText value="#{row.ExpectedDate}" id="ot18">
+                        <af:convertDateTime pattern="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.format}"/>
+                    </af:outputText>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.name}" sortable="false"
+                           id="c9">
+                    <af:outputText value="#{row.SubmitNote}" id="ot19"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.State.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.State.name}" sortable="false" id="c10">
+                    <af:outputText value="#{row.State}" id="ot20"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.PurchaseQuantity.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.PurchaseQuantity.name}"
+                           sortable="false" id="c11">
+                    <af:outputText value="#{row.PurchaseQuantity}" id="ot21"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.name}" sortable="false"
+                           id="c12">
+                    <af:outputText value="#{row.ActualPrice}" id="ot22"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ActualTotal.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.ActualTotal.name}" sortable="false"
+                           id="c13">
+                    <af:outputText value="#{row.ActualTotal}" id="ot23"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.name}" sortable="false"
+                           id="c14">
+                    <af:outputText value="#{row.VerifyNote}" id="ot24"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ReceiveQuantity.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.ReceiveQuantity.name}" sortable="false"
+                           id="c15">
+                    <af:outputText value="#{row.ReceiveQuantity}" id="ot25"/>
+                </af:column>
+                <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.OrderId.label}"
+                           sortProperty="#{bindings.PurchaseOrderLinesView.hints.OrderId.name}" sortable="false"
+                           id="c16">
+                    <af:outputText value="#{row.OrderId}" id="ot26"/>
+                </af:column>
+            </af:table>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+</ui:composition>

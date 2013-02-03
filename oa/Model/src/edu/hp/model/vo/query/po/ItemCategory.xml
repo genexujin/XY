@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ItemCategory"
+  Version="11.1.2.62.76"
+  SelectList="Lovs.ID, 
+       Lovs.CODE, 
+       Lovs.VALUE, 
+       Lovs.PARENT_CODE"
+  FromList="LOVS Lovs"
+  Where="Lovs.CODE = 'ItemCatg'"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.query.po.ItemCategory_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="Lovs"
+    Entity="edu.hp.model.eo.Lovs"
+    ReadOnly="true"
+    DeleteParticipant="false"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Lovs"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="Code"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="Code"
+    EntityUsage="Lovs"
+    AliasName="CODE"/>
+  <ViewAttribute
+    Name="Value"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="Value"
+    EntityUsage="Lovs"
+    AliasName="VALUE"/>
+  <ViewAttribute
+    Name="ParentCode"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="ParentCode"
+    EntityUsage="Lovs"
+    AliasName="PARENT_CODE"/>
+  <ViewLinkAccessor
+    Name="Items"
+    ViewLink="edu.hp.model.vo.link.ItemCategoryToItemLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

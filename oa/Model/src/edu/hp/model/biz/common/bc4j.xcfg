@@ -1,97 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
-   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.AdminModule">
-      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="edu.hp.model.Model" name="AdminModuleLocal" ApplicationName="edu.hp.model.biz.AdminModule">
-         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.AdminModule"/>
-         <Custom JDBCDataSource="jdbc/oaDS"/>
-      </AppModuleConfig>
-      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="edu.hp.model.Model" name="AdminModuleShared" ApplicationName="edu.hp.model.biz.AdminModule">
-         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="1" jbo.ampool.resetnontransactionalstate="false"/>
-         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.AdminModule"/>
-         <Custom JDBCDataSource="jdbc/oaDS"/>
-      </AppModuleConfig>
-   </AppModuleConfigBag>
-   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.RootAppModule">
-      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="edu.hp.model.Model" name="RootAppModuleLocal" ApplicationName="edu.hp.model.biz.RootAppModule">
-         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.RootAppModule"/>
-         <Custom JDBCDataSource="jdbc/oaDS"/>
-      </AppModuleConfig>
-      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="edu.hp.model.Model" name="RootAppModuleShared" ApplicationName="edu.hp.model.biz.RootAppModule">
-         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="1" jbo.ampool.resetnontransactionalstate="false"/>
-         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.RootAppModule"/>
-         <Custom JDBCDataSource="jdbc/oaDS"/>
-      </AppModuleConfig>
-   </AppModuleConfigBag>
-   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.RepairCallsAppModule">
-      <AppModuleConfig name="RepairCallsAppModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.RepairCallsAppModule" DeployPlatform="LOCAL">
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.RepairCallsAppModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-      <AppModuleConfig name="RepairCallsAppModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.RepairCallsAppModule" DeployPlatform="LOCAL">
-         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.RepairCallsAppModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-   </AppModuleConfigBag>
-   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.NotificationModule">
-      <AppModuleConfig name="NotificationModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.NotificationModule" DeployPlatform="LOCAL">
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.NotificationModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-      <AppModuleConfig name="NotificationModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.NotificationModule" DeployPlatform="LOCAL">
-         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.NotificationModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-   </AppModuleConfigBag>
-   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.ClassRmModule">
-      <AppModuleConfig name="ClassRmModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.ClassRmModule" DeployPlatform="LOCAL">
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.ClassRmModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-      <AppModuleConfig name="ClassRmModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.ClassRmModule" DeployPlatform="LOCAL">
-         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.ClassRmModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-   </AppModuleConfigBag>
-   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.HelpdeskCallsAppModule">
-      <AppModuleConfig name="HelpdeskCallsAppModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.HelpdeskCallsAppModule" DeployPlatform="LOCAL">
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.HelpdeskCallsAppModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-      <AppModuleConfig name="HelpdeskCallsAppModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.HelpdeskCallsAppModule" DeployPlatform="LOCAL">
-         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.HelpdeskCallsAppModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-   </AppModuleConfigBag>
-   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.ConfRmModule">
-      <AppModuleConfig name="ConfRmModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.ConfRmModule" DeployPlatform="LOCAL">
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.ConfRmModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-      <AppModuleConfig name="ConfRmModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.ConfRmModule" DeployPlatform="LOCAL">
-         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.ConfRmModule"/>
-         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
-      </AppModuleConfig>
-   </AppModuleConfigBag>
-<<<<<<< HEAD
    <AppModuleConfigBag ApplicationName="edu.hp.model.biz.PurchaseOrderAppModule">
       <AppModuleConfig name="PurchaseOrderAppModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.PurchaseOrderAppModule" DeployPlatform="LOCAL">
          <Database jbo.TypeMapEntries="OracleApps"/>
@@ -102,18 +10,19 @@
          <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
          <Database jbo.TypeMapEntries="OracleApps"/>
          <Security AppModuleJndiName="edu.hp.model.biz.PurchaseOrderAppModule"/>
-=======
-   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.VehicleModule">
-      <AppModuleConfig name="VehicleModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.VehicleModule" DeployPlatform="LOCAL">
-         <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.VehicleModule"/>
          <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
       </AppModuleConfig>
-      <AppModuleConfig name="VehicleModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.VehicleModule" DeployPlatform="LOCAL">
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.RootAppModule">
+      <AppModuleConfig name="RootAppModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.RootAppModule" DeployPlatform="LOCAL">
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.RootAppModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="RootAppModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.RootAppModule" DeployPlatform="LOCAL">
          <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
          <Database jbo.TypeMapEntries="OracleApps"/>
-         <Security AppModuleJndiName="edu.hp.model.biz.VehicleModule"/>
->>>>>>> f4b4e2ddb3715275753910a521cf0d0a7a88b4d5
+         <Security AppModuleJndiName="edu.hp.model.biz.RootAppModule"/>
          <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
       </AppModuleConfig>
    </AppModuleConfigBag>

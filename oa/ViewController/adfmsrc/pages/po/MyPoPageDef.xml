@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="MyPoPageDef" Package="pages.po">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.PoState" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="PoStateIterator"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.ItemCategory" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ItemCategoryIterator"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrdersView" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="PurchaseOrdersViewIterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="PoStateIterator" ListOperMode="navigation" ListIter="PoStateIterator" id="PoState"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ItemCategoryIterator" ListOperMode="navigation" ListIter="ItemCategoryIterator"
+          id="ItemCategory" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <tree IterBinding="PurchaseOrdersViewIterator" id="PurchaseOrdersView">
+      <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrdersView" Name="PurchaseOrdersView0">
+        <AttrNames>
+          <Item Value="OrderReadableId"/>
+          <Item Value="SubmitterId"/>
+          <Item Value="CreateAt"/>
+          <Item Value="State"/>
+          <Item Value="SubmitTotal"/>
+          <Item Value="VerifyTotal"/>
+          <Item Value="ItemCategoryId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="PurchaseOrdersViewIterator" StaticList="false" Uses="LOV_SubmitterId" id="SubmitterId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction IterBinding="PurchaseOrdersViewIterator" id="doQuery" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="doQuery" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule.PurchaseOrdersView">
+      <NamedData NDName="oRdId" NDType="java.lang.String"/>
+      <NamedData NDName="state" NDType="java.lang.String"/>
+      <NamedData NDName="category" NDType="java.lang.String"/>
+      <NamedData NDName="submitDateFrom" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="submitDateTo" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <tree IterBinding="PurchaseOrdersViewIterator" id="PurchaseOrdersView1">
+      <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrdersView" Name="PurchaseOrdersView10">
+        <AttrNames>
+          <Item Value="OrderId"/>
+          <Item Value="OrderReadableId"/>
+          <Item Value="SubmitterId"/>
+          <Item Value="CreateBy"/>
+          <Item Value="CreateAt"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedAt"/>
+          <Item Value="State"/>
+          <Item Value="SubmitTotal"/>
+          <Item Value="VerifyTotal"/>
+          <Item Value="OrderNote"/>
+          <Item Value="ItemCategoryId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

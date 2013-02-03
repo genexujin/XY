@@ -49,6 +49,9 @@
     <page path="/pages/vehicle/VehicleApplication.jsff" usageId="edu_hp_view_VehicleApplicationPageDef"/>
     <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@findByPendingPlanning"
           usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"/>
+    <page path="/pages/po/MyPo.jsff" usageId="edu_hp_view_MyPoPageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@Create" usageId="edu_hp_view_MyPo_MyPo_CreatePageDef"/>
+    <page path="/pages/po/CreatePo.jsff" usageId="edu_hp_view_CreatePoPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -90,6 +93,9 @@
     <page id="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"
           path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_findByStatePageDef1"/>
     <page id="edu_hp_view_VehicleApplicationPageDef" path="pages.vehicle.VehicleApplicationPageDef"/>
+    <page id="edu_hp_view_MyPoPageDef" path="pages.po.MyPoPageDef"/>
+    <page id="edu_hp_view_MyPo_MyPo_CreatePageDef" path="flows.po.MyPo_MyPo_CreatePageDef"/>
+    <page id="edu_hp_view_CreatePoPageDef" path="pages.po.CreatePoPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

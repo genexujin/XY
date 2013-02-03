@@ -127,4 +127,10 @@
     EntityAttrName="OrderId"
     EntityUsage="PurchaseOrderLines"
     AliasName="ORDER_ID"/>
+  <ViewLinkAccessor
+    Name="PurchaseOrder"
+    ViewLink="edu.hp.model.vo.link.PoToPoLineLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
 </ViewObject>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="MyPo">
+    <default-activity>MyPoPage</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>MyPoBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.po.MyPoBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="MyPoPage">
+      <page>/pages/po/MyPo.jsff</page>
+    </view>
+    <method-call id="Create">
+      <method>#{bindings.newRow.execute}</method>
+      <outcome>
+        <fixed-outcome>newRow</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="CreatePoPage">
+      <page>/pages/po/CreatePo.jsff</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>MyPoPage</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>Create</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>CreatePoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>Create</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>newRow</from-outcome>
+        <to-activity-id>CreatePoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
