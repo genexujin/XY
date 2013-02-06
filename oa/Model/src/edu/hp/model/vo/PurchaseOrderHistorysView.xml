@@ -14,7 +14,11 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.PurchaseOrderHistorysViewImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
   <EntityUsage
     Name="PurchaseOrderHistorys"
     Entity="edu.hp.model.eo.PurchaseOrderHistorys"/>
@@ -24,7 +28,8 @@
     PrecisionRule="true"
     EntityAttrName="OrderHistoryId"
     EntityUsage="PurchaseOrderHistorys"
-    AliasName="ORDER_HISTORY_ID"/>
+    AliasName="ORDER_HISTORY_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="OrderHistoryDetail"
     PrecisionRule="true"
