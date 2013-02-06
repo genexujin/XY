@@ -34,7 +34,10 @@
               <af:commandToolbarButton text="删除" id="ctb3" icon="/images/icons/delete.png"
                                        visible="#{bindings.State.inputValue=='未提交'}"/>
               <af:commandToolbarButton text="取消所有操作" id="ctb2" icon="/images/icons/rollback.png"
-                                       actionListener="#{bindings.Rollback.execute}"/>
+                                       actionListener="#{bindings.Rollback.execute}"
+                                       disabled="#{!bindings.Rollback.enabled}" immediate="true">
+                <af:resetActionListener/>
+              </af:commandToolbarButton>
               <af:commandToolbarButton text="导出" id="cb6" icon="/images/icons/export.png">
                 <af:exportCollectionActionListener type="excelHTML" exportedId="t2" title="会议室预订信息"
                                                    filename="ConfRmRrv.xls"/>

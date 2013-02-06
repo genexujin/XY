@@ -13,7 +13,10 @@
               <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
             </af:commandToolbarButton>
             <af:commandToolbarButton id="ctb2" icon="/images/icons/undo.png" text="取消"
-                                     actionListener="#{bindings.Rollback.execute}"/>
+                                     actionListener="#{bindings.Rollback.execute}" immediate="true"
+                                     disabled="#{!bindings.Rollback.enabled}">
+              <af:resetActionListener/>
+            </af:commandToolbarButton>
           </af:toolbar>
         </f:facet>
         <f:facet name="legend"/>
@@ -77,6 +80,17 @@
                 <f:validator binding="#{row.bindings.Title.validator}"/>
               </af:inputText>
             </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.LastName.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Employees.hints.LastName.label}" id="c5" width="55">
+              <af:inputText value="#{row.bindings.LastName.inputValue}"
+                            label="#{bindings.Employees.hints.LastName.label}"
+                            required="#{bindings.Employees.hints.LastName.mandatory}"
+                            columns="#{bindings.Employees.hints.LastName.displayWidth}"
+                            maximumLength="#{bindings.Employees.hints.LastName.precision}"
+                            shortDesc="#{bindings.Employees.hints.LastName.tooltip}" id="it5" autoSubmit="true">
+                <f:validator binding="#{row.bindings.LastName.validator}"/>
+              </af:inputText>
+            </af:column>
             <af:column sortProperty="#{bindings.Employees.hints.FirstName.name}" filterable="true" sortable="true"
                        headerText="#{bindings.Employees.hints.FirstName.label}" id="c4" width="55">
               <af:inputText value="#{row.bindings.FirstName.inputValue}"
@@ -86,17 +100,6 @@
                             maximumLength="#{bindings.Employees.hints.FirstName.precision}"
                             shortDesc="#{bindings.Employees.hints.FirstName.tooltip}" id="it4" autoSubmit="true">
                 <f:validator binding="#{row.bindings.FirstName.validator}"/>
-              </af:inputText>
-            </af:column>
-            <af:column sortProperty="#{bindings.Employees.hints.LastName.name}" filterable="true" sortable="true"
-                       headerText="#{bindings.Employees.hints.LastName.label}" id="c5" width="55" >
-              <af:inputText value="#{row.bindings.LastName.inputValue}"
-                            label="#{bindings.Employees.hints.LastName.label}"
-                            required="#{bindings.Employees.hints.LastName.mandatory}"
-                            columns="#{bindings.Employees.hints.LastName.displayWidth}"
-                            maximumLength="#{bindings.Employees.hints.LastName.precision}"
-                            shortDesc="#{bindings.Employees.hints.LastName.tooltip}" id="it5" autoSubmit="true">
-                <f:validator binding="#{row.bindings.LastName.validator}"/>
               </af:inputText>
             </af:column>
             <af:column sortProperty="#{bindings.Employees.hints.Gender.name}" sortable="true"

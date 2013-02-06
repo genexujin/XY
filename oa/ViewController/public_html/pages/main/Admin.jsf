@@ -16,7 +16,7 @@
                     </af:panelGroupLayout>
                 </f:facet>
                 <f:facet name="navigation">
-                    <af:panelAccordion id="pa1">
+                    <af:panelAccordion id="pa1" binding="#{viewScope.AdminBean.menuAccordion}">
                         <af:showDetailItem text="平台管理" id="sdi1" icon="/images/icons/accessors.png">
                          <af:spacer width="10" height="5" id="s7"/>
                         <af:panelList id="pl1">

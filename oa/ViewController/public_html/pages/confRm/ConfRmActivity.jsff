@@ -18,7 +18,10 @@
                             <af:commandToolbarButton text="保存" id="ctb1" action="#{viewScope.confCalDetailBean.save}"
                                                      icon="/images/icons/saveall.png"/>
                             <af:commandToolbarButton text="取消" id="ctb3" actionListener="#{bindings.Rollback.execute}"
-                                                     icon="/images/icons/rollback.png"/>
+                                                     icon="/images/icons/rollback.png"
+                                                     disabled="#{!bindings.Rollback.enabled}" immediate="true">
+                                <af:resetActionListener/>
+                            </af:commandToolbarButton>
                             <af:commandToolbarButton text="返回日历" id="ctb4" icon="/images/icons/chooseDate.png"
                                                      action="Calendar" actionListener="#{bindings.Rollback.execute}"/>
                         </af:toolbar>
