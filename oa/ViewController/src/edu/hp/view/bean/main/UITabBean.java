@@ -43,13 +43,13 @@ public class UITabBean {
     public UITabBean() {
 
         LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-       
+
         if (user == null) {
             HttpSession session =
                 (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             user = (LoginUser)session.getAttribute(Constants.SECURITY_FILTER_SESSION_KEY);
             JSFUtils.setExpressionValue("#{sessionScope.LoginUserBean}", user);
-            
+
         }
 
     }
@@ -72,7 +72,7 @@ public class UITabBean {
 
             OperationBinding binding = ADFUtils.findOperation("queryUserMenu");
             Map map = binding.getParamsMap();
-
+            System.err.println("user name: " + user.getUserName());
             map.put("userName", user.getUserName());
             binding.execute();
 
@@ -98,36 +98,39 @@ public class UITabBean {
         menus.setSysMealMenus(new ArrayList<LoginUserMenu>());
         menus.setSysPurMenus(new ArrayList<LoginUserMenu>());
         menus.setAdminMenus(new ArrayList<LoginUserMenu>());
-        
+
         DCIteratorBinding it = ADFUtils.findIterator("UserMenusIterator");
+        //it.executeQuery();
+        Row[] allRowsInRange = it.getAllRowsInRange();
+        if (allRowsInRange != null) {
+            for (Row row :allRowsInRange) {
 
-        for (Row row : it.getAllRowsInRange()) {
+                LoginUserMenu menu = new LoginUserMenu();
 
-            LoginUserMenu menu = new LoginUserMenu();
+                menu.setMenuId((String)row.getAttribute("MenuId"));
+                menu.setMenuCategory((String)row.getAttribute("MenuCategory"));
+                menu.setMenuMasterCategory((String)row.getAttribute("MenuMasterCategory"));
+                menu.setMenuName((String)row.getAttribute("MenuName"));
+                menu.setMenuTaskFlowURL((String)row.getAttribute("MenuTaskflowUrl"));
+                menu.setMenuIconURL((String)row.getAttribute("MenuIconUrl"));
 
-            menu.setMenuId((String)row.getAttribute("MenuId"));
-            menu.setMenuCategory((String)row.getAttribute("MenuCategory"));
-            menu.setMenuMasterCategory((String)row.getAttribute("MenuMasterCategory"));
-            menu.setMenuName((String)row.getAttribute("MenuName"));
-            menu.setMenuTaskFlowURL((String)row.getAttribute("MenuTaskflowUrl"));
-            menu.setMenuIconURL((String)row.getAttribute("MenuIconUrl"));
-
-            if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("ANCMT")) {
-                menus.getSysAncmtMenus().add(menu);
-            } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("CAR")) {
-                menus.getSysCarMenus().add(menu);
-            } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("CLSRM")) {
-                menus.getSysClsRmMenus().add(menu);
-            } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("CONFRM")) {
-                menus.getSysConfRmMenus().add(menu);
-            } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("HD")) {
-                menus.getSysHdMenus().add(menu);
-            } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("MEAL")) {
-                menus.getSysMealMenus().add(menu);
-            } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("PUR")) {
-                menus.getSysPurMenus().add(menu);
-            }else if(menu.getMenuMasterCategory().equals("ADMIN")){
-                menus.getAdminMenus().add(menu);
+                if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("ANCMT")) {
+                    menus.getSysAncmtMenus().add(menu);
+                } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("CAR")) {
+                    menus.getSysCarMenus().add(menu);
+                } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("CLSRM")) {
+                    menus.getSysClsRmMenus().add(menu);
+                } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("CONFRM")) {
+                    menus.getSysConfRmMenus().add(menu);
+                } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("HD")) {
+                    menus.getSysHdMenus().add(menu);
+                } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("MEAL")) {
+                    menus.getSysMealMenus().add(menu);
+                } else if (menu.getMenuMasterCategory().equals("SYS") && menu.getMenuCategory().equals("PUR")) {
+                    menus.getSysPurMenus().add(menu);
+                } else if (menu.getMenuMasterCategory().equals("ADMIN")) {
+                    menus.getAdminMenus().add(menu);
+                }
             }
         }
     }
@@ -160,7 +163,7 @@ public class UITabBean {
             String title = (String)(component.getAttributes().get("title"));
             String taskflowId = (String)(component.getAttributes().get("taskflow"));
             HashMap<String, Object> parameters = new HashMap<String, Object>();
-            TabContext.getCurrentInstance().addTab(title, taskflowId, parameters);
+            TabContext.getCurrentInstance().addOrSelectTab(title, taskflowId, parameters);
 
         } catch (TabContext.TabOverflowException toe) {
             // causes a dialog to be displayed to the user saying that there are
