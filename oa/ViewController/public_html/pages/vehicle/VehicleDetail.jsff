@@ -19,7 +19,10 @@
                                                      icon="/images/icons/saveall.png"
                                                      action="#{pageFlowScope.vehiclesCalBean.save}"/>
                             <af:commandToolbarButton text="取消" id="ctb3" actionListener="#{bindings.Rollback.execute}"
-                                                     icon="/images/icons/rollback.png"/>
+                                                     icon="/images/icons/rollback.png" immediate="true"
+                                                     disabled="#{!bindings.Rollback.enabled}">
+                                <af:resetActionListener/>
+                            </af:commandToolbarButton>
                             <af:commandToolbarButton text="返回日历" id="ctb4" icon="/images/icons/chooseDate.png"
                                                      action="Calendar" actionListener="#{bindings.Rollback.execute}"/>
                         </af:toolbar>

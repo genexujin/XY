@@ -176,7 +176,7 @@
                             <af:commandButton text="保存" id="cb1" icon="/images/icons/filesave.png"
                                               action="#{viewScope.ClsRmBatchBean.saveBatch}"/>
                             <af:commandButton actionListener="#{bindings.Rollback.execute}" text="取消" immediate="true" id="cb2"
-                                              icon="/images/icons/undo.png">
+                                              icon="/images/icons/undo.png" disabled="#{!bindings.Rollback.enabled}">
                                 <af:resetActionListener/>
                             </af:commandButton>
                         </af:panelGroupLayout>

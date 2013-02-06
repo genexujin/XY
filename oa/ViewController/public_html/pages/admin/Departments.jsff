@@ -13,7 +13,10 @@
               <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
             </af:commandToolbarButton>
             <af:commandToolbarButton id="ctb2" icon="/images/icons/undo.png" text="取消"
-                                     actionListener="#{bindings.Rollback.execute}"/>
+                                     actionListener="#{bindings.Rollback.execute}"
+                                     disabled="#{!bindings.Rollback.enabled}">
+              <af:resetActionListener/>
+            </af:commandToolbarButton>
           </af:toolbar>
         </f:facet>
         <f:facet name="legend"/>

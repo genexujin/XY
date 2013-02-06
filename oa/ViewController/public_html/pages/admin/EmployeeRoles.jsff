@@ -11,7 +11,10 @@
                     <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png"
                                              action="#{viewScope.AdminOperationBean.saveEmpRoles}"/>
                     <af:commandToolbarButton text="取消" id="ctb2" icon="/images/icons/undo.png"
-                                             actionListener="#{bindings.Rollback.execute}"/>
+                                             actionListener="#{bindings.Rollback.execute}" immediate="true"
+                                             disabled="#{!bindings.Rollback.enabled}">
+                        <af:resetActionListener/>
+                    </af:commandToolbarButton>
                     <af:commandToolbarButton text="员工列表" id="ctb3" icon="/images/icons/team.png" action="emps"
                                              actionListener="#{bindings.Rollback.execute}"/>
                 </af:toolbar>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="ConfRmApplicationPageDef"
-                Package="pages.confRm">
+                Package="pages.confRm" SkipValidation="true">
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
