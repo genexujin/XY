@@ -218,6 +218,7 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
         }
     }
 
+
     public static final int ORDERLINEID = AttributesEnum.OrderLineId.index();
     public static final int ITEMID = AttributesEnum.ItemId.index();
     public static final int ITEMDESCRIPTION = AttributesEnum.ItemDescription.index();
@@ -241,6 +242,7 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
      */
     public PurchaseOrderLinesImpl() {
     }
+
 
     /**
      * @return the definition object for this instance class.
@@ -553,11 +555,12 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
 
     /**
      * @param orderLineId key constituent
+     * @param orderId key constituent
 
      * @return a Key object based on given key constituents.
      */
-    public static Key createPrimaryKey(DBSequence orderLineId) {
-        return new Key(new Object[]{orderLineId});
+    public static Key createPrimaryKey(DBSequence orderLineId, String orderId) {
+        return new Key(new Object[]{orderLineId, orderId});
     }
 
     /**

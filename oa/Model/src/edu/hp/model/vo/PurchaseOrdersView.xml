@@ -16,13 +16,17 @@
        PurchaseOrders.SUBMIT_TOTAL, 
        PurchaseOrders.VERIFY_TOTAL, 
        PurchaseOrders.ORDER_NOTE, 
-       PurchaseOrders.ITEM_CATEGORY_ID"
-  FromList="PURCHASE_ORDERS PurchaseOrders"
+       PurchaseOrders.ITEM_CATEGORY_ID, 
+       Employees.FIRST_NAME, 
+       Employees.ID, 
+       Employees.LAST_NAME"
+  FromList="PURCHASE_ORDERS PurchaseOrders, EMPLOYEES Employees"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
   ComponentClass="edu.hp.model.vo.PurchaseOrdersViewImpl"
+  Where="PurchaseOrders.SUBMITTER_ID = Employees.ID(+)"
   ComponentInterface="edu.hp.model.vo.common.PurchaseOrdersView"
   ClientProxyName="edu.hp.model.vo.client.PurchaseOrdersViewClient">
   <DesignTime>
@@ -48,6 +52,10 @@
     Name="submitDateTo"
     Kind="viewcriteria"
     Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="sbmtId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="PoState"
     ViewObjectName="edu.hp.model.vo.query.po.PoState"
@@ -107,7 +115,7 @@
       <Item Value="ItemCategoryId"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
+      <Item Value="FlexCol1"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Value"/>
@@ -117,6 +125,25 @@
   <EntityUsage
     Name="PurchaseOrders"
     Entity="edu.hp.model.eo.PurchaseOrders"/>
+  <EntityUsage
+    Name="Employees"
+    Entity="edu.hp.model.eo.Employees"
+    Association="edu.hp.model.eo.asso.EmpPoAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.EmpPoAssoc.Submitter"
+    SourceUsage="edu.hp.model.vo.PurchaseOrdersView.PurchaseOrders"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="LEFT OUTER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="edu.hp.model.eo.PurchaseOrders.SubmitterId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="edu.hp.model.eo.Employees.Id"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
   <ViewAttribute
     Name="OrderId"
     IsNotNull="true"
@@ -132,7 +159,14 @@
     EntityAttrName="OrderReadableId"
     EntityUsage="PurchaseOrders"
     AliasName="ORDER_READABLE_ID"
-    IsUpdateable="while_insert"/>
+    IsUpdateable="while_insert">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrdersView.OrderReadableId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="SubmitterId"
     PrecisionRule="true"
@@ -158,7 +192,14 @@
     PrecisionRule="true"
     EntityAttrName="CreateAt"
     EntityUsage="PurchaseOrders"
-    AliasName="CREATE_AT"/>
+    AliasName="CREATE_AT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrdersView.CreateAt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="LastUpdatedBy"
     PrecisionRule="true"
@@ -182,6 +223,8 @@
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrdersView.State_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -190,13 +233,27 @@
     PrecisionRule="true"
     EntityAttrName="SubmitTotal"
     EntityUsage="PurchaseOrders"
-    AliasName="SUBMIT_TOTAL"/>
+    AliasName="SUBMIT_TOTAL">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrdersView.SubmitTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="VerifyTotal"
     PrecisionRule="true"
     EntityAttrName="VerifyTotal"
     EntityUsage="PurchaseOrders"
-    AliasName="VERIFY_TOTAL"/>
+    AliasName="VERIFY_TOTAL">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrdersView.VerifyTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="OrderNote"
     PrecisionRule="true"
@@ -212,11 +269,57 @@
     LOVName="LOV_ItemCategoryId">
     <Properties>
       <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrdersView.ItemCategoryId_LABEL"/>
         <CONTROLTYPE
           Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="SubmitterName"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[LastName+FirstName]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="FirstName"/>
+      <Item
+        Value="LastName"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrdersView.SubmitterName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FirstName"
+    PrecisionRule="true"
+    EntityAttrName="FirstName"
+    EntityUsage="Employees"
+    AliasName="FIRST_NAME"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Employees"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="LastName"
+    PrecisionRule="true"
+    EntityAttrName="LastName"
+    EntityUsage="Employees"
+    AliasName="LAST_NAME"/>
   <ViewCriteria
     Name="OrderReadableIdCriteria"
     ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
@@ -397,11 +500,65 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="SubmitterIdCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="SubmitterId"
+        ViewAttribute="SubmitterId"
+        Operator="="
+        Conjunction="AND"
+        Value=":sbmtId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="OrderId"/>
+  </AttrArray>
   <ViewLinkAccessor
     Name="PurchaseOrderLines"
     ViewLink="edu.hp.model.vo.link.PoToPoLineLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="PoSubmitter"
+    ViewLink="edu.hp.model.vo.link.EmpPoViewLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="PoLineCount"
+    ViewLink="edu.hp.model.vo.link.PoToPoLineCountLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
   <ClientInterface>
     <Method
       Name="doQuery"
@@ -423,6 +580,9 @@
       <Parameter
         Name="submitDateTo"
         Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
     </Method>
     <Method
       Name="newRow"

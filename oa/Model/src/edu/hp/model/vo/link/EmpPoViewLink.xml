@@ -3,38 +3,39 @@
 <!---->
 <ViewLink
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="ItemCategoryToItemLink"
-  Version="11.1.2.62.76">
+  Name="EmpPoViewLink"
+  Version="11.1.2.62.76"
+  EntityAssociation="edu.hp.model.eo.asso.EmpPoAssoc">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.link.ItemCategoryToItemLink_LABEL"/>
+        ResId="edu.hp.model.vo.link.EmpPoViewLink_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <ViewLinkDefEnd
-    Name="ItemCategory"
+    Name="PoSubmitter"
     Cardinality="1"
     Source="true"
-    Owner="edu.hp.model.vo.query.po.ItemCategory">
+    Owner="edu.hp.model.vo.EmployeesView">
     <DesignTime>
       <Attr Name="_accessor" Value="true"/>
-      <Attr Name="_finderName" Value="ItemCategory"/>
+      <Attr Name="_finderName" Value="PoSubmitter"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.query.po.ItemCategory.FlexCol1"/>
+      <Item Value="edu.hp.model.vo.EmployeesView.Id"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ViewLinkDefEnd
-    Name="Items"
+    Name="PurchaseOrdersView"
     Cardinality="-1"
-    Owner="edu.hp.model.vo.query.po.Item">
+    Owner="edu.hp.model.vo.PurchaseOrdersView">
     <DesignTime>
-      <Attr Name="_finderName" Value="Items"/>
+      <Attr Name="_finderName" Value="PurchaseOrdersView"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.query.po.Item.ParentCode"/>
+      <Item Value="edu.hp.model.vo.PurchaseOrdersView.SubmitterId"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ResourceBundle>

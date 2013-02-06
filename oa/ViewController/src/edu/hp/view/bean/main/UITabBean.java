@@ -101,7 +101,8 @@ public class UITabBean {
         
         DCIteratorBinding it = ADFUtils.findIterator("UserMenusIterator");
 
-        for (Row row : it.getAllRowsInRange()) {
+        Row[] rows = it.getAllRowsInRange();
+        for (Row row : rows) {
 
             LoginUserMenu menu = new LoginUserMenu();
 

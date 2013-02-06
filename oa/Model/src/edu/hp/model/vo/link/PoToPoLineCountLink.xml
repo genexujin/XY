@@ -3,38 +3,37 @@
 <!---->
 <ViewLink
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="ItemCategoryToItemLink"
+  Name="PoToPoLineCountLink"
   Version="11.1.2.62.76">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.link.ItemCategoryToItemLink_LABEL"/>
+        ResId="edu.hp.model.vo.link.PoToPoLineCountLink_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <ViewLinkDefEnd
-    Name="ItemCategory"
+    Name="PurchaseOrdersView"
     Cardinality="1"
     Source="true"
-    Owner="edu.hp.model.vo.query.po.ItemCategory">
+    Owner="edu.hp.model.vo.PurchaseOrdersView">
     <DesignTime>
-      <Attr Name="_accessor" Value="true"/>
-      <Attr Name="_finderName" Value="ItemCategory"/>
+      <Attr Name="_finderName" Value="PurchaseOrdersView"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.query.po.ItemCategory.FlexCol1"/>
+      <Item Value="edu.hp.model.vo.PurchaseOrdersView.Id"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ViewLinkDefEnd
-    Name="Items"
+    Name="PoLineCount"
     Cardinality="-1"
-    Owner="edu.hp.model.vo.query.po.Item">
+    Owner="edu.hp.model.vo.query.po.PoLineCount">
     <DesignTime>
-      <Attr Name="_finderName" Value="Items"/>
+      <Attr Name="_finderName" Value="PoLineCount"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.query.po.Item.ParentCode"/>
+      <Item Value="edu.hp.model.vo.query.po.PoLineCount.OrderId"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ResourceBundle>

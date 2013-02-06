@@ -58,7 +58,7 @@
       <list n="dependencyList">
          <hash>
             <hash n="dependable">
-               <url n="sourceOwnerURL" path="../oa.jws"/>
+               <url n="sourceOwnerURL" path="../OA.jws"/>
                <url n="sourceURL" path="../Model/Model.jpr"/>
             </hash>
             <value n="recognizerId" v="oracle.jdeveloper.library"/>

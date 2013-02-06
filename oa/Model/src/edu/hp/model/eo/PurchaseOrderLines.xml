@@ -169,12 +169,13 @@
     TableName="PURCHASE_ORDER_LINES"/>
   <Attribute
     Name="OrderId"
-    Precision="20"
     ColumnName="ORDER_ID"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="PURCHASE_ORDER_LINES">
+    TableName="PURCHASE_ORDER_LINES"
+    PrimaryKey="true"
+    Precision="255">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -194,6 +195,7 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.PurchaseOrderLines.OrderLineId"/>
+      <Item Value="edu.hp.model.eo.PurchaseOrderLines.OrderId"/>
     </AttrArray>
   </Key>
 </Entity>

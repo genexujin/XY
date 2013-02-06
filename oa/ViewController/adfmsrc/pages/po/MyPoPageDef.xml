@@ -9,6 +9,8 @@
               id="ItemCategoryIterator"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrdersView" DataControl="RootAppModuleDataControl"
               RangeSize="25" id="PurchaseOrdersViewIterator"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.EmployeesViewForLOV" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="EmployeesViewForLOVIterator"/>
   </executables>
   <bindings>
     <list IterBinding="PoStateIterator" ListOperMode="navigation" ListIter="PoStateIterator" id="PoState"
@@ -33,6 +35,16 @@
           <Item Value="SubmitTotal"/>
           <Item Value="VerifyTotal"/>
           <Item Value="ItemCategoryId"/>
+          <Item Value="SubmitterName"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="PoLineCount"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="edu.hp.model.vo.query.po.PoLineCount" Name="PurchaseOrdersView1">
+        <AttrNames>
+          <Item Value="OrderId"/>
+          <Item Value="LineCount"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -46,6 +58,7 @@
       <NamedData NDName="category" NDType="java.lang.String"/>
       <NamedData NDName="submitDateFrom" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="submitDateTo" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="submitterId" NDType="java.lang.String"/>
     </methodAction>
     <tree IterBinding="PurchaseOrdersViewIterator" id="PurchaseOrdersView1">
       <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrdersView" Name="PurchaseOrdersView10">
@@ -65,5 +78,11 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <list IterBinding="EmployeesViewForLOVIterator" ListOperMode="navigation" ListIter="EmployeesViewForLOVIterator"
+          id="EmployeesViewForLOV" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
   </bindings>
 </pageDefinition>

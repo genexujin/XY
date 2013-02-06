@@ -30,7 +30,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
     public PurchaseOrdersViewImpl() {
     }
     
-    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo) {
+    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo, String submitterId) {
         this.setApplyViewCriteriaNames(null);
         
         System.err.println("In VO: oRdId is: " + oRdId);
@@ -38,6 +38,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
         System.err.println("In VO: category is: " + category);
         System.err.println("In VO: submitDateFrom is: " + submitDateFrom);
         System.err.println("In VO: submitDateTo is: " + submitDateTo);
+        System.err.println("In VO: submitterId is: " + submitterId);
         
         List<String> vcNames = new ArrayList<String>();
         
@@ -71,6 +72,12 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
             vcNames.add(dToCriteria.getName());
         }
         
+        if (submitterId != null) {
+            this.setsbmtId(submitterId);
+            ViewCriteria sIdCriteria = this.getViewCriteria("SubmitterIdCriteria");
+            vcNames.add(sIdCriteria.getName());
+        }
+        
         this.setApplyViewCriteriaNames(vcNames.toArray(new String[0]));
         this.executeQuery();
     }
@@ -82,6 +89,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
         this.insertRow(newRow);        
         this.setCurrentRow(newRow);
     }
+
 
     /**
      * Returns the variable value for OdRdId.
@@ -161,5 +169,21 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
      */
     public void setsubmitDateTo(Date value) {
         ensureVariableManager().setVariableValue("submitDateTo", value);
+    }
+
+    /**
+     * Returns the variable value for sbmtId.
+     * @return variable value for sbmtId
+     */
+    public String getsbmtId() {
+        return (String)ensureVariableManager().getVariableValue("sbmtId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable sbmtId.
+     * @param value value to bind as sbmtId
+     */
+    public void setsbmtId(String value) {
+        ensureVariableManager().setVariableValue("sbmtId", value);
     }
 }

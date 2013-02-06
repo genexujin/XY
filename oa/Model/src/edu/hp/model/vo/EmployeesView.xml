@@ -411,6 +411,11 @@
     ViewLink="edu.hp.model.vo.link.UserRoleDMLViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="PurchaseOrdersView"
+    ViewLink="edu.hp.model.vo.link.EmpPoViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <LOVUIHints
     ListType="113"
     MRUCount="0"

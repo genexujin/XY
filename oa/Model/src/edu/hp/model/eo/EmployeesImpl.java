@@ -329,30 +329,29 @@ public class EmployeesImpl extends EntityImpl {
             }
         }
         ,
-
         RoleUsers {
             public Object get(EmployeesImpl obj) {
                 return obj.getRoleUsers();
-
             }
 
             public void put(EmployeesImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        },
-        
+        }
+        ,
         PurchaseOrders {
             public Object get(EmployeesImpl obj) {
                 return obj.getPurchaseOrders();
-
             }
-        public void put(EmployeesImpl obj, Object value) {
-            obj.setAttributeInternal(index(), value);
+
+            public void put(EmployeesImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
         }
-        };
-        
-        
+        ;
         private static AttributesEnum[] vals = null;
+
+
         private static int firstIndex = 0;
 
         public abstract Object get(EmployeesImpl object);
@@ -413,6 +412,7 @@ public class EmployeesImpl extends EntityImpl {
     public static final int HELPDESKCALLSFORCALLER = AttributesEnum.HelpdeskCallsForCaller.index();
     public static final int ROLEUSERS = AttributesEnum.RoleUsers.index();
     public static final int PURCHASEORDERS = AttributesEnum.PurchaseOrders.index();
+
     /**
      * This is the default constructor (do not remove).
      */

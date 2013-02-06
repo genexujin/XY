@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelGroupLayout id="pgl1" layout="vertical">
+    
+    <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="0px">
+      <f:facet name="center">
+      <af:panelGroupLayout id="pgl1" layout="vertical">
         <af:spacer width="50px" height="5px"/>
         <af:panelHeader text="输入查询条件" id="ph1">
             <af:spacer width="50px" height="5px"/>
@@ -25,12 +28,13 @@
                                     shortDesc="#{bindings.ItemCategory.hints.tooltip}" id="soc2">
                     <f:selectItems value="#{bindings.ItemCategory.items}" id="si2"/>
                 </af:selectOneChoice>
-                <af:selectOneChoice value="#{bindings.SubmitterId.inputValue}" label="申请人"
-                                    required="#{bindings.SubmitterId.hints.mandatory}"
-                                    shortDesc="#{bindings.SubmitterId.hints.tooltip}" id="soc4">
-                    <f:selectItems value="#{bindings.SubmitterId.items}" id="si4"/>
-                </af:selectOneChoice>
-            </af:panelFormLayout>
+                        <af:selectOneChoice value="#{bindings.EmployeesViewForLOV.inputValue}"
+                                            label="申请人"
+                                            required="#{bindings.EmployeesViewForLOV.hints.mandatory}"
+                                            shortDesc="#{bindings.EmployeesViewForLOV.hints.tooltip}" id="soc4">
+                            <f:selectItems value="#{bindings.EmployeesViewForLOV.items}" id="si4"/>
+                        </af:selectOneChoice>
+                    </af:panelFormLayout>
             <f:facet name="context"/>
             <f:facet name="menuBar"/>
             <f:facet name="toolbar"/>
@@ -68,14 +72,14 @@
                             <!--<f:validator binding="#{row.bindings.OrderReadableId.validator}"/>-->
                         </af:inputText>
                     </af:column>
-                    <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.SubmitterId.name}" sortable="false"
-                               headerText="#{bindings.PurchaseOrdersView.hints.SubmitterId.label}" id="c2">
-                        <af:inputText value="#{row.bindings.SubmitterId.inputValue}"
-                                      label="#{bindings.PurchaseOrdersView.hints.SubmitterId.label}"
-                                      required="#{bindings.PurchaseOrdersView.hints.SubmitterId.mandatory}"
-                                      columns="#{bindings.PurchaseOrdersView.hints.SubmitterId.displayWidth}"
-                                      maximumLength="#{bindings.PurchaseOrdersView.hints.SubmitterId.precision}"
-                                      shortDesc="#{bindings.PurchaseOrdersView.hints.SubmitterId.tooltip}" id="it4" readOnly="true">
+                    <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.SubmitterName.name}" sortable="false"
+                               headerText="#{bindings.PurchaseOrdersView.hints.SubmitterName.label}" id="c22">
+                        <af:inputText value="#{row.bindings.SubmitterName.inputValue}"
+                                      label="#{bindings.PurchaseOrdersView.hints.SubmitterName.label}"
+                                      required="#{bindings.PurchaseOrdersView.hints.SubmitterName.mandatory}"
+                                      columns="#{bindings.PurchaseOrdersView.hints.SubmitterName.displayWidth}"
+                                      maximumLength="#{bindings.PurchaseOrdersView.hints.SubmitterName.precision}"
+                                      shortDesc="#{bindings.PurchaseOrdersView.hints.SubmitterName.tooltip}" id="it42" readOnly="true">
                             <!--<f:validator binding="#{row.bindings.SubmitterId.validator}"/>-->
                         </af:inputText>
                     </af:column>
@@ -108,8 +112,12 @@
                                         required="#{bindings.PurchaseOrdersView.hints.ItemCategoryId.mandatory}"
                                         shortDesc="#{bindings.PurchaseOrdersView.hints.ItemCategoryId.tooltip}"
                                         readOnly="true" id="soc7">
-                        <f:selectItems value="#{row.bindings.ItemCategoryId.items}" id="si7"/>
-                    </af:selectOneChoice>
+                          <f:selectItems value="#{row.bindings.ItemCategoryId.items}" id="si7"/>
+                        </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.LineCount.name}" sortable="false"
+                               headerText="#{bindings.PurchaseOrdersView.hints.LineCount.label}" id="c60">
+                        <af:outputText value="#{row.LineCount}" id="ot80"/>
                     </af:column>
                 </af:table>
             </af:panelCollection>
@@ -119,5 +127,8 @@
             <f:facet name="legend"/>
             <f:facet name="info"/>
         </af:panelHeader>
+        
     </af:panelGroupLayout>
+        </f:facet>
+      </af:panelStretchLayout> 
 </ui:composition>

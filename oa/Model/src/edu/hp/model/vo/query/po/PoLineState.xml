@@ -3,14 +3,14 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="Item"
+  Name="PoLineState"
   Version="11.1.2.62.76"
   SelectList="Lovs.ID, 
        Lovs.CODE, 
        Lovs.VALUE, 
-       Lovs.PARENT_CODE"
+       Lovs.FLEX_COL1"
   FromList="LOVS Lovs"
-  Where="Lovs.CODE = 'Item'"
+  Where="Lovs.CODE = 'PoLineState'"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
@@ -18,7 +18,7 @@
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.query.po.Item_LABEL"/>
+        ResId="edu.hp.model.vo.query.po.PoLineState_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <EntityUsage
@@ -44,17 +44,11 @@
     EntityUsage="Lovs"
     AliasName="VALUE"/>
   <ViewAttribute
-    Name="ParentCode"
+    Name="FlexCol1"
     PrecisionRule="true"
-    EntityAttrName="ParentCode"
+    EntityAttrName="FlexCol1"
     EntityUsage="Lovs"
-    AliasName="PARENT_CODE"/>
-  <ViewLinkAccessor
-    Name="ItemCategory"
-    ViewLink="edu.hp.model.vo.link.ItemCategoryToItemLink"
-    Type="oracle.jbo.Row"
-    Reversed="true"
-    IsUpdateable="false"/>
+    AliasName="FLEX_COL1"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

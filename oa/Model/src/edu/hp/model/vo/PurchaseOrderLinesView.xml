@@ -26,6 +26,31 @@
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_diagramName" Value="物品描述"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="PoLineState"
+    ViewObjectName="edu.hp.model.vo.query.po.PoLineState"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_State"
+    ListVOName="PoLineState"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="State"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexCol1"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="PurchaseOrderLines"
     Entity="edu.hp.model.eo.PurchaseOrderLines"/>
@@ -42,85 +67,225 @@
     PrecisionRule="true"
     EntityAttrName="ItemId"
     EntityUsage="PurchaseOrderLines"
-    AliasName="ITEM_ID"/>
+    AliasName="ITEM_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ItemId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ItemDescription"
     PrecisionRule="true"
     EntityAttrName="ItemDescription"
     EntityUsage="PurchaseOrderLines"
-    AliasName="ITEM_DESCRIPTION"/>
+    AliasName="ITEM_DESCRIPTION">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="物品描述"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ItemDescription_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="SubmitQuantity"
     PrecisionRule="true"
     EntityAttrName="SubmitQuantity"
     EntityUsage="PurchaseOrderLines"
-    AliasName="SUBMIT_QUANTITY"/>
+    AliasName="SUBMIT_QUANTITY">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="申请数量"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitQuantity_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="SubmitUnit"
     PrecisionRule="true"
     EntityAttrName="SubmitUnit"
     EntityUsage="PurchaseOrderLines"
-    AliasName="SUBMIT_UNIT"/>
+    AliasName="SUBMIT_UNIT">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="单位"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitUnit_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="SubmitPrice"
     PrecisionRule="true"
     EntityAttrName="SubmitPrice"
     EntityUsage="PurchaseOrderLines"
-    AliasName="SUBMIT_PRICE"/>
+    AliasName="SUBMIT_PRICE">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="预算单价"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitPrice_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="SubmitTotal"
     PrecisionRule="true"
     EntityAttrName="SubmitTotal"
     EntityUsage="PurchaseOrderLines"
-    AliasName="SUBMIT_TOTAL"/>
+    AliasName="SUBMIT_TOTAL">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="预算金额"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ExpectedDate"
     PrecisionRule="true"
     EntityAttrName="ExpectedDate"
     EntityUsage="PurchaseOrderLines"
-    AliasName="EXPECTED_DATE"/>
+    AliasName="EXPECTED_DATE">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="需求日期"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ExpectedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="SubmitNote"
     PrecisionRule="true"
     EntityAttrName="SubmitNote"
     EntityUsage="PurchaseOrderLines"
-    AliasName="SUBMIT_NOTE"/>
+    AliasName="SUBMIT_NOTE">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="申请备注"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitNote_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="State"
     PrecisionRule="true"
     EntityAttrName="State"
     EntityUsage="PurchaseOrderLines"
-    AliasName="STATE"/>
+    AliasName="STATE"
+    LOVName="LOV_State">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="行状态"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.State_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="PurchaseQuantity"
     PrecisionRule="true"
     EntityAttrName="PurchaseQuantity"
     EntityUsage="PurchaseOrderLines"
-    AliasName="PURCHASE_QUANTITY"/>
+    AliasName="PURCHASE_QUANTITY">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="采购数量"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.PurchaseQuantity_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ActualPrice"
     PrecisionRule="true"
     EntityAttrName="ActualPrice"
     EntityUsage="PurchaseOrderLines"
-    AliasName="ACTUAL_PRICE"/>
+    AliasName="ACTUAL_PRICE">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="实际单价"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ActualPrice_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ActualTotal"
     PrecisionRule="true"
     EntityAttrName="ActualTotal"
     EntityUsage="PurchaseOrderLines"
-    AliasName="ACTUAL_TOTAL"/>
+    AliasName="ACTUAL_TOTAL">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="实际金额"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ActualTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="VerifyNote"
     PrecisionRule="true"
     EntityAttrName="VerifyNote"
     EntityUsage="PurchaseOrderLines"
-    AliasName="VERIFY_NOTE"/>
+    AliasName="VERIFY_NOTE">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="审核备注"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.VerifyNote_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ReceiveQuantity"
     PrecisionRule="true"
     EntityAttrName="ReceiveQuantity"
     EntityUsage="PurchaseOrderLines"
-    AliasName="RECEIVE_QUANTITY"/>
+    AliasName="RECEIVE_QUANTITY">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="已接收数量"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ReceiveQuantity_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="OrderId"
     PrecisionRule="true"
@@ -133,4 +298,8 @@
     Type="oracle.jbo.Row"
     Reversed="true"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>
