@@ -181,6 +181,16 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
             }
         }
         ,
+        ItemCategoryId {
+            public Object get(PurchaseOrderLinesImpl obj) {
+                return obj.getItemCategoryId();
+            }
+
+            public void put(PurchaseOrderLinesImpl obj, Object value) {
+                obj.setItemCategoryId((String)value);
+            }
+        }
+        ,
         PurchaseOrder {
             public Object get(PurchaseOrderLinesImpl obj) {
                 return obj.getPurchaseOrder();
@@ -235,6 +245,7 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
     public static final int VERIFYNOTE = AttributesEnum.VerifyNote.index();
     public static final int RECEIVEQUANTITY = AttributesEnum.ReceiveQuantity.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
+    public static final int ITEMCATEGORYID = AttributesEnum.ItemCategoryId.index();
     public static final int PURCHASEORDER = AttributesEnum.PurchaseOrder.index();
 
     /**
@@ -505,6 +516,22 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
      */
     public void setOrderId(String value) {
         setAttributeInternal(ORDERID, value);
+    }
+
+    /**
+     * Gets the attribute value for ItemCategoryId, using the alias name ItemCategoryId.
+     * @return the value of ItemCategoryId
+     */
+    public String getItemCategoryId() {
+        return (String)getAttributeInternal(ITEMCATEGORYID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ItemCategoryId.
+     * @param value value to set the ItemCategoryId
+     */
+    public void setItemCategoryId(String value) {
+        setAttributeInternal(ITEMCATEGORYID, value);
     }
 
     /**

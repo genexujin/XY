@@ -6,6 +6,7 @@ import oracle.jbo.AttributeList;
 import oracle.jbo.Key;
 import oracle.jbo.RowIterator;
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Number;
 import oracle.jbo.domain.Timestamp;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
@@ -142,6 +143,16 @@ public class PurchaseOrdersImpl extends EntityImpl {
             }
         }
         ,
+        LineNum {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getLineNum();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setLineNum((Number)value);
+            }
+        }
+        ,
         Submitter {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitter();
@@ -212,6 +223,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
     public static final int VERIFYTOTAL = AttributesEnum.VerifyTotal.index();
     public static final int ORDERNOTE = AttributesEnum.OrderNote.index();
     public static final int ITEMCATEGORYID = AttributesEnum.ItemCategoryId.index();
+    public static final int LINENUM = AttributesEnum.LineNum.index();
     public static final int SUBMITTER = AttributesEnum.Submitter.index();
     public static final int PURCHASEORDERLINES = AttributesEnum.PurchaseOrderLines.index();
     public static final int PURCHASEORDERHISTORYS = AttributesEnum.PurchaseOrderHistorys.index();
@@ -420,6 +432,22 @@ public class PurchaseOrdersImpl extends EntityImpl {
      */
     public void setItemCategoryId(String value) {
         setAttributeInternal(ITEMCATEGORYID, value);
+    }
+
+    /**
+     * Gets the attribute value for LineNum, using the alias name LineNum.
+     * @return the value of LineNum
+     */
+    public oracle.jbo.domain.Number getLineNum() {
+        return (oracle.jbo.domain.Number)getAttributeInternal(LINENUM);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for LineNum.
+     * @param value value to set the LineNum
+     */
+    public void setLineNum(oracle.jbo.domain.Number value) {
+        setAttributeInternal(LINENUM, value);
     }
 
     /**

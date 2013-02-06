@@ -20,18 +20,21 @@
                 <af:selectOneChoice value="#{bindings.PoState.inputValue}" label="订单状态"
                                     required="#{bindings.PoState.hints.mandatory}"
                                     shortDesc="#{bindings.PoState.hints.tooltip}" id="soc1">
+                    <f:selectItem id="si11" itemLabel="" itemValue=""/>
                     <f:selectItems value="#{bindings.PoState.items}" id="si1"/>
                 </af:selectOneChoice>
                 <af:inputDate label="至" id="id2" columns="20" value="#{pageFlowScope.MyPoBean.submitDateTo}"/>
                 <af:selectOneChoice value="#{bindings.ItemCategory.inputValue}" label="采购类别"
                                     required="#{bindings.ItemCategory.hints.mandatory}"
                                     shortDesc="#{bindings.ItemCategory.hints.tooltip}" id="soc2">
+                    <f:selectItem id="si12" itemLabel="" itemValue=""/>
                     <f:selectItems value="#{bindings.ItemCategory.items}" id="si2"/>
                 </af:selectOneChoice>
                         <af:selectOneChoice value="#{bindings.EmployeesViewForLOV.inputValue}"
                                             label="申请人"
                                             required="#{bindings.EmployeesViewForLOV.hints.mandatory}"
-                                            shortDesc="#{bindings.EmployeesViewForLOV.hints.tooltip}" id="soc4">
+                                            shortDesc="#{bindings.EmployeesViewForLOV.hints.tooltip}" id="soc4" autoSubmit="true">
+                            <f:selectItem id="si13" itemLabel="" itemValue="aaaa"/>
                             <f:selectItems value="#{bindings.EmployeesViewForLOV.items}" id="si4"/>
                         </af:selectOneChoice>
                     </af:panelFormLayout>
@@ -115,9 +118,9 @@
                           <f:selectItems value="#{row.bindings.ItemCategoryId.items}" id="si7"/>
                         </af:selectOneChoice>
                     </af:column>
-                    <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.LineCount.name}" sortable="false"
-                               headerText="#{bindings.PurchaseOrdersView.hints.LineCount.label}" id="c60">
-                        <af:outputText value="#{row.LineCount}" id="ot80"/>
+                    <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.LineNum.name}" sortable="false"
+                               headerText="#{bindings.PurchaseOrdersView.hints.LineNum.label}" id="c60">
+                        <af:outputText value="#{row.LineNum}" id="ot80"/>
                     </af:column>
                 </af:table>
             </af:panelCollection>

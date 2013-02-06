@@ -180,6 +180,19 @@
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="ItemCategoryId"
+    Precision="80"
+    ColumnName="ITEM_CATEGORY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDER_LINES"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[PurchaseOrder.ItemCategoryId]]></TransientExpression>
+  </Attribute>
   <AccessorAttribute
     Name="PurchaseOrder"
     Association="edu.hp.model.eo.asso.PoPoLinesAssoc"

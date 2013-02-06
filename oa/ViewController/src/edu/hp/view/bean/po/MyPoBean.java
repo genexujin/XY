@@ -2,6 +2,8 @@ package edu.hp.view.bean.po;
 
 import edu.hp.view.utils.ADFUtils;
 
+import edu.hp.view.utils.JSFUtils;
+
 import java.math.BigDecimal;
 
 import java.sql.Date;
@@ -31,6 +33,8 @@ public class MyPoBean {
     }
 
     public String doQuery() {
+        Object expression = JSFUtils.resolveExpression("#{bindings.EmployeesViewForLOV.inputValue}");
+        System.out.println("Expression value is: " + expression);
         String poStateId = getLovAttrValue("PoState", "FlexCol1");
         System.out.println("PoState Id is: " + poStateId);
         String itemCategoryId = getLovAttrValue("ItemCategory", "Id");
@@ -190,6 +194,8 @@ public class MyPoBean {
     }
 
     public void itemCategoryChanged(ValueChangeEvent valueChangeEvent) {
+        DCIteratorBinding lbinding = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
+        lbinding.executeQuery();
 //        int newValue = (Integer)valueChangeEvent.getNewValue();
 //        System.out.println("Item category changed to: " + newValue);
 ////        long categoryId = newValue.getValue();

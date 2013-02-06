@@ -61,18 +61,18 @@
                           selectedRowKeys="#{bindings.PurchaseOrderLinesView.collectionModel.selectedRow}"
                           selectionListener="#{bindings.PurchaseOrderLinesView.collectionModel.makeCurrent}"
                           rowSelection="single" id="t1" partialTriggers="::ctb1 ::ctb2 :::soc3">
-                    <!--<af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemId.name}" sortable="false"
+                    <af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemId.name}" sortable="false"
                                headerText="#{bindings.PurchaseOrderLinesView.hints.ItemId.label}" id="c41">
                         <af:selectOneChoice value="#{row.bindings.ItemId.inputValue}" label="#{row.bindings.ItemId.label}"
                                             required="#{bindings.PurchaseOrderLinesView.hints.ItemId.mandatory}"
                                             shortDesc="#{bindings.PurchaseOrderLinesView.hints.ItemId.tooltip}" id="soc31">
                             <f:selectItems value="#{row.bindings.ItemId.items}" id="si31"/>
                         </af:selectOneChoice>
-                    </af:column>-->
-                    <af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemId.name}" sortable="false"
+                    </af:column>
+                    <!--<af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemId.name}" sortable="false"
                                headerText="#{bindings.PurchaseOrderLinesView.hints.ItemId.label}" id="c41">
                         <af:outputText value="#{row.ItemId}" id="ot2"/>
-                    </af:column>
+                    </af:column>-->
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ItemDescription.label}"
                                sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemDescription.name}"
                                sortable="false" id="c3">
