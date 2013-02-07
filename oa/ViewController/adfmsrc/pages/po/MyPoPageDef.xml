@@ -36,15 +36,7 @@
           <Item Value="VerifyTotal"/>
           <Item Value="ItemCategoryId"/>
           <Item Value="SubmitterName"/>
-        </AttrNames>
-        <Accessors>
-          <Item Value="PoLineCount"/>
-        </Accessors>
-      </nodeDefinition>
-      <nodeDefinition DefName="edu.hp.model.vo.query.po.PoLineCount" Name="PurchaseOrdersView1">
-        <AttrNames>
-          <Item Value="OrderId"/>
-          <Item Value="LineCount"/>
+          <Item Value="LineNum"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -60,24 +52,6 @@
       <NamedData NDName="submitDateTo" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="submitterId" NDType="java.lang.String"/>
     </methodAction>
-    <tree IterBinding="PurchaseOrdersViewIterator" id="PurchaseOrdersView1">
-      <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrdersView" Name="PurchaseOrdersView10">
-        <AttrNames>
-          <Item Value="OrderId"/>
-          <Item Value="OrderReadableId"/>
-          <Item Value="SubmitterId"/>
-          <Item Value="CreateBy"/>
-          <Item Value="CreateAt"/>
-          <Item Value="LastUpdatedBy"/>
-          <Item Value="LastUpdatedAt"/>
-          <Item Value="State"/>
-          <Item Value="SubmitTotal"/>
-          <Item Value="VerifyTotal"/>
-          <Item Value="OrderNote"/>
-          <Item Value="ItemCategoryId"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
     <list IterBinding="EmployeesViewForLOVIterator" ListOperMode="navigation" ListIter="EmployeesViewForLOVIterator"
           id="EmployeesViewForLOV" DTSupportsMRU="true" SelectItemValueMode="ListObject">
       <AttrNames>

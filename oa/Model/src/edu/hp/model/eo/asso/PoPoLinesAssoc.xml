@@ -13,7 +13,9 @@
     Cardinality="1"
     Source="true"
     Owner="edu.hp.model.eo.PurchaseOrders"
-    LockLevel="NONE">
+    LockLevel="NONE"
+    DeleteContainee="true"
+    CascadeUpdate="true">
     <DesignTime>
       <Attr Name="_aggregation" Value="0"/>
       <Attr Name="_finderName" Value="PurchaseOrder"/>
@@ -26,7 +28,8 @@
   <AssociationEnd
     Name="PurchaseOrderLines"
     Cardinality="-1"
-    Owner="edu.hp.model.eo.PurchaseOrderLines">
+    Owner="edu.hp.model.eo.PurchaseOrderLines"
+    HasOwner="true">
     <DesignTime>
       <Attr Name="_aggregation" Value="0"/>
       <Attr Name="_finderName" Value="PurchaseOrderLines"/>

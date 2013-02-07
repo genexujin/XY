@@ -27,6 +27,10 @@
     Name="locationId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="ItemCtgyId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="Lovs"
     Entity="edu.hp.model.eo.Lovs"/>
@@ -293,6 +297,44 @@
         Conjunction="AND"
         Value="Vehicle"
         Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="PoItemCriteria"
+    ViewObjectName="edu.hp.model.vo.LovsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LovsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ParentCode"
+        ViewAttribute="ParentCode"
+        Operator="="
+        Conjunction="AND"
+        Value=":ItemCtgyId"
+        IsBindVarValue="true"
+        Required="Required"
+        GenerateIsNullClauseForBindVars="false"
+        ValidateBindVars="true"/>
     </ViewCriteriaRow>
   </ViewCriteria>
 </ViewObject>

@@ -33,6 +33,18 @@
     Name="PoLineState"
     ViewObjectName="edu.hp.model.vo.query.po.PoLineState"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ItemLov"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemLov">
+    <ViewCriteriaUsage
+      Name="ItemLovCriteria"
+      FullName="edu.hp.model.vo.query.po.ItemLov.ItemLovCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="ItemCtgyId">
+        <TransientExpression><![CDATA[ItemCategoryId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_State"
     ListVOName="PoLineState"
@@ -42,6 +54,24 @@
     MRUCount="0">
     <AttrArray Name="AttrNames">
       <Item Value="State"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexCol1"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ItemId"
+    ListVOName="ItemLov"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ItemId"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
       <Item Value="FlexCol1"/>
@@ -67,11 +97,14 @@
     PrecisionRule="true"
     EntityAttrName="ItemId"
     EntityUsage="PurchaseOrderLines"
-    AliasName="ITEM_ID">
+    AliasName="ITEM_ID"
+    LOVName="LOV_ItemId">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrderLinesView.ItemId_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -292,6 +325,14 @@
     EntityAttrName="OrderId"
     EntityUsage="PurchaseOrderLines"
     AliasName="ORDER_ID"/>
+  <ViewAttribute
+    Name="ItemCategoryId"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="ItemCategoryId"
+    EntityUsage="PurchaseOrderLines"
+    AliasName="ITEM_CATEGORY"/>
   <ViewLinkAccessor
     Name="PurchaseOrder"
     ViewLink="edu.hp.model.vo.link.PoToPoLineLink"

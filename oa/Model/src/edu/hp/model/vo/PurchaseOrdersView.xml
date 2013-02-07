@@ -320,6 +320,14 @@
     EntityAttrName="LastName"
     EntityUsage="Employees"
     AliasName="LAST_NAME"/>
+  <ViewAttribute
+    Name="LineNum"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="LineNum"
+    EntityUsage="PurchaseOrders"
+    AliasName="LINE_COUNT"/>
   <ViewCriteria
     Name="OrderReadableIdCriteria"
     ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"

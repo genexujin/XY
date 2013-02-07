@@ -149,6 +149,23 @@
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="LineNum"
+    ColumnName="LINE_COUNT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[PurchaseOrderLines.count("OrderId")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.PurchaseOrders.LineNum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Submitter"
     Association="edu.hp.model.eo.asso.EmpPoAssoc"
@@ -180,4 +197,8 @@
       <Item Value="edu.hp.model.eo.PurchaseOrders.OrderId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>
