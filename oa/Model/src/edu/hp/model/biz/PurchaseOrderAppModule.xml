@@ -16,9 +16,6 @@
     Name="ItemCategory"
     ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"/>
   <ViewUsage
-    Name="Item"
-    ViewObjectName="edu.hp.model.vo.query.po.Item"/>
-  <ViewUsage
     Name="PurchaseOrderLinesView"
     ViewObjectName="edu.hp.model.vo.PurchaseOrderLinesView"/>
   <ViewUsage
@@ -30,12 +27,7 @@
   <ViewUsage
     Name="EmployeesViewForLOV"
     ViewObjectName="edu.hp.model.vo.EmployeesView"/>
-  <ViewLinkUsage
-    Name="ItemCategoryToItemLink"
-    ViewLinkObjectName="edu.hp.model.vo.link.ItemCategoryToItemLink"
-    SrcViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.ItemCategory"
-    DstViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.Item"
-    Reversed="false"/>
+ 
   <ViewLinkUsage
     Name="PoToPoLineLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"

@@ -61,11 +61,6 @@
     EntityAttrName="FlexCol1"
     EntityUsage="Lovs"
     AliasName="FLEX_COL1"/>
-  <ViewLinkAccessor
-    Name="Items"
-    ViewLink="edu.hp.model.vo.link.ItemCategoryToItemLink"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
