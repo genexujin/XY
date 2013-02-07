@@ -7,7 +7,7 @@
     <iterator id="UserNotificationsIterator" Binds="Root.HomeModule.UserNotifications"
               DataControl="RootAppModuleDataControl" RangeSize="25"/>
     <iterator id="UserTasksIterator" Binds="Root.HomeModule.UserTasks" DataControl="RootAppModuleDataControl"
-              RangeSize="25"/>
+              RangeSize="10"/>
   </executables>
   <bindings>
     <tree IterBinding="UserTasksIterator" id="UserTasks">
@@ -40,5 +40,22 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction IterBinding="UserTasksIterator" id="setForCompleted" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setForCompleted" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HomeModule.UserTasks"/>
+    <methodAction IterBinding="UserTasksIterator" id="setForPending" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setForPending" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HomeModule.UserTasks"/>
+    <methodAction IterBinding="UserNotificationsIterator" id="setForRead" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setForRead" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HomeModule.UserNotifications"/>
+    <methodAction IterBinding="UserNotificationsIterator" id="setForUnread" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setForUnread" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HomeModule.UserNotifications"/>
   </bindings>
+  <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
+    <event name="openTaskEvent" eventType="Action Event"/>
+  </events>
 </pageDefinition>

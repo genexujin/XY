@@ -61,6 +61,10 @@
     <page path="/WEB-INF/flows/home/home-btf.xml#home-btf@loadTasks"
           usageId="edu_hp_view_home_btf_home_btf_ExecuteWithParamsPageDef1"/>
     <page path="/pages/welcome/Home.jsff" usageId="edu_hp_view_HomePageDef1"/>
+    <page path="/WEB-INF/flows/home/home-btf.xml#home-btf@initDashboard"
+          usageId="edu_hp_view_home_btf_home_btf_initDashboardPageDef"/>
+    <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@queryByPK"
+          usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -112,6 +116,10 @@
     <page id="edu_hp_view_home_btf_home_btf_ExecuteWithParamsPageDef1"
           path="flows.home.home_btf_home_btf_ExecuteWithParamsPageDef1"/>
     <page id="edu_hp_view_HomePageDef1" path="pages.welcome.HomePageDef"/>
+    <page id="edu_hp_view_home_btf_home_btf_initDashboardPageDef"
+          path="flows.home.home_btf_home_btf_initDashboardPageDef"/>
+    <page id="edu_hp_view_vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"
+          path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

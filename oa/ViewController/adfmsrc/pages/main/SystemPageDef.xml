@@ -6,7 +6,8 @@
     <variableIterator id="variables"/>
     <page path="oracle.ui.pattern.dynamicShell.model.dynamicTabShellDefinition" id="ptb1" Refresh="ifNeeded"/>
     <taskFlow id="dynamicRegion1" taskFlowId="${viewScope.SystemBean.dynamicTaskFlowId}" activation="deferred"
-              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"
+              parametersMap="#{viewScope.SystemBean.parameters}"/>
     <iterator id="UserMenusIterator" Binds="Root.AdminModule.UserMenus" DataControl="RootAppModuleDataControl"
               RangeSize="25"/>
   </executables>

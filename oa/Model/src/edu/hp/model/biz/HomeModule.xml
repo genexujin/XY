@@ -5,7 +5,13 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="HomeModule"
   Version="11.1.2.62.76"
-  ClearCacheOnRollback="true">
+  ClearCacheOnRollback="true"
+  ComponentClass="edu.hp.model.biz.HomeModuleImpl"
+  ComponentInterface="edu.hp.model.biz.common.HomeModule"
+  ClientProxyName="edu.hp.model.biz.client.HomeModuleClient">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
@@ -28,4 +34,15 @@
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="initDashboard"
+      MethodName="initDashboard">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userName"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </AppModule>

@@ -44,16 +44,16 @@
       <property
          name="fromOutcome">success</property>
       <property
-         name="sdm:polyPoints">R50,266.35156,166.74707,409.0,171.24707,L50</property>
+         name="sdm:polyPoints">R50,266.35156,166.74707,409.0,167.74707,L46</property>
    </ControlFlowCase>
    <MethodCall
       id="MethodCall5">
       <property
          name="activityId">loadTasks</property>
       <property
-         name="start">true</property>
+         name="start">false</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>loadTasks&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>loadTasks&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
@@ -70,5 +70,53 @@
          name="fromOutcome">success</property>
       <property
          name="sdm:polyPoints">R50,67.35156,164.09766,184.35156,166.74707,L50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall7">
+      <property
+         name="activityId">initDashboard</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>initDashboard&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">301.1494</property>
+      <property
+         name="x">148.02246</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="MethodCall7"
+      to="View2">
+      <property
+         name="fromOutcome">initDashboard</property>
+      <property
+         name="sdm:polyPoints">R50,189.02246,300.79883,409.0,174.74707,L54</property>
+   </ControlFlowCase>
+   <ParentAction
+      id="ParentAction10">
+      <property
+         name="activityId">goToSystem</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>goToSystem&lt;/b>&lt;/p>&lt;p>Activity Type:  Parent Action&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">315.29883</property>
+      <property
+         name="x">459.0</property>
+   </ParentAction>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase11"
+      from="View2"
+      to="ParentAction10">
+      <property
+         name="fromOutcome">openTask</property>
+      <property
+         name="sdm:polyPoints">B50,450.0,225.24707,459.0,260.94824,T50</property>
    </ControlFlowCase>
 </SDM>

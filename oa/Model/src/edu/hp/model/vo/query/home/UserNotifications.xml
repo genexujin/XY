@@ -9,7 +9,9 @@
   CustomQuery="true"
   ComponentClass="edu.hp.model.vo.query.home.UserNotificationsImpl"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentInterface="edu.hp.model.vo.query.home.common.UserNotifications"
+  ClientProxyName="edu.hp.model.vo.query.home.client.UserNotificationsClient">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
     <Attr Name="_isExpertMode" Value="true"/>
@@ -199,4 +201,18 @@ ORDER BY notifications.event_date desc]]></SQLQuery>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="setForRead"
+      MethodName="setForRead">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
+      Name="setForUnread"
+      MethodName="setForUnread">
+      <Return
+        Type="void"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

@@ -3,7 +3,7 @@
                 id="home_btf_home_btf_ExecuteWithParamsPageDef1" Package="flows.home" SkipValidation="true">
   <parameters/>
   <executables>
-    <iterator Binds="UserTasks" RangeSize="25" DataControl="HomeModuleDataControl" id="UserTasksIterator"
+    <iterator Binds="UserTasks" RangeSize="10" DataControl="HomeModuleDataControl" id="UserTasksIterator"
               Refresh="never"/>
   </executables>
   <bindings>

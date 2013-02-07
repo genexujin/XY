@@ -163,5 +163,17 @@
                 <f:attribute name="navSplitterPosition" value="170"/>
             </af:pageTemplate>
         </af:form>
+        <af:clientListener method="initialize" type="load"/>
+        <f:facet name="metaContainer">
+        <af:group id="g1">
+         <script type="text/javascript">
+            function initialize(event) {
+                var source = event.getSource();
+                 AdfCustomEvent.queue(source,"launchDefaultTab",{},false);
+            }
+          </script>
+        </af:group>
+        </f:facet>
+        <af:serverListener type="launchDefaultTab" method="#{viewScope.SystemBean.launchDefaultTab}"/>
     </af:document>
 </f:view>
