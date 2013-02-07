@@ -9,5 +9,36 @@
     <iterator id="UserTasksIterator" Binds="Root.HomeModule.UserTasks" DataControl="RootAppModuleDataControl"
               RangeSize="25"/>
   </executables>
-  <bindings/>
+  <bindings>
+    <tree IterBinding="UserTasksIterator" id="UserTasks">
+      <nodeDefinition DefName="edu.hp.model.vo.query.home.UserTasks" Name="UserTasks0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="AssignedDate"/>
+          <Item Value="AssignedRoleId"/>
+          <Item Value="CompletionDate"/>
+          <Item Value="ContextObjectId"/>
+          <Item Value="ContextObjectType"/>
+          <Item Value="ExecutorDisplayName"/>
+          <Item Value="ExecutorId"/>
+          <Item Value="State"/>
+          <Item Value="Title"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="UserNotificationsIterator" id="UserNotifications">
+      <nodeDefinition DefName="edu.hp.model.vo.query.home.UserNotifications" Name="UserNotifications0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Category"/>
+          <Item Value="Content"/>
+          <Item Value="EventDate"/>
+          <Item Value="IsSmsSent"/>
+          <Item Value="State"/>
+          <Item Value="Title"/>
+          <Item Value="ToRoleId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
 </pageDefinition>

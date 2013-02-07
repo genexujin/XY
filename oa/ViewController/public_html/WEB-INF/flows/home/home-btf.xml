@@ -5,6 +5,11 @@
     <data-control-scope>
       <isolated/>
     </data-control-scope>
+    <managed-bean id="__5">
+      <managed-bean-name>HomeOperationBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.home.HomeOperationBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
     <view id="Home">
       <page>/pages/welcome/Home.jsff</page>
     </view>

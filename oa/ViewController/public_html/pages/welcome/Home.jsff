@@ -13,6 +13,17 @@
       <af:panelDashboard id="pd1" columns="2" rowHeight="250px">
         <af:panelBox text="待处理事项" id="pb1" background="medium" icon="/images/icons/actor.png">
           <f:facet name="toolbar"/>
+          <af:panelGroupLayout id="pgl1" layout="vertical">
+            <af:panelList id="pl2">
+              <af:iterator id="i1" value="#{bindings.UserTasks.collectionModel}" var="task" rows="10">
+                <af:commandImageLink id="ot4" text="#{task.Title}"
+                                     action="#{viewScope.HomeOperationBean.goToTaskPage}">
+                  <af:clientAttribute value="#{task.ContextObjectId}" name="contextObjectId"/>
+                  <af:clientAttribute value="#{task.ContextObjectType}" name="contextObjectType"/>
+                </af:commandImageLink>
+              </af:iterator>
+            </af:panelList>
+          </af:panelGroupLayout>
         </af:panelBox>
         <af:panelBox text="个人消息" id="pb2" background="medium" icon="/images/icons/envelope.png">
           <f:facet name="toolbar"/>
