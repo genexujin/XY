@@ -37,6 +37,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Notifications.Category_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Priority"
@@ -48,6 +54,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Notifications.Priority_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Title"
@@ -60,6 +72,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Notifications.Title_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Content"
@@ -72,6 +90,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="2000"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Notifications.Content_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="EventDate"
@@ -79,7 +103,14 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="NOTIFICATIONS"/>
+    TableName="NOTIFICATIONS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Notifications.EventDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="IsSmsSent"
     Precision="1"
@@ -91,6 +122,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Notifications.IsSmsSent_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ToRoleId"
@@ -100,6 +137,19 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="NOTIFICATIONS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="State"
+    Precision="20"
+    ColumnName="STATE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NOTIFICATIONS">
+    <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_NOTE_UNREAD]]></TransientExpression>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -114,4 +164,8 @@
       <Item Value="edu.hp.model.eo.Notifications.Id"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

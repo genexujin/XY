@@ -37,6 +37,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="500"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Tasks.Title_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="AssignedDate"
@@ -44,7 +50,14 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="TASKS"/>
+    TableName="TASKS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Tasks.AssignedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="State"
     Precision="20"
@@ -53,9 +66,16 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="TASKS">
+    <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_TASK_PENDING]]></TransientExpression>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Tasks.State_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="ContextObjectType"
@@ -99,7 +119,14 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="TASKS"/>
+    TableName="TASKS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Tasks.CompletionDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="ExecutorId"
     Precision="20"
@@ -123,6 +150,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Tasks.ExecutorDisplayName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Key
     Name="TasksPk"
@@ -134,4 +167,8 @@
       <Item Value="edu.hp.model.eo.Tasks.Id"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

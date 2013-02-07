@@ -50,8 +50,8 @@
                 <f:facet name="innerToolbar"/>
                 <f:attribute name="tooManyTabsPopupText" value="您已打开太多标签页。您需要关闭一些，然后才能打开新的标签页。"/>
                 <f:attribute name="tooManyTabsPopupTitle" value="打开太多标签页"/>
-                <f:attribute name="legalAreaPosition" value="12"/>
-                <f:attribute name="headerSplitterPosition" value="25"/>
+                <f:attribute name="legalAreaPosition" value="14"/>
+                <f:attribute name="headerSplitterPosition" value="30"/>
                 <f:attribute name="globalAreaSplitterPosition" value="0"/>
                 <f:attribute name="dirtyTabPopupTitle" value="当前标签有未保存的数据"/>
                 <f:attribute name="dirtyTabPopupText" value="当前标签有未保存的数据，确定离开吗？"/>

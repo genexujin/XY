@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UserTasks"
+  Version="11.1.2.62.76"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.query.home.UserTasks_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="userName"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="state"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select distinct tasks.id id,
+tasks.title title,
+tasks.assigned_date assigned_date,
+tasks.assignee_role_id assigned_role_id,
+tasks.state state,
+tasks.context_object_id context_object_id,
+tasks.context_object_type context_object_type,
+tasks.completion_date completion_date,
+tasks.executor_display_name executor_display_name,
+tasks.executor_id executor_id
+from
+employees,tasks,roles,role_users
+where
+employees.id = role_users.user_id
+and role_users.role_id = roles.role_id
+and roles.role_id = tasks.assignee_role_id
+and employees.user_name = :userName
+ORDER BY tasks.assigned_date desc]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Title"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TITLE"
+    Expression="TITLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AssignedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="ASSIGNED_DATE"
+    Expression="ASSIGNED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="AssignedRoleId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ASSIGNED_ROLE_ID"
+    Expression="ASSIGNED_ROLE_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="State"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATE"
+    Expression="STATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContextObjectId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONTEXT_OBJECT_ID"
+    Expression="CONTEXT_OBJECT_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContextObjectType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONTEXT_OBJECT_TYPE"
+    Expression="CONTEXT_OBJECT_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CompletionDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="COMPLETION_DATE"
+    Expression="COMPLETION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ExecutorDisplayName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXECUTOR_DISPLAY_NAME"
+    Expression="EXECUTOR_DISPLAY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExecutorId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXECUTOR_ID"
+    Expression="EXECUTOR_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="findByState"
+    ViewObjectName="edu.hp.model.vo.query.home.UserTasks"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="UserTasksCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="State"
+        ViewAttribute="State"
+        Operator="="
+        Conjunction="AND"
+        Value=":state"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="home-btf">
+    <default-activity>loadTasks</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <view id="Home">
+      <page>/pages/welcome/Home.jsff</page>
+    </view>
+    <method-call id="loadNotifications">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>success</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="loadTasks">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>success</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>loadNotifications</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>success</from-outcome>
+        <to-activity-id>Home</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>loadTasks</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>success</from-outcome>
+        <to-activity-id>loadNotifications</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

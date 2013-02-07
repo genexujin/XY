@@ -56,6 +56,11 @@
     <page path="/pages/admin/Roles.jsff" usageId="edu_hp_view_RolesPageDef"/>
     <page path="/pages/admin/RoleMenus.jsff" usageId="edu_hp_view_RoleMenusPageDef"/>
     <page path="/pages/admin/EmployeeRoles.jsff" usageId="edu_hp_view_EmployeeRolesPageDef"/>
+    <page path="/WEB-INF/flows/home/home-btf.xml#home-btf@loadNotifications"
+          usageId="edu_hp_view_home_btf_home_btf_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/flows/home/home-btf.xml#home-btf@loadTasks"
+          usageId="edu_hp_view_home_btf_home_btf_ExecuteWithParamsPageDef1"/>
+    <page path="/pages/welcome/Home.jsff" usageId="edu_hp_view_HomePageDef1"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -102,6 +107,11 @@
     <page id="edu_hp_view_RolesPageDef" path="pages.admin.RolesPageDef"/>
     <page id="edu_hp_view_RoleMenusPageDef" path="pages.admin.RoleMenusPageDef"/>
     <page id="edu_hp_view_EmployeeRolesPageDef" path="pages.admin.EmployeeRolesPageDef"/>
+    <page id="edu_hp_view_home_btf_home_btf_ExecuteWithParamsPageDef"
+          path="flows.home.home_btf_home_btf_ExecuteWithParamsPageDef"/>
+    <page id="edu_hp_view_home_btf_home_btf_ExecuteWithParamsPageDef1"
+          path="flows.home.home_btf_home_btf_ExecuteWithParamsPageDef1"/>
+    <page id="edu_hp_view_HomePageDef1" path="pages.welcome.HomePageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"
@@ -123,6 +133,11 @@
                      FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
                      SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
                      SupportsSortCollection="true" Configuration="HelpdeskCallsAppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="HomeModuleDataControl" Package="edu.hp.model.biz"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="HomeModuleLocal" syncMode="Immediate"
                      xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
   </dataControlUsages>
 </Application>

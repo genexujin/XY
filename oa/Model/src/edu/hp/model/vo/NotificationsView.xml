@@ -12,7 +12,8 @@
        Notifications.EVENT_DATE, 
        Notifications.IS_SMS_SENT, 
        Notifications.TO_ROLE_ID, 
-       Notifications.PRIORITY"
+       Notifications.PRIORITY, 
+       Notifications.STATE"
   FromList="NOTIFICATIONS Notifications"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -33,7 +34,8 @@
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Notifications"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="Category"
     PrecisionRule="true"
@@ -76,4 +78,10 @@
     EntityAttrName="Priority"
     EntityUsage="Notifications"
     AliasName="PRIORITY"/>
+  <ViewAttribute
+    Name="State"
+    PrecisionRule="true"
+    EntityAttrName="State"
+    EntityUsage="Notifications"
+    AliasName="STATE"/>
 </ViewObject>

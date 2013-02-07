@@ -101,6 +101,16 @@ public class NotificationsViewRowImpl extends ViewRowImpl {
                 obj.setPriority((BigDecimal)value);
             }
         }
+        ,
+        State {
+            public Object get(NotificationsViewRowImpl obj) {
+                return obj.getState();
+            }
+
+            public void put(NotificationsViewRowImpl obj, Object value) {
+                obj.setState((String)value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -138,6 +148,7 @@ public class NotificationsViewRowImpl extends ViewRowImpl {
     public static final int ISSMSSENT = AttributesEnum.IsSmsSent.index();
     public static final int TOROLEID = AttributesEnum.ToRoleId.index();
     public static final int PRIORITY = AttributesEnum.Priority.index();
+    public static final int STATE = AttributesEnum.State.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -281,6 +292,22 @@ public class NotificationsViewRowImpl extends ViewRowImpl {
      */
     public void setPriority(BigDecimal value) {
         setAttributeInternal(PRIORITY, value);
+    }
+
+    /**
+     * Gets the attribute value for STATE using the alias name State.
+     * @return the STATE
+     */
+    public String getState() {
+        return (String) getAttributeInternal(STATE);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for STATE using the alias name State.
+     * @param value value to set the STATE
+     */
+    public void setState(String value) {
+        setAttributeInternal(STATE, value);
     }
 
     /**

@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">Home</property>
+      <property
+         name="page">/pages/welcome/Home.jsff</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Home&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">171.59766</property>
+      <property
+         name="x">450.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">loadNotifications</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>loadNotifications&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">167.09766</property>
+      <property
+         name="x">225.35156</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View2">
+      <property
+         name="fromOutcome">success</property>
+      <property
+         name="sdm:polyPoints">R50,266.35156,166.74707,409.0,171.24707,L50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall5">
+      <property
+         name="activityId">loadTasks</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>loadTasks&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">164.44824</property>
+      <property
+         name="x">26.351562</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="MethodCall5"
+      to="MethodCall3">
+      <property
+         name="fromOutcome">success</property>
+      <property
+         name="sdm:polyPoints">R50,67.35156,164.09766,184.35156,166.74707,L50</property>
+   </ControlFlowCase>
+</SDM>

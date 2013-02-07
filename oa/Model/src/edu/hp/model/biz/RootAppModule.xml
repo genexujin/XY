@@ -44,6 +44,10 @@
     Name="PurchaseOrderAppModule"
     FullName="edu.hp.model.biz.PurchaseOrderAppModule"
     SharedScope="0"/>
+  <AppModuleUsage
+    Name="HomeModule"
+    FullName="edu.hp.model.biz.HomeModule"
+    SharedScope="0"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

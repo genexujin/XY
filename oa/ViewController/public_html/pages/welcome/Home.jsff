@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelSplitter id="psl1" orientation="vertical" splitterPosition="60">
+    <f:facet name="first">
+      <af:panelList id="pl1">
+        <af:outputText value="欢迎使用本系统！" id="ot1"/>
+        <af:outputText value="单击下面的链接可以直接导航到相关业务界面。" id="ot2"/>
+        <af:outputText value="用户可修改登录密码" id="ot3"/>
+      </af:panelList>
+    </f:facet>
+    <f:facet name="second">
+      <af:panelDashboard id="pd1" columns="2" rowHeight="250px">
+        <af:panelBox text="待处理事项" id="pb1" background="medium" icon="/images/icons/actor.png">
+          <f:facet name="toolbar"/>
+        </af:panelBox>
+        <af:panelBox text="修改密码" id="pb3" background="medium" icon="/images/icons/key.png">
+          <f:facet name="toolbar"/>
+        </af:panelBox>
+        <af:panelBox text="个人消息" id="pb2" background="medium" icon="/images/icons/envelope.png">
+          <f:facet name="toolbar"/>
+        </af:panelBox>
+      </af:panelDashboard>
+    </f:facet>
+  </af:panelSplitter>
+</ui:composition>

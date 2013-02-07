@@ -10,4 +10,8 @@ public class Constants {
     public static final String STATE_CANCELED="已取消";
     public static final String STATE_PENDING_APPROVAL="待审批";
     public static final String STATE_TRIP_PLANNED="已调度";
+    public static final String STATE_NOTE_UNREAD="UNREAD";
+    public static final String STATE_NOTE_READ="READ";
+    public static final String STATE_TASK_PENDING="PENDING";
+    public static final String STATE_TASK_COMPLETED="COMPLETED";
 }
