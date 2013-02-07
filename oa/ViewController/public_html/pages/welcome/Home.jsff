@@ -14,9 +14,6 @@
         <af:panelBox text="待处理事项" id="pb1" background="medium" icon="/images/icons/actor.png">
           <f:facet name="toolbar"/>
         </af:panelBox>
-        <af:panelBox text="修改密码" id="pb3" background="medium" icon="/images/icons/key.png">
-          <f:facet name="toolbar"/>
-        </af:panelBox>
         <af:panelBox text="个人消息" id="pb2" background="medium" icon="/images/icons/envelope.png">
           <f:facet name="toolbar"/>
         </af:panelBox>
