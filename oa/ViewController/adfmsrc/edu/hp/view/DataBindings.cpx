@@ -24,8 +24,7 @@
     <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@Create"
           usageId="edu_hp_view_MyHdCall_MyHdCall_CreatePageDef"/>
     <page path="/pages/helpdesk/CreateHelpdeskCall.jsff" usageId="edu_hp_view_CreateHelpdeskCallPageDef"/>
-    <page path="/WEB-INF/flows/confRm/confRm-calendar-btf.xml#confRm-calendar-btf@newRow"
-          usageId="edu_hp_view_confRm_calendar_btf_confRm_calendar_btf_newRowPageDef"/>
+   
     <page path="/WEB-INF/flows/confRm/confRm-calendar-btf.xml#confRm-calendar-btf@CreateWithParameters"
           usageId="edu_hp_view_confRm_calendar_btf_confRm_calendar_btf_CreateWithParametersPageDef"/>
     <page path="/pages/confRm/ConfRmActivity.jsff" usageId="edu_hp_view_ConfRmActivityPageDef"/>
