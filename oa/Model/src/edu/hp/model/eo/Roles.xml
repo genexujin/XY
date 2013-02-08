@@ -9,7 +9,12 @@
   DBObjectName="ROLES"
   AliasName="Roles"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.eo.RolesImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="RoleId"
     ColumnName="ROLE_ID"
@@ -98,7 +103,8 @@
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
     TableName="ROLES"
-    HistoryColumn="DateHistory"/>
+    HistoryColumn="DateHistory"
+    RetrievedOnUpdate="true"/>
   <Attribute
     Name="LastUpdatedBy"
     Precision="20"
@@ -108,6 +114,19 @@
     ColumnType="VARCHAR2"
     TableName="ROLES"
     IsQueriable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Expired"
+    Precision="20"
+    ColumnName="EXPIRED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="ROLES"
+    DefaultValue="N">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>

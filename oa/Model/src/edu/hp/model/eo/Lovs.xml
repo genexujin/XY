@@ -10,7 +10,11 @@
   AliasName="Lovs"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  RowClass="edu.hp.model.common.BaseEntity">
+  RowClass="edu.hp.model.eo.LovsImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -112,7 +116,8 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="LOVS"/>
+    TableName="LOVS"
+    RetrievedOnUpdate="true"/>
   <Attribute
     Name="FlexCol1"
     Precision="200"
@@ -147,6 +152,19 @@
     TableName="LOVS">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Expired"
+    Precision="20"
+    ColumnName="EXPIRED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOVS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
   <AccessorAttribute

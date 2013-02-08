@@ -3,42 +3,71 @@ package edu.hp.view.bean.clsrm;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.domain.DBSequence;
+
 
 public class ClsRmBatchBean {
+    
+    private RichPopup updateConfirmPopup;
+
     public ClsRmBatchBean() {
     }
 
     public void onDelConfirm(DialogEvent dialogEvent) {
-        if(dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)){
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             OperationBinding binding = ADFUtils.findOperation("deleteCurrentBatchOrder");
             binding.execute();
-            if(binding.getErrors().isEmpty()){
+            if (binding.getErrors().isEmpty()) {
                 JSFUtils.addFacesInformationMessage("批量预订已成功删除！");
-            }else{
+            } else {
                 JSFUtils.addFacesInformationMessage("无法进行批量预订操作，请联系管理员！");
             }
         }
     }
 
     public String saveBatch() {
+        DBSequence id = (DBSequence)ADFUtils.getBoundAttributeValue("Id");
         
-       
+        if (id != null && new Integer(id.toString()) > 0){
+            RichPopup.PopupHints hints = new RichPopup.PopupHints();
+            updateConfirmPopup.show(hints);
+        }else{
+            _saveBatch();
+        }
+        
+        return null;
+    }
+
+    private void _saveBatch() {
         OperationBinding binding = ADFUtils.findOperation("saveBatchOrders");
         binding.execute();
-        if(binding.getErrors().isEmpty()){
-            if((Boolean)binding.getResult()){
+        if (binding.getErrors().isEmpty()) {
+            if ((Boolean)binding.getResult()) {
                 JSFUtils.addFacesInformationMessage("批量预订已完成，但部分预订和已有预订有冲突，请自行检查并修正！");
-            }else{
+            } else {
                 JSFUtils.addFacesInformationMessage("批量预订已完成！");
             }
-        }else{
+        } else {
             JSFUtils.addFacesErrorMessage("无法完成批量预订，请联系系统管理员！");
         }
-     
-        return null;
+    }
+
+    public void onBatchUpdateConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            _saveBatch();
+        }
+    }
+
+    public void setUpdateConfirmPopup(RichPopup updateConfirmPopup) {
+        this.updateConfirmPopup = updateConfirmPopup;
+    }
+
+    public RichPopup getUpdateConfirmPopup() {
+        return updateConfirmPopup;
     }
 }

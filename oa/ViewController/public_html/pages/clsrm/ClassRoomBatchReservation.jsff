@@ -30,6 +30,18 @@
                         </af:toolbar>
                     </f:facet>
                     <f:facet name="statusbar"/>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="p2" contentDelivery="lazyUncached"
+                              binding="#{viewScope.ClsRmBatchBean.updateConfirmPopup}">
+                        <af:dialog id="d2" closeIconVisible="false" title="更新批量预订确认"
+                                   dialogListener="#{viewScope.ClsRmBatchBean.onBatchUpdateConfirm}">
+                            <f:facet name="buttonBar"/>
+                            <af:panelGroupLayout id="pgl2" layout="horizontal" inlineStyle="width:300px;">
+                                <af:icon name="warning" id="i2"/>
+                                <af:outputText value="更新批量预订将会同时更新所有相关的预订记录，包括已经单独变更的预订记录，确认要更新批号为#{bindings.BatchNo.inputValue} 的批量预订吗？"
+                                               id="ot12" styleClass="AFFieldText"/>
+                            </af:panelGroupLayout>
+                        </af:dialog>
+                    </af:popup>
                     <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached">
                         <af:dialog id="d1" closeIconVisible="false" title="删除批量预订确认"
                                    dialogListener="#{viewScope.ClsRmBatchBean.onDelConfirm}">
@@ -70,7 +82,8 @@
                                    filterable="true" sortable="true"
                                    headerText="#{bindings.ClsRmBtchRsvtnView.hints.ActStartTime.label}" id="c4">
                             <af:outputText value="#{row.ActStartTime}" id="ot4">
-                                <af:convertDateTime pattern="#{bindings.ClsRmBtchRsvtnView.hints.ActStartTime.format}"/>
+                                <af:convertDateTime pattern="#{bindings.ClsRmBtchRsvtnView.hints.ActStartTime.format}"
+                                                    type="time"/>
                             </af:outputText>
                             <f:facet name="filter">
                                 <af:inputDate value="#{vs.filterCriteria.ActStartTime}" id="id3">
@@ -82,7 +95,8 @@
                                    sortable="true" headerText="#{bindings.ClsRmBtchRsvtnView.hints.ActEndTime.label}"
                                    id="c5">
                             <af:outputText value="#{row.ActEndTime}" id="ot5">
-                                <af:convertDateTime pattern="#{bindings.ClsRmBtchRsvtnView.hints.ActEndTime.format}"/>
+                                <af:convertDateTime pattern="#{bindings.ClsRmBtchRsvtnView.hints.ActEndTime.format}"
+                                                    type="time"/>
                             </af:outputText>
                             <f:facet name="filter">
                                 <af:inputDate value="#{vs.filterCriteria.ActEndTime}" id="id4">
@@ -162,158 +176,48 @@
         </f:facet>
         <f:facet name="second">
             <!-- id="af_one_column_header_scroll_with_splitter"   -->
-            <af:panelStretchLayout id="pgl1" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="0px">
+            <af:panelStretchLayout id="pgl1" startWidth="0px" endWidth="0px" topHeight="80px" bottomHeight="0px">
                 <f:facet name="center">
                     
-                        <af:panelHeader text="批量预订明细" id="ph2" type="stretch">
-                            <f:facet name="context"/>
-                            <f:facet name="menuBar"/>
-                            <f:facet name="toolbar"/>
-                            <f:facet name="legend"/>
-                            <f:facet name="info"/>
-                            <af:separator id="s16"/>
-                        <af:panelGroupLayout id="pgl7" layout="horizontal">
-                            <af:commandButton text="保存" id="cb1" icon="/images/icons/filesave.png"
-                                              action="#{viewScope.ClsRmBatchBean.saveBatch}"/>
-                            <af:commandButton actionListener="#{bindings.Rollback.execute}" text="取消" immediate="true" id="cb2"
-                                              icon="/images/icons/undo.png" disabled="#{!bindings.Rollback.enabled}">
-                                <af:resetActionListener/>
-                            </af:commandButton>
-                        </af:panelGroupLayout>
-                            <af:spacer width="10" height="10" id="s17"/>
-                            <af:panelGroupLayout id="pgl2" layout="horizontal" valign="top">
-                                <af:panelGroupLayout id="pgl5" layout="vertical">
-                                    <af:outputText value="预订信息：" id="ot29" inlineStyle="font-size:small;"/>
-                                    <af:panelFormLayout id="pfl1" maxColumns="2" rows="1">
-                                        <f:facet name="footer"/>
-                                        <af:inputText value="#{bindings.BatchNo.inputValue}"
-                                                      label="#{bindings.BatchNo.hints.label}"
-                                                      required="#{bindings.BatchNo.hints.mandatory}"
-                                                      columns="#{bindings.BatchNo.hints.displayWidth}"
-                                                      maximumLength="#{bindings.BatchNo.hints.precision}"
-                                                      shortDesc="#{bindings.BatchNo.hints.tooltip}" id="it1"
-                                                      autoSubmit="true" readOnly="true" disabled="false"
-                                                      contentStyle="color:Black;font-weight:bold;">
-                                            <f:validator binding="#{bindings.BatchNo.validator}"/>
-                                        </af:inputText>
-                                    <af:inputText value="#{bindings.ActTitle.inputValue}"
-                                                      label="#{bindings.ActTitle.hints.label}"
-                                                      required="#{bindings.ActTitle.hints.mandatory}"
-                                                      columns="#{bindings.ActTitle.hints.displayWidth}"
-                                                      maximumLength="#{bindings.ActTitle.hints.precision}"
-                                                      shortDesc="#{bindings.ActTitle.hints.tooltip}" id="it2"
-                                                      autoSubmit="true" contentStyle="width:150px;">
-                                            <f:validator binding="#{bindings.ActTitle.validator}"/>
-                                        </af:inputText>
-                                        <af:inputComboboxListOfValues id="userDisplayNameId"
-                                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
-                                                                      value="#{bindings.UserDisplayName.inputValue}"
-                                                                      label="#{bindings.UserDisplayName.hints.label}"
-                                                                      model="#{bindings.UserDisplayName.listOfValuesModel}"
-                                                                      required="#{bindings.UserDisplayName.hints.mandatory}"
-                                                                      columns="#{bindings.UserDisplayName.hints.displayWidth}"
-                                                                      shortDesc="#{bindings.UserDisplayName.hints.tooltip}"
-                                                                      autoSubmit="true" contentStyle="width:150px;">
-                                            <f:validator binding="#{bindings.UserDisplayName.validator}"/>
-                                        </af:inputComboboxListOfValues>
-                                        <af:selectOneChoice value="#{bindings.LocationName.inputValue}"
-                                                            label="#{bindings.LocationName.label}"
-                                                            required="#{bindings.LocationName.hints.mandatory}"
-                                                            shortDesc="#{bindings.LocationName.hints.tooltip}" id="soc3"
-                                                            autoSubmit="true" contentStyle="width:150px;">
-                                            <f:selectItems value="#{bindings.LocationName.items}" id="si3"/>
-                                        </af:selectOneChoice>
-                                    <af:selectOneChoice value="#{bindings.Classroom.inputValue}"
-                                                            label="#{bindings.Classroom.label}"
-                                                            required="#{bindings.Classroom.hints.mandatory}"
-                                                            shortDesc="#{bindings.Classroom.hints.tooltip}" id="soc4"
-                                                            partialTriggers="soc3" autoSubmit="true"
-                                                        contentStyle="width:150px;">
-                                            <f:selectItems value="#{bindings.Classroom.items}" id="si4"/>
-                                        </af:selectOneChoice>
-                                        <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
-                                                               label="#{bindings.NumOfPeople.hints.label}"
-                                                               required="#{bindings.NumOfPeople.hints.mandatory}"
-                                                               columns="#{bindings.NumOfPeople.hints.displayWidth}"
-                                                               shortDesc="#{bindings.NumOfPeople.hints.tooltip}"
-                                                               id="it4" autoSubmit="true">
-                                            <f:validator binding="#{bindings.NumOfPeople.validator}"/>
-                                        </af:inputNumberSpinbox>
-                                    <af:selectOneRadio required="#{bindings.AllDay.hints.mandatory}"
-                                                       label="#{bindings.AllDay.hints.label}" id="sor1"
-                                                       value="#{bindings.AllDay.inputValue}" layout="horizontal"
+                        <af:panelStretchLayout id="psl1" startWidth="500px" endWidth="0px" topHeight="0px"
+                                               bottomHeight="0px">
+                            <f:facet name="bottom"/>
+                            <f:facet name="center">
+                            <af:panelGroupLayout id="pgl6" layout="scroll"
+                                                 inlineStyle="border-style:dotted; height:150px;padding:5px 5px 5px 5px;">
+                                <af:outputText value="重复选项：" id="ot26" inlineStyle="font-size:small;"/>
+                                <af:panelFormLayout id="pfl2" rows="1" maxColumns="2">
+                                    <af:inputDate value="#{bindings.BatchEffectiveDate.inputValue}"
+                                                  label="#{bindings.BatchEffectiveDate.hints.label}"
+                                                  required="#{bindings.BatchEffectiveDate.hints.mandatory}"
+                                                  columns="#{bindings.BatchEffectiveDate.hints.displayWidth}"
+                                                  shortDesc="#{bindings.BatchEffectiveDate.hints.tooltip}" id="id7"
+                                                  autoSubmit="true">
+                                        <f:validator binding="#{bindings.BatchEffectiveDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.BatchEffectiveDate.format}"
+                                                            type="date"/>
+                                    </af:inputDate>
+                                    <af:inputDate value="#{bindings.BatchExpireDate.inputValue}"
+                                                  label="#{bindings.BatchExpireDate.hints.label}"
+                                                  required="#{bindings.BatchExpireDate.hints.mandatory}"
+                                                  columns="#{bindings.BatchExpireDate.hints.displayWidth}"
+                                                  shortDesc="#{bindings.BatchExpireDate.hints.tooltip}" id="id8"
+                                                  autoSubmit="true">
+                                        <f:validator binding="#{bindings.BatchExpireDate.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.BatchExpireDate.format}" type="date"/>
+                                    </af:inputDate>
+                                    <af:selectOneRadio required="#{bindings.RecurrenceType.hints.mandatory}"
+                                                       label="#{bindings.RecurrenceType.hints.label}" id="sor2"
+                                                       value="#{bindings.RecurrenceType.inputValue}" layout="horizontal"
                                                        autoSubmit="true" immediate="false">
-                                        <af:selectItem label="全天" value="ALLDAY" id="si5"/>
-                                        <af:selectItem label="非全天" value="TIME" id="si6"/>
+                                        <af:selectItem label="每周" value="WEEKLY" id="si7"/>
+                                        <af:selectItem label="每两周" value="FORTNIGHTLY" id="si8"/>
                                     </af:selectOneRadio>
-                                    <af:inputDate value="#{bindings.ActStartTime.inputValue}"
-                                                  label="#{bindings.ActStartTime.hints.label}"
-                                                  required="#{bindings.ActStartTime.hints.mandatory}"
-                                                  columns="#{bindings.ActStartTime.hints.displayWidth}"
-                                                  shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id5"
-                                                  partialTriggers="sor1" autoSubmit="true"
-                                                  disabled="#{bindings.AllDay.inputValue!='TIME'}">
-                                        <f:validator binding="#{bindings.ActStartTime.validator}"/>
-                                        <af:convertDateTime pattern="#{bindings.ActStartTime.format}" type="time"/>
-                                    </af:inputDate>
-                                    <af:inputDate value="#{bindings.ActEndTime.inputValue}"
-                                                  label="#{bindings.ActEndTime.hints.label}"
-                                                  required="#{bindings.ActEndTime.hints.mandatory}"
-                                                  columns="#{bindings.ActEndTime.hints.displayWidth}"
-                                                  shortDesc="#{bindings.ActEndTime.hints.tooltip}" id="id6"
-                                                  partialTriggers="sor1"
-                                                  autoSubmit="true" disabled="#{bindings.AllDay.inputValue!='TIME'}">
-                                        <f:validator binding="#{bindings.ActEndTime.validator}"/>
-                                        <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="time"/>
-                                    </af:inputDate>
-                                    <af:inputText value="#{bindings.Comments.inputValue}"
-                                                      label="#{bindings.Comments.hints.label}"
-                                                      required="#{bindings.Comments.hints.mandatory}"
-                                                      columns="#{bindings.Comments.hints.displayWidth}"
-                                                      maximumLength="#{bindings.Comments.hints.precision}"
-                                                      shortDesc="#{bindings.Comments.hints.tooltip}" id="it5"
-                                                      autoSubmit="true" rows="2" contentStyle="width:200px;">
-                                            <f:validator binding="#{bindings.Comments.validator}"/>
-                                        </af:inputText>
-                                    </af:panelFormLayout>
-                                </af:panelGroupLayout>
-                                <af:spacer width="30" height="10" id="s1"/>
-                                <af:panelGroupLayout id="pgl6" layout="vertical"
-                                                     inlineStyle="border-style:dotted; height:180px; padding:5px 5px 5px 5px;">
-                                    <af:outputText value="重复选项：" id="ot26" inlineStyle="font-size:small;"/>
-                                    <af:panelFormLayout id="pfl2" rows="1" maxColumns="2">
-                                        <af:inputDate value="#{bindings.BatchEffectiveDate.inputValue}"
-                                                      label="#{bindings.BatchEffectiveDate.hints.label}"
-                                                      required="#{bindings.BatchEffectiveDate.hints.mandatory}"
-                                                      columns="#{bindings.BatchEffectiveDate.hints.displayWidth}"
-                                                      shortDesc="#{bindings.BatchEffectiveDate.hints.tooltip}" id="id7"
-                                                      autoSubmit="true">
-                                            <f:validator binding="#{bindings.BatchEffectiveDate.validator}"/>
-                                            <af:convertDateTime pattern="#{bindings.BatchEffectiveDate.format}"
-                                                                type="date"/>
-                                        </af:inputDate>
-                                        <af:inputDate value="#{bindings.BatchExpireDate.inputValue}"
-                                                      label="#{bindings.BatchExpireDate.hints.label}"
-                                                      required="#{bindings.BatchExpireDate.hints.mandatory}"
-                                                      columns="#{bindings.BatchExpireDate.hints.displayWidth}"
-                                                      shortDesc="#{bindings.BatchExpireDate.hints.tooltip}" id="id8"
-                                                      autoSubmit="true">
-                                            <f:validator binding="#{bindings.BatchExpireDate.validator}"/>
-                                            <af:convertDateTime pattern="#{bindings.BatchExpireDate.format}"
-                                                                type="date"/>
-                                        </af:inputDate>
-                                        <af:selectOneRadio required="#{bindings.RecurrenceType.hints.mandatory}"
-                                                           label="#{bindings.RecurrenceType.hints.label}" id="sor2"
-                                                           value="#{bindings.RecurrenceType.inputValue}"
-                                                           layout="horizontal" autoSubmit="true" immediate="false">
-                                            <af:selectItem label="每周" value="WEEKLY" id="si7"/>
-                                            <af:selectItem label="每两周" value="FORTNIGHTLY" id="si8"/>
-                                        </af:selectOneRadio>
-                                    </af:panelFormLayout>
-                                    <af:spacer width="10" height="10" id="s18"/>
-                                    <af:panelGroupLayout id="pgl3" layout="horizontal">
-                                        <af:outputText value="第一周：" id="ot27"/>
-                                        <af:spacer width="20" height="10" id="s2"/>
+                                </af:panelFormLayout>
+                                <af:spacer width="10" height="10" id="s18"/>
+                                <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                    <af:outputText value="第一周：" id="ot27"/>
+                                    <af:spacer width="20" height="10" id="s2"/>
                                     <af:selectBooleanCheckbox value="#{bindings.FstWkSun.inputValue}"
                                                               label="#{bindings.FstWkSun.label}"
                                                               shortDesc="#{bindings.FstWkSun.hints.tooltip}" id="sbc7"
@@ -349,12 +253,12 @@
                                                               shortDesc="#{bindings.FstWkSat.hints.tooltip}" id="sbc6"
                                                               autoSubmit="true"/>
                                 </af:panelGroupLayout>
-                                    <af:spacer width="10" height="10" id="s19"/>
-                                    <af:panelGroupLayout id="pgl4" layout="horizontal"
-                                                         rendered="#{bindings.RecurrenceType.inputValue=='FORTNIGHTLY'}"
-                                                         partialTriggers="sor2">
-                                        <af:outputText value="第二周：" id="ot28"/>
-                                        <af:spacer width="20" height="10" id="s3"/>
+                                <af:spacer width="10" height="10" id="s19"/>
+                                <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                                     rendered="#{bindings.RecurrenceType.inputValue=='FORTNIGHTLY'}"
+                                                     partialTriggers="sor2">
+                                    <af:outputText value="第二周：" id="ot28"/>
+                                    <af:spacer width="20" height="10" id="s3"/>
                                     <af:selectBooleanCheckbox value="#{bindings.SndWkSun.inputValue}"
                                                               label="#{bindings.SndWkSun.label}"
                                                               shortDesc="#{bindings.SndWkSun.hints.tooltip}" id="sbc14"
@@ -372,33 +276,151 @@
                                     <af:spacer width="20" height="10" id="s11"/>
                                     <af:selectBooleanCheckbox value="#{bindings.SndWkWed.inputValue}"
                                                               label="#{bindings.SndWkWed.label}"
-                                                              shortDesc="#{bindings.SndWkWed.hints.tooltip}"
-                                                              id="sbc10" autoSubmit="true"/>
+                                                              shortDesc="#{bindings.SndWkWed.hints.tooltip}" id="sbc10"
+                                                              autoSubmit="true"/>
                                     <af:spacer width="20" height="10" id="s12"/>
                                     <af:selectBooleanCheckbox value="#{bindings.SndWkThu.inputValue}"
                                                               label="#{bindings.SndWkThu.label}"
-                                                              shortDesc="#{bindings.SndWkThu.hints.tooltip}"
-                                                              id="sbc11" autoSubmit="true"/>
+                                                              shortDesc="#{bindings.SndWkThu.hints.tooltip}" id="sbc11"
+                                                              autoSubmit="true"/>
                                     <af:spacer width="20" height="10" id="s13"/>
                                     <af:selectBooleanCheckbox value="#{bindings.SndWkFri.inputValue}"
                                                               label="#{bindings.SndWkFri.label}"
-                                                              shortDesc="#{bindings.SndWkFri.hints.tooltip}"
-                                                              id="sbc12" autoSubmit="true"/>
+                                                              shortDesc="#{bindings.SndWkFri.hints.tooltip}" id="sbc12"
+                                                              autoSubmit="true"/>
                                     <af:spacer width="20" height="10" id="s14"/>
                                     <af:selectBooleanCheckbox value="#{bindings.SndWkSat.inputValue}"
                                                               label="#{bindings.SndWkSat.label}"
-                                                              shortDesc="#{bindings.SndWkSat.hints.tooltip}"
-                                                              id="sbc13" autoSubmit="true"/>
-                                </af:panelGroupLayout>
+                                                              shortDesc="#{bindings.SndWkSat.hints.tooltip}" id="sbc13"
+                                                              autoSubmit="true"/>
                                 </af:panelGroupLayout>
                             </af:panelGroupLayout>
-                    </af:panelHeader>
-                    
+                        </f:facet>
+                            <f:facet name="start">
+                            <af:panelGroupLayout id="pgl5" layout="scroll">
+                                <af:outputText value="预订信息：" id="ot29" inlineStyle="font-size:small;"/>
+                                <af:panelFormLayout id="pfl1" maxColumns="2" rows="1">
+                                    <f:facet name="footer"/>
+                                    <af:inputText value="#{bindings.BatchNo.inputValue}"
+                                                  label="#{bindings.BatchNo.hints.label}"
+                                                  required="#{bindings.BatchNo.hints.mandatory}"
+                                                  columns="#{bindings.BatchNo.hints.displayWidth}"
+                                                  maximumLength="#{bindings.BatchNo.hints.precision}"
+                                                  shortDesc="#{bindings.BatchNo.hints.tooltip}" id="it1"
+                                                  autoSubmit="true" readOnly="true" disabled="false"
+                                                  contentStyle="color:Black;font-weight:bold;">
+                                        <f:validator binding="#{bindings.BatchNo.validator}"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.ActTitle.inputValue}"
+                                                  label="#{bindings.ActTitle.hints.label}"
+                                                  required="#{bindings.ActTitle.hints.mandatory}"
+                                                  columns="#{bindings.ActTitle.hints.displayWidth}"
+                                                  maximumLength="#{bindings.ActTitle.hints.precision}"
+                                                  shortDesc="#{bindings.ActTitle.hints.tooltip}" id="it2"
+                                                  autoSubmit="true" contentStyle="width:150px;">
+                                        <f:validator binding="#{bindings.ActTitle.validator}"/>
+                                    </af:inputText>
+                                    <af:inputComboboxListOfValues id="userDisplayNameId"
+                                                                  popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
+                                                                  value="#{bindings.UserDisplayName.inputValue}"
+                                                                  label="#{bindings.UserDisplayName.hints.label}"
+                                                                  model="#{bindings.UserDisplayName.listOfValuesModel}"
+                                                                  required="#{bindings.UserDisplayName.hints.mandatory}"
+                                                                  columns="#{bindings.UserDisplayName.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.UserDisplayName.hints.tooltip}"
+                                                                  autoSubmit="true" contentStyle="width:150px;">
+                                        <f:validator binding="#{bindings.UserDisplayName.validator}"/>
+                                    </af:inputComboboxListOfValues>
+                                    <af:selectOneChoice value="#{bindings.LocationName.inputValue}"
+                                                        label="#{bindings.LocationName.label}"
+                                                        required="#{bindings.LocationName.hints.mandatory}"
+                                                        shortDesc="#{bindings.LocationName.hints.tooltip}" id="soc3"
+                                                        autoSubmit="true" contentStyle="width:150px;">
+                                        <f:selectItems value="#{bindings.LocationName.items}" id="si3"/>
+                                    </af:selectOneChoice>
+                                    <af:selectOneChoice value="#{bindings.Classroom.inputValue}"
+                                                        label="#{bindings.Classroom.label}"
+                                                        required="#{bindings.Classroom.hints.mandatory}"
+                                                        shortDesc="#{bindings.Classroom.hints.tooltip}" id="soc4"
+                                                        partialTriggers="soc3" autoSubmit="true"
+                                                        contentStyle="width:150px;">
+                                        <f:selectItems value="#{bindings.Classroom.items}" id="si4"/>
+                                    </af:selectOneChoice>
+                                    <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
+                                                           label="#{bindings.NumOfPeople.hints.label}"
+                                                           required="#{bindings.NumOfPeople.hints.mandatory}"
+                                                           columns="#{bindings.NumOfPeople.hints.displayWidth}"
+                                                           shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it4"
+                                                           autoSubmit="true">
+                                        <f:validator binding="#{bindings.NumOfPeople.validator}"/>
+                                    </af:inputNumberSpinbox>
+                                    <af:selectOneRadio required="#{bindings.AllDay.hints.mandatory}"
+                                                       label="#{bindings.AllDay.hints.label}" id="sor1"
+                                                       value="#{bindings.AllDay.inputValue}" layout="horizontal"
+                                                       autoSubmit="true" immediate="false">
+                                        <af:selectItem label="全天" value="ALLDAY" id="si5"/>
+                                        <af:selectItem label="非全天" value="TIME" id="si6"/>
+                                    </af:selectOneRadio>
+                                    <af:inputDate value="#{bindings.ActStartTime.inputValue}"
+                                                  label="#{bindings.ActStartTime.hints.label}"
+                                                  required="#{bindings.ActStartTime.hints.mandatory}"
+                                                  columns="#{bindings.ActStartTime.hints.displayWidth}"
+                                                  shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id5"
+                                                  partialTriggers="sor1" autoSubmit="true"
+                                                  disabled="#{bindings.AllDay.inputValue!='TIME'}">
+                                        <f:validator binding="#{bindings.ActStartTime.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.ActStartTime.format}" type="time"/>
+                                    </af:inputDate>
+                                    <af:inputDate value="#{bindings.ActEndTime.inputValue}"
+                                                  label="#{bindings.ActEndTime.hints.label}"
+                                                  required="#{bindings.ActEndTime.hints.mandatory}"
+                                                  columns="#{bindings.ActEndTime.hints.displayWidth}"
+                                                  shortDesc="#{bindings.ActEndTime.hints.tooltip}" id="id6"
+                                                  partialTriggers="sor1" autoSubmit="true"
+                                                  disabled="#{bindings.AllDay.inputValue!='TIME'}">
+                                        <f:validator binding="#{bindings.ActEndTime.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="time"/>
+                                    </af:inputDate>
+                                    <af:inputText value="#{bindings.Comments.inputValue}"
+                                                  label="#{bindings.Comments.hints.label}"
+                                                  required="#{bindings.Comments.hints.mandatory}"
+                                                  columns="#{bindings.Comments.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Comments.hints.precision}"
+                                                  shortDesc="#{bindings.Comments.hints.tooltip}" id="it5"
+                                                  autoSubmit="true" rows="2" contentStyle="width:200px;">
+                                        <f:validator binding="#{bindings.Comments.validator}"/>
+                                    </af:inputText>
+                                </af:panelFormLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                            <f:facet name="end"/>
+                            <f:facet name="top"/>
+                        </af:panelStretchLayout>
+                  
                 </f:facet>
                 <f:facet name="bottom"/>
                 <f:facet name="start"/>
                 <f:facet name="end"/>
-                <f:facet name="top"/>
+                <f:facet name="top">
+                    <af:panelHeader text="批量预订明细" id="ph2" type="stretch">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar"/>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:separator id="s16"/>
+                        <af:panelGroupLayout id="pgl7" layout="horizontal">
+                            <af:commandButton text="保存" id="cb1" icon="/images/icons/filesave.png"
+                                              action="#{viewScope.ClsRmBatchBean.saveBatch}"/>
+                            <af:commandButton actionListener="#{bindings.Rollback.execute}" text="取消" immediate="true"
+                                              id="cb2" icon="/images/icons/undo.png"
+                                              disabled="#{!bindings.Rollback.enabled}">
+                                <af:resetActionListener/>
+                            </af:commandButton>
+                        </af:panelGroupLayout>
+                        <af:spacer width="10" height="10" id="s17"/>
+                    </af:panelHeader>
+                </f:facet>
             </af:panelStretchLayout>
         </f:facet>
     </af:panelSplitter>

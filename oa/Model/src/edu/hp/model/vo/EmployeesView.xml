@@ -28,14 +28,16 @@
        Employees.TITLE, 
        Employees.ID, 
        Employees.MGR_NAME, 
-       Employees.DEPT_NAME"
+       Employees.DEPT_NAME, 
+       Employees.EXPIRED"
   FromList="EMPLOYEES Employees"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
   FetchMode="FETCH_AS_NEEDED"
-  ComponentClass="edu.hp.model.common.BaseView">
+  ComponentClass="edu.hp.model.common.BaseView"
+  Where="Employees.EXPIRED &lt;> 'Y'">
   <ViewAccessor
     Name="Managers"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
@@ -333,6 +335,12 @@
     EntityUsage="Employees"
     AliasName="DEPT_NAME"
     IsQueriable="false"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Employees"
+    AliasName="EXPIRED"/>
   <ViewCriteria
     Name="findByDepartment"
     ViewObjectName="edu.hp.model.vo.EmployeesView"

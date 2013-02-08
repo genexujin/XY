@@ -4,10 +4,15 @@ import edu.hp.view.utils.JSFUtils;
 
 import java.util.HashMap;
 
+import javax.faces.component.UIComponent;
+
 import oracle.adf.controller.TaskFlowId;
 import oracle.adf.view.rich.component.rich.RichDocument;
 import oracle.adf.view.rich.component.rich.layout.RichPanelAccordion;
+import oracle.adf.view.rich.component.rich.layout.RichShowDetailItem;
 import oracle.adf.view.rich.render.ClientEvent;
+
+import org.apache.myfaces.trinidad.event.DisclosureEvent;
 
 
 public class SystemBean extends UITabBean {
@@ -19,6 +24,7 @@ public class SystemBean extends UITabBean {
     private RichPanelAccordion menuPanelAccordion;
     private RichDocument document;
     private HashMap parameters;
+
 
     public SystemBean() {
         initMenus();
@@ -77,7 +83,7 @@ public class SystemBean extends UITabBean {
             if (contextObjectType.equals(edu.hp.model.common.Constants.CONTEXT_TYPE_VEHICLE)) {
                 taskFlowId = edu.hp.model.common.Constants.CONTEXT_VEHICLE_TASKFLOW;
                 title = "车辆申请";
-                
+
             }
             parameters = new HashMap();
             parameters.put("id", contextObjectId);
@@ -86,5 +92,23 @@ public class SystemBean extends UITabBean {
 
     }
 
-   
+
+    public void onItemDisclosed(DisclosureEvent disclosureEvent) {
+
+        if (disclosureEvent.isExpanded()) {
+            //System.err.println("here");
+            RichShowDetailItem component = (RichShowDetailItem)disclosureEvent.getComponent();
+            for (UIComponent child : menuPanelAccordion.getChildren()) {
+                RichShowDetailItem sdi = (RichShowDetailItem)child;
+                if (!component.equals(child)) {
+                    sdi.setDisclosed(false);
+                } else {
+                    String menuCode = (String)component.getAttributes().get("menuCode");
+                    JSFUtils.setExpressionValue("#{pageFlowScope.openMenu}", menuCode);
+                    //sdi.setDisclosed(true);
+                }
+            }
+        }
+
+    }
 }

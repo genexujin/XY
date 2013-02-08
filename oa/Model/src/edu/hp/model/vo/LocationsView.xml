@@ -14,13 +14,15 @@
        Locations.CREATED_AT, 
        Locations.CREATED_BY, 
        Locations.LAST_UPDATED_AT, 
-       Locations.LAST_UPDATED_BY"
+       Locations.LAST_UPDATED_BY, 
+       Locations.EXPIRED"
   FromList="LOCATIONS Locations"
   BindingStyle="OracleName"
   CustomQuery="false"
   ComponentClass="edu.hp.model.common.BaseView"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  Where="Locations.EXPIRED &lt;> 'Y'">
   <EntityUsage
     Name="Locations"
     Entity="edu.hp.model.eo.Locations"/>
@@ -87,6 +89,12 @@
     EntityAttrName="LastUpdatedBy"
     EntityUsage="Locations"
     AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Locations"
+    AliasName="EXPIRED"/>
   <ViewLinkAccessor
     Name="Classrooms"
     ViewLink="edu.hp.model.vo.link.LocClsRmViewLink"

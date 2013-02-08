@@ -17,7 +17,9 @@
                 </f:facet>
                 <f:facet name="navigation">
                     <af:panelAccordion id="pa1" binding="#{viewScope.SystemBean.menuPanelAccordion}">
-                        <af:showDetailItem text="采购管理" id="sdi1" icon="/images/icons/cart.gif">
+                        <af:showDetailItem text="采购管理" id="sdi1" icon="/images/icons/cart.gif"
+                                           disclosureListener="#{viewScope.SystemBean.onItemDisclosed}"
+                                           disclosed="#{pageFlowScope.openMenu=='PUR'}">
                             <af:spacer width="10" height="5" id="s8"/>
                             <af:panelList id="pl1">
                                 <af:forEach items="#{sessionScope.LoginUserMenuBean.sysPurMenus}" var="menu">
@@ -32,8 +34,11 @@
                                     </af:panelGroupLayout>
                                 </af:forEach>
                             </af:panelList>
+                            <af:clientAttribute name="menuCode" value="PUR"/>
                         </af:showDetailItem>
-                        <af:showDetailItem text="设备报修" id="sdi2" icon="/images/icons/monitors.png">
+                        <af:showDetailItem text="设备报修" id="sdi2" icon="/images/icons/monitors.png"
+                                           disclosureListener="#{viewScope.SystemBean.onItemDisclosed}"
+                                           disclosed="#{pageFlowScope.openMenu=='HD'}">
                             <af:spacer width="10" height="5" id="s9"/>
                             <af:panelList id="pl7">
                                 <af:forEach items="#{sessionScope.LoginUserMenuBean.sysHdMenus}" var="menu">
@@ -48,8 +53,11 @@
                                     </af:panelGroupLayout>
                                 </af:forEach>
                             </af:panelList>
+                            <af:clientAttribute name="menuCode" value="HD"/>
                         </af:showDetailItem>
-                        <af:showDetailItem text="教室管理" id="sdi3" icon="/images/icons/chooseDate.png">
+                        <af:showDetailItem text="教室管理" id="sdi3" icon="/images/icons/chooseDate.png"
+                                           disclosureListener="#{viewScope.SystemBean.onItemDisclosed}"
+                                           disclosed="#{pageFlowScope.openMenu=='CLSRM'}">
                             <af:spacer width="10" height="5" id="s10"/>
                             <af:panelList id="pl6">
                                 <af:forEach items="#{sessionScope.LoginUserMenuBean.sysClsRmMenus}" var="menu">
@@ -64,8 +72,11 @@
                                     </af:panelGroupLayout>
                                 </af:forEach>
                             </af:panelList>
+                            <af:clientAttribute name="menuCode" value="CLSRM"/>
                         </af:showDetailItem>
-                        <af:showDetailItem text="会议室管理" id="sdi4" icon="/images/icons/team.png">
+                        <af:showDetailItem text="会议室管理" id="sdi4" icon="/images/icons/team.png"
+                                           disclosureListener="#{viewScope.SystemBean.onItemDisclosed}"
+                                           disclosed="#{pageFlowScope.openMenu=='CONFRM'}">
                             <af:spacer width="10" height="5" id="s11"/>
                             <af:panelList id="pl5">
                                 <af:forEach items="#{sessionScope.LoginUserMenuBean.sysConfRmMenus}" var="menu">
@@ -80,8 +91,11 @@
                                     </af:panelGroupLayout>
                                 </af:forEach>
                             </af:panelList>
+                           <af:clientAttribute name="menuCode" value="CONFRM"/>
                         </af:showDetailItem>
-                        <af:showDetailItem text="车辆管理" id="sdi5" icon="/images/icons/car_arrow.png">
+                        <af:showDetailItem text="车辆管理" id="sdi5" icon="/images/icons/car_arrow.png"
+                         disclosureListener="#{viewScope.SystemBean.onItemDisclosed}"
+                                           disclosed="#{pageFlowScope.openMenu=='VEH'}">
                             <af:spacer width="10" height="5" id="s12"/>
                             <af:panelList id="pl4">
                                 <af:forEach items="#{sessionScope.LoginUserMenuBean.sysCarMenus}" var="menu">
@@ -96,6 +110,7 @@
                                     </af:panelGroupLayout>
                                 </af:forEach>
                             </af:panelList>
+                             <af:clientAttribute name="menuCode" value="VEH"/>
                         </af:showDetailItem>
                         <!--
                         <af:showDetailItem text="订餐管理" id="sdi7" icon="/images/icons/coffee.png">
@@ -165,14 +180,17 @@
         </af:form>
         <af:clientListener method="initialize" type="load"/>
         <f:facet name="metaContainer">
-        <af:group id="g1">
-         <script type="text/javascript">
-            function initialize(event) {
-                var source = event.getSource();
-                 AdfCustomEvent.queue(source,"launchDefaultTab",{},false);
-            }
-          </script>
-        </af:group>
+            <af:group id="g1">
+                <script type="text/javascript">
+                  function initialize(event) {
+                      var source = event.getSource();
+                      AdfCustomEvent.queue(source, "launchDefaultTab", 
+                      {
+                      },
+false);
+                  }
+                </script>
+            </af:group>
         </f:facet>
         <af:serverListener type="launchDefaultTab" method="#{viewScope.SystemBean.launchDefaultTab}"/>
     </af:document>

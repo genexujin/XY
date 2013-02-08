@@ -13,13 +13,15 @@
        Departments.LAST_UPDATED_BY, 
        Departments.LOCATION_ID, 
        Departments.MGR_ID, 
-       Departments.MGR_NAME"
+       Departments.MGR_NAME, 
+       Departments.EXPIRED"
   FromList="DEPARTMENTS Departments"
   BindingStyle="OracleName"
   CustomQuery="false"
   ComponentClass="edu.hp.model.common.BaseView"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  Where="Departments.EXPIRED &lt;> 'Y'">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
@@ -152,6 +154,12 @@
     EntityAttrName="MgrName"
     EntityUsage="Departments"
     AliasName="MGR_NAME"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Departments"
+    AliasName="EXPIRED"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

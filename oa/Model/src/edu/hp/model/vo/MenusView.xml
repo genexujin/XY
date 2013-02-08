@@ -12,12 +12,14 @@
        Menus.MENU_CATEGORY, 
        Menus.PARENT_MENU_ID, 
        Menus.MENU_ICON_URL, 
-       Menus.MENU_MASTER_CATEGORY"
+       Menus.MENU_MASTER_CATEGORY, 
+       Menus.EXPIRED"
   FromList="MENUS Menus"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  Where="Menus.EXPIRED &lt;> 'Y'">
   <EntityUsage
     Name="Menus"
     Entity="edu.hp.model.eo.Menus"/>
@@ -70,4 +72,10 @@
     EntityAttrName="MenuMasterCategory"
     EntityUsage="Menus"
     AliasName="MENU_MASTER_CATEGORY"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Menus"
+    AliasName="EXPIRED"/>
 </ViewObject>

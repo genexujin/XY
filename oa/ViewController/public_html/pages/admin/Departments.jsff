@@ -72,7 +72,6 @@
               <af:panelGroupLayout id="pgl1" layout="horizontal">
                 <af:outputText value="#{row.MgrName}" id="ot1"/>
                 <af:spacer width="10" height="10" id="s1"/>
-                <af:outputText value="ID：" id="ot2"/>
                 <af:spacer width="10" height="10" id="s2"/>
                 <af:inputComboboxListOfValues id="mgrIdId"
                                               popupTitle="#{bindings.Departments.hints.MgrId.label}"

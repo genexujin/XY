@@ -38,11 +38,14 @@ public class ClassroomCalendarBean extends CalendarBean {
     public void locationChange(ValueChangeEvent valueChangeEvent) {
 
         Integer newValue = (Integer)valueChangeEvent.getNewValue();
-        //System.err.println(newValue);
-        setCurrentLocation(newValue.intValue());
-        this.reload();
-        UIComponent component = JSFUtils.findComponent(valueChangeEvent.getComponent().getNamingContainer(), "pgl3");
-        ADFUtils.partialRefreshComponenet(component);
+        if (newValue != null) {
+            //this.location = newValue;
+            setCurrentLocation(newValue.intValue());
+            this.reload();
+            UIComponent component =
+                JSFUtils.findComponent(valueChangeEvent.getComponent().getNamingContainer(), "pgl3");
+            ADFUtils.partialRefreshComponenet(component);
+        }
     }
 
 
@@ -50,12 +53,12 @@ public class ClassroomCalendarBean extends CalendarBean {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             OperationBinding binding = ADFUtils.findOperation("deleteByPK");
             String clsRmCalId = this.getCurrActivity().getActivity().getId();
-            //            System.err.println("to del act id: " + clsRmCalId);
+                       // System.err.println("to del act id: " + clsRmCalId);
             binding.getParamsMap().put("clsRmCalId", clsRmCalId);
             binding.execute();
             if (binding.getErrors().isEmpty()) {
                 this._currActivity = null;
-                UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+                UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);              
                 refreshCalendar(calendar);
             }
 
@@ -132,7 +135,6 @@ public class ClassroomCalendarBean extends CalendarBean {
 
     }
 
-   
 
     protected void doUpdateCalendar(OACalendarActivity activity, Date newStart, Date newEnd) {
 

@@ -79,16 +79,18 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl implements ClassRmM
         startCalendar.setTimeInMillis(actStartTime.getTime());
         // if allday then set the start time and end time
         if (allday != null && allday.equals("ALLDAY")) {
-
+            System.err.println(allday);
             if (actEndTime != null) {
                 endCalendar.set(Calendar.HOUR_OF_DAY, 23);
                 endCalendar.set(Calendar.MINUTE, 59);
                 endCalendar.set(Calendar.SECOND, 59);
+                currentRow.setAttribute("ActEndTime",new Timestamp(endCalendar.getTimeInMillis()));
             }
             if (actStartTime != null) {
                 startCalendar.set(Calendar.HOUR_OF_DAY, 0);
                 startCalendar.set(Calendar.MINUTE, 0);
                 startCalendar.set(Calendar.SECOND, 0);
+                currentRow.setAttribute("ActStartTime",new Timestamp(startCalendar.getTimeInMillis()));
             }
         }
 
@@ -181,7 +183,7 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl implements ClassRmM
                 java.sql.Timestamp end = new java.sql.Timestamp(tempCal.getTimeInMillis());
                 calDMLViewImpl.insertRow(newActivity);
                 if (!hasconflict) {
-                    hasconflict = !calendarConflitQueryImpl.ifConflict(start, end, classroomId, "-1");
+                    hasconflict = !calendarConflitQueryImpl.ifConflict(start, end, classroomId, "-1",batchNo);
                 }
             }
         }

@@ -68,8 +68,8 @@
                     </af:popup>
                 </f:facet>
                 <f:facet name="activityContextMenu">
-                    <af:popup id="p1" rendered="#{pageFlowScope.vehiclesCalBean.editable}" partialTriggers="::c1">
-                        <af:menu id="m1">
+                    <af:popup id="p1"  partialTriggers="::c1">
+                        <af:menu id="m1" rendered="#{pageFlowScope.vehiclesCalBean.editable}">
                             <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png"
                                                 action="#{pageFlowScope.vehiclesCalBean.doEdit}"></af:commandMenuItem>
                             <af:commandMenuItem text="删除" id="cmi2" icon="/images/icons/delete_ena.png">
@@ -80,11 +80,11 @@
                 </f:facet>
                 <f:facet name="activityDelete">
                     <af:popup id="delete" contentDelivery="lazyUncached"
-                              rendered="#{pageFlowScope.vehiclesCalBean.editable}" partialTriggers="::c1">
+                               partialTriggers="::c1">
                         <!-- don't render if the activity is null -->
                         <af:dialog dialogListener="#{pageFlowScope.vehiclesCalBean.deleteListener}"
                                    title="#{pageFlowScope.vehiclesCalBean.currActivity.title}"
-                                   rendered="#{pageFlowScope.vehiclesCalBean.currActivity != null}" id="d2">
+                                   rendered="#{pageFlowScope.vehiclesCalBean.editable}" id="d2">
                             <af:outputText value="请注意：该操作无法恢复！" id="ot4"/>
                             <af:spacer height="20" id="s4"/>
                             <af:outputText value="您确认要删除该预订吗？" id="ot5"/>

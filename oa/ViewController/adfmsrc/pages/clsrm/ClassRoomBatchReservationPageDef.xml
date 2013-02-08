@@ -223,5 +223,10 @@
     <methodAction id="deleteCurrentBatchOrder" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="deleteCurrentBatchOrder" IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule"/>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
