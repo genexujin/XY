@@ -17,8 +17,10 @@
        Roles.CREATED_AT, 
        Roles.CREATED_BY, 
        Roles.LAST_UPDATED_AT, 
-       Roles.LAST_UPDATED_BY"
-  FromList="ROLES Roles">
+       Roles.LAST_UPDATED_BY, 
+       Roles.EXPIRED"
+  FromList="ROLES Roles"
+  Where="Roles.EXPIRED &lt;> 'Y'">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -79,6 +81,12 @@
     EntityUsage="Roles"
     AliasName="LAST_UPDATED_BY"
     IsQueriable="false"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Roles"
+    AliasName="EXPIRED"/>
   <ViewCriteria
     Name="queryById"
     ViewObjectName="edu.hp.model.vo.RolesView"

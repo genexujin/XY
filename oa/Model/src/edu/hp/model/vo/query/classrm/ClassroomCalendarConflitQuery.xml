@@ -38,6 +38,11 @@
     Name="actId"
     Kind="where"
     Type="java.lang.String"/>
+  <Variable
+    Name="actBatchId"
+    Kind="where"
+    Type="java.lang.String"
+    DefaultValue="NA"/>
   <SQLQuery><![CDATA[SELECT ClassroomCalendar.ACT_END_TIME, 
        ClassroomCalendar.ACT_START_TIME, 
        ClassroomCalendar.ACT_TITLE, 
@@ -55,7 +60,7 @@
        ClassroomCalendar.USER_DISPLAY_NAME, 
        ClassroomCalendar.USER_ID
 FROM CLASSROOM_CALENDAR ClassroomCalendar
-WHERE (NOT( ClassroomCalendar.ACT_END_TIME <= :startQueryTime  OR ClassroomCalendar.ACT_START_TIME >= :endQueryTime)) AND  ClassroomCalendar.CLASSROOM_ID =:clsRoomId AND ClassroomCalendar.ID <> :actId]]></SQLQuery>
+WHERE (NOT( ClassroomCalendar.ACT_END_TIME <= :startQueryTime  OR ClassroomCalendar.ACT_START_TIME >= :endQueryTime)) AND  ClassroomCalendar.CLASSROOM_ID =:clsRoomId AND ClassroomCalendar.ID <> :actId AND ClassroomCalendar.BATCH_NO <> :actBatchId]]></SQLQuery>
   <ViewAttribute
     Name="ActEndTime"
     IsUpdateable="false"

@@ -10,7 +10,11 @@
   AliasName="Locations"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  RowClass="edu.hp.model.common.BaseEntity">
+  RowClass="edu.hp.model.eo.LocationsImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="LocationId"
     IsNotNull="true"
@@ -156,7 +160,8 @@
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
     TableName="LOCATIONS"
-    HistoryColumn="DateHistory">
+    HistoryColumn="DateHistory"
+    RetrievedOnUpdate="true">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -181,6 +186,19 @@
           ResId="edu.hp.model.eo.Locations.LastUpdatedBy_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
+  </Attribute>
+  <Attribute
+    Name="Expired"
+    Precision="20"
+    ColumnName="EXPIRED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATIONS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
   </Attribute>
   <AccessorAttribute
     Name="ClassRooms"

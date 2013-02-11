@@ -101,7 +101,7 @@
          <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
          <Database jbo.TypeMapEntries="OracleApps"/>
          <Security AppModuleJndiName="edu.hp.model.biz.PurchaseOrderAppModule"/>
-   </AppModuleConfig>
+      </AppModuleConfig>
    </AppModuleConfigBag>
    <AppModuleConfigBag ApplicationName="edu.hp.model.biz.VehicleModule">
       <AppModuleConfig name="VehicleModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.VehicleModule" DeployPlatform="LOCAL">
@@ -113,6 +113,19 @@
          <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
          <Database jbo.TypeMapEntries="OracleApps"/>
          <Security AppModuleJndiName="edu.hp.model.biz.VehicleModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="edu.hp.model.biz.HomeModule">
+      <AppModuleConfig name="HomeModuleLocal" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.HomeModule" DeployPlatform="LOCAL">
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.HomeModule"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="HomeModuleShared" jbo.project="edu.hp.model.Model" ApplicationName="edu.hp.model.biz.HomeModule" DeployPlatform="LOCAL">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="edu.hp.model.biz.HomeModule"/>
          <Custom JDBCDataSource="java:comp/env/jdbc/oaDS"/>
       </AppModuleConfig>
    </AppModuleConfigBag>

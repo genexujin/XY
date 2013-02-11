@@ -323,7 +323,8 @@
       Type="oracle.jbo.domain.Timestamp"
       ColumnType="DATE"
       TableName="EMPLOYEES"
-      HistoryColumn="DateHistory"/>
+        HistoryColumn="DateHistory"
+        RetrievedOnUpdate="true"/>
     <Attribute
       Name="CreatedBy"
       Precision="20"
@@ -414,6 +415,19 @@
                   ResId="edu.hp.model.eo.Employees.DeptName_LABEL"/>
             </SchemaBasedProperties>
         </Properties>
+    </Attribute>
+    <Attribute
+        Name="Expired"
+        Precision="20"
+        ColumnName="EXPIRED"
+        SQLType="VARCHAR"
+        Type="java.lang.String"
+        ColumnType="VARCHAR2"
+        TableName="EMPLOYEES"
+        DefaultValue="N">
+        <DesignTime>
+            <Attr Name="_DisplaySize" Value="20"/>
+        </DesignTime>
     </Attribute>
     <AccessorAttribute
       Name="MgrEmployee"

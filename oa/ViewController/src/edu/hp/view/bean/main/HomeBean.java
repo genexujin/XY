@@ -5,7 +5,7 @@ import oracle.adf.view.rich.component.rich.RichDocument;
 
 
 public class HomeBean extends UITabBean{
-    private String taskFlowId = "/WEB-INF/flows/welcome/welcome-btf.xml#welcome-btf";
+    private String taskFlowId = "/WEB-INF/flows/home/home-btf.xml#home-btf";
     private RichDocument document;
 
     public HomeBean() {

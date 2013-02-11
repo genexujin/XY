@@ -1,25 +1,27 @@
 package edu.hp.model.common;
 
+//
+//import edu.hp.view.security.LoginUser;
+//import edu.hp.view.utils.JSFUtils;
 
-import edu.hp.view.security.LoginUser;
-import edu.hp.view.utils.JSFUtils;
-
+import oracle.jbo.AttributeDef;
 import oracle.jbo.server.EntityImpl;
 import oracle.jbo.server.TransactionEvent;
 
 
 public class BaseEntity extends EntityImpl {
 
-    //    public void remove() {
-    //
-    //        String entityName = getEntityDef().getName();
-    //        if (entityName.equals("Lov")) {
-    //            super.remove();
-    //        } else {
-    //            setAttribute("Deleted", "Y");
-    //            super.remove();
-    //        }
-    //    }
+    public void remove() {
+
+        AttributeDef attributeDef = getEntityDef().findAttributeDef("Expired");
+        if (attributeDef == null) {
+            super.remove();
+        } else {
+            setAttribute("Expired", "Y");
+         
+            super.remove();
+        }
+    }
 
     /**
      * audit users
@@ -27,32 +29,36 @@ public class BaseEntity extends EntityImpl {
      * @param e
      */
     protected void doDML(int operation, TransactionEvent e) {
-
+      
         if (operation != DML_DELETE) {
-
-            LoginUser user = null;
+           // LoginUser user = null;
             try {
-                user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+          //      user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
             } catch (Exception e1) {
                 // TODO: Add catch code
                 e1.printStackTrace();
             }
-
             if (this.getEntityDef().getAttributeIndexOf("CreatedBy") > 0) {
 
-                if (operation == DML_INSERT) {
-                    if (user != null)
-                        this.setAttribute("CreatedBy", user.getDisplayName());
-                }
+//                if (operation == DML_INSERT) {
+//                    if (user != null)
+//                        this.setAttribute("CreatedBy", user.getDisplayName());
+//                }
 
             }
-
             if (this.getEntityDef().getAttributeIndexOf("LastUpdatedBy") > 0) {
-                if (user != null)
-                    this.setAttribute("LastUpdatedBy", user.getDisplayName());
+//                if (user != null)
+//                    this.setAttribute("LastUpdatedBy", user.getDisplayName());
+            }
+        } else {
+        
+            AttributeDef attributeDef = getEntityDef().findAttributeDef("Expired");
+            
+            if (attributeDef != null) {
+                operation = DML_UPDATE;
+             
             }
         }
-
         super.doDML(operation, e);
     }
 

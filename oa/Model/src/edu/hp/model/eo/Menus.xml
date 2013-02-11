@@ -9,7 +9,12 @@
   DBObjectName="MENUS"
   AliasName="Menus"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.eo.MenusImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="MenuId"
     IsNotNull="true"
@@ -155,6 +160,19 @@
           ResId="edu.hp.model.eo.Menus.MenuIconUrl_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
+  </Attribute>
+  <Attribute
+    Name="Expired"
+    Precision="20"
+    ColumnName="EXPIRED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MENUS"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
   </Attribute>
   <Key
     Name="MenusPk"

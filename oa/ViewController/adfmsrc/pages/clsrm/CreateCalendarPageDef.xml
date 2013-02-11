@@ -6,6 +6,8 @@
     <variableIterator id="variables"/>
     <iterator Binds="Root.ClassRmModule.ClsRmCalDMLView" DataControl="RootAppModuleDataControl" RangeSize="25"
               id="ClsRmCalDMLViewIterator"/>
+    <iterator id="LocationsIterator" Binds="Root.ClassRmModule.Locations" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="ClsRmCalDMLViewIterator" id="ActTitle">
@@ -67,5 +69,10 @@
         <Item Value="Id"/>
       </AttrNames>
     </attributeValues>
+    <list ListOperMode="navigation" IterBinding="LocationsIterator" id="Locations">
+      <AttrNames>
+        <Item Value="LocationName"/>
+      </AttrNames>
+    </list>
   </bindings>
 </pageDefinition>

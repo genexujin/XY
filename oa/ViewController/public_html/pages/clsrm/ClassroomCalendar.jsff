@@ -22,12 +22,13 @@
                                                           autoSubmit="true"/>
                             </af:panelGroupLayout>
                             <af:spacer width="10" height="10" id="s2"/>
-                            <af:selectOneChoice value="#{bindings.Locations.inputValue}"
+                            <af:selectOneChoice value="#{pageFlowScope.clsCalBean.location}"
                                                 label="#{bindings.Locations.label}"
                                                 required="#{bindings.Locations.hints.mandatory}"
                                                 shortDesc="#{bindings.Locations.hints.tooltip}" id="soc1"
                                                 autoSubmit="true"
-                                                valueChangeListener="#{pageFlowScope.clsCalBean.locationChange}">
+                                                valueChangeListener="#{pageFlowScope.clsCalBean.locationChange}"
+                                                valuePassThru="false">
                                 <f:selectItems value="#{bindings.Locations.items}" id="si1"/>
                             </af:selectOneChoice>
                             <af:panelGroupLayout id="pgl3" layout="scroll">
@@ -77,8 +78,8 @@
                     </af:popup>
                 </f:facet>
                 <f:facet name="activityContextMenu">
-                    <af:popup id="p1" rendered="#{pageFlowScope.clsCalBean.editable}" partialTriggers="::c1">
-                        <af:menu id="m1">
+                    <af:popup id="p1" partialTriggers="::c1">
+                        <af:menu id="m1" rendered="#{pageFlowScope.clsCalBean.editable}">
                             <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png"
                                                 action="#{pageFlowScope.clsCalBean.doEdit}"></af:commandMenuItem>
                             <af:commandMenuItem text="删除" id="cmi2" icon="/images/icons/delete_ena.png">
@@ -88,12 +89,12 @@
                     </af:popup>
                 </f:facet>
                 <f:facet name="activityDelete">
-                    <af:popup id="delete" contentDelivery="lazyUncached" rendered="#{pageFlowScope.clsCalBean.editable}"
+                    <af:popup id="delete" contentDelivery="lazyUncached" 
                               partialTriggers="::c1">
                         <!-- don't render if the activity is null -->
                         <af:dialog dialogListener="#{pageFlowScope.clsCalBean.deleteListener}"
                                    title="#{pageFlowScope.clsCalBean.currActivity.title}"
-                                   rendered="#{pageFlowScope.clsCalBean.currActivity != null}" id="d2">
+                                   rendered="#{pageFlowScope.clsCalBean.editable}" id="d2">
                             <af:outputText value="请注意：该操作无法恢复！" id="ot4"/>
                             <af:spacer height="20" id="s4"/>
                             <af:outputText value="您确认要删除该预订吗？" id="ot5"/>

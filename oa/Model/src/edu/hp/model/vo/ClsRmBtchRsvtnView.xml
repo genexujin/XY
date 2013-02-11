@@ -86,6 +86,7 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Value"/>
+      <Item Value="FlexCol2"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>

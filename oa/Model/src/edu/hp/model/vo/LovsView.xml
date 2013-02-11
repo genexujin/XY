@@ -16,13 +16,15 @@
        Lovs.LAST_UPDATED_AT, 
        Lovs.FLEX_COL1, 
        Lovs.FLEX_COL2, 
-       Lovs.FLEX_COL3"
+       Lovs.FLEX_COL3, 
+       Lovs.EXPIRED"
   FromList="LOVS Lovs"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
-  ComponentClass="edu.hp.model.common.BaseView">
+  ComponentClass="edu.hp.model.common.BaseView"
+  Where="Lovs.EXPIRED &lt;> 'Y'">
   <Variable
     Name="locationId"
     Kind="viewcriteria"
@@ -108,6 +110,12 @@
     EntityAttrName="FlexCol3"
     EntityUsage="Lovs"
     AliasName="FLEX_COL3"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
   <ViewCriteria
     Name="ClsRmList"
     ViewObjectName="edu.hp.model.vo.LovsView"

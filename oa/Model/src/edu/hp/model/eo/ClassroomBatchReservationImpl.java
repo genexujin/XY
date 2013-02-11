@@ -399,6 +399,33 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("edu.hp.model.eo.ClassroomBatchReservation");
     }
+    
+//    protected void doDML(int operation, TransactionEvent e) {
+//        if (operation == DML_INSERT || operation == DML_UPDATE) {
+//            if (this.getAllDay().equals("ALLDAY")) {
+//                Timestamp actEndTime = this.getActEndTime();
+//                if (actEndTime != null) {
+//                    Calendar calendar = Calendar.getInstance();
+//                    calendar.setTimeInMillis(actEndTime.getTime());
+//                    calendar.set(Calendar.HOUR_OF_DAY, 23);
+//                    calendar.set(Calendar.MINUTE, 59);
+//                    calendar.set(Calendar.SECOND, 59);
+//                    this.setActEndTime(new Timestamp(calendar.getTimeInMillis()));
+//                }
+//                Timestamp actStartTime = this.getActStartTime();
+//                if (actStartTime != null) {
+//                    Calendar calendar = Calendar.getInstance();
+//                    calendar.setTimeInMillis(actStartTime.getTime());
+//                    calendar.set(Calendar.HOUR_OF_DAY, 0);
+//                    calendar.set(Calendar.MINUTE, 0);
+//                    calendar.set(Calendar.SECOND, 0);
+//                    this.setActEndTime(new Timestamp(calendar.getTimeInMillis()));
+//                }
+//            }
+//        }
+//
+//        super.doDML(operation, e);
+//    }
 
     /**
      * Add attribute defaulting logic in this method.

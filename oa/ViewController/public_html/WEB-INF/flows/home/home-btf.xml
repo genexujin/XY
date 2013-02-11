@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="home-btf">
+    <default-activity>initDashboard</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <managed-bean id="__5">
+      <managed-bean-name>HomeOperationBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.home.HomeOperationBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="Home">
+      <page>/pages/welcome/Home.jsff</page>
+    </view>
+    <method-call id="loadNotifications">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>success</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="loadTasks">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>success</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="initDashboard">
+      <method>#{bindings.initDashboard.execute}</method>
+      <outcome>
+        <fixed-outcome>initDashboard</fixed-outcome>
+      </outcome>
+    </method-call>
+    <parent-action id="goToSystem">
+      <parent-outcome>System</parent-outcome>
+    </parent-action>
+    <control-flow-rule id="__1">
+      <from-activity-id>loadNotifications</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>success</from-outcome>
+        <to-activity-id>Home</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>loadTasks</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>success</from-outcome>
+        <to-activity-id>loadNotifications</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>initDashboard</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>initDashboard</from-outcome>
+        <to-activity-id>Home</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>Home</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>openTask</from-outcome>
+        <to-activity-id>goToSystem</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -38,6 +38,7 @@ import oracle.adf.view.rich.util.InstanceStyles;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.Key;
 import oracle.jbo.Row;
 import oracle.jbo.domain.Array;
 
@@ -66,25 +67,28 @@ public class CalendarBean {
     protected String superAdminRole = "系统管理员";
     protected String moduleAdminRole;
     protected String locationIdFieldName;
+    protected Integer location;
+    protected Key currentLocationKey;
 
     public CalendarBean() {
     }
 
     protected void setCurrentLocation(int id) {
-
-        DCIteratorBinding it = ADFUtils.findIterator(locationIteratorName);
+        DCIteratorBinding it = ADFUtils.findIterator(locationIteratorName);        
         it.setCurrentRowIndexInRange(id);
-
+        location = it.getCurrentRowIndexInRange();  
     }
 
     protected void reload() {
         try {
-            //Set<String>[] tags = _modelBean.getTags();
+            if(location==null){              
+                location = 0;                          
+            }
+         
             List<Color> defaultOrderProviderColors = getDefaultOrderProviderColors();
 
             DCIteratorBinding it = ADFUtils.findIterator(providerIteratorName);
             if (it != null) {
-
                 it.setRangeSize(-1);
                 it.executeQuery();
                 Row[] allRowsInRange = it.getAllRowsInRange();
@@ -129,13 +133,13 @@ public class CalendarBean {
     }
 
     public void activityListener(CalendarActivityEvent ae) {
-
-
         CalendarActivity activity = ae.getCalendarActivity();
 
         if (activity == null) {
+            //System.err.println("set null activity");
             setCurrActivity(null);
         } else {
+            //System.err.println("set activity");
             setCurrActivity(new OACalendarActivity(activity));
             //System.err.println(this.getCurrActivity().getId());
         }
@@ -364,7 +368,6 @@ public class CalendarBean {
 
             String userId = this.getCurrActivity().getUserId();
             if (userId.equals(user.getUserName())) {
-
                 return true;
             }
         }
@@ -414,6 +417,22 @@ public class CalendarBean {
 
     public boolean isMyView() {
         return myView;
+    }
+
+    public void setLocation(Integer location) {
+        this.location = location;
+    }
+
+    public Integer getLocation() {
+        return location;
+    }
+
+    public void setCurrentLocationKey(Key currentLocationKey) {
+        this.currentLocationKey = currentLocationKey;
+    }
+
+    public Key getCurrentLocationKey() {
+        return currentLocationKey;
     }
 
     public static class ProviderData implements Serializable {

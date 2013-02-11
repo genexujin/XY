@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="vehicle-dashboard-btf">
+    <default-activity>vehicle-application-btf</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>id</name>
+      <value>#{pageFlowScope.id}</value>
+    </input-parameter-definition>
+    <task-flow-call id="vehicle-application-btf">
+      <task-flow-reference>
+        <document>/WEB-INF/flows/vehicle/vehicle-application-btf.xml</document>
+        <id>vehicle-application-btf</id>
+      </task-flow-reference>
+      <input-parameter id="__2">
+        <name>id</name>
+        <value>#{pageFlowScope.id}</value>
+      </input-parameter>
+    </task-flow-call>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

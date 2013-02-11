@@ -91,6 +91,16 @@ public class RolesViewRowImpl extends ViewRowImpl {
             }
         }
         ,
+        Expired {
+            public Object get(RolesViewRowImpl obj) {
+                return obj.getExpired();
+            }
+
+            public void put(RolesViewRowImpl obj, Object value) {
+                obj.setExpired((String)value);
+            }
+        }
+        ,
         EmployeesVA {
             public Object get(RolesViewRowImpl obj) {
                 return obj.getEmployeesVA();
@@ -146,6 +156,7 @@ public class RolesViewRowImpl extends ViewRowImpl {
     public static final int CREATEDBY = AttributesEnum.CreatedBy.index();
     public static final int LASTUPDATEDAT = AttributesEnum.LastUpdatedAt.index();
     public static final int LASTUPDATEDBY = AttributesEnum.LastUpdatedBy.index();
+    public static final int EXPIRED = AttributesEnum.Expired.index();
     public static final int EMPLOYEESVA = AttributesEnum.EmployeesVA.index();
     public static final int ROLEMENUSVA = AttributesEnum.RoleMenusVA.index();
 
@@ -273,6 +284,22 @@ public class RolesViewRowImpl extends ViewRowImpl {
      */
     public void setLastUpdatedBy(String value) {
         setAttributeInternal(LASTUPDATEDBY, value);
+    }
+
+    /**
+     * Gets the attribute value for EXPIRED using the alias name Expired.
+     * @return the EXPIRED
+     */
+    public String getExpired() {
+        return (String) getAttributeInternal(EXPIRED);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for EXPIRED using the alias name Expired.
+     * @param value value to set the EXPIRED
+     */
+    public void setExpired(String value) {
+        setAttributeInternal(EXPIRED, value);
     }
 
     /**
