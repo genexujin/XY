@@ -85,9 +85,11 @@
           DTSupportsMRU="true" SelectItemValueMode="ListIndex"/>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"/>
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
-    <action IterBinding="PurchaseOrderLinesViewIterator" id="CreateInsert" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
     <action IterBinding="PurchaseOrderLinesViewIterator" id="Delete" RequiresUpdateModel="false"
             Action="removeCurrentRow"/>
+    <methodAction IterBinding="PurchaseOrderLinesViewIterator" id="newRow" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="newRow" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule.PurchaseOrderLinesView"/>
   </bindings>
 </pageDefinition>

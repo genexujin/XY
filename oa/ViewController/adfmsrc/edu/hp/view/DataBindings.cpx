@@ -56,6 +56,14 @@
     <page path="/pages/admin/Roles.jsff" usageId="edu_hp_view_RolesPageDef"/>
     <page path="/pages/admin/RoleMenus.jsff" usageId="edu_hp_view_RoleMenusPageDef"/>
     <page path="/pages/admin/EmployeeRoles.jsff" usageId="edu_hp_view_EmployeeRolesPageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findBySubmitterId"
+          usageId="edu_hp_view_MyPo_MyPo_findBySubmitterIdPageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByPendingVerify"
+          usageId="edu_hp_view_MyPo_MyPo_findByPendingVerifyPageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByPendingApprove"
+          usageId="edu_hp_view_MyPo_MyPo_findByPendingApprovePageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByPendingReceive"
+          usageId="edu_hp_view_MyPo_MyPo_findByPendingReceivePageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -102,6 +110,10 @@
     <page id="edu_hp_view_RolesPageDef" path="pages.admin.RolesPageDef"/>
     <page id="edu_hp_view_RoleMenusPageDef" path="pages.admin.RoleMenusPageDef"/>
     <page id="edu_hp_view_EmployeeRolesPageDef" path="pages.admin.EmployeeRolesPageDef"/>
+    <page id="edu_hp_view_MyPo_MyPo_findBySubmitterIdPageDef" path="flows.po.MyPo_MyPo_findBySubmitterIdPageDef"/>
+    <page id="edu_hp_view_MyPo_MyPo_findByPendingVerifyPageDef" path="flows.po.MyPo_MyPo_findByPendingVerifyPageDef"/>
+    <page id="edu_hp_view_MyPo_MyPo_findByPendingApprovePageDef" path="flows.po.MyPo_MyPo_findByPendingApprovePageDef"/>
+    <page id="edu_hp_view_MyPo_MyPo_findByPendingReceivePageDef" path="flows.po.MyPo_MyPo_findByPendingReceivePageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

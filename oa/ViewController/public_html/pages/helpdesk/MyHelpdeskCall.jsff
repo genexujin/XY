@@ -1,82 +1,107 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelGroupLayout layout="vertical" id="pgl1">
-        <af:spacer width="50px" height="5px"/>
-        <af:panelHeader text="输入查询条件" id="ph1">
-            <af:spacer width="50px" height="5px"/>
-            <af:panelFormLayout id="pfl1">
-                <f:facet name="footer">
-                    <af:panelGroupLayout id="pgl2" layout="horizontal">
-                        <f:facet name="separator">
-                            <af:spacer width="10px" height="5px"/>
-                        </f:facet>
-                        <!--<af:commandButton text="查询" id="cb1" actionListener="#{pageFlowScope.MyHdCallBean.doQuery}"
+    <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="190px" bottomHeight="0px">
+        <f:facet name="top">
+            <af:panelGroupLayout layout="vertical" id="pgl1">
+                <af:panelHeader text="输入查询条件" id="ph1">
+                    <af:spacer width="50px" height="5px"/>
+                    <af:panelFormLayout id="pfl1">
+                        <f:facet name="footer">
+                            <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                <f:facet name="separator">
+                                    <af:spacer width="10px" height="5px"/>
+                                </f:facet>
+                                <!--<af:commandButton text="查询" id="cb1" actionListener="#{pageFlowScope.MyHdCallBean.doQuery}"
                                           partialSubmit="false" action="#{pageFlowScope.MyHdCallBean.doQuery2}"/>-->
-                        <af:commandButton text="查询" id="cb1" 
-                                          partialSubmit="false" action="#{pageFlowScope.MyHdCallBean.doQuery}"/>
-                        <af:resetButton text="清空条件" id="rb1"/>
-                    </af:panelGroupLayout>
-                </f:facet>
-                <af:panelGroupLayout id="pgl3" layout="horizontal">
-                    <f:facet name="separator">
-                        <af:spacer width="10px" height="5px"/>
-                    </f:facet>
-                    <af:inputText label="报修单号" id="it1"/>
-                    <af:inputDate label="提交日期自" id="id1"/>
-                    <af:inputDate label="至" id="id2"/>
-                </af:panelGroupLayout>
-                <af:panelGroupLayout id="pgl4" layout="horizontal">
-                    <f:facet name="separator">
-                        <af:spacer width="10px" height="5px"/>
-                    </f:facet>
-                    <af:inputText label="申请人" id="it2"/>
-                    <af:selectOneChoice value="#{bindings.HdState.inputValue}" label="#{bindings.HdState.label}"
-                                        required="#{bindings.HdState.hints.mandatory}"
-                                        shortDesc="#{bindings.HdState.hints.tooltip}" id="soc3">
-                        <f:selectItems value="#{bindings.HdState.items}" id="si7"/>
-                    </af:selectOneChoice>
-                    <af:inputText label="受理人" id="it3"/>
-                </af:panelGroupLayout>
-                <af:panelGroupLayout id="pgl5" layout="horizontal">
-                    <f:facet name="separator">
-                        <af:spacer width="10px" height="5px"/>
-                    </f:facet>
-                    <af:selectOneChoice label="#{bindings.ReasonLevel1.label}" id="iclov1" value="#{bindings.ReasonLevel1.inputValue}"
-                                        valueChangeListener="#{pageFlowScope.MyHdCallBean.reasonLevel1Changed}" autoSubmit="true">
-                        <f:selectItems value="#{bindings.ReasonLevel1.items}" id="soc1"/>
-                    </af:selectOneChoice>
-                    <af:selectOneChoice value="#{bindings.ReasonLevel2.inputValue}"
-                                        required="#{bindings.ReasonLevel2.hints.mandatory}"
-                                        shortDesc="#{bindings.ReasonLevel2.hints.tooltip}" id="soc2">
-                        <f:selectItems value="#{bindings.ReasonLevel2.items}" id="si6"/>
-                    </af:selectOneChoice>
-                    <af:inputComboboxListOfValues popupTitle="Search and Result Dialog" id="iclov4"/>
-                    <af:inputComboboxListOfValues label="处理结果" popupTitle="Search and Result Dialog" id="iclov5"/>
-                </af:panelGroupLayout>
-                <af:panelGroupLayout id="pgl6" layout="horizontal">
-                    <f:facet name="separator">
-                        <af:spacer width="10px" height="5px"/>
-                    </f:facet>
-                    <af:selectManyCheckbox label="用户评价" id="smc1" layout="horizontal">
+                                <af:commandButton text="查询" id="cb1" partialSubmit="false"
+                                                  action="#{pageFlowScope.MyHdCallBean.doQuery}"/>
+                                <af:resetButton text="清空条件" id="rb1"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:panelGroupLayout id="pgl3" layout="horizontal">
+                            <f:facet name="separator">
+                                <af:spacer width="10px" height="5px"/>
+                            </f:facet>
+                            <af:inputText label="报修单号" id="it1" value="#{pageFlowScope.MyHdCallBean.callReadableId}"/>
+                            <af:inputDate label="提交日期自" id="id1" value="#{pageFlowScope.MyHdCallBean.submitDateFrom}"/>
+                            <af:inputDate label="至" id="id2" value="#{pageFlowScope.MyHdCallBean.submitDateTo}"/>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl4" layout="horizontal">
+                            <f:facet name="separator">
+                                <af:spacer width="10px" height="5px"/>
+                            </f:facet>
+                            <af:selectOneChoice value="#{bindings.EmployeesView.inputValue}" label="申请人"
+                                                required="#{bindings.EmployeesView.hints.mandatory}"
+                                                shortDesc="#{bindings.EmployeesView.hints.tooltip}" id="soc4">
+                                <f:selectItems value="#{bindings.EmployeesView.items}" id="si8"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.HdState.inputValue}" label="#{bindings.HdState.label}"
+                                                required="#{bindings.HdState.hints.mandatory}"
+                                                shortDesc="#{bindings.HdState.hints.tooltip}" id="soc3">
+                                <f:selectItems value="#{bindings.HdState.items}" id="si7"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.EmployeesView2.inputValue}" label="受理人"
+                                                required="#{bindings.EmployeesView2.hints.mandatory}"
+                                                shortDesc="#{bindings.EmployeesView2.hints.tooltip}" id="soc5">
+                                <f:selectItems value="#{bindings.EmployeesView2.items}" id="si9"/>
+                            </af:selectOneChoice>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl5" layout="horizontal">
+                            <f:facet name="separator">
+                                <af:spacer width="10px" height="5px"/>
+                            </f:facet>
+                            <af:selectOneChoice label="#{bindings.ReasonLevel1.label}" id="iclov1"
+                                                value="#{bindings.ReasonLevel1.inputValue}" autoSubmit="true">
+                                <f:selectItems value="#{bindings.ReasonLevel1.items}" id="soc1"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.ReasonLevel2.inputValue}"
+                                                required="#{bindings.ReasonLevel2.hints.mandatory}" autoSubmit="true"
+                                                shortDesc="#{bindings.ReasonLevel2.hints.tooltip}" id="soc2">
+                                <f:selectItems value="#{bindings.ReasonLevel2.items}" id="si6"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.ReasonLevel3.inputValue}"
+                                                required="#{bindings.ReasonLevel3.hints.mandatory}"
+                                                shortDesc="#{bindings.ReasonLevel3.hints.tooltip}" id="soc6">
+                                <f:selectItems value="#{bindings.ReasonLevel3.items}" id="si10"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice value="#{bindings.HdResult.inputValue}" label="处理结果"
+                                                required="#{bindings.HdResult.hints.mandatory}"
+                                                shortDesc="#{bindings.HdResult.hints.tooltip}" id="soc7">
+                                <f:selectItems value="#{bindings.HdResult.items}" id="si11"/>
+                            </af:selectOneChoice>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl6" layout="horizontal">
+                            <f:facet name="separator">
+                                <af:spacer width="10px" height="5px"/>
+                            </f:facet>
+                            <!--<af:selectManyCheckbox label="用户评价" id="smc1" layout="horizontal">
                         <af:selectItem label="非常满意" value="1" id="si1"/>
                         <af:selectItem label="满意" value="2" id="si2"/>
                         <af:selectItem label="一般" value="3" id="si3"/>
                         <af:selectItem label="不满意" value="4" id="si4"/>
                         <af:selectItem label="非常不满意" value="5" id="si5"/>
-                    </af:selectManyCheckbox>
-                </af:panelGroupLayout>
-            </af:panelFormLayout>
-        </af:panelHeader>
-        <af:spacer width="50px" height="5px"/>
-        <af:panelHeader text="查询结果" id="ph2">
-        <af:spacer width="50px" height="5px"/>
+                    </af:selectManyCheckbox>-->
+                            <af:selectManyCheckbox value="#{bindings.HdEval.inputValue}" label="用户评价" id="smc2"
+                                                   layout="horizontal">
+                                <f:selectItems value="#{bindings.HdEval.items}" id="si12"/>
+                            </af:selectManyCheckbox>
+                        </af:panelGroupLayout>
+                    </af:panelFormLayout>
+                </af:panelHeader>
+                <af:spacer width="50px" height="20px"/>
+                <af:panelHeader text="查询结果" id="ph2">
+                    <af:spacer width="50px" height="5px"/>
+                </af:panelHeader>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
             <af:panelCollection id="pc1">
                 <f:facet name="menus"/>
                 <f:facet name="toolbar">
                     <af:toolbar id="t1">
                         <af:commandToolbarButton text="新建" id="ctb1" action="create"/>
-                        <af:commandToolbarButton text="Edit" id="ctb2" action="edit"/>
+                        <af:commandToolbarButton text="更改" id="ctb2" action="edit"/>
                     </af:toolbar>
                 </f:facet>
                 <f:facet name="statusbar"/>
@@ -117,6 +142,9 @@
                     </af:column>
                 </af:table>
             </af:panelCollection>
-        </af:panelHeader>
-    </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="bottom"/>
+        <f:facet name="start"/>
+        <f:facet name="end"/>
+    </af:panelStretchLayout>
 </ui:composition>

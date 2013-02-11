@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="MyPo">
-    <default-activity>MyPoPage</default-activity>
+    <default-activity>Router</default-activity>
+    <input-parameter-definition id="__9">
+      <name>fromMenu</name>
+      <value>#{pageFlowScope.fromMenu}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
     <managed-bean id="__1">
       <managed-bean-name>MyPoBean</managed-bean-name>
       <managed-bean-class>edu.hp.view.bean.po.MyPoBean</managed-bean-class>
@@ -19,6 +24,45 @@
     <view id="CreatePoPage">
       <page>/pages/po/CreatePo.jsff</page>
     </view>
+    <router id="Router">
+      <case id="__12">
+        <expression>#{pageFlowScope.fromMenu == 'verifier'}</expression>
+        <outcome>verifier</outcome>
+      </case>
+      <case id="__13">
+        <expression>#{pageFlowScope.fromMenu == 'approver'}</expression>
+        <outcome>approver</outcome>
+      </case>
+      <case id="__14">
+        <expression>#{pageFlowScope.fromMenu == 'receiver'}</expression>
+        <outcome>receiver</outcome>
+      </case>
+      <default-outcome>normalUser</default-outcome>
+    </router>
+    <method-call id="findBySubmitterId">
+      <method>#{bindings.findBySubmitterId.execute}</method>
+      <outcome>
+        <fixed-outcome>findBySubmitterId</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByPendingVerify">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>findByState</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByPendingApprove">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>findByState</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByPendingReceive">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>findByState</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__2">
       <from-activity-id>MyPoPage</from-activity-id>
       <control-flow-case id="__3">
@@ -35,6 +79,53 @@
       <control-flow-case id="__5">
         <from-outcome>newRow</from-outcome>
         <to-activity-id>CreatePoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>Router</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>normalUser</from-outcome>
+        <to-activity-id>findBySubmitterId</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__17">
+        <from-outcome>verifier</from-outcome>
+        <to-activity-id>findByPendingVerify</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__20">
+        <from-outcome>approver</from-outcome>
+        <to-activity-id>findByPendingApprove</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__25">
+        <from-outcome>receiver</from-outcome>
+        <to-activity-id>findByPendingReceive</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>findBySubmitterId</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>findBySubmitterId</from-outcome>
+        <to-activity-id>MyPoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id>findByPendingVerify</from-activity-id>
+      <control-flow-case id="__19">
+        <from-outcome>findByState</from-outcome>
+        <to-activity-id>MyPoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id>findByPendingApprove</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome>findByState</from-outcome>
+        <to-activity-id>MyPoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id>findByPendingReceive</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome>findByState</from-outcome>
+        <to-activity-id>MyPoPage</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

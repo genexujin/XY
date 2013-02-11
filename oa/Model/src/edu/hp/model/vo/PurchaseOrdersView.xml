@@ -598,5 +598,32 @@
       <Return
         Type="void"/>
     </Method>
+    <Method
+      Name="findByState"
+      MethodName="findByState">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="state"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findBySubmitterId"
+      MethodName="findBySubmitterId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="newRow1"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </ViewObject>

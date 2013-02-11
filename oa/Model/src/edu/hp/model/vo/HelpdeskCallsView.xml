@@ -142,7 +142,7 @@
       <Item Value="ReasonLevel1"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
+      <Item Value="Value"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Value"/>
@@ -160,7 +160,7 @@
       <Item Value="ReasonLevel2"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
+      <Item Value="Value"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Value"/>

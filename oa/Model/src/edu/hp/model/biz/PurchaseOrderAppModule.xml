@@ -5,7 +5,13 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="PurchaseOrderAppModule"
   Version="11.1.2.62.76"
-  ClearCacheOnRollback="true">
+  ClearCacheOnRollback="true"
+  ComponentClass="edu.hp.model.biz.PurchaseOrderAppModuleImpl"
+  ComponentInterface="edu.hp.model.biz.common.PurchaseOrderAppModule"
+  ClientProxyName="edu.hp.model.biz.client.PurchaseOrderAppModuleClient">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <ViewUsage
     Name="PurchaseOrderHistorysView"
     ViewObjectName="edu.hp.model.vo.PurchaseOrderHistorysView"/>
@@ -15,9 +21,6 @@
   <ViewUsage
     Name="ItemCategory"
     ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"/>
-  <ViewUsage
-    Name="Item"
-    ViewObjectName="edu.hp.model.vo.query.po.Item"/>
   <ViewUsage
     Name="PurchaseOrderLinesView"
     ViewObjectName="edu.hp.model.vo.PurchaseOrderLinesView"/>
@@ -31,12 +34,6 @@
     Name="EmployeesViewForLOV"
     ViewObjectName="edu.hp.model.vo.EmployeesView"/>
   <ViewLinkUsage
-    Name="ItemCategoryToItemLink"
-    ViewLinkObjectName="edu.hp.model.vo.link.ItemCategoryToItemLink"
-    SrcViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.ItemCategory"
-    DstViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.Item"
-    Reversed="false"/>
-  <ViewLinkUsage
     Name="PoToPoLineLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"
     SrcViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.PurchaseOrdersView"
@@ -48,4 +45,15 @@
     SrcViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.PurchaseOrdersView"
     DstViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.PoLineCount"
     Reversed="false"/>
+  <ClientInterface>
+    <Method
+      Name="findByUserId"
+      MethodName="findByUserId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </AppModule>

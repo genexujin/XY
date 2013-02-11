@@ -3,38 +3,38 @@
 <!---->
 <ViewLink
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="HdReasonLevel1ToLevel2Link"
+  Name="HdReasonLevel2ToLevel3Link"
   Version="11.1.2.62.76">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.link.HdReasonLevel1ToLevel2Link_LABEL"/>
+        ResId="edu.hp.model.vo.link.HdReasonLevel2ToLevel3Link_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <ViewLinkDefEnd
-    Name="ReasonLevel1"
+    Name="ReasonLevel2"
     Cardinality="1"
     Source="true"
-    Owner="edu.hp.model.vo.query.helpdesk.ReasonLevel1">
-    <DesignTime>
-      <Attr Name="_accessor" Value="true"/>
-      <Attr Name="_finderName" Value="ReasonLevel1"/>
-      <Attr Name="_isUpdateable" Value="true"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.query.helpdesk.ReasonLevel1.Value"/>
-    </AttrArray>
-  </ViewLinkDefEnd>
-  <ViewLinkDefEnd
-    Name="ReasonLevel2"
-    Cardinality="-1"
     Owner="edu.hp.model.vo.query.helpdesk.ReasonLevel2">
     <DesignTime>
+      <Attr Name="_accessor" Value="true"/>
       <Attr Name="_finderName" Value="ReasonLevel2"/>
       <Attr Name="_isUpdateable" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="edu.hp.model.vo.query.helpdesk.ReasonLevel2.ParentCode"/>
+      <Item Value="edu.hp.model.vo.query.helpdesk.ReasonLevel2.Value"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ReasonLevel3"
+    Cardinality="-1"
+    Owner="edu.hp.model.vo.query.helpdesk.ReasonLevel3">
+    <DesignTime>
+      <Attr Name="_finderName" Value="ReasonLevel3"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.vo.query.helpdesk.ReasonLevel3.ParentCode"/>
     </AttrArray>
   </ViewLinkDefEnd>
   <ResourceBundle>

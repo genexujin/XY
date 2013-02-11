@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ReasonLevel3"
+  Version="11.1.2.62.76"
+  SelectList="Lovs.CODE, 
+       Lovs.ID, 
+       Lovs.VALUE, 
+       Lovs.PARENT_CODE"
+  FromList="LOVS Lovs"
+  Where="Lovs.CODE = 'HdRsnLv3'"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.query.helpdesk.ReasonLevel3_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="Lovs"
+    Entity="edu.hp.model.eo.Lovs"/>
+  <ViewAttribute
+    Name="Code"
+    PrecisionRule="true"
+    EntityAttrName="Code"
+    EntityUsage="Lovs"
+    AliasName="CODE"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Lovs"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="Value"
+    PrecisionRule="true"
+    EntityAttrName="Value"
+    EntityUsage="Lovs"
+    AliasName="VALUE"/>
+  <ViewAttribute
+    Name="ParentCode"
+    PrecisionRule="true"
+    EntityAttrName="ParentCode"
+    EntityUsage="Lovs"
+    AliasName="PARENT_CODE"/>
+  <ViewLinkAccessor
+    Name="ReasonLevel2"
+    ViewLink="edu.hp.model.vo.link.HdReasonLevel2ToLevel3Link"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

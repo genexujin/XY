@@ -81,13 +81,47 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
         this.setApplyViewCriteriaNames(vcNames.toArray(new String[0]));
         this.executeQuery();
     }
-    
+       
     public void newRow() {
         System.err.println("here");
         Row newRow = this.createRow();
         newRow.setAttribute("State", STATE_UN_SUBMITTED);
         this.insertRow(newRow);        
         this.setCurrentRow(newRow);
+    }
+    
+    public void newRow(String userId) {
+        System.err.println("Creating new PO. SubmitterId is: " + userId);
+        Row newRow = this.createRow();
+        newRow.setAttribute("State", STATE_UN_SUBMITTED);
+        newRow.setAttribute("SubmitterId", userId);
+        this.insertRow(newRow);        
+        this.setCurrentRow(newRow);
+    }
+    
+    public void findBySubmitterId(String submitterId) {
+        this.setApplyViewCriteriaNames(null);
+        
+        System.err.println("In VO: submitterId is: " + submitterId);
+        if (submitterId != null) {
+            this.setsbmtId(submitterId);
+            ViewCriteria sIdCriteria = this.getViewCriteria("SubmitterIdCriteria");
+            this.setApplyViewCriteriaName(sIdCriteria.getName());
+            this.executeQuery();
+        }
+    }
+    
+    public void findByState(String state) {
+        this.setApplyViewCriteriaNames(null);
+        
+        System.err.println("In VO: state is: " + state);
+        
+        if (state != null) {
+            this.setOrStateId(state);
+            ViewCriteria oStateIdCriteria = this.getViewCriteria("OrderStateCriteria");
+            this.setApplyViewCriteriaName(oStateIdCriteria.getName());
+            this.executeQuery();
+        }
     }
 
 
