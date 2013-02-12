@@ -8,6 +8,8 @@
   <bindings>
     <action id="newRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="newRow"
                   IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
-                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule.PurchaseOrdersView"/>
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule.PurchaseOrdersView">
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </action>
   </bindings>
 </pageDefinition>

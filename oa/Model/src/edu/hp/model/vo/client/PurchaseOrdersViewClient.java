@@ -17,6 +17,7 @@ public class PurchaseOrdersViewClient extends ViewUsageImpl implements PurchaseO
     public PurchaseOrdersViewClient() {
     }
 
+
     public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo,
                         String submitterId) {
         Object _ret =
@@ -24,8 +25,26 @@ public class PurchaseOrdersViewClient extends ViewUsageImpl implements PurchaseO
         return;
     }
 
+    public void findByState(String state) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"findByState",new String [] {"java.lang.String"},new Object[] {state});
+        return;
+    }
+
+    public void findBySubmitterId(String submitterId) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"findBySubmitterId",new String [] {"java.lang.String"},new Object[] {submitterId});
+        return;
+    }
+
     public void newRow() {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this,"newRow",null,null);
+        return;
+    }
+
+    public void newRow(String userId) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"newRow",new String [] {"java.lang.String"},new Object[] {userId});
         return;
     }
 }

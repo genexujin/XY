@@ -11,4 +11,10 @@ public interface PurchaseOrdersView extends ViewObject {
                  String submitterId);
 
     void newRow();
+
+    void findByState(String state);
+
+    void findBySubmitterId(String submitterId);
+
+    void newRow(String userId);
 }

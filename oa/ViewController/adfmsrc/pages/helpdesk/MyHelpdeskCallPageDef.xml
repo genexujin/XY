@@ -16,6 +16,16 @@
               id="ReasonLevel2Iterator"/>
     <iterator Binds="Root.HelpdeskCallsAppModule1.HdState" DataControl="RootAppModuleDataControl" RangeSize="25"
               id="HdStateIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.EmployeesView" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="EmployeesViewIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.EmployeesView2" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="EmployeesView2Iterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel3" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ReasonLevel3Iterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HdResult" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="HdResultIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HdEval" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="HdEvalIterator"/>
   </executables>
   <bindings>
     <tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView11">
@@ -58,6 +68,40 @@
       <AttrNames>
         <Item Value="Value"/>
       </AttrNames>
+    </list>
+    <list IterBinding="EmployeesViewIterator" ListOperMode="navigation" ListIter="EmployeesViewIterator"
+          id="EmployeesView" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="EmployeesView2Iterator" ListOperMode="navigation" ListIter="EmployeesView2Iterator"
+          id="EmployeesView2" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ReasonLevel3Iterator" ListOperMode="navigation" ListIter="ReasonLevel3Iterator"
+          id="ReasonLevel3" DTSupportsMRU="true" SelectItemValueMode="ListObject" NullValueFlag="start"
+          NullValueId="aaa">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="HdResultIterator" ListOperMode="navigation" ListIter="HdResultIterator" id="HdResult"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject" NullValueFlag="start">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="HdEvalIterator" ListOperMode="multiSelect" ListIter="HdEvalIterator" id="HdEval"
+          SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Value"/>
+      </ListDisplayAttrNames>
     </list>
   </bindings>
 </pageDefinition>

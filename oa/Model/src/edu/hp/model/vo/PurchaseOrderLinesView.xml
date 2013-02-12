@@ -25,9 +25,13 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.PurchaseOrderLinesViewImpl"
+  ComponentInterface="edu.hp.model.vo.common.PurchaseOrderLinesView"
+  ClientProxyName="edu.hp.model.vo.client.PurchaseOrderLinesViewClient">
   <DesignTime>
     <Attr Name="_diagramName" Value="物品描述"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <ViewAccessor
     Name="PoLineState"
@@ -226,7 +230,8 @@
     EntityAttrName="State"
     EntityUsage="PurchaseOrderLines"
     AliasName="STATE"
-    LOVName="LOV_State">
+    LOVName="LOV_State"
+    DefaultValue="1">
     <DesignTime>
       <Attr Name="_diagramName" Value="行状态"/>
     </DesignTime>
@@ -343,4 +348,12 @@
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="newRow"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

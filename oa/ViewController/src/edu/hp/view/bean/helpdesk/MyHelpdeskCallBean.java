@@ -4,6 +4,8 @@ import edu.hp.view.utils.ADFUtils;
 
 import edu.hp.view.utils.JSFUtils;
 
+import java.sql.Date;
+
 import java.util.Iterator;
 
 import java.util.List;
@@ -36,9 +38,11 @@ import org.apache.myfaces.trinidad.model.CollectionModel;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
 public class MyHelpdeskCallBean {
-    private final String reasonLevel1IteratorName = "ReasonLevel1Iterator";
-    private final String reasonLevel2IteratorName = "ReasonLevel2Iterator";
     private RichTable resultTable;
+    
+    private String callReadableId;
+    private Date submitDateFrom;
+    private Date submitDateTo;
 
     public MyHelpdeskCallBean() {
         
@@ -54,7 +58,7 @@ public class MyHelpdeskCallBean {
     }
     
     public void setCurrentReasonLevel1(final int index) {
-        DCIteratorBinding it = ADFUtils.findIterator(reasonLevel1IteratorName);
+        DCIteratorBinding it = ADFUtils.findIterator("ReasonLevel1Iterator");
         it.setCurrentRowIndexInRange(index);
     }
     
@@ -139,5 +143,29 @@ public class MyHelpdeskCallBean {
 //        ADFUtils.setBoundAttributeValue("CallId", 100);        
         OperationBinding oper = ADFUtils.findOperation("Commit");
         oper.execute();
+    }
+
+    public String getCallReadableId() {
+        return callReadableId;
+    }
+    
+    public void setCallReadableId(String rId) {
+        this.callReadableId = rId;
+    }
+    
+    public void setSubmitDateFrom(Date submitDateFrom) {
+        this.submitDateFrom = submitDateFrom;
+    }
+
+    public Date getSubmitDateFrom() {
+        return submitDateFrom;
+    }
+
+    public void setSubmitDateTo(Date submitDateTo) {
+        this.submitDateTo = submitDateTo;
+    }
+
+    public Date getSubmitDateTo() {
+        return submitDateTo;
     }
 }

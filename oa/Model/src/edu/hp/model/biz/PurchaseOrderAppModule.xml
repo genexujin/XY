@@ -5,7 +5,13 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="PurchaseOrderAppModule"
   Version="11.1.2.62.76"
-  ClearCacheOnRollback="true">
+  ClearCacheOnRollback="true"
+  ComponentClass="edu.hp.model.biz.PurchaseOrderAppModuleImpl"
+  ComponentInterface="edu.hp.model.biz.common.PurchaseOrderAppModule"
+  ClientProxyName="edu.hp.model.biz.client.PurchaseOrderAppModuleClient">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <ViewUsage
     Name="PurchaseOrderHistorysView"
     ViewObjectName="edu.hp.model.vo.PurchaseOrderHistorysView"/>
@@ -27,7 +33,6 @@
   <ViewUsage
     Name="EmployeesViewForLOV"
     ViewObjectName="edu.hp.model.vo.EmployeesView"/>
- 
   <ViewLinkUsage
     Name="PoToPoLineLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"
@@ -40,4 +45,15 @@
     SrcViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.PurchaseOrdersView"
     DstViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.PoLineCount"
     Reversed="false"/>
+  <ClientInterface>
+    <Method
+      Name="findByUserId"
+      MethodName="findByUserId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </AppModule>

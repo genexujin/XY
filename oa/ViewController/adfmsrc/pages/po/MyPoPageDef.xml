@@ -19,12 +19,6 @@
         <Item Value="Value"/>
       </AttrNames>
     </list>
-    <list IterBinding="ItemCategoryIterator" ListOperMode="navigation" ListIter="ItemCategoryIterator"
-          id="ItemCategory" DTSupportsMRU="true" SelectItemValueMode="ListObject">
-      <AttrNames>
-        <Item Value="Value"/>
-      </AttrNames>
-    </list>
     <tree IterBinding="PurchaseOrdersViewIterator" id="PurchaseOrdersView">
       <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrdersView" Name="PurchaseOrdersView0">
         <AttrNames>
@@ -56,6 +50,12 @@
           id="EmployeesViewForLOV" DTSupportsMRU="true" SelectItemValueMode="ListObject">
       <AttrNames>
         <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
+    <list ListOperMode="navigation" IterBinding="ItemCategoryIterator" ListIter="ItemCategoryIterator" 
+          id="ItemCategory" NullValueFlag="start">
+      <AttrNames>
+        <Item Value="Value"/>
       </AttrNames>
     </list>
   </bindings>

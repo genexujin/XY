@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <TaskFlowCall
+      id="TaskFlowCall2">
+      <property
+         name="taskFlowId">MyPo</property>
+      <property
+         name="activityId">MyPo</property>
+      <property
+         name="documentReference">/WEB-INF/flows/po/MyPo.xml</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>MyPo&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">179.5459</property>
+      <property
+         name="x">345.0</property>
+   </TaskFlowCall>
+</SDM>

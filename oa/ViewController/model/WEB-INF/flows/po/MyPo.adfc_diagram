@@ -12,17 +12,17 @@
       <property
          name="page">/pages/po/MyPo.jsff</property>
       <property
-         name="start">true</property>
+         name="start">false</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>MyPoPage&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>MyPoPage&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">175.79297</property>
+         name="y">170.98828</property>
       <property
          name="pageFragment">true</property>
       <property
-         name="x">245.0</property>
+         name="x">486.0</property>
    </View>
    <MethodCall
       id="MethodCall3">
@@ -33,9 +33,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">175.39062</property>
+         name="y">171.28711</property>
       <property
-         name="x">507.0</property>
+         name="x">699.0</property>
    </MethodCall>
    <ControlFlowCase
       islink="true"
@@ -45,7 +45,7 @@
       <property
          name="fromOutcome">create</property>
       <property
-         name="sdm:polyPoints">R50,376.0,175.44238,376.0,175.04004,L50</property>
+         name="sdm:polyPoints">R50,592.5,170.6377,592.5,170.93652,L50</property>
    </ControlFlowCase>
    <View
       id="View5">
@@ -58,11 +58,11 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">176.19531</property>
+         name="y">170.39062</property>
       <property
          name="pageFragment">true</property>
       <property
-         name="x">718.0</property>
+         name="x">872.0</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -72,7 +72,7 @@
       <property
          name="fromOutcome">newRow</property>
       <property
-         name="sdm:polyPoints">R50,612.5,175.04004,612.5,175.84473,L50</property>
+         name="sdm:polyPoints">R50,785.5,170.93652,785.5,170.04004,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -82,6 +82,153 @@
       <property
          name="fromOutcome">edit</property>
       <property
-         name="sdm:polyPoints">T50,245.0,121.44238,718.0,121.44238,T50</property>
+         name="sdm:polyPoints">T50,486.0,116.04004,872.0,116.04004,T50</property>
+   </ControlFlowCase>
+   <Router
+      id="Router8">
+      <property
+         name="activityId">Router</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Router&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Router&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">171.39062</property>
+      <property
+         name="x">76.0</property>
+   </Router>
+   <MethodCall
+      id="MethodCall10">
+      <property
+         name="activityId">findBySubmitterId</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>findBySubmitterId&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">170.14355</property>
+      <property
+         name="x">275.0</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase11"
+      from="Router8"
+      to="MethodCall10">
+      <property
+         name="fromOutcome">normalUser</property>
+      <property
+         name="sdm:polyPoints">R50,175.5,171.04004,175.5,169.79297,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase12"
+      from="MethodCall10"
+      to="View2">
+      <property
+         name="fromOutcome">findBySubmitterId</property>
+      <property
+         name="sdm:polyPoints">R50,380.5,169.79297,380.5,170.6377,L50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall13">
+      <property
+         name="activityId">findByPendingVerify</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>findByPendingVerify&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">68.19531</property>
+      <property
+         name="x">273.0</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase14"
+      from="Router8"
+      to="MethodCall13">
+      <property
+         name="fromOutcome">verifier</property>
+      <property
+         name="sdm:polyPoints">T50,76.0,67.84473,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase15"
+      from="MethodCall13"
+      to="View2">
+      <property
+         name="fromOutcome">findByState</property>
+      <property
+         name="sdm:polyPoints">R50,482.5,67.84473,T44</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall16">
+      <property
+         name="activityId">findByPendingApprove</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>findByPendingApprove&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">271.84473</property>
+      <property
+         name="x">275.0</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase17"
+      from="Router8"
+      to="MethodCall16">
+      <property
+         name="fromOutcome">approver</property>
+      <property
+         name="sdm:polyPoints">B50,76.0,271.49414,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase18"
+      from="MethodCall16"
+      to="View2">
+      <property
+         name="fromOutcome">findByState</property>
+      <property
+         name="sdm:polyPoints">R50,486.0,271.49414,B50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall19">
+      <property
+         name="activityId">findByPendingReceive</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>findByPendingReceive&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">373.59766</property>
+      <property
+         name="x">275.0</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase20"
+      from="MethodCall19"
+      to="View2">
+      <property
+         name="fromOutcome">findByState</property>
+      <property
+         name="sdm:polyPoints">R50,489.5,373.24707,B56</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase21"
+      from="Router8"
+      to="MethodCall19">
+      <property
+         name="fromOutcome">receiver</property>
+      <property
+         name="sdm:polyPoints">B44,72.5,373.24707,L50</property>
    </ControlFlowCase>
 </SDM>

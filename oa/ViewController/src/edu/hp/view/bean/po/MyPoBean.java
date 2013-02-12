@@ -21,6 +21,7 @@ import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Timestamp;
 import oracle.jbo.uicli.binding.JUCtrlListBinding;
 
 public class MyPoBean {
@@ -37,10 +38,12 @@ public class MyPoBean {
         System.out.println("Expression value is: " + expression);
         String poStateId = getLovAttrValue("PoState", "FlexCol1");
         System.out.println("PoState Id is: " + poStateId);
-        String itemCategoryId = getLovAttrValue("ItemCategory", "Id");
-        System.out.println("ItemCategory Id is: " + itemCategoryId);
+//        String itemCategoryId = getLovAttrValue("ItemCategory", "Id");
+//        System.out.println("ItemCategory Id is: " + itemCategoryId);
         String submitterId = getLovAttrValue("EmployeesViewForLOV", "Id");
         System.out.println("submitterId is: " + submitterId);
+        String newItemCategory = getLovAttrValue("ItemCategory", "FlexCol1");
+        System.out.println("ItemCategory is: " + newItemCategory);
         
         System.out.println("OrderReadableId is: " + orderReadableId);
         System.out.println("SubmitDateFrom is: " + submitDateFrom);
@@ -49,7 +52,7 @@ public class MyPoBean {
         OperationBinding binding = ADFUtils.findOperation("doQuery");
         binding.getParamsMap().put("oRdId", orderReadableId);
         binding.getParamsMap().put("state", poStateId);
-        binding.getParamsMap().put("category", itemCategoryId);
+        binding.getParamsMap().put("category", newItemCategory);
         binding.getParamsMap().put("submitDateFrom", submitDateFrom);
         binding.getParamsMap().put("submitDateTo", submitDateTo);
         binding.getParamsMap().put("submitterId", submitterId);
@@ -102,85 +105,95 @@ public class MyPoBean {
     public RichTable getResultTable() {
         return resultTable;
     }
+    
+    public String savePo() {
+        computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
+        commit();
+        return null;
+    }
 
     public void submitPo(ActionEvent actionEvent) {
-        //First need to compute submit total for lines and for whole order
-        DCIteratorBinding lineIt = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
-        Row[] rows = lineIt.getAllRowsInRange();
-        double masterTotal = 0;
-        if (rows != null && rows.length > 0) {
-            for (Row row : rows) {
-                double price = 0;
-                BigDecimal p = (BigDecimal)row.getAttribute("SubmitPrice");
-                if (p != null) {
-                    price = p.doubleValue();
-                }
-                long quantity = 0;
-                BigDecimal q = (BigDecimal)row.getAttribute("SubmitQuantity");
-                if (q != null) {
-                    quantity = q.longValue();
-                }
-                System.out.println("SubmitPrice is: " + price + " SubmitQuantity is: " + quantity);
-                row.setAttribute("SubmitTotal", price * quantity);
-                masterTotal += price * quantity;
-            }
-        }
-        
-        System.out.println("Master SubmitTotal is: " + masterTotal);
-        DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrdersViewIterator");
-        Row masterRow = it.getCurrentRow();
-        masterRow.setAttribute("SubmitTotal", masterTotal);
-
-        masterRow.setAttribute("State", "2");        
+        computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
+        //If no need to verify for this category, then go to "待审批3"
+        changeState("2");
+        setSubmitDate();
 //        toState("2");
+        commit();
     }
 
     public void verifyPo(ActionEvent actionEvent) {
-        //First need to compute verify total for whole order
+        double verifyTotal = computeTotal("SubmitPrice", "PurchaseQuantity", null, "VerifyTotal");
+        if (verifyTotal == 0) {
+            System.out.println("VerifyTotal is 0. No need to approve.");
+            changeState("6");
+        } else {
+            changeState("3");
+        }
+        
+//        toState("3");
+        commit();
+    }
+
+    public void approvePo(ActionEvent actionEvent) {
+//        toState("5");
+        changeState("5");
+        commit();
+    }
+    
+    public void finishPo(ActionEvent actionEvent) {
+        computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", null);
+//        toState("6");
+        changeState("6");
+        commit();
+    }
+    
+    public void rejectPo(ActionEvent actionEvent) {
+//        toState("4");
+        changeState("4");
+        commit();
+    }
+    
+    public void cancelPo(ActionEvent actionEvent) {
+//        toState("7");
+        changeState("7");
+        commit();
+    }
+    
+    private double computeTotal(String priceAttr, String quantityAttr, String lineTotalAttr, String masterTotalAttr) {
         DCIteratorBinding lineIt = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
         Row[] rows = lineIt.getAllRowsInRange();
         double masterTotal = 0;
-        if (rows != null && rows.length > 0) {
+        if (rows == null || rows.length == 0) {
+            System.err.println("THere is no row at all!");
+        } else {
+            System.out.println("Sometimes the getAllRowsInRange() is not reliable. Here the rows count is: " + rows.length);
             for (Row row : rows) {
                 double price = 0;
-                BigDecimal p = (BigDecimal)row.getAttribute("SubmitPrice");
+                BigDecimal p = (BigDecimal)row.getAttribute(priceAttr);
                 if (p != null) {
                     price = p.doubleValue();
                 }
                 long quantity = 0;
-                BigDecimal q = (BigDecimal)row.getAttribute("PurchaseQuantity");
+                BigDecimal q = (BigDecimal)row.getAttribute(quantityAttr);
                 if (q != null) {
                     quantity = q.longValue();
                 }
-                System.out.println("SubmitPrice is: " + price + " PurchaseQuantity is: " + quantity);
+                System.out.println(priceAttr + " is: " + price + " " + quantityAttr +" is: " + quantity);
+                if (lineTotalAttr != null) {
+                    row.setAttribute(lineTotalAttr, price * quantity);
+                }
                 masterTotal += price * quantity;
+            }
+
+            System.out.println("Master " + masterTotalAttr + " is: " + masterTotal);
+            if (masterTotalAttr != null) {
+                DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrdersViewIterator");
+                Row masterRow = it.getCurrentRow();
+                masterRow.setAttribute(masterTotalAttr, masterTotal);
             }
         }
         
-        System.out.println("Master VerifyTotal is: " + masterTotal);
-        DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrdersViewIterator");
-        Row masterRow = it.getCurrentRow();
-        masterRow.setAttribute("VerifyTotal", masterTotal);
-        
-        masterRow.setAttribute("State", "3");
-        
-//        toState("3");
-    }
-
-    public void approvePo(ActionEvent actionEvent) {
-        toState("5");
-    }
-    
-    public void finishPo(ActionEvent actionEvent) {
-        toState("6");
-    }
-    
-    public void rejectPo(ActionEvent actionEvent) {
-        toState("4");
-    }
-    
-    public void cancelPo(ActionEvent actionEvent) {
-        toState("7");
+        return masterTotal;
     }
     
     private void toState(String state) {
@@ -189,6 +202,16 @@ public class MyPoBean {
         //row.setAttribute("State", state);
         ADFUtils.setBoundAttributeValue("State", state);
     //        ADFUtils.setBoundAttributeValue("CallId", 100);
+        commit();
+    }
+
+    private void changeState(String state) {
+        DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrdersViewIterator");
+        Row row = it.getCurrentRow();
+        row.setAttribute("State", state);
+    }
+    
+    private void commit() {
         OperationBinding oper = ADFUtils.findOperation("Commit");
         oper.execute();
     }
@@ -330,5 +353,18 @@ public class MyPoBean {
         DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrdersViewIterator");
         Row masterRow = it.getCurrentRow();
         masterRow.setAttribute("VerifyTotal", masterTotal);
+    }
+
+    private void setSubmitDate() {
+        DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrdersViewIterator");
+        Row row = it.getCurrentRow();
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        System.out.println("Current time is: " + now);
+        row.setAttribute("CreateAt", now);
+    }
+
+    public void newPoLine(ActionEvent actionEvent) {
+        OperationBinding oper = ADFUtils.findOperation("newRow");
+        oper.execute();
     }
 }
