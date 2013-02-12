@@ -36,7 +36,7 @@
           <Item Value="IsSmsSent"/>
           <Item Value="State"/>
           <Item Value="Title"/>
-          <Item Value="ToRoleId"/>
+          <Item Value="ToUserId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -54,6 +54,15 @@
                   Action="invokeMethod" MethodName="setForUnread" IsViewObjectMethod="true"
                   DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HomeModule.UserNotifications"/>
+    <methodAction id="markAsRead" RequiresUpdateModel="true" Action="invokeMethod" MethodName="markAsRead"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HomeModule.NotificationsView">
+      <NamedData NDName="id" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
   </bindings>
   <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
     <event name="openTaskEvent" eventType="Action Event"/>

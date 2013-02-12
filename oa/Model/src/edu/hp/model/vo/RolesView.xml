@@ -29,6 +29,10 @@
     Name="roleId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="roleName"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="Roles"
     Entity="edu.hp.model.eo.Roles"/>
@@ -119,6 +123,42 @@
         Operator="="
         Conjunction="AND"
         Value=":roleId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="queryByName"
+    ViewObjectName="edu.hp.model.vo.RolesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="RolesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="RoleName"
+        ViewAttribute="RoleName"
+        Operator="="
+        Conjunction="AND"
+        Value=":roleName"
         IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>

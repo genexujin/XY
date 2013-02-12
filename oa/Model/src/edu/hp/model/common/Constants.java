@@ -16,6 +16,19 @@ public class Constants {
     public static final String STATE_TASK_COMPLETED = "COMPLETED";
     public static final String CONTEXT_TYPE_VEHICLE = "VEHICLE";
     public static final String CONTEXT_TYPE_CONFRM = "CONFRM";
+    
+    public static final String ROLE_OFFICE_MGR="办公室主任";
+    public static final String ROLE_ZONGWU_MGR="总务处主任";
+    public static final String ROLE_VP="副院长";
+    public static final String ROLE_CEO="院长";
+    public static final String ROLE_BUYER="采购员";
+    public static final String ROLE_USER="普通用户";
+    public static final String ROLE_CONFRM_ADMIN="会议室管理员";
+    public static final String ROLE_CLSRM_ADMIN="教室管理员";
+    
+    public static final String CONTEXT_OBJ_VEH= "VEH";
+    public static final String CONTEXT_OBJ_VEH_ID = "id";
+    
 
     public static final String CONTEXT_VEHICLE_TASKFLOW =
         "/WEB-INF/flows/vehicle/vehicle-dashboard-btf.xml#vehicle-dashboard-btf";

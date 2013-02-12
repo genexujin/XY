@@ -11,20 +11,26 @@
        Notifications.CONTENT, 
        Notifications.EVENT_DATE, 
        Notifications.IS_SMS_SENT, 
-       Notifications.TO_ROLE_ID, 
        Notifications.PRIORITY, 
-       Notifications.STATE"
+       Notifications.STATE, 
+       Notifications.TO_USER_ID"
   FromList="NOTIFICATIONS Notifications"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
   ComponentClass="edu.hp.model.vo.NotificationsViewImpl"
+  ComponentInterface="edu.hp.model.vo.common.NotificationsView"
+  ClientProxyName="edu.hp.model.vo.client.NotificationsViewClient"
   RowClass="edu.hp.model.vo.NotificationsViewRowImpl">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="id"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="Notifications"
     Entity="edu.hp.model.eo.Notifications"/>
@@ -66,12 +72,7 @@
     EntityAttrName="IsSmsSent"
     EntityUsage="Notifications"
     AliasName="IS_SMS_SENT"/>
-  <ViewAttribute
-    Name="ToRoleId"
-    PrecisionRule="true"
-    EntityAttrName="ToRoleId"
-    EntityUsage="Notifications"
-    AliasName="TO_ROLE_ID"/>
+
   <ViewAttribute
     Name="Priority"
     PrecisionRule="true"
@@ -84,4 +85,57 @@
     EntityAttrName="State"
     EntityUsage="Notifications"
     AliasName="STATE"/>
+  <ViewAttribute
+    Name="ToUserId"
+    PrecisionRule="true"
+    EntityAttrName="ToUserId"
+    EntityUsage="Notifications"
+    AliasName="TO_USER_ID"/>
+  <ViewCriteria
+    Name="findById"
+    ViewObjectName="edu.hp.model.vo.NotificationsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="NotificationsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":id"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ClientInterface>
+    <Method
+      Name="markAsRead"
+      MethodName="markAsRead">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="id"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

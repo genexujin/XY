@@ -5,13 +5,28 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="RootAppModule"
   Version="11.1.2.62.76"
-  ClearCacheOnRollback="true">
+  ClearCacheOnRollback="true"
+  ComponentClass="edu.hp.model.biz.RootAppModuleImpl"
+  ComponentInterface="edu.hp.model.biz.common.RootAppModule"
+  ClientProxyName="edu.hp.model.biz.client.RootAppModuleClient">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
         ResId="edu.hp.model.biz.RootAppModule_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <ViewUsage
+    Name="Notifications"
+    ViewObjectName="edu.hp.model.vo.NotificationsView"/>
+  <ViewUsage
+    Name="Tasks"
+    ViewObjectName="edu.hp.model.vo.TasksView"/>
+  <ViewUsage
+    Name="ReceiverMobileList"
+    ViewObjectName="edu.hp.model.vo.query.note.ReceiverMobileListView"/>
   <AppModuleUsage
     Name="AdminModule"
     FullName="edu.hp.model.biz.AdminModule"
@@ -52,4 +67,42 @@
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="createTask"
+      MethodName="createTask">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="title"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectType"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="roleName"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="enableSMS"
+      MethodName="enableSMS">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="enalbed"
+        Type="java.lang.Boolean"/>
+    </Method>
+    <Method
+      Name="sendNotification"
+      MethodName="sendNotification">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="notification"
+        Type="edu.hp.model.pojo.Notification"/>
+    </Method>
+  </ClientInterface>
 </AppModule>

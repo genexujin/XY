@@ -1,15 +1,21 @@
 package edu.hp.view.bean.vehicle;
 
 import edu.hp.model.common.Constants;
+import edu.hp.model.pojo.Notification;
+import edu.hp.view.bean.BaseBean;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
+
+import java.util.Date;
 
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.domain.DBSequence;
 
-public class VehicleApplicationBean {
+
+public class VehicleApplicationBean extends BaseBean {
 
     private String queryState;
 
@@ -28,10 +34,33 @@ public class VehicleApplicationBean {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_INITIAL)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_PENDING_REVIEW);
-            ADFUtils.commit("车辆预订已提交审核！", "车辆预订提交审核失败，请核对输入的信息或联系管理员！");
+            boolean success = ADFUtils.commit("车辆预订已提交审核！", "车辆预订提交审核失败，请核对输入的信息或联系管理员！");
+            if (success) {
+                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+                String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+                String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+                String title = (String)ADFUtils.getBoundAttributeValue("Title");
+
+                String noteTitle = "您为事由：" + title + " 所做的用车申请已提交审核 ";
+                String noteContent = " 提交时间：" + new Date();
+                //send to requester
+                sendNotification(noteTitle, noteContent, userId, null);
+                //send to approver
+                String apprvTitle = "有新的用车申请等待您的审核";
+                String apprvContent = " 事由：" + title + " 申请人： " + userDisplayName;
+                sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_OFFICE_MGR);
+                
+                //create task
+                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_OFFICE_MGR);
+
+                ADFUtils.findOperation("Commit").execute();
+            }else{
+                ADFUtils.setBoundAttributeValue("State", Constants.STATE_INITIAL);
+            }
         }
         return null;
-    }
+    }   
+
 
     public String approve() {
         String state = (String)ADFUtils.getBoundAttributeValue("State");

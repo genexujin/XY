@@ -127,5 +127,30 @@
         <Item Value="N"/>
       </ValueList>
     </button>
+    <attributeValues IterBinding="VehicleDMLIterator" id="ContactId">
+      <AttrNames>
+        <Item Value="ContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="sendNotification" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendNotification" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.sendNotification_RootAppModuleDataControl_dataProvider_sendNotification_result">
+      <NamedData NDName="notification" NDType="edu.hp.model.pojo.Notification"/>
+    </methodAction>
+    <methodAction id="createTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createTask" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.createTask_RootAppModuleDataControl_dataProvider_createTask_result">
+      <NamedData NDName="title" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="roleName" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

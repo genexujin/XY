@@ -18,6 +18,9 @@ public class HomeOperationBean {
     private UIXIterator taskIterator;
     private UIXIterator notesIterator;
     private int rangeSize = 10;
+    private int selectDefault = 0;
+    private String defaultTaskState = "PENDING";
+    private String defaultNoteState = "UNREAD";
 
     public HomeOperationBean() {
     }
@@ -40,10 +43,12 @@ public class HomeOperationBean {
 
 
     public void refreshNotes(ActionEvent actionEvent) {
+        ADFUtils.findIterator("UserNotificationsIterator").executeQuery();
         this.getNotesIterator().setFirst(0);
     }
 
     public void refreshTaskList(ActionEvent actionEvent) {
+        ADFUtils.findIterator("UserTasksIterator").executeQuery();
         this.getTaskIterator().setFirst(0);
     }
 
@@ -145,5 +150,43 @@ public class HomeOperationBean {
         FacesContext context = JSFUtils.getFacesContext();
         context.getApplication().getNavigationHandler().handleNavigation(context, null, "openTask");
         // Add event code here...
+    }
+
+    public void setSelectDefault(int selectDefault) {
+        this.selectDefault = selectDefault;
+    }
+
+    public int getSelectDefault() {
+        return selectDefault;
+    }
+
+    public void setDefaultNoteState(String defaultNoteState) {
+        this.defaultNoteState = defaultNoteState;
+    }
+
+    public String getDefaultNoteState() {
+        return defaultNoteState;
+    }
+
+    public void setDefaultTaskState(String defaultTaskState) {
+        this.defaultTaskState = defaultTaskState;
+    }
+
+    public String getDefaultTaskState() {
+        return defaultTaskState;
+    }
+
+    public void markAsRead(ActionEvent actionEvent) {
+        UIComponent component = actionEvent.getComponent();
+        String id = (String)component.getAttributes().get("noteId");
+        //System.err.println(id);
+        if(id!=null){
+            OperationBinding op = ADFUtils.findOperation("markAsRead");
+            op.getParamsMap().put("id", id);
+            op.execute();
+            OperationBinding commit = ADFUtils.findOperation("Commit");
+            commit.execute();
+            refreshNotes(actionEvent);
+        }
     }
 }

@@ -70,5 +70,20 @@
             RequiresUpdateModel="false" Action="rollbackTransaction"/>
     <list IterBinding="VehicleDMLIterator" StaticList="false" Uses="LOV_VehicleName" id="VehicleName"
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="sendNotification" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendNotification" IsViewObjectMethod="false">
+      <NamedData NDName="notification" NDValue="" NDType="edu.hp.model.pojo.Notification"/>
+    </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="UserId">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="ContactId">
+      <AttrNames>
+        <Item Value="ContactId"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

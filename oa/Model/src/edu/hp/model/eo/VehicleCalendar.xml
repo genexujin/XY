@@ -483,6 +483,18 @@
     Name="VehicleCalendar_Rule_6"
     MethodName="validateVehicle"
     ResId="VEHICLE_CANNOT_NULL"/>
+  <validation:ExpressionValidationBean
+    Name="VehicleCalendar_Rule_7"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="VEHICLE_TIME_CANNOT_NULL"/>
+      <validation:Item
+        Value="errorId"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[StartTime!=null&&EndTime!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

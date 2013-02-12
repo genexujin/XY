@@ -1,5 +1,6 @@
 package edu.hp.view.bean.common;
 
+import edu.hp.view.bean.BaseBean;
 import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
@@ -43,7 +44,7 @@ import oracle.jbo.Row;
 import oracle.jbo.domain.Array;
 
 
-public class CalendarBean {
+public class CalendarBean  extends BaseBean{
 
     protected boolean needCheckConflict = true;
     protected List<OACalendarProvider> _providerList;

@@ -36,8 +36,15 @@
   PageIterMode="Full"
   UseGlueCode="false"
   FetchMode="FETCH_AS_NEEDED"
-  ComponentClass="edu.hp.model.common.BaseView"
+  ComponentClass="edu.hp.model.vo.EmployeesViewImpl"
   Where="Employees.EXPIRED &lt;> 'Y'">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Variable
+    Name="userId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="Managers"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
@@ -293,8 +300,7 @@
     EntityAttrName="Id"
     EntityUsage="Employees"
     AliasName="ID"
-    IsUpdateable="while_insert"
-    IsQueriable="false"/>
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="DisplayName"
     IsUpdateable="false"
@@ -375,6 +381,42 @@
         ViewAttribute="DeptId"
         Operator="="
         Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByUserId"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EmployeesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":userId"
+        IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>

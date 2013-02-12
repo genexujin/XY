@@ -8,8 +8,10 @@ import cn.emay.sdk.client.api.Client;
 import java.util.Date;
 
 public class SingletonSMSClient {
+    
     private static Client client = null;
     public static String password="220235";
+    
 
     private SingletonSMSClient() {
     }
