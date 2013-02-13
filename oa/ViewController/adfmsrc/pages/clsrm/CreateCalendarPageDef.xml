@@ -74,5 +74,10 @@
         <Item Value="LocationName"/>
       </AttrNames>
     </list>
+    <attributeValues IterBinding="ClsRmCalDMLViewIterator" id="UserId">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

@@ -88,6 +88,14 @@
     </DesignTime>
   </Containee>
   <Containee
+    Name="note"
+    PackageName="edu.hp.model.vo.query.note"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
     Name="po"
     PackageName="edu.hp.model.vo.query.po"
     ObjectType="JboPackage">

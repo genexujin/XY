@@ -17,7 +17,8 @@
               <af:toolbar id="t1">
                 <af:selectOneChoice label="选择状态" 
                                     valueChangeListener="#{viewScope.HomeOperationBean.onTaskSateChange}" id="soc1"
-                                    simple="false" autoSubmit="true">
+                                    simple="false" autoSubmit="true"
+                                    value="#{viewScope.HomeOperationBean.defaultTaskState}">
                   <af:selectItem label="待处理" value="PENDING" id="si1"/>
                   <af:selectItem label="已处理" value="COMPLETED" id="si2"/>
                 </af:selectOneChoice>
@@ -48,18 +49,26 @@
               </af:panelGroupLayout>
             </f:facet>
             <f:facet name="center">
-              <af:panelGroupLayout id="pgl1" layout="vertical">
+              <af:panelGroupLayout id="pgl1" layout="scroll">
                 <af:spacer width="10" height="5" id="s12"/>
-                <af:panelList id="pl2">
-                  <af:iterator id="i1" value="#{bindings.UserTasks.collectionModel}" var="task" rows="10"
-                               binding="#{viewScope.HomeOperationBean.taskIterator}">
+                <af:iterator id="i1" value="#{bindings.UserTasks.collectionModel}" var="task" rows="10"
+                             binding="#{viewScope.HomeOperationBean.taskIterator}">
+                  <af:panelGroupLayout id="pgl5" layout="horizontal"
+                                       inlineStyle="border-width:thin; outline-width:thin;">
+                    <af:spacer width="15" height="10" id="s10"/>
+                    <af:icon name="required" id="i3"/>
+                    <af:spacer width="3" height="10" id="s13"/>
+                    <af:outputText value="#{task.AssignedDate}" id="ot6">
+                      <af:convertDateTime type="both" dateStyle="short" timeStyle="short"/>
+                    </af:outputText>
+                    <af:spacer width="10" height="10" id="s14"/>
                     <af:commandImageLink id="ot4" text="#{task.Title}"
                                          actionListener="#{viewScope.HomeOperationBean.openTask}">
                       <af:clientAttribute value="#{task.ContextObjectId}" name="contextObjectId"/>
                       <af:clientAttribute value="#{task.ContextObjectType}" name="contextObjectType"/>
                     </af:commandImageLink>
-                  </af:iterator>
-                </af:panelList>
+                  </af:panelGroupLayout>
+                </af:iterator>
               </af:panelGroupLayout>
             </f:facet>
             <f:facet name="start"/>
@@ -72,7 +81,8 @@
             <af:toolbar id="t2">
               <af:selectOneChoice label="选择状态" 
                                     valueChangeListener="#{viewScope.HomeOperationBean.onNoteStateChange}" id="soc2"
-                                    simple="false" autoSubmit="true">
+                                    simple="false" autoSubmit="true"
+                                  value="#{viewScope.HomeOperationBean.defaultNoteState}">
                   <af:selectItem label="未读" value="UNREAD" id="si3"/>
                   <af:selectItem label="已读" value="READ" id="si4"/>
                 </af:selectOneChoice>
@@ -102,15 +112,29 @@
               </af:panelGroupLayout>
             </f:facet>
             <f:facet name="center">
-              <af:panelGroupLayout id="pgl2" layout="vertical" valign="bottom">
+              <af:panelGroupLayout id="pgl2" layout="scroll" valign="bottom">
                 <af:spacer width="10" height="5" id="s11"/>
-                <af:panelList id="pl3">
-                  <af:iterator id="i2" value="#{bindings.UserNotifications.collectionModel}" var="notes" rows="10"
-                               binding="#{viewScope.HomeOperationBean.notesIterator}">
-                    <af:commandImageLink id="cil1" text="#{notes.Title}"
-                                         action="#{viewScope.HomeOperationBean.goToTaskPage}"/>
-                  </af:iterator>
-                </af:panelList>
+                <af:iterator id="i2" value="#{bindings.UserNotifications.collectionModel}" var="notes" rows="10"
+                             binding="#{viewScope.HomeOperationBean.notesIterator}">
+                  <af:showDetail disclosed="true" id="sd1">
+                    <f:facet name="prompt">
+                      <af:panelGroupLayout id="g1" layout="horizontal">
+                        <af:outputText value="#{notes.EventDate}" id="ot7">
+                          <af:convertDateTime dateStyle="short" timeStyle="short" type="both"/>
+                        </af:outputText>
+                        <af:spacer width="10" height="10" id="s15"/>
+                        <af:commandImageLink id="cil1" text="#{notes.Title}"
+                                             actionListener="#{viewScope.HomeOperationBean.markAsRead}"
+                                             disabled="#{notes.State=='READ'}" inlineStyle="font-size:105%;">
+                          <af:clientAttribute name="noteId" value="#{notes.Id}"/>
+                        </af:commandImageLink>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                    <af:outputText value="#{notes.Content}" id="ot5"
+                                   inlineStyle="color:rgb(99,99,99);"/>
+                  </af:showDetail>
+                  <af:spacer width="10" height="5" id="s9"/>
+                </af:iterator>
               </af:panelGroupLayout>
             </f:facet>
             <f:facet name="start"/>

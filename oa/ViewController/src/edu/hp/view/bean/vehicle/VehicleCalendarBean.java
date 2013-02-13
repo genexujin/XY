@@ -1,5 +1,8 @@
 package edu.hp.view.bean.vehicle;
 
+import edu.hp.model.common.Constants;
+import edu.hp.model.pojo.Notification;
+import edu.hp.view.bean.BaseBean;
 import edu.hp.view.bean.common.CalendarBean;
 import edu.hp.view.bean.common.OACalendarActivity;
 import edu.hp.view.utils.ADFUtils;
@@ -22,7 +25,7 @@ import oracle.jbo.domain.Timestamp;
 public class VehicleCalendarBean extends CalendarBean {
 
     public VehicleCalendarBean() {
-        
+
         needCheckConflict = false;
         refreshCalendarOptName = "refreshCalendar";
         providerNumOfPplCol = "FlexCol1";
@@ -158,9 +161,26 @@ public class VehicleCalendarBean extends CalendarBean {
         UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
         this.refreshCalendar(calendar);
     }
-    
-    public String save(){
-        ADFUtils.commit("车辆预订已保存！", "车辆预订保存失败，请核对输入的信息或联系管理员！");
+
+    public String save() {
+        boolean success = ADFUtils.commit("车辆预订已保存！", "车辆预订保存失败，请核对输入的信息或联系管理员！");
+        if (success)
+            sendNotification();
         return null;
+    }
+
+    private void sendNotification() {
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        if (state != null && state.equals(Constants.STATE_TRIP_PLANNED)) {
+            String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
+            String contactId = (String)ADFUtils.getBoundAttributeValue("ContactId");
+            String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+            String title = (String)ADFUtils.getBoundAttributeValue("Title");
+
+            this.sendNotification("您的车辆预订: " + title + " 已调度完成 ", " 使用的车辆为：" + vehicleName, userId, null);
+            this.sendNotification("您的车辆预订: " + title + " 已调度完成 ", " 使用的车辆为：" + contactId, userId, null);
+
+            ADFUtils.findOperation("Commit").execute();
+        }
     }
 }

@@ -33,7 +33,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="NOTIFICATIONS">
+    TableName="NOTIFICATIONS"
+    DefaultValue="DEFAULT">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -48,9 +49,10 @@
     Name="Priority"
     ColumnName="PRIORITY"
     SQLType="NUMERIC"
-    Type="java.math.BigDecimal"
+    Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
-    TableName="NOTIFICATIONS">
+    TableName="NOTIFICATIONS"
+    DefaultValue="1">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -130,18 +132,6 @@
     </Properties>
   </Attribute>
   <Attribute
-    Name="ToRoleId"
-    Precision="20"
-    ColumnName="TO_ROLE_ID"
-    SQLType="VARCHAR"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    TableName="NOTIFICATIONS">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="20"/>
-    </DesignTime>
-  </Attribute>
-  <Attribute
     Name="State"
     Precision="20"
     ColumnName="STATE"
@@ -149,7 +139,19 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="NOTIFICATIONS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
     <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_NOTE_UNREAD]]></TransientExpression>
+  </Attribute>
+  <Attribute
+    Name="ToUserId"
+    Precision="20"
+    ColumnName="TO_USER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NOTIFICATIONS">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>

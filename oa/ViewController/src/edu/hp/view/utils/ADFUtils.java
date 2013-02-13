@@ -56,8 +56,8 @@ public class ADFUtils {
     /**
      * ensure the calling page has a binding operation called Commit.
      */
-    public static void commit(String msg, String errMsg) {
-
+    public static boolean commit(String msg, String errMsg) {
+        boolean success = true;
         try {
             OperationBinding operation = findOperation("Commit");
             operation.execute();
@@ -69,13 +69,15 @@ public class ADFUtils {
                     System.err.println(error);
                 }
                 JSFUtils.addFacesErrorMessage(errMsg);
+                success = false;
             }
         } catch (Exception e) {
+            success=false;
             JSFUtils.addFacesErrorMessage(errMsg);
             e.printStackTrace();
         }
 
-
+        return success;
     }
     public static void createInsert(String errMsg) {
 

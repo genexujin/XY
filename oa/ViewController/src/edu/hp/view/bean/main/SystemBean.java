@@ -1,5 +1,6 @@
 package edu.hp.view.bean.main;
 
+import edu.hp.model.common.Constants;
 import edu.hp.view.utils.JSFUtils;
 
 import java.util.HashMap;
@@ -76,17 +77,21 @@ public class SystemBean extends UITabBean {
         String title = null;
         if (contextObjectType != null && contextObjectId != null && !contextObjectType.equals("EXP") &&
             !contextObjectId.equals("EXP")) {
-
+            
             JSFUtils.setExpressionValue(CONTEXT_OBJECT_TYPE, "EXP");
             JSFUtils.setExpressionValue(CONTEXT_OBJECT_ID, "EXP");
-
-            if (contextObjectType.equals(edu.hp.model.common.Constants.CONTEXT_TYPE_VEHICLE)) {
-                taskFlowId = edu.hp.model.common.Constants.CONTEXT_VEHICLE_TASKFLOW;
-                title = "车辆申请";
-
-            }
             parameters = new HashMap();
-            parameters.put("id", contextObjectId);
+            if (contextObjectType.equals(Constants.CONTEXT_TYPE_VEHICLE)) {
+                taskFlowId = Constants.CONTEXT_VEHICLE_TASKFLOW;
+                title = "车辆申请审核/调度";
+                parameters.put("id", contextObjectId);
+            }else if (contextObjectType.equals(Constants.CONTEXT_TYPE_CONFRM)){
+                taskFlowId = Constants.CONTEXT_CONFRM_TASKFLOW;
+                title = "会议室申请审核";
+                parameters.put("id", contextObjectId);
+            }
+            
+            
             _launchActivity(title, taskFlowId, parameters, false);
         }
 

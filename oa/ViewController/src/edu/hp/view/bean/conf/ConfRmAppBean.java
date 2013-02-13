@@ -1,6 +1,7 @@
 package edu.hp.view.bean.conf;
 
 import edu.hp.model.common.Constants;
+import edu.hp.view.bean.BaseBean;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
@@ -8,8 +9,10 @@ import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.domain.DBSequence;
 
-public class ConfRmAppBean {
+
+public class ConfRmAppBean extends BaseBean {
     public ConfRmAppBean() {
     }
 
@@ -40,7 +43,31 @@ public class ConfRmAppBean {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_PENDING_REVIEW);
             if (ensureTimeConflicts()) {
                 //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
-                ADFUtils.commit("会议室预订已提交审核！", "会议室预订提交审核失败，请核对输入的信息或联系管理员！");
+                boolean success = ADFUtils.commit("会议室预订已提交审核！", "会议室预订提交审核失败，请核对输入的信息或联系管理员！");
+
+                if (success) {
+                    String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+                    String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+                    String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+                    String title = (String)ADFUtils.getBoundAttributeValue("Title");
+
+                    String noteTitle = "您为会议主题：" + title + " 所做的会议室申请已提交审核。 ";
+                    String dateStr = getDateString();
+                    String noteContent = " 提交时间：" + dateStr;
+                    //send to requester
+                    sendNotification(noteTitle, noteContent, userId, null);
+
+                    String apprvTitle = "有新的会议室申请等待您的审核。";
+                    String apprvContent = " 会议主题：" + title + " 申请人： " + userDisplayName;
+                    sendNotification(noteTitle, apprvContent, null, Constants.ROLE_CONFRM_ADMIN);
+
+                    //create task
+                    createTask(id, Constants.CONTEXT_TYPE_CONFRM, apprvTitle, Constants.ROLE_CONFRM_ADMIN);
+
+                    ADFUtils.findOperation("Commit").execute();
+                } else {
+                    ADFUtils.setBoundAttributeValue("State", state);
+                }
             } else {
                 JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
             }
@@ -53,7 +80,24 @@ public class ConfRmAppBean {
         if (state != null && state.equals(Constants.STATE_PENDING_REVIEW)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_REJECTED);
             //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
-            ADFUtils.commit("会议室预订已拒绝！", "会议室预订审核拒绝失败，请核对输入的信息或联系管理员！");
+            boolean success = ADFUtils.commit("会议室预订已拒绝！", "会议室预订审核拒绝失败，请核对输入的信息或联系管理员！");
+            if (success) {
+                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+                //String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+                String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+                String title = (String)ADFUtils.getBoundAttributeValue("Title");
+
+                String noteTitle = "您为会议主题：" + title + " 所做的会议室申请审核未通过。 ";
+                String dateStr = getDateString();
+                String noteContent = " 审核时间：" + dateStr;
+                //send to requester
+                sendNotification(noteTitle, noteContent, userId, null);
+                completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_CONFRM_ADMIN);
+                
+                ADFUtils.findOperation("Commit").execute();
+            } else {
+                ADFUtils.setBoundAttributeValue("State", state);
+            }
         }
         return null;
     }
@@ -63,7 +107,22 @@ public class ConfRmAppBean {
         if (state != null && !state.equals(Constants.STATE_REVIEWED)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_CANCELED);
             //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
-            ADFUtils.commit("会议室预订已取消！", "会议室预订取消失败，请核对输入的信息或联系管理员！");
+            boolean success = ADFUtils.commit("会议室预订已取消！", "会议室预订取消失败，请核对输入的信息或联系管理员！");
+            if (success) {
+//                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+//                String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+                String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+                String title = (String)ADFUtils.getBoundAttributeValue("Title");
+
+                String noteTitle = "您为会议主题：" + title + " 所做的会议室申请已取消。 ";
+                String dateStr = getDateString();
+                String noteContent = " 取消时间：" + dateStr;
+                //send to requester
+                sendNotification(noteTitle, noteContent, userId, null);
+                ADFUtils.findOperation("Commit").execute();
+            } else {
+                ADFUtils.setBoundAttributeValue("State", state);
+            }
         }
         return null;
     }
@@ -74,7 +133,23 @@ public class ConfRmAppBean {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
             if (ensureTimeConflicts()) {
                 //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
-                ADFUtils.commit("会议室预订已审核！", "会议室预订审核失败，请核对输入的信息或联系管理员！");
+                boolean success =ADFUtils.commit("会议室预订已审核！", "会议室预订审核失败，请核对输入的信息或联系管理员！");
+                if (success) {
+                    String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+//                    String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+                    String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+                    String title = (String)ADFUtils.getBoundAttributeValue("Title");
+
+                    String noteTitle = "您为会议主题：" + title + " 所做的会议室申请已通过审核。 ";
+                    String dateStr = getDateString();
+                    String noteContent = " 审核时间：" + dateStr;
+                    //send to requester
+                    sendNotification(noteTitle, noteContent, userId, null);
+                    completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_CONFRM_ADMIN);
+                    ADFUtils.findOperation("Commit").execute();
+                } else {
+                    ADFUtils.setBoundAttributeValue("State", state);
+                }
             } else {
                 JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
             }
@@ -91,7 +166,7 @@ public class ConfRmAppBean {
         return result;
 
     }
-    
+
     public void delete(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             ADFUtils.findOperation("deleteByPK").execute();

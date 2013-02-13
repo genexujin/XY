@@ -32,15 +32,13 @@
     Type="java.lang.String"/>
   <SQLQuery><![CDATA[select distinct notifications.id ID, notifications.category category,
 notifications.title title, notifications.content content,
-notifications.to_role_id to_role_id, notifications.event_date event_date,
+notifications.to_user_id to_user_id, notifications.event_date event_date,
 notifications.is_sms_sent is_sms_sent,
 notifications.state state
 from
-employees,notifications,roles,role_users
+employees,notifications
 where
-employees.id = role_users.user_id
-and role_users.role_id = roles.role_id
-and roles.role_id = notifications.to_role_id
+employees.id = notifications.to_user_id
 and employees.user_name =:userName
 ORDER BY notifications.event_date desc]]></SQLQuery>
   <ViewAttribute
@@ -104,15 +102,15 @@ ORDER BY notifications.event_date desc]]></SQLQuery>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
-    Name="ToRoleId"
+    Name="ToUserId"
     IsUpdateable="false"
     IsPersistent="false"
     PrecisionRule="true"
     Precision="20"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    AliasName="TO_ROLE_ID"
-    Expression="TO_ROLE_ID"
+    AliasName="TO_USER_ID"
+    Expression="TO_USER_ID"
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>

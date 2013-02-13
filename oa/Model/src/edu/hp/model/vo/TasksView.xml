@@ -19,7 +19,23 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.TasksViewImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Variable
+    Name="contextId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="contextType"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="roleId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="Tasks"
     Entity="edu.hp.model.eo.Tasks"/>
@@ -29,7 +45,8 @@
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Tasks"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="Title"
     PrecisionRule="true"
@@ -84,4 +101,56 @@
     EntityAttrName="ExecutorDisplayName"
     EntityUsage="Tasks"
     AliasName="EXECUTOR_DISPLAY_NAME"/>
+  <ViewCriteria
+    Name="findByContext"
+    ViewObjectName="edu.hp.model.vo.TasksView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="TasksViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ContextObjectType"
+        ViewAttribute="ContextObjectType"
+        Operator="="
+        Conjunction="AND"
+        Value=":contextType"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ContextObjectId"
+        ViewAttribute="ContextObjectId"
+        Operator="="
+        Conjunction="AND"
+        Value=":contextId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AssigneeRoleId"
+        ViewAttribute="AssigneeRoleId"
+        Operator="="
+        Conjunction="AND"
+        Value=":roleId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
 </ViewObject>

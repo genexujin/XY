@@ -174,7 +174,7 @@
                                             label="#{bindings.VehicleName.label}"
                                             required="#{bindings.VehicleName.hints.mandatory}"
                                             shortDesc="#{bindings.VehicleName.hints.tooltip}" id="soc3"
-                                            rendered="#{pageFlowScope.fromMenu=='planner'}">
+                                            rendered="#{bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['总务处主任']}">
                             <f:selectItems value="#{bindings.VehicleName.items}" id="si3"/>
                         </af:selectOneChoice>
                         <af:inputText value="#{bindings.TripStart.inputValue}" label="#{bindings.TripStart.hints.label}"
@@ -272,18 +272,15 @@
                                           rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}"/>
                         <af:spacer width="10" height="10" id="s9"/>
                         <af:commandButton text="审核" id="cb3" icon="/images/icons/task.png"
-                                          visible="#{bindings.State.inputValue=='待审核'}"
-                                          action="#{viewScope.vehicleApplicationBean.approve}"
-                                          rendered="#{pageFlowScope.fromMenu=='approver'}"/>
+                                          visible="#{bindings.State.inputValue=='待审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['办公室主任']}"
+                                          action="#{viewScope.vehicleApplicationBean.approve}"/>
                         <af:spacer width="10" height="10" id="s10"/>
                         <af:commandButton id="cb7" text="完成调度" icon="/images/icons/activity.png"
-                                          visible="#{bindings.State.inputValue=='已审核'}"
-                                          rendered="#{pageFlowScope.fromMenu=='planner'}"
+                                          visible="#{bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['总务处主任']}"
                                           action="#{viewScope.vehicleApplicationBean.planTrip}"/>
                         <af:spacer width="10" height="10" id="s11"/>
                         <af:commandButton id="cb4" text="拒绝" icon="/images/icons/terminate.png"
-                                          visible="#{bindings.State.inputValue=='待审核'||(bindings.State.inputValue=='已审核'&amp;&amp;pageFlowScope.fromMenu=='planner')}"
-                                          rendered="#{pageFlowScope.fromMenu=='approver' || pageFlowScope.fromMenu=='planner'}"
+                                          visible="#{(bindings.State.inputValue=='待审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['办公室主任'])||(bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['总务处主任'])}"
                                           action="#{viewScope.vehicleApplicationBean.reject}"/>
                         <af:spacer width="10" height="10" id="s1"/>
                         <af:commandButton text="取消" id="cb5" icon="/images/icons/undo.png"

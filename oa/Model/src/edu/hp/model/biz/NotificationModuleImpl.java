@@ -42,66 +42,66 @@ public class NotificationModuleImpl extends ApplicationModuleImpl {
         return (NotificationsViewImpl)findViewObject("Notifications");
     }
 
-    public void sendNotification(String title, String content, String category, Timestamp eventDate,
-                                 BigDecimal priority, String roleId) {
-
-
-        try {
-            //GET VO
-            NotificationsViewImpl ntfVO = getNotifications();
-
-            //CREATE AN EMPTY NEW ROW
-            NotificationsViewRowImpl newRow = (NotificationsViewRowImpl)ntfVO.createRow();
-            newRow.setCategory(category);
-            newRow.setContent(content);
-            newRow.setEventDate(eventDate);
-            newRow.setIsSmsSent(isSmsSent);
-            newRow.setPriority(priority);
-            newRow.setTitle(title);
-            newRow.setToRoleId(roleId);
-
-            //INSERT IT INTO THE CURRENT RESULT SET
-            ntfVO.insertRow(newRow);
-
-            //COMMIT THE TRANSACTION
-            this.getDBTransaction().commit();
-
-
-        } catch (Exception e) {
-
-            this.getDBTransaction().rollback();
-            //TODO add code to send message to UI
-        }
-        
-        //send the text by SMS
-        if (isSmsSent.equals("Y")) {
-            //get role vo
-            RolesViewImpl roleView = getRoles();
-            //query by id
-            roleView.queryById(roleId);
-            //get emp vo which linked to current row of role vo
-            ViewObjectImpl employeesOfRole = this.getEmployeesOfRole();
-            //-1 indicates that we will fetch all rows
-            employeesOfRole.setRangeSize(-1);
-            //execte the query to get result
-            employeesOfRole.executeQuery();
-            //iteration over the result set
-            Row[] allRowsInRange = employeesOfRole.getAllRowsInRange();
-            if (allRowsInRange != null && allRowsInRange.length > 0) {
-                //get all phone nos
-                String[] phoneNos = new String[allRowsInRange.length];
-
-                for (int i = 0; i < allRowsInRange.length; i++) {
-                    phoneNos[i] = (String)allRowsInRange[i].getAttribute("Mobile");
-                }
-                //send the text
-                int sent = SMSManager.sendSMS(phoneNos, TEXT_PREFIX + content + TEXT_SURFIX, priority.intValue());
-            }
-
-        }
-
-
-    }
+//    public void sendNotification(String title, String content, String category, Timestamp eventDate,
+//                                 BigDecimal priority, String roleId) {
+//
+//
+//        try {
+//            //GET VO
+//            NotificationsViewImpl ntfVO = getNotifications();
+//
+//            //CREATE AN EMPTY NEW ROW
+//            NotificationsViewRowImpl newRow = (NotificationsViewRowImpl)ntfVO.createRow();
+//            newRow.setCategory(category);
+//            newRow.setContent(content);
+//            newRow.setEventDate(eventDate);
+//            newRow.setIsSmsSent(isSmsSent);
+//            newRow.setPriority(priority);
+//            newRow.setTitle(title);
+//            newRow.setToRoleId(roleId);
+//
+//            //INSERT IT INTO THE CURRENT RESULT SET
+//            ntfVO.insertRow(newRow);
+//
+//            //COMMIT THE TRANSACTION
+//            this.getDBTransaction().commit();
+//
+//
+//        } catch (Exception e) {
+//
+//            this.getDBTransaction().rollback();
+//            //TODO add code to send message to UI
+//        }
+//        
+//        //send the text by SMS
+//        if (isSmsSent.equals("Y")) {
+//            //get role vo
+//            RolesViewImpl roleView = getRoles();
+//            //query by id
+//            roleView.queryById(roleId);
+//            //get emp vo which linked to current row of role vo
+//            ViewObjectImpl employeesOfRole = this.getEmployeesOfRole();
+//            //-1 indicates that we will fetch all rows
+//            employeesOfRole.setRangeSize(-1);
+//            //execte the query to get result
+//            employeesOfRole.executeQuery();
+//            //iteration over the result set
+//            Row[] allRowsInRange = employeesOfRole.getAllRowsInRange();
+//            if (allRowsInRange != null && allRowsInRange.length > 0) {
+//                //get all phone nos
+//                String[] phoneNos = new String[allRowsInRange.length];
+//
+//                for (int i = 0; i < allRowsInRange.length; i++) {
+//                    phoneNos[i] = (String)allRowsInRange[i].getAttribute("Mobile");
+//                }
+//                //send the text
+//                int sent = SMSManager.sendSMS(phoneNos, TEXT_PREFIX + content + TEXT_SURFIX, priority.intValue());
+//            }
+//
+//        }
+//
+//
+//    }
 
     /**
      * Container's getter for RolesView1.
