@@ -39,6 +39,9 @@
   <ViewUsage
     Name="HdEval"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.HdEval"/>
+  <ViewUsage
+    Name="HdLovView"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdLovView"/>
   <ViewLinkUsage
     Name="EmpHelpdeskCalleeViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"

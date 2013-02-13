@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HdLovView"
+  Version="11.1.2.62.76"
+  SelectList="HelpdeskCalls.CALL_EVAL, 
+       HelpdeskCalls.CALL_ID, 
+       HelpdeskCalls.CALL_RESULT, 
+       HelpdeskCalls.CALLEE_ID, 
+       HelpdeskCalls.CALLER_ID, 
+       HelpdeskCalls.REASON_LEVEL_1, 
+       HelpdeskCalls.REASON_LEVEL_2, 
+       HelpdeskCalls.REASON_LEVEL_3, 
+       HelpdeskCalls.STATE"
+  FromList="HELPDESK_CALLS HelpdeskCalls"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.query.helpdesk.HdLovView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="HdResult"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdResult"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="HdState"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdState"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="HdEval"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdEval"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ReasonLevel1_1"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ReasonLevel2_1"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ReasonLevel3_1"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel3"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EmployeesView"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_CallResult"
+    ListVOName="HdResult"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CallResult"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_State"
+    ListVOName="HdState"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="State"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CallEval"
+    ListVOName="HdEval"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CallEval"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReasonLevel1"
+    ListVOName="ReasonLevel1_1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReasonLevel1"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReasonLevel2"
+    ListVOName="ReasonLevel2_1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReasonLevel2"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReasonLevel3"
+    ListVOName="ReasonLevel3_1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReasonLevel3"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CallerId"
+    ListVOName="EmployeesView"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CallerId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CalleeId"
+    ListVOName="EmployeesView"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CalleeId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="HelpdeskCalls"
+    Entity="edu.hp.model.eo.HelpdeskCalls"/>
+  <ViewAttribute
+    Name="CallEval"
+    PrecisionRule="true"
+    EntityAttrName="CallEval"
+    EntityUsage="HelpdeskCalls"
+    AliasName="CALL_EVAL"
+    LOVName="LOV_CallEval">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CallId"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="CallId"
+    EntityUsage="HelpdeskCalls"
+    AliasName="CALL_ID"/>
+  <ViewAttribute
+    Name="CallResult"
+    PrecisionRule="true"
+    EntityAttrName="CallResult"
+    EntityUsage="HelpdeskCalls"
+    AliasName="CALL_RESULT"
+    LOVName="LOV_CallResult">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CalleeId"
+    PrecisionRule="true"
+    EntityAttrName="CalleeId"
+    EntityUsage="HelpdeskCalls"
+    AliasName="CALLEE_ID"
+    LOVName="LOV_CalleeId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CallerId"
+    PrecisionRule="true"
+    EntityAttrName="CallerId"
+    EntityUsage="HelpdeskCalls"
+    AliasName="CALLER_ID"
+    LOVName="LOV_CallerId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReasonLevel1"
+    PrecisionRule="true"
+    EntityAttrName="ReasonLevel1"
+    EntityUsage="HelpdeskCalls"
+    AliasName="REASON_LEVEL_1"
+    LOVName="LOV_ReasonLevel1">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReasonLevel2"
+    PrecisionRule="true"
+    EntityAttrName="ReasonLevel2"
+    EntityUsage="HelpdeskCalls"
+    AliasName="REASON_LEVEL_2"
+    LOVName="LOV_ReasonLevel2">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReasonLevel3"
+    PrecisionRule="true"
+    EntityAttrName="ReasonLevel3"
+    EntityUsage="HelpdeskCalls"
+    AliasName="REASON_LEVEL_3"
+    LOVName="LOV_ReasonLevel3">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="State"
+    PrecisionRule="true"
+    EntityAttrName="State"
+    EntityUsage="HelpdeskCalls"
+    AliasName="STATE"
+    LOVName="LOV_State">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -38,6 +38,7 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         
         //Set the lov's value, so on page the correct user will be selected by default in the lov
         ViewObjectImpl eLov = this.getEmployeesViewForLOV();
+        eLov.setRangeSize(-1);
         eLov.executeQuery();
         Row[] rows = eLov.getAllRowsInRange();
         System.err.println("The lov rows num: " + rows.length);
