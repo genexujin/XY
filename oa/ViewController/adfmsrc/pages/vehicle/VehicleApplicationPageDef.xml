@@ -152,5 +152,12 @@
         <Item Value="Id"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="completeTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="completeTask" IsViewObjectMethod="false">
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="roleName" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

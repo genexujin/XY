@@ -104,5 +104,20 @@
         Name="notification"
         Type="edu.hp.model.pojo.Notification"/>
     </Method>
+    <Method
+      Name="completeTask"
+      MethodName="completeTask">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="contextObjectType"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="roleName"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </AppModule>

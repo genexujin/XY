@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <task-flow-definition id="confRm-approval-btf">
+  <task-flow-definition id="confRm-dashboard-btf">
     <default-activity>confRm-application-btf</default-activity>
-    <data-control-scope>
-      <isolated/>
-    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>id</name>
+      <value>#{pageFlowScope.id}</value>
+    </input-parameter-definition>
     <task-flow-call id="confRm-application-btf">
       <task-flow-reference>
         <document>/WEB-INF/flows/confRm/confRm-application-btf.xml</document>
         <id>confRm-application-btf</id>
       </task-flow-reference>
-      <input-parameter id="__1">
-        <name>forApproval</name>
-        <value>approver</value>
-      </input-parameter>
       <input-parameter id="__2">
         <name>actId</name>
-        <value></value>
+        <value>#{pageFlowScope.id}</value>
+      </input-parameter>
+      <input-parameter id="__3">
+        <name>forApproval</name>
+        <value>false</value>
       </input-parameter>
     </task-flow-call>
     <use-page-fragments/>

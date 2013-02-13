@@ -32,5 +32,7 @@ public class Constants {
 
     public static final String CONTEXT_VEHICLE_TASKFLOW =
         "/WEB-INF/flows/vehicle/vehicle-dashboard-btf.xml#vehicle-dashboard-btf";
+    public static final String CONTEXT_CONFRM_TASKFLOW =
+        "/WEB-INF/flows/confRm/confRm-dashboard-btf.xml#confRm-dashboard-btf";
 
 }

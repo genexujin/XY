@@ -40,8 +40,8 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
 
     public void updateEndTime(String clsRmCalId, Timestamp endTime) {
         this.queryByPK(clsRmCalId);
-        System.err.println("to update id: "+clsRmCalId);
-        System.err.println(endTime);
+        //System.err.println("to update id: "+clsRmCalId);
+        //System.err.println(endTime);
         Row[] rows = this.getAllRowsInRange();
         if (rows != null && rows.length > 0) {
             System.err.println("Row id: " + rows[0].getAttribute("Id"));
@@ -64,6 +64,7 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
     }
 
     public void queryByPK(String confRmCalId) {
+        //System.err.println("query by pk");
         super.queryByVC("findById", "confRmCalId", confRmCalId);
     }
 

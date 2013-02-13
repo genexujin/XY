@@ -13,4 +13,7 @@ public interface RootAppModule extends ApplicationModule {
     void enableSMS(Boolean enalbed);
 
     void sendNotification(Notification notification);
+
+
+    void completeTask(String contextObjectType, String contextObjectId, String roleName);
 }

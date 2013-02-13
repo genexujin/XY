@@ -23,12 +23,11 @@
     </view>
     <router id="ifNormalUser">
       <case id="__7">
-        <expression>#{pageFlowScope.forApproval!='true' and (sessionScope.LoginUserBean.isUserInRole['系统管理员'] or
-                    sessionScope.LoginUserBean.isUserInRole['会议室管理员']) }</expression>
+        <expression>#{pageFlowScope.forApproval=='admin'}</expression>
         <outcome>adminUser</outcome>
       </case>
       <case id="__12">
-        <expression>#{pageFlowScope.forApproval=='true'}</expression>
+        <expression>#{pageFlowScope.forApproval=='approver'}</expression>
         <outcome>approvals</outcome>
       </case>
       <case id="__18">

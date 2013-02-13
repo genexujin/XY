@@ -2,6 +2,7 @@ package edu.hp.model.biz.client;
 
 import edu.hp.model.biz.common.ClassRmModule;
 import edu.hp.model.biz.common.HomeModule;
+import edu.hp.model.biz.common.PurchaseOrderAppModule;
 import edu.hp.model.biz.common.RootAppModule;
 
 import edu.hp.model.pojo.Notification;
@@ -50,12 +51,26 @@ public class RootAppModuleClient extends ApplicationModuleImpl implements RootAp
         return (ApplicationModule)findApplicationModule("VehicleModule");
     }
 
-    public ApplicationModule getPurchaseOrderAppModule() {
-        return (ApplicationModule)findApplicationModule("PurchaseOrderAppModule");
+    public PurchaseOrderAppModule getPurchaseOrderAppModule() {
+        return (PurchaseOrderAppModule)findApplicationModule("PurchaseOrderAppModule");
     }
 
     public HomeModule getHomeModule() {
         return (HomeModule)findApplicationModule("HomeModule");
+    }
+
+
+    public void completeTask(String contextObjectType, String contextObjectId) {
+        Object _ret =
+            this.riInvokeExportedMethod(this,"completeTask",new String [] {"java.lang.String","java.lang.String"},new Object[] {contextObjectType, contextObjectId});
+        return;
+    }
+
+
+    public void completeTask(String contextObjectType, String contextObjectId, String roleName) {
+        Object _ret =
+            this.riInvokeExportedMethod(this,"completeTask",new String [] {"java.lang.String","java.lang.String","java.lang.String"},new Object[] {contextObjectType, contextObjectId, roleName});
+        return;
     }
 
     public void createTask(String title, String contextObjectType, String contextObjectId, String roleName) {

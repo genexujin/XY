@@ -1,6 +1,7 @@
 package edu.hp.model.biz;
 
 import edu.hp.model.biz.common.RootAppModule;
+import edu.hp.model.common.Constants;
 import edu.hp.model.pojo.Notification;
 import edu.hp.model.sms.SMSManager;
 import edu.hp.model.vo.EmployeesViewImpl;
@@ -9,8 +10,8 @@ import edu.hp.model.vo.NotificationsViewImpl;
 import edu.hp.model.vo.NotificationsViewRowImpl;
 import edu.hp.model.vo.RolesViewImpl;
 
+import edu.hp.model.vo.TasksViewImpl;
 import edu.hp.model.vo.query.note.ReceiverMobileListViewImpl;
-
 
 
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                     if (receivers != null && receivers.length > 0) {
                         //ArrayList<String> mobileList = new ArrayList<String>();
                         phoneList = new String[receivers.length];
-                        int i=0;
+                        int i = 0;
                         for (Row receiver : receivers) {
                             NotificationsViewRowImpl newRow = (NotificationsViewRowImpl)ntfVO.createRow();
                             //newRow.setCategory(category);
@@ -92,14 +93,15 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                             String mobile = (String)receiver.getAttribute("Mobile");
                             //System.err.println(mobile);
                             phoneList[i++] = mobile;
-//                            if (mobile != null)
-//                                mobileList.add(mobile);
+                            //                            if (mobile != null)
+                            //                                mobileList.add(mobile);
                         }
                         //String[] phoneList = (String[])mobileList.toArray();
-                        SMSManager.sendSMS(phoneList, notification.getTitle() +notification.getContent(), notification.getPriority());
+                        SMSManager.sendSMS(phoneList, notification.getTitle() + notification.getContent(),
+                                           notification.getPriority());
                     }
                 }
-            }else if(notification.getUserId()!=null){
+            } else if (notification.getUserId() != null) {
                 //System.err.println("sent user notification");
                 AdminModuleImpl adminModule = (AdminModuleImpl)this.getAdminModule();
                 EmployeesViewImpl employees = (EmployeesViewImpl)adminModule.getEmployees();
@@ -111,13 +113,14 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                 newRow.setEventDate(new Timestamp(System.currentTimeMillis()));
                 newRow.setIsSmsSent(SMSManager.isEnabled() ? "Y" : "N");
                 newRow.setPriority(new Number(notification.getPriority()));
-                newRow.setTitle(notification.getTitle());                
+                newRow.setTitle(notification.getTitle());
                 newRow.setToUserId(notification.getUserId());
                 //INSERT IT INTO THE CURRENT RESULT SET
                 ntfVO.insertRow(newRow);
-                if(mobile!=null){
-                    String[] phoneList = new String[]{mobile};
-                    SMSManager.sendSMS(phoneList, notification.getTitle() + notification.getContent(), notification.getPriority());
+                if (mobile != null) {
+                    String[] phoneList = new String[] { mobile };
+                    SMSManager.sendSMS(phoneList, notification.getTitle() + notification.getContent(),
+                                       notification.getPriority());
                 }
             }
         }
@@ -163,6 +166,33 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
     }
 
     /**
+     * 将任务状态置为完成状态，没有commit
+     * @param contextObjectType
+     * @param contextObjectId
+     */
+    public void completeTask(String contextObjectType, String contextObjectId, String roleName) {
+        if (contextObjectType != null && contextObjectId != null && roleName != null) {
+
+            Row[] roles = this.getRoleIdByName(roleName);
+            if (roles != null && roles.length > 0) {
+                String roleId = ((DBSequence)roles[0].getAttribute("RoleId")).toString();
+                TasksViewImpl taskVO = (TasksViewImpl)this.getTasks();
+                taskVO.setcontextId(contextObjectId);
+                taskVO.setcontextType(contextObjectType);
+                taskVO.setroleId(roleId);
+                taskVO.setApplyViewCriteriaNames(null);
+                taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContext"));
+                taskVO.executeQuery();
+                Row[] allRowsInRange = taskVO.getAllRowsInRange();
+                if (allRowsInRange != null && allRowsInRange.length > 0) {
+                    allRowsInRange[0].setAttribute("State", Constants.STATE_TASK_COMPLETED);
+                }
+
+            }
+        }
+    }
+
+    /**
      * Container's getter for Notifications.
      * @return Notifications
      */
@@ -174,8 +204,8 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      * Container's getter for Tasks.
      * @return Tasks
      */
-    public ViewObjectImpl getTasks() {
-        return (ViewObjectImpl)findViewObject("Tasks");
+    public TasksViewImpl getTasks() {
+        return (TasksViewImpl)findViewObject("Tasks");
     }
 
     /**
