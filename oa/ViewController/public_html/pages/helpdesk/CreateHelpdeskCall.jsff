@@ -4,7 +4,7 @@
   <af:panelStretchLayout id="psl1">
     <f:facet name="bottom"/>
     <f:facet name="center">
-      <af:panelHeader text="报修单 #{bindings.CallReadableId}" id="ph1">
+      <af:panelHeader text="报修单 #{bindings.CallReadableId}" id="ph1" messageType="confirmation">
         <f:facet name="context"/>
         <f:facet name="menuBar"/>
         <f:facet name="toolbar"/>
@@ -25,34 +25,40 @@
                                        actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}"/>
             </af:toolbar>
           </af:panelGroupLayout>
-          <af:panelFormLayout id="pfl1">
-            <f:facet name="footer"/>
+          <af:panelHeader text="保修单" id="ph2" messageType="info">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelFormLayout id="pfl1">
+              <f:facet name="footer"/>
               <af:panelGroupLayout id="pgl3" layout="horizontal">
-              <af:selectOneChoice value="#{bindings.CallerId.inputValue}" label="#{bindings.CallerId.label}"
-                                  required="#{bindings.CallerId.hints.mandatory}"
-                                  shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1">
-                <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
-              </af:selectOneChoice>
-              <af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
-                                  required="#{bindings.CalleeId.hints.mandatory}"
-                                  shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2">
-                <f:selectItems value="#{bindings.CalleeId.items}" id="si2"/>
-              </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.CallerId.inputValue}" label="#{bindings.CallerId.label}"
+                                    required="#{bindings.CallerId.hints.mandatory}"
+                                    shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1">
+                  <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
+                                    required="#{bindings.CalleeId.hints.mandatory}"
+                                    shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2">
+                  <f:selectItems value="#{bindings.CalleeId.items}" id="si2"/>
+                </af:selectOneChoice>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl5" layout="horizontal">
-              <af:selectOneChoice value="#{bindings.State1.inputValue}" label="#{bindings.State1.label}"
-                                  required="#{bindings.State1.hints.mandatory}"
-                                  shortDesc="#{bindings.State1.hints.tooltip}" id="soc3" disabled="true">
-                <f:selectItems value="#{bindings.State1.items}" id="si3"/>
-              </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.State1.inputValue}" label="#{bindings.State1.label}"
+                                    required="#{bindings.State1.hints.mandatory}"
+                                    shortDesc="#{bindings.State1.hints.tooltip}" id="soc3" disabled="true">
+                  <f:selectItems value="#{bindings.State1.items}" id="si3"/>
+                </af:selectOneChoice>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl4" layout="horizontal">
-              <af:selectOneChoice value="#{bindings.LocationId.inputValue}" label="#{bindings.LocationId.label}"
-                                  required="#{bindings.LocationId.hints.mandatory}"
-                                  shortDesc="#{bindings.LocationId.hints.tooltip}" id="soc4">
-                <f:selectItems value="#{bindings.LocationId.items}" id="si4"/>
-              </af:selectOneChoice>
-              <af:inputText value="#{bindings.LocationDetail.inputValue}"
+                <af:selectOneChoice value="#{bindings.LocationId.inputValue}" label="#{bindings.LocationId.label}"
+                                    required="#{bindings.LocationId.hints.mandatory}"
+                                    shortDesc="#{bindings.LocationId.hints.tooltip}" id="soc4">
+                  <f:selectItems value="#{bindings.LocationId.items}" id="si4"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{bindings.LocationDetail.inputValue}"
                               label="#{bindings.LocationDetail.hints.label}"
                               required="#{bindings.LocationDetail.hints.mandatory}"
                               columns="#{bindings.LocationDetail.hints.displayWidth}"
@@ -63,16 +69,16 @@
                 </af:inputText>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl6" layout="horizontal" valign="top">
-              <af:selectOneChoice value="#{bindings.ReasonLevel1.inputValue}" label="#{bindings.ReasonLevel1.label}"
-                                  required="#{bindings.ReasonLevel1.hints.mandatory}"
-                                  shortDesc="#{bindings.ReasonLevel1.hints.tooltip}" id="soc5" autoSubmit="true">
-                <f:selectItems value="#{bindings.ReasonLevel1.items}" id="si5"/>
-              </af:selectOneChoice>
-              <af:selectOneChoice value="#{bindings.ReasonLevel21.inputValue}"
-                                  required="#{bindings.ReasonLevel21.hints.mandatory}"
-                                  shortDesc="#{bindings.ReasonLevel21.hints.tooltip}" id="soc6">
-                <f:selectItems value="#{bindings.ReasonLevel21.items}" id="si6"/>
-              </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.ReasonLevel1.inputValue}" label="#{bindings.ReasonLevel1.label}"
+                                    required="#{bindings.ReasonLevel1.hints.mandatory}"
+                                    shortDesc="#{bindings.ReasonLevel1.hints.tooltip}" id="soc5" autoSubmit="true">
+                  <f:selectItems value="#{bindings.ReasonLevel1.items}" id="si5"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.ReasonLevel21.inputValue}"
+                                    required="#{bindings.ReasonLevel21.hints.mandatory}"
+                                    shortDesc="#{bindings.ReasonLevel21.hints.tooltip}" id="soc6">
+                  <f:selectItems value="#{bindings.ReasonLevel21.items}" id="si6"/>
+                </af:selectOneChoice>
                 <af:inputText value="#{bindings.ReasonLevel3.inputValue}"
                               required="#{bindings.ReasonLevel3.hints.mandatory}"
                               columns="#{bindings.ReasonLevel3.hints.displayWidth}"
@@ -90,35 +96,43 @@
                   <f:validator binding="#{bindings.ReasonDetail.validator}"/>
                 </af:inputText>
               </af:panelGroupLayout>
-          </af:panelFormLayout>
+            </af:panelFormLayout>
+          </af:panelHeader>
           <af:separator id="s1"/>
-          <af:panelFormLayout id="pfl3" rows="1"
-                              rendered="#{bindings.State.inputValue ne '1' and bindings.State.inputValue ne '5'}">
-            <af:panelGroupLayout id="pgl7" layout="horizontal" valign="top">
-              <af:inputText value="#{bindings.CallResult.inputValue}" label="#{bindings.CallResult.hints.label}"
-                            required="#{bindings.CallResult.hints.mandatory}"
-                            columns="#{bindings.CallResult.hints.displayWidth}"
-                            maximumLength="#{bindings.CallResult.hints.precision}"
-                            shortDesc="#{bindings.CallResult.hints.tooltip}" id="it6"
-                            disabled="#{bindings.State.inputValue ne '2'}">
-                <f:validator binding="#{bindings.CallResult.validator}"/>
-              </af:inputText>
-              <af:inputText value="#{bindings.CallResultDetail.inputValue}"
-                            required="#{bindings.CallResultDetail.hints.mandatory}"
-                            columns="#{bindings.CallResultDetail.hints.displayWidth}"
-                            maximumLength="#{bindings.CallResultDetail.hints.precision}"
-                            shortDesc="#{bindings.CallResultDetail.hints.tooltip}" id="it7" rows="4"
-                            disabled="#{bindings.State.inputValue ne '2'}">
-                <f:validator binding="#{bindings.CallResultDetail.validator}"/>
-              </af:inputText>
-            </af:panelGroupLayout>
-            <f:facet name="footer">
-              <af:toolbar id="t2">
-                <af:commandToolbarButton text="处理完成" id="ctb5" rendered="#{bindings.State.inputValue eq '2'}"
-                                         actionListener="#{pageFlowScope.MyHdCallBean.processHdCall}"/>
-              </af:toolbar>
-            </f:facet>
-          </af:panelFormLayout>
+          <af:panelHeader text="保修单处理" id="ph3" messageType="info">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelFormLayout id="pfl3" rows="1"
+                                rendered="#{bindings.State.inputValue ne '1' and bindings.State.inputValue ne '5'}">
+              <af:panelGroupLayout id="pgl7" layout="horizontal" valign="top">
+                <af:inputText value="#{bindings.CallResult.inputValue}" label="#{bindings.CallResult.hints.label}"
+                              required="#{bindings.CallResult.hints.mandatory}"
+                              columns="#{bindings.CallResult.hints.displayWidth}"
+                              maximumLength="#{bindings.CallResult.hints.precision}"
+                              shortDesc="#{bindings.CallResult.hints.tooltip}" id="it6"
+                              disabled="#{bindings.State.inputValue ne '2'}">
+                  <f:validator binding="#{bindings.CallResult.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.CallResultDetail.inputValue}"
+                              required="#{bindings.CallResultDetail.hints.mandatory}"
+                              columns="#{bindings.CallResultDetail.hints.displayWidth}"
+                              maximumLength="#{bindings.CallResultDetail.hints.precision}"
+                              shortDesc="#{bindings.CallResultDetail.hints.tooltip}" id="it7" rows="4"
+                              disabled="#{bindings.State.inputValue ne '2'}">
+                  <f:validator binding="#{bindings.CallResultDetail.validator}"/>
+                </af:inputText>
+              </af:panelGroupLayout>
+              <f:facet name="footer">
+                <af:toolbar id="t2">
+                  <af:commandToolbarButton text="处理完成" id="ctb5" rendered="#{bindings.State.inputValue eq '2'}"
+                                           actionListener="#{pageFlowScope.MyHdCallBean.processHdCall}"/>
+                </af:toolbar>
+              </f:facet>
+            </af:panelFormLayout>
+          </af:panelHeader>
           <af:separator id="s2"/>
           <af:panelFormLayout id="pfl4"
                               rendered="#{bindings.State.inputValue eq '3' or bindings.State.inputValue eq '4'}">

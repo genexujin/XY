@@ -75,6 +75,35 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
             vcNames.add(rsnLv1Criteria.getName());
         }
         
+        if (rsnLv2 != null) {
+            this.setRsnLv2(rsnLv2);
+            ViewCriteria rsnLv2Criteria = this.getViewCriteria("ReasonLevel2Criteria");
+            vcNames.add(rsnLv2Criteria.getName());
+        }
+        
+        if (rsnLv3 != null) {
+            this.setRsnLv3(rsnLv3);
+            ViewCriteria rsnLv3Criteria = this.getViewCriteria("ReasonLevel3Criteria");
+            vcNames.add(rsnLv3Criteria.getName());
+        }
+        
+        if (submitDateFrom != null) {
+            this.setSubmitDateFm(submitDateFrom);
+            ViewCriteria submitDateFromCriteria = this.getViewCriteria("SubmitDateFromCriteria");
+            vcNames.add(submitDateFromCriteria.getName());
+        }
+        
+        if (submitDateTo != null) {
+            this.setSubmitDateTo(submitDateTo);
+            ViewCriteria submitDateToCriteria = this.getViewCriteria("SubmitDateToCriteria");
+            vcNames.add(submitDateToCriteria.getName());
+        }
+        
+        if (callerId != null) {
+            this.setcRdId(cReadableId);
+            ViewCriteria cRdIdCriteria = this.getViewCriteria("CallReadableIdCriteria");
+            vcNames.add(cRdIdCriteria.getName());
+        }
     }
     
     public void newRow() {
