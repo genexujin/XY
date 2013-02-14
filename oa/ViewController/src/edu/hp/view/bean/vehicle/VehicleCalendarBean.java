@@ -23,7 +23,9 @@ import oracle.jbo.domain.Timestamp;
 
 
 public class VehicleCalendarBean extends CalendarBean {
-
+    
+    private boolean myVelView = false;
+    
     public VehicleCalendarBean() {
 
         needCheckConflict = false;
@@ -33,7 +35,7 @@ public class VehicleCalendarBean extends CalendarBean {
         this.providerIteratorName = "VehiclesIterator";
         this.locationIteratorName = "LocationsIterator";
         this.calendarIteratorName = "VehicleCalQueryIterator";
-        this.calendarid = "c1";
+        this.calendarid = "c3";
         this.moduleAdminRole = "总务处主任";
         locationIdFieldName = "VehicleId";
         reload();
@@ -159,6 +161,7 @@ public class VehicleCalendarBean extends CalendarBean {
         this.setMyView(newValue);
         binding.execute();
         UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+        System.err.println(calendar.getClientId());
         this.refreshCalendar(calendar);
     }
 
@@ -182,5 +185,13 @@ public class VehicleCalendarBean extends CalendarBean {
 
             ADFUtils.findOperation("Commit").execute();
         }
+    }
+
+    public void setMyVelView(boolean myVelView) {
+        this.myVelView = myVelView;
+    }
+
+    public boolean isMyVelView() {
+        return myVelView;
     }
 }

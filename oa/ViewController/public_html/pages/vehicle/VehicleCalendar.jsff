@@ -53,7 +53,7 @@
             </af:panelStretchLayout>
         </f:facet>
         <f:facet name="second">
-            <af:calendar value="#{bindings.VehicleCalQuery.calendarModel}" id="c1"
+            <af:calendar value="#{bindings.VehicleCalQuery.calendarModel}" id="c3"
                          calendarActivityListener="#{pageFlowScope.vehiclesCalBean.activityListener}"
                          activityStyles="#{pageFlowScope.vehiclesCalBean.activityStyles}" view="week"
                          calendarActivityDurationChangeListener="#{pageFlowScope.vehiclesCalBean.calDurationChanged}"
@@ -68,7 +68,7 @@
                     </af:popup>
                 </f:facet>
                 <f:facet name="activityContextMenu">
-                    <af:popup id="p1"  partialTriggers="::c1">
+                    <af:popup id="p1"  partialTriggers="::c3">
                         <af:menu id="m1" rendered="#{pageFlowScope.vehiclesCalBean.editable}">
                             <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png"
                                                 action="#{pageFlowScope.vehiclesCalBean.doEdit}"></af:commandMenuItem>
@@ -80,7 +80,7 @@
                 </f:facet>
                 <f:facet name="activityDelete">
                     <af:popup id="delete" contentDelivery="lazyUncached"
-                               partialTriggers="::c1">
+                               partialTriggers="::c3">
                         <!-- don't render if the activity is null -->
                         <af:dialog dialogListener="#{pageFlowScope.vehiclesCalBean.deleteListener}"
                                    title="#{pageFlowScope.vehiclesCalBean.currActivity.title}"

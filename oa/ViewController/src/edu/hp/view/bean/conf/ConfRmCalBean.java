@@ -28,7 +28,7 @@ public class ConfRmCalBean extends CalendarBean {
         this.providerIteratorName = "ConfRmOfLocationIterator";
         this.locationIteratorName = "LocationsIterator";
         this.calendarIteratorName = "ConfRoomQueryIterator";
-        this.calendarid = "c1";
+        this.calendarid = "c2";
         this.moduleAdminRole = "会议室管理员";
         locationIdFieldName = "MeetingRoomId";
         reload();
@@ -167,11 +167,13 @@ public class ConfRmCalBean extends CalendarBean {
     }
 
     public void onMyViewChange(ValueChangeEvent valueChangeEvent) {
+        //System.err.println("here");
         Boolean newValue = (Boolean)valueChangeEvent.getNewValue();
         OperationBinding binding = ADFUtils.findOperation("findByUserId");
         this.setMyView(newValue);
         binding.execute();
         UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+        //System.err.println(calendar.getClientId());
         this.refreshCalendar(calendar);
     }
 }

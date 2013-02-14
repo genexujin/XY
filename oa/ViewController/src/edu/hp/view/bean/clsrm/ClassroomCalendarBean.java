@@ -165,11 +165,13 @@ public class ClassroomCalendarBean extends CalendarBean {
     }
 
     public void onMyViewChange(ValueChangeEvent valueChangeEvent) {
+        //System.err.println("here");
         Boolean newValue = (Boolean)valueChangeEvent.getNewValue();
         OperationBinding binding = ADFUtils.findOperation("findByUserId");
         this.setMyView(newValue);
         binding.execute();
         UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
+        //System.err.println(calendar.getClientId());
         this.refreshCalendar(calendar);
     }
 }

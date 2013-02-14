@@ -5,7 +5,7 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator id="UserNotificationsIterator" Binds="Root.HomeModule.UserNotifications"
-              DataControl="RootAppModuleDataControl" RangeSize="25"/>
+              DataControl="RootAppModuleDataControl" RangeSize="10"/>
     <iterator id="UserTasksIterator" Binds="Root.HomeModule.UserTasks" DataControl="RootAppModuleDataControl"
               RangeSize="10"/>
   </executables>
