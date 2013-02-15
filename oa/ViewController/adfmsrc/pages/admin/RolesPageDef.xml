@@ -15,13 +15,12 @@
             RequiresUpdateModel="false" Action="rollbackTransaction"/>
     <action IterBinding="RolesIterator" id="CreateInsert" InstanceName="RootAppModuleDataControl.Root.AdminModule.Roles"
             DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <action IterBinding="RolesIterator" id="Delete" InstanceName="RootAppModuleDataControl.Root.AdminModule.Roles"
-            DataControl="RootAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
     <tree IterBinding="RolesIterator" id="Roles">
       <nodeDefinition DefName="edu.hp.model.vo.RolesView" Name="Roles0">
         <AttrNames>
           <Item Value="RoleName"/>
           <Item Value="RoleDesc"/>
+          <Item Value="Expired" Binds="Expired"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -30,5 +29,14 @@
         <Item Value="RoleId"/>
       </AttrNames>
     </attributeValues>
+    <button IterBinding="RolesIterator" id="Expired" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
   </bindings>
 </pageDefinition>

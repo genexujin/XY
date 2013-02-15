@@ -66,7 +66,10 @@ public class HomeOperationBean {
     }
 
     public void previousTask(ActionEvent actionEvent) {
-        this.getTaskIterator().setFirst(this.getTaskIterator().getFirst() - rangeSize);
+        int index = this.getTaskIterator().getFirst() - rangeSize;
+        if(index<0)
+            index = 0;
+        this.getTaskIterator().setFirst(index);
     }
 
     public void nextTask(ActionEvent actionEvent) {
@@ -86,7 +89,10 @@ public class HomeOperationBean {
     }
 
     public void previousNotes(ActionEvent actionEvent) {
-        this.getNotesIterator().setFirst(this.getTaskIterator().getFirst() - rangeSize);
+        int index = this.getTaskIterator().getFirst() - rangeSize;
+        if(index<0)
+            index = 0;
+        this.getNotesIterator().setFirst(index);
     }
 
     public void nextNotes(ActionEvent actionEvent) {

@@ -76,6 +76,7 @@
           usageId="edu_hp_view_MyHdCall_MyHdCall_findByCallerIdPageDef"/>
     <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findByPendingProcess"
           usageId="edu_hp_view_MyHdCall_MyHdCall_findByPendingProcessPageDef"/>
+    <page path="/pages/admin/Classrooms.jsff" usageId="edu_hp_view_ClassroomsPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -139,6 +140,7 @@
           path="flows.helpdesk.MyHdCall_MyHdCall_findByCallerIdPageDef"/>
     <page id="edu_hp_view_MyHdCall_MyHdCall_findByPendingProcessPageDef"
           path="flows.helpdesk.MyHdCall_MyHdCall_findByPendingProcessPageDef"/>
+    <page id="edu_hp_view_ClassroomsPageDef" path="pages.admin.ClassroomsPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

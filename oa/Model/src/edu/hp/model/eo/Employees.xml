@@ -428,6 +428,12 @@
         <DesignTime>
             <Attr Name="_DisplaySize" Value="20"/>
         </DesignTime>
+        <Properties>
+            <SchemaBasedProperties>
+                <LABEL
+                    ResId="edu.hp.model.eo.Employees.Expired_LABEL"/>
+            </SchemaBasedProperties>
+        </Properties>
     </Attribute>
     <AccessorAttribute
       Name="MgrEmployee"

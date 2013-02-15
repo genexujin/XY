@@ -60,7 +60,11 @@
   <ViewAccessor
     Name="Employees"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="filterByExpired"
+      FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_ContactName"
     ListVOName="Employees"
@@ -85,7 +89,8 @@
       <Item Value="Title"/>
     </AttrArray>
     <DisplayCriteria
-      Name="findByDepartment"/>
+      Name="findByUserName"
+      Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
     Name="LOV_UserDisplayName"
@@ -109,7 +114,7 @@
       <Item Value="Title"/>
     </AttrArray>
     <DisplayCriteria
-      Name="findByDepartment"
+      Name="findByUserName"
       Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding

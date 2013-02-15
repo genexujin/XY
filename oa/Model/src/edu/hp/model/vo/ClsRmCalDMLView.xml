@@ -65,7 +65,11 @@
   <ViewAccessor
     Name="Employees"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="filterByExpired"
+      FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_Classroom"
     ListVOName="ClsRmList"
@@ -114,7 +118,8 @@
     ListVOName="Employees"
     ListRangeSize="-1"
     NullValueFlag="none"
-    MRUCount="0">
+    MRUCount="0"
+    ComboRowCountHint="5">
     <AttrArray Name="AttrNames">
       <Item Value="UserDisplayName"/>
     </AttrArray>
@@ -129,7 +134,9 @@
       <Item Value="DisplayName"/>
       <Item Value="Title"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="findByUserName"
+      Hint="showAndExecute"/>
   </ListBinding>
   <EntityUsage
     Name="ClassroomCalendar"
@@ -246,7 +253,7 @@
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="choice"/>
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

@@ -36,8 +36,7 @@
   PageIterMode="Full"
   UseGlueCode="false"
   FetchMode="FETCH_AS_NEEDED"
-  ComponentClass="edu.hp.model.vo.EmployeesViewImpl"
-  Where="Employees.EXPIRED &lt;> 'Y'">
+  ComponentClass="edu.hp.model.vo.EmployeesViewImpl">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -52,7 +51,11 @@
   <ViewAccessor
     Name="Departments"
     ViewObjectName="edu.hp.model.vo.DepartmentsView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="filterByExpired"
+      FullName="edu.hp.model.vo.DepartmentsView.filterByExpired"/>
+  </ViewAccessor>
   <ViewAccessor
     Name="Locations"
     ViewObjectName="edu.hp.model.vo.LocationsView"
@@ -61,9 +64,9 @@
     Name="LOV_MgrId"
     ListVOName="Managers"
     ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
     <AttrArray Name="AttrNames">
       <Item Value="MgrId"/>
     </AttrArray>
@@ -77,7 +80,9 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="DisplayName"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="findByUserName"
+      Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
     Name="LOV_DeptId"
@@ -167,7 +172,7 @@
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="choice"/>
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -418,6 +423,98 @@
         Value=":userId"
         IsBindVarValue="true"
         Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="filterByExpired"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EmployeesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Expired"
+        ViewAttribute="Expired"
+        Operator="&lt;>"
+        Conjunction="AND"
+        Value="Y"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByUserName"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="findByUserName_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="FirstName"
+        ViewAttribute="FirstName"
+        Operator="="
+        Conjunction="OR"
+        Required="Optional">
+        <Properties>
+          <SchemaBasedProperties>
+            <DISPLAYWIDTH
+              Value="10"/>
+          </SchemaBasedProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="LastName"
+        ViewAttribute="LastName"
+        Operator="="
+        Conjunction="OR"
+        Required="Optional">
+        <Properties>
+          <SchemaBasedProperties>
+            <DISPLAYWIDTH
+              Value="10"/>
+          </SchemaBasedProperties>
+        </Properties>
+      </ViewCriteriaItem>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewLinkAccessor

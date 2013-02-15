@@ -28,9 +28,6 @@
               <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
                                        disabled="#{!bindings.CreateInsert.enabled}" id="ctb3"
                                        icon="/images/icons/new.png"/>
-              <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
-                                       disabled="#{!bindings.Delete.enabled}" id="ctb4" icon="/images/icons/delete.png"
-                                       text="删除"/>
               <af:commandToolbarButton id="ctb6" icon="/images/icons/actor.png" text="设置角色" action="roles"/>
               <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
                 <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="员工信息"
@@ -40,13 +37,13 @@
           </f:facet>
           <f:facet name="statusbar"/>
           <af:table value="#{bindings.Employees.collectionModel}" var="row" rows="#{bindings.Employees.rangeSize}"
-                    emptyText="#{bindings.Employees.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    emptyText="#{bindings.Employees.viewable ? '暂无数据。' : 'Access Denied.'}"
                     fetchSize="#{bindings.Employees.rangeSize}" rowBandingInterval="1"
                     filterModel="#{bindings.EmployeesQuery.queryDescriptor}"
                     queryListener="#{bindings.EmployeesQuery.processQuery}" filterVisible="false" varStatus="vs"
                     selectedRowKeys="#{bindings.Employees.collectionModel.selectedRow}"
                     selectionListener="#{bindings.Employees.collectionModel.makeCurrent}" rowSelection="single" id="t3"
-                    partialTriggers="::ctb3 ::ctb4" editingMode="clickToEdit">
+                    partialTriggers="::ctb3" editingMode="clickToEdit">
             <af:column sortProperty="#{bindings.Employees.hints.UserName.name}" filterable="true" sortable="true"
                        headerText="#{bindings.Employees.hints.UserName.label}" id="c1" width="105">
               <af:inputText value="#{row.bindings.UserName.inputValue}"
@@ -108,12 +105,12 @@
                             required="#{bindings.Employees.hints.Gender.mandatory}"
                             columns="#{bindings.Employees.hints.Gender.displayWidth}"
                             maximumLength="#{bindings.Employees.hints.Gender.precision}"
-                            shortDesc="#{bindings.Employees.hints.Gender.tooltip}" id="it6" autoSubmit="true"> 
+                            shortDesc="#{bindings.Employees.hints.Gender.tooltip}" id="it6" autoSubmit="true">
                 <f:validator binding="#{row.bindings.Gender.validator}"/>
               </af:inputText>
             </af:column>
             <af:column sortProperty="#{bindings.Employees.hints.MgrId.name}" sortable="true"
-                       headerText="#{bindings.Employees.hints.MgrId.label}" id="c7" width="120">
+                       headerText="#{bindings.Employees.hints.MgrName.label}" id="c7" width="120">
               <af:panelGroupLayout id="pgl1" layout="horizontal">
                 <af:outputText value="#{row.MgrName}" id="ot1"/>
                 <af:spacer width="10" height="10" id="s1"/>
@@ -127,6 +124,12 @@
                   <f:validator binding="#{bindings.MgrId.validator}"/>
                 </af:inputComboboxListOfValues>
               </af:panelGroupLayout>
+            </af:column>
+            <af:column sortProperty="#{bindings.Employees.hints.Expired.name}" filterable="true" sortable="false"
+                       headerText="#{bindings.Employees.hints.Expired.label}" id="c17" width="50" align="center">
+              <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}" label="#{row.bindings.Expired.label}"
+                                        shortDesc="#{bindings.Employees.hints.Expired.tooltip}" id="sbc1"
+                                        autoSubmit="true"/>
             </af:column>
             <af:column sortProperty="#{bindings.Employees.hints.DeptId.name}" sortable="true"
                        headerText="#{bindings.Employees.hints.DeptId.label}" id="c8" width="55">

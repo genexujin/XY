@@ -28,9 +28,6 @@
               <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
                                        disabled="#{!bindings.CreateInsert.enabled}" id="ctb3"
                                        icon="/images/icons/new.png"/>
-              <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
-                                       disabled="#{!bindings.Delete.enabled}" id="ctb4" icon="/images/icons/delete.png"
-                                       text="删除"/>
               <af:commandToolbarButton text="设置菜单" id="ctb6" icon="/images/icons/tree.png" action="menus"/>
               <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
                 <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="角色" filename="Roles.xls"/>
@@ -39,20 +36,21 @@
           </f:facet>
           <f:facet name="statusbar"/>
           <af:table value="#{bindings.Roles.collectionModel}" var="row" rows="#{bindings.Roles.rangeSize}"
-                    emptyText="#{bindings.Roles.viewable ? '暂无数据' : 'Access Denied.'}"
+                    emptyText="#{bindings.Roles.viewable ? 'No data to display.' : 'Access Denied.'}"
                     fetchSize="#{bindings.Roles.rangeSize}" rowBandingInterval="1"
                     filterModel="#{bindings.RolesQuery.queryDescriptor}"
                     queryListener="#{bindings.RolesQuery.processQuery}" filterVisible="false" varStatus="vs"
                     selectedRowKeys="#{bindings.Roles.collectionModel.selectedRow}"
                     selectionListener="#{bindings.Roles.collectionModel.makeCurrent}" rowSelection="single" id="t3"
-                    partialTriggers="::ctb3 ::ctb4" editingMode="clickToEdit">
+                    partialTriggers="::ctb3">
             <af:column sortProperty="#{bindings.Roles.hints.RoleName.name}" filterable="true" sortable="true"
                        headerText="#{bindings.Roles.hints.RoleName.label}" id="c1">
               <af:inputText value="#{row.bindings.RoleName.inputValue}" label="#{bindings.Roles.hints.RoleName.label}"
                             required="#{bindings.Roles.hints.RoleName.mandatory}"
                             columns="#{bindings.Roles.hints.RoleName.displayWidth}"
                             maximumLength="#{bindings.Roles.hints.RoleName.precision}"
-                            shortDesc="#{bindings.Roles.hints.RoleName.tooltip}" id="it1">
+                            shortDesc="#{bindings.Roles.hints.RoleName.tooltip}" id="it1" readOnly="false"
+                            autoSubmit="true">
                 <f:validator binding="#{row.bindings.RoleName.validator}"/>
               </af:inputText>
             </af:column>
@@ -62,9 +60,16 @@
                             required="#{bindings.Roles.hints.RoleDesc.mandatory}"
                             columns="#{bindings.Roles.hints.RoleDesc.displayWidth}"
                             maximumLength="#{bindings.Roles.hints.RoleDesc.precision}"
-                            shortDesc="#{bindings.Roles.hints.RoleDesc.tooltip}" id="it2">
+                            shortDesc="#{bindings.Roles.hints.RoleDesc.tooltip}" id="it2" readOnly="false"
+                            autoSubmit="true">
                 <f:validator binding="#{row.bindings.RoleDesc.validator}"/>
               </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.Roles.hints.Expired.name}" filterable="true" sortable="false"
+                       headerText="#{bindings.Roles.hints.Expired.label}" id="c3" width="50" align="center">
+              <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}" label="#{row.bindings.Expired.label}"
+                                        shortDesc="#{bindings.Roles.hints.Expired.tooltip}" id="sbc1"
+                                        autoSubmit="true"/>
             </af:column>
           </af:table>
           <af:popup id="confirm" contentDelivery="lazyUncached">

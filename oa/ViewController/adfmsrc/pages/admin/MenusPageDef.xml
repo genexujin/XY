@@ -15,8 +15,6 @@
             RequiresUpdateModel="false" Action="rollbackTransaction"/>
     <action IterBinding="MenusIterator" id="CreateInsert" InstanceName="RootAppModuleDataControl.Root.AdminModule.Menus"
             DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <action IterBinding="MenusIterator" id="Delete" InstanceName="RootAppModuleDataControl.Root.AdminModule.Menus"
-            DataControl="RootAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
     <tree IterBinding="MenusIterator" id="Menus">
       <nodeDefinition DefName="edu.hp.model.vo.MenusView" Name="Menus0">
         <AttrNames>
@@ -27,8 +25,18 @@
           <Item Value="MenuMasterCategory"/>
           <Item Value="MenuCategory"/>
           <Item Value="MenuIconUrl"/>
+          <Item Value="Expired" Binds="Expired"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <button IterBinding="MenusIterator" id="Expired" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
   </bindings>
 </pageDefinition>
