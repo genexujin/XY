@@ -1,5 +1,6 @@
 package edu.hp.model.vo;
 
+import edu.hp.model.common.Constants;
 import edu.hp.model.vo.common.HelpdeskCallsView;
 
 import java.util.ArrayList;
@@ -15,13 +16,7 @@ import oracle.jbo.server.ViewObjectImpl;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCallsView {
-    private static final String STATE_UN_SUBMITTED = "1";
-    private static final String STATE_SUBMITTED = "2";
-    private static final String STATE_PROCESSED = "3";
-    private static final String STATE_EVALUATED = "4";
-    private static final String STATE_CANCELLED = "5";
-    
+public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCallsView {    
     /**
      * This is the default constructor (do not remove).
      */
@@ -47,7 +42,7 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
     
     public void doQuery(String cReadableId, String rsnLv1, String rsnLv2, String rsnLv3, 
                         Date submitDateFrom, Date submitDateTo, String callerId,
-                        String calleeId, String state, String callResult) {
+                        String calleeId, String state, String callResult, String callEval) {
         this.setApplyViewCriteriaNames(null);
         
         System.err.println("In VO: cReadableId is: " + cReadableId);
@@ -60,6 +55,7 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
         System.err.println("In VO: callerId is: " + callerId);
         System.err.println("In VO: calleeId is: " + calleeId);
         System.err.println("In VO: callResult is: " + callResult);
+        System.err.println("In VO: callEval is: " + callEval);
         
         List<String> vcNames = new ArrayList<String>();
         
@@ -69,7 +65,7 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
             vcNames.add(cRdIdCriteria.getName());
         }
         
-        if (rsnLv1 != null) {
+        if (rsnLv1 != null && !" ".equals(rsnLv1)) {
             this.setRsnLv1(rsnLv1);
             ViewCriteria rsnLv1Criteria = this.getViewCriteria("ReasonLevel1Criteria");
             vcNames.add(rsnLv1Criteria.getName());
@@ -99,17 +95,45 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
             vcNames.add(submitDateToCriteria.getName());
         }
         
-        if (callerId != null) {
-            this.setcRdId(cReadableId);
-            ViewCriteria cRdIdCriteria = this.getViewCriteria("CallReadableIdCriteria");
-            vcNames.add(cRdIdCriteria.getName());
+        if (callerId != null && !"0".equals(callerId)) {
+            this.setcallerId(callerId);
+            ViewCriteria callerCriteria = this.getViewCriteria("CallerCriteria");
+            vcNames.add(callerCriteria.getName());
         }
+        
+        if (calleeId != null && !"0".equals(calleeId)) {
+            this.setcalleeId(calleeId);
+            ViewCriteria calleeCriteria = this.getViewCriteria("CalleeCriteria");
+            vcNames.add(calleeCriteria.getName());
+        }
+        
+        if (state != null && !" ".equals(state)) {
+            this.setStateV(state);
+            ViewCriteria stateCriteria = this.getViewCriteria("StateCriteria");
+            vcNames.add(stateCriteria.getName());
+        }
+        
+        if (callResult != null && !" ".equals(callResult)) {
+            this.setcResult(callResult);
+            ViewCriteria callResultCriteria = this.getViewCriteria("CallResultCriteria");
+            vcNames.add(callResultCriteria.getName());
+        }
+        
+        if (callEval != null && !" ".equals(callEval)) {
+            this.setcEval(callEval);
+            ViewCriteria evalCriteria = this.getViewCriteria("EvaluationCriteria");
+            vcNames.add(evalCriteria.getName());
+        }
+        
+        this.setApplyViewCriteriaNames(vcNames.toArray(new String[0]));
+        this.executeQuery();
     }
     
-    public void newRow() {
+    public void newRow(String callerId) {
         System.err.println("here");
         Row newRow = this.createRow();
-        newRow.setAttribute("State", STATE_UN_SUBMITTED);
+        newRow.setAttribute("State", Constants.STATE_INITIAL);
+        newRow.setAttribute("CallerId", callerId);
         this.insertRow(newRow);        
         this.setCurrentRow(newRow);
     }
@@ -241,5 +265,53 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
      */
     public void setcResult(String value) {
         ensureVariableManager().setVariableValue("cResult", value);
+    }
+
+    /**
+     * Returns the variable value for callerId.
+     * @return variable value for callerId
+     */
+    public String getcallerId() {
+        return (String)ensureVariableManager().getVariableValue("callerId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable callerId.
+     * @param value value to bind as callerId
+     */
+    public void setcallerId(String value) {
+        ensureVariableManager().setVariableValue("callerId", value);
+    }
+
+    /**
+     * Returns the variable value for calleeId.
+     * @return variable value for calleeId
+     */
+    public String getcalleeId() {
+        return (String)ensureVariableManager().getVariableValue("calleeId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable calleeId.
+     * @param value value to bind as calleeId
+     */
+    public void setcalleeId(String value) {
+        ensureVariableManager().setVariableValue("calleeId", value);
+    }
+
+    /**
+     * Returns the variable value for cEval.
+     * @return variable value for cEval
+     */
+    public String getcEval() {
+        return (String)ensureVariableManager().getVariableValue("cEval");
+    }
+
+    /**
+     * Sets <code>value</code> for variable cEval.
+     * @param value value to bind as cEval
+     */
+    public void setcEval(String value) {
+        ensureVariableManager().setVariableValue("cEval", value);
     }
 }

@@ -3,24 +3,29 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="HdResult"
+  Name="HdResultWithEmpty"
   Version="11.1.2.62.76"
   BindingStyle="OracleName"
-  CustomQuery="false"
+  CustomQuery="true"
   PageIterMode="Full"
-  UseGlueCode="false"
-  SelectList="Lovs.CODE, 
-       Lovs.VALUE, 
-       Lovs.ID"
-  FromList="LOVS Lovs"
-  Where="Lovs.CODE = 'HdResult'"
-  OrderBy="ID">
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.query.helpdesk.HdResult_LABEL"/>
+        ResId="edu.hp.model.vo.query.helpdesk.HdResultWithEmpty_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <SQLQuery><![CDATA[SELECT Lovs.CODE, 
+       Lovs.ID, 
+       Lovs.VALUE
+FROM LOVS Lovs
+WHERE Lovs.CODE = 'HdResult'
+union
+select 'HdResult', '-1', ' ' from dual
+order by ID]]></SQLQuery>
   <EntityUsage
     Name="Lovs"
     Entity="edu.hp.model.eo.Lovs"/>
@@ -31,18 +36,18 @@
     EntityUsage="Lovs"
     AliasName="CODE"/>
   <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Lovs"
+    AliasName="ID"/>
+  <ViewAttribute
     Name="Value"
     PrecisionRule="true"
     EntityAttrName="Value"
     EntityUsage="Lovs"
     AliasName="VALUE"/>
-  <ViewAttribute
-    Name="Id"
-    IsUpdateable="while_insert"
-    PrecisionRule="true"
-    AliasName="ID"
-    EntityAttrName="Id"
-    EntityUsage="Lovs"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

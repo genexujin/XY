@@ -3,40 +3,38 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="ReasonLevel2"
+  Name="HdStateWithEmpty"
   Version="11.1.2.62.76"
-  SelectList="Lovs.ID, 
-       Lovs.CODE, 
-       Lovs.PARENT_CODE, 
-       Lovs.VALUE"
-  FromList="LOVS Lovs"
-  Where="lovs.code = 'HdRsnLv2'"
   BindingStyle="OracleName"
-  CustomQuery="false"
+  CustomQuery="true"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  OrderBy="ID"
+  ComponentClass="edu.hp.model.vo.query.helpdesk.HdStateWithEmptyImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.query.helpdesk.ReasonLevel2_LABEL"/>
+        ResId="edu.hp.model.vo.query.helpdesk.HdStateWithEmpty_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="rsnLevel1"
+    Name="state"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT Lovs.CODE, 
+       Lovs.ID, 
+       Lovs.VALUE
+FROM LOVS Lovs
+WHERE Lovs.CODE = 'HdState'
+union
+select 'HdState', '0', ' ' from dual]]></SQLQuery>
   <EntityUsage
     Name="Lovs"
-    Entity="edu.hp.model.eo.Lovs"
-    ReadOnly="true"
-    DeleteParticipant="false"/>
-  <ViewAttribute
-    Name="Id"
-    IsUpdateable="false"
-    PrecisionRule="true"
-    EntityAttrName="Id"
-    EntityUsage="Lovs"
-    AliasName="ID"/>
+    Entity="edu.hp.model.eo.Lovs"/>
   <ViewAttribute
     Name="Code"
     PrecisionRule="true"
@@ -44,11 +42,12 @@
     EntityUsage="Lovs"
     AliasName="CODE"/>
   <ViewAttribute
-    Name="ParentCode"
+    Name="Id"
+    IsUpdateable="while_insert"
     PrecisionRule="true"
-    EntityAttrName="ParentCode"
+    EntityAttrName="Id"
     EntityUsage="Lovs"
-    AliasName="PARENT_CODE"/>
+    AliasName="ID"/>
   <ViewAttribute
     Name="Value"
     PrecisionRule="true"
@@ -56,8 +55,8 @@
     EntityUsage="Lovs"
     AliasName="VALUE"/>
   <ViewCriteria
-    Name="ReasonLevel1Criteria"
-    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"
+    Name="HdStateCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdStateWithEmpty"
     Conjunction="AND">
     <Properties>
       <CustomProperties>
@@ -79,37 +78,18 @@
       </CustomProperties>
     </Properties>
     <ViewCriteriaRow
-      Name="ReasonLevel2Criteria_row_0"
+      Name="HdStateWithEmptyCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
-        Name="ParentCode"
-        ViewAttribute="ParentCode"
+        Name="Value"
+        ViewAttribute="Value"
         Operator="="
         Conjunction="AND"
-        Value=":rsnLevel1"
+        Value=":state"
         IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
-  <ViewLinkAccessor
-    Name="ReasonLevel1"
-    ViewLink="edu.hp.model.vo.link.HdReasonLevel1ToLevel2Link"
-    Type="oracle.jbo.Row"
-    Reversed="true"
-    IsUpdateable="false"/>
-  <ViewLinkAccessor
-    Name="ReasonLevel3"
-    ViewLink="edu.hp.model.vo.link.HdReasonLevel2ToLevel3Link"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
-  <LOVUIHints
-    ListType="105"
-    MRUCount="0"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
-    <DisplayCriteria/>
-  </LOVUIHints>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

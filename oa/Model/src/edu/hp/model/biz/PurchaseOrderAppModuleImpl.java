@@ -1,6 +1,7 @@
 package edu.hp.model.biz;
 
 import edu.hp.model.biz.common.PurchaseOrderAppModule;
+import edu.hp.model.vo.EmployeesViewImpl;
 import edu.hp.model.vo.PurchaseOrderHistorysViewImpl;
 import edu.hp.model.vo.PurchaseOrdersViewImpl;
 
@@ -37,22 +38,11 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         }
         
         //Set the lov's value, so on page the correct user will be selected by default in the lov
-        ViewObjectImpl eLov = this.getEmployeesViewForLOV();
-        eLov.setRangeSize(-1);
+        EmployeesViewImpl eLov = (EmployeesViewImpl)this.getEmployeesViewForLOV();
+        eLov.setuserId(submitterId);
+        ViewCriteria empCriteria = eLov.getViewCriteria("findByUserId");
+        eLov.setApplyViewCriteriaName(empCriteria.getName());
         eLov.executeQuery();
-        Row[] rows = eLov.getAllRowsInRange();
-        System.err.println("The lov rows num: " + rows.length);
-        if (rows != null) {
-            for (Row row : rows) {
-                String rowId = ((DBSequence)row.getAttribute("Id")).toString();
-                System.err.println("The lov id is: " + rowId);
-                if (submitterId.equalsIgnoreCase(rowId)) {
-                    System.err.println("In if. Row id is: " + rowId + ". submitter id is: " + submitterId);
-                    eLov.setCurrentRow(row);
-                    break;
-                }
-            }
-        }
             
     }
 

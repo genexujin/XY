@@ -5,16 +5,15 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="HdState"
   Version="11.1.2.62.76"
-  SelectList="Lovs.ID, 
-       Lovs.FLEX_COL1, 
-       Lovs.VALUE, 
-       Lovs.CODE"
-  FromList="LOVS Lovs"
-  Where="Lovs.CODE = 'HdState'"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  SelectList="Lovs.CODE, 
+       Lovs.VALUE, 
+       Lovs.ID"
+  FromList="LOVS Lovs"
+  Where="Lovs.CODE = 'HdState'">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
@@ -27,19 +26,12 @@
     ReadOnly="true"
     DeleteParticipant="false"/>
   <ViewAttribute
-    Name="Id"
+    Name="Code"
     IsUpdateable="false"
     PrecisionRule="true"
-    EntityAttrName="Id"
+    EntityAttrName="Code"
     EntityUsage="Lovs"
-    AliasName="ID"/>
-  <ViewAttribute
-    Name="FlexCol1"
-    IsUpdateable="false"
-    PrecisionRule="true"
-    EntityAttrName="FlexCol1"
-    EntityUsage="Lovs"
-    AliasName="FLEX_COL1"/>
+    AliasName="CODE"/>
   <ViewAttribute
     Name="Value"
     IsUpdateable="false"
@@ -55,12 +47,12 @@
     </Properties>
   </ViewAttribute>
   <ViewAttribute
-    Name="Code"
-    IsUpdateable="false"
+    Name="Id"
+    IsUpdateable="while_insert"
     PrecisionRule="true"
-    EntityAttrName="Code"
-    EntityUsage="Lovs"
-    AliasName="CODE"/>
+    AliasName="ID"
+    EntityAttrName="Id"
+    EntityUsage="Lovs"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

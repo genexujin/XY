@@ -3,59 +3,72 @@
 <!---->
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="ReasonLevel3"
+  Name="EmpWithEmpty"
   Version="11.1.2.62.76"
-  SelectList="Lovs.CODE, 
-       Lovs.ID, 
-       Lovs.VALUE, 
-       Lovs.PARENT_CODE"
-  FromList="LOVS Lovs"
-  Where="Lovs.CODE = 'HdRsnLv3'"
   BindingStyle="OracleName"
-  CustomQuery="false"
+  CustomQuery="true"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.query.helpdesk.EmpWithEmptyImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
-        ResId="edu.hp.model.vo.query.helpdesk.ReasonLevel3_LABEL"/>
+        ResId="edu.hp.model.vo.query.helpdesk.EmpWithEmpty_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="rsnLevel2"
+    Name="cId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT Employees.LAST_NAME, 
+       Employees.ID, 
+       Employees.FIRST_NAME
+FROM EMPLOYEES Employees
+union
+select ' ', '0', ' ' from dual
+order by ID]]></SQLQuery>
   <EntityUsage
-    Name="Lovs"
-    Entity="edu.hp.model.eo.Lovs"/>
+    Name="Employees"
+    Entity="edu.hp.model.eo.Employees"/>
   <ViewAttribute
-    Name="Code"
+    Name="LastName"
     PrecisionRule="true"
-    EntityAttrName="Code"
-    EntityUsage="Lovs"
-    AliasName="CODE"/>
+    EntityAttrName="LastName"
+    EntityUsage="Employees"
+    AliasName="LAST_NAME"/>
   <ViewAttribute
     Name="Id"
     IsUpdateable="while_insert"
     PrecisionRule="true"
     EntityAttrName="Id"
-    EntityUsage="Lovs"
+    EntityUsage="Employees"
     AliasName="ID"/>
   <ViewAttribute
-    Name="Value"
+    Name="FirstName"
     PrecisionRule="true"
-    EntityAttrName="Value"
-    EntityUsage="Lovs"
-    AliasName="VALUE"/>
+    EntityAttrName="FirstName"
+    EntityUsage="Employees"
+    AliasName="FIRST_NAME"/>
   <ViewAttribute
-    Name="ParentCode"
+    Name="DisplayName"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
     PrecisionRule="true"
-    EntityAttrName="ParentCode"
-    EntityUsage="Lovs"
-    AliasName="PARENT_CODE"/>
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[LastName+FirstName]]></TransientExpression>
+  </ViewAttribute>
   <ViewCriteria
-    Name="ReasonLevel2Criteria"
-    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel3"
+    Name="findByCallerIdCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"
     Conjunction="AND">
     <Properties>
       <CustomProperties>
@@ -77,24 +90,18 @@
       </CustomProperties>
     </Properties>
     <ViewCriteriaRow
-      Name="ReasonLevel3Criteria_row_0"
+      Name="findByCallerIdCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
-        Name="ParentCode"
-        ViewAttribute="ParentCode"
+        Name="Id"
+        ViewAttribute="Id"
         Operator="="
         Conjunction="AND"
-        Value=":rsnLevel2"
+        Value=":cId"
         IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
-  <ViewLinkAccessor
-    Name="ReasonLevel2"
-    ViewLink="edu.hp.model.vo.link.HdReasonLevel2ToLevel3Link"
-    Type="oracle.jbo.Row"
-    Reversed="true"
-    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

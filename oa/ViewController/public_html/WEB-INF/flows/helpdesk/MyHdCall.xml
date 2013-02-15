@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="MyHdCall">
-    <default-activity>MyHelpdeskCall</default-activity>
+    <default-activity>Router</default-activity>
     <data-control-scope>
       <isolated/>
     </data-control-scope>
+    <input-parameter-definition id="__16">
+      <name>fromMenu</name>
+      <value>#{pageFlowScope.fromMenu}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
     <managed-bean id="__1">
       <managed-bean-name>MyHdCallBean</managed-bean-name>
       <managed-bean-class>edu.hp.view.bean.helpdesk.MyHelpdeskCallBean</managed-bean-class>
@@ -22,6 +27,25 @@
     <view id="CreateHelpdeskCall">
       <page>/pages/helpdesk/CreateHelpdeskCall.jsff</page>
     </view>
+    <router id="Router">
+      <case id="__7">
+        <expression>#{pageFlowScope.fromMenu == 'callee'}</expression>
+        <outcome>callee</outcome>
+      </case>
+      <default-outcome>normalUser</default-outcome>
+    </router>
+    <method-call id="findByCallerId">
+      <method>#{bindings.findByCallerId.execute}</method>
+      <outcome>
+        <fixed-outcome>byCallerId</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByPendingProcess">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>byState</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__2">
       <from-activity-id>MyHelpdeskCall</from-activity-id>
       <control-flow-case id="__3">
@@ -38,6 +62,31 @@
       <control-flow-case id="__5">
         <from-outcome>newRow</from-outcome>
         <to-activity-id>CreateHelpdeskCall</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>Router</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>normalUser</from-outcome>
+        <to-activity-id>findByCallerId</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__11">
+        <from-outcome>callee</from-outcome>
+        <to-activity-id>findByPendingProcess</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>findByCallerId</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>byCallerId</from-outcome>
+        <to-activity-id>MyHelpdeskCall</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>findByPendingProcess</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>byState</from-outcome>
+        <to-activity-id>MyHelpdeskCall</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

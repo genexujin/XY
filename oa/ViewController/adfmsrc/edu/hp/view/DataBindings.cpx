@@ -72,6 +72,10 @@
           usageId="edu_hp_view_home_btf_home_btf_initDashboardPageDef"/>
     <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@queryByPK"
           usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"/>
+    <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findByCallerId"
+          usageId="edu_hp_view_MyHdCall_MyHdCall_findByCallerIdPageDef"/>
+    <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findByPendingProcess"
+          usageId="edu_hp_view_MyHdCall_MyHdCall_findByPendingProcessPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -131,6 +135,10 @@
           path="flows.home.home_btf_home_btf_initDashboardPageDef"/>
     <page id="edu_hp_view_vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"
           path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"/>
+    <page id="edu_hp_view_MyHdCall_MyHdCall_findByCallerIdPageDef"
+          path="flows.helpdesk.MyHdCall_MyHdCall_findByCallerIdPageDef"/>
+    <page id="edu_hp_view_MyHdCall_MyHdCall_findByPendingProcessPageDef"
+          path="flows.helpdesk.MyHdCall_MyHdCall_findByPendingProcessPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

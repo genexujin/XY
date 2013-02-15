@@ -11,51 +11,51 @@
         <f:facet name="legend"/>
         <f:facet name="info"/>
         <af:panelGroupLayout id="pgl1" layout="vertical">
-          <af:panelGroupLayout id="pgl2" layout="horizontal">
-            <af:toolbar id="t1">
-              <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '1'}"
-                                       icon="/images/icons/saveall.png" actionListener="#{bindings.Commit.execute}"/>
-              <af:commandToolbarButton text="取消" id="ctb2" immediate="true" rendered="#{bindings.State.inputValue eq '1'}"
-                                       icon="/images/icons/rollback.png" actionListener="#{bindings.Rollback.execute}">
-                <af:resetActionListener/>
-              </af:commandToolbarButton>
-              <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '1'}"
-                                       actionListener="#{pageFlowScope.MyHdCallBean.submitHdCall}"/>
-              <af:commandToolbarButton text="撤消保修单" id="ctb4" rendered="#{bindings.State.inputValue eq '1'}"
-                                       actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}"/>
-            </af:toolbar>
-          </af:panelGroupLayout>
-          <af:panelHeader text="保修单" id="ph2" messageType="info">
+          <af:panelHeader text="报修单" id="ph2" messageType="info">
             <f:facet name="context"/>
             <f:facet name="menuBar"/>
             <f:facet name="toolbar"/>
             <f:facet name="legend"/>
             <f:facet name="info"/>
             <af:panelFormLayout id="pfl1">
-              <f:facet name="footer"/>
+              <f:facet name="footer">
+                <af:toolbar id="t1">
+              <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '未提交'}"
+                                       icon="/images/icons/saveall.png" actionListener="#{bindings.Commit.execute}"/>
+              <af:commandToolbarButton text="取消" id="ctb2" immediate="true" rendered="#{bindings.State.inputValue eq '未提交'}"
+                                       icon="/images/icons/rollback.png" actionListener="#{bindings.Rollback.execute}">
+                <af:resetActionListener/>
+              </af:commandToolbarButton>
+              <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '未提交'}"
+                                       actionListener="#{pageFlowScope.MyHdCallBean.submitHdCall}"/>
+              <af:commandToolbarButton text="撤消报修单" id="ctb4" rendered="#{bindings.State.inputValue eq '未提交'}"
+                                       actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}"/>
+            </af:toolbar>
+              </f:facet>
               <af:panelGroupLayout id="pgl3" layout="horizontal">
                 <af:selectOneChoice value="#{bindings.CallerId.inputValue}" label="#{bindings.CallerId.label}"
                                     required="#{bindings.CallerId.hints.mandatory}"
-                                    shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1">
+                                    shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1" disabled="true">
                   <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
                 </af:selectOneChoice>
                 <af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
                                     required="#{bindings.CalleeId.hints.mandatory}"
-                                    shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2">
-                  <f:selectItems value="#{bindings.CalleeId.items}" id="si2"/>
+                                    shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc9">
+                  <f:selectItems value="#{bindings.CalleeId.items}" id="si10"/>
                 </af:selectOneChoice>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl5" layout="horizontal">
-                <af:selectOneChoice value="#{bindings.State1.inputValue}" label="#{bindings.State1.label}"
-                                    required="#{bindings.State1.hints.mandatory}"
-                                    shortDesc="#{bindings.State1.hints.tooltip}" id="soc3" disabled="true">
-                  <f:selectItems value="#{bindings.State1.items}" id="si3"/>
+                <af:selectOneChoice value="#{bindings.State.inputValue}" label="#{bindings.State.label}"
+                                    required="#{bindings.State.hints.mandatory}"
+                                    shortDesc="#{bindings.State.hints.tooltip}" id="soc3" disabled="true">
+                  <f:selectItems value="#{bindings.State.items}" id="si3"/>
                 </af:selectOneChoice>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl4" layout="horizontal">
                 <af:selectOneChoice value="#{bindings.LocationId.inputValue}" label="#{bindings.LocationId.label}"
                                     required="#{bindings.LocationId.hints.mandatory}"
-                                    shortDesc="#{bindings.LocationId.hints.tooltip}" id="soc4">
+                                    shortDesc="#{bindings.LocationId.hints.tooltip}" id="soc4"
+                                    disabled="#{bindings.State.inputValue ne '未提交'}" autoSubmit="true">
                   <f:selectItems value="#{bindings.LocationId.items}" id="si4"/>
                 </af:selectOneChoice>
                 <af:inputText value="#{bindings.LocationDetail.inputValue}"
@@ -64,101 +64,107 @@
                               columns="#{bindings.LocationDetail.hints.displayWidth}"
                               maximumLength="#{bindings.LocationDetail.hints.precision}"
                               shortDesc="#{bindings.LocationDetail.hints.tooltip}" id="it4"
-                              disabled="#{bindings.State.inputValue ne '1'}">
+                              disabled="#{bindings.State.inputValue ne '未提交'}" autoSubmit="true">
                   <f:validator binding="#{bindings.LocationDetail.validator}"/>
                 </af:inputText>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl6" layout="horizontal" valign="top">
                 <af:selectOneChoice value="#{bindings.ReasonLevel1.inputValue}" label="#{bindings.ReasonLevel1.label}"
                                     required="#{bindings.ReasonLevel1.hints.mandatory}"
-                                    shortDesc="#{bindings.ReasonLevel1.hints.tooltip}" id="soc5" autoSubmit="true">
+                                    shortDesc="#{bindings.ReasonLevel1.hints.tooltip}" id="soc5" autoSubmit="true"
+                                    valueChangeListener="#{pageFlowScope.MyHdCallBean.reasonLevelChanged}"
+                                    disabled="#{bindings.State.inputValue ne '未提交'}">
                   <f:selectItems value="#{bindings.ReasonLevel1.items}" id="si5"/>
                 </af:selectOneChoice>
-                <af:selectOneChoice value="#{bindings.ReasonLevel21.inputValue}"
-                                    required="#{bindings.ReasonLevel21.hints.mandatory}"
-                                    shortDesc="#{bindings.ReasonLevel21.hints.tooltip}" id="soc6">
-                  <f:selectItems value="#{bindings.ReasonLevel21.items}" id="si6"/>
+                <af:selectOneChoice value="#{bindings.ReasonLevel2.inputValue}"
+                                    required="#{bindings.ReasonLevel2.hints.mandatory}"
+                                    shortDesc="#{bindings.ReasonLevel2.hints.tooltip}" id="soc6" autoSubmit="true"
+                                    valueChangeListener="#{pageFlowScope.MyHdCallBean.reasonLevelChanged}"
+                                    disabled="#{bindings.State.inputValue ne '未提交'}" partialTriggers="soc5">
+                  <f:selectItems value="#{bindings.ReasonLevel2.items}" id="si6"/>
                 </af:selectOneChoice>
-                <af:inputText value="#{bindings.ReasonLevel3.inputValue}"
-                              required="#{bindings.ReasonLevel3.hints.mandatory}"
-                              columns="#{bindings.ReasonLevel3.hints.displayWidth}"
-                              maximumLength="#{bindings.ReasonLevel3.hints.precision}"
-                              shortDesc="#{bindings.ReasonLevel3.hints.tooltip}" id="it12"
-                              disabled="#{bindings.State.inputValue ne '1'}">
-                  <f:validator binding="#{bindings.ReasonLevel3.validator}"/>
-                </af:inputText>
+                <af:selectOneChoice value="#{bindings.ReasonLevel3.inputValue}"
+                                    required="#{bindings.ReasonLevel3.hints.mandatory}"
+                                    shortDesc="#{bindings.ReasonLevel3.hints.tooltip}" id="soc7"
+                                    disabled="#{bindings.State.inputValue ne '未提交'}"  partialTriggers="soc6">
+                  <f:selectItems value="#{bindings.ReasonLevel3.items}" id="si7"/>
+                </af:selectOneChoice>
                 <af:inputText value="#{bindings.ReasonDetail.inputValue}"
                               required="#{bindings.ReasonDetail.hints.mandatory}"
                               columns="#{bindings.ReasonDetail.hints.displayWidth}"
                               maximumLength="#{bindings.ReasonDetail.hints.precision}"
                               shortDesc="#{bindings.ReasonDetail.hints.tooltip}" id="it13" rows="4"
-                              disabled="#{bindings.State.inputValue ne '1'}">
+                              disabled="#{bindings.State.inputValue ne '未提交'}" autoSubmit="true">
                   <f:validator binding="#{bindings.ReasonDetail.validator}"/>
                 </af:inputText>
               </af:panelGroupLayout>
             </af:panelFormLayout>
           </af:panelHeader>
           <af:separator id="s1"/>
-          <af:panelHeader text="保修单处理" id="ph3" messageType="info">
+          <af:panelHeader text="报修单处理" id="ph3" messageType="info"
+                          rendered="#{(bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已撤消' and pageFlowScope.fromMenu eq 'callee')
+                                      or (bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价')}">
             <f:facet name="context"/>
             <f:facet name="menuBar"/>
             <f:facet name="toolbar"/>
             <f:facet name="legend"/>
             <f:facet name="info"/>
-            <af:panelFormLayout id="pfl3" rows="1"
-                                rendered="#{bindings.State.inputValue ne '1' and bindings.State.inputValue ne '5'}">
+            <af:panelFormLayout id="pfl3" rows="1">
               <af:panelGroupLayout id="pgl7" layout="horizontal" valign="top">
-                <af:inputText value="#{bindings.CallResult.inputValue}" label="#{bindings.CallResult.hints.label}"
-                              required="#{bindings.CallResult.hints.mandatory}"
-                              columns="#{bindings.CallResult.hints.displayWidth}"
-                              maximumLength="#{bindings.CallResult.hints.precision}"
-                              shortDesc="#{bindings.CallResult.hints.tooltip}" id="it6"
-                              disabled="#{bindings.State.inputValue ne '2'}">
-                  <f:validator binding="#{bindings.CallResult.validator}"/>
-                </af:inputText>
+                <af:selectOneChoice value="#{bindings.CallResult.inputValue}" label="#{bindings.CallResult.label}"
+                                    required="#{bindings.CallResult.hints.mandatory}"
+                                    shortDesc="#{bindings.CallResult.hints.tooltip}" id="soc8" disabled="#{bindings.State.inputValue ne '已受理'}">
+                  <f:selectItems value="#{bindings.CallResult.items}" id="si8"/>
+                </af:selectOneChoice>
                 <af:inputText value="#{bindings.CallResultDetail.inputValue}"
                               required="#{bindings.CallResultDetail.hints.mandatory}"
                               columns="#{bindings.CallResultDetail.hints.displayWidth}"
                               maximumLength="#{bindings.CallResultDetail.hints.precision}"
                               shortDesc="#{bindings.CallResultDetail.hints.tooltip}" id="it7" rows="4"
-                              disabled="#{bindings.State.inputValue ne '2'}">
+                              disabled="#{bindings.State.inputValue ne '已受理'}">
                   <f:validator binding="#{bindings.CallResultDetail.validator}"/>
                 </af:inputText>
               </af:panelGroupLayout>
               <f:facet name="footer">
                 <af:toolbar id="t2">
-                  <af:commandToolbarButton text="处理完成" id="ctb5" rendered="#{bindings.State.inputValue eq '2'}"
+                  <af:commandToolbarButton text="处理完成" id="ctb5" rendered="#{bindings.State.inputValue eq '已受理'}"
                                            actionListener="#{pageFlowScope.MyHdCallBean.processHdCall}"/>
                 </af:toolbar>
               </f:facet>
             </af:panelFormLayout>
           </af:panelHeader>
           <af:separator id="s2"/>
-          <af:panelFormLayout id="pfl4"
-                              rendered="#{bindings.State.inputValue eq '3' or bindings.State.inputValue eq '4'}">
-              <af:inputText value="#{bindings.CallEval.inputValue}" label="#{bindings.CallEval.hints.label}"
-                            required="#{bindings.CallEval.hints.mandatory}"
-                            columns="#{bindings.CallEval.hints.displayWidth}"
-                            maximumLength="#{bindings.CallEval.hints.precision}"
-                            shortDesc="#{bindings.CallEval.hints.tooltip}" id="it8"
-                            disabled="#{bindings.State.inputValue ne '3'}" rows="1">
-                <f:validator binding="#{bindings.CallEval.validator}"/>
-              </af:inputText>
+          <af:panelHeader text="用户评价" id="ph4"
+                          rendered="#{(bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价') 
+                                      and pageFlowScope.fromMenu ne 'callee'}"
+                          messageType="info">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelFormLayout id="pfl4">
+              <af:selectOneRadio value="#{bindings.CallEval.inputValue}" label="#{bindings.CallEval.label}"
+                                 required="#{bindings.CallEval.hints.mandatory}"
+                                 shortDesc="#{bindings.CallEval.hints.tooltip}" id="sor1" layout="horizontal">
+                <f:selectItems value="#{bindings.CallEval.items}" id="si9"/>
+              </af:selectOneRadio>
               <af:inputText value="#{bindings.CallEvalDetail.inputValue}" label="#{bindings.CallEvalDetail.hints.label}"
                             required="#{bindings.CallEvalDetail.hints.mandatory}"
                             columns="#{bindings.CallEvalDetail.hints.displayWidth}"
                             maximumLength="#{bindings.CallEvalDetail.hints.precision}"
                             shortDesc="#{bindings.CallEvalDetail.hints.tooltip}" id="it9" rows="4"
-                            disabled="#{bindings.State.inputValue ne '3'}">
+                            disabled="#{bindings.State.inputValue ne '已处理'}">
                 <f:validator binding="#{bindings.CallEvalDetail.validator}"/>
               </af:inputText>
-            <f:facet name="footer">
-              <af:toolbar id="t3">
-                <af:commandToolbarButton text="评价" id="ctb6" rendered="#{bindings.State.inputValue eq '3'}"
-                                         actionListener="#{pageFlowScope.MyHdCallBean.evaluateHdCall}"/>
-              </af:toolbar>
-            </f:facet>
-          </af:panelFormLayout>
+              <f:facet name="footer">
+                <af:toolbar id="t3">
+                  <af:commandToolbarButton text="评价" id="ctb6" rendered="#{bindings.State.inputValue eq '已处理'}"
+                                           actionListener="#{pageFlowScope.MyHdCallBean.evaluateHdCall}"/>
+                </af:toolbar>
+              </f:facet>
+            </af:panelFormLayout>
+          </af:panelHeader>
         </af:panelGroupLayout>        
       </af:panelHeader>
     </f:facet>

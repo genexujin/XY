@@ -22,34 +22,14 @@
         <Item Value="LocationDetail"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="State">
-      <AttrNames>
-        <Item Value="State"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallResult">
-      <AttrNames>
-        <Item Value="CallResult"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallResultDetail">
       <AttrNames>
         <Item Value="CallResultDetail"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallEval">
-      <AttrNames>
-        <Item Value="CallEval"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallEvalDetail">
       <AttrNames>
         <Item Value="CallEvalDetail"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonLevel3">
-      <AttrNames>
-        <Item Value="ReasonLevel3"/>
       </AttrNames>
     </attributeValues>
     <attributeValues IterBinding="HelpdeskCallsViewIterator" id="ReasonDetail">
@@ -61,13 +41,42 @@
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId" id="CalleeId"
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_State" id="State1" DTSupportsMRU="true"
-          SelectItemValueMode="ListObject"/>
     <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_LocationId" id="LocationId"
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_ReasonLevel1" id="ReasonLevel1"
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_ReasonLevel2" id="ReasonLevel21"
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_ReasonLevel2" id="ReasonLevel2"
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_ReasonLevel3" id="ReasonLevel3"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CallResult" id="CallResult"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CallEval" id="CallEval"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_State" id="State"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <methodAction id="sendNotification" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendNotification" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.sendNotification_RootAppModuleDataControl_dataProvider_sendNotification_result">
+      <NamedData NDName="notification" NDType="edu.hp.model.pojo.Notification"/>
+    </methodAction>
+    <methodAction id="createTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createTask" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.createTask_RootAppModuleDataControl_dataProvider_createTask_result">
+      <NamedData NDName="title" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="roleName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="completeTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="completeTask" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.completeTask_RootAppModuleDataControl_dataProvider_completeTask_result">
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="roleName" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

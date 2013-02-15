@@ -67,6 +67,18 @@
     Name="cResult"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="callerId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="calleeId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="cEval"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="ReasonLevel1_1"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"
@@ -85,14 +97,43 @@
     RowLevelBinds="true"/>
   <ViewAccessor
     Name="ReasonLevel2_1"
-    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2">
+    <ViewCriteriaUsage
+      Name="ReasonLevel1Criteria"
+      FullName="edu.hp.model.vo.query.helpdesk.ReasonLevel2.ReasonLevel1Criteria"/>
+    <ParameterMap>
+      <PIMap Variable="rsnLevel1">
+        <TransientExpression><![CDATA[ReasonLevel1]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="HdResult"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdResult"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ReasonLevel3_1"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel3">
+    <ViewCriteriaUsage
+      Name="ReasonLevel2Criteria"
+      FullName="edu.hp.model.vo.query.helpdesk.ReasonLevel3.ReasonLevel2Criteria"/>
+    <ParameterMap>
+      <PIMap Variable="rsnLevel2">
+        <TransientExpression><![CDATA[ReasonLevel2]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="HdEval"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdEval"
     RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_CallerId"
     ListVOName="EmployeesView"
     ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0">
+    NullValueFlag="start"
+    MRUCount="0"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
     <AttrArray Name="AttrNames">
       <Item Value="CallerId"/>
     </AttrArray>
@@ -100,7 +141,7 @@
       <Item Value="Id"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="UserName"/>
+      <Item Value="DisplayName"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -108,8 +149,9 @@
     Name="LOV_CalleeId"
     ListVOName="EmployeesView"
     ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0">
+    NullValueFlag="start"
+    MRUCount="0"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
     <AttrArray Name="AttrNames">
       <Item Value="CalleeId"/>
     </AttrArray>
@@ -117,7 +159,7 @@
       <Item Value="Id"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="UserName"/>
+      <Item Value="DisplayName"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -125,13 +167,14 @@
     Name="LOV_State"
     ListVOName="HdState"
     ListRangeSize="-1"
-    NullValueFlag="none"
-    MRUCount="0">
+    NullValueFlag="start"
+    MRUCount="0"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
     <AttrArray Name="AttrNames">
       <Item Value="State"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
-      <Item Value="FlexCol1"/>
+      <Item Value="Value"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Value"/>
@@ -182,6 +225,59 @@
     MRUCount="0">
     <AttrArray Name="AttrNames">
       <Item Value="ReasonLevel2"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CallResult"
+    ListVOName="HdResult"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    MRUCount="0"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
+    <AttrArray Name="AttrNames">
+      <Item Value="CallResult"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReasonLevel3"
+    ListVOName="ReasonLevel3_1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReasonLevel3"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CallEval"
+    ListVOName="HdEval"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CallEval"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
       <Item Value="Value"/>
@@ -303,7 +399,15 @@
     PrecisionRule="true"
     EntityAttrName="CallResult"
     EntityUsage="HelpdeskCalls"
-    AliasName="CALL_RESULT"/>
+    AliasName="CALL_RESULT"
+    LOVName="LOV_CallResult">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CallResultDetail"
     PrecisionRule="true"
@@ -315,7 +419,15 @@
     PrecisionRule="true"
     EntityAttrName="CallEval"
     EntityUsage="HelpdeskCalls"
-    AliasName="CALL_EVAL"/>
+    AliasName="CALL_EVAL"
+    LOVName="LOV_CallEval">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CallEvalDetail"
     PrecisionRule="true"
@@ -354,6 +466,8 @@
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="choice"/>
+        <LABEL
+          ResId="edu.hp.model.vo.HelpdeskCallsView.ReasonLevel2_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -362,7 +476,17 @@
     PrecisionRule="true"
     EntityAttrName="ReasonLevel3"
     EntityUsage="HelpdeskCalls"
-    AliasName="REASON_LEVEL_3"/>
+    AliasName="REASON_LEVEL_3"
+    LOVName="LOV_ReasonLevel3">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="edu.hp.model.vo.HelpdeskCallsView.ReasonLevel3_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ReasonDetail"
     PrecisionRule="true"
@@ -657,6 +781,114 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="CallerCriteria"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HelpdeskCallsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CallerId"
+        ViewAttribute="CallerId"
+        Operator="="
+        Conjunction="AND"
+        Value=":callerId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="CalleeCriteria"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HelpdeskCallsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CalleeId"
+        ViewAttribute="CalleeId"
+        Operator="="
+        Conjunction="AND"
+        Value=":calleeId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="EvaluationCriteria"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HelpdeskCallsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="HelpdeskCallsViewCriteria_HelpdeskCallsViewCriteria_row_0_CallEval"
+        ViewAttribute="CallEval"
+        Operator="="
+        Conjunction="AND"
+        Value=":cEval"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="CalleeView"
     ViewLink="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
@@ -671,12 +903,6 @@
     IsUpdateable="false"/>
   <ClientInterface>
     <Method
-      Name="newRow"
-      MethodName="newRow">
-      <Return
-        Type="void"/>
-    </Method>
-    <Method
       Name="doQuery"
       MethodName="doQuery">
       <Return
@@ -686,6 +912,54 @@
         Type="java.lang.String"/>
       <Parameter
         Name="state"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="newRow"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="callerId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="doQuery1"
+      MethodName="doQuery">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="cReadableId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="rsnLv1"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="rsnLv2"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="rsnLv3"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="submitDateFrom"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="submitDateTo"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="callerId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="calleeId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="state"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="callResult"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="callEval"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

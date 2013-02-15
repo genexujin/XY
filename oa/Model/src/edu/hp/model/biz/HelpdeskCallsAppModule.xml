@@ -5,7 +5,13 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="HelpdeskCallsAppModule"
   Version="11.1.2.62.76"
-  ClearCacheOnRollback="true">
+  ClearCacheOnRollback="true"
+  ComponentClass="edu.hp.model.biz.HelpdeskCallsAppModuleImpl"
+  ComponentInterface="edu.hp.model.biz.common.HelpdeskCallsAppModule"
+  ClientProxyName="edu.hp.model.biz.client.HelpdeskCallsAppModuleClient">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <ViewUsage
     Name="HelpdeskCallsView"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"/>
@@ -42,6 +48,27 @@
   <ViewUsage
     Name="HdLovView"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.HdLovView"/>
+  <ViewUsage
+    Name="HdStateWithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdStateWithEmpty"/>
+  <ViewUsage
+    Name="HdResultWithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdResultWithEmpty"/>
+  <ViewUsage
+    Name="ReasonLevel1WithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1WithEmpty"/>
+  <ViewUsage
+    Name="ReasonLevel2WithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2WithEmpty"/>
+  <ViewUsage
+    Name="EmpWithEmptyForCaller"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"/>
+  <ViewUsage
+    Name="EmpWithEmptyForCallee"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"/>
+  <ViewUsage
+    Name="HdEvalWithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdEvalWithEmpty"/>
   <ViewLinkUsage
     Name="EmpHelpdeskCalleeViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
@@ -66,4 +93,30 @@
     SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.ReasonLevel2"
     DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.ReasonLevel3"
     Reversed="false"/>
+  <ViewLinkUsage
+    Name="HdReasonL1ToL2EmptyLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.HdReasonL1ToL2EmptyLink"
+    SrcViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.ReasonLevel1WithEmpty"
+    DstViewUsageName="edu.hp.model.biz.HelpdeskCallsAppModule.ReasonLevel2WithEmpty"
+    Reversed="false"/>
+  <ClientInterface>
+    <Method
+      Name="findByCallerId"
+      MethodName="findByCallerId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="callerId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findByState"
+      MethodName="findByState">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="state"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </AppModule>

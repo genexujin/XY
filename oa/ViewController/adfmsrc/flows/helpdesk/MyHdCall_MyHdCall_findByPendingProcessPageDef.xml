@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="MyHdCall_MyHdCall_findByPendingProcessPageDef" Package="flows.helpdesk" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="findByState" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByState"
+                  IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1">
+      <NamedData NDName="state" NDValue="已受理" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

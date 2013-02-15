@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HdReasonL1ToL2EmptyLink"
+  Version="11.1.2.62.76">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.link.HdReasonL1ToL2EmptyLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="ReasonLevel1WithEmpty"
+    Cardinality="1"
+    Source="true"
+    Owner="edu.hp.model.vo.query.helpdesk.ReasonLevel1WithEmpty">
+    <DesignTime>
+      <Attr Name="_finderName" Value="ReasonLevel1WithEmpty"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.vo.query.helpdesk.ReasonLevel1WithEmpty.Value"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ReasonLevel2WithEmpty"
+    Cardinality="-1"
+    Owner="edu.hp.model.vo.query.helpdesk.ReasonLevel2WithEmpty">
+    <DesignTime>
+      <Attr Name="_finderName" Value="ReasonLevel2WithEmpty"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.vo.query.helpdesk.ReasonLevel2WithEmpty.ParentCode"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

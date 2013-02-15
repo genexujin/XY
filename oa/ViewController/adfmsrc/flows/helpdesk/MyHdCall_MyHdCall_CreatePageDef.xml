@@ -6,6 +6,8 @@
   <bindings>
     <action id="newRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="newRow" IsViewObjectMethod="true"
             DataControl="RootAppModuleDataControl"
-            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskCallsView"/>
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskCallsView">
+      <NamedData NDName="callerId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </action>
   </bindings>
 </pageDefinition>

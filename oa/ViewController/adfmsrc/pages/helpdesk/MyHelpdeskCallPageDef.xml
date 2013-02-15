@@ -10,22 +10,22 @@
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery"/>-->
     <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="HelpdeskCallsView1Iterator" id="ImplicitViewCriteriaQuery1"/>
-    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel1" RangeSize="10" DataControl="RootAppModuleDataControl"
-              id="ReasonLevel1Iterator"/>
-    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel2" RangeSize="25" DataControl="RootAppModuleDataControl"
-              id="ReasonLevel2Iterator"/>
     <iterator Binds="Root.HelpdeskCallsAppModule1.HdState" DataControl="RootAppModuleDataControl" RangeSize="25"
               id="HdStateIterator"/>
-    <iterator Binds="Root.HelpdeskCallsAppModule1.EmployeesView" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="EmployeesViewIterator"/>
-    <iterator Binds="Root.HelpdeskCallsAppModule1.EmployeesView2" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="EmployeesView2Iterator"/>
-    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel3" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="ReasonLevel3Iterator"/>
     <iterator Binds="Root.HelpdeskCallsAppModule1.HdResult" DataControl="RootAppModuleDataControl" RangeSize="25"
               id="HdResultIterator"/>
-    <iterator Binds="Root.HelpdeskCallsAppModule1.HdEval" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="HdEvalIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HdStateWithEmpty" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="HdStateWithEmptyIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HdResultWithEmpty" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="HdResultWithEmptyIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.ReasonLevel1WithEmpty" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="ReasonLevel1WithEmptyIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.EmpWithEmptyForCaller" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="EmpWithEmptyForCallerIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.EmpWithEmptyForCallee" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="EmpWithEmptyForCalleeIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.HdEvalWithEmpty" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="HdEvalWithEmptyIterator"/>
   </executables>
   <bindings>
     <tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView11">
@@ -38,20 +38,12 @@
           <Item Value="CallResult"/>
           <Item Value="CallEval"/>
           <Item Value="ReasonLevel1"/>
+          <Item Value="ReasonLevel2"/>
+          <Item Value="ReasonLevel3"/>
+          <Item Value="CreateAt"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <list ListOperMode="navigation" IterBinding="ReasonLevel1Iterator" ListIter="ReasonLevel1Iterator" id="ReasonLevel1">
-      <AttrNames>
-        <Item Value="Value"/>
-      </AttrNames>
-    </list>
-    <list IterBinding="ReasonLevel2Iterator" ListOperMode="navigation" ListIter="ReasonLevel2Iterator"
-          id="ReasonLevel2" DTSupportsMRU="true" SelectItemValueMode="ListObject">
-      <AttrNames>
-        <Item Value="Value"/>
-      </AttrNames>
-    </list>
     <action IterBinding="HelpdeskCallsView1Iterator" id="QueryHepdeskCalls"
             InstanceName="RootAppModuleDataControl.Root.HelpdeskCallsAppModule1.HelpdeskCallsView"
             DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="executeWithParams">
@@ -60,30 +52,20 @@
     <methodAction IterBinding="HelpdeskCallsView1Iterator" id="doQuery" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="doQuery" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskCallsView">
+      <NamedData NDName="cReadableId" NDType="java.lang.String"/>
       <NamedData NDName="rsnLv1" NDType="java.lang.String"/>
+      <NamedData NDName="rsnLv2" NDType="java.lang.String"/>
+      <NamedData NDName="rsnLv3" NDType="java.lang.String"/>
+      <NamedData NDName="submitDateFrom" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="submitDateTo" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="callerId" NDType="java.lang.String"/>
+      <NamedData NDName="calleeId" NDType="java.lang.String"/>
       <NamedData NDName="state" NDType="java.lang.String"/>
+      <NamedData NDName="callResult" NDType="java.lang.String"/>
+      <NamedData NDName="callEval" NDType="java.lang.String"/>
     </methodAction>
     <list IterBinding="HdStateIterator" ListOperMode="navigation" ListIter="HdStateIterator" id="HdState"
           DTSupportsMRU="true" SelectItemValueMode="ListObject">
-      <AttrNames>
-        <Item Value="Value"/>
-      </AttrNames>
-    </list>
-    <list IterBinding="EmployeesViewIterator" ListOperMode="navigation" ListIter="EmployeesViewIterator"
-          id="EmployeesView" DTSupportsMRU="true" SelectItemValueMode="ListObject">
-      <AttrNames>
-        <Item Value="DisplayName"/>
-      </AttrNames>
-    </list>
-    <list IterBinding="EmployeesView2Iterator" ListOperMode="navigation" ListIter="EmployeesView2Iterator"
-          id="EmployeesView2" DTSupportsMRU="true" SelectItemValueMode="ListObject">
-      <AttrNames>
-        <Item Value="DisplayName"/>
-      </AttrNames>
-    </list>
-    <list IterBinding="ReasonLevel3Iterator" ListOperMode="navigation" ListIter="ReasonLevel3Iterator"
-          id="ReasonLevel3" DTSupportsMRU="true" SelectItemValueMode="ListObject" NullValueFlag="start"
-          NullValueId="aaa">
       <AttrNames>
         <Item Value="Value"/>
       </AttrNames>
@@ -94,14 +76,41 @@
         <Item Value="Value"/>
       </AttrNames>
     </list>
-    <list IterBinding="HdEvalIterator" ListOperMode="multiSelect" ListIter="HdEvalIterator" id="HdEval"
-          SelectItemValueMode="ListObject">
+    <list IterBinding="HdStateWithEmptyIterator" ListOperMode="navigation" ListIter="HdStateWithEmptyIterator"
+          id="HdStateWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
       <AttrNames>
         <Item Value="Value"/>
       </AttrNames>
-      <ListDisplayAttrNames>
+    </list>
+    <list IterBinding="HdResultWithEmptyIterator" ListOperMode="navigation" ListIter="HdResultWithEmptyIterator"
+          id="HdResultWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
         <Item Value="Value"/>
-      </ListDisplayAttrNames>
+      </AttrNames>
+    </list>
+    <list IterBinding="ReasonLevel1WithEmptyIterator" ListOperMode="navigation" ListIter="ReasonLevel1WithEmptyIterator"
+          id="ReasonLevel1WithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="EmpWithEmptyForCallerIterator" ListOperMode="navigation" ListIter="EmpWithEmptyForCallerIterator"
+          id="EmpWithEmptyForCaller" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="EmpWithEmptyForCalleeIterator" ListOperMode="navigation" ListIter="EmpWithEmptyForCalleeIterator"
+          id="EmpWithEmptyForCallee" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="HdEvalWithEmptyIterator" ListOperMode="navigation" ListIter="HdEvalWithEmptyIterator"
+          id="HdEvalWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
     </list>
   </bindings>
 </pageDefinition>
