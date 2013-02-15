@@ -76,13 +76,18 @@
                             <f:validator binding="#{bindings.NumOfPeople.validator}"/>
                         </af:inputNumberSpinbox>
                         <af:separator id="s3"/>
-                        <af:selectOneChoice value="#{bindings.UserDisplayName.inputValue}"
-                                            label="#{bindings.UserDisplayName.label}"
-                                            shortDesc="#{bindings.UserDisplayName.hints.tooltip}" id="soc3"
-                                            visible="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['教室管理员']}"
-                                            required="#{bindings.UserDisplayName.hints.mandatory}">
-                            <f:selectItems value="#{bindings.UserDisplayName.items}" id="si3"/>
-                        </af:selectOneChoice>
+                        <af:inputComboboxListOfValues id="userDisplayName1Id"
+                                                      popupTitle="Search and Select: #{bindings.UserDisplayName1.hints.label}"
+                                                      value="#{bindings.UserDisplayName1.inputValue}"
+                                                      label="#{bindings.UserDisplayName1.hints.label}"
+                                                      model="#{bindings.UserDisplayName1.listOfValuesModel}"
+                                                      required="#{bindings.UserDisplayName1.hints.mandatory}"
+                                                      columns="#{bindings.UserDisplayName1.hints.displayWidth}"
+                                                      shortDesc="#{bindings.UserDisplayName1.hints.tooltip}"
+                                                      visible="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['教室管理员']}"
+                                                      autoSubmit="true">
+                            <f:validator binding="#{bindings.UserDisplayName1.validator}"/>
+                        </af:inputComboboxListOfValues>
                         <af:inputText value="#{bindings.UserDisplayName.inputValue}" label="#{bindings.UserDisplayName.label}"
                                       required="#{bindings.UserDisplayName.hints.mandatory}"
                                       columns="#{bindings.UserDisplayName.hints.displayWidth}"

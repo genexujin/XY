@@ -17,19 +17,17 @@
     <action IterBinding="EmployeesIterator" id="CreateInsert"
             InstanceName="RootAppModuleDataControl.Root.AdminModule.Employees" DataControl="RootAppModuleDataControl"
             RequiresUpdateModel="true" Action="createInsertRow"/>
-    <action IterBinding="EmployeesIterator" id="Delete"
-            InstanceName="RootAppModuleDataControl.Root.AdminModule.Employees" DataControl="RootAppModuleDataControl"
-            RequiresUpdateModel="false" Action="removeCurrentRow"/>
     <tree IterBinding="EmployeesIterator" id="Employees">
       <nodeDefinition DefName="edu.hp.model.vo.EmployeesView" Name="Employees0">
         <AttrNames>
           <Item Value="UserName"/>
           <Item Value="Password"/>
           <Item Value="Title"/>
-          <Item Value="FirstName"/>
           <Item Value="LastName"/>
+          <Item Value="FirstName"/>
           <Item Value="Gender"/>
           <Item Value="MgrName"/>
+          <Item Value="Expired" Binds="Expired"/>
           <Item Value="DeptId"/>
           <Item Value="Email"/>
           <Item Value="Mobile"/>
@@ -39,18 +37,18 @@
           <Item Value="LocationId"/>
           <Item Value="HomeAddress"/>
           <Item Value="OfficeAddress"/>
-          <Item Value="CreatedAt"/>
-          <Item Value="CreatedBy"/>
-          <Item Value="DeptName"/>
-          <Item Value="DisplayName"/>
-          <Item Value="Id"/>
-          <Item Value="LastUpdatedAt"/>
-          <Item Value="LastUpdatedBy"/>
-          <Item Value="MgrId"/>
-          <Item Value="Photo"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
     <listOfValues StaticList="false" IterBinding="EmployeesIterator" Uses="LOV_MgrId" id="MgrId"/>
+    <button IterBinding="EmployeesIterator" id="Expired" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
   </bindings>
 </pageDefinition>

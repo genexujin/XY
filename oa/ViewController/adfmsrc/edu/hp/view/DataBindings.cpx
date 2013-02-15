@@ -72,6 +72,7 @@
           usageId="edu_hp_view_home_btf_home_btf_initDashboardPageDef"/>
     <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@queryByPK"
           usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"/>
+    <page path="/pages/admin/Classrooms.jsff" usageId="edu_hp_view_ClassroomsPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -131,6 +132,7 @@
           path="flows.home.home_btf_home_btf_initDashboardPageDef"/>
     <page id="edu_hp_view_vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"
           path="flows.vehicle.vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"/>
+    <page id="edu_hp_view_ClassroomsPageDef" path="pages.admin.ClassroomsPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

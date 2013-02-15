@@ -20,8 +20,7 @@
   CustomQuery="false"
   ComponentClass="edu.hp.model.common.BaseView"
   PageIterMode="Full"
-  UseGlueCode="false"
-  Where="Departments.EXPIRED &lt;> 'Y'">
+  UseGlueCode="false">
   <Properties>
     <SchemaBasedProperties>
       <LABEL
@@ -35,7 +34,11 @@
   <ViewAccessor
     Name="Employees"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="filterByExpired"
+      FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_LocationId"
     ListVOName="Locations"
@@ -73,9 +76,11 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="DisplayName"/>
+      <Item Value="Title"/>
     </AttrArray>
     <DisplayCriteria
-      Hint="showAndExecute"/>
+      Hint="showAndExecute"
+      Name="findByUserName"/>
   </ListBinding>
   <EntityUsage
     Name="Departments"
@@ -160,6 +165,41 @@
     EntityAttrName="Expired"
     EntityUsage="Departments"
     AliasName="EXPIRED"/>
+  <ViewCriteria
+    Name="filterByExpired"
+    ViewObjectName="edu.hp.model.vo.DepartmentsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="DepartmentsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Expired"
+        ViewAttribute="Expired"
+        Operator="&lt;>"
+        Conjunction="AND"
+        Value="Y"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

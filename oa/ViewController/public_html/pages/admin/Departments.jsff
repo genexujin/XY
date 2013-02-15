@@ -28,9 +28,6 @@
               <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
                                        disabled="#{!bindings.CreateInsert.enabled}" id="ctb3"
                                        icon="/images/icons/new.png"/>
-              <af:commandToolbarButton actionListener="#{bindings.Delete.execute}"
-                                       disabled="#{!bindings.Delete.enabled}" id="ctb4" icon="/images/icons/delete.png"
-                                       text="删除"/>
                                        
             <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
                 <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="部门信息"
@@ -40,13 +37,13 @@
           </f:facet>
           <f:facet name="statusbar"/>
           <af:table value="#{bindings.Departments.collectionModel}" var="row" rows="#{bindings.Departments.rangeSize}"
-                    emptyText="#{bindings.Departments.viewable ? '暂无数据。' : 'Access Denied.'}"
+                    emptyText="#{bindings.Departments.viewable ? 'No data to display.' : 'Access Denied.'}"
                     fetchSize="#{bindings.Departments.rangeSize}" rowBandingInterval="1"
                     filterModel="#{bindings.DepartmentsQuery.queryDescriptor}"
                     queryListener="#{bindings.DepartmentsQuery.processQuery}" filterVisible="false" varStatus="vs"
                     selectedRowKeys="#{bindings.Departments.collectionModel.selectedRow}"
                     selectionListener="#{bindings.Departments.collectionModel.makeCurrent}" rowSelection="single"
-                    id="t3" editingMode="clickToEdit" partialTriggers="::ctb3 ::ctb4">
+                    id="t3" editingMode="clickToEdit" partialTriggers="::ctb3">
             <af:column sortProperty="#{bindings.Departments.hints.DeptName.name}" filterable="true" sortable="true"
                        headerText="#{bindings.Departments.hints.DeptName.label}" id="c4">
               <af:inputText value="#{row.bindings.DeptName.inputValue}"
@@ -68,74 +65,25 @@
               </af:selectOneChoice>
             </af:column>
             <af:column sortProperty="#{bindings.Departments.hints.MgrId.name}" filterable="true" sortable="false"
-                       headerText="#{bindings.Departments.hints.MgrId.label}" id="c3" width="130">
+                       headerText="#{bindings.Departments.hints.MgrName.label}" id="c3" width="150">
               <af:panelGroupLayout id="pgl1" layout="horizontal">
                 <af:outputText value="#{row.MgrName}" id="ot1"/>
                 <af:spacer width="10" height="10" id="s1"/>
                 <af:spacer width="10" height="10" id="s2"/>
-                <af:inputComboboxListOfValues id="mgrIdId"
-                                              popupTitle="#{bindings.Departments.hints.MgrId.label}"
-                                              value="#{row.bindings.MgrId.inputValue}"
-                                              model="#{row.bindings.MgrId.listOfValuesModel}"
-                                              required="#{bindings.Departments.hints.MgrId.mandatory}"
-                                              columns="#{bindings.Departments.hints.MgrId.displayWidth}"
-                                              shortDesc="#{bindings.Departments.hints.MgrId.tooltip}"
-                                              contentStyle="width:100px;" autoSubmit="true"/>
+                <af:inputComboboxListOfValues id="mgrIdId" popupTitle="Search and Select: #{bindings.MgrId.hints.label}"
+                                              value="#{bindings.MgrId.inputValue}" label="#{bindings.MgrId.hints.label}"
+                                              model="#{bindings.MgrId.listOfValuesModel}"
+                                              required="#{bindings.MgrId.hints.mandatory}"
+                                              columns="#{bindings.MgrId.hints.displayWidth}"
+                                              shortDesc="#{bindings.MgrId.hints.tooltip}" contentStyle="width:100px;">
+                  <f:validator binding="#{bindings.MgrId.validator}"/>
+                </af:inputComboboxListOfValues>
               </af:panelGroupLayout>
             </af:column>
-            <af:column sortProperty="#{bindings.Departments.hints.CreatedAt.name}" filterable="true" sortable="true"
-                       headerText="#{bindings.Departments.hints.CreatedAt.label}" id="c1">
-              <af:inputDate value="#{row.bindings.CreatedAt.inputValue}"
-                            label="#{bindings.Departments.hints.CreatedAt.label}"
-                            required="#{bindings.Departments.hints.CreatedAt.mandatory}"
-                            columns="#{bindings.Departments.hints.CreatedAt.displayWidth}"
-                            shortDesc="#{bindings.Departments.hints.CreatedAt.tooltip}" id="id2" readOnly="true">
-                <f:validator binding="#{row.bindings.CreatedAt.validator}"/>
-                <af:convertDateTime pattern="#{bindings.Departments.hints.CreatedAt.format}"/>
-              </af:inputDate>
-              <f:facet name="filter">
-                <af:inputDate value="#{vs.filterCriteria.CreatedAt}" id="id3">
-                  <af:convertDateTime pattern="#{bindings.Departments.hints.CreatedAt.format}"/>
-                </af:inputDate>
-              </f:facet>
-            </af:column>
-            <af:column sortProperty="#{bindings.Departments.hints.CreatedBy.name}" filterable="true" sortable="true"
-                       headerText="#{bindings.Departments.hints.CreatedBy.label}" id="c2">
-              <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
-                            label="#{bindings.Departments.hints.CreatedBy.label}"
-                            required="#{bindings.Departments.hints.CreatedBy.mandatory}"
-                            columns="#{bindings.Departments.hints.CreatedBy.displayWidth}"
-                            maximumLength="#{bindings.Departments.hints.CreatedBy.precision}"
-                            shortDesc="#{bindings.Departments.hints.CreatedBy.tooltip}" id="it1" readOnly="true">
-                <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
-              </af:inputText>
-            </af:column>
-            <af:column sortProperty="#{bindings.Departments.hints.LastUpdatedAt.name}" filterable="true" sortable="true"
-                       headerText="#{bindings.Departments.hints.LastUpdatedAt.label}" id="c5">
-              <af:inputDate value="#{row.bindings.LastUpdatedAt.inputValue}"
-                            label="#{bindings.Departments.hints.LastUpdatedAt.label}"
-                            required="#{bindings.Departments.hints.LastUpdatedAt.mandatory}"
-                            columns="#{bindings.Departments.hints.LastUpdatedAt.displayWidth}"
-                            shortDesc="#{bindings.Departments.hints.LastUpdatedAt.tooltip}" id="id4" readOnly="true">
-                <f:validator binding="#{row.bindings.LastUpdatedAt.validator}"/>
-                <af:convertDateTime pattern="#{bindings.Departments.hints.LastUpdatedAt.format}"/>
-              </af:inputDate>
-              <f:facet name="filter">
-                <af:inputDate value="#{vs.filterCriteria.LastUpdatedAt}" id="id1">
-                  <af:convertDateTime pattern="#{bindings.Departments.hints.LastUpdatedAt.format}"/>
-                </af:inputDate>
-              </f:facet>
-            </af:column>
-            <af:column sortProperty="#{bindings.Departments.hints.LastUpdatedBy.name}" filterable="true" sortable="true"
-                       headerText="#{bindings.Departments.hints.LastUpdatedBy.label}" id="c6">
-              <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
-                            label="#{bindings.Departments.hints.LastUpdatedBy.label}"
-                            required="#{bindings.Departments.hints.LastUpdatedBy.mandatory}"
-                            columns="#{bindings.Departments.hints.LastUpdatedBy.displayWidth}"
-                            maximumLength="#{bindings.Departments.hints.LastUpdatedBy.precision}"
-                            shortDesc="#{bindings.Departments.hints.LastUpdatedBy.tooltip}" id="it4" readOnly="true">
-                <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
-              </af:inputText>
+            <af:column sortProperty="#{bindings.Departments.hints.Expired.name}" filterable="true" sortable="false"
+                       headerText="#{bindings.Departments.hints.Expired.label}" id="c8" align="center" width="50">
+              <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}" label="#{row.bindings.Expired.label}"
+                                        shortDesc="#{bindings.Departments.hints.Expired.tooltip}" id="sbc1"/>
             </af:column>
           </af:table>
           <af:popup id="confirm" contentDelivery="lazyUncached">

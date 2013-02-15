@@ -46,6 +46,9 @@
   <ViewUsage
     Name="RolesOfUser"
     ViewObjectName="edu.hp.model.vo.RoleUsersView"/>
+  <ViewUsage
+    Name="Classrooms"
+    ViewObjectName="edu.hp.model.vo.ClassroomView"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"

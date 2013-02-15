@@ -1,5 +1,7 @@
 package edu.hp.model.biz;
 
+import edu.hp.model.vo.EmployeesViewImpl;
+import edu.hp.model.vo.LovsViewImpl;
 import edu.hp.model.vo.RoleMenusViewImpl;
 import edu.hp.model.vo.RolesViewImpl;
 import edu.hp.model.vo.query.security.UserMenuQueryImpl;
@@ -139,4 +141,14 @@ public class AdminModuleImpl extends ApplicationModuleImpl {
     public ViewLinkImpl getUserRoleDMLViewLink1() {
         return (ViewLinkImpl)findViewLink("UserRoleDMLViewLink1");
     }
+
+    /**
+     * Container's getter for ClassroomView1.
+     * @return ClassroomView1
+     */
+    public ViewObjectImpl getClassrooms() {
+        return (ViewObjectImpl)findViewObject("Classrooms");
+    }
+
+
 }

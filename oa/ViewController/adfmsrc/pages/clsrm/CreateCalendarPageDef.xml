@@ -40,7 +40,7 @@
       </AttrNames>
     </attributeValues>
     <list IterBinding="ClsRmCalDMLViewIterator" StaticList="false" Uses="LOV_UserDisplayName" id="UserDisplayName"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <attributeValues IterBinding="ClsRmCalDMLViewIterator" id="Comments">
       <AttrNames>
         <Item Value="Comments"/>
@@ -79,5 +79,7 @@
         <Item Value="UserId"/>
       </AttrNames>
     </attributeValues>
+    <listOfValues StaticList="false" IterBinding="ClsRmCalDMLViewIterator" Uses="LOV_UserDisplayName"
+                  id="UserDisplayName1"/>
   </bindings>
 </pageDefinition>
