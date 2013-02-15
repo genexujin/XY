@@ -45,14 +45,14 @@
                     queryListener="#{bindings.RolesQuery.processQuery}" filterVisible="false" varStatus="vs"
                     selectedRowKeys="#{bindings.Roles.collectionModel.selectedRow}"
                     selectionListener="#{bindings.Roles.collectionModel.makeCurrent}" rowSelection="single" id="t3"
-                    partialTriggers="::ctb3 ::ctb4" editingMode="clickToEdit">
+                    partialTriggers="::ctb3 ::ctb4">
             <af:column sortProperty="#{bindings.Roles.hints.RoleName.name}" filterable="true" sortable="true"
                        headerText="#{bindings.Roles.hints.RoleName.label}" id="c1">
               <af:inputText value="#{row.bindings.RoleName.inputValue}" label="#{bindings.Roles.hints.RoleName.label}"
                             required="#{bindings.Roles.hints.RoleName.mandatory}"
                             columns="#{bindings.Roles.hints.RoleName.displayWidth}"
                             maximumLength="#{bindings.Roles.hints.RoleName.precision}"
-                            shortDesc="#{bindings.Roles.hints.RoleName.tooltip}" id="it1">
+                            shortDesc="#{bindings.Roles.hints.RoleName.tooltip}" id="it1" readOnly="true">
                 <f:validator binding="#{row.bindings.RoleName.validator}"/>
               </af:inputText>
             </af:column>
@@ -62,7 +62,7 @@
                             required="#{bindings.Roles.hints.RoleDesc.mandatory}"
                             columns="#{bindings.Roles.hints.RoleDesc.displayWidth}"
                             maximumLength="#{bindings.Roles.hints.RoleDesc.precision}"
-                            shortDesc="#{bindings.Roles.hints.RoleDesc.tooltip}" id="it2">
+                            shortDesc="#{bindings.Roles.hints.RoleDesc.tooltip}" id="it2" readOnly="true">
                 <f:validator binding="#{row.bindings.RoleDesc.validator}"/>
               </af:inputText>
             </af:column>

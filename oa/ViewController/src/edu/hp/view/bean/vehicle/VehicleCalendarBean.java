@@ -161,7 +161,7 @@ public class VehicleCalendarBean extends CalendarBean {
         this.setMyView(newValue);
         binding.execute();
         UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
-        System.err.println(calendar.getClientId());
+        //System.err.println(calendar.getClientId());
         this.refreshCalendar(calendar);
     }
 
