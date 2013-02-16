@@ -118,5 +118,14 @@
         Name="state"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="findByCallId"
+      MethodName="findByCallId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="id"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </AppModule>

@@ -21,6 +21,7 @@ public class Constants {
     public static final String STATE_TASK_COMPLETED = "COMPLETED";
     public static final String CONTEXT_TYPE_VEHICLE = "VEHICLE";
     public static final String CONTEXT_TYPE_CONFRM = "CONFRM";
+    public static final String CONTEXT_TYPE_HELPDESK = "HELPDESK";
     
     public static final String ROLE_OFFICE_MGR="办公室主任";
     public static final String ROLE_ZONGWU_MGR="总务处主任";
@@ -40,5 +41,7 @@ public class Constants {
         "/WEB-INF/flows/vehicle/vehicle-dashboard-btf.xml#vehicle-dashboard-btf";
     public static final String CONTEXT_CONFRM_TASKFLOW =
         "/WEB-INF/flows/confRm/confRm-dashboard-btf.xml#confRm-dashboard-btf";
+    public static final String CONTEXT_HELPDESK_TASKFLOW =
+        "/WEB-INF/flows/helpdesk/MyHdCallDashboard.xml#MyHdCallDashboard";
 
 }

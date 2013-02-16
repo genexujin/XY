@@ -78,5 +78,10 @@
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="roleName" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CallId">
+      <AttrNames>
+        <Item Value="CallId"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

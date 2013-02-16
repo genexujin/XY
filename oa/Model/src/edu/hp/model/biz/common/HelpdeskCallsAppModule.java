@@ -9,4 +9,6 @@ public interface HelpdeskCallsAppModule extends ApplicationModule {
     void findByCallerId(String callerId);
 
     void findByState(String state);
+
+    void findByCallId(String id);
 }

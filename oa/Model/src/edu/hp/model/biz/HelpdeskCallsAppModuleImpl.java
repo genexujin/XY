@@ -69,6 +69,19 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
         sView.setApplyViewCriteriaName(sCriteria.getName());
         sView.executeQuery();
     }
+    
+    public void findByCallId(String id) {
+        HelpdeskCallsViewImpl hdView = this.getHelpdeskCallsView();
+        hdView.setApplyViewCriteriaNames(null);
+        
+        System.err.println("In AppModule: CallId is: " + id);
+        if (id != null) {
+            hdView.setcallId(id);
+            ViewCriteria cCriteria = hdView.getViewCriteria("CallIdCriteria");
+            hdView.setApplyViewCriteriaName(cCriteria.getName());
+            hdView.executeQuery();
+        }
+    }
 
     /**
      * Container's getter for HelpdeskCallsView.

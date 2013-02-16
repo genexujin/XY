@@ -89,6 +89,10 @@ public class SystemBean extends UITabBean {
                 taskFlowId = Constants.CONTEXT_CONFRM_TASKFLOW;
                 title = "会议室申请审核";
                 parameters.put("id", contextObjectId);
+            }else if (contextObjectType.equals(Constants.CONTEXT_TYPE_HELPDESK)) {
+                taskFlowId = Constants.CONTEXT_HELPDESK_TASKFLOW;
+                title = "报修单处理";
+                parameters.put("id", contextObjectId);
             }
             
             

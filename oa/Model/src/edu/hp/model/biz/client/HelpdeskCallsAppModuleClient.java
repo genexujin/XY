@@ -16,6 +16,12 @@ public class HelpdeskCallsAppModuleClient extends ApplicationModuleImpl implemen
     public HelpdeskCallsAppModuleClient() {
     }
 
+
+    public void findByCallId(String id) {
+        Object _ret = this.riInvokeExportedMethod(this,"findByCallId",new String [] {"java.lang.String"},new Object[] {id});
+        return;
+    }
+
     public void findByCallerId(String callerId) {
         Object _ret = this.riInvokeExportedMethod(this,"findByCallerId",new String [] {"java.lang.String"},new Object[] {callerId});
         return;

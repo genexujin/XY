@@ -314,4 +314,20 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
     public void setcEval(String value) {
         ensureVariableManager().setVariableValue("cEval", value);
     }
+
+    /**
+     * Returns the variable value for callId.
+     * @return variable value for callId
+     */
+    public String getcallId() {
+        return (String)ensureVariableManager().getVariableValue("callId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable callId.
+     * @param value value to bind as callId
+     */
+    public void setcallId(String value) {
+        ensureVariableManager().setVariableValue("callId", value);
+    }
 }

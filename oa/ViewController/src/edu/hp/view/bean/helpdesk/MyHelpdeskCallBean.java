@@ -156,6 +156,7 @@ public class MyHelpdeskCallBean extends BaseBean {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_ACCEPTED);
             boolean success = ADFUtils.commit("报修单已提交！", "报修单提交失败，请核对输入的信息或联系管理员！");
             if (success) {
+                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
                 String locationDetail = (String)ADFUtils.getBoundAttributeValue("LocationDetail");
                 String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
                 
@@ -163,6 +164,8 @@ public class MyHelpdeskCallBean extends BaseBean {
                 String noteTitle = "有新的报修请求等待处理";
                 String noteContent = "详细地址：" + locationDetail + " 报修原因：" + rsnLv1 + " 提交时间：" + getDateString();                
                 sendNotification(noteTitle, noteContent, null, Constants.ROLE_HD_ADMIN);
+                
+                createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, Constants.ROLE_HD_ADMIN);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -176,7 +179,30 @@ public class MyHelpdeskCallBean extends BaseBean {
     }
 
     public void processHdCall(ActionEvent actionEvent) {
-        toState(Constants.STATE_PROCESSED);
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        String calleeId = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");
+        String callerId = ADFUtils.getBoundAttributeValue("CallerId").toString();
+        System.out.println("calleeId is: " + calleeId);
+        System.out.println("callerId is: " + callerId);
+        
+        if (state != null && state.equals(Constants.STATE_ACCEPTED)) {
+            ADFUtils.setBoundAttributeValue("State", Constants.STATE_PROCESSED);
+            ADFUtils.setBoundAttributeValue("CalleeId", calleeId);
+            boolean success = ADFUtils.commit("报修单已处理！", "报修单处理失败，请核对输入的信息或联系管理员！");
+            if (success) {
+                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
+                
+                //complete the task for callee
+                completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, Constants.ROLE_HD_ADMIN);
+                
+                //send notification to caller
+                this.sendNotification("您的报修处理已完成", "", callerId, null);
+                
+                ADFUtils.findOperation("Commit").execute();
+            } else {
+                ADFUtils.setBoundAttributeValue("State", state);
+            }
+        }
     }
 
     public void evaluateHdCall(ActionEvent actionEvent) {

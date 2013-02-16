@@ -10,6 +10,10 @@
       <value>#{pageFlowScope.fromMenu}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
+    <input-parameter-definition id="__20">
+      <name>id</name>
+      <value>#{pageFlowScope.callId}</value>
+    </input-parameter-definition>
     <managed-bean id="__1">
       <managed-bean-name>MyHdCallBean</managed-bean-name>
       <managed-bean-class>edu.hp.view.bean.helpdesk.MyHelpdeskCallBean</managed-bean-class>
@@ -32,6 +36,10 @@
         <expression>#{pageFlowScope.fromMenu == 'callee'}</expression>
         <outcome>callee</outcome>
       </case>
+      <case id="__19">
+        <expression>#{pageFlowScope.callId!= null}</expression>
+        <outcome>byCallId</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findByCallerId">
@@ -44,6 +52,12 @@
       <method>#{bindings.findByState.execute}</method>
       <outcome>
         <fixed-outcome>byState</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByCallId">
+      <method>#{bindings.findByCallId.execute}</method>
+      <outcome>
+        <fixed-outcome>byCallId</fixed-outcome>
       </outcome>
     </method-call>
     <control-flow-rule id="__2">
@@ -74,6 +88,10 @@
         <from-outcome>callee</from-outcome>
         <to-activity-id>findByPendingProcess</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__18">
+        <from-outcome>byCallId</from-outcome>
+        <to-activity-id>findByCallId</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__12">
       <from-activity-id>findByCallerId</from-activity-id>
@@ -87,6 +105,13 @@
       <control-flow-case id="__15">
         <from-outcome>byState</from-outcome>
         <to-activity-id>MyHelpdeskCall</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>findByCallId</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>byCallId</from-outcome>
+        <to-activity-id>CreateHelpdeskCall</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>
