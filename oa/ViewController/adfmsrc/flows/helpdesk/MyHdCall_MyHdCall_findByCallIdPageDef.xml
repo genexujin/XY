@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="MyHdCall_MyHdCall_findByCallIdPageDef" Package="flows.helpdesk" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="findByCallId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByCallId"
+                  IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByCallId_RootAppModuleDataControl_dataProvider_Root_HelpdeskCallsAppModule1_findByCallId_result">
+      <NamedData NDName="id" NDValue="#{pageFlowScope.callId}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>
