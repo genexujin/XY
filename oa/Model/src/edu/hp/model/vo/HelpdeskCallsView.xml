@@ -90,7 +90,11 @@
   <ViewAccessor
     Name="EmployeesView"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="filterByExpired"
+      FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
+  </ViewAccessor>
   <ViewAccessor
     Name="HdState"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.HdState"
@@ -131,6 +135,10 @@
     Name="HdEval"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.HdEval"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Callees"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_CallerId"
     ListVOName="EmployeesView"
@@ -151,10 +159,11 @@
   </ListBinding>
   <ListBinding
     Name="LOV_CalleeId"
-    ListVOName="EmployeesView"
+    ListVOName="Callees"
     ListRangeSize="-1"
     NullValueFlag="start"
     MRUCount="0"
+    ComboRowCountHint="10"
     NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
     <AttrArray Name="AttrNames">
       <Item Value="CalleeId"/>
@@ -165,7 +174,9 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="DisplayName"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Name="findByUserName"
+      Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
     Name="LOV_State"
@@ -334,7 +345,7 @@
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="choice"/>
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -371,7 +382,8 @@
     PrecisionRule="true"
     EntityAttrName="CreateAt"
     EntityUsage="HelpdeskCalls"
-    AliasName="CREATE_AT"/>
+    AliasName="CREATE_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="LastUpdatedBy"
     PrecisionRule="true"
@@ -383,7 +395,8 @@
     PrecisionRule="true"
     EntityAttrName="LastUpdatedAt"
     EntityUsage="HelpdeskCalls"
-    AliasName="LAST_UPDATED_AT"/>
+    AliasName="LAST_UPDATED_AT"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="State"
     PrecisionRule="true"
@@ -964,7 +977,7 @@
         Type="java.lang.String"/>
     </Method>
     <Method
-      Name="doQuery1"
+      Name="doQuery"
       MethodName="doQuery">
       <Return
         Type="void"/>

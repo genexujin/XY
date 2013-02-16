@@ -150,7 +150,7 @@ public class MyHelpdeskCallBean extends BaseBean {
     }
 
     public void submitHdCall(ActionEvent actionEvent) {
-        setSubmitDate();
+        //setSubmitDate();
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_INITIAL)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_ACCEPTED);

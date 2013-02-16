@@ -38,11 +38,16 @@
                                     shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1" disabled="true">
                   <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
                 </af:selectOneChoice>
-                <af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
-                                    required="#{bindings.CalleeId.hints.mandatory}"
-                                    shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc9">
-                  <f:selectItems value="#{bindings.CalleeId.items}" id="si10"/>
-                </af:selectOneChoice>
+                <af:inputComboboxListOfValues id="calleeIdId"
+                                              popupTitle="Search and Select: #{bindings.CalleeId.hints.label}"
+                                              value="#{bindings.CalleeId.inputValue}"
+                                              label="#{bindings.CalleeId.hints.label}"
+                                              model="#{bindings.CalleeId.listOfValuesModel}"
+                                              required="#{bindings.CalleeId.hints.mandatory}"
+                                              columns="#{bindings.CalleeId.hints.displayWidth}"
+                                              shortDesc="#{bindings.CalleeId.hints.tooltip}">
+                  <f:validator binding="#{bindings.CalleeId.validator}"/>
+                </af:inputComboboxListOfValues>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl5" layout="horizontal">
                 <af:selectOneChoice value="#{bindings.State.inputValue}" label="#{bindings.State.label}"

@@ -132,7 +132,10 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="HELPDESK_CALLS">
+    TableName="HELPDESK_CALLS"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory"
+    RetrievedOnInsert="true">
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -158,7 +161,9 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="HELPDESK_CALLS"/>
+    TableName="HELPDESK_CALLS"
+    HistoryColumn="DateHistory"
+    RetrievedOnUpdate="true"/>
   <Attribute
     Name="State"
     Precision="20"

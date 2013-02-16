@@ -39,8 +39,6 @@
     </attributeValues>
     <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CallerId" id="CallerId"
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId" id="CalleeId"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_LocationId" id="LocationId"
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_ReasonLevel1" id="ReasonLevel1"
@@ -83,5 +81,6 @@
         <Item Value="CallId"/>
       </AttrNames>
     </attributeValues>
+    <listOfValues StaticList="false" IterBinding="HelpdeskCallsViewIterator" Uses="LOV_CalleeId" id="CalleeId"/>
   </bindings>
 </pageDefinition>
