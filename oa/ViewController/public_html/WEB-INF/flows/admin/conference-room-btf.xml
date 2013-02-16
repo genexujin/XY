@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <task-flow-definition id="menus-btf">
+  <task-flow-definition id="conference-room-btf">
     <template-reference>
       <document>/WEB-INF/flows/admin/admin-btf-template.xml</document>
       <id>admin-btf-template</id>
     </template-reference>
-    <default-activity>Menus</default-activity>
+    <default-activity>ConferenceRooms</default-activity>
     <data-control-scope>
       <isolated/>
     </data-control-scope>
-    <view id="Menus">
-      <page>/pages/admin/Menus.jsff</page>
+    <view id="ConferenceRooms">
+      <page>/pages/admin/ConferenceRooms.jsff</page>
     </view>
     <use-page-fragments/>
   </task-flow-definition>

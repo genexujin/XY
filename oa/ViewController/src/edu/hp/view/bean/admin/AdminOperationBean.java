@@ -49,6 +49,7 @@ public class AdminOperationBean {
         BindingContext bc = BindingContext.getCurrent();
         DCBindingContainer binding = (DCBindingContainer)bc.getCurrentBindingsEntry();
         DCIteratorBinding iter = binding.findIteratorBinding(iteratorName);
+        iter.setRangeSize(-1);
         List<SelectItem> selectItems = new ArrayList<SelectItem>();
         for (Row r : iter.getAllRowsInRange()) {
             selectItems.add(new SelectItem(r.getAttribute(valueAttrName),

@@ -72,7 +72,7 @@ public class UITabBean {
 
             OperationBinding binding = ADFUtils.findOperation("queryUserMenu");
             Map map = binding.getParamsMap();
-            System.err.println("user name: " + user.getUserName());
+            //System.err.println("user name: " + user.getUserName());
             map.put("userName", user.getUserName());
             binding.execute();
 

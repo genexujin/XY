@@ -6,6 +6,9 @@
       <id>admin-btf-template</id>
     </template-reference>
     <default-activity>Departments</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
     <view id="Departments">
       <page>/pages/admin/Departments.jsff</page>
     </view>

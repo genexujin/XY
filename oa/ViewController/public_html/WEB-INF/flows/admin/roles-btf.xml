@@ -6,6 +6,9 @@
       <id>admin-btf-template</id>
     </template-reference>
     <default-activity>Roles</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
     <view id="Roles">
       <page>/pages/admin/Roles.jsff</page>
     </view>

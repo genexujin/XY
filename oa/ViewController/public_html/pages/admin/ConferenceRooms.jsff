@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="center">
+            <af:panelHeader text="教室信息维护" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t1">
+                        <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png">
+                            <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
+                        </af:commandToolbarButton>
+                        <af:commandToolbarButton id="ctb2" icon="/images/icons/undo.png" text="取消"
+                                                 actionListener="#{bindings.Rollback.execute}"
+                                                 disabled="#{!bindings.Rollback.enabled}">
+                            <af:resetActionListener/>
+                        </af:commandToolbarButton>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelCollection id="pc1">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t2">
+                            <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
+                                                     disabled="#{!bindings.CreateInsert.enabled}" id="ctb3"
+                                                     icon="/images/icons/new.png"/>
+                            <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
+                                <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="部门信息"
+                                                                   filename="Dept.xls"/>
+                            </af:commandToolbarButton>
+                        </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar"/>
+                    <af:popup id="confirm" contentDelivery="lazyUncached">
+                        <!-- don't render if the activity is null -->
+                        <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}" title="请确认操作" id="d2">
+                            <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+                            <af:spacer height="20" id="s4"/>
+                            <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+                        </af:dialog>
+                    </af:popup>
+                    <af:table value="#{bindings.ConferenceRooms.collectionModel}" var="row"
+                              rows="#{bindings.ConferenceRooms.rangeSize}"
+                              emptyText="#{bindings.ConferenceRooms.viewable ? '暂无数据。' : 'Access Denied.'}"
+                              fetchSize="#{bindings.ConferenceRooms.rangeSize}" rowBandingInterval="1"
+                              filterModel="#{bindings.ConferenceRoomsQuery.queryDescriptor}"
+                              queryListener="#{bindings.ConferenceRoomsQuery.processQuery}" filterVisible="false"
+                              varStatus="vs" selectedRowKeys="#{bindings.ConferenceRooms.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.ConferenceRooms.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3">
+                        <af:column sortProperty="#{bindings.ConferenceRooms.hints.Value.name}" filterable="true"
+                                   sortable="true" headerText="#{bindings.ConferenceRooms.hints.Value.label}" id="c1">
+                            <af:inputText value="#{row.bindings.Value.inputValue}"
+                                          label="#{bindings.ConferenceRooms.hints.Value.label}"
+                                          required="#{bindings.ConferenceRooms.hints.Value.mandatory}"
+                                          columns="#{bindings.ConferenceRooms.hints.Value.displayWidth}"
+                                          maximumLength="#{bindings.ConferenceRooms.hints.Value.precision}"
+                                          shortDesc="#{bindings.ConferenceRooms.hints.Value.tooltip}" id="it1">
+                                <f:validator binding="#{row.bindings.Value.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.ConferenceRooms.hints.FlexCol3.name}" filterable="true"
+                                   sortable="true" headerText="#{bindings.ConferenceRooms.hints.FlexCol3.label}"
+                                   id="c2">
+                            <af:selectOneChoice value="#{row.bindings.FlexCol3.inputValue}"
+                                                label="#{row.bindings.FlexCol3.label}"
+                                                required="#{bindings.ConferenceRooms.hints.FlexCol3.mandatory}"
+                                                shortDesc="#{bindings.ConferenceRooms.hints.FlexCol3.tooltip}"
+                                                id="soc1">
+                                <f:selectItems value="#{row.bindings.FlexCol3.items}" id="si1"/>
+                            </af:selectOneChoice>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.ConferenceRooms.hints.FlexCol2.name}" filterable="true"
+                                   sortable="true" headerText="#{bindings.ConferenceRooms.hints.FlexCol2.label}"
+                                   id="c3">
+                            <af:inputText value="#{row.bindings.FlexCol2.inputValue}"
+                                          label="#{bindings.ConferenceRooms.hints.FlexCol2.label}"
+                                          required="#{bindings.ConferenceRooms.hints.FlexCol2.mandatory}"
+                                          columns="#{bindings.ConferenceRooms.hints.FlexCol2.displayWidth}"
+                                          maximumLength="#{bindings.ConferenceRooms.hints.FlexCol2.precision}"
+                                          shortDesc="#{bindings.ConferenceRooms.hints.FlexCol2.tooltip}" id="it2">
+                                <f:validator binding="#{row.bindings.FlexCol2.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.ConferenceRooms.hints.Expired.name}" filterable="true"
+                                   sortable="true" headerText="#{bindings.ConferenceRooms.hints.Expired.label}" id="c4"
+                                   width="50" align="center">
+                            <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}"
+                                                      label="#{row.bindings.Expired.label}"
+                                                      shortDesc="#{bindings.ConferenceRooms.hints.Expired.tooltip}"
+                                                      id="sbc1"/>
+                        </af:column>
+                    </af:table>
+                </af:panelCollection>
+            </af:panelHeader>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

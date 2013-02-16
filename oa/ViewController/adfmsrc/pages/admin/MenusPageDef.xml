@@ -25,7 +25,8 @@
           <Item Value="MenuMasterCategory"/>
           <Item Value="MenuCategory"/>
           <Item Value="MenuIconUrl"/>
-          <Item Value="Expired" Binds="Expired"/>
+          <Item Value="Expired"/>
+          <Item Value="Seq"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

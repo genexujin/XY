@@ -151,4 +151,19 @@ public class AdminModuleImpl extends ApplicationModuleImpl {
     }
 
 
+    /**
+     * Container's getter for ConferenceRoomsView1.
+     * @return ConferenceRoomsView1
+     */
+    public ViewObjectImpl getConferenceRooms() {
+        return (ViewObjectImpl)findViewObject("ConferenceRooms");
+    }
+
+    /**
+     * Container's getter for VehicleView1.
+     * @return VehicleView1
+     */
+    public ViewObjectImpl getVehicles() {
+        return (ViewObjectImpl)findViewObject("Vehicles");
+    }
 }

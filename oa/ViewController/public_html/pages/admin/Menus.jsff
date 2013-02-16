@@ -122,6 +122,16 @@
                                         shortDesc="#{bindings.Menus.hints.Expired.tooltip}" id="sbc1"
                                         autoSubmit="true"/>
             </af:column>
+            <af:column sortProperty="#{bindings.Menus.hints.Seq.name}" filterable="true" sortable="false"
+                       headerText="#{bindings.Menus.hints.Seq.label}" id="c9" width="50">
+              <af:inputNumberSpinbox value="#{row.bindings.Seq.inputValue}" label="#{bindings.Menus.hints.Seq.label}"
+                                     required="#{bindings.Menus.hints.Seq.mandatory}"
+                                     columns="#{bindings.Menus.hints.Seq.displayWidth}"
+                                     shortDesc="#{bindings.Menus.hints.Seq.tooltip}" id="it5" autoSubmit="true"
+                                     contentStyle="width:20px;">
+                <f:validator binding="#{row.bindings.Seq.validator}"/>
+              </af:inputNumberSpinbox>
+            </af:column>
           </af:table>
           <af:popup id="confirm" contentDelivery="lazyUncached">
                         <!-- don't render if the activity is null -->

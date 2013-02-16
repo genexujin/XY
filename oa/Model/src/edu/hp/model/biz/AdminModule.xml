@@ -49,6 +49,12 @@
   <ViewUsage
     Name="Classrooms"
     ViewObjectName="edu.hp.model.vo.ClassroomView"/>
+  <ViewUsage
+    Name="ConferenceRooms"
+    ViewObjectName="edu.hp.model.vo.ConferenceRoomsView"/>
+  <ViewUsage
+    Name="Vehicles"
+    ViewObjectName="edu.hp.model.vo.VehicleView"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"

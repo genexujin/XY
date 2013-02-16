@@ -12,7 +12,7 @@
     <iterator Binds="Root.AdminModule.RoleMenus" DataControl="RootAppModuleDataControl" RangeSize="10"
               id="RoleMenusIterator"/>
     <iterator id="MenusOfRoleIterator" Binds="Root.AdminModule.MenusOfRole" DataControl="RootAppModuleDataControl"
-              RangeSize="25" ChangeEventPolicy="ppr"/>
+              RangeSize="-1" ChangeEventPolicy="ppr"/>
   </executables>
   <bindings>
     <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"

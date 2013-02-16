@@ -107,6 +107,16 @@ public class MenusImpl extends BaseEntity {
                 obj.setExpired((String)value);
             }
         }
+        ,
+        Seq {
+            public Object get(MenusImpl obj) {
+                return obj.getSeq();
+            }
+
+            public void put(MenusImpl obj, Object value) {
+                obj.setSeq((String)value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -135,6 +145,7 @@ public class MenusImpl extends BaseEntity {
         }
     }
 
+
     public static final int MENUID = AttributesEnum.MenuId.index();
     public static final int MENUNAME = AttributesEnum.MenuName.index();
     public static final int MENUTASKFLOWURL = AttributesEnum.MenuTaskflowUrl.index();
@@ -144,12 +155,14 @@ public class MenusImpl extends BaseEntity {
     public static final int MENUMASTERCATEGORY = AttributesEnum.MenuMasterCategory.index();
     public static final int MENUICONURL = AttributesEnum.MenuIconUrl.index();
     public static final int EXPIRED = AttributesEnum.Expired.index();
+    public static final int SEQ = AttributesEnum.Seq.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public MenusImpl() {
     }
+
 
     /**
      * @return the definition object for this instance class.
@@ -300,6 +313,22 @@ public class MenusImpl extends BaseEntity {
      */
     public void setExpired(String value) {
         setAttributeInternal(EXPIRED, value);
+    }
+
+    /**
+     * Gets the attribute value for Seq, using the alias name Seq.
+     * @return the value of Seq
+     */
+    public String getSeq() {
+        return (String)getAttributeInternal(SEQ);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for Seq.
+     * @param value value to set the Seq
+     */
+    public void setSeq(String value) {
+        setAttributeInternal(SEQ, value);
     }
 
     /**

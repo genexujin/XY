@@ -8,7 +8,7 @@
     <taskFlow id="dynamicRegion1" taskFlowId="${viewScope.HomeBean.dynamicTaskFlowId}" activation="deferred"
               xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
     <iterator id="UserMenusIterator" Binds="Root.AdminModule.UserMenus" DataControl="RootAppModuleDataControl"
-              RangeSize="25"/>
+              RangeSize="-1"/>
   </executables>
   <bindings>
     <methodAction IterBinding="UserMenusIterator" id="queryUserMenu" RequiresUpdateModel="true" Action="invokeMethod"

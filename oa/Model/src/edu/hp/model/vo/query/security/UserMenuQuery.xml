@@ -5,7 +5,7 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="UserMenuQuery"
   Version="11.1.2.62.76"
-  OrderBy="&quot;MENU_CATEGORY&quot;"
+  OrderBy="&quot;SEQ&quot;,&quot;MENU_MASTER_CATEGORY&quot;,&quot;MENU_CATEGORY&quot;"
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
@@ -43,7 +43,8 @@ menus.menu_category,
 menus.menu_master_category,
 menus.menu_name,
 menus.menu_taskflow_url,
-menus.menu_icon_url
+menus.menu_icon_url,
+menus.seq
 from
 employees,menus,roles,role_menus,role_users
 where
@@ -157,6 +158,21 @@ and employees.user_name = :userName]]></SQLQuery>
       <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewAttribute
+    Name="Seq"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEQ"
+    Expression="SEQ"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewCriteria
     Name="QueryByCategory"
     ViewObjectName="edu.hp.model.vo.query.security.UserMenuQuery"
@@ -227,7 +243,7 @@ and employees.user_name = :userName]]></SQLQuery>
         Type="java.lang.String"/>
     </Method>
     <Method
-      Name="queryUserMenu1"
+      Name="queryUserMenu"
       MethodName="queryUserMenu">
       <Return
         Type="void"/>

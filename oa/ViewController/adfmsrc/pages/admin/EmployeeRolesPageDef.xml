@@ -9,8 +9,8 @@
     <iterator Binds="Root.AdminModule.RoleUsers" DataControl="RootAppModuleDataControl" RangeSize="10"
               id="RoleUsersIterator"/>
     <iterator id="RolesOfUserIterator" Binds="Root.AdminModule.RolesOfUser" DataControl="RootAppModuleDataControl"
-              RangeSize="25"/>
-    <iterator id="RolesIterator" Binds="Roles" DataControl="AdminModuleDataControl" RangeSize="25"/>
+              RangeSize="-1"/>
+    <iterator id="RolesIterator" Binds="Roles" DataControl="AdminModuleDataControl" RangeSize="-1"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="EmployeesIterator" id="DisplayName">

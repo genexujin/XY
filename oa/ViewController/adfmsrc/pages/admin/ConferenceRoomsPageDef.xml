@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="ConferenceRoomsPageDef"
+                Package="pages.admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.ConferenceRooms" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ConferenceRoomsIterator"/>
+    <searchRegion Binds="ConferenceRoomsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ConferenceRoomsQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ConferenceRoomsIterator" id="ConferenceRooms">
+      <nodeDefinition DefName="edu.hp.model.vo.ConferenceRoomsView" Name="ConferenceRooms0">
+        <AttrNames>
+          <Item Value="Value"/>
+          <Item Value="FlexCol3"/>
+          <Item Value="FlexCol2"/>
+          <Item Value="Expired" Binds="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="ConferenceRoomsIterator" id="Expired" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action IterBinding="ConferenceRoomsIterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.ConferenceRooms"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>
