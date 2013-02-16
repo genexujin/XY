@@ -58,7 +58,8 @@
                                           required="#{bindings.Classrooms.hints.Value.mandatory}"
                                           columns="#{bindings.Classrooms.hints.Value.displayWidth}"
                                           maximumLength="#{bindings.Classrooms.hints.Value.precision}"
-                                          shortDesc="#{bindings.Classrooms.hints.Value.tooltip}" id="it1">
+                                          shortDesc="#{bindings.Classrooms.hints.Value.tooltip}" id="it1"
+                                          autoSubmit="true">
                                 <f:validator binding="#{row.bindings.Value.validator}"/>
                             </af:inputText>
                         </af:column>
@@ -67,7 +68,8 @@
                             <af:selectOneChoice value="#{row.bindings.FlexCol1.inputValue}"
                                                 label="#{row.bindings.FlexCol1.label}"
                                                 required="#{bindings.Classrooms.hints.FlexCol1.mandatory}"
-                                                shortDesc="#{bindings.Classrooms.hints.FlexCol1.tooltip}" id="soc1">
+                                                shortDesc="#{bindings.Classrooms.hints.FlexCol1.tooltip}" id="soc1"
+                                                autoSubmit="true">
                                 <f:selectItems value="#{row.bindings.FlexCol1.items}" id="si1"/>
                             </af:selectOneChoice>
                         </af:column>
@@ -78,7 +80,8 @@
                                           required="#{bindings.Classrooms.hints.FlexCol2.mandatory}"
                                           columns="#{bindings.Classrooms.hints.FlexCol2.displayWidth}"
                                           maximumLength="#{bindings.Classrooms.hints.FlexCol2.precision}"
-                                          shortDesc="#{bindings.Classrooms.hints.FlexCol2.tooltip}" id="it2">
+                                          shortDesc="#{bindings.Classrooms.hints.FlexCol2.tooltip}" id="it2"
+                                          autoSubmit="true">
                                 <f:validator binding="#{row.bindings.FlexCol2.validator}"/>
                             </af:inputText>
                         </af:column>
