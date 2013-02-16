@@ -58,7 +58,8 @@
                                           required="#{bindings.Vehicles.hints.Value.mandatory}"
                                           columns="#{bindings.Vehicles.hints.Value.displayWidth}"
                                           maximumLength="#{bindings.Vehicles.hints.Value.precision}"
-                                          shortDesc="#{bindings.Vehicles.hints.Value.tooltip}" id="it1">
+                                          shortDesc="#{bindings.Vehicles.hints.Value.tooltip}" id="it1"
+                                          autoSubmit="true">
                                 <f:validator binding="#{row.bindings.Value.validator}"/>
                             </af:inputText>
                         </af:column>
@@ -69,7 +70,8 @@
                                           required="#{bindings.Vehicles.hints.FlexCol1.mandatory}"
                                           columns="#{bindings.Vehicles.hints.FlexCol1.displayWidth}"
                                           maximumLength="#{bindings.Vehicles.hints.FlexCol1.precision}"
-                                          shortDesc="#{bindings.Vehicles.hints.FlexCol1.tooltip}" id="it2">
+                                          shortDesc="#{bindings.Vehicles.hints.FlexCol1.tooltip}" id="it2"
+                                          autoSubmit="true">
                                 <f:validator binding="#{row.bindings.FlexCol1.validator}"/>
                             </af:inputText>
                         </af:column>
@@ -78,7 +80,8 @@
                                    width="50" align="center">
                             <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}"
                                                       label="#{row.bindings.Expired.label}"
-                                                      shortDesc="#{bindings.Vehicles.hints.Expired.tooltip}" id="sbc1"/>
+                                                      shortDesc="#{bindings.Vehicles.hints.Expired.tooltip}" id="sbc1"
+                                                      autoSubmit="true"/>
                         </af:column>
                     </af:table>
                 </af:panelCollection>

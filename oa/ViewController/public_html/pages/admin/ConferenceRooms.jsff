@@ -58,7 +58,8 @@
                                           required="#{bindings.ConferenceRooms.hints.Value.mandatory}"
                                           columns="#{bindings.ConferenceRooms.hints.Value.displayWidth}"
                                           maximumLength="#{bindings.ConferenceRooms.hints.Value.precision}"
-                                          shortDesc="#{bindings.ConferenceRooms.hints.Value.tooltip}" id="it1">
+                                          shortDesc="#{bindings.ConferenceRooms.hints.Value.tooltip}" id="it1"
+                                          autoSubmit="true">
                                 <f:validator binding="#{row.bindings.Value.validator}"/>
                             </af:inputText>
                         </af:column>
@@ -69,7 +70,7 @@
                                                 label="#{row.bindings.FlexCol3.label}"
                                                 required="#{bindings.ConferenceRooms.hints.FlexCol3.mandatory}"
                                                 shortDesc="#{bindings.ConferenceRooms.hints.FlexCol3.tooltip}"
-                                                id="soc1">
+                                                id="soc1" autoSubmit="true">
                                 <f:selectItems value="#{row.bindings.FlexCol3.items}" id="si1"/>
                             </af:selectOneChoice>
                         </af:column>
@@ -81,7 +82,8 @@
                                           required="#{bindings.ConferenceRooms.hints.FlexCol2.mandatory}"
                                           columns="#{bindings.ConferenceRooms.hints.FlexCol2.displayWidth}"
                                           maximumLength="#{bindings.ConferenceRooms.hints.FlexCol2.precision}"
-                                          shortDesc="#{bindings.ConferenceRooms.hints.FlexCol2.tooltip}" id="it2">
+                                          shortDesc="#{bindings.ConferenceRooms.hints.FlexCol2.tooltip}" id="it2"
+                                          autoSubmit="true">
                                 <f:validator binding="#{row.bindings.FlexCol2.validator}"/>
                             </af:inputText>
                         </af:column>
@@ -91,7 +93,7 @@
                             <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}"
                                                       label="#{row.bindings.Expired.label}"
                                                       shortDesc="#{bindings.ConferenceRooms.hints.Expired.tooltip}"
-                                                      id="sbc1"/>
+                                                      id="sbc1" autoSubmit="true"/>
                         </af:column>
                     </af:table>
                 </af:panelCollection>
