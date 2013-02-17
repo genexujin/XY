@@ -39,7 +39,7 @@
                   <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
                 </af:selectOneChoice>
                 <af:inputComboboxListOfValues id="calleeIdId"
-                                              popupTitle="Search and Select: #{bindings.CalleeId.hints.label}"
+                                              popupTitle="#{bindings.CalleeId.hints.label}"
                                               value="#{bindings.CalleeId.inputValue}"
                                               label="#{bindings.CalleeId.hints.label}"
                                               model="#{bindings.CalleeId.listOfValuesModel}"

@@ -101,13 +101,12 @@
             </af:column>
             <af:column sortProperty="#{bindings.Employees.hints.Gender.name}" sortable="true"
                        headerText="#{bindings.Employees.hints.Gender.label}" id="c6" width="55">
-              <af:inputText value="#{row.bindings.Gender.inputValue}" label="#{bindings.Employees.hints.Gender.label}"
-                            required="#{bindings.Employees.hints.Gender.mandatory}"
-                            columns="#{bindings.Employees.hints.Gender.displayWidth}"
-                            maximumLength="#{bindings.Employees.hints.Gender.precision}"
-                            shortDesc="#{bindings.Employees.hints.Gender.tooltip}" id="it6" autoSubmit="true">
-                <f:validator binding="#{row.bindings.Gender.validator}"/>
-              </af:inputText>
+              <af:selectOneChoice value="#{row.bindings.Gender.inputValue}" label="#{row.bindings.Gender.label}"
+                                  required="#{bindings.Employees.hints.Gender.mandatory}"
+                                  shortDesc="#{bindings.Employees.hints.Gender.tooltip}" id="soc1" autoSubmit="true">
+                <af:selectItem label="男" id="si5" value="男"/>
+                <af:selectItem label="女" id="si4" value="女"/>
+              </af:selectOneChoice>
             </af:column>
             <af:column sortProperty="#{bindings.Employees.hints.MgrId.name}" sortable="true"
                        headerText="#{bindings.Employees.hints.MgrName.label}" id="c7" width="120">

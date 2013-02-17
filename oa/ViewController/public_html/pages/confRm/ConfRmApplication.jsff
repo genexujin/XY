@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-  <af:panelSplitter id="ps1" orientation="vertical" splitterPosition="180">
+  <af:panelSplitter id="ps1" orientation="vertical" splitterPosition="220">
     <f:facet name="first">
       <af:panelHeader text="会议室预订" id="ph1">
         <f:facet name="context"/>
@@ -202,7 +202,7 @@
                                           required="#{bindings.UserDisplayName.hints.mandatory}"
                                           columns="#{bindings.UserDisplayName.hints.displayWidth}"
                                           shortDesc="#{bindings.UserDisplayName.hints.tooltip}"
-                                          rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室管理员']}">
+                                          rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['办公室主任']}">
               <f:validator binding="#{bindings.UserDisplayName.validator}"/>
             </af:inputComboboxListOfValues>
             <af:inputText value="#{bindings.UserDisplayName1.inputValue}"
@@ -270,7 +270,7 @@
                               action="#{viewScope.ConfRmAppBean.save}"/>
             <af:spacer width="10" height="10" id="s8"/>
             <af:commandButton text="提交" id="cb2" icon="/images/icons/run.png"
-                              visible="#{bindings.State.inputValue=='未提交'}" action="#{viewScope.ConfRmAppBean.submit}"/>
+                              visible="#{bindings.State.inputValue=='未提交'&amp;&amp; bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}" action="#{viewScope.ConfRmAppBean.submit}"/>
             <af:spacer width="10" height="10" id="s9"/>
             <af:commandButton text="审核" id="cb3" icon="/images/icons/task.png"
                               visible="#{bindings.State.inputValue=='待审核'}"

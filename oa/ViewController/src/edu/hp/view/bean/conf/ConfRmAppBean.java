@@ -59,10 +59,10 @@ public class ConfRmAppBean extends BaseBean {
 
                     String apprvTitle = "有新的会议室申请等待您的审核。";
                     String apprvContent = " 会议主题：" + title + " 申请人： " + userDisplayName;
-                    sendNotification(noteTitle, apprvContent, null, Constants.ROLE_CONFRM_ADMIN);
+                    sendNotification(noteTitle, apprvContent, null, Constants.ROLE_OFFICE_MGR);
 
                     //create task
-                    createTask(id, Constants.CONTEXT_TYPE_CONFRM, apprvTitle, Constants.ROLE_CONFRM_ADMIN);
+                    createTask(id, Constants.CONTEXT_TYPE_CONFRM, apprvTitle, Constants.ROLE_OFFICE_MGR);
 
                     ADFUtils.findOperation("Commit").execute();
                 } else {
@@ -92,7 +92,7 @@ public class ConfRmAppBean extends BaseBean {
                 String noteContent = " 审核时间：" + dateStr;
                 //send to requester
                 sendNotification(noteTitle, noteContent, userId, null);
-                completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_CONFRM_ADMIN);
+                completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_OFFICE_MGR);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -145,7 +145,7 @@ public class ConfRmAppBean extends BaseBean {
                     String noteContent = " 审核时间：" + dateStr;
                     //send to requester
                     sendNotification(noteTitle, noteContent, userId, null);
-                    completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_CONFRM_ADMIN);
+                    completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_OFFICE_MGR);
                     ADFUtils.findOperation("Commit").execute();
                 } else {
                     ADFUtils.setBoundAttributeValue("State", state);

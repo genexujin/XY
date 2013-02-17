@@ -8,7 +8,7 @@
     position: absolute;
     z-index: 1;
     margin-left: 10%;
-    margin-top: 220px;
+    margin-top: 16%;
 }
 
 #login-box {
@@ -26,7 +26,7 @@
 #login-box h2 {
     padding: 0;
     margin: 0;
-    color: rgb(0, 132, 198);
+    color: rgb(66,132,255);
     font-family: 'Microsoft YaHei';
     font-size: xx-large;
     font-weight: bold;

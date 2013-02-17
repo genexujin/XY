@@ -33,13 +33,13 @@ function eraseCookie(name) {
 
 function toMem(a) {
     newCookie('userName', document.getElementById('userid').value);// add a new cookie as shown at left for every
-    newCookie('passwd', document.getElementById('password').value);
+    //newCookie('passwd', document.getElementById('password').value);
     newCookie('rem', document.getElementById('rememberMe').checked);// field you wish to have the script remember
 }
 
 function delMem(a) {
     eraseCookie('userName');// make sure to add the eraseCookie function for every field
-    eraseCookie('passwd');
+    //eraseCookie('passwd');
     eraseCookie('rem');
 
     //document.getElementById('userid').value = '';// add a line for every field
@@ -49,21 +49,21 @@ function delMem(a) {
 
 function remCookie() {
     document.getElementById('userid').value = readCookie("userName");
-    document.getElementById('password').value = readCookie("passwd");
+    //document.getElementById('password').value = readCookie("passwd");
     document.getElementById('rememberMe').checked = readCookie("rem");
 }
 
 function submitform() {
     var form = document.getElementById('form1');
     if (validationForm()) {
-        
+
         if (document.getElementById('rememberMe').checked) {
             toMem();
         }
         else {
             delMem();
         }
-        form.setAttribute('action','signinservlet');
+        form.setAttribute('action', 'signinservlet');
         form.submit();
 
     }
@@ -91,4 +91,11 @@ function validationForm() {
 
     return true;
 }
-  
+
+function fnTrapKD(event) {
+    if (event.keyCode == 13) {
+        event.returnValue = false;
+        event.cancel = true;
+        submitform();
+    }
+}

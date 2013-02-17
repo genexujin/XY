@@ -28,7 +28,7 @@
                     <div id="login-box-name">密码:</div>
                     <div id="login-box-field">
                         <input id="password" name="password" type="password" class="form-login" title="Password"
-                               value="" size="30"/>
+                               value="" size="30" onkeydown="javascript:fnTrapKD(event)" />
                     </div>
                     <br/><span style='color:red;font-size:15px;' id="usernamespan"> </span><span id="passwordspan"></span>  <br/>                   
                      
@@ -37,7 +37,7 @@
                             <img src="/oa/images/LoginButton.png" width="80" height="20"/>
                        </a>
                        <span style="float:right;margin-right:40px">
-                        <input id="rememberMe" type="checkbox" name="rememberMe"></input> 记住用户名和密码
+                        <input id="rememberMe" type="checkbox" name="rememberMe"></input> 记住用户名
                         <a href="#" style="margin-left:20px;">忘记密码？</a>
                         </span>
                     </span>

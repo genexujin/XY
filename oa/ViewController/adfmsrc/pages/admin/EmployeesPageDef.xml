@@ -50,5 +50,15 @@
         <Item Value="N"/>
       </ValueList>
     </button>
+    <list IterBinding="EmployeesIterator" id="Gender" DTSupportsMRU="true" SelectItemValueMode="ListObject"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="男"/>
+        <Item Value="女"/>
+      </ValueList>
+    </list>
   </bindings>
 </pageDefinition>

@@ -42,7 +42,8 @@
   PageIterMode="Full"
   UseGlueCode="false"
   ComponentClass="edu.hp.model.vo.ClsRmBtchRsvtnViewImpl"
-  RowClass="edu.hp.model.vo.ClsRmBtchRsvtnViewRowImpl">
+  RowClass="edu.hp.model.vo.ClsRmBtchRsvtnViewRowImpl"
+  OrderBy="ClassroomBatchReservation.BATCH_NO desc">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
