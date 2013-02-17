@@ -35,6 +35,7 @@ public class ClassroomCalenderViewImpl extends ViewObjectImpl implements Classro
 
     public void refreshCalendar(String clsRmNos) {
         this.setclsRmNos(clsRmNos);
+        System.err.println("reexecute");
         this.executeQuery();
     }
 
