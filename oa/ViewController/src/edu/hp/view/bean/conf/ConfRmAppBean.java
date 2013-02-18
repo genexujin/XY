@@ -2,6 +2,7 @@ package edu.hp.view.bean.conf;
 
 import edu.hp.model.common.Constants;
 import edu.hp.view.bean.BaseBean;
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
@@ -10,6 +11,7 @@ import oracle.adf.view.rich.event.DialogEvent;
 import oracle.binding.OperationBinding;
 
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Timestamp;
 
 
 public class ConfRmAppBean extends BaseBean {
@@ -40,7 +42,13 @@ public class ConfRmAppBean extends BaseBean {
 
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_INITIAL)) {
-            ADFUtils.setBoundAttributeValue("State", Constants.STATE_PENDING_REVIEW);
+            ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
+            LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+
+            if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) != null)
+                ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);    
+            else
+                ADFUtils.setBoundAttributeValue("State", Constants.STATE_PENDING_REVIEW);
             if (ensureTimeConflicts()) {
                 //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
                 boolean success = ADFUtils.commit("会议室预订已提交审核！", "会议室预订提交审核失败，请核对输入的信息或联系管理员！");
@@ -59,10 +67,10 @@ public class ConfRmAppBean extends BaseBean {
 
                     String apprvTitle = "有新的会议室申请等待您的审核。";
                     String apprvContent = " 会议主题：" + title + " 申请人： " + userDisplayName;
-                    sendNotification(noteTitle, apprvContent, null, Constants.ROLE_OFFICE_MGR);
+                    sendNotification(noteTitle, apprvContent, null, Constants.ROLE_CONFRM_ADMIN);
 
                     //create task
-                    createTask(id, Constants.CONTEXT_TYPE_CONFRM, apprvTitle, Constants.ROLE_OFFICE_MGR);
+                    createTask(id, Constants.CONTEXT_TYPE_CONFRM, apprvTitle, Constants.ROLE_CONFRM_ADMIN);
 
                     ADFUtils.findOperation("Commit").execute();
                 } else {
@@ -92,7 +100,7 @@ public class ConfRmAppBean extends BaseBean {
                 String noteContent = " 审核时间：" + dateStr;
                 //send to requester
                 sendNotification(noteTitle, noteContent, userId, null);
-                completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_OFFICE_MGR);
+                completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_CONFRM_ADMIN);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -145,7 +153,7 @@ public class ConfRmAppBean extends BaseBean {
                     String noteContent = " 审核时间：" + dateStr;
                     //send to requester
                     sendNotification(noteTitle, noteContent, userId, null);
-                    completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_OFFICE_MGR);
+                    completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_CONFRM_ADMIN);
                     ADFUtils.findOperation("Commit").execute();
                 } else {
                     ADFUtils.setBoundAttributeValue("State", state);

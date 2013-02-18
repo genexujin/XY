@@ -80,18 +80,17 @@ public class ClsCalCrtBean extends BaseBean {
 
         if (clsRmId != null && startDayTime != null && changeMade) {
             String ids = (String)JSFUtils.resolveExpression("#{pageFlowScope.clsCalBean.providerIds}");
-            if (ids != null && ids.indexOf(clsRmId) < 0) {
-                if (!ids.equals("NA"))
+            if (ids != null && ids.indexOf(clsRmId) < 0 && !ids.equals("NA")) {
                     ids = ids + "," + clsRmId;
-                else
-                    ids = clsRmId;
+            }else if(ids == null || ids.equals("NA")){
+                ids = clsRmId;
             }
             
             Date activeDay = new Date(startDayTime.getTime());            
             JSFUtils.setExpressionValue("#{pageFlowScope.clsCalBean.activeDay}", activeDay);
             OperationBinding refreshOp = ADFUtils.findOperation("refreshCalendar");
             refreshOp.getParamsMap().put("clsRmNos", ids);
-            refreshOp.execute();
+            refreshOp.execute();            
             
         }
         return "Calendar";

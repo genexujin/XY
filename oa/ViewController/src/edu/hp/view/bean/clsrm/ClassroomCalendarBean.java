@@ -142,7 +142,7 @@ public class ClassroomCalendarBean extends CalendarBean {
 
         Boolean hasNoConflict =
             ensureTimeConflicts(new java.sql.Timestamp(newStart.getTime()), new java.sql.Timestamp(newEnd.getTime()),
-                                (String)activity.getCustomAttributes().get("LocationId"), activity.getId());
+                                (String)activity.getCustomAttributes().get("ClassroomId"), activity.getId());
         if (hasNoConflict) {
 
             OperationBinding binding = ADFUtils.findOperation("updateActivityTime");

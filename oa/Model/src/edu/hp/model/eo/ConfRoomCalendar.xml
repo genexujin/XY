@@ -398,6 +398,20 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="SubmitDate"
+    ColumnName="SUBMIT_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CONF_ROOM_CALENDAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ConfRoomCalendar.SubmitDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Key
     Name="ConfRoomCalendarPk"
     PrimaryKey="true">

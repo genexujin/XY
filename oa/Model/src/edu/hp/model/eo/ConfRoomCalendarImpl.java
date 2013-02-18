@@ -243,6 +243,16 @@ public class ConfRoomCalendarImpl extends EntityImpl {
                 obj.setAllday((String)value);
             }
         }
+        ,
+        SubmitDate {
+            public Object get(ConfRoomCalendarImpl obj) {
+                return obj.getSubmitDate();
+            }
+
+            public void put(ConfRoomCalendarImpl obj, Object value) {
+                obj.setSubmitDate((Timestamp)value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -270,6 +280,8 @@ public class ConfRoomCalendarImpl extends EntityImpl {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int USERID = AttributesEnum.UserId.index();
     public static final int USERDISPLAYNAME = AttributesEnum.UserDisplayName.index();
@@ -292,13 +304,22 @@ public class ConfRoomCalendarImpl extends EntityImpl {
     public static final int STATE = AttributesEnum.State.index();
     public static final int PRID = AttributesEnum.PrId.index();
     public static final int ALLDAY = AttributesEnum.Allday.index();
+    public static final int SUBMITDATE = AttributesEnum.SubmitDate.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public ConfRoomCalendarImpl() {
     }
-    
+
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("edu.hp.model.eo.ConfRoomCalendar");
+    }
+
     /**
      * Custom DML update/insert/delete logic here.
      * @param operation the operation type
@@ -675,6 +696,22 @@ public class ConfRoomCalendarImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for SubmitDate, using the alias name SubmitDate.
+     * @return the value of SubmitDate
+     */
+    public Timestamp getSubmitDate() {
+        return (Timestamp)getAttributeInternal(SUBMITDATE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for SubmitDate.
+     * @param value value to set the SubmitDate
+     */
+    public void setSubmitDate(Timestamp value) {
+        setAttributeInternal(SUBMITDATE, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -714,10 +751,5 @@ public class ConfRoomCalendarImpl extends EntityImpl {
         return new Key(new Object[]{id});
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("edu.hp.model.eo.ConfRoomCalendar");
-    }
+
 }

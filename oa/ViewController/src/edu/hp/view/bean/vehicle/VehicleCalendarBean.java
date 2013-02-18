@@ -25,6 +25,9 @@ import oracle.jbo.domain.Timestamp;
 public class VehicleCalendarBean extends CalendarBean {
     
     private boolean myVelView = false;
+    private boolean changeMade = false;
+    private Timestamp startDayTime = null;
+    private String vehicleId = null;
     
     public VehicleCalendarBean() {
 
@@ -36,7 +39,7 @@ public class VehicleCalendarBean extends CalendarBean {
         this.locationIteratorName = "LocationsIterator";
         this.calendarIteratorName = "VehicleCalQueryIterator";
         this.calendarid = "c3";
-        this.moduleAdminRole = "总务处主任";
+        this.moduleAdminRole = "车辆调度";
         locationIdFieldName = "VehicleId";
         reload();
     }
@@ -166,6 +169,11 @@ public class VehicleCalendarBean extends CalendarBean {
     }
 
     public String save() {
+        startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
+        Timestamp submit = (Timestamp)ADFUtils.getBoundAttributeValue("SubmitDate");
+        if(submit==null)
+            ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
+        vehicleId = (String)ADFUtils.getBoundAttributeValue("VehicleId");
         boolean success = ADFUtils.commit("车辆预订已保存！", "车辆预订保存失败，请核对输入的信息或联系管理员！");
         if (success)
             sendNotification();
@@ -182,9 +190,29 @@ public class VehicleCalendarBean extends CalendarBean {
 
             this.sendNotification("您的车辆预订: " + title + " 已调度完成 ", " 使用的车辆为：" + vehicleName, userId, null);
             this.sendNotification("您的车辆预订: " + title + " 已调度完成 ", " 使用的车辆为：" + contactId, userId, null);
-
+            changeMade = true;
             ADFUtils.findOperation("Commit").execute();
         }
+    }
+    
+    public String goBackToCalendar() {
+
+        if (vehicleId != null && startDayTime != null && changeMade) {
+            String ids = this.getProviderIds();
+                if (ids != null && ids.indexOf(vehicleId) < 0 && !ids.equals("NA")) {
+                    ids = ids + "," + vehicleId;
+                } else if (ids == null || ids.equals("NA")) {
+                    ids = vehicleId;
+                }
+            
+            Date active = new Date(startDayTime.getTime());            
+            this.setActiveDay(active);
+            OperationBinding refreshOp = ADFUtils.findOperation("refreshCalendar");
+            refreshOp.getParamsMap().put("vehicleIds", ids);
+            refreshOp.execute();
+            
+        }
+        return "Calendar";
     }
 
     public void setMyVelView(boolean myVelView) {

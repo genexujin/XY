@@ -149,5 +149,16 @@
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="roleName" NDType="java.lang.String"/>
     </methodAction>
+    <methodAction id="refreshCalendar" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshCalendar"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomQuery"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.refreshCalendar_RootAppModuleDataControl_dataProvider_Root_ConfRmModule_ConfRoomQuery_refreshCalendar_result">
+      <NamedData NDName="confRmNos" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

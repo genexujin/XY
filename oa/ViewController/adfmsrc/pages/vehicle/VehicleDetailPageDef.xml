@@ -85,5 +85,21 @@
         <Item Value="ContactId"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="refreshCalendar" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshCalendar"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleCalQuery"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.refreshCalendar_RootAppModuleDataControl_dataProvider_Root_VehicleModule_VehicleCalQuery_refreshCalendar_result">
+      <NamedData NDName="vehicleIds" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="VehicleId">
+      <AttrNames>
+        <Item Value="VehicleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

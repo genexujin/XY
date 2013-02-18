@@ -26,7 +26,8 @@
        ConfRoomCalendar.NUM_OF_PEOPLE, 
        ConfRoomCalendar.STATE, 
        ConfRoomCalendar.PR_ID, 
-       ConfRoomCalendar.ALLDAY"
+       ConfRoomCalendar.ALLDAY, 
+       ConfRoomCalendar.SUBMIT_DATE"
   FromList="CONF_ROOM_CALENDAR ConfRoomCalendar"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -34,7 +35,8 @@
   UseGlueCode="false"
   ComponentClass="edu.hp.model.vo.ConfRoomCalendarViewImpl"
   ComponentInterface="edu.hp.model.vo.common.ConfRoomCalendarView"
-  ClientProxyName="edu.hp.model.vo.client.ConfRoomCalendarViewClient">
+  ClientProxyName="edu.hp.model.vo.client.ConfRoomCalendarViewClient"
+  OrderBy="ConfRoomCalendar.START_TIME desc">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -371,6 +373,12 @@
     EntityAttrName="Allday"
     EntityUsage="ConfRoomCalendar"
     AliasName="ALLDAY"/>
+  <ViewAttribute
+    Name="SubmitDate"
+    PrecisionRule="true"
+    EntityAttrName="SubmitDate"
+    EntityUsage="ConfRoomCalendar"
+    AliasName="SUBMIT_DATE"/>
   <ViewCriteria
     Name="findById"
     ViewObjectName="edu.hp.model.vo.ConfRoomCalendarView"

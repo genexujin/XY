@@ -29,7 +29,7 @@ public class ConfRmCalBean extends CalendarBean {
         this.locationIteratorName = "LocationsIterator";
         this.calendarIteratorName = "ConfRoomQueryIterator";
         this.calendarid = "c2";
-        this.moduleAdminRole = "会议室管理员";
+        this.moduleAdminRole = "会议室审核";
         locationIdFieldName = "MeetingRoomId";
         reload();
     }
@@ -144,7 +144,7 @@ public class ConfRmCalBean extends CalendarBean {
 
         Boolean hasNoConflict =
             ensureTimeConflicts(new java.sql.Timestamp(newStart.getTime()), new java.sql.Timestamp(newEnd.getTime()),
-                                (String)activity.getCustomAttributes().get("LocationId"), activity.getId());
+                                (String)activity.getCustomAttributes().get("MeetingRoomId"), activity.getId());
         if (hasNoConflict) {
 
             OperationBinding binding = ADFUtils.findOperation("updateActivityTime");

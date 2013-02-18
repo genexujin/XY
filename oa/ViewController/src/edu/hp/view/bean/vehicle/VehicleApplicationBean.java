@@ -13,6 +13,7 @@ import oracle.adf.view.rich.event.DialogEvent;
 import oracle.binding.OperationBinding;
 
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Timestamp;
 
 
 public class VehicleApplicationBean extends BaseBean {
@@ -34,6 +35,7 @@ public class VehicleApplicationBean extends BaseBean {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_INITIAL)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_PENDING_REVIEW);
+            ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
             boolean success = ADFUtils.commit("车辆预订已提交审核！", "车辆预订提交审核失败，请核对输入的信息或联系管理员！");
             if (success) {
                 String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();

@@ -14,15 +14,15 @@
             <af:menu id="m1" text="快速查询">
               <af:commandMenuItem text="我的预订" id="cmi1" actionListener="#{bindings.findByUserid.execute}"/>
               <af:commandMenuItem text="待审核" id="cmi2" action="#{viewScope.ConfRmAppBean.findByState}"
-                                  rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室管理员'] }">
+                                  rendered="#{sessionScope.LoginUserBean.isUserInRole['会议室审核'] }">
                 <af:setActionListener from="#{'待审核'}" to="#{viewScope.ConfRmAppBean.queryState}"/>
               </af:commandMenuItem>
               <af:commandMenuItem text="未提交" id="cmi3" action="#{viewScope.ConfRmAppBean.findByState}"
-                                  rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室管理员'] }">
+                                  rendered="#{sessionScope.LoginUserBean.isUserInRole['会议室审核'] }">
                 <af:setActionListener from="#{'未提交'}" to="#{viewScope.ConfRmAppBean.queryState}"/>
               </af:commandMenuItem>
               <af:commandMenuItem text="已审核" id="cmi4" action="#{viewScope.ConfRmAppBean.findByState}"
-                                  rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室管理员'] }">
+                                  rendered="#{sessionScope.LoginUserBean.isUserInRole['会议室审核'] }">
                 <af:setActionListener from="#{'已审核'}" to="#{viewScope.ConfRmAppBean.queryState}"/>
               </af:commandMenuItem>
             </af:menu>
@@ -47,7 +47,7 @@
           <f:facet name="statusbar"/>
           <af:table value="#{bindings.ConfRoomCalendarView.collectionModel}" var="row"
                     rows="#{bindings.ConfRoomCalendarView.rangeSize}"
-                    emptyText="#{bindings.ConfRoomCalendarView.viewable ? '暂无数据' : 'Access Denied.'}"
+                    emptyText="#{bindings.ConfRoomCalendarView.viewable ? 'No data to display.' : 'Access Denied.'}"
                     fetchSize="#{bindings.ConfRoomCalendarView.rangeSize}" rowBandingInterval="1"
                     filterModel="#{bindings.ConfRoomCalendarViewQuery.queryDescriptor}"
                     queryListener="#{bindings.ConfRoomCalendarViewQuery.processQuery}" filterVisible="false"
@@ -94,7 +94,7 @@
             </af:column>
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.Allday.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.Allday.label}" id="c6">
-              <af:outputText value="#{row.Allday=='TIME'?'非全天':'全天'}" id="ot4"/>
+              <af:outputText value="#{row.Allday}" id="ot4"/>
             </af:column>
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.StartTime.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.StartTime.label}" id="c7">
@@ -102,7 +102,7 @@
                 <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.StartTime.format}"/>
               </af:outputText>
               <f:facet name="filter">
-                <af:inputDate value="#{vs.filterCriteria.StartTime}" id="id2">
+                <af:inputDate value="#{vs.filterCriteria.StartTime}" id="id1">
                   <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.StartTime.format}"/>
                 </af:inputDate>
               </f:facet>
@@ -113,7 +113,7 @@
                 <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.EndTime.format}"/>
               </af:outputText>
               <f:facet name="filter">
-                <af:inputDate value="#{vs.filterCriteria.EndTime}" id="id1">
+                <af:inputDate value="#{vs.filterCriteria.EndTime}" id="id6">
                   <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.EndTime.format}"/>
                 </af:inputDate>
               </f:facet>
@@ -121,6 +121,24 @@
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.NumOfPeople.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.NumOfPeople.label}" id="c9">
               <af:outputText value="#{row.NumOfPeople}" id="ot7"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.SubmitDate.name}" filterable="true"
+                       sortable="false" headerText="#{bindings.ConfRoomCalendarView.hints.SubmitDate.label}" id="c10"
+                       width="130">
+              <f:facet name="filter">
+                <af:inputDate value="#{vs.filterCriteria.SubmitDate}" id="id5">
+                  <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.SubmitDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:inputDate value="#{row.bindings.SubmitDate.inputValue}"
+                            label="#{bindings.ConfRoomCalendarView.hints.SubmitDate.label}"
+                            required="#{bindings.ConfRoomCalendarView.hints.SubmitDate.mandatory}"
+                            columns="#{bindings.ConfRoomCalendarView.hints.SubmitDate.displayWidth}"
+                            shortDesc="#{bindings.ConfRoomCalendarView.hints.SubmitDate.tooltip}" id="id2"
+                            readOnly="true">
+                <f:validator binding="#{row.bindings.SubmitDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.SubmitDate.format}" type="both"/>
+              </af:inputDate>
             </af:column>
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.Comments.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.Comments.label}" id="c17">
@@ -202,7 +220,7 @@
                                           required="#{bindings.UserDisplayName.hints.mandatory}"
                                           columns="#{bindings.UserDisplayName.hints.displayWidth}"
                                           shortDesc="#{bindings.UserDisplayName.hints.tooltip}"
-                                          rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['办公室主任']}">
+                                          rendered="#{sessionScope.LoginUserBean.isUserInRole['办公室主任']}">
               <f:validator binding="#{bindings.UserDisplayName.validator}"/>
             </af:inputComboboxListOfValues>
             <af:inputText value="#{bindings.UserDisplayName1.inputValue}"
@@ -211,7 +229,7 @@
                           columns="#{bindings.UserDisplayName1.hints.displayWidth}"
                           maximumLength="#{bindings.UserDisplayName1.hints.precision}"
                           shortDesc="#{bindings.UserDisplayName1.hints.tooltip}" id="it6" readOnly="true"
-                          rendered="#{not (sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室管理员'])}">
+                          rendered="#{not (sessionScope.LoginUserBean.isUserInRole['会议室审核'])}">
               <f:validator binding="#{bindings.UserDisplayName1.validator}"/>
             </af:inputText>
             <af:inputNumberSpinbox value="#{bindings.NumOfPeople.inputValue}"
@@ -258,7 +276,8 @@
             <af:spacer width="10" height="10" id="s1"/>
             <af:selectOneChoice value="#{bindings.SnackLevel.inputValue}" label="#{bindings.SnackLevel.label}"
                                 required="#{bindings.SnackLevel.hints.mandatory}"
-                                shortDesc="#{bindings.SnackLevel.hints.tooltip}" id="soc11">
+                                shortDesc="#{bindings.SnackLevel.hints.tooltip}" id="soc11"
+                                visible="#{sessionScope.LoginUserBean.isUserInRole['会议室审核']}">
               <f:selectItems value="#{bindings.SnackLevel.items}" id="si13"/>
             </af:selectOneChoice>
           </af:panelGroupLayout>
@@ -275,11 +294,11 @@
             <af:commandButton text="审核" id="cb3" icon="/images/icons/task.png"
                               visible="#{bindings.State.inputValue=='待审核'}"
                               action="#{viewScope.ConfRmAppBean.approve}"
-                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室管理员']}"/>
+                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室审核']}"/>
             <af:spacer width="10" height="10" id="s10"/>
             <af:commandButton id="cb4" text="拒绝" icon="/images/icons/terminate.png"
                               visible="#{bindings.State.inputValue=='待审核'}"
-                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室管理员']}"
+                              rendered="#{sessionScope.LoginUserBean.isUserInRole['会议室审核']}"
                               action="#{viewScope.ConfRmAppBean.reject}"/>
             <af:spacer width="10" height="10" id="s11"/>
             <af:commandButton text="取消" id="cb5" icon="/images/icons/undo.png"

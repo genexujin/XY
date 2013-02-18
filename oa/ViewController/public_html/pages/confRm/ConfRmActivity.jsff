@@ -23,7 +23,7 @@
                                 <af:resetActionListener/>
                             </af:commandToolbarButton>
                             <af:commandToolbarButton text="返回日历" id="ctb4" icon="/images/icons/chooseDate.png"
-                                                     action="Calendar" actionListener="#{bindings.Rollback.execute}"/>
+                                                     action="#{viewScope.confCalDetailBean.goBackToCalendar}" actionListener="#{bindings.Rollback.execute}"/>
                         </af:toolbar>
                     </af:panelGroupLayout>
                     <af:separator id="s1"/>

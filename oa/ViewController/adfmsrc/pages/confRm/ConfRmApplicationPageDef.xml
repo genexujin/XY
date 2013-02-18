@@ -18,11 +18,12 @@
           <Item Value="UserDisplayName"/>
           <Item Value="LocationName"/>
           <Item Value="MeetingRoom"/>
+          <Item Value="State"/>
           <Item Value="Allday"/>
           <Item Value="StartTime"/>
           <Item Value="EndTime"/>
           <Item Value="NumOfPeople"/>
-          <Item Value="State"/>
+          <Item Value="SubmitDate"/>
           <Item Value="Comments"/>
         </AttrNames>
       </nodeDefinition>
@@ -204,5 +205,10 @@
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="roleName" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

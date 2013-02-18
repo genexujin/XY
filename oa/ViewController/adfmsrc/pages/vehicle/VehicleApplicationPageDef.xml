@@ -41,6 +41,7 @@
           <Item Value="NumOfPeople"/>
           <Item Value="ReturnTrip"/>
           <Item Value="Comments"/>
+          <Item Value="SubmitDate"/>
           <Item Value="State"/>
         </AttrNames>
       </nodeDefinition>
@@ -159,5 +160,10 @@
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="roleName" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

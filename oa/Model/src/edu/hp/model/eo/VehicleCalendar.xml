@@ -399,6 +399,20 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="SubmitDate"
+    ColumnName="SUBMIT_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="VEHICLE_CALENDAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.VehicleCalendar.SubmitDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Key
     Name="VehicleAlendarPk"
     PrimaryKey="true">
@@ -495,6 +509,19 @@
     </validation:MsgIds>
     <validation:TransientExpression><![CDATA[StartTime!=null&&EndTime!=null]]></validation:TransientExpression>
   </validation:ExpressionValidationBean>
+  <validation:CompareValidationBean
+    Name="VehicleCalendar_Rule_8"
+    ResId="VEH_NUM_OF_PPL_GT_ZERO"
+    OnAttribute="NumOfPeople"
+    OperandType="LITERAL"
+    Inverse="false"
+    CompareType="GREATERTHAN"
+    CompareValue="0">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="NumOfPeople"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

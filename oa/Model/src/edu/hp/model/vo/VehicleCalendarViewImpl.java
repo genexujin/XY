@@ -23,6 +23,7 @@ public class VehicleCalendarViewImpl extends BaseView implements VehicleCalendar
  
     
     public void newRow(String userDisplayName, String userId) {
+        this.executeEmptyRowSet();
         Row newRow = this.createRow();
         newRow.setAttribute("UserDisplayName", userDisplayName);
         newRow.setAttribute("UserId", userId);

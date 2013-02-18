@@ -25,7 +25,8 @@
        VehicleCalendar.RETURN_TRIP_END, 
        VehicleCalendar.NUM_OF_PEOPLE, 
        VehicleCalendar.COMMENTS, 
-       VehicleCalendar.USER_ID"
+       VehicleCalendar.USER_ID, 
+       VehicleCalendar.SUBMIT_DATE"
   FromList="VEHICLE_CALENDAR VehicleCalendar"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -294,6 +295,12 @@
     EntityAttrName="UserId"
     EntityUsage="VehicleCalendar"
     AliasName="USER_ID"/>
+  <ViewAttribute
+    Name="SubmitDate"
+    PrecisionRule="true"
+    EntityAttrName="SubmitDate"
+    EntityUsage="VehicleCalendar"
+    AliasName="SUBMIT_DATE"/>
   <ViewCriteria
     Name="findById"
     ViewObjectName="edu.hp.model.vo.VehicleCalendarView"

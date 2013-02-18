@@ -68,11 +68,11 @@
                          calendarActivityListener="#{pageFlowScope.confRmCalBean.activityListener}"
                          activityStyles="#{pageFlowScope.confRmCalBean.activityStyles}" view="week"
                          calendarActivityDurationChangeListener="#{pageFlowScope.confRmCalBean.calDurationChanged}"
-                         startHour="8">
+                         startHour="8" activeDay="#{pageFlowScope.confRmCalBean.activeDay}">
                 <af:calendarDropTarget actions="MOVE" dropListener="#{pageFlowScope.confRmCalBean.handleDrop}"/>
                 <f:facet name="contextMenu">
                     <af:popup id="p2"
-                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员']|| sessionScope.LoginUserBean.isUserInRole['会议室管理员']}">
+                              rendered="#{sessionScope.LoginUserBean.isUserInRole['会议室审核']}">
                         <af:menu id="m2">
                             <af:commandMenuItem text="新预订" id="cmi3" icon="/images/icons/new_ena.png" action="create"/>
                         </af:menu>
