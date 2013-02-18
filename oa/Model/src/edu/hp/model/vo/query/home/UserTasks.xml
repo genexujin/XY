@@ -43,10 +43,9 @@ tasks.executor_id executor_id
 from
 employees,tasks,roles,role_users
 where
-employees.id = role_users.user_id
+((employees.id = role_users.user_id
 and role_users.role_id = roles.role_id
-and roles.role_id = tasks.assignee_role_id
-and employees.user_name = :userName
+and roles.role_id = tasks.assignee_role_id) or (employees.id = tasks.assignee_user_id)) and employees.user_name = :userName
 ORDER BY tasks.assigned_date desc]]></SQLQuery>
   <ViewAttribute
     Name="Id"

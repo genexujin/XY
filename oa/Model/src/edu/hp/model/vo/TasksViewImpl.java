@@ -62,4 +62,20 @@ public class TasksViewImpl extends ViewObjectImpl {
     public void setroleId(String value) {
         ensureVariableManager().setVariableValue("roleId", value);
     }
+
+    /**
+     * Returns the variable value for userId.
+     * @return variable value for userId
+     */
+    public String getuserId() {
+        return (String)ensureVariableManager().getVariableValue("userId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable userId.
+     * @param value value to bind as userId
+     */
+    public void setuserId(String value) {
+        ensureVariableManager().setVariableValue("userId", value);
+    }
 }

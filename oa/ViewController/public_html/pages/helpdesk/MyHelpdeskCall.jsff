@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="270px" bottomHeight="0px">
+    <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="200px" bottomHeight="0px">
         <f:facet name="top">
             <af:panelGroupLayout layout="vertical" id="pgl1">
                 <af:panelHeader text="输入查询条件" id="ph1">
@@ -106,8 +106,8 @@
                                headerText="#{bindings.HelpdeskCallsView11.hints.CalleeId.label}" id="resId1c3">
                         <af:selectOneChoice value="#{row.bindings.CalleeId.inputValue}"
                                                     label="#{row.bindings.CalleeId.label}"
-                                                    required="#{bindings.HelpdeskCallsView11.hints.State.mandatory}"
-                                                    shortDesc="#{bindings.HelpdeskCallsView11.hints.State.tooltip}"
+                                                    required="#{bindings.HelpdeskCallsView11.hints.CalleeId.mandatory}"
+                                                    shortDesc="#{bindings.HelpdeskCallsView11.hints.CalleeId.tooltip}"
                                                     id="soc31" readOnly="true">
                             <f:selectItems value="#{row.bindings.CalleeId.items}" id="si31"/>
                         </af:selectOneChoice>
@@ -144,6 +144,7 @@
                         <af:outputText value="#{row.CallEval}" id="ot6"/>
                     </af:column>
                 </af:table>
+                
             </af:panelCollection>
         </f:facet>
         <f:facet name="bottom"/>

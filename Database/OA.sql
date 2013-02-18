@@ -315,7 +315,8 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 	"REASON_LEVEL_1" VARCHAR2(40 BYTE), 
 	"REASON_LEVEL_2" VARCHAR2(40 BYTE), 
 	"REASON_LEVEL_3" VARCHAR2(40 BYTE), 
-	"REASON_DETAIL" VARCHAR2(500 BYTE)
+	"REASON_DETAIL" VARCHAR2(500 BYTE),
+  "SUBMIT_AT" DATE
    ) ;
 --------------------------------------------------------
 --  DDL for Table LOCATIONS
@@ -517,6 +518,7 @@ ALTER SESSION SET NLS_DATE_LANGUAGE='AMERICAN';
 	"CONTEXT_OBJECT_TYPE" VARCHAR2(20 BYTE), 
 	"CONTEXT_OBJECT_ID" VARCHAR2(20 BYTE), 
 	"ASSIGNEE_ROLE_ID" VARCHAR2(20 BYTE), 
+  "ASSIGNEE_USER_ID" VARCHAR2(20 BYTE), 
 	"COMPLETION_DATE" DATE, 
 	"EXECUTOR_ID" VARCHAR2(20 BYTE), 
 	"EXECUTOR_DISPLAY_NAME" VARCHAR2(20 BYTE)
@@ -1195,7 +1197,7 @@ Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGOR
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_PR','采购订单','/WEB-INF/flows/welcome/welcome-btf.xml#welcome-btf','采购订单','PUR',null,'SYS','/images/icons/log.png','false','5');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_MY_REQ','我的报修','/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall','我的报修','HD',null,'SYS','/images/icons/communicate.png','false','1');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_REQ','报修单','/WEB-INF/flows/helpdesk/CreateHdCall.xml#CreateHdCall','报修单','HD',null,'SYS','/images/icons/constructor.png','false','3');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_PROC','报修处理','/WEB-INF/flows/welcome/welcome-btf.xml#welcome-btf','报修处理','HD',null,'SYS','/images/icons/show_failures.png','false','2');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_PROC','报修处理','/WEB-INF/flows/helpdesk/MyHdCallCallee.xml#MyHdCallCallee','报修处理','HD',null,'SYS','/images/icons/show_failures.png','false','2');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CLSRM_CAL','教室日历','/WEB-INF/flows/clsrm/ClsRmCalendar.xml#ClsRmCalendar','教室日历','CLSRM',null,'SYS','/images/icons/chooseDate.png','false','1');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CLSRM_BATCH','批量预定','/WEB-INF/flows/clsrm/batch-reservation-btf.xml#batch-reservation-btf','批量预定','CLSRM',null,'SYS','/images/icons/group.png','false','2');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CONFRM_CAL','会议室日历','/WEB-INF/flows/confRm/confRm-calendar-btf.xml#confRm-calendar-btf','会议室日历','CONFRM',null,'SYS','/images/icons/chooseDate.png','false','1');

@@ -42,5 +42,22 @@ public class BaseBean {
         binding.getParamsMap().put("roleName", roleName);
         binding.execute();
     }
+    
+    protected void createTaskForUser(String id, String contextType, String apprvTitle, String userId) {
+        OperationBinding createTaskOp = ADFUtils.findOperation("createTaskForUserId");
+        createTaskOp.getParamsMap().put("title", apprvTitle);
+        createTaskOp.getParamsMap().put("contextObjectType", contextType);
+        createTaskOp.getParamsMap().put("contextObjectId", id);
+        createTaskOp.getParamsMap().put("userId", userId);
+        createTaskOp.execute();
+    }
+    
+    protected void completeTaskForUser(String contextType, String id, String userId) {
+        OperationBinding binding = ADFUtils.findOperation("completeTaskForUserId");
+        binding.getParamsMap().put("contextObjectType",contextType);
+        binding.getParamsMap().put("contextObjectId", id);
+        binding.getParamsMap().put("userId", userId);
+        binding.execute();
+    }
 
 }

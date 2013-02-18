@@ -1,6 +1,7 @@
 package edu.hp.model.biz.client;
 
 import edu.hp.model.biz.common.ClassRmModule;
+import edu.hp.model.biz.common.HelpdeskCallsAppModule;
 import edu.hp.model.biz.common.HomeModule;
 import edu.hp.model.biz.common.PurchaseOrderAppModule;
 import edu.hp.model.biz.common.RootAppModule;
@@ -39,8 +40,8 @@ public class RootAppModuleClient extends ApplicationModuleImpl implements RootAp
         return (ClassRmModule)findApplicationModule("ClassRmModule");
     }
 
-    public ApplicationModule getHelpdeskCallsAppModule() {
-        return (ApplicationModule)findApplicationModule("HelpdeskCallsAppModule1");
+    public HelpdeskCallsAppModule getHelpdeskCallsAppModule() {
+        return (HelpdeskCallsAppModule)findApplicationModule("HelpdeskCallsAppModule1");
     }
 
     public ApplicationModule getConfRmModule() {
@@ -73,9 +74,21 @@ public class RootAppModuleClient extends ApplicationModuleImpl implements RootAp
         return;
     }
 
+    public void completeTaskForUserId(String contextObjectType, String contextObjectId, String userId) {
+        Object _ret =
+            this.riInvokeExportedMethod(this,"completeTaskForUserId",new String [] {"java.lang.String","java.lang.String","java.lang.String"},new Object[] {contextObjectType, contextObjectId, userId});
+        return;
+    }
+
     public void createTask(String title, String contextObjectType, String contextObjectId, String roleName) {
         Object _ret =
             this.riInvokeExportedMethod(this,"createTask",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {title, contextObjectType, contextObjectId, roleName});
+        return;
+    }
+
+    public void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId) {
+        Object _ret =
+            this.riInvokeExportedMethod(this,"createTaskForUserId",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {title, contextObjectType, contextObjectId, userId});
         return;
     }
 
