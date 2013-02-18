@@ -70,6 +70,9 @@ public class CalendarBean  extends BaseBean{
     protected String locationIdFieldName;
     protected Integer location;
     protected Key currentLocationKey;
+    protected String providerIds;
+    protected Date activeDay;
+    
 
     public CalendarBean() {
     }
@@ -81,6 +84,7 @@ public class CalendarBean  extends BaseBean{
     }
 
     protected void reload() {
+        System.err.println("reloaded!");
         try {
             if(location==null){              
                 location = 0;                          
@@ -199,7 +203,7 @@ public class CalendarBean  extends BaseBean{
 
 
     protected void refreshCalendar(UIComponent calendar) {
-
+        
         StringBuffer clsRmNos = new StringBuffer();
 
         for (OACalendarProvider provider : _providerList) {
@@ -215,6 +219,7 @@ public class CalendarBean  extends BaseBean{
             clsRmNos.append("NA");
         }
 
+        this.setProviderIds(clsRmNos.toString());
         OperationBinding refreshOp = ADFUtils.findOperation(refreshCalendarOptName);
 
         refreshOp.getParamsMap().put(refreshCalendarParamName, clsRmNos.toString());
@@ -434,6 +439,22 @@ public class CalendarBean  extends BaseBean{
 
     public Key getCurrentLocationKey() {
         return currentLocationKey;
+    }
+
+    public void setProviderIds(String providerIds) {
+        this.providerIds = providerIds;
+    }
+
+    public String getProviderIds() {
+        return providerIds;
+    }
+
+    public void setActiveDay(Date activeDay) {
+        this.activeDay = activeDay;
+    }
+
+    public Date getActiveDay() {
+        return activeDay;
     }
 
     public static class ProviderData implements Serializable {

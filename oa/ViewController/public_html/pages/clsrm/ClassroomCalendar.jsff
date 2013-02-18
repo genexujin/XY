@@ -68,7 +68,7 @@
                          calendarActivityListener="#{pageFlowScope.clsCalBean.activityListener}"
                          activityStyles="#{pageFlowScope.clsCalBean.activityStyles}" view="week"
                          calendarActivityDurationChangeListener="#{pageFlowScope.clsCalBean.calDurationChanged}"
-                         startHour="8">
+                         startHour="8" activeDay="#{pageFlowScope.clsCalBean.activeDay}">
                 <af:calendarDropTarget actions="MOVE" dropListener="#{pageFlowScope.clsCalBean.handleDrop}"/>
                 <f:facet name="contextMenu">
                     <af:popup id="p2">

@@ -345,7 +345,8 @@
       ColumnType="DATE"
       TableName="EMPLOYEES"
       IsUpdateable="while_insert"
-      HistoryColumn="DateHistory"/>
+      HistoryColumn="DateHistory"
+        RetrievedOnInsert="true"/>
     <Attribute
       Name="Title"
       Precision="20"

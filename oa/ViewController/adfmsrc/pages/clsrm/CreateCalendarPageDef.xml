@@ -81,5 +81,17 @@
     </attributeValues>
     <listOfValues StaticList="false" IterBinding="ClsRmCalDMLViewIterator" Uses="LOV_UserDisplayName"
                   id="UserDisplayName1"/>
+    <methodAction id="refreshCalendar" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshCalendar"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule.Calendar"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.refreshCalendar_RootAppModuleDataControl_dataProvider_Root_ClassRmModule_Calendar_refreshCalendar_result">
+      <NamedData NDName="clsRmNos" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="sendNotification" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendNotification" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.sendNotification_RootAppModuleDataControl_dataProvider_sendNotification_result">
+      <NamedData NDName="notification" NDType="edu.hp.model.pojo.Notification"/>
+    </methodAction>
   </bindings>
 </pageDefinition>
