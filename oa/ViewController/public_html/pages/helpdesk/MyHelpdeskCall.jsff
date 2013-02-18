@@ -112,11 +112,11 @@
                             <f:selectItems value="#{row.bindings.CalleeId.items}" id="si31"/>
                         </af:selectOneChoice>
                     </af:column>
-                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CreateAt.name}"
-                                       sortable="false" headerText="#{bindings.HelpdeskCallsView11.hints.CreateAt.label}"
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.SubmitAt.name}"
+                                       sortable="false" headerText="#{bindings.HelpdeskCallsView11.hints.SubmitAt.label}"
                                        id="c3">
-                                <af:outputText value="#{row.CreateAt}" id="ot40">
-                                    <af:convertDateTime pattern="#{bindings.HelpdeskCallsView11.hints.CreateAt.format}"/>
+                                <af:outputText value="#{row.SubmitAt}" id="ot40">
+                                    <af:convertDateTime pattern="#{bindings.HelpdeskCallsView11.hints.SubmitAt.format}"/>
                                 </af:outputText>
                     </af:column>
                     <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.State.name}" sortable="true"

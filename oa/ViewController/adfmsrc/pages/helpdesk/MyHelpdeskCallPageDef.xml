@@ -41,6 +41,7 @@
           <Item Value="ReasonLevel2"/>
           <Item Value="ReasonLevel3"/>
           <Item Value="CreateAt"/>
+          <Item Value="SubmitAt"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

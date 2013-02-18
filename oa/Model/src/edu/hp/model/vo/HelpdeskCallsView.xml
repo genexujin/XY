@@ -517,7 +517,14 @@
     PrecisionRule="true"
     EntityAttrName="SubmitAt"
     EntityUsage="HelpdeskCalls"
-    AliasName="SUBMIT_AT"/>
+    AliasName="SUBMIT_AT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.HelpdeskCallsView.SubmitAt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewCriteria
     Name="ReasonLevel1Criteria"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
