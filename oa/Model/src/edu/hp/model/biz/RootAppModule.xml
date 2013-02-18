@@ -119,5 +119,38 @@
         Name="roleName"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="completeTaskForUserId"
+      MethodName="completeTaskForUserId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="contextObjectType"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="createTaskForUserId"
+      MethodName="createTaskForUserId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="title"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectType"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </AppModule>

@@ -23,7 +23,8 @@
        HelpdeskCalls.REASON_LEVEL_1, 
        HelpdeskCalls.REASON_LEVEL_2, 
        HelpdeskCalls.REASON_LEVEL_3, 
-       HelpdeskCalls.REASON_DETAIL"
+       HelpdeskCalls.REASON_DETAIL, 
+       HelpdeskCalls.SUBMIT_AT"
   FromList="HELPDESK_CALLS HelpdeskCalls"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -136,7 +137,11 @@
     ViewObjectName="edu.hp.model.vo.query.helpdesk.HdEval"
     RowLevelBinds="true"/>
   <ViewAccessor
-    Name="Callees"
+    Name="EmpViewForCallee"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CalleesView"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
     RowLevelBinds="true"/>
   <ListBinding
@@ -156,27 +161,6 @@
       <Item Value="DisplayName"/>
     </AttrArray>
     <DisplayCriteria/>
-  </ListBinding>
-  <ListBinding
-    Name="LOV_CalleeId"
-    ListVOName="Callees"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    MRUCount="0"
-    ComboRowCountHint="10"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}">
-    <AttrArray Name="AttrNames">
-      <Item Value="CalleeId"/>
-    </AttrArray>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Id"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="DisplayName"/>
-    </AttrArray>
-    <DisplayCriteria
-      Name="findByUserName"
-      Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
     Name="LOV_State"
@@ -302,6 +286,24 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_CalleeId_New"
+    ListVOName="CalleesView"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CalleeId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="HelpdeskCalls"
     Entity="edu.hp.model.eo.HelpdeskCalls"/>
@@ -341,11 +343,11 @@
     EntityAttrName="CalleeId"
     EntityUsage="HelpdeskCalls"
     AliasName="CALLEE_ID"
-    LOVName="LOV_CalleeId">
+    LOVName="LOV_CalleeId_New">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="combo_lov"/>
+          Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -510,6 +512,12 @@
     EntityAttrName="ReasonDetail"
     EntityUsage="HelpdeskCalls"
     AliasName="REASON_DETAIL"/>
+  <ViewAttribute
+    Name="SubmitAt"
+    PrecisionRule="true"
+    EntityAttrName="SubmitAt"
+    EntityUsage="HelpdeskCalls"
+    AliasName="SUBMIT_AT"/>
   <ViewCriteria
     Name="ReasonLevel1Criteria"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"

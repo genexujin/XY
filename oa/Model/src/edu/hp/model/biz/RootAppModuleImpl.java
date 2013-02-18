@@ -191,6 +191,49 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             }
         }
     }
+    
+    /**
+     * 注意：该方法不commit，需要在外部调用commit
+     * @param title
+     * @param contextObjectType
+     * @param contextObjectId
+     * @param userId
+     */
+    public void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId) {
+
+        if (title != null && contextObjectType != null && contextObjectId != null && userId != null) {
+            ViewObjectImpl taskVO = this.getTasks();
+            Row newRow = taskVO.createRow();
+            newRow.setAttribute("Title", title);
+            newRow.setAttribute("AssignedDate", new Timestamp(System.currentTimeMillis()));
+            newRow.setAttribute("ContextObjectType", contextObjectType);
+            newRow.setAttribute("ContextObjectId", contextObjectId);
+            newRow.setAttribute("AssigneeUserId", userId);
+            taskVO.insertRow(newRow);
+        }
+    }
+    
+    /**
+     * 将任务状态置为完成状态，没有commit
+     * @param contextObjectType
+     * @param contextObjectId
+     * @param userId
+     */
+    public void completeTaskForUserId(String contextObjectType, String contextObjectId, String userId) {
+        if (contextObjectType != null && contextObjectId != null && userId != null) {
+            TasksViewImpl taskVO = (TasksViewImpl)this.getTasks();
+            taskVO.setcontextId(contextObjectId);
+            taskVO.setcontextType(contextObjectType);
+            taskVO.setuserId(userId);
+            taskVO.setApplyViewCriteriaNames(null);
+            taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContextAndUserId"));
+            taskVO.executeQuery();
+            Row[] allRowsInRange = taskVO.getAllRowsInRange();
+            if (allRowsInRange != null && allRowsInRange.length > 0) {
+                allRowsInRange[0].setAttribute("State", Constants.STATE_TASK_COMPLETED);
+            }
+        }
+    }
 
     /**
      * Container's getter for Notifications.

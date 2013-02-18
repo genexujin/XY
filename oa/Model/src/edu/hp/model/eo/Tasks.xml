@@ -66,10 +66,10 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="TASKS">
-    <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_TASK_PENDING]]></TransientExpression>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_TASK_PENDING]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -156,6 +156,18 @@
           ResId="edu.hp.model.eo.Tasks.ExecutorDisplayName_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
+  </Attribute>
+  <Attribute
+    Name="AssigneeUserId"
+    Precision="20"
+    ColumnName="ASSIGNEE_USER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TASKS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
   </Attribute>
   <Key
     Name="TasksPk"

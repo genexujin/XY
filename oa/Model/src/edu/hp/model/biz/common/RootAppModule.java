@@ -16,4 +16,8 @@ public interface RootAppModule extends ApplicationModule {
 
 
     void completeTask(String contextObjectType, String contextObjectId, String roleName);
+
+    void completeTaskForUserId(String contextObjectType, String contextObjectId, String userId);
+
+    void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId);
 }

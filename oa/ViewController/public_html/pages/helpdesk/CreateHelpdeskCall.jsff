@@ -38,16 +38,16 @@
                                     shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1" disabled="true">
                   <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
                 </af:selectOneChoice>
-                <af:inputComboboxListOfValues id="calleeIdId"
-                                              popupTitle="#{bindings.CalleeId.hints.label}"
-                                              value="#{bindings.CalleeId.inputValue}"
-                                              label="#{bindings.CalleeId.hints.label}"
-                                              model="#{bindings.CalleeId.listOfValuesModel}"
-                                              required="#{bindings.CalleeId.hints.mandatory}"
-                                              columns="#{bindings.CalleeId.hints.displayWidth}"
-                                              shortDesc="#{bindings.CalleeId.hints.tooltip}">
-                  <f:validator binding="#{bindings.CalleeId.validator}"/>
-                </af:inputComboboxListOfValues>
+                <af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
+                                    required="#{bindings.CalleeId.hints.mandatory}"
+                                    shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2">
+                  <f:selectItems value="#{bindings.CalleeId.items}" id="si2"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.CalleeId1.inputValue}" label="#{bindings.CalleeId1.label}"
+                                    required="#{bindings.CalleeId1.hints.mandatory}"
+                                    shortDesc="#{bindings.CalleeId1.hints.tooltip}" id="soc9">
+                  <f:selectItems value="#{bindings.CalleeId1.items}" id="si10"/>
+                </af:selectOneChoice>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl5" layout="horizontal">
                 <af:selectOneChoice value="#{bindings.State.inputValue}" label="#{bindings.State.label}"
@@ -105,7 +105,7 @@
               </af:panelGroupLayout>
             </af:panelFormLayout>
           </af:panelHeader>
-          <af:separator id="s1"/>
+          <af:spacer id="s1" width="10px" height="10px"/>
           <af:panelHeader text="报修单处理" id="ph3" messageType="info"
                           rendered="#{(bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已撤消' 
                                           and (pageFlowScope.fromMenu eq 'callee' or pageFlowScope.fromMenu eq '-') )
@@ -139,7 +139,7 @@
               </f:facet>
             </af:panelFormLayout>
           </af:panelHeader>
-          <af:separator id="s2"/>
+          <af:spacer id="s2" width="10px" height="10px"/>
           <af:panelHeader text="用户评价" id="ph4"
                           rendered="#{(bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价') 
                                       and pageFlowScope.fromMenu ne 'callee'}"
@@ -152,7 +152,8 @@
             <af:panelFormLayout id="pfl4">
               <af:selectOneRadio value="#{bindings.CallEval.inputValue}" label="#{bindings.CallEval.label}"
                                  required="#{bindings.CallEval.hints.mandatory}"
-                                 shortDesc="#{bindings.CallEval.hints.tooltip}" id="sor1" layout="horizontal">
+                                 shortDesc="#{bindings.CallEval.hints.tooltip}" id="sor1" layout="horizontal"
+                                 disabled="#{bindings.State.inputValue ne '已处理'}">
                 <f:selectItems value="#{bindings.CallEval.items}" id="si9"/>
               </af:selectOneRadio>
               <af:inputText value="#{bindings.CallEvalDetail.inputValue}" label="#{bindings.CallEvalDetail.hints.label}"

@@ -81,6 +81,29 @@
         <Item Value="CallId"/>
       </AttrNames>
     </attributeValues>
-    <listOfValues StaticList="false" IterBinding="HelpdeskCallsViewIterator" Uses="LOV_CalleeId" id="CalleeId"/>
+    <methodAction id="completeTaskForUserId" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="completeTaskForUserId" IsViewObjectMethod="false">
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="createTaskForUserId" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createTaskForUserId" IsViewObjectMethod="false">
+      <NamedData NDName="title" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="SubmitAt">
+      <AttrNames>
+        <Item Value="SubmitAt"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_New" id="CalleeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_New" id="CalleeId1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

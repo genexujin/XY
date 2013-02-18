@@ -316,6 +316,13 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="SubmitAt"
+    ColumnName="SUBMIT_AT"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="HELPDESK_CALLS"/>
   <AccessorAttribute
     Name="Callee"
     Association="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc"

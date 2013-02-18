@@ -28,6 +28,7 @@
        Employees.ID, 
        Employees.FIRST_NAME
 FROM EMPLOYEES Employees
+where Employees.EXPIRED <> 'Y'
 union
 select ' ', '0', ' ' from dual
 order by ID]]></SQLQuery>
