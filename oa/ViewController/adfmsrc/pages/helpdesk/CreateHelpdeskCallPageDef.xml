@@ -105,5 +105,13 @@
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_New" id="CalleeId1"
           DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="findByLocationIdAndHdReason" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findByLocationIdAndHdReason" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskRolesView"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByLocationIdAndHdReason_RootAppModuleDataControl_dataProvider_Root_HelpdeskCallsAppModule1_HelpdeskRolesView_findByLocationIdAndHdReason_result">
+      <NamedData NDName="locationId" NDType="java.lang.String"/>
+      <NamedData NDName="hdReason" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

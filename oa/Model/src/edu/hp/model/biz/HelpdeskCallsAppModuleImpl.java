@@ -4,6 +4,7 @@ import edu.hp.model.biz.common.HelpdeskCallsAppModule;
 import edu.hp.model.vo.EmployeesViewImpl;
 import edu.hp.model.vo.HelpdeskCallsViewImpl;
 
+import edu.hp.model.vo.HelpdeskRolesViewImpl;
 import edu.hp.model.vo.query.helpdesk.EmpWithEmptyImpl;
 
 import edu.hp.model.vo.query.helpdesk.HdStateWithEmptyImpl;
@@ -273,5 +274,13 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
      */
     public ViewObjectImpl getHdEvalWithEmpty() {
         return (ViewObjectImpl)findViewObject("HdEvalWithEmpty");
+    }
+
+    /**
+     * Container's getter for HelpdeskRolesView1.
+     * @return HelpdeskRolesView1
+     */
+    public HelpdeskRolesViewImpl getHelpdeskRolesView() {
+        return (HelpdeskRolesViewImpl)findViewObject("HelpdeskRolesView");
     }
 }

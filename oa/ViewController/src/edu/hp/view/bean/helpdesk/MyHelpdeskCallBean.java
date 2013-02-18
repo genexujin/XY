@@ -157,15 +157,17 @@ public class MyHelpdeskCallBean extends BaseBean {
             boolean success = ADFUtils.commit("报修单已提交！", "报修单提交失败，请核对输入的信息或联系管理员！");
             if (success) {
                 String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
+                String locId = (String)ADFUtils.getBoundAttributeValue("LocationId");
                 String locationDetail = (String)ADFUtils.getBoundAttributeValue("LocationDetail");
                 String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
+                String roleName = getRoleName(locId, rsnLv1);
                 
                 //send to callee
                 String noteTitle = "有新的报修请求等待处理";
                 String noteContent = "详细地址：" + locationDetail + " 报修原因：" + rsnLv1 + " 提交时间：" + getDateString();                
-                sendNotification(noteTitle, noteContent, null, Constants.ROLE_HD_ADMIN);
+                sendNotification(noteTitle, noteContent, null, roleName);
                 
-                createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, Constants.ROLE_HD_ADMIN);
+                createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, roleName);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -192,8 +194,12 @@ public class MyHelpdeskCallBean extends BaseBean {
             if (success) {
                 String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
                 
+                String locId = (String)ADFUtils.getBoundAttributeValue("LocationId");
+                String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
+                String roleName = getRoleName(locId, rsnLv1);
+                
                 //complete the task for callee
-                completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, Constants.ROLE_HD_ADMIN);
+                completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, roleName);
                 
                 //create evaluation task for caller
                 this.createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价", callerId);
@@ -280,5 +286,16 @@ public class MyHelpdeskCallBean extends BaseBean {
 
     public void onReasonLevel1Change(ValueChangeEvent valueChangeEvent) {
         // Add event code here...
+    }
+
+    private String getRoleName(final String locId, final String rsnLv1) {
+        OperationBinding op = ADFUtils.findOperation("findByLocationIdAndHdReason");
+        op.getParamsMap().put("locationId", locId);
+        op.getParamsMap().put("hdReason", rsnLv1);
+        op.execute();
+        
+        final String roleName = (String)op.getResult();
+        System.out.println("Role name in bean is: " + roleName);
+        return roleName;
     }
 }
