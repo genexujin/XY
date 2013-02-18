@@ -92,6 +92,7 @@ public class ClsCalCrtBean extends BaseBean {
             OperationBinding refreshOp = ADFUtils.findOperation("refreshCalendar");
             refreshOp.getParamsMap().put("clsRmNos", ids);
             refreshOp.execute();
+            
         }
         return "Calendar";
     }
