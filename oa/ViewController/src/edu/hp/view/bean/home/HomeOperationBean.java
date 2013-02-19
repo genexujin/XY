@@ -19,8 +19,8 @@ public class HomeOperationBean {
     private UIXIterator notesIterator;
     private int rangeSize = 10;
     private int selectDefault = 0;
-    private String defaultTaskState = "PENDING";
-    private String defaultNoteState = "UNREAD";
+    private String defaultTaskState = "ALL";
+    private String defaultNoteState = "ALL";
 
     public HomeOperationBean() {
     }
@@ -125,6 +125,9 @@ public class HomeOperationBean {
         } else if (newValue != null && newValue.equals(Constants.STATE_TASK_PENDING)) {
             OperationBinding binding = ADFUtils.findOperation("setForPending");
             binding.execute();
+        }else{
+            OperationBinding binding = ADFUtils.findOperation("setForAll");
+            binding.execute();
         }
         this.getTaskIterator().setFirst(0);
         ADFUtils.partialRefreshComponenet(getTaskIterator());
@@ -138,6 +141,9 @@ public class HomeOperationBean {
             binding.execute();
         } else if (newValue != null && newValue.equals(Constants.STATE_NOTE_UNREAD)) {
             OperationBinding binding = ADFUtils.findOperation("setForUnread");
+            binding.execute();
+        }else{
+            OperationBinding binding = ADFUtils.findOperation("setForAllNotes");
             binding.execute();
         }
         this.getNotesIterator().setFirst(0);

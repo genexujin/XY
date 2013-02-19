@@ -166,5 +166,11 @@
         <Item Value="SubmitDate"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="cancelTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="cancelTask" IsViewObjectMethod="false">
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

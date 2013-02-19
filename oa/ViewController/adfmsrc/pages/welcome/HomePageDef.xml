@@ -64,6 +64,13 @@
             RequiresUpdateModel="true" Action="commitTransaction"/>
     <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
             RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <methodAction IterBinding="UserTasksIterator" id="setForAll" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setForAll" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HomeModule.UserTasks"/>
+    <methodAction IterBinding="UserNotificationsIterator" id="setForAllNotes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setForAllNotes" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HomeModule.UserNotifications"/>
   </bindings>
   <events xmlns="http://xmlns.oracle.com/adfm/contextualEvent">
     <event name="openTaskEvent" eventType="Action Event"/>

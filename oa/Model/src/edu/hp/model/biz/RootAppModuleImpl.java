@@ -132,6 +132,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
         roles.setApplyViewCriteriaNames(null);
         roles.setroleName(role_name);
         roles.applyViewCriteria(roles.getViewCriteria("queryByName"));
+        roles.setRangeSize(-1);
         roles.executeQuery();
         Row[] allRowsInRange = roles.getAllRowsInRange();
         return allRowsInRange;
@@ -183,6 +184,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                 taskVO.setroleId(roleId);
                 taskVO.setApplyViewCriteriaNames(null);
                 taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContext"));
+                taskVO.setRangeSize(-1);
                 taskVO.executeQuery();
                 Row[] allRowsInRange = taskVO.getAllRowsInRange();
                 if (allRowsInRange != null && allRowsInRange.length > 0) {
@@ -230,6 +232,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             taskVO.setuserId(userId);
             taskVO.setApplyViewCriteriaNames(null);
             taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContextAndUserId"));
+            taskVO.setRangeSize(-1);
             taskVO.executeQuery();
             Row[] allRowsInRange = taskVO.getAllRowsInRange();
             if (allRowsInRange != null && allRowsInRange.length > 0) {
@@ -251,6 +254,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             taskVO.setcontextType(contextObjectType);
             taskVO.setApplyViewCriteriaNames(null);
             taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContextObject"));
+            taskVO.setRangeSize(-1);
             taskVO.executeQuery();
             Row[] allRowsInRange = taskVO.getAllRowsInRange();
             for( Row row : allRowsInRange) {

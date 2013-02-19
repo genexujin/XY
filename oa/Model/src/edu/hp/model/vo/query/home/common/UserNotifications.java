@@ -9,4 +9,6 @@ public interface UserNotifications extends ViewObject {
     void setForRead();
 
     void setForUnread();
+
+    void setForAllNotes();
 }

@@ -45,6 +45,8 @@
                             </af:commandToolbarButton>
                             <af:commandToolbarButton text="取消所有操作" id="ctb2" icon="/images/icons/rollback.png"
                                                      actionListener="#{bindings.Rollback.execute}"/>
+                            <af:commandToolbarButton id="ctb4" icon="/images/icons/refresh.png" text="刷新"
+                                                     action="#{viewScope.vehicleApplicationBean.refreshTableIterator}"/>
                             <af:commandToolbarButton text="导出" id="cb6" icon="/images/icons/export.png">
                                 <af:exportCollectionActionListener type="excelHTML" exportedId="t2" title="会议室预订信息"
                                                                    filename="Vehicles.xls"/>
@@ -54,14 +56,14 @@
                     <f:facet name="statusbar"/>
                     <af:table value="#{bindings.VehicleDML.collectionModel}" var="row"
                               rows="#{bindings.VehicleDML.rangeSize}"
-                              emptyText="#{bindings.VehicleDML.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              emptyText="#{bindings.VehicleDML.viewable ? '暂无数据。' : 'Access Denied.'}"
                               fetchSize="#{bindings.VehicleDML.rangeSize}" rowBandingInterval="1"
                               filterModel="#{bindings.VehicleDMLQuery.queryDescriptor}"
                               queryListener="#{bindings.VehicleDMLQuery.processQuery}" filterVisible="false"
                               varStatus="vs" selectedRowKeys="#{bindings.VehicleDML.collectionModel.selectedRow}"
                               selectionListener="#{bindings.VehicleDML.collectionModel.makeCurrent}"
                               rowSelection="single" id="t2"
-                              partialTriggers="::ctb1 :::cb1 :::cb2 :::cb3 :::cb7 :::cb4 :::cb5 ::ctb3 ::ctb2">
+                              partialTriggers="::ctb1 ::ctb4 :::cb1 :::cb2 :::cb3 :::cb7 :::cb4 :::cb5 ::ctb3 ::ctb2">
                         <af:column sortProperty="#{bindings.VehicleDML.hints.VehicleName.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.VehicleName.label}" id="c1">
                             <af:selectOneChoice value="#{row.bindings.VehicleName.inputValue}"
@@ -178,7 +180,7 @@
                     <af:outputText value="车辆预订信息" id="ot14" inlineStyle="color:Black; font-size:small;"/>
                     <af:panelFormLayout id="pfl2" rows="4">
                         <af:inputComboboxListOfValues id="iclov1"
-                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
+                                                      popupTitle="#{bindings.UserDisplayName.hints.label}"
                                                       value="#{bindings.UserDisplayName.inputValue}"
                                                       label="#{bindings.UserDisplayName.hints.label}"
                                                       model="#{bindings.UserDisplayName.listOfValuesModel}"
@@ -287,24 +289,24 @@
                                           action="#{viewScope.vehicleApplicationBean.save}"/>
                         <af:spacer width="10" height="10" id="s8"/>
                         <af:commandButton text="提交" id="cb2" icon="/images/icons/run.png"
-                                          visible="#{bindings.State.inputValue=='未提交'}"
+                                          visible="#{bindings.State.inputValue=='未提交' or bindings.State.inputValue=='已拒绝' or bindings.State.inputValue=='已取消'}"
                                           action="#{viewScope.vehicleApplicationBean.submit}"
                                           rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}"/>
                         <af:spacer width="10" height="10" id="s9"/>
                         <af:commandButton text="审核" id="cb3" icon="/images/icons/task.png"
-                                          visible="#{bindings.State.inputValue=='待审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['车辆审核']}"
+                                          visible="#{bindings.State.inputValue=='待审核' and  sessionScope.LoginUserBean.isUserInRole['车辆审核']}"
                                           action="#{viewScope.vehicleApplicationBean.approve}"/>
                         <af:spacer width="10" height="10" id="s10"/>
                         <af:commandButton id="cb7" text="完成调度" icon="/images/icons/activity.png"
-                                          visible="#{bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['车辆调度']}"
+                                          visible="#{bindings.State.inputValue=='已审核' and sessionScope.LoginUserBean.isUserInRole['车辆调度']}"
                                           action="#{viewScope.vehicleApplicationBean.planTrip}"/>
                         <af:spacer width="10" height="10" id="s11"/>
                         <af:commandButton id="cb4" text="拒绝" icon="/images/icons/terminate.png"
-                                          visible="#{(bindings.State.inputValue=='待审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['车辆审核'])||(bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['车辆调度'])}"
+                                          visible="#{(bindings.State.inputValue=='待审核' and sessionScope.LoginUserBean.isUserInRole['车辆审核'])||(bindings.State.inputValue=='已审核' and sessionScope.LoginUserBean.isUserInRole['车辆调度'])}"
                                           action="#{viewScope.vehicleApplicationBean.reject}"/>
                         <af:spacer width="10" height="10" id="s1"/>
                         <af:commandButton text="取消" id="cb5" icon="/images/icons/undo.png"
-                                          visible="#{bindings.State.inputValue=='待审核'}"
+                                          visible="#{bindings.State.inputValue!='未提交'}"
                                           rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}"
                                           action="#{viewScope.vehicleApplicationBean.cancel}"/>
                     </af:panelGroupLayout>

@@ -113,12 +113,13 @@
                     <af:panelFormLayout id="pfl3" rows="1">
                         <f:facet name="footer"/>
                         <af:selectOneChoice label="#{bindings.State.hints.label}" value="#{bindings.State.inputValue}"
-                                            id="soc4" required="#{bindings.State.hints.mandatory}">
-                            <af:selectItem label="未提交" value="未提交" id="si6"/>
+                                            id="soc4" required="#{bindings.State.hints.mandatory}" autoSubmit="true"
+                                            valueChangeListener="#{pageFlowScope.vehiclesCalBean.onStateChange}">
+                            <!--af:selectItem label="未提交" value="未提交" id="si6"/>
                             <af:selectItem label="待审核" value="待审核" id="si7"/>
-                            <af:selectItem label="已审核" value="已审核" id="si8"/>
+                            <af:selectItem label="已审核" value="已审核" id="si8"/-->
                             <af:selectItem label="已调度" value="已调度" id="si9"/>
-                            <af:selectItem label="已拒绝" value="已拒绝" id="si10"/>
+                            <!--af:selectItem label="已拒绝" value="已拒绝" id="si10"/-->
                             <af:selectItem label="已取消" value="已取消" id="si1"/>
                         </af:selectOneChoice>
                         <af:inputText value="#{bindings.Comments.inputValue}" label="#{bindings.Comments.hints.label}"

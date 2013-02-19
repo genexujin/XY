@@ -23,12 +23,13 @@ import oracle.jbo.domain.Timestamp;
 
 
 public class VehicleCalendarBean extends CalendarBean {
-    
+
     private boolean myVelView = false;
     private boolean changeMade = false;
     private Timestamp startDayTime = null;
     private String vehicleId = null;
-    
+    private String action = "save";
+
     public VehicleCalendarBean() {
 
         needCheckConflict = false;
@@ -113,13 +114,6 @@ public class VehicleCalendarBean extends CalendarBean {
 
             OACalendarActivity demoActivity = new OACalendarActivity(activity);
             this.setCurrActivity(demoActivity);
-            //            System.err.println(activity.getTitle());
-            //            System.err.println(demoActivity.getId());
-            //            System.err.println(demoActivity.getFrom());
-            //            System.err.println(ae.getNewEndDate());
-            //            System.err.println(demoActivity.getCustomAttributes().get("MeetingRoomId"));
-            //            System.err.println("param ending...");
-
 
             OperationBinding binding = ADFUtils.findOperation("updateEndTime");
             binding.getParamsMap().put("vehicleActId", demoActivity.getId());
@@ -171,7 +165,7 @@ public class VehicleCalendarBean extends CalendarBean {
     public String save() {
         startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
         Timestamp submit = (Timestamp)ADFUtils.getBoundAttributeValue("SubmitDate");
-        if(submit==null)
+        if (submit == null)
             ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
         vehicleId = (String)ADFUtils.getBoundAttributeValue("VehicleId");
         boolean success = ADFUtils.commit("车辆预订已保存！", "车辆预订保存失败，请核对输入的信息或联系管理员！");
@@ -181,36 +175,69 @@ public class VehicleCalendarBean extends CalendarBean {
     }
 
     private void sendNotification() {
-        String state = (String)ADFUtils.getBoundAttributeValue("State");
-        if (state != null && state.equals(Constants.STATE_TRIP_PLANNED)) {
-            String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
-            String contactId = (String)ADFUtils.getBoundAttributeValue("ContactId");
-            String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
-            String title = (String)ADFUtils.getBoundAttributeValue("Title");
 
-            this.sendNotification("您的车辆预订: " + title + " 已调度完成 ", " 使用的车辆为：" + vehicleName, userId, null);
-            this.sendNotification("您的车辆预订: " + title + " 已调度完成 ", " 使用的车辆为：" + contactId, userId, null);
-            changeMade = true;
-            ADFUtils.findOperation("Commit").execute();
+        String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
+        String contactId = (String)ADFUtils.getBoundAttributeValue("ContactId");
+        String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+        String title = (String)ADFUtils.getBoundAttributeValue("Title");
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        String noteTitle;
+        String noteContent;
+        String dateStr = getDateString();
+
+        if (action.equals("save") && state.equals(Constants.STATE_TRIP_PLANNED)) {
+            noteTitle = "您的车辆预订：" + title + " 已完成调度并被修改。 ";
+            noteContent = " 修改时间：" + dateStr + " 使用的车辆为：" + vehicleName;
+            //System.err.println("sent as saved");
+        } else if (action.equals("cancel")) {
+            noteTitle = "您的车辆预订：" + title + " 已取消。 ";
+            noteContent = " 取消时间：" + dateStr;
+            //System.err.println("sent as cancelled");
+        } else {
+            noteTitle = "您的车辆预订：" + title + " 已调度完成。 ";
+            noteContent = " 完成时间：" + dateStr + " 使用的车辆为：" + vehicleName;
+            //System.err.println("sent as planned");
+        }
+        this.sendNotification(noteTitle, noteContent, userId, null);
+        this.sendNotification(noteTitle, noteContent, contactId, null);
+        
+        changeMade = true;
+        ADFUtils.findOperation("Commit").execute();
+
+    }
+
+    public void onStateChange(ValueChangeEvent valueChangeEvent) {
+
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        String newState = (String)valueChangeEvent.getNewValue();
+
+        if (state != null && newState != null && !state.equals(newState)) {
+            if (newState.equals(Constants.STATE_CANCELED)) {
+                action = "cancel";
+            } else if (newState.equals(Constants.STATE_TRIP_PLANNED)) {
+                action = "approve";
+            }
+        } else {
+            action = "save";
         }
     }
-    
+
     public String goBackToCalendar() {
 
         if (vehicleId != null && startDayTime != null && changeMade) {
             String ids = this.getProviderIds();
-                if (ids != null && ids.indexOf(vehicleId) < 0 && !ids.equals("NA")) {
-                    ids = ids + "," + vehicleId;
-                } else if (ids == null || ids.equals("NA")) {
-                    ids = vehicleId;
-                }
-            
-            Date active = new Date(startDayTime.getTime());            
+            if (ids != null && ids.indexOf(vehicleId) < 0 && !ids.equals("NA")) {
+                ids = ids + "," + vehicleId;
+            } else if (ids == null || ids.equals("NA")) {
+                ids = vehicleId;
+            }
+
+            Date active = new Date(startDayTime.getTime());
             this.setActiveDay(active);
             OperationBinding refreshOp = ADFUtils.findOperation("refreshCalendar");
             refreshOp.getParamsMap().put("vehicleIds", ids);
             refreshOp.execute();
-            
+
         }
         return "Calendar";
     }

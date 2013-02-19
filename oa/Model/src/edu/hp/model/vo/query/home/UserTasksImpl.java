@@ -31,6 +31,11 @@ public class UserTasksImpl extends ViewObjectImpl implements UserTasks {
         this.setstate(Constants.STATE_TASK_COMPLETED);
         this.executeQuery();
     }
+    
+    public void setForAll(){
+        this.setApplyViewCriteriaNames(null);       
+        this.executeQuery();
+    }
 
     /**
      * Returns the bind variable value for userName.

@@ -27,13 +27,13 @@ public class HomeModuleImpl extends ApplicationModuleImpl implements HomeModule 
         
         UserTasksImpl userTask = (UserTasksImpl)this.getUserTasks();        
         userTask.setApplyViewCriteriaNames(null);
-        userTask.applyViewCriteria(userTask.getViewCriteria("findByState"));
+//        userTask.applyViewCriteria(userTask.getViewCriteria("findByState"));
         userTask.setuserName(userName);
         userTask.setstate(Constants.STATE_TASK_PENDING);
         
         UserNotificationsImpl userNotifications = (UserNotificationsImpl)this.getUserNotifications();
         userNotifications.setApplyViewCriteriaNames(null);
-        userNotifications.applyViewCriteria(userNotifications.getViewCriteria("findByState"));
+//        userNotifications.applyViewCriteria(userNotifications.getViewCriteria("findByState"));
         userNotifications.setuserName(userName);
         userNotifications.setstate(Constants.STATE_NOTE_UNREAD);
     }

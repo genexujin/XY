@@ -16,6 +16,12 @@ public class UserNotificationsClient extends ViewUsageImpl implements UserNotifi
     public UserNotificationsClient() {
     }
 
+
+    public void setForAllNotes() {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this,"setForAllNotes",null,null);
+        return;
+    }
+
     public void setForRead() {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this,"setForRead",null,null);
         return;

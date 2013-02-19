@@ -236,7 +236,8 @@ ORDER BY tasks.assigned_date desc]]></SQLQuery>
         Conjunction="AND"
         Value=":state"
         IsBindVarValue="true"
-        Required="Optional"/>
+        Required="Optional"
+        UpperColumns="1"/>
     </ViewCriteriaRow>
   </ViewCriteria>
   <AttrArray Name="KeyAttributes">
@@ -256,6 +257,12 @@ ORDER BY tasks.assigned_date desc]]></SQLQuery>
     <Method
       Name="setForPending"
       MethodName="setForPending">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
+      Name="setForAll"
+      MethodName="setForAll">
       <Return
         Type="void"/>
     </Method>
