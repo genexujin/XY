@@ -22,7 +22,7 @@
                 <af:toolbar id="t1">
               <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '未提交'}"
                                        actionListener="#{bindings.Commit.execute}"/>
-              <af:commandToolbarButton text="返回" id="ctb2" immediate="true" rendered="#{pageFlowScope.fromMenu ne '-'}"
+              <af:commandToolbarButton text="返回" id="ctb2" immediate="true" rendered="#{pageFlowScope.fromMenu ne '-' and pageFlowScope.fromMenu ne 'create'}"
                                        actionListener="#{bindings.Rollback.execute}" action="return">
                 <af:resetActionListener/>
               </af:commandToolbarButton>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="CreateHdCall">
-    <default-activity>CreateHelpdeskCall</default-activity>
+    <default-activity>MyHdCall</default-activity>
     <data-control-scope>
       <isolated/>
     </data-control-scope>
@@ -10,9 +10,16 @@
       <managed-bean-class>edu.hp.view.bean.helpdesk.MyHelpdeskCallBean</managed-bean-class>
       <managed-bean-scope>pageFlow</managed-bean-scope>
     </managed-bean>
-    <view id="CreateHelpdeskCall">
-      <page>/pages/helpdesk/CreateHelpdeskCall.jsff</page>
-    </view>
+    <task-flow-call id="MyHdCall">
+      <task-flow-reference>
+        <document>/WEB-INF/flows/helpdesk/MyHdCall.xml</document>
+        <id>MyHdCall</id>
+      </task-flow-reference>
+      <input-parameter id="__3">
+        <name>fromMenu</name>
+        <value>create</value>
+      </input-parameter>
+    </task-flow-call>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

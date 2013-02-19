@@ -40,6 +40,10 @@
         <expression>#{pageFlowScope.callId!= null}</expression>
         <outcome>byCallId</outcome>
       </case>
+      <case id="__25">
+        <expression>#{pageFlowScope.fromMenu == 'create'}</expression>
+        <outcome>create</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findByCallerId">
@@ -91,6 +95,10 @@
       <control-flow-case id="__18">
         <from-outcome>byCallId</from-outcome>
         <to-activity-id>findByCallId</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__24">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>Create</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__12">

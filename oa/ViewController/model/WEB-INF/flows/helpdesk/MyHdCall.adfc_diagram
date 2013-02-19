@@ -208,4 +208,14 @@
       <property
          name="sdm:polyPoints">B44,914.5,280.39062,129.5,280.39062,B56</property>
    </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase22"
+      from="Router8"
+      to="MethodCall3">
+      <property
+         name="fromOutcome">create</property>
+      <property
+         name="sdm:polyPoints">B61,133.0,251.0918,726.0,251.0918,B50</property>
+   </ControlFlowCase>
 </SDM>
