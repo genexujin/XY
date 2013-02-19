@@ -8,7 +8,6 @@ import oracle.jbo.ApplicationModule;
 // ---    Tue Feb 12 16:04:15 CST 2013
 // ---------------------------------------------------------------------
 public interface RootAppModule extends ApplicationModule {
-    void createTask(String title, String contextObjectType, String contextObjectId, String roleName);
 
     void enableSMS(Boolean enalbed);
 
@@ -19,5 +18,12 @@ public interface RootAppModule extends ApplicationModule {
 
     void completeTaskForUserId(String contextObjectType, String contextObjectId, String userId);
 
-    void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId);
+
+    void cancelTask(String contextObjectType, String contextObjectId);
+
+    void createTask(String title, String contextObjectType, String contextObjectId, String roleName,
+                    String contextTitle);
+
+    void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId,
+                             String contextTitle);
 }

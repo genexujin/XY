@@ -147,6 +147,7 @@
       <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="roleName" NDType="java.lang.String"/>
+      <NamedData NDName="contextTitle" NDType="java.lang.String"/>
     </methodAction>
     <attributeValues IterBinding="VehicleDMLIterator" id="Id">
       <AttrNames>

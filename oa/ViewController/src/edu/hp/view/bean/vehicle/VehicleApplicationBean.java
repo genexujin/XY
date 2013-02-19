@@ -54,7 +54,7 @@ public class VehicleApplicationBean extends BaseBean {
                 sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_OFFICE_MGR);
 
                 //create task
-                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_OFFICE_MGR);
+                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_OFFICE_MGR,title);
 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -90,7 +90,7 @@ public class VehicleApplicationBean extends BaseBean {
                 sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_ZONGWU_MGR);
 
                 //create task
-                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_ZONGWU_MGR);
+                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_ZONGWU_MGR,title);
 
                 completeTask(Constants.CONTEXT_TYPE_VEHICLE, id, Constants.ROLE_OFFICE_MGR);
 

@@ -38,6 +38,8 @@
                                        disabled="#{!bindings.Rollback.enabled}" immediate="true">
                 <af:resetActionListener/>
               </af:commandToolbarButton>
+              <af:commandToolbarButton id="ctb4" icon="/images/icons/refresh.png" text="刷新"
+                                       action="#{viewScope.ConfRmAppBean.refreshTableIterator}"/>
               <af:commandToolbarButton text="导出" id="cb6" icon="/images/icons/export.png">
                 <af:exportCollectionActionListener type="excelHTML" exportedId="t2" title="会议室预订信息"
                                                    filename="ConfRmRrv.xls"/>
@@ -47,14 +49,14 @@
           <f:facet name="statusbar"/>
           <af:table value="#{bindings.ConfRoomCalendarView.collectionModel}" var="row"
                     rows="#{bindings.ConfRoomCalendarView.rangeSize}"
-                    emptyText="#{bindings.ConfRoomCalendarView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    emptyText="#{bindings.ConfRoomCalendarView.viewable ? '暂无数据。' : 'Access Denied.'}"
                     fetchSize="#{bindings.ConfRoomCalendarView.rangeSize}" rowBandingInterval="1"
                     filterModel="#{bindings.ConfRoomCalendarViewQuery.queryDescriptor}"
                     queryListener="#{bindings.ConfRoomCalendarViewQuery.processQuery}" filterVisible="false"
                     varStatus="vs" selectedRowKeys="#{bindings.ConfRoomCalendarView.collectionModel.selectedRow}"
                     selectionListener="#{bindings.ConfRoomCalendarView.collectionModel.makeCurrent}"
                     rowSelection="single" id="t2"
-                    partialTriggers="::cmi1 ::cmi2 ::cmi3 ::cmi4 ::ctb1 :::cb1 :::cb2 :::cb3 :::cb4 :::cb5">
+                    partialTriggers="::cmi1 ::cmi2 ::cmi3 ::cmi4 ::ctb1 :::cb1 :::cb2 :::cb3 :::cb4 :::cb5 ::ctb4">
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.Title.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.Title.label}" id="c1">
               <af:outputText value="#{row.Title}" id="ot1"/>
@@ -94,7 +96,7 @@
             </af:column>
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.Allday.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.Allday.label}" id="c6">
-              <af:outputText value="#{row.Allday}" id="ot4"/>
+              <af:outputText value="#{row.Allday=='AllDAY'?'全天':'非全天'}" id="ot4"/>
             </af:column>
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.StartTime.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.StartTime.label}" id="c7">
@@ -170,14 +172,15 @@
             <af:inputText value="#{bindings.Title.inputValue}" label="#{bindings.Title.hints.label}"
                           required="#{bindings.Title.hints.mandatory}" columns="#{bindings.Title.hints.displayWidth}"
                           maximumLength="#{bindings.Title.hints.precision}" shortDesc="#{bindings.Title.hints.tooltip}"
-                          id="it1">
+                          id="it1" readOnly="#{bindings.UserId.inputValue!= sessionScope.LoginUserBean.userId}">
               <f:validator binding="#{bindings.Title.validator}"/>
             </af:inputText>
             <af:inputText value="#{bindings.Participants.inputValue}" label="#{bindings.Participants.hints.label}"
                           required="#{bindings.Participants.hints.mandatory}"
                           columns="#{bindings.Participants.hints.displayWidth}"
                           maximumLength="#{bindings.Participants.hints.precision}"
-                          shortDesc="#{bindings.Participants.hints.tooltip}" id="it2">
+                          shortDesc="#{bindings.Participants.hints.tooltip}" id="it2"
+                          readOnly="#{bindings.UserId.inputValue!= sessionScope.LoginUserBean.userId}">
               <f:validator binding="#{bindings.Participants.validator}"/>
             </af:inputText>
             <af:selectOneChoice value="#{bindings.LocationName1.inputValue}" label="#{bindings.LocationName1.label}"
@@ -236,7 +239,8 @@
                                    label="#{bindings.NumOfPeople.hints.label}"
                                    required="#{bindings.NumOfPeople.hints.mandatory}"
                                    columns="#{bindings.NumOfPeople.hints.displayWidth}"
-                                   shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it4">
+                                   shortDesc="#{bindings.NumOfPeople.hints.tooltip}" id="it4"
+                                   readOnly="#{bindings.UserId.inputValue!= sessionScope.LoginUserBean.userId}">
               <f:validator binding="#{bindings.NumOfPeople.validator}"/>
             </af:inputNumberSpinbox>
             <af:inputText value="#{bindings.Comments.inputValue}" label="#{bindings.Comments.hints.label}"
@@ -277,7 +281,7 @@
             <af:selectOneChoice value="#{bindings.SnackLevel.inputValue}" label="#{bindings.SnackLevel.label}"
                                 required="#{bindings.SnackLevel.hints.mandatory}"
                                 shortDesc="#{bindings.SnackLevel.hints.tooltip}" id="soc11"
-                                visible="#{sessionScope.LoginUserBean.isUserInRole['会议室审核']}">
+                                readOnly="#{!sessionScope.LoginUserBean.isUserInRole['会议室审核']}">
               <f:selectItems value="#{bindings.SnackLevel.items}" id="si13"/>
             </af:selectOneChoice>
           </af:panelGroupLayout>
@@ -289,7 +293,7 @@
                               action="#{viewScope.ConfRmAppBean.save}"/>
             <af:spacer width="10" height="10" id="s8"/>
             <af:commandButton text="提交" id="cb2" icon="/images/icons/run.png"
-                              visible="#{bindings.State.inputValue=='未提交'&amp;&amp; bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}" action="#{viewScope.ConfRmAppBean.submit}"/>
+                              visible="#{(bindings.State.inputValue=='未提交'or bindings.State.inputValue=='已拒绝' or bindings.State.inputValue=='已取消')&amp;&amp; bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}" action="#{viewScope.ConfRmAppBean.submit}"/>
             <af:spacer width="10" height="10" id="s9"/>
             <af:commandButton text="审核" id="cb3" icon="/images/icons/task.png"
                               visible="#{bindings.State.inputValue=='待审核'}"
@@ -302,7 +306,7 @@
                               action="#{viewScope.ConfRmAppBean.reject}"/>
             <af:spacer width="10" height="10" id="s11"/>
             <af:commandButton text="取消" id="cb5" icon="/images/icons/undo.png"
-                              visible="#{bindings.State.inputValue=='待审核'}"
+                              visible="#{bindings.State.inputValue=='待审核'or bindings.State.inputValue=='已审核'}"
                               rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}"
                               action="#{viewScope.ConfRmAppBean.cancel}"/>
           </af:panelGroupLayout>

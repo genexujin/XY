@@ -68,6 +68,12 @@ public class RootAppModuleClient extends ApplicationModuleImpl implements RootAp
     }
 
 
+    public void cancelTask(String contextObjectType, String contextObjectId) {
+        Object _ret =
+            this.riInvokeExportedMethod(this,"cancelTask",new String [] {"java.lang.String","java.lang.String"},new Object[] {contextObjectType, contextObjectId});
+        return;
+    }
+
     public void completeTask(String contextObjectType, String contextObjectId, String roleName) {
         Object _ret =
             this.riInvokeExportedMethod(this,"completeTask",new String [] {"java.lang.String","java.lang.String","java.lang.String"},new Object[] {contextObjectType, contextObjectId, roleName});
@@ -80,15 +86,17 @@ public class RootAppModuleClient extends ApplicationModuleImpl implements RootAp
         return;
     }
 
-    public void createTask(String title, String contextObjectType, String contextObjectId, String roleName) {
+    public void createTask(String title, String contextObjectType, String contextObjectId, String roleName,
+                           String contextTitle) {
         Object _ret =
-            this.riInvokeExportedMethod(this,"createTask",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {title, contextObjectType, contextObjectId, roleName});
+            this.riInvokeExportedMethod(this,"createTask",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {title, contextObjectType, contextObjectId, roleName, contextTitle});
         return;
     }
 
-    public void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId) {
+    public void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId,
+                                    String contextTitle) {
         Object _ret =
-            this.riInvokeExportedMethod(this,"createTaskForUserId",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {title, contextObjectType, contextObjectId, userId});
+            this.riInvokeExportedMethod(this,"createTaskForUserId",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {title, contextObjectType, contextObjectId, userId, contextTitle});
         return;
     }
 

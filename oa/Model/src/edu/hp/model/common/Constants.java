@@ -19,6 +19,7 @@ public class Constants {
     public static final String STATE_NOTE_READ = "READ";
     public static final String STATE_TASK_PENDING = "PENDING";
     public static final String STATE_TASK_COMPLETED = "COMPLETED";
+    public static final String STATE_TASK_CANCELED = "CANCELED";
     public static final String CONTEXT_TYPE_VEHICLE = "VEHICLE";
     public static final String CONTEXT_TYPE_CONFRM = "CONFRM";
     public static final String CONTEXT_TYPE_HELPDESK = "HELPDESK";

@@ -169,6 +169,18 @@
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="ContextTitle"
+    Precision="20"
+    ColumnName="CONTEXT_TITLE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TASKS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
   <Key
     Name="TasksPk"
     PrimaryKey="true">

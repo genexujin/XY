@@ -65,7 +65,7 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
     }
 
     public void queryByPK(String confRmCalId) {
-        //System.err.println("query by pk");
+       // System.err.println("query by pk: " + confRmCalId);
         super.queryByVC("findById", "confRmCalId", confRmCalId);
     }
 

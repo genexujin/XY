@@ -355,7 +355,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CONF_ROOM_CALENDAR">
+    TableName="CONF_ROOM_CALENDAR"
+    RetrievedOnUpdate="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -404,7 +405,8 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="CONF_ROOM_CALENDAR">
+    TableName="CONF_ROOM_CALENDAR"
+    RetrievedOnUpdate="true">
     <Properties>
       <SchemaBasedProperties>
         <LABEL

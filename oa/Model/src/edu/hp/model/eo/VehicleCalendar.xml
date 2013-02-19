@@ -178,7 +178,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="VEHICLE_CALENDAR">
+    TableName="VEHICLE_CALENDAR"
+    RetrievedOnUpdate="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -405,7 +406,8 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="VEHICLE_CALENDAR">
+    TableName="VEHICLE_CALENDAR"
+    RetrievedOnUpdate="true">
     <Properties>
       <SchemaBasedProperties>
         <LABEL

@@ -7,6 +7,8 @@ import edu.hp.view.utils.JSFUtils;
 
 import java.util.Date;
 
+import javax.faces.event.ValueChangeEvent;
+
 import oracle.binding.OperationBinding;
 
 import oracle.jbo.domain.DBSequence;
@@ -20,9 +22,10 @@ public class ConfCalDetailBean extends BaseBean {
     private boolean changeMade = false;
     private Timestamp startDayTime = null;
     private String meetingroomId = null;
+    private String action = "save";
 
     public String save() {
-        
+
         if (ensureTimeConflicts()) {
 
             startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
@@ -30,19 +33,32 @@ public class ConfCalDetailBean extends BaseBean {
             //ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
             String state = (String)ADFUtils.getBoundAttributeValue("State");
             Timestamp submit = (Timestamp)ADFUtils.getBoundAttributeValue("SubmitDate");
-            if(submit==null)
+            if (submit == null)
                 ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
             boolean success = ADFUtils.commit("会议室预订已保存！", "会议室预订保存失败，请核对输入的信息或联系管理员！");
 
-            if (success && state.equals(Constants.STATE_REVIEWED)) {
-                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
-                String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+            if (success) {
+                //String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+                //String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
                 String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
                 String title = (String)ADFUtils.getBoundAttributeValue("Title");
-
-                String noteTitle = "您为会议主题：" + title + " 所做的会议室申请已通过审核。 ";
+                String noteTitle;
                 String dateStr = getDateString();
-                String noteContent = " 审核时间：" + dateStr;
+                String noteContent;
+                if(action.equals("save")&&state.equals(Constants.STATE_REVIEWED)){
+                    noteTitle = "您为会议主题：" + title + " 所做的会议室申请已修改。 ";
+                    noteContent = " 修改时间：" + dateStr;
+                }
+                else if(action.equals("cancel")) {
+                    noteTitle = "您为会议主题：" + title + " 所做的会议室申请已取消。 ";
+                    noteContent = " 取消时间：" + dateStr;
+                }
+                else{
+                    noteTitle = "您为会议主题：" + title + " 所做的会议室申请已通过审核。 ";
+                    noteContent = " 审核时间：" + dateStr;
+                }
+                
+                
                 //send to requester
                 sendNotification(noteTitle, noteContent, userId, null);
                 ADFUtils.findOperation("Commit").execute();
@@ -83,5 +99,21 @@ public class ConfCalDetailBean extends BaseBean {
 
         }
         return "Calendar";
+    }
+
+    public void onStateChange(ValueChangeEvent valueChangeEvent) {
+        
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        String newState = (String)valueChangeEvent.getNewValue();
+        
+        if (state != null && newState != null && !state.equals(newState)) {
+            if (newState.equals(Constants.STATE_CANCELED)) {
+                action = "cancel";
+            }else if(newState.equals(Constants.STATE_REVIEWED)){
+                action = "approve";
+            }
+        } else {
+            action = "save";
+        }
     }
 }

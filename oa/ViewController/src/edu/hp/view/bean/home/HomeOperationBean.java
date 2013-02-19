@@ -147,12 +147,17 @@ public class HomeOperationBean {
 
     public void openTask(ActionEvent actionEvent) {
         UIComponent component = actionEvent.getComponent();
+        //System.err.println(component.getClientId());
         String contextObjectId = (String)component.getAttributes().get("contextObjectId");
-        //System.err.println(contextObjectId);
+//        System.err.println(contextObjectId);
         String contextObjectType = (String)component.getAttributes().get("contextObjectType");
-        //System.err.println(contextObjectType);
+        String contextTitle = (String)component.getAttributes().get("contextTitle");
+        
+//        System.err.println(contextObjectType);
         JSFUtils.setExpressionValue("#{sessionScope.contextObjectId}", contextObjectId);
         JSFUtils.setExpressionValue("#{sessionScope.contextObjectType}", contextObjectType);
+        JSFUtils.setExpressionValue("#{sessionScope.contextTitle}", contextTitle);
+        
         FacesContext context = JSFUtils.getFacesContext();
         context.getApplication().getNavigationHandler().handleNavigation(context, null, "openTask");
         // Add event code here...

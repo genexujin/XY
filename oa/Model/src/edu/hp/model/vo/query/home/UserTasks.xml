@@ -39,7 +39,8 @@ tasks.context_object_id context_object_id,
 tasks.context_object_type context_object_type,
 tasks.completion_date completion_date,
 tasks.executor_display_name executor_display_name,
-tasks.executor_id executor_id
+tasks.executor_id executor_id,
+tasks.context_Title
 from
 employees,tasks,roles,role_users
 where
@@ -182,6 +183,21 @@ ORDER BY tasks.assigned_date desc]]></SQLQuery>
     ColumnType="VARCHAR2"
     AliasName="EXECUTOR_ID"
     Expression="EXECUTOR_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContextTitle"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONTEXT_TITLE"
+    Expression="CONTEXT_TITLE"
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>

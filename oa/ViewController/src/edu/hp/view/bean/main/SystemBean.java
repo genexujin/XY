@@ -21,6 +21,7 @@ public class SystemBean extends UITabBean {
     private String taskFlowId = "/WEB-INF/flows/welcome/welcome-btf.xml#welcome-btf";
     private String CONTEXT_OBJECT_TYPE = "#{sessionScope.contextObjectType}";
     private String CONTEXT_OBJECT_ID = "#{sessionScope.contextObjectId}";
+    private String CONTEXT_TITLE = "#{sessionScope.contextTitle}";
 
     private RichPanelAccordion menuPanelAccordion;
     private RichDocument document;
@@ -71,32 +72,33 @@ public class SystemBean extends UITabBean {
 
         String contextObjectType = JSFUtils.resolveExpressionAsString(CONTEXT_OBJECT_TYPE);
         String contextObjectId = JSFUtils.resolveExpressionAsString(CONTEXT_OBJECT_ID);
-
+        String contextTitle = JSFUtils.resolveExpressionAsString(CONTEXT_TITLE);
+        //System.err.println(contextObjectType);
+        //System.err.println(contextObjectId);
+        
         String taskFlowId = null;
         HashMap parameters;
         String title = null;
         if (contextObjectType != null && contextObjectId != null && !contextObjectType.equals("EXP") &&
-            !contextObjectId.equals("EXP")) {
-            
+            !contextObjectId.equals("EXP")) {            
             JSFUtils.setExpressionValue(CONTEXT_OBJECT_TYPE, "EXP");
             JSFUtils.setExpressionValue(CONTEXT_OBJECT_ID, "EXP");
             parameters = new HashMap();
             if (contextObjectType.equals(Constants.CONTEXT_TYPE_VEHICLE)) {
                 taskFlowId = Constants.CONTEXT_VEHICLE_TASKFLOW;
-                title = "车辆申请审核/调度";
+                title = "车辆申请:"+contextTitle;
                 parameters.put("id", contextObjectId);
             }else if (contextObjectType.equals(Constants.CONTEXT_TYPE_CONFRM)){
                 taskFlowId = Constants.CONTEXT_CONFRM_TASKFLOW;
-                title = "会议室申请审核";
+                title = "会议室申请:"+contextTitle;
                 parameters.put("id", contextObjectId);
             }else if (contextObjectType.equals(Constants.CONTEXT_TYPE_HELPDESK)) {
                 taskFlowId = Constants.CONTEXT_HELPDESK_TASKFLOW;
-                title = "报修单处理";
+                title = "报修单处理:"+contextTitle;
                 parameters.put("id", contextObjectId);
-            }
+            }            
             
-            
-            _launchActivity(title, taskFlowId, parameters, false);
+            _launchActivity(title, taskFlowId, parameters, true);
         }
 
     }

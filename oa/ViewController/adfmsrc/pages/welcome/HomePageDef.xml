@@ -23,6 +23,7 @@
           <Item Value="ExecutorId"/>
           <Item Value="State"/>
           <Item Value="Title"/>
+          <Item Value="ContextTitle"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

@@ -23,7 +23,7 @@
                   <af:selectItem label="已处理" value="COMPLETED" id="si2"/>
                 </af:selectOneChoice>
                 <af:commandImageLink text="刷新" id="cil10" icon="/images/icons/refresh.png"
-                                     actionListener="#{viewScope.HomeOperationBean.firstTask}"/>
+                                     actionListener="#{viewScope.HomeOperationBean.refreshTaskList}"/>
               </af:toolbar>
           
           </f:facet>
@@ -66,6 +66,7 @@
                                          actionListener="#{viewScope.HomeOperationBean.openTask}">
                       <af:clientAttribute value="#{task.ContextObjectId}" name="contextObjectId"/>
                       <af:clientAttribute value="#{task.ContextObjectType}" name="contextObjectType"/>
+                      <af:clientAttribute value="#{task.ContextTitle}" name="contextTitle"/>
                     </af:commandImageLink>
                   </af:panelGroupLayout>
                 </af:iterator>
@@ -87,7 +88,7 @@
                   <af:selectItem label="已读" value="READ" id="si4"/>
                 </af:selectOneChoice>
               <af:commandImageLink text="刷新" id="cil11" icon="/images/icons/refresh.png"
-                                   actionListener="#{viewScope.HomeOperationBean.firstNotes}"/>
+                                   actionListener="#{viewScope.HomeOperationBean.refreshNotes}"/>
             </af:toolbar>
           </f:facet>
           <af:panelStretchLayout id="psl3" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="30px">
