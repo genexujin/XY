@@ -101,10 +101,6 @@
         <Item Value="SubmitAt"/>
       </AttrNames>
     </attributeValues>
-    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_New" id="CalleeId"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_New" id="CalleeId1"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <methodAction id="findByLocationIdAndHdReason" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="findByLocationIdAndHdReason" IsViewObjectMethod="true"
                   DataControl="RootAppModuleDataControl"
@@ -113,5 +109,7 @@
       <NamedData NDName="locationId" NDType="java.lang.String"/>
       <NamedData NDName="hdReason" NDType="java.lang.String"/>
     </methodAction>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_Retry" id="CalleeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

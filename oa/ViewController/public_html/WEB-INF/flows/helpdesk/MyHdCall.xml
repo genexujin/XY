@@ -114,6 +114,13 @@
         <to-activity-id>CreateHelpdeskCall</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id>CreateHelpdeskCall</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>MyHelpdeskCall</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

@@ -149,7 +149,7 @@ public class MyHelpdeskCallBean extends BaseBean {
         
     }
 
-    public void submitHdCall(ActionEvent actionEvent) {
+    public String submitHdCall() {
         setSubmitDate();
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_INITIAL)) {
@@ -174,6 +174,8 @@ public class MyHelpdeskCallBean extends BaseBean {
                 ADFUtils.setBoundAttributeValue("State", state);
             }
         }
+        
+        return null;
     }
 
     public void cancelHdCall(ActionEvent actionEvent) {
@@ -189,7 +191,7 @@ public class MyHelpdeskCallBean extends BaseBean {
         
         if (state != null && state.equals(Constants.STATE_ACCEPTED)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_PROCESSED);
-            ADFUtils.setBoundAttributeValue("CalleeId1", calleeId);
+            ADFUtils.setBoundAttributeValue("CalleeId", calleeId);
             boolean success = ADFUtils.commit("报修单已处理！", "报修单处理失败，请核对输入的信息或联系管理员！");
             if (success) {
                 String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
@@ -214,9 +216,9 @@ public class MyHelpdeskCallBean extends BaseBean {
     public void evaluateHdCall(ActionEvent actionEvent) {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         String callerId = ADFUtils.getBoundAttributeValue("CallerId").toString();
-        String calleeId = ADFUtils.getBoundAttributeValue("CalleeId").toString();
+//        String calleeId = ADFUtils.getBoundAttributeValue("CalleeId").toString();
         System.out.println("callerId is: " + callerId);
-        System.out.println("calleeId is: " + calleeId);
+//        System.out.println("calleeId is: " + calleeId);
         
         if (state != null && state.equals(Constants.STATE_PROCESSED)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_EVALUATED);
@@ -228,7 +230,7 @@ public class MyHelpdeskCallBean extends BaseBean {
                 completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, callerId);
                 
                 //send notification to callee
-                sendNotification("您的报修处理已评价", "您的报修处理已评价", calleeId, null);
+//                sendNotification("您的报修处理已评价", "您的报修处理已评价", calleeId, null);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {

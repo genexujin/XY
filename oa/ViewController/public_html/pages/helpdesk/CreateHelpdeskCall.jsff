@@ -23,11 +23,11 @@
               <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '未提交'}"
                                        icon="/images/icons/saveall.png" actionListener="#{bindings.Commit.execute}"/>
               <af:commandToolbarButton text="取消" id="ctb2" immediate="true" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       icon="/images/icons/rollback.png" actionListener="#{bindings.Rollback.execute}">
+                                       icon="/images/icons/rollback.png" actionListener="#{bindings.Rollback.execute}" action="return">
                 <af:resetActionListener/>
               </af:commandToolbarButton>
               <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       actionListener="#{pageFlowScope.MyHdCallBean.submitHdCall}"/>
+                                       action="#{pageFlowScope.MyHdCallBean.submitHdCall}"/>
               <af:commandToolbarButton text="撤消报修单" id="ctb4" rendered="#{bindings.State.inputValue eq '未提交'}"
                                        actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}"/>
             </af:toolbar>
@@ -42,11 +42,6 @@
                                     required="#{bindings.CalleeId.hints.mandatory}"
                                     shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2">
                   <f:selectItems value="#{bindings.CalleeId.items}" id="si2"/>
-                </af:selectOneChoice>
-                <af:selectOneChoice value="#{bindings.CalleeId1.inputValue}" label="#{bindings.CalleeId1.label}"
-                                    required="#{bindings.CalleeId1.hints.mandatory}"
-                                    shortDesc="#{bindings.CalleeId1.hints.tooltip}" id="soc9">
-                  <f:selectItems value="#{bindings.CalleeId1.items}" id="si10"/>
                 </af:selectOneChoice>
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl5" layout="horizontal">
@@ -141,8 +136,9 @@
           </af:panelHeader>
           <af:spacer id="s2" width="10px" height="10px"/>
           <af:panelHeader text="用户评价" id="ph4"
-                          rendered="#{(bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价') 
-                                      and pageFlowScope.fromMenu ne 'callee'}"
+                          rendered="#{(bindings.State.inputValue eq '已处理' and pageFlowScope.fromMenu ne 'callee'
+                                      and !sessionScope.LoginUserBean.isUserInRole['丽园IT报修处理员'] and !sessionScope.LoginUserBean.isUserInRole['丽园电工报修处理员'] and !sessionScope.LoginUserBean.isUserInRole['自忠IT报修处理员'] and !sessionScope.LoginUserBean.isUserInRole['自忠电工报修处理员'] )
+                                      or bindings.State.inputValue eq '已评价'}"
                           messageType="info">
             <f:facet name="context"/>
             <f:facet name="menuBar"/>
