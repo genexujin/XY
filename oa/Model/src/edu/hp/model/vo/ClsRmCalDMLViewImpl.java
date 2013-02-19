@@ -59,6 +59,7 @@ public class ClsRmCalDMLViewImpl extends BaseView implements ClsRmCalDMLView {
     }
 
     public void newRow(String userDisplayName, String userId) {
+        this.executeEmptyRowSet();
         Row newRow = this.createRow();
         newRow.setAttribute("UserDisplayName", userDisplayName);
         newRow.setAttribute("UserId", userId);

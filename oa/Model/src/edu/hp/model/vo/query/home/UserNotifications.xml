@@ -212,5 +212,11 @@ ORDER BY notifications.event_date desc]]></SQLQuery>
       <Return
         Type="void"/>
     </Method>
+    <Method
+      Name="setForAllNotes"
+      MethodName="setForAllNotes">
+      <Return
+        Type="void"/>
+    </Method>
   </ClientInterface>
 </ViewObject>

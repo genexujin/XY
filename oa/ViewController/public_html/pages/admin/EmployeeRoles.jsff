@@ -41,8 +41,9 @@
             <af:spacer width="10" height="10" id="s3"/>
             <af:separator id="s4"/>
             <af:selectManyShuttle label="角色菜单" value="#{viewScope.AdminOperationBean.selectedRoles}" id="sms1"
-                                  layout="horizontal" trailingHeader="已选菜单" leadingHeader="可选菜单"
-                                  autoSubmit="true" size="15" binding="#{viewScope.AdminOperationBean.roleMenuShuttle}">
+                                  layout="horizontal" leadingHeader="可选角色"
+                                  autoSubmit="true" size="15" binding="#{viewScope.AdminOperationBean.roleMenuShuttle}"
+                                  trailingHeader="已选角色">
                 <f:selectItems value="#{viewScope.AdminOperationBean.allRoles}" id="si1"/>
             </af:selectManyShuttle>
         </af:panelHeader>

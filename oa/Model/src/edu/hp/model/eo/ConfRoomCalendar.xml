@@ -355,7 +355,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="CONF_ROOM_CALENDAR">
+    TableName="CONF_ROOM_CALENDAR"
+    RetrievedOnUpdate="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -395,6 +396,21 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ConfRoomCalendar.Allday_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="SubmitDate"
+    ColumnName="SUBMIT_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="CONF_ROOM_CALENDAR"
+    RetrievedOnUpdate="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ConfRoomCalendar.SubmitDate_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

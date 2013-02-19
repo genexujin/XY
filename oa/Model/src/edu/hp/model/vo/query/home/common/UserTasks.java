@@ -9,4 +9,6 @@ public interface UserTasks extends ViewObject {
     void setForCompleted();
 
     void setForPending();
+
+    void setForAll();
 }

@@ -15,7 +15,7 @@
                         <af:spacer width="10" height="10" id="s1"/>
                         <af:panelGroupLayout id="pgl4" layout="horizontal">
                             <af:commandButton text="新预订" id="cb1" icon="/images/icons/new_ena.png" action="create"
-                                              visible="#{sessionScope.LoginUserBean.isUserInRole['系统管理员']|| sessionScope.LoginUserBean.isUserInRole['总务处主任']}"/>
+                                              visible="#{sessionScope.LoginUserBean.isUserInRole['系统管理员']|| sessionScope.LoginUserBean.isUserInRole['车辆调度']}"/>
                             <af:selectBooleanCheckbox id="sbc2" text="只看自己"
                                                       value="#{pageFlowScope.vehiclesCalBean.myView}"
                                                       valueChangeListener="#{pageFlowScope.vehiclesCalBean.onMyViewChange}"
@@ -57,11 +57,11 @@
                          calendarActivityListener="#{pageFlowScope.vehiclesCalBean.activityListener}"
                          activityStyles="#{pageFlowScope.vehiclesCalBean.activityStyles}" view="week"
                          calendarActivityDurationChangeListener="#{pageFlowScope.vehiclesCalBean.calDurationChanged}"
-                         startHour="8">
+                         startHour="8" activeDay="#{pageFlowScope.vehiclesCalBean.activeDay}">
                 <af:calendarDropTarget actions="MOVE" dropListener="#{pageFlowScope.vehiclesCalBean.handleDrop}"/>
                 <f:facet name="contextMenu">
                     <af:popup id="p2"
-                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员']|| sessionScope.LoginUserBean.isUserInRole['总务处主任']}">
+                              rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员']|| sessionScope.LoginUserBean.isUserInRole['车辆调度']}">
                         <af:menu id="m2">
                             <af:commandMenuItem text="新预订" id="cmi3" icon="/images/icons/new_ena.png" action="create"/>
                         </af:menu>

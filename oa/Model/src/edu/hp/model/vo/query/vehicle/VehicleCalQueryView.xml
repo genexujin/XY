@@ -69,7 +69,8 @@
        VehicleCalendar.RETURN_TRIP_END, 
        VehicleCalendar.NUM_OF_PEOPLE, 
        VehicleCalendar.COMMENTS, 
-       VehicleCalendar.USER_ID
+       VehicleCalendar.USER_ID,
+       VehicleCalendar.SUBMIT_DATE
 FROM VEHICLE_CALENDAR VehicleCalendar
 WHERE VehicleCalendar.VEHICLE_ID IN
   (
@@ -238,7 +239,7 @@ AND VehicleCalendar.STATE = :initStat]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="START_TIME"
     Expression="START_TIME"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="EndTime"
     IsUpdateable="false"
@@ -248,7 +249,7 @@ AND VehicleCalendar.STATE = :initStat]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="END_TIME"
     Expression="END_TIME"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="ReturnStartTime"
     IsUpdateable="false"
@@ -258,7 +259,7 @@ AND VehicleCalendar.STATE = :initStat]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="RETURN_START_TIME"
     Expression="RETURN_START_TIME"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="ReturnEndTime"
     IsUpdateable="false"
@@ -268,7 +269,7 @@ AND VehicleCalendar.STATE = :initStat]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="RETURN_END_TIME"
     Expression="RETURN_END_TIME"
-    SQLType="TIMESTAMP"/>
+    SQLType="DATE"/>
   <ViewAttribute
     Name="TripStart"
     IsUpdateable="false"
@@ -369,6 +370,16 @@ AND VehicleCalendar.STATE = :initStat]]></SQLQuery>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewAttribute
+    Name="SubmitDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="SUBMIT_DATE"
+    Expression="SUBMIT_DATE"
+    SQLType="DATE"/>
   <ViewCriteria
     Name="findByUserId"
     ViewObjectName="edu.hp.model.vo.query.vehicle.VehicleCalQueryView"

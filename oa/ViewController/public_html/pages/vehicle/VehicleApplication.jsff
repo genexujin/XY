@@ -45,6 +45,8 @@
                             </af:commandToolbarButton>
                             <af:commandToolbarButton text="取消所有操作" id="ctb2" icon="/images/icons/rollback.png"
                                                      actionListener="#{bindings.Rollback.execute}"/>
+                            <af:commandToolbarButton id="ctb4" icon="/images/icons/refresh.png" text="刷新"
+                                                     action="#{viewScope.vehicleApplicationBean.refreshTableIterator}"/>
                             <af:commandToolbarButton text="导出" id="cb6" icon="/images/icons/export.png">
                                 <af:exportCollectionActionListener type="excelHTML" exportedId="t2" title="会议室预订信息"
                                                                    filename="Vehicles.xls"/>
@@ -61,7 +63,7 @@
                               varStatus="vs" selectedRowKeys="#{bindings.VehicleDML.collectionModel.selectedRow}"
                               selectionListener="#{bindings.VehicleDML.collectionModel.makeCurrent}"
                               rowSelection="single" id="t2"
-                              partialTriggers="::ctb1 :::cb1 :::cb2 :::cb3 :::cb7 :::cb4 :::cb5 ::ctb3 ::ctb2">
+                              partialTriggers="::ctb1 ::ctb4 :::cb1 :::cb2 :::cb3 :::cb7 :::cb4 :::cb5 ::ctb3 ::ctb2">
                         <af:column sortProperty="#{bindings.VehicleDML.hints.VehicleName.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.VehicleName.label}" id="c1">
                             <af:selectOneChoice value="#{row.bindings.VehicleName.inputValue}"
@@ -91,25 +93,25 @@
                         </af:column>
                         <af:column sortProperty="#{bindings.VehicleDML.hints.StartTime.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.StartTime.label}" id="c6">
-                            <f:facet name="filter">
-                                <af:inputDate value="#{vs.filterCriteria.StartTime}" id="id1">
-                                    <af:convertDateTime pattern="#{bindings.VehicleDML.hints.StartTime.format}"/>
-                                </af:inputDate>
-                            </f:facet>
                             <af:outputText value="#{row.StartTime}" id="ot5">
                                 <af:convertDateTime pattern="#{bindings.VehicleDML.hints.StartTime.format}"/>
                             </af:outputText>
+                            <f:facet name="filter">
+                                <af:inputDate value="#{vs.filterCriteria.StartTime}" id="id4">
+                                    <af:convertDateTime pattern="#{bindings.VehicleDML.hints.StartTime.format}"/>
+                                </af:inputDate>
+                            </f:facet>
                         </af:column>
                         <af:column sortProperty="#{bindings.VehicleDML.hints.EndTime.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.EndTime.label}" id="c7">
-                            <f:facet name="filter">
-                                <af:inputDate value="#{vs.filterCriteria.EndTime}" id="id2">
-                                    <af:convertDateTime pattern="#{bindings.VehicleDML.hints.EndTime.format}"/>
-                                </af:inputDate>
-                            </f:facet>
                             <af:outputText value="#{row.EndTime}" id="ot6">
                                 <af:convertDateTime pattern="#{bindings.VehicleDML.hints.EndTime.format}"/>
                             </af:outputText>
+                            <f:facet name="filter">
+                                <af:inputDate value="#{vs.filterCriteria.EndTime}" id="id1">
+                                    <af:convertDateTime pattern="#{bindings.VehicleDML.hints.EndTime.format}"/>
+                                </af:inputDate>
+                            </f:facet>
                         </af:column>
                         <af:column sortProperty="#{bindings.VehicleDML.hints.TripStart.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.TripStart.label}" id="c8">
@@ -130,6 +132,25 @@
                         <af:column sortProperty="#{bindings.VehicleDML.hints.Comments.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.Comments.label}" id="c12">
                             <af:outputText value="#{row.Comments}" id="ot12"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.VehicleDML.hints.SubmitDate.name}" filterable="true"
+                                   sortable="false" headerText="#{bindings.VehicleDML.hints.SubmitDate.label}" id="c14"
+                                   width="130">
+                            <af:inputDate value="#{row.bindings.SubmitDate.inputValue}"
+                                          label="#{bindings.VehicleDML.hints.SubmitDate.label}"
+                                          required="#{bindings.VehicleDML.hints.SubmitDate.mandatory}"
+                                          columns="#{bindings.VehicleDML.hints.SubmitDate.displayWidth}"
+                                          shortDesc="#{bindings.VehicleDML.hints.SubmitDate.tooltip}" id="id3"
+                                          readOnly="true">
+                                <f:validator binding="#{row.bindings.SubmitDate.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.VehicleDML.hints.SubmitDate.format}"
+                                                    type="both"/>
+                            </af:inputDate>
+                            <f:facet name="filter">
+                                <af:inputDate value="#{vs.filterCriteria.SubmitDate}" id="id6">
+                                    <af:convertDateTime pattern="#{bindings.VehicleDML.hints.SubmitDate.format}"/>
+                                </af:inputDate>
+                            </f:facet>
                         </af:column>
                         <af:column sortProperty="#{bindings.VehicleDML.hints.State.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.State.label}" id="c13">
@@ -159,7 +180,7 @@
                     <af:outputText value="车辆预订信息" id="ot14" inlineStyle="color:Black; font-size:small;"/>
                     <af:panelFormLayout id="pfl2" rows="4">
                         <af:inputComboboxListOfValues id="iclov1"
-                                                      popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
+                                                      popupTitle="#{bindings.UserDisplayName.hints.label}"
                                                       value="#{bindings.UserDisplayName.inputValue}"
                                                       label="#{bindings.UserDisplayName.hints.label}"
                                                       model="#{bindings.UserDisplayName.listOfValuesModel}"
@@ -174,7 +195,7 @@
                                             label="#{bindings.VehicleName.label}"
                                             required="#{bindings.VehicleName.hints.mandatory}"
                                             shortDesc="#{bindings.VehicleName.hints.tooltip}" id="soc3"
-                                            rendered="#{bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['总务处主任']}">
+                                            rendered="#{bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['车辆调度']}">
                             <f:selectItems value="#{bindings.VehicleName.items}" id="si3"/>
                         </af:selectOneChoice>
                         <af:inputText value="#{bindings.TripStart.inputValue}" label="#{bindings.TripStart.hints.label}"
@@ -255,7 +276,8 @@
                                       required="#{bindings.Comments.hints.mandatory}"
                                       columns="#{bindings.Comments.hints.displayWidth}"
                                       maximumLength="#{bindings.Comments.hints.precision}"
-                                      shortDesc="#{bindings.Comments.hints.tooltip}" id="it19" rows="3">
+                                      shortDesc="#{bindings.Comments.hints.tooltip}" id="it19" rows="3" simple="false"
+                                      contentStyle="resize:none;">
                             <f:validator binding="#{bindings.Comments.validator}"/>
                         </af:inputText>
                     </af:panelFormLayout>
@@ -267,24 +289,24 @@
                                           action="#{viewScope.vehicleApplicationBean.save}"/>
                         <af:spacer width="10" height="10" id="s8"/>
                         <af:commandButton text="提交" id="cb2" icon="/images/icons/run.png"
-                                          visible="#{bindings.State.inputValue=='未提交'}"
+                                          visible="#{bindings.State.inputValue=='未提交' or bindings.State.inputValue=='已拒绝' or bindings.State.inputValue=='已取消'}"
                                           action="#{viewScope.vehicleApplicationBean.submit}"
                                           rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}"/>
                         <af:spacer width="10" height="10" id="s9"/>
                         <af:commandButton text="审核" id="cb3" icon="/images/icons/task.png"
-                                          visible="#{bindings.State.inputValue=='待审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['办公室主任']}"
+                                          visible="#{bindings.State.inputValue=='待审核' and  sessionScope.LoginUserBean.isUserInRole['车辆审核']}"
                                           action="#{viewScope.vehicleApplicationBean.approve}"/>
                         <af:spacer width="10" height="10" id="s10"/>
                         <af:commandButton id="cb7" text="完成调度" icon="/images/icons/activity.png"
-                                          visible="#{bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['总务处主任']}"
+                                          visible="#{bindings.State.inputValue=='已审核' and sessionScope.LoginUserBean.isUserInRole['车辆调度']}"
                                           action="#{viewScope.vehicleApplicationBean.planTrip}"/>
                         <af:spacer width="10" height="10" id="s11"/>
                         <af:commandButton id="cb4" text="拒绝" icon="/images/icons/terminate.png"
-                                          visible="#{(bindings.State.inputValue=='待审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['办公室主任'])||(bindings.State.inputValue=='已审核'&amp;&amp; sessionScope.LoginUserBean.isUserInRole['总务处主任'])}"
+                                          visible="#{(bindings.State.inputValue=='待审核' and sessionScope.LoginUserBean.isUserInRole['车辆审核'])||(bindings.State.inputValue=='已审核' and sessionScope.LoginUserBean.isUserInRole['车辆调度'])}"
                                           action="#{viewScope.vehicleApplicationBean.reject}"/>
                         <af:spacer width="10" height="10" id="s1"/>
                         <af:commandButton text="取消" id="cb5" icon="/images/icons/undo.png"
-                                          visible="#{bindings.State.inputValue=='待审核'}"
+                                          visible="#{bindings.State.inputValue!='未提交'}"
                                           rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}"
                                           action="#{viewScope.vehicleApplicationBean.cancel}"/>
                     </af:panelGroupLayout>

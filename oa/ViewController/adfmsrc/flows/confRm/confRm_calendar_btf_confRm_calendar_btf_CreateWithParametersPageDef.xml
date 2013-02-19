@@ -13,6 +13,7 @@
       <NamedData NDName="UserId" NDType="java.lang.String" NDValue="#{sessionScope.LoginUserBean.userId}"/>
       <NamedData NDName="UserDisplayName" NDType="java.lang.String"
                  NDValue="#{sessionScope.LoginUserBean.displayName}"/>
+      <NamedData NDName="State" NDType="java.lang.String" NDValue="已审核"/>
     </action>
   </bindings>
 </pageDefinition>

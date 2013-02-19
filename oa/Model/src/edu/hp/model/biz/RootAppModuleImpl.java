@@ -132,6 +132,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
         roles.setApplyViewCriteriaNames(null);
         roles.setroleName(role_name);
         roles.applyViewCriteria(roles.getViewCriteria("queryByName"));
+        roles.setRangeSize(-1);
         roles.executeQuery();
         Row[] allRowsInRange = roles.getAllRowsInRange();
         return allRowsInRange;
@@ -144,7 +145,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      * @param contextObjectId
      * @param roleName
      */
-    public void createTask(String title, String contextObjectType, String contextObjectId, String roleName) {
+    public void createTask(String title, String contextObjectType, String contextObjectId, String roleName, String contextTitle) {
 
         if (title != null && contextObjectType != null && contextObjectId != null && roleName != null) {
             Row[] allRowsInRange = getRoleIdByName(roleName);
@@ -158,6 +159,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                 newRow.setAttribute("ContextObjectType", contextObjectType);
                 newRow.setAttribute("ContextObjectId", contextObjectId);
                 newRow.setAttribute("AssigneeRoleId", roleId);
+                newRow.setAttribute("ContextTitle", contextTitle);
                 taskVO.insertRow(newRow);
             }
 
@@ -172,7 +174,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      */
     public void completeTask(String contextObjectType, String contextObjectId, String roleName) {
         if (contextObjectType != null && contextObjectId != null && roleName != null) {
-
+            
             Row[] roles = this.getRoleIdByName(roleName);
             if (roles != null && roles.length > 0) {
                 String roleId = ((DBSequence)roles[0].getAttribute("RoleId")).toString();
@@ -182,10 +184,12 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                 taskVO.setroleId(roleId);
                 taskVO.setApplyViewCriteriaNames(null);
                 taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContext"));
+                taskVO.setRangeSize(-1);
                 taskVO.executeQuery();
                 Row[] allRowsInRange = taskVO.getAllRowsInRange();
                 if (allRowsInRange != null && allRowsInRange.length > 0) {
                     allRowsInRange[0].setAttribute("State", Constants.STATE_TASK_COMPLETED);
+                    //System.err.println("complete task!");
                 }
 
             }
@@ -199,7 +203,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      * @param contextObjectId
      * @param userId
      */
-    public void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId) {
+    public void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId , String contextTitle) {
 
         if (title != null && contextObjectType != null && contextObjectId != null && userId != null) {
             ViewObjectImpl taskVO = this.getTasks();
@@ -209,6 +213,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             newRow.setAttribute("ContextObjectType", contextObjectType);
             newRow.setAttribute("ContextObjectId", contextObjectId);
             newRow.setAttribute("AssigneeUserId", userId);
+            newRow.setAttribute("ContextTitle", contextTitle);
             taskVO.insertRow(newRow);
         }
     }
@@ -227,10 +232,34 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             taskVO.setuserId(userId);
             taskVO.setApplyViewCriteriaNames(null);
             taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContextAndUserId"));
+            taskVO.setRangeSize(-1);
             taskVO.executeQuery();
             Row[] allRowsInRange = taskVO.getAllRowsInRange();
             if (allRowsInRange != null && allRowsInRange.length > 0) {
                 allRowsInRange[0].setAttribute("State", Constants.STATE_TASK_COMPLETED);
+            }
+        }
+    }
+    
+    /**
+     * 申请人取消申请时，同时取消任务的方法，没有commit
+     * @param contextObjectType
+     * @param contextObjectId
+     */
+    public void cancelTask(String contextObjectType, String contextObjectId){
+        if (contextObjectType != null && contextObjectId != null) {
+      
+            TasksViewImpl taskVO = (TasksViewImpl)this.getTasks();
+            taskVO.setcontextId(contextObjectId);
+            taskVO.setcontextType(contextObjectType);
+            taskVO.setApplyViewCriteriaNames(null);
+            taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContextObject"));
+            taskVO.setRangeSize(-1);
+            taskVO.executeQuery();
+            Row[] allRowsInRange = taskVO.getAllRowsInRange();
+            for( Row row : allRowsInRange) {
+                row.setAttribute("State", Constants.STATE_TASK_CANCELED);
+                //System.err.println("canceled");
             }
         }
     }

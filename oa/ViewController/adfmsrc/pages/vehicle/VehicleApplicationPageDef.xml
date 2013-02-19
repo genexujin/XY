@@ -41,6 +41,7 @@
           <Item Value="NumOfPeople"/>
           <Item Value="ReturnTrip"/>
           <Item Value="Comments"/>
+          <Item Value="SubmitDate"/>
           <Item Value="State"/>
         </AttrNames>
       </nodeDefinition>
@@ -146,6 +147,7 @@
       <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="roleName" NDType="java.lang.String"/>
+      <NamedData NDName="contextTitle" NDType="java.lang.String"/>
     </methodAction>
     <attributeValues IterBinding="VehicleDMLIterator" id="Id">
       <AttrNames>
@@ -158,6 +160,17 @@
       <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="roleName" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="cancelTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="cancelTask" IsViewObjectMethod="false">
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
     </methodAction>
   </bindings>
 </pageDefinition>

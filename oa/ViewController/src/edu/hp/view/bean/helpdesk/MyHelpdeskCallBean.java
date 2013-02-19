@@ -167,7 +167,7 @@ public class MyHelpdeskCallBean extends BaseBean {
                 String noteContent = "详细地址：" + locationDetail + " 报修原因：" + rsnLv1 + " 提交时间：" + getDateString();                
                 sendNotification(noteTitle, noteContent, null, roleName);
                 
-                createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, roleName);
+                createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, roleName,id);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -204,7 +204,7 @@ public class MyHelpdeskCallBean extends BaseBean {
                 completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, roleName);
                 
                 //create evaluation task for caller
-                this.createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价", callerId);
+                this.createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价", callerId,id);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {

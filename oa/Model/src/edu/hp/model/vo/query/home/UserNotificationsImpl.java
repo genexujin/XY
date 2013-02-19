@@ -31,6 +31,11 @@ public class UserNotificationsImpl extends ViewObjectImpl implements UserNotific
         this.setstate(Constants.STATE_NOTE_READ);
         this.executeQuery();
     }
+    
+    public void setForAllNotes(){
+        this.setApplyViewCriteriaNames(null);
+        this.executeQuery();
+    }
     /**
      * Returns the bind variable value for userName.
      * @return bind variable value for userName

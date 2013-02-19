@@ -70,6 +70,7 @@
        ConfRoomCalendar.NUM_OF_PEOPLE, 
        ConfRoomCalendar.STATE, 
        ConfRoomCalendar.PR_ID,
+ConfRoomCalendar.SUBMIT_DATE,
 ConfRoomCalendar.ALLDAY
 FROM CONF_ROOM_CALENDAR ConfRoomCalendar
 WHERE ConfRoomCalendar.MEETING_ROOM_ID IN
@@ -380,6 +381,16 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewAttribute
+    Name="SubmitDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="SUBMIT_DATE"
+    Expression="SUBMIT_DATE"
+    SQLType="DATE"/>
   <ViewAttribute
     Name="Allday"
     IsUpdateable="false"

@@ -84,7 +84,7 @@ public class CalendarBean  extends BaseBean{
     }
 
     protected void reload() {
-        System.err.println("reloaded!");
+        //System.err.println("reloaded!");
         try {
             if(location==null){              
                 location = 0;                          
@@ -311,16 +311,16 @@ public class CalendarBean  extends BaseBean{
             Date endDate = new Date(_proposedStartDate.getTime() + delta);
 
 
-            Boolean hasNoConflict =
-                ensureTimeConflicts(new Timestamp(_proposedStartDate.getTime()), new Timestamp(endDate.getTime()),
-                                    (String)(movingActivity.getCustomAttributes().get(this.locationIdFieldName)),
-                                    movingActivity.getId());
+//            Boolean hasNoConflict =
+//                ensureTimeConflicts(new Timestamp(_proposedStartDate.getTime()), new Timestamp(endDate.getTime()),
+//                                    (String)(movingActivity.getCustomAttributes().get(this.locationIdFieldName)),
+//                                    movingActivity.getId());
             //System.err.println("here " + hasNoConflict);
-            if (hasNoConflict)
+            //if (hasNoConflict)
                 // update to the new start and end day
                 doUpdateCalendar(movingActivity, _proposedStartDate, endDate);
-            else
-                JSFUtils.addFacesErrorMessage("该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
+            //else
+                //JSFUtils.addFacesErrorMessage("该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
 
 
         } else {

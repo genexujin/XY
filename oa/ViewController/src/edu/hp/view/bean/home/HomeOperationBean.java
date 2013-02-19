@@ -19,8 +19,8 @@ public class HomeOperationBean {
     private UIXIterator notesIterator;
     private int rangeSize = 10;
     private int selectDefault = 0;
-    private String defaultTaskState = "PENDING";
-    private String defaultNoteState = "UNREAD";
+    private String defaultTaskState = "ALL";
+    private String defaultNoteState = "ALL";
 
     public HomeOperationBean() {
     }
@@ -125,6 +125,9 @@ public class HomeOperationBean {
         } else if (newValue != null && newValue.equals(Constants.STATE_TASK_PENDING)) {
             OperationBinding binding = ADFUtils.findOperation("setForPending");
             binding.execute();
+        }else{
+            OperationBinding binding = ADFUtils.findOperation("setForAll");
+            binding.execute();
         }
         this.getTaskIterator().setFirst(0);
         ADFUtils.partialRefreshComponenet(getTaskIterator());
@@ -139,6 +142,9 @@ public class HomeOperationBean {
         } else if (newValue != null && newValue.equals(Constants.STATE_NOTE_UNREAD)) {
             OperationBinding binding = ADFUtils.findOperation("setForUnread");
             binding.execute();
+        }else{
+            OperationBinding binding = ADFUtils.findOperation("setForAllNotes");
+            binding.execute();
         }
         this.getNotesIterator().setFirst(0);
         ADFUtils.partialRefreshComponenet(getNotesIterator());
@@ -147,12 +153,17 @@ public class HomeOperationBean {
 
     public void openTask(ActionEvent actionEvent) {
         UIComponent component = actionEvent.getComponent();
+        //System.err.println(component.getClientId());
         String contextObjectId = (String)component.getAttributes().get("contextObjectId");
-        //System.err.println(contextObjectId);
+//        System.err.println(contextObjectId);
         String contextObjectType = (String)component.getAttributes().get("contextObjectType");
-        //System.err.println(contextObjectType);
+        String contextTitle = (String)component.getAttributes().get("contextTitle");
+        
+//        System.err.println(contextObjectType);
         JSFUtils.setExpressionValue("#{sessionScope.contextObjectId}", contextObjectId);
         JSFUtils.setExpressionValue("#{sessionScope.contextObjectType}", contextObjectType);
+        JSFUtils.setExpressionValue("#{sessionScope.contextTitle}", contextTitle);
+        
         FacesContext context = JSFUtils.getFacesContext();
         context.getApplication().getNavigationHandler().handleNavigation(context, null, "openTask");
         // Add event code here...

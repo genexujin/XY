@@ -3,6 +3,7 @@ package edu.hp.view.bean.vehicle;
 import edu.hp.model.common.Constants;
 import edu.hp.model.pojo.Notification;
 import edu.hp.view.bean.BaseBean;
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
@@ -13,6 +14,7 @@ import oracle.adf.view.rich.event.DialogEvent;
 import oracle.binding.OperationBinding;
 
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Timestamp;
 
 
 public class VehicleApplicationBean extends BaseBean {
@@ -32,33 +34,41 @@ public class VehicleApplicationBean extends BaseBean {
 
     public String submit() {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
-        if (state != null && state.equals(Constants.STATE_INITIAL)) {
+
+        ADFUtils.setBoundAttributeValue("State", Constants.STATE_PENDING_REVIEW);
+        ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
+
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        if (user.getIsUserInRole().get(Constants.ROLE_ZONGWU_MGR) != null)
+            ADFUtils.setBoundAttributeValue("State", Constants.STATE_TRIP_PLANNED);
+        else
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_PENDING_REVIEW);
-            boolean success = ADFUtils.commit("车辆预订已提交审核！", "车辆预订提交审核失败，请核对输入的信息或联系管理员！");
-            if (success) {
-                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
-                String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
-                String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
-                String title = (String)ADFUtils.getBoundAttributeValue("Title");
 
-                String noteTitle = "您为事由：" + title + " 所做的用车申请已提交审核 ";
-                String dateStr = getDateString();
-                String noteContent = " 提交时间：" + dateStr;
-                //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
-                //send to approver
-                String apprvTitle = "有新的用车申请等待您的审核";
-                String apprvContent = " 事由：" + title + " 申请人： " + userDisplayName;
-                sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_OFFICE_MGR);
+        boolean success = ADFUtils.commit("车辆预订已提交审核！", "车辆预订提交审核失败，请核对输入的信息或联系管理员！");
+        if (success) {
+            String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+            String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+            String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+            String title = (String)ADFUtils.getBoundAttributeValue("Title");
 
-                //create task
-                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_OFFICE_MGR);
+            String noteTitle = "您为事由：" + title + " 所做的用车申请已提交审核 ";
+            String dateStr = getDateString();
+            String noteContent = " 提交时间：" + dateStr;
+            //send to requester
+            sendNotification(noteTitle, noteContent, userId, null);
+            //send to approver
+            String apprvTitle = "有新的用车申请等待您的审核";
+            String apprvContent = " 事由：" + title + " 申请人： " + userDisplayName;
+            sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_OFFICE_MGR);
 
-                ADFUtils.findOperation("Commit").execute();
-            } else {
-                ADFUtils.setBoundAttributeValue("State", state);
-            }
+            //create task
+            createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_OFFICE_MGR, title);
+
+            ADFUtils.findOperation("Commit").execute();
+        } else {
+            ADFUtils.setBoundAttributeValue("State", state);
         }
+
         return null;
     }
 
@@ -88,7 +98,7 @@ public class VehicleApplicationBean extends BaseBean {
                 sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_ZONGWU_MGR);
 
                 //create task
-                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_ZONGWU_MGR);
+                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_ZONGWU_MGR, title);
 
                 completeTask(Constants.CONTEXT_TYPE_VEHICLE, id, Constants.ROLE_OFFICE_MGR);
 
@@ -99,8 +109,11 @@ public class VehicleApplicationBean extends BaseBean {
         }
         return null;
     }
-
     
+    public String refreshTableIterator(){
+        ADFUtils.findIterator("VehicleDMLIterator").executeQuery();
+        return null;
+    }
 
 
     public String reject() {
@@ -117,17 +130,17 @@ public class VehicleApplicationBean extends BaseBean {
                 String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
                 String title = (String)ADFUtils.getBoundAttributeValue("Title");
 
-                String noteTitle = "您为事由：" + title + " 所做的用车申请已被决绝。 ";
+                String noteTitle = "您为事由：" + title + " 所做的用车申请已被拒绝。 ";
                 String dateStr = getDateString();
 
                 String noteContent = "审核时间：" + dateStr;
                 //send to requester
                 sendNotification(noteTitle, noteContent, userId, null);
-                if(state.equals(Constants.STATE_PENDING_REVIEW))
+                if (state.equals(Constants.STATE_PENDING_REVIEW))
                     completeTask(Constants.CONTEXT_TYPE_VEHICLE, id, Constants.ROLE_OFFICE_MGR);
                 else
                     completeTask(Constants.CONTEXT_TYPE_VEHICLE, id, Constants.ROLE_ZONGWU_MGR);
-                
+
                 ADFUtils.findOperation("Commit").execute();
             } else {
                 ADFUtils.setBoundAttributeValue("State", state);
@@ -138,34 +151,32 @@ public class VehicleApplicationBean extends BaseBean {
 
     public String cancel() {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
-        if (state != null && (state.equals(Constants.STATE_PENDING_REVIEW) || state.equals(Constants.STATE_INITIAL))) {
-            ADFUtils.setBoundAttributeValue("State", Constants.STATE_CANCELED);
-            //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
-            boolean success = ADFUtils.commit("车辆预订已取消！", "车辆预订取消失败，请核对输入的信息或联系管理员！");
-            
-            if (success) {
-                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
-                String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
-                String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
-                String title = (String)ADFUtils.getBoundAttributeValue("Title");
+        //        if (state != null && (state.equals(Constants.STATE_PENDING_REVIEW) || state.equals(Constants.STATE_INITIAL))) {
+        ADFUtils.setBoundAttributeValue("State", Constants.STATE_CANCELED);
+        //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
+        boolean success = ADFUtils.commit("车辆预订已取消！", "车辆预订取消失败，请核对输入的信息或联系管理员！");
 
-                String noteTitle = "您为事由：" + title + " 所做的用车申请已取消。 ";
-                String dateStr = getDateString();
+        if (success) {
+            String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+            String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+            String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+            String title = (String)ADFUtils.getBoundAttributeValue("Title");
 
-                String noteContent = "取消时间：" + dateStr;
-                //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
-                
-                
-                ADFUtils.findOperation("Commit").execute();
-            } else {
-                ADFUtils.setBoundAttributeValue("State", state);
-            }
+            String noteTitle = "您为事由：" + title + " 所做的用车申请已取消。 ";
+            String dateStr = getDateString();
+
+            String noteContent = "取消时间：" + dateStr;
+            //send to requester
+            sendNotification(noteTitle, noteContent, userId, null);
+            this.cancelTask(Constants.CONTEXT_TYPE_VEHICLE, id);
+            ADFUtils.findOperation("Commit").execute();
+        } else {
+            ADFUtils.setBoundAttributeValue("State", state);
         }
+        //        }
         return null;
     }
 
-    
 
     public String planTrip() {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
@@ -187,9 +198,9 @@ public class VehicleApplicationBean extends BaseBean {
                 String noteContent = "完成调度时间：" + dateStr + " 使用的车辆为：" + vehicleName;
                 //send to requester
                 sendNotification(noteTitle, noteContent, userId, null);
-                
+
                 completeTask(Constants.CONTEXT_TYPE_VEHICLE, id, Constants.ROLE_ZONGWU_MGR);
-                
+
                 ADFUtils.findOperation("Commit").execute();
             } else {
                 ADFUtils.setBoundAttributeValue("State", state);
@@ -204,8 +215,8 @@ public class VehicleApplicationBean extends BaseBean {
             JSFUtils.addFacesInformationMessage("车辆预订已删除！");
         }
     }
-    
-    
+
+
     public String findByState() {
         OperationBinding binding = ADFUtils.findOperation("findByState");
         binding.execute();

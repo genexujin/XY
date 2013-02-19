@@ -21,6 +21,7 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
     }
 
     public void newRow(String userDisplayName, String userId) {
+        this.executeEmptyRowSet();
         Row newRow = this.createRow();
         newRow.setAttribute("UserDisplayName", userDisplayName);
         newRow.setAttribute("UserId", userId);
@@ -64,7 +65,7 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
     }
 
     public void queryByPK(String confRmCalId) {
-        //System.err.println("query by pk");
+       // System.err.println("query by pk: " + confRmCalId);
         super.queryByVC("findById", "confRmCalId", confRmCalId);
     }
 

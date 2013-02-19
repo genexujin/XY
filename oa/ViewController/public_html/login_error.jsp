@@ -28,7 +28,7 @@
                     <div id="login-box-name">密码:</div>
                     <div id="login-box-field">
                         <input id="password" name="password" type="password" class="form-login" title="Password"
-                               value="" size="30" onkeydown="javascript:fnTrapKD('Login')" />
+                               value="" size="30" onkeydown="javascript:fnTrapKD(event)" />
                     </div>
                     <br/><span style='color:red;font-size:15px;' id="usernamespan">用户名或密码不正确！ </span><span id="passwordspan"></span>  <br/>                   
                      

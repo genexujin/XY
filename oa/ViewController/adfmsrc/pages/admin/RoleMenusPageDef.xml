@@ -8,7 +8,12 @@
               ChangeEventPolicy="ppr"/>
     <searchRegion Binds="RolesIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="RolesQuery"/>
-    <iterator id="MenusIterator" Binds="Root.AdminModule.Menus" DataControl="RootAppModuleDataControl" RangeSize="25"/>
+    <iterator id="MenusIterator" Binds="Root.AdminModule.Menus" DataControl="RootAppModuleDataControl" RangeSize="25">
+      <sortCriteria>
+        <sort attribute="MenuCategory" ascending="true"/>
+        <sort attribute="MenuMasterCategory" ascending="true"/>
+      </sortCriteria>
+    </iterator>
     <iterator Binds="Root.AdminModule.RoleMenus" DataControl="RootAppModuleDataControl" RangeSize="10"
               id="RoleMenusIterator"/>
     <iterator id="MenusOfRoleIterator" Binds="Root.AdminModule.MenusOfRole" DataControl="RootAppModuleDataControl"

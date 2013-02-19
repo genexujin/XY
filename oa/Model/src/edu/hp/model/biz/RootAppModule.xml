@@ -69,24 +69,6 @@
   </ResourceBundle>
   <ClientInterface>
     <Method
-      Name="createTask"
-      MethodName="createTask">
-      <Return
-        Type="void"/>
-      <Parameter
-        Name="title"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="contextObjectType"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="contextObjectId"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="roleName"
-        Type="java.lang.String"/>
-    </Method>
-    <Method
       Name="enableSMS"
       MethodName="enableSMS">
       <Return
@@ -135,6 +117,39 @@
         Type="java.lang.String"/>
     </Method>
     <Method
+      Name="cancelTask"
+      MethodName="cancelTask">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="contextObjectType"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="createTask"
+      MethodName="createTask">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="title"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectType"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextObjectId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="roleName"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextTitle"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
       Name="createTaskForUserId"
       MethodName="createTaskForUserId">
       <Return
@@ -150,6 +165,9 @@
         Type="java.lang.String"/>
       <Parameter
         Name="userId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="contextTitle"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

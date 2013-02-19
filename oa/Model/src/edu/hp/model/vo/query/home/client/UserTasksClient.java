@@ -16,6 +16,12 @@ public class UserTasksClient extends ViewUsageImpl implements UserTasks {
     public UserTasksClient() {
     }
 
+
+    public void setForAll() {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this,"setForAll",null,null);
+        return;
+    }
+
     public void setForCompleted() {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this,"setForCompleted",null,null);
         return;

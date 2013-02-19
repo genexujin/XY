@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 
 import java.util.Calendar;
 
+import oracle.jbo.Row;
 import oracle.jbo.server.ViewObjectImpl;
 
 
@@ -23,19 +24,22 @@ public class ClassroomCalendarConflitQueryImpl extends ViewObjectImpl implements
     }
     
     public Boolean ifConflict(Timestamp actStartTime, Timestamp actEndTime, String clsRmId, String actId){
-        
+        System.err.println(actStartTime);
+        System.err.println(actEndTime);
+        System.err.println(clsRmId);
+        System.err.println(actId);
         try {
             
-            if(actStartTime.equals(actEndTime)){                
-                if (actEndTime != null) {
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(actEndTime.getTime());
-                    calendar.set(Calendar.HOUR_OF_DAY, 23);
-                    calendar.set(Calendar.MINUTE, 59);
-                    calendar.set(Calendar.SECOND, 59);
-                    actEndTime = new Timestamp(calendar.getTimeInMillis());
-                }                      
-            }
+//            if(actStartTime.equals(actEndTime)){                
+//                if (actEndTime != null) {
+//                    Calendar calendar = Calendar.getInstance();
+//                    calendar.setTimeInMillis(actEndTime.getTime());
+//                    calendar.set(Calendar.HOUR_OF_DAY, 23);
+//                    calendar.set(Calendar.MINUTE, 59);
+//                    calendar.set(Calendar.SECOND, 59);
+//                    actEndTime = new Timestamp(calendar.getTimeInMillis());
+//                }                      
+//            }
             
             ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
             ensureVariableManager().setVariableValue("startQueryTime", actStartTime);
@@ -44,6 +48,10 @@ public class ClassroomCalendarConflitQueryImpl extends ViewObjectImpl implements
             
             setRangeSize(-1);
             executeQuery();
+            Row[] allRowsInRange = this.getAllRowsInRange();
+            if(allRowsInRange!=null)
+                System.err.println(allRowsInRange.length);
+            System.err.println(first());
             if (first() !=null){
                 return false;                
             }
@@ -87,6 +95,7 @@ public class ClassroomCalendarConflitQueryImpl extends ViewObjectImpl implements
         }
         return true;
     }
+
 
     /**
      * Returns the bind variable value for startQueryTime.

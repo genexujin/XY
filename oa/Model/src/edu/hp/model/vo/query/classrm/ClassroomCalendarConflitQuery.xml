@@ -60,7 +60,7 @@
        ClassroomCalendar.USER_DISPLAY_NAME, 
        ClassroomCalendar.USER_ID
 FROM CLASSROOM_CALENDAR ClassroomCalendar
-WHERE (NOT( ClassroomCalendar.ACT_END_TIME <= :startQueryTime  OR ClassroomCalendar.ACT_START_TIME >= :endQueryTime)) AND  ClassroomCalendar.CLASSROOM_ID =:clsRoomId AND ClassroomCalendar.ID <> :actId AND ClassroomCalendar.BATCH_NO <> :actBatchId]]></SQLQuery>
+WHERE (NOT( ClassroomCalendar.ACT_END_TIME <= :startQueryTime  OR ClassroomCalendar.ACT_START_TIME >= :endQueryTime)) AND  ClassroomCalendar.CLASSROOM_ID =:clsRoomId AND ClassroomCalendar.ID <> :actId AND (ClassroomCalendar.BATCH_NO <> :actBatchId OR :actBatchId IS NULL OR batch_no is null)]]></SQLQuery>
   <ViewAttribute
     Name="ActEndTime"
     IsUpdateable="false"

@@ -1,148 +1,156 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-  <af:panelSplitter id="psl1" orientation="vertical" splitterPosition="60">
-    <f:facet name="first">
-      <af:panelList id="pl1">
-        <af:outputText value="欢迎使用本系统！" id="ot1"/>
-        <af:outputText value="单击下面的链接可以直接导航到相关业务界面。" id="ot2"/>
-        <af:outputText value="用户可修改登录密码" id="ot3"/>
-      </af:panelList>
-    </f:facet>
-    <f:facet name="second">
-      <af:panelDashboard id="pd1" columns="2" rowHeight="250px">
-        <af:panelBox text="待处理事项" id="pb1" background="medium" icon="/images/icons/actor.png">
-          <f:facet name="toolbar">
-          
-              <af:toolbar id="t1">
-                <af:selectOneChoice label="选择状态" 
-                                    valueChangeListener="#{viewScope.HomeOperationBean.onTaskSateChange}" id="soc1"
-                                    simple="false" autoSubmit="true"
-                                    value="#{viewScope.HomeOperationBean.defaultTaskState}">
-                  <af:selectItem label="待处理" value="PENDING" id="si1"/>
-                  <af:selectItem label="已处理" value="COMPLETED" id="si2"/>
-                </af:selectOneChoice>
-                <af:commandImageLink text="刷新" id="cil10" icon="/images/icons/refresh.png"
-                                     actionListener="#{viewScope.HomeOperationBean.firstTask}"/>
-              </af:toolbar>
-          
-          </f:facet>
-          <af:panelStretchLayout id="psl2" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="30px">
-            <f:facet name="bottom">
-              <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end">
-                <af:commandImageLink text="首页" id="cil2" icon="/images/icons/first.png"
-                                     actionListener="#{viewScope.HomeOperationBean.firstTask}"
-                                     disabled="#{viewScope.HomeOperationBean.beforeTaskDisabled}"/>
-                <af:spacer width="10" height="10" id="s2"/>
-                <af:commandImageLink id="cil3" text="上一页" icon="/images/icons/previous.png"
-                                     actionListener="#{viewScope.HomeOperationBean.previousTask}"
-                                     disabled="#{viewScope.HomeOperationBean.beforeTaskDisabled}"/>
-                <af:spacer width="10" height="10" id="s3"/>
-                <af:commandImageLink id="cil4" text="下一页" icon="/images/icons/next.png"
-                                     actionListener="#{viewScope.HomeOperationBean.nextTask}"
-                                     disabled="#{viewScope.HomeOperationBean.afterTaskDisabled}"/>
-                <af:spacer width="10" height="10" id="s4"/>
-                <af:commandImageLink text="尾页" id="cil5" icon="/images/icons/last.png"
-                                     actionListener="#{viewScope.HomeOperationBean.lastTask}"
-                                     disabled="#{viewScope.HomeOperationBean.afterTaskDisabled}"/>
-                <af:spacer width="30" height="10" id="s1"/>
-              </af:panelGroupLayout>
-            </f:facet>
-            <f:facet name="center">
-              <af:panelGroupLayout id="pgl1" layout="scroll">
-                <af:spacer width="10" height="5" id="s12"/>
-                <af:iterator id="i1" value="#{bindings.UserTasks.collectionModel}" var="task" rows="10"
-                             binding="#{viewScope.HomeOperationBean.taskIterator}">
-                  <af:panelGroupLayout id="pgl5" layout="horizontal"
-                                       inlineStyle="border-width:thin; outline-width:thin;">
-                    <af:spacer width="15" height="10" id="s10"/>
-                    <af:icon name="required" id="i3"/>
-                    <af:spacer width="3" height="10" id="s13"/>
-                    <af:outputText value="#{task.AssignedDate}" id="ot6">
-                      <af:convertDateTime type="both" dateStyle="short" timeStyle="short"/>
-                    </af:outputText>
-                    <af:spacer width="10" height="10" id="s14"/>
-                    <af:commandImageLink id="ot4" text="#{task.Title}"
-                                         actionListener="#{viewScope.HomeOperationBean.openTask}">
-                      <af:clientAttribute value="#{task.ContextObjectId}" name="contextObjectId"/>
-                      <af:clientAttribute value="#{task.ContextObjectType}" name="contextObjectType"/>
-                    </af:commandImageLink>
-                  </af:panelGroupLayout>
-                </af:iterator>
-              </af:panelGroupLayout>
-            </f:facet>
-            <f:facet name="start"/>
-            <f:facet name="end"/>
-            <f:facet name="top"/>
-          </af:panelStretchLayout>
-        </af:panelBox>
-        <af:panelBox text="个人消息" id="pb2" background="medium" icon="/images/icons/envelope.png">
-          <f:facet name="toolbar">
-            <af:toolbar id="t2">
-              <af:selectOneChoice label="选择状态" 
-                                    valueChangeListener="#{viewScope.HomeOperationBean.onNoteStateChange}" id="soc2"
-                                    simple="false" autoSubmit="true"
-                                  value="#{viewScope.HomeOperationBean.defaultNoteState}">
-                  <af:selectItem label="未读" value="UNREAD" id="si3"/>
-                  <af:selectItem label="已读" value="READ" id="si4"/>
-                </af:selectOneChoice>
-              <af:commandImageLink text="刷新" id="cil11" icon="/images/icons/refresh.png"
-                                   actionListener="#{viewScope.HomeOperationBean.firstNotes}"/>
-            </af:toolbar>
-          </f:facet>
-          <af:panelStretchLayout id="psl3" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="30px">
-            <f:facet name="bottom">
-              <af:panelGroupLayout id="pgl4" layout="horizontal" halign="end">
-                <af:commandImageLink text="首页" id="cil6" icon="/images/icons/first.png"
-                                     actionListener="#{viewScope.HomeOperationBean.firstNotes}"
-                                     disabled="#{viewScope.HomeOperationBean.beforeNoteDisabled}"/>
-                <af:spacer width="10" height="10" id="s6"/>
-                <af:commandImageLink id="cil7" text="上一页" icon="/images/icons/previous.png"
-                                     actionListener="#{viewScope.HomeOperationBean.previousNotes}"
-                                     disabled="#{viewScope.HomeOperationBean.beforeNoteDisabled}"/>
-                <af:spacer width="10" height="10" id="s7"/>
-                <af:commandImageLink id="cil8" text="下一页" icon="/images/icons/next.png"
-                                     actionListener="#{viewScope.HomeOperationBean.nextNotes}"
-                                     disabled="#{viewScope.HomeOperationBean.afterNoteDisabled}"/>
-                <af:spacer width="10" height="10" id="s8"/>
-                <af:commandImageLink text="尾页" id="cil9" icon="/images/icons/last.png"
-                                     actionListener="#{viewScope.HomeOperationBean.lastNotes}"
-                                     disabled="#{viewScope.HomeOperationBean.afterNoteDisabled}"/>
-                <af:spacer width="30" height="10" id="s5"/>
-              </af:panelGroupLayout>
-            </f:facet>
-            <f:facet name="center">
-              <af:panelGroupLayout id="pgl2" layout="scroll" valign="bottom">
-                <af:spacer width="10" height="5" id="s11"/>
-                <af:iterator id="i2" value="#{bindings.UserNotifications.collectionModel}" var="notes" rows="10"
-                             binding="#{viewScope.HomeOperationBean.notesIterator}">
-                  <af:showDetail disclosed="true" id="sd1">
-                    <f:facet name="prompt">
-                      <af:panelGroupLayout id="g1" layout="horizontal">
-                        <af:outputText value="#{notes.EventDate}" id="ot7">
-                          <af:convertDateTime dateStyle="short" timeStyle="short" type="both"/>
-                        </af:outputText>
-                        <af:spacer width="10" height="10" id="s15"/>
-                        <af:commandImageLink id="cil1" text="#{notes.Title}"
-                                             actionListener="#{viewScope.HomeOperationBean.markAsRead}"
-                                             disabled="#{notes.State=='READ'}" inlineStyle="font-size:105%;">
-                          <af:clientAttribute name="noteId" value="#{notes.Id}"/>
-                        </af:commandImageLink>
-                      </af:panelGroupLayout>
+    <af:panelSplitter id="psl1" orientation="vertical" splitterPosition="60">
+        <f:facet name="first">
+            <af:panelList id="pl1">
+                <af:outputText value="欢迎使用本系统！" id="ot1"/>
+                <af:outputText value="单击下面的链接可以直接导航到相关业务界面。" id="ot2"/>
+                <af:outputText value="用户可修改登录密码" id="ot3"/>
+            </af:panelList>
+        </f:facet>
+        <f:facet name="second">
+            <af:panelDashboard id="pd1" columns="2" rowHeight="250px">
+                <af:panelBox text="待处理事项" id="pb1" background="medium" icon="/images/icons/actor.png">
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t1">
+                            <af:selectOneChoice label="选择状态"
+                                                valueChangeListener="#{viewScope.HomeOperationBean.onTaskSateChange}"
+                                                id="soc1" simple="false" autoSubmit="true"
+                                                value="#{viewScope.HomeOperationBean.defaultTaskState}">
+                                <af:selectItem label="全部" value="ALL" id="si3"/>
+                                <af:selectItem label="待处理" value="PENDING" id="si1"/>
+                                <af:selectItem label="已处理" value="COMPLETED" id="si2"/>
+                            </af:selectOneChoice>
+                            <af:commandImageLink text="刷新" id="cil10" icon="/images/icons/refresh.png"
+                                                 actionListener="#{viewScope.HomeOperationBean.refreshTaskList}"/>
+                        </af:toolbar>
                     </f:facet>
-                    <af:outputText value="#{notes.Content}" id="ot5"
-                                   inlineStyle="color:rgb(99,99,99);"/>
-                  </af:showDetail>
-                  <af:spacer width="10" height="5" id="s9"/>
-                </af:iterator>
-              </af:panelGroupLayout>
-            </f:facet>
-            <f:facet name="start"/>
-            <f:facet name="end"/>
-            <f:facet name="top"/>
-          </af:panelStretchLayout>
-        </af:panelBox>
-      </af:panelDashboard>
-    </f:facet>
-  </af:panelSplitter>
+                    <af:panelStretchLayout id="psl2" startWidth="0px" endWidth="0px" topHeight="0px"
+                                           bottomHeight="30px">
+                        <f:facet name="bottom">
+                            <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end">
+                                <af:commandImageLink text="首页" id="cil2" icon="/images/icons/first.png"
+                                                     actionListener="#{viewScope.HomeOperationBean.firstTask}"
+                                                     disabled="#{viewScope.HomeOperationBean.beforeTaskDisabled}"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:commandImageLink id="cil3" text="上一页" icon="/images/icons/previous.png"
+                                                     actionListener="#{viewScope.HomeOperationBean.previousTask}"
+                                                     disabled="#{viewScope.HomeOperationBean.beforeTaskDisabled}"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:commandImageLink id="cil4" text="下一页" icon="/images/icons/next.png"
+                                                     actionListener="#{viewScope.HomeOperationBean.nextTask}"
+                                                     disabled="#{viewScope.HomeOperationBean.afterTaskDisabled}"/>
+                                <af:spacer width="10" height="10" id="s4"/>
+                                <af:commandImageLink text="尾页" id="cil5" icon="/images/icons/last.png"
+                                                     actionListener="#{viewScope.HomeOperationBean.lastTask}"
+                                                     disabled="#{viewScope.HomeOperationBean.afterTaskDisabled}"/>
+                                <af:spacer width="30" height="10" id="s1"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl1" layout="scroll">
+                                <af:spacer width="10" height="5" id="s12"/>
+                                <af:iterator id="i1" value="#{bindings.UserTasks.collectionModel}" var="task" rows="10"
+                                             binding="#{viewScope.HomeOperationBean.taskIterator}">
+                                    <af:panelGroupLayout id="pgl5" layout="horizontal"
+                                                         inlineStyle="border-width:thin; outline-width:thin;">
+                                        <af:spacer width="15" height="10" id="s10"/>
+                                        <af:icon name="required" id="i3"/>
+                                        <af:spacer width="3" height="10" id="s13"/>
+                                        <af:outputText value="#{task.AssignedDate}" id="ot6">
+                                            <af:convertDateTime type="both" dateStyle="short" timeStyle="short"/>
+                                        </af:outputText>
+                                        <af:spacer width="10" height="10" id="s14"/>
+                                        <af:commandImageLink id="ot4" text="#{task.Title}"
+                                                             actionListener="#{viewScope.HomeOperationBean.openTask}"
+                                                             disabled="#{task.State!='PENDING'}">
+                                            <af:clientAttribute value="#{task.ContextObjectId}" name="contextObjectId"/>
+                                            <af:clientAttribute value="#{task.ContextObjectType}"
+                                                                name="contextObjectType"/>
+                                            <af:clientAttribute value="#{task.ContextTitle}" name="contextTitle"/>
+                                        </af:commandImageLink>
+                                        
+                                    </af:panelGroupLayout>
+                                </af:iterator>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </af:panelBox>
+                <af:panelBox text="个人消息" id="pb2" background="medium" icon="/images/icons/envelope.png">
+                    <f:facet name="toolbar">
+                        <af:toolbar id="t2">
+                            <af:selectOneChoice label="选择状态"
+                                                valueChangeListener="#{viewScope.HomeOperationBean.onNoteStateChange}"
+                                                id="soc2" simple="false" autoSubmit="true"
+                                                value="#{viewScope.HomeOperationBean.defaultNoteState}">
+                                <af:selectItem label="全部" value="ALL" id="si6"/>
+                                <af:selectItem label="未读" value="UNREAD" id="si5"/>
+                                <af:selectItem label="已读" value="READ" id="si4"/>
+                            </af:selectOneChoice>
+                            <af:commandImageLink text="刷新" id="cil11" icon="/images/icons/refresh.png"
+                                                 actionListener="#{viewScope.HomeOperationBean.refreshNotes}"/>
+                        </af:toolbar>
+                    </f:facet>
+                    <af:panelStretchLayout id="psl3" startWidth="0px" endWidth="0px" topHeight="0px"
+                                           bottomHeight="30px">
+                        <f:facet name="bottom">
+                            <af:panelGroupLayout id="pgl4" layout="horizontal" halign="end">
+                                <af:commandImageLink text="首页" id="cil6" icon="/images/icons/first.png"
+                                                     actionListener="#{viewScope.HomeOperationBean.firstNotes}"
+                                                     disabled="#{viewScope.HomeOperationBean.beforeNoteDisabled}"/>
+                                <af:spacer width="10" height="10" id="s6"/>
+                                <af:commandImageLink id="cil7" text="上一页" icon="/images/icons/previous.png"
+                                                     actionListener="#{viewScope.HomeOperationBean.previousNotes}"
+                                                     disabled="#{viewScope.HomeOperationBean.beforeNoteDisabled}"/>
+                                <af:spacer width="10" height="10" id="s7"/>
+                                <af:commandImageLink id="cil8" text="下一页" icon="/images/icons/next.png"
+                                                     actionListener="#{viewScope.HomeOperationBean.nextNotes}"
+                                                     disabled="#{viewScope.HomeOperationBean.afterNoteDisabled}"/>
+                                <af:spacer width="10" height="10" id="s8"/>
+                                <af:commandImageLink text="尾页" id="cil9" icon="/images/icons/last.png"
+                                                     actionListener="#{viewScope.HomeOperationBean.lastNotes}"
+                                                     disabled="#{viewScope.HomeOperationBean.afterNoteDisabled}"/>
+                                <af:spacer width="30" height="10" id="s5"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" layout="scroll" valign="bottom">
+                                <af:spacer width="10" height="5" id="s11"/>
+                                <af:iterator id="i2" value="#{bindings.UserNotifications.collectionModel}" var="notes"
+                                             rows="10" binding="#{viewScope.HomeOperationBean.notesIterator}">
+                                    <af:showDetail disclosed="true" id="sd1">
+                                        <f:facet name="prompt">
+                                            <af:panelGroupLayout id="g1" layout="horizontal">
+                                                <af:outputText value="#{notes.EventDate}" id="ot7">
+                                                    <af:convertDateTime dateStyle="short" timeStyle="short"
+                                                                        type="both"/>
+                                                </af:outputText>
+                                                <af:spacer width="10" height="10" id="s15"/>
+                                                <af:commandImageLink id="cil1" text="#{notes.Title}"
+                                                                     actionListener="#{viewScope.HomeOperationBean.markAsRead}"
+                                                                     disabled="#{notes.State=='READ'}"
+                                                                     inlineStyle="font-size:105%;">
+                                                    <af:clientAttribute name="noteId" value="#{notes.Id}"/>
+                                                </af:commandImageLink>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                        <af:outputText value="#{notes.Content}" id="ot5"
+                                                       inlineStyle="color:rgb(99,99,99);"/>
+                                    </af:showDetail>
+                                    <af:spacer width="10" height="5" id="s9"/>
+                                </af:iterator>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </af:panelBox>
+            </af:panelDashboard>
+        </f:facet>
+    </af:panelSplitter>
 </ui:composition>
