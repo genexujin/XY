@@ -40,6 +40,10 @@
         <expression>#{pageFlowScope.callId!= null}</expression>
         <outcome>byCallId</outcome>
       </case>
+      <case id="__25">
+        <expression>#{pageFlowScope.fromMenu == 'create'}</expression>
+        <outcome>create</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findByCallerId">
@@ -92,6 +96,10 @@
         <from-outcome>byCallId</from-outcome>
         <to-activity-id>findByCallId</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__24">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>Create</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__12">
       <from-activity-id>findByCallerId</from-activity-id>
@@ -112,6 +120,13 @@
       <control-flow-case id="__17">
         <from-outcome>byCallId</from-outcome>
         <to-activity-id>CreateHelpdeskCall</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id>CreateHelpdeskCall</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>Router</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

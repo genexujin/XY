@@ -137,13 +137,13 @@
     ViewObjectName="edu.hp.model.vo.query.helpdesk.HdEval"
     RowLevelBinds="true"/>
   <ViewAccessor
-    Name="EmpViewForCallee"
+    Name="EmployeeAsCallee"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
-    RowLevelBinds="true"/>
-  <ViewAccessor
-    Name="CalleesView"
-    ViewObjectName="edu.hp.model.vo.EmployeesView"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="filterByExpired"
+      FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_CallerId"
     ListVOName="EmployeesView"
@@ -287,9 +287,10 @@
     <DisplayCriteria/>
   </ListBinding>
   <ListBinding
-    Name="LOV_CalleeId_New"
-    ListVOName="CalleesView"
+    Name="LOV_CalleeId_Retry"
+    ListVOName="EmployeeAsCallee"
     ListRangeSize="10"
+    ComboRowCountHint="10"
     NullValueFlag="start"
     NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
     MRUCount="0">
@@ -302,7 +303,8 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="DisplayName"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
   </ListBinding>
   <EntityUsage
     Name="HelpdeskCalls"
@@ -343,11 +345,11 @@
     EntityAttrName="CalleeId"
     EntityUsage="HelpdeskCalls"
     AliasName="CALLEE_ID"
-    LOVName="LOV_CalleeId_New">
+    LOVName="LOV_CalleeId_Retry">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="choice"/>
+          Value="combo_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

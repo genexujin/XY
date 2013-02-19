@@ -2,23 +2,23 @@
 <SDM>
    <OverallProperties
       id="OverallProperties1"/>
-   <View
-      id="View2">
+   <TaskFlowCall
+      id="TaskFlowCall3">
       <property
-         name="activityId">CreateHelpdeskCall</property>
+         name="taskFlowId">MyHdCall</property>
       <property
-         name="page">/pages/helpdesk/CreateHelpdeskCall.jsff</property>
+         name="activityId">MyHdCall</property>
+      <property
+         name="documentReference">/WEB-INF/flows/helpdesk/MyHdCall.xml</property>
       <property
          name="start">true</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>CreateHelpdeskCall&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>MyHdCall&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">271.79883</property>
+         name="y">204.94824</property>
       <property
-         name="pageFragment">true</property>
-      <property
-         name="x">492.3584</property>
-   </View>
+         name="x">424.0</property>
+   </TaskFlowCall>
 </SDM>

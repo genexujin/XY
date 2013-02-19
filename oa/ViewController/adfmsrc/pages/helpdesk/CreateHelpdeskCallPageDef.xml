@@ -67,6 +67,7 @@
       <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="roleName" NDType="java.lang.String"/>
+      <NamedData NDName="contextTitle" NDType="java.lang.String"/>
     </methodAction>
     <methodAction id="completeTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
                   DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
@@ -90,21 +91,19 @@
     </methodAction>
     <methodAction id="createTaskForUserId" InstanceName="data.RootAppModuleDataControl.dataProvider"
                   DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="createTaskForUserId" IsViewObjectMethod="false">
+                  MethodName="createTaskForUserId" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.createTaskForUserId_RootAppModuleDataControl_dataProvider_createTaskForUserId_result">
       <NamedData NDName="title" NDType="java.lang.String"/>
       <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
       <NamedData NDName="userId" NDType="java.lang.String"/>
+      <NamedData NDName="contextTitle" NDType="java.lang.String"/>
     </methodAction>
     <attributeValues IterBinding="HelpdeskCallsViewIterator" id="SubmitAt">
       <AttrNames>
         <Item Value="SubmitAt"/>
       </AttrNames>
     </attributeValues>
-    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_New" id="CalleeId"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_New" id="CalleeId1"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <methodAction id="findByLocationIdAndHdReason" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="findByLocationIdAndHdReason" IsViewObjectMethod="true"
                   DataControl="RootAppModuleDataControl"
@@ -113,5 +112,7 @@
       <NamedData NDName="locationId" NDType="java.lang.String"/>
       <NamedData NDName="hdReason" NDType="java.lang.String"/>
     </methodAction>
+    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_Retry" id="CalleeId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>
