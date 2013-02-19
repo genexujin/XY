@@ -2,6 +2,7 @@ package edu.hp.view.bean.helpdesk;
 
 import edu.hp.model.common.Constants;
 import edu.hp.view.bean.BaseBean;
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 
 import edu.hp.view.utils.JSFUtils;
@@ -142,14 +143,18 @@ public class MyHelpdeskCallBean extends BaseBean {
 
     public void processHdCall(ActionEvent actionEvent) {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
-        String calleeId = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");
+        //String calleeId = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        String calleeId = user.getUserId();
+        
         String callerId = ADFUtils.getBoundAttributeValue("CallerId").toString();
         System.out.println("calleeId is: " + calleeId);
         System.out.println("callerId is: " + callerId);
         
         if (state != null && state.equals(Constants.STATE_ACCEPTED)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_PROCESSED);
-            ADFUtils.setBoundAttributeValue("CalleeId", calleeId);
+            ADFUtils.setBoundAttributeValue("CalleeId1", calleeId);
+            ADFUtils.setBoundAttributeValue("CalleeDisplayName", user.getDisplayName());
             boolean success = ADFUtils.commit("报修单已处理！", "报修单处理失败，请核对输入的信息或联系管理员！");
             if (success) {
                 String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();

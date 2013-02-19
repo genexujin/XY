@@ -323,6 +323,24 @@
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
     TableName="HELPDESK_CALLS"/>
+  <Attribute
+    Name="CalleeDisplayName"
+    Precision="20"
+    ColumnName="CALLEE_DISPLAY_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="HELPDESK_CALLS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.HelpdeskCalls.CalleeDisplayName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Callee"
     Association="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc"

@@ -112,7 +112,15 @@
       <NamedData NDName="locationId" NDType="java.lang.String"/>
       <NamedData NDName="hdReason" NDType="java.lang.String"/>
     </methodAction>
-    <list IterBinding="HelpdeskCallsViewIterator" StaticList="false" Uses="LOV_CalleeId_Retry" id="CalleeId"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CalleeId1">
+      <AttrNames>
+        <Item Value="CalleeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CalleeDisplayName">
+      <AttrNames>
+        <Item Value="CalleeDisplayName"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

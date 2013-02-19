@@ -24,7 +24,8 @@
        HelpdeskCalls.REASON_LEVEL_2, 
        HelpdeskCalls.REASON_LEVEL_3, 
        HelpdeskCalls.REASON_DETAIL, 
-       HelpdeskCalls.SUBMIT_AT"
+       HelpdeskCalls.SUBMIT_AT, 
+       HelpdeskCalls.CALLEE_DISPLAY_NAME"
   FromList="HELPDESK_CALLS HelpdeskCalls"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -290,9 +291,8 @@
     Name="LOV_CalleeId_Retry"
     ListVOName="EmployeeAsCallee"
     ListRangeSize="10"
-    ComboRowCountHint="10"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    ComboRowCountHint="5"
+    NullValueFlag="none"
     MRUCount="0">
     <AttrArray Name="AttrNames">
       <Item Value="CalleeId"/>
@@ -304,7 +304,8 @@
       <Item Value="DisplayName"/>
     </AttrArray>
     <DisplayCriteria
-      Hint="showAndExecute"/>
+      Hint="showAndExecute"
+      Name="findByUserName"/>
   </ListBinding>
   <EntityUsage
     Name="HelpdeskCalls"
@@ -527,6 +528,12 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="CalleeDisplayName"
+    PrecisionRule="true"
+    EntityAttrName="CalleeDisplayName"
+    EntityUsage="HelpdeskCalls"
+    AliasName="CALLEE_DISPLAY_NAME"/>
   <ViewCriteria
     Name="ReasonLevel1Criteria"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"

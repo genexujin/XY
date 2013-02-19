@@ -39,11 +39,11 @@
                                     shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1" disabled="true">
                   <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
                 </af:selectOneChoice>
-                <af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
+                <!--af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
                                     required="#{bindings.CalleeId.hints.mandatory}"
-                                    shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2">
+                                    shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2" autoSubmit="true">
                   <f:selectItems value="#{bindings.CalleeId.items}" id="si2"/>
-                </af:selectOneChoice>
+                </af:selectOneChoice-->
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl5" layout="horizontal">
                 <af:selectOneChoice value="#{bindings.State.inputValue}" label="#{bindings.State.label}"
@@ -126,6 +126,9 @@
                               disabled="#{bindings.State.inputValue ne '已受理'}">
                   <f:validator binding="#{bindings.CallResultDetail.validator}"/>
                 </af:inputText>
+                <af:panelLabelAndMessage label="#{bindings.CalleeDisplayName.hints.label}" id="plam1">
+                  <af:outputText value="#{bindings.CalleeDisplayName.inputValue}" id="ot1"/>
+                </af:panelLabelAndMessage>
               </af:panelGroupLayout>
               <f:facet name="footer">
                 <af:toolbar id="t2">
