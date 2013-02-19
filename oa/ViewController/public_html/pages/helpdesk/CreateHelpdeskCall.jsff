@@ -21,14 +21,15 @@
               <f:facet name="footer">
                 <af:toolbar id="t1">
               <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       icon="/images/icons/saveall.png" actionListener="#{bindings.Commit.execute}"/>
-              <af:commandToolbarButton text="取消" id="ctb2" immediate="true" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       icon="/images/icons/rollback.png" actionListener="#{bindings.Rollback.execute}" action="return">
+                                       actionListener="#{bindings.Commit.execute}"/>
+              <af:commandToolbarButton text="返回" id="ctb2" immediate="true" rendered="#{pageFlowScope.fromMenu ne '-'}"
+                                       actionListener="#{bindings.Rollback.execute}" action="return">
                 <af:resetActionListener/>
               </af:commandToolbarButton>
               <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       action="#{pageFlowScope.MyHdCallBean.submitHdCall}"/>
-              <af:commandToolbarButton text="撤消报修单" id="ctb4" rendered="#{bindings.State.inputValue eq '未提交'}"
+                                       action="#{pageFlowScope.MyHdCallBean.submitHdCall}">
+              </af:commandToolbarButton>
+              <af:commandToolbarButton text="取消报修单" id="ctb4" rendered="#{bindings.State.inputValue eq '未提交'}"
                                        actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}"/>
             </af:toolbar>
               </f:facet>
@@ -174,5 +175,6 @@
     <f:facet name="start"/>
     <f:facet name="end"/>
     <f:facet name="top"/>
+    
   </af:panelStretchLayout>
 </ui:composition>

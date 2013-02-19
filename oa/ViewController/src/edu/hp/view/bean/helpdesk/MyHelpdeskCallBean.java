@@ -48,46 +48,7 @@ public class MyHelpdeskCallBean extends BaseBean {
     private Date submitDateTo;
 
     public MyHelpdeskCallBean() {
-        
     }
-
-//    public void reasonLevel1Changed(ValueChangeEvent valueChangeEvent) {
-//        int newValue = (Integer)valueChangeEvent.getNewValue();
-////        System.out.println(newValue);
-//        setCurrentReasonLevel1(newValue);
-////        loadReasonLevel2();
-//        UIComponent component = JSFUtils.findComponent(valueChangeEvent.getComponent().getNamingContainer(), "soc2");
-//        ADFUtils.partialRefreshComponenet(component);
-//    }
-    
-//    public void setCurrentReasonLevel1(final int index) {
-//        DCIteratorBinding it = ADFUtils.findIterator("ReasonLevel1Iterator");
-//        it.setCurrentRowIndexInRange(index);
-//    }
-    
-//    private DCIteratorBinding getBinding(UIComponent comp) {
-//        if (comp instanceof UIXTable || comp instanceof UIXTree) {
-//            CollectionModel model = comp instanceof UIXTable ?
-//                (CollectionModel)((UIXTable)comp).getValue() :
-//                (CollectionModel)((UIXTree)comp).getValue();
-//            JUCtrlHierBinding adfTreeBinding = (JUCtrlHierBinding)model.getWrappedData();
-//            return adfTreeBinding.getDCIteratorBinding();
-//        }
-//    }
-    
-//    private void howToGetTableSelectedRow() {
-//        RichTable table = this.getResultTable();
-//        RowKeySet rks = table.getSelectedRowKeys(); //One row has many columns, so the name is "keys"
-//        Iterator it = rks.iterator();
-//        if (it.hasNext()) {
-//            List keys = (List)it.next();
-//            CollectionModel model = (CollectionModel)table.getValue();
-//            JUCtrlHierBinding treeBinding = (JUCtrlHierBinding)model.getWrappedData();
-//            JUCtrlHierNodeBinding nodeBinding = treeBinding.findNodeByKeyPath(keys);
-//            Row rw = nodeBinding.getRow();
-//        }
-//        
-//    }
 
     public void setResultTable(RichTable resultTable) {
         this.resultTable = resultTable;
@@ -130,8 +91,6 @@ public class MyHelpdeskCallBean extends BaseBean {
         binding.execute();
         
         ADFUtils.partialRefreshComponenet(resultTable);
-//        return null;
-        
     }
 
     private String getLovAttrValue(String lovBindingName, String attrName) {
@@ -174,12 +133,11 @@ public class MyHelpdeskCallBean extends BaseBean {
                 ADFUtils.setBoundAttributeValue("State", state);
             }
         }
-        
         return null;
     }
 
     public void cancelHdCall(ActionEvent actionEvent) {
-        toState(Constants.STATE_CANCELED_2);
+        toState(Constants.STATE_CANCELED);
     }
 
     public void processHdCall(ActionEvent actionEvent) {
