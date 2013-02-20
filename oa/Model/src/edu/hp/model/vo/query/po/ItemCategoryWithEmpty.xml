@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ItemCategoryWithEmpty"
+  Version="11.1.2.62.76"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.query.po.ItemCategoryWithEmpty_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT Lovs.ID, 
+       Lovs.CODE, 
+       Lovs.VALUE, 
+       Lovs.FLEX_COL1
+FROM LOVS Lovs
+WHERE Lovs.CODE = 'ItemCatg'
+union
+select '-10', 'ItemCatg', ' ', ' ' from dual
+order by id]]></SQLQuery>
+  <EntityUsage
+    Name="Lovs"
+    Entity="edu.hp.model.eo.Lovs"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Lovs"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="Code"
+    PrecisionRule="true"
+    EntityAttrName="Code"
+    EntityUsage="Lovs"
+    AliasName="CODE"/>
+  <ViewAttribute
+    Name="Value"
+    PrecisionRule="true"
+    EntityAttrName="Value"
+    EntityUsage="Lovs"
+    AliasName="VALUE"/>
+  <ViewAttribute
+    Name="FlexCol1"
+    PrecisionRule="true"
+    EntityAttrName="FlexCol1"
+    EntityUsage="Lovs"
+    AliasName="FLEX_COL1"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

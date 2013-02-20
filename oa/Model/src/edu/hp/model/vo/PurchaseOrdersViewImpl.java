@@ -48,13 +48,13 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
             vcNames.add(oRdIdCriteria.getName());
         }
                 
-        if (state != null) {
+        if (state != null && !"0".equals(state)) {
             this.setOrStateId(state);
             ViewCriteria oStateIdCriteria = this.getViewCriteria("OrderStateCriteria");
             vcNames.add(oStateIdCriteria.getName());
         }
         
-        if (category != null) {
+        if (category != null && !" ".equals(category)) {
             this.setItCatgId(category);
             ViewCriteria itCatgCriteria = this.getViewCriteria("ItemCategoryCriteria");
             vcNames.add(itCatgCriteria.getName());
@@ -72,7 +72,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
             vcNames.add(dToCriteria.getName());
         }
         
-        if (submitterId != null) {
+        if (submitterId != null && !"0".equals(submitterId)) {
             this.setsbmtId(submitterId);
             ViewCriteria sIdCriteria = this.getViewCriteria("SubmitterIdCriteria");
             vcNames.add(sIdCriteria.getName());

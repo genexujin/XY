@@ -17,25 +17,25 @@
                                       value="#{pageFlowScope.MyPoBean.orderReadableId}"/>
                         <af:inputDate label="提交日期自" id="id1" columns="20"
                                       value="#{pageFlowScope.MyPoBean.submitDateFrom}"/>
-                        <af:selectOneChoice value="#{bindings.PoState.inputValue}" label="订单状态"
-                                            required="#{bindings.PoState.hints.mandatory}"
-                                            shortDesc="#{bindings.PoState.hints.tooltip}" id="soc1"
-                                            disabled="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver'}">
-                            <f:selectItem id="si11" itemLabel="" itemValue=""/>
-                            <f:selectItems value="#{bindings.PoState.items}" id="si1"/>
+                        <af:selectOneChoice value="#{bindings.PoStateWithEmpty.inputValue}"
+                                            label="订单状态"
+                                            required="#{bindings.PoStateWithEmpty.hints.mandatory}"
+                                            shortDesc="#{bindings.PoStateWithEmpty.hints.tooltip}" id="soc2">
+                            <f:selectItems value="#{bindings.PoStateWithEmpty.items}" id="si2"/>
                         </af:selectOneChoice>
                         <af:inputDate label="至" id="id2" columns="20" value="#{pageFlowScope.MyPoBean.submitDateTo}"/>
-                        <af:selectOneChoice value="#{bindings.ItemCategory.inputValue}" label="采购类别"
-                                            required="#{bindings.ItemCategory.hints.mandatory}"
-                                            shortDesc="#{bindings.ItemCategory.hints.tooltip}" id="soc2">
-                            <f:selectItems value="#{bindings.ItemCategory.items}" id="si2"/>
+                        <af:selectOneChoice value="#{bindings.ItemCategoryWithEmpty.inputValue}"
+                                            label="采购类别"
+                                            required="#{bindings.ItemCategoryWithEmpty.hints.mandatory}"
+                                            shortDesc="#{bindings.ItemCategoryWithEmpty.hints.tooltip}" id="soc5">
+                            <f:selectItems value="#{bindings.ItemCategoryWithEmpty.items}" id="si5"/>
                         </af:selectOneChoice>
-                        <af:selectOneChoice value="#{bindings.EmployeesViewForLOV.inputValue}" label="申请人"
-                                            required="#{bindings.EmployeesViewForLOV.hints.mandatory}"
-                                            shortDesc="#{bindings.EmployeesViewForLOV.hints.tooltip}" id="soc4"
-                                            disabled="#{pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='receiver'}">
-                            <f:selectItem id="si13" itemLabel="" itemValue="aaaa"/>
-                            <f:selectItems value="#{bindings.EmployeesViewForLOV.items}" id="si4"/>
+                        <af:selectOneChoice value="#{bindings.EmpWithEmpty.inputValue}"
+                                            label="申请人"
+                                            required="#{bindings.EmpWithEmpty.hints.mandatory}"
+                                            shortDesc="#{bindings.EmpWithEmpty.hints.tooltip}" id="soc1"
+                                            disabled="#{pageFlowScope.fromMenu eq null}">
+                            <f:selectItems value="#{bindings.EmpWithEmpty.items}" id="si1"/>
                         </af:selectOneChoice>
                     </af:panelFormLayout>
                     <f:facet name="context"/>

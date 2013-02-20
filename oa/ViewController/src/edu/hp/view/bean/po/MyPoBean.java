@@ -34,15 +34,13 @@ public class MyPoBean {
     }
 
     public String doQuery() {
-        Object expression = JSFUtils.resolveExpression("#{bindings.EmployeesViewForLOV.inputValue}");
-        System.out.println("Expression value is: " + expression);
-        String poStateId = getLovAttrValue("PoState", "FlexCol1");
+        String poStateId = getLovAttrValue("PoStateWithEmpty", "FlexCol1");
         System.out.println("PoState Id is: " + poStateId);
 //        String itemCategoryId = getLovAttrValue("ItemCategory", "Id");
 //        System.out.println("ItemCategory Id is: " + itemCategoryId);
-        String submitterId = getLovAttrValue("EmployeesViewForLOV", "Id");
+        String submitterId = getLovAttrValue("EmpWithEmpty", "Id");
         System.out.println("submitterId is: " + submitterId);
-        String newItemCategory = getLovAttrValue("ItemCategory", "FlexCol1");
+        String newItemCategory = getLovAttrValue("ItemCategoryWithEmpty", "FlexCol1");
         System.out.println("ItemCategory is: " + newItemCategory);
         
         System.out.println("OrderReadableId is: " + orderReadableId);
