@@ -57,7 +57,7 @@
                             <af:spacer />
                             <af:inputDate label="至" id="id2" value="#{pageFlowScope.MyHdCallBean.submitDateTo}"/>
                             <af:selectOneChoice value="#{bindings.EmpWithEmptyForCallee.inputValue}"
-                                                label="受理人"
+                                                label="处理人"
                                                 required="#{bindings.EmpWithEmptyForCallee.hints.mandatory}"
                                                 shortDesc="#{bindings.EmpWithEmptyForCallee.hints.tooltip}" id="soc11">
                                 <f:selectItems value="#{bindings.EmpWithEmptyForCallee.items}" id="si7"/>
@@ -102,15 +102,9 @@
                             <f:selectItems value="#{row.bindings.CallerId.items}" id="si30"/>
                         </af:selectOneChoice>
                     </af:column>
-                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CalleeId.name}" sortable="true"
-                               headerText="#{bindings.HelpdeskCallsView11.hints.CalleeId.label}" id="resId1c3">
-                        <af:selectOneChoice value="#{row.bindings.CalleeId.inputValue}"
-                                                    label="#{row.bindings.CalleeId.label}"
-                                                    required="#{bindings.HelpdeskCallsView11.hints.CalleeId.mandatory}"
-                                                    shortDesc="#{bindings.HelpdeskCallsView11.hints.CalleeId.tooltip}"
-                                                    id="soc31" readOnly="true">
-                            <f:selectItems value="#{row.bindings.CalleeId.items}" id="si31"/>
-                        </af:selectOneChoice>
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CalleeDisplayName.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.CalleeDisplayName.label}" id="resId1c3">
+                        <af:outputText value="#{row.CalleeDisplayName}" id="ot11"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.SubmitAt.name}"
                                        sortable="false" headerText="#{bindings.HelpdeskCallsView11.hints.SubmitAt.label}"

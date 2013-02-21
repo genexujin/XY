@@ -3,7 +3,10 @@ package edu.hp.model.biz;
 import edu.hp.model.biz.common.PurchaseOrderAppModule;
 import edu.hp.model.vo.EmployeesViewImpl;
 import edu.hp.model.vo.PurchaseOrderHistorysViewImpl;
+import edu.hp.model.vo.PurchaseOrderLinesViewImpl;
 import edu.hp.model.vo.PurchaseOrdersViewImpl;
+
+import edu.hp.model.vo.query.po.EmpWithEmptyImpl;
 
 import oracle.jbo.Row;
 import oracle.jbo.ViewCriteria;
@@ -34,16 +37,16 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
             po.setsbmtId(submitterId);
             ViewCriteria sIdCriteria = po.getViewCriteria("SubmitterIdCriteria");
             po.setApplyViewCriteriaName(sIdCriteria.getName());
-            po.executeQuery();
-        }
-        
-        //Set the lov's value, so on page the correct user will be selected by default in the lov
-        EmployeesViewImpl eLov = (EmployeesViewImpl)this.getEmployeesViewForLOV();
-        eLov.setuserId(submitterId);
-        ViewCriteria empCriteria = eLov.getViewCriteria("findByUserId");
-        eLov.setApplyViewCriteriaName(empCriteria.getName());
-        eLov.executeQuery();
+            po.executeQuery();            
             
+            //Set the lov's value, so on page the correct user will be selected by default in the lov
+            EmpWithEmptyImpl eLov = (EmpWithEmptyImpl)this.getEmpWithEmpty();
+            eLov.setApplyViewCriteriaNames(null);
+            eLov.setsubmiterId(submitterId);
+            ViewCriteria empCriteria = eLov.getViewCriteria("findBySubmitterIdCriteria");
+            eLov.setApplyViewCriteriaName(empCriteria.getName());
+            eLov.executeQuery();
+        }
     }
 
     /**
@@ -117,5 +120,29 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
      */
     public ViewLinkImpl getPoToPoLineCountLink() {
         return (ViewLinkImpl)findViewLink("PoToPoLineCountLink");
+    }
+
+    /**
+     * Container's getter for ItemCategoryWithEmpty1.
+     * @return ItemCategoryWithEmpty1
+     */
+    public ViewObjectImpl getItemCategoryWithEmpty() {
+        return (ViewObjectImpl)findViewObject("ItemCategoryWithEmpty");
+    }
+
+    /**
+     * Container's getter for PoStateWithEmpty1.
+     * @return PoStateWithEmpty1
+     */
+    public ViewObjectImpl getPoStateWithEmpty() {
+        return (ViewObjectImpl)findViewObject("PoStateWithEmpty");
+    }
+
+    /**
+     * Container's getter for EmpWithEmpty1.
+     * @return EmpWithEmpty1
+     */
+    public ViewObjectImpl getEmpWithEmpty() {
+        return (ViewObjectImpl)findViewObject("EmpWithEmpty");
     }
 }

@@ -33,6 +33,15 @@
   <ViewUsage
     Name="EmployeesViewForLOV"
     ViewObjectName="edu.hp.model.vo.EmployeesView"/>
+  <ViewUsage
+    Name="ItemCategoryWithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemCategoryWithEmpty"/>
+  <ViewUsage
+    Name="PoStateWithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.po.PoStateWithEmpty"/>
+  <ViewUsage
+    Name="EmpWithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.po.EmpWithEmpty"/>
   <ViewLinkUsage
     Name="PoToPoLineLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"

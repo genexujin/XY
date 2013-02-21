@@ -3,22 +3,16 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="Root.PurchaseOrderAppModule.PoState" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="PoStateIterator"/>
-    <iterator Binds="Root.PurchaseOrderAppModule.ItemCategory" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="ItemCategoryIterator"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrdersView" DataControl="RootAppModuleDataControl"
               RangeSize="25" id="PurchaseOrdersViewIterator"/>
-    <iterator Binds="Root.PurchaseOrderAppModule.EmployeesViewForLOV" DataControl="RootAppModuleDataControl"
-              RangeSize="25" id="EmployeesViewForLOVIterator"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.ItemCategoryWithEmpty" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="ItemCategoryWithEmptyIterator"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.PoStateWithEmpty" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="PoStateWithEmptyIterator"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.EmpWithEmpty" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="EmpWithEmptyIterator"/>
   </executables>
   <bindings>
-    <list IterBinding="PoStateIterator" ListOperMode="navigation" ListIter="PoStateIterator" id="PoState"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject">
-      <AttrNames>
-        <Item Value="Value"/>
-      </AttrNames>
-    </list>
     <tree IterBinding="PurchaseOrdersViewIterator" id="PurchaseOrdersView">
       <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrdersView" Name="PurchaseOrdersView0">
         <AttrNames>
@@ -46,16 +40,22 @@
       <NamedData NDName="submitDateTo" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="submitterId" NDType="java.lang.String"/>
     </methodAction>
-    <list IterBinding="EmployeesViewForLOVIterator" ListOperMode="navigation" ListIter="EmployeesViewForLOVIterator"
-          id="EmployeesViewForLOV" DTSupportsMRU="true" SelectItemValueMode="ListObject">
-      <AttrNames>
-        <Item Value="DisplayName"/>
-      </AttrNames>
-    </list>
-    <list ListOperMode="navigation" IterBinding="ItemCategoryIterator" ListIter="ItemCategoryIterator" 
-          id="ItemCategory" NullValueFlag="start">
+    <list IterBinding="ItemCategoryWithEmptyIterator" ListOperMode="navigation" ListIter="ItemCategoryWithEmptyIterator"
+          id="ItemCategoryWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
       <AttrNames>
         <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="PoStateWithEmptyIterator" ListOperMode="navigation" ListIter="PoStateWithEmptyIterator"
+          id="PoStateWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="EmpWithEmptyIterator" ListOperMode="navigation" ListIter="EmpWithEmptyIterator"
+          id="EmpWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DisplayName"/>
       </AttrNames>
     </list>
   </bindings>
