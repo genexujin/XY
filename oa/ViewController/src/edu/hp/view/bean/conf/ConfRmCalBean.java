@@ -49,16 +49,31 @@ public class ConfRmCalBean extends CalendarBean {
     public void deleteListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             OperationBinding binding = ADFUtils.findOperation("deleteByPK");
-            String clsRmCalId = this.getCurrActivity().getActivity().getId();
+            String clsRmCalId = this.getCurrActivity().getId();
+            String title = getCurrActivity().getTitle();
+            String userId = getCurrActivity().getUserId();
+            String dateStr = getDateString();
+            String noteTitle = "您为会议主题：" + title + " 所做的会议室申请已取消。 ";
+            String noteContent = " 取消时间：" + dateStr;
+            
             //            System.err.println("to del act id: " + clsRmCalId);
-            binding.getParamsMap().put("confRmCalId", clsRmCalId);
+            binding.getParamsMap().put("clsRmCalId", clsRmCalId);
             binding.execute();
             if (binding.getErrors().isEmpty()) {
                 this._currActivity = null;
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
-                refreshCalendar(calendar);
+                refreshCalendar(calendar);                
+                sendNotification(noteTitle, noteContent, userId, null);
+                ADFUtils.findOperation("Commit").execute();
             }
+            
         }
+    }
+    
+    protected String getDateString() {
+        java.text.DateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String  dateStr = format.format(new Date());
+        return dateStr;
     }
 
 

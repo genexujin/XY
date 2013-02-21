@@ -22,7 +22,7 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
     }
 
     public void newRow(String userDisplayName, String userId) {
-        this.executeEmptyRowSet();
+        
         Row newRow = this.createRow();
         newRow.setAttribute("UserDisplayName", userDisplayName);
         newRow.setAttribute("UserId", userId);
@@ -59,13 +59,15 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
      * @param clsRmCalId
      */
     public void deleteByPK(String clsRmCalId) {
+        
         this.queryByPK(clsRmCalId);
         Row[] rows = this.getAllRowsInRange();
         if (rows != null && rows.length > 0) {
-            rows[0].setAttribute("State", Constants.STATE_CANCELED);
+//            rows[0].setAttribute("State", Constants.STATE_CANCELED);
             //rows[0].removeFromCollection();
-            //rows[0].remove();
+            rows[0].remove();
             this.getDBTransaction().commit();
+            //System.err.println("delete clsRmCalId " + clsRmCalId);
         }
     }
 

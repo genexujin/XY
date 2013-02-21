@@ -7,12 +7,14 @@ import edu.hp.view.utils.JSFUtils;
 
 import java.math.BigDecimal;
 
+import oracle.jbo.AttributeDef;
 import oracle.jbo.Key;
 import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Timestamp;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
+import oracle.jbo.server.TransactionEvent;
 
 
 // ---------------------------------------------------------------------
@@ -277,6 +279,19 @@ public class VehicleCalendarImpl extends EntityImpl {
      * This is the default constructor (do not remove).
      */
     public VehicleCalendarImpl() {
+    }
+
+    public void remove() {
+        setAttribute("State", Constants.STATE_CANCELED);
+        super.remove();
+    }
+
+    protected void doDML(int operation, TransactionEvent e) {
+
+        if (operation == DML_DELETE) {
+            operation = DML_UPDATE;
+        }
+        super.doDML(operation, e);
     }
 
     /**

@@ -317,6 +317,13 @@ public class ConfRoomCalendarImpl extends EntityImpl {
     }
 
 
+    public void remove() {
+        setAttribute("State", Constants.STATE_CANCELED);
+        super.remove();
+        //System.err.println("set status");
+    }
+
+
     /**
      * @return the definition object for this instance class.
      */
@@ -330,6 +337,10 @@ public class ConfRoomCalendarImpl extends EntityImpl {
      * @param e the transaction event
      */
     protected void doDML(int operation, TransactionEvent e) {
+        if (operation == DML_DELETE) {
+            operation = DML_UPDATE;
+        }
+        
         if (operation == DML_INSERT || operation == DML_UPDATE) {
             if (this.getAllday().equals("ALLDAY")) {
                 Timestamp actEndTime = this.getEndTime();

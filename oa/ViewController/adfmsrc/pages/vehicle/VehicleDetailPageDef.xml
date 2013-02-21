@@ -101,5 +101,10 @@
         <Item Value="SubmitDate"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

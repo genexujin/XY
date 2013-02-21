@@ -38,11 +38,11 @@
                             <af:commandToolbarButton text="新申请" id="ctb1" icon="/images/icons/tasks.png"
                                                      actionListener="#{bindings.newRow.execute}"
                                                      rendered="#{pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='planner'}"/>
-                            <af:commandToolbarButton text="删除" id="ctb3" icon="/images/icons/delete.png"
+                            <!--af:commandToolbarButton text="删除" id="ctb3" icon="/images/icons/delete.png"
                                                      visible="#{bindings.State.inputValue=='未提交'}"
                                                      rendered="#{pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='planner'}">
                                 <af:showPopupBehavior triggerType="click" popupId="delete"/>
-                            </af:commandToolbarButton>
+                            </af:commandToolbarButton-->
                             <af:commandToolbarButton text="取消所有操作" id="ctb2" icon="/images/icons/rollback.png"
                                                      actionListener="#{bindings.Rollback.execute}"/>
                             <af:commandToolbarButton id="ctb4" icon="/images/icons/refresh.png" text="刷新"

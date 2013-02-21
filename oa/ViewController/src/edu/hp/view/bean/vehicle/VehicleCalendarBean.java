@@ -20,6 +20,7 @@ import oracle.adf.view.rich.model.CalendarActivity;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Timestamp;
 
 
@@ -29,7 +30,7 @@ public class VehicleCalendarBean extends CalendarBean {
     private boolean changeMade = false;
     private Timestamp startDayTime = null;
     private String vehicleId = null;
-    private String action = "save";
+    private String action = "new";
 
     public VehicleCalendarBean() {
 
@@ -62,6 +63,11 @@ public class VehicleCalendarBean extends CalendarBean {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             OperationBinding binding = ADFUtils.findOperation("deleteByPK");
             String clsRmCalId = this.getCurrActivity().getActivity().getId();
+            String title = getCurrActivity().getTitle();
+            String userId = getCurrActivity().getUserId();
+            String dateStr = getDateString();
+            String noteTitle = "您为事由：" + title + " 所做的用车申请已取消。 ";
+            String noteContent = " 取消时间：" + dateStr;
             //            System.err.println("to del act id: " + clsRmCalId);
             binding.getParamsMap().put("vehicleActId", clsRmCalId);
             binding.execute();
@@ -69,6 +75,9 @@ public class VehicleCalendarBean extends CalendarBean {
                 this._currActivity = null;
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
                 refreshCalendar(calendar);
+                sendNotification(noteTitle, noteContent, userId, null);
+                ADFUtils.findOperation("Commit").execute();
+//                System.err.println("refreshed!");
             }
 
         }
@@ -164,6 +173,11 @@ public class VehicleCalendarBean extends CalendarBean {
     }
 
     public String save() {
+        
+        String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+        if (Integer.valueOf(id) > 0 && action.equals("new"))
+            action = "save";
+        
         startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
         Timestamp submit = (Timestamp)ADFUtils.getBoundAttributeValue("SubmitDate");
         if (submit == null)

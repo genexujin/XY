@@ -17,6 +17,8 @@ public class ConfRoomQueryViewImpl extends ViewObjectImpl implements ConfRoomQue
      */
     public ConfRoomQueryViewImpl() {
     }
+    
+    
 
     public void findByUserId(boolean enabled, String userId) {
 

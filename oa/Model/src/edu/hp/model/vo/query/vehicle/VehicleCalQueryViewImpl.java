@@ -33,8 +33,10 @@ public class VehicleCalQueryViewImpl extends ViewObjectImpl implements VehicleCa
     }
 
     public void refreshCalendar(String vehicleIds) {
+//        System.err.println(vehicleIds);
         this.setvehicleIds(vehicleIds);
         this.executeQuery();
+//        System.err.println("query executed!");
     }
 
     /**
@@ -61,13 +63,6 @@ public class VehicleCalQueryViewImpl extends ViewObjectImpl implements VehicleCa
         return (String)getNamedWhereClauseParam("initStat");
     }
 
-    /**
-     * Sets <code>value</code> for bind variable initStat.
-     * @param value value to bind as initStat
-     */
-    public void setinitStat(String value) {
-        setNamedWhereClauseParam("initStat", value);
-    }
 
     /**
      * Returns the variable value for userId.

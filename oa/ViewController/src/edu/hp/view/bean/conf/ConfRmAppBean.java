@@ -84,6 +84,7 @@ public class ConfRmAppBean extends BaseBean {
             }
         } else {
             JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
+            ADFUtils.setBoundAttributeValue("State", state);
         }
         
         //refreshTableIterator();

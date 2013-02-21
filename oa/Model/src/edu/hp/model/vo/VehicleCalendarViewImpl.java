@@ -24,7 +24,7 @@ public class VehicleCalendarViewImpl extends BaseView implements VehicleCalendar
  
     
     public void newRow(String userDisplayName, String userId) {
-        this.executeEmptyRowSet();
+        //this.executeEmptyRowSet();
         Row newRow = this.createRow();
         newRow.setAttribute("UserDisplayName", userDisplayName);
         newRow.setAttribute("UserId", userId);
@@ -47,8 +47,8 @@ public class VehicleCalendarViewImpl extends BaseView implements VehicleCalendar
        
         Row[] rows = this.getAllRowsInRange();
         if (rows != null && rows.length > 0) {
-            System.err.println("Row id: " + rows[0].getAttribute("Id"));
-            System.err.println(rows[0].getAttribute("StartTime"));
+            //System.err.println("Row id: " + rows[0].getAttribute("Id"));
+            //System.err.println(rows[0].getAttribute("StartTime"));
             //rows[0].removeFromCollection();
             rows[0].setAttribute("EndTime", endTime);
             this.getDBTransaction().commit();
@@ -61,8 +61,8 @@ public class VehicleCalendarViewImpl extends BaseView implements VehicleCalendar
         Row[] rows = this.getAllRowsInRange();
         if (rows != null && rows.length > 0) {
             //rows[0].removeFromCollection();
-            //rows[0].remove();
-            rows[0].setAttribute("State", Constants.STATE_CANCELED);
+            rows[0].remove();
+//            rows[0].setAttribute("State", Constants.STATE_CANCELED);
             this.getDBTransaction().commit();
         }
     }

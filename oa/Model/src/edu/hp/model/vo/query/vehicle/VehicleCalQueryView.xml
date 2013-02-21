@@ -29,8 +29,9 @@
     DefaultValue="NA"/>
   <Variable
     Name="initStat"
-    Kind="where"
-    Type="java.lang.String">
+    Kind="viewcriteria"
+    Type="java.lang.String"
+    IsUpdateable="false">
     <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_TRIP_PLANNED]]></TransientExpression>
   </Variable>
   <Variable
@@ -79,7 +80,7 @@ WHERE VehicleCalendar.VEHICLE_ID IN
     FROM
       dual CONNECT BY regexp_substr(:vehicleIds, '[^,]+', 1, level) IS NOT NULL
   )
-AND VehicleCalendar.STATE = :initStat]]></SQLQuery>
+AND VehicleCalendar.STATE = '已调度']]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"
