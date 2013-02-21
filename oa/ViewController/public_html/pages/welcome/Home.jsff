@@ -64,7 +64,8 @@
                                         <af:spacer width="10" height="10" id="s14"/>
                                         <af:commandImageLink id="ot4" text="#{task.Title}"
                                                              actionListener="#{viewScope.HomeOperationBean.openTask}"
-                                                             disabled="#{task.State!='PENDING'}">
+                                                             disabled="#{task.State!='PENDING'}"
+                                                             inlineStyle="font-size:120%;">
                                             <af:clientAttribute value="#{task.ContextObjectId}" name="contextObjectId"/>
                                             <af:clientAttribute value="#{task.ContextObjectType}"
                                                                 name="contextObjectType"/>

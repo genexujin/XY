@@ -1,6 +1,7 @@
 package edu.hp.model.vo;
 
 import edu.hp.model.common.BaseView;
+import edu.hp.model.common.Constants;
 import edu.hp.model.vo.common.ConfRoomCalendarView;
 
 import oracle.jbo.Row;
@@ -45,21 +46,25 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
         //System.err.println(endTime);
         Row[] rows = this.getAllRowsInRange();
         if (rows != null && rows.length > 0) {
-            System.err.println("Row id: " + rows[0].getAttribute("Id"));
-            System.err.println(rows[0].getAttribute("StartTime"));
+            //System.err.println("Row id: " + rows[0].getAttribute("Id"));
+            //System.err.println(rows[0].getAttribute("StartTime"));
             //rows[0].removeFromCollection();
             rows[0].setAttribute("EndTime", endTime);
             this.getDBTransaction().commit();
         }
     }
 
-
+/**
+     * 注意！已经改为cancel这个申请
+     * @param clsRmCalId
+     */
     public void deleteByPK(String clsRmCalId) {
         this.queryByPK(clsRmCalId);
         Row[] rows = this.getAllRowsInRange();
         if (rows != null && rows.length > 0) {
+            rows[0].setAttribute("State", Constants.STATE_CANCELED);
             //rows[0].removeFromCollection();
-            rows[0].remove();
+            //rows[0].remove();
             this.getDBTransaction().commit();
         }
     }

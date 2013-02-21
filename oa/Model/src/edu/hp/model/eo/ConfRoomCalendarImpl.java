@@ -1,5 +1,9 @@
 package edu.hp.model.eo;
 
+import edu.hp.model.common.Constants;
+import edu.hp.view.security.LoginUser;
+import edu.hp.view.utils.JSFUtils;
+
 import java.math.BigDecimal;
 
 import java.util.Calendar;
@@ -740,6 +744,24 @@ public class ConfRoomCalendarImpl extends EntityImpl {
             return;
         }
         super.setAttrInvokeAccessor(index, value, attrDef);
+    }
+
+    /**
+     * Validation method for ConfRoomCalendar.
+     */
+    public boolean validateStartDate() {
+        
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null && getStartTime() != null) {
+            
+            long delta = this.getStartTime().getTime() - System.currentTimeMillis();
+            delta = delta/1000/60/60/24;
+            
+            if (delta > 14) {
+                return false;
+            }
+        }        
+        return true;
     }
 
     /**

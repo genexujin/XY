@@ -489,6 +489,30 @@
     </validation:MsgIds>
     <validation:TransientExpression><![CDATA[Participants!=null]]></validation:TransientExpression>
   </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ConfRoomCalendar_Rule_6"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="START_TIME_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[StartTime!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ConfRoomCalendar_Rule_7"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="END_TIME_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[EndTime!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:MethodValidationBean
+    Name="ConfRoomCalendar_Rule_8"
+    ResId="START_TIME_MUST_LESS_THAN"
+    MethodName="validateStartDate"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

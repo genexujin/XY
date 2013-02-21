@@ -2,6 +2,7 @@ package edu.hp.view.bean.conf;
 
 import edu.hp.model.common.Constants;
 import edu.hp.view.bean.BaseBean;
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
@@ -44,9 +45,10 @@ public class ConfCalDetailBean extends BaseBean {
                 String title = (String)ADFUtils.getBoundAttributeValue("Title");
                 String noteTitle;
                 String dateStr = getDateString();
-                String noteContent;
+                String noteContent;                
+                LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
                 if(action.equals("save")&&state.equals(Constants.STATE_REVIEWED)){
-                    noteTitle = "您为会议主题：" + title + " 所做的会议室申请已修改。 ";
+                    noteTitle = "您为会议主题：" + title + " 所做的会议室申请已被"+user.getDisplayName()+"修改。 ";
                     noteContent = " 修改时间：" + dateStr;
                 }
                 else if(action.equals("cancel")) {

@@ -2,8 +2,14 @@ package edu.hp.model.eo;
 
 import edu.hp.model.common.Constants;
 
+import edu.hp.view.security.LoginUser;
+import edu.hp.view.utils.JSFUtils;
+
+import java.math.BigDecimal;
+
 import oracle.jbo.Key;
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Timestamp;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
@@ -17,9 +23,643 @@ import oracle.jbo.server.EntityImpl;
 // ---------------------------------------------------------------------
 public class VehicleCalendarImpl extends EntityImpl {
     /**
+     * AttributesEnum: generated enum for identifying attributes and accessors. Do not modify.
+     */
+    public enum AttributesEnum {
+        Id {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getId();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setId((DBSequence)value);
+            }
+        },
+        UserDisplayName {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getUserDisplayName();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setUserDisplayName((String)value);
+            }
+        },
+        VehicleName {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getVehicleName();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setVehicleName((String)value);
+            }
+        },
+        VehicleId {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getVehicleId();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setVehicleId((String)value);
+            }
+        },
+        Title {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getTitle();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setTitle((String)value);
+            }
+        },
+        ContactId {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getContactId();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setContactId((String)value);
+            }
+        },
+        ContactName {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getContactName();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setContactName((String)value);
+            }
+        },
+        ContactPhone {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getContactPhone();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setContactPhone((String)value);
+            }
+        },
+        State {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getState();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setState((String)value);
+            }
+        },
+        ReturnTrip {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getReturnTrip();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setReturnTrip((String)value);
+            }
+        },
+        StartTime {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getStartTime();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setStartTime((Timestamp)value);
+            }
+        },
+        EndTime {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getEndTime();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setEndTime((Timestamp)value);
+            }
+        },
+        ReturnStartTime {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getReturnStartTime();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setReturnStartTime((Timestamp)value);
+            }
+        },
+        ReturnEndTime {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getReturnEndTime();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setReturnEndTime((Timestamp)value);
+            }
+        },
+        TripStart {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getTripStart();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setTripStart((String)value);
+            }
+        },
+        TripDest {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getTripDest();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setTripDest((String)value);
+            }
+        },
+        ReturnTripStart {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getReturnTripStart();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setReturnTripStart((String)value);
+            }
+        },
+        ReturnTripEnd {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getReturnTripEnd();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setReturnTripEnd((String)value);
+            }
+        },
+        NumOfPeople {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getNumOfPeople();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setNumOfPeople((BigDecimal)value);
+            }
+        },
+        Comments {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getComments();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setComments((String)value);
+            }
+        },
+        UserId {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getUserId();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setUserId((String)value);
+            }
+        },
+        SubmitDate {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getSubmitDate();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setSubmitDate((Timestamp)value);
+            }
+        };
+        private static AttributesEnum[] vals = null;
+        private static int firstIndex = 0;
+
+        public abstract Object get(VehicleCalendarImpl object);
+
+        public abstract void put(VehicleCalendarImpl object, Object value);
+
+        public int index() {
+            return AttributesEnum.firstIndex() + ordinal();
+        }
+
+        public static int firstIndex() {
+            return firstIndex;
+        }
+
+        public static int count() {
+            return AttributesEnum.firstIndex() + AttributesEnum.staticValues().length;
+        }
+
+        public static AttributesEnum[] staticValues() {
+            if (vals == null) {
+                vals = AttributesEnum.values();
+            }
+            return vals;
+        }
+    }
+    public static final int ID = AttributesEnum.Id.index();
+    public static final int USERDISPLAYNAME = AttributesEnum.UserDisplayName.index();
+    public static final int VEHICLENAME = AttributesEnum.VehicleName.index();
+    public static final int VEHICLEID = AttributesEnum.VehicleId.index();
+    public static final int TITLE = AttributesEnum.Title.index();
+    public static final int CONTACTID = AttributesEnum.ContactId.index();
+    public static final int CONTACTNAME = AttributesEnum.ContactName.index();
+    public static final int CONTACTPHONE = AttributesEnum.ContactPhone.index();
+    public static final int STATE = AttributesEnum.State.index();
+    public static final int RETURNTRIP = AttributesEnum.ReturnTrip.index();
+    public static final int STARTTIME = AttributesEnum.StartTime.index();
+    public static final int ENDTIME = AttributesEnum.EndTime.index();
+    public static final int RETURNSTARTTIME = AttributesEnum.ReturnStartTime.index();
+    public static final int RETURNENDTIME = AttributesEnum.ReturnEndTime.index();
+    public static final int TRIPSTART = AttributesEnum.TripStart.index();
+    public static final int TRIPDEST = AttributesEnum.TripDest.index();
+    public static final int RETURNTRIPSTART = AttributesEnum.ReturnTripStart.index();
+    public static final int RETURNTRIPEND = AttributesEnum.ReturnTripEnd.index();
+    public static final int NUMOFPEOPLE = AttributesEnum.NumOfPeople.index();
+    public static final int COMMENTS = AttributesEnum.Comments.index();
+    public static final int USERID = AttributesEnum.UserId.index();
+    public static final int SUBMITDATE = AttributesEnum.SubmitDate.index();
+
+    /**
      * This is the default constructor (do not remove).
      */
     public VehicleCalendarImpl() {
+    }
+
+    /**
+     * Gets the attribute value for Id, using the alias name Id.
+     * @return the value of Id
+     */
+    public DBSequence getId() {
+        return (DBSequence)getAttributeInternal(ID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for Id.
+     * @param value value to set the Id
+     */
+    public void setId(DBSequence value) {
+        setAttributeInternal(ID, value);
+    }
+
+    /**
+     * Gets the attribute value for UserDisplayName, using the alias name UserDisplayName.
+     * @return the value of UserDisplayName
+     */
+    public String getUserDisplayName() {
+        return (String)getAttributeInternal(USERDISPLAYNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for UserDisplayName.
+     * @param value value to set the UserDisplayName
+     */
+    public void setUserDisplayName(String value) {
+        setAttributeInternal(USERDISPLAYNAME, value);
+    }
+
+    /**
+     * Gets the attribute value for VehicleName, using the alias name VehicleName.
+     * @return the value of VehicleName
+     */
+    public String getVehicleName() {
+        return (String)getAttributeInternal(VEHICLENAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for VehicleName.
+     * @param value value to set the VehicleName
+     */
+    public void setVehicleName(String value) {
+        setAttributeInternal(VEHICLENAME, value);
+    }
+
+    /**
+     * Gets the attribute value for VehicleId, using the alias name VehicleId.
+     * @return the value of VehicleId
+     */
+    public String getVehicleId() {
+        return (String)getAttributeInternal(VEHICLEID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for VehicleId.
+     * @param value value to set the VehicleId
+     */
+    public void setVehicleId(String value) {
+        setAttributeInternal(VEHICLEID, value);
+    }
+
+    /**
+     * Gets the attribute value for Title, using the alias name Title.
+     * @return the value of Title
+     */
+    public String getTitle() {
+        return (String)getAttributeInternal(TITLE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for Title.
+     * @param value value to set the Title
+     */
+    public void setTitle(String value) {
+        setAttributeInternal(TITLE, value);
+    }
+
+    /**
+     * Gets the attribute value for ContactId, using the alias name ContactId.
+     * @return the value of ContactId
+     */
+    public String getContactId() {
+        return (String)getAttributeInternal(CONTACTID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ContactId.
+     * @param value value to set the ContactId
+     */
+    public void setContactId(String value) {
+        setAttributeInternal(CONTACTID, value);
+    }
+
+    /**
+     * Gets the attribute value for ContactName, using the alias name ContactName.
+     * @return the value of ContactName
+     */
+    public String getContactName() {
+        return (String)getAttributeInternal(CONTACTNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ContactName.
+     * @param value value to set the ContactName
+     */
+    public void setContactName(String value) {
+        setAttributeInternal(CONTACTNAME, value);
+    }
+
+    /**
+     * Gets the attribute value for ContactPhone, using the alias name ContactPhone.
+     * @return the value of ContactPhone
+     */
+    public String getContactPhone() {
+        return (String)getAttributeInternal(CONTACTPHONE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ContactPhone.
+     * @param value value to set the ContactPhone
+     */
+    public void setContactPhone(String value) {
+        setAttributeInternal(CONTACTPHONE, value);
+    }
+
+    /**
+     * Gets the attribute value for State, using the alias name State.
+     * @return the value of State
+     */
+    public String getState() {
+        return (String)getAttributeInternal(STATE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for State.
+     * @param value value to set the State
+     */
+    public void setState(String value) {
+        setAttributeInternal(STATE, value);
+    }
+
+    /**
+     * Gets the attribute value for ReturnTrip, using the alias name ReturnTrip.
+     * @return the value of ReturnTrip
+     */
+    public String getReturnTrip() {
+        return (String)getAttributeInternal(RETURNTRIP);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ReturnTrip.
+     * @param value value to set the ReturnTrip
+     */
+    public void setReturnTrip(String value) {
+        setAttributeInternal(RETURNTRIP, value);
+    }
+
+    /**
+     * Gets the attribute value for StartTime, using the alias name StartTime.
+     * @return the value of StartTime
+     */
+    public Timestamp getStartTime() {
+        return (Timestamp)getAttributeInternal(STARTTIME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for StartTime.
+     * @param value value to set the StartTime
+     */
+    public void setStartTime(Timestamp value) {
+        setAttributeInternal(STARTTIME, value);
+    }
+
+    /**
+     * Gets the attribute value for EndTime, using the alias name EndTime.
+     * @return the value of EndTime
+     */
+    public Timestamp getEndTime() {
+        return (Timestamp)getAttributeInternal(ENDTIME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for EndTime.
+     * @param value value to set the EndTime
+     */
+    public void setEndTime(Timestamp value) {
+        setAttributeInternal(ENDTIME, value);
+    }
+
+    /**
+     * Gets the attribute value for ReturnStartTime, using the alias name ReturnStartTime.
+     * @return the value of ReturnStartTime
+     */
+    public Timestamp getReturnStartTime() {
+        return (Timestamp)getAttributeInternal(RETURNSTARTTIME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ReturnStartTime.
+     * @param value value to set the ReturnStartTime
+     */
+    public void setReturnStartTime(Timestamp value) {
+        setAttributeInternal(RETURNSTARTTIME, value);
+    }
+
+    /**
+     * Gets the attribute value for ReturnEndTime, using the alias name ReturnEndTime.
+     * @return the value of ReturnEndTime
+     */
+    public Timestamp getReturnEndTime() {
+        return (Timestamp)getAttributeInternal(RETURNENDTIME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ReturnEndTime.
+     * @param value value to set the ReturnEndTime
+     */
+    public void setReturnEndTime(Timestamp value) {
+        setAttributeInternal(RETURNENDTIME, value);
+    }
+
+    /**
+     * Gets the attribute value for TripStart, using the alias name TripStart.
+     * @return the value of TripStart
+     */
+    public String getTripStart() {
+        return (String)getAttributeInternal(TRIPSTART);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for TripStart.
+     * @param value value to set the TripStart
+     */
+    public void setTripStart(String value) {
+        setAttributeInternal(TRIPSTART, value);
+    }
+
+    /**
+     * Gets the attribute value for TripDest, using the alias name TripDest.
+     * @return the value of TripDest
+     */
+    public String getTripDest() {
+        return (String)getAttributeInternal(TRIPDEST);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for TripDest.
+     * @param value value to set the TripDest
+     */
+    public void setTripDest(String value) {
+        setAttributeInternal(TRIPDEST, value);
+    }
+
+    /**
+     * Gets the attribute value for ReturnTripStart, using the alias name ReturnTripStart.
+     * @return the value of ReturnTripStart
+     */
+    public String getReturnTripStart() {
+        return (String)getAttributeInternal(RETURNTRIPSTART);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ReturnTripStart.
+     * @param value value to set the ReturnTripStart
+     */
+    public void setReturnTripStart(String value) {
+        setAttributeInternal(RETURNTRIPSTART, value);
+    }
+
+    /**
+     * Gets the attribute value for ReturnTripEnd, using the alias name ReturnTripEnd.
+     * @return the value of ReturnTripEnd
+     */
+    public String getReturnTripEnd() {
+        return (String)getAttributeInternal(RETURNTRIPEND);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ReturnTripEnd.
+     * @param value value to set the ReturnTripEnd
+     */
+    public void setReturnTripEnd(String value) {
+        setAttributeInternal(RETURNTRIPEND, value);
+    }
+
+    /**
+     * Gets the attribute value for NumOfPeople, using the alias name NumOfPeople.
+     * @return the value of NumOfPeople
+     */
+    public BigDecimal getNumOfPeople() {
+        return (BigDecimal)getAttributeInternal(NUMOFPEOPLE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for NumOfPeople.
+     * @param value value to set the NumOfPeople
+     */
+    public void setNumOfPeople(BigDecimal value) {
+        setAttributeInternal(NUMOFPEOPLE, value);
+    }
+
+    /**
+     * Gets the attribute value for Comments, using the alias name Comments.
+     * @return the value of Comments
+     */
+    public String getComments() {
+        return (String)getAttributeInternal(COMMENTS);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for Comments.
+     * @param value value to set the Comments
+     */
+    public void setComments(String value) {
+        setAttributeInternal(COMMENTS, value);
+    }
+
+    /**
+     * Gets the attribute value for UserId, using the alias name UserId.
+     * @return the value of UserId
+     */
+    public String getUserId() {
+        return (String)getAttributeInternal(USERID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for UserId.
+     * @param value value to set the UserId
+     */
+    public void setUserId(String value) {
+        setAttributeInternal(USERID, value);
+    }
+
+    /**
+     * Gets the attribute value for SubmitDate, using the alias name SubmitDate.
+     * @return the value of SubmitDate
+     */
+    public Timestamp getSubmitDate() {
+        return (Timestamp)getAttributeInternal(SUBMITDATE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for SubmitDate.
+     * @param value value to set the SubmitDate
+     */
+    public void setSubmitDate(Timestamp value) {
+        setAttributeInternal(SUBMITDATE, value);
+    }
+
+    /**
+     * getAttrInvokeAccessor: generated method. Do not modify.
+     * @param index the index identifying the attribute
+     * @param attrDef the attribute
+
+     * @return the attribute value
+     * @throws Exception
+     */
+    protected Object getAttrInvokeAccessor(int index, AttributeDefImpl attrDef) throws Exception {
+        if ((index >= AttributesEnum.firstIndex()) && (index < AttributesEnum.count())) {
+            return AttributesEnum.staticValues()[index - AttributesEnum.firstIndex()].get(this);
+        }
+        return super.getAttrInvokeAccessor(index, attrDef);
+    }
+
+    /**
+     * setAttrInvokeAccessor: generated method. Do not modify.
+     * @param index the index identifying the attribute
+     * @param value the value to assign to the attribute
+     * @param attrDef the attribute
+
+     * @throws Exception
+     */
+    protected void setAttrInvokeAccessor(int index, Object value, AttributeDefImpl attrDef) throws Exception {
+        if ((index >= AttributesEnum.firstIndex()) && (index < AttributesEnum.count())) {
+            AttributesEnum.staticValues()[index - AttributesEnum.firstIndex()].put(this, value);
+            return;
+        }
+        super.setAttrInvokeAccessor(index, value, attrDef);
     }
 
     /**
@@ -28,7 +668,7 @@ public class VehicleCalendarImpl extends EntityImpl {
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(DBSequence id) {
-        return new Key(new Object[]{id});
+        return new Key(new Object[] { id });
     }
 
     /**
@@ -38,6 +678,23 @@ public class VehicleCalendarImpl extends EntityImpl {
         return EntityDefImpl.findDefObject("edu.hp.model.eo.VehicleCalendar");
     }
 
+    /**
+     * Validation method for VehicleCalendar.
+     */
+    public boolean validateStartDate() {
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        if (user.getIsUserInRole().get(Constants.ROLE_ZONGWU_MGR) == null && getStartTime() != null) {
+
+            long delta = this.getStartTime().getTime() - System.currentTimeMillis();
+            delta = delta / 1000 / 60 / 60 / 24;
+
+            if (delta > 28 || delta < 2) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     /**
      * Validation method for VehicleCalendar.
@@ -45,8 +702,8 @@ public class VehicleCalendarImpl extends EntityImpl {
     public boolean validateVehicle() {
         String state = (String)getAttribute("State");
         String vehicleId = (String)getAttribute("VehicleId");
-        if(state!=null&&state.equals(Constants.STATE_TRIP_PLANNED)&&vehicleId==null)
-            return false;                
+        if (state != null && state.equals(Constants.STATE_TRIP_PLANNED) && vehicleId == null)
+            return false;
         return true;
     }
 

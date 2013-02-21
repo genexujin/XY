@@ -1,6 +1,7 @@
 package edu.hp.model.vo;
 
 import edu.hp.model.common.BaseView;
+import edu.hp.model.common.Constants;
 import edu.hp.model.vo.common.VehicleCalendarView;
 
 import oracle.jbo.Row;
@@ -60,7 +61,8 @@ public class VehicleCalendarViewImpl extends BaseView implements VehicleCalendar
         Row[] rows = this.getAllRowsInRange();
         if (rows != null && rows.length > 0) {
             //rows[0].removeFromCollection();
-            rows[0].remove();
+            //rows[0].remove();
+            rows[0].setAttribute("State", Constants.STATE_CANCELED);
             this.getDBTransaction().commit();
         }
     }

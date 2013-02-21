@@ -5,6 +5,7 @@ import edu.hp.model.pojo.Notification;
 import edu.hp.view.bean.BaseBean;
 import edu.hp.view.bean.common.CalendarBean;
 import edu.hp.view.bean.common.OACalendarActivity;
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
@@ -184,9 +185,9 @@ public class VehicleCalendarBean extends CalendarBean {
         String noteTitle;
         String noteContent;
         String dateStr = getDateString();
-
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
         if (action.equals("save") && state.equals(Constants.STATE_TRIP_PLANNED)) {
-            noteTitle = "您的车辆预订：" + title + " 已完成调度并被修改。 ";
+            noteTitle = "您的车辆预订：" + title + " 已完成调度并被"+user.getDisplayName()+"修改。 ";
             noteContent = " 修改时间：" + dateStr + " 使用的车辆为：" + vehicleName;
             //System.err.println("sent as saved");
         } else if (action.equals("cancel")) {

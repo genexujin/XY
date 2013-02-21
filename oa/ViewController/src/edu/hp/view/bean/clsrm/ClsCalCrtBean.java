@@ -9,6 +9,8 @@ import java.util.Calendar;
 
 import java.util.Date;
 
+import javax.faces.event.ValueChangeEvent;
+
 import oracle.adf.model.binding.DCIteratorBinding;
 
 import oracle.binding.OperationBinding;
@@ -27,9 +29,10 @@ public class ClsCalCrtBean extends BaseBean {
     private boolean changeMade = false;
     private Timestamp startDayTime = null;
     private String clsRmId = null;
+    
 
     public String save() {
-        //Todo： 产生请购订单
+        
         if (ensureTimeConflicts()) {
             boolean success = ADFUtils.commit("教室预订已保存！", "预订保存失败，请核对输入的信息或联系管理员！");
             if (success) {
@@ -95,4 +98,6 @@ public class ClsCalCrtBean extends BaseBean {
         }
         return "Calendar";
     }
+    
+    
 }

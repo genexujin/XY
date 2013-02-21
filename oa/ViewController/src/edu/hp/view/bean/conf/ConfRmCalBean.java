@@ -58,7 +58,6 @@ public class ConfRmCalBean extends CalendarBean {
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
                 refreshCalendar(calendar);
             }
-
         }
     }
 

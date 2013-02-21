@@ -14,6 +14,7 @@
   RowClass="edu.hp.model.eo.VehicleCalendarImpl">
   <DesignTime>
     <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
   </DesignTime>
   <Attribute
     Name="Id"
@@ -524,6 +525,10 @@
         Value="NumOfPeople"/>
     </validation:OnAttributes>
   </validation:CompareValidationBean>
+  <validation:MethodValidationBean
+    Name="VehicleCalendar_Rule_9"
+    ResId="VEHICLE_START_DATE_RULE"
+    MethodName="validateStartDate"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

@@ -101,7 +101,7 @@
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.StartTime.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.StartTime.label}" id="c7">
               <af:outputText value="#{row.StartTime}" id="ot5">
-                <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.StartTime.format}"/>
+                <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.StartTime.format}" type="both"/>
               </af:outputText>
               <f:facet name="filter">
                 <af:inputDate value="#{vs.filterCriteria.StartTime}" id="id1">
@@ -112,7 +112,7 @@
             <af:column sortProperty="#{bindings.ConfRoomCalendarView.hints.EndTime.name}" filterable="true"
                        sortable="true" headerText="#{bindings.ConfRoomCalendarView.hints.EndTime.label}" id="c8">
               <af:outputText value="#{row.EndTime}" id="ot6">
-                <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.EndTime.format}"/>
+                <af:convertDateTime pattern="#{bindings.ConfRoomCalendarView.hints.EndTime.format}" type="both"/>
               </af:outputText>
               <f:facet name="filter">
                 <af:inputDate value="#{vs.filterCriteria.EndTime}" id="id6">
@@ -247,7 +247,7 @@
                           required="#{bindings.Comments.hints.mandatory}"
                           columns="#{bindings.Comments.hints.displayWidth}"
                           maximumLength="#{bindings.Comments.hints.precision}"
-                          shortDesc="#{bindings.Comments.hints.tooltip}" id="it3" rows="3">
+                          shortDesc="#{bindings.Comments.hints.tooltip}" id="it3" rows="3" contentStyle="resize:none;">
               <f:validator binding="#{bindings.Comments.validator}"/>
             </af:inputText>
             <af:inputText value="#{bindings.State.inputValue}" label="#{bindings.State.hints.label}"
@@ -281,7 +281,7 @@
             <af:selectOneChoice value="#{bindings.SnackLevel.inputValue}" label="#{bindings.SnackLevel.label}"
                                 required="#{bindings.SnackLevel.hints.mandatory}"
                                 shortDesc="#{bindings.SnackLevel.hints.tooltip}" id="soc11"
-                                readOnly="#{!sessionScope.LoginUserBean.isUserInRole['会议室审核']}">
+                                rendered="#{sessionScope.LoginUserBean.isUserInRole['会议室审核']}">
               <f:selectItems value="#{bindings.SnackLevel.items}" id="si13"/>
             </af:selectOneChoice>
           </af:panelGroupLayout>
@@ -295,7 +295,7 @@
             <af:commandButton text="提交" id="cb2" icon="/images/icons/run.png"
                               visible="#{(bindings.State.inputValue=='未提交'or bindings.State.inputValue=='已拒绝' or bindings.State.inputValue=='已取消')&amp;&amp; bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}" action="#{viewScope.ConfRmAppBean.submit}"/>
             <af:spacer width="10" height="10" id="s9"/>
-            <af:commandButton text="审核" id="cb3" icon="/images/icons/task.png"
+            <af:commandButton text="审核" id="cb3" icon="/images/icons/check.png"
                               visible="#{bindings.State.inputValue=='待审核'}"
                               action="#{viewScope.ConfRmAppBean.approve}"
                               rendered="#{sessionScope.LoginUserBean.isUserInRole['系统管理员'] or sessionScope.LoginUserBean.isUserInRole['会议室审核']}"/>

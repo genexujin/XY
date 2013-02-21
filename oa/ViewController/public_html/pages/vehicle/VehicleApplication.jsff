@@ -94,7 +94,8 @@
                         <af:column sortProperty="#{bindings.VehicleDML.hints.StartTime.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.StartTime.label}" id="c6">
                             <af:outputText value="#{row.StartTime}" id="ot5">
-                                <af:convertDateTime pattern="#{bindings.VehicleDML.hints.StartTime.format}"/>
+                                <af:convertDateTime pattern="#{bindings.VehicleDML.hints.StartTime.format}"
+                                                    type="both"/>
                             </af:outputText>
                             <f:facet name="filter">
                                 <af:inputDate value="#{vs.filterCriteria.StartTime}" id="id4">
@@ -105,7 +106,7 @@
                         <af:column sortProperty="#{bindings.VehicleDML.hints.EndTime.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.EndTime.label}" id="c7">
                             <af:outputText value="#{row.EndTime}" id="ot6">
-                                <af:convertDateTime pattern="#{bindings.VehicleDML.hints.EndTime.format}"/>
+                                <af:convertDateTime pattern="#{bindings.VehicleDML.hints.EndTime.format}" type="both"/>
                             </af:outputText>
                             <f:facet name="filter">
                                 <af:inputDate value="#{vs.filterCriteria.EndTime}" id="id1">
@@ -293,7 +294,7 @@
                                           action="#{viewScope.vehicleApplicationBean.submit}"
                                           rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}"/>
                         <af:spacer width="10" height="10" id="s9"/>
-                        <af:commandButton text="审核" id="cb3" icon="/images/icons/task.png"
+                        <af:commandButton text="审核" id="cb3" icon="/images/icons/check.png"
                                           visible="#{bindings.State.inputValue=='待审核' and  sessionScope.LoginUserBean.isUserInRole['车辆审核']}"
                                           action="#{viewScope.vehicleApplicationBean.approve}"/>
                         <af:spacer width="10" height="10" id="s10"/>

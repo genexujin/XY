@@ -1,8 +1,14 @@
 package edu.hp.model.eo;
 
+import edu.hp.model.common.Constants;
+import edu.hp.view.security.LoginUser;
+import edu.hp.view.utils.JSFUtils;
+
 import java.math.BigDecimal;
 
 import java.util.Calendar;
+
+import java.util.Date;
 
 import oracle.jbo.Key;
 import oracle.jbo.RowSet;
@@ -206,7 +212,7 @@ public class ClassroomCalendarImpl extends EntityImpl {
             }
 
             public void put(ClassroomCalendarImpl obj, Object value) {
-                obj.setClassroomBatchReservation((EntityImpl)value);
+                obj.setClassroomBatchReservation((ClassroomBatchReservationImpl)value);
             }
         },
         ClassroomCalendarConflitQuery1 {
@@ -561,14 +567,14 @@ public class ClassroomCalendarImpl extends EntityImpl {
     /**
      * @return the associated entity oracle.jbo.server.EntityImpl.
      */
-    public EntityImpl getClassroomBatchReservation() {
-        return (EntityImpl)getAttributeInternal(CLASSROOMBATCHRESERVATION);
+    public ClassroomBatchReservationImpl getClassroomBatchReservation() {
+        return (ClassroomBatchReservationImpl)getAttributeInternal(CLASSROOMBATCHRESERVATION);
     }
 
     /**
      * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
      */
-    public void setClassroomBatchReservation(EntityImpl value) {
+    public void setClassroomBatchReservation(ClassroomBatchReservationImpl value) {
         setAttributeInternal(CLASSROOMBATCHRESERVATION, value);
     }
 
@@ -577,6 +583,25 @@ public class ClassroomCalendarImpl extends EntityImpl {
      */
     public RowSet getClassroomCalendarConflitQuery1() {
         return (RowSet)getAttributeInternal(CLASSROOMCALENDARCONFLITQUERY1);
+    }
+
+    /**
+     * Validation method for ClassroomCalendar.
+     */
+    public boolean validateStartDate() {
+
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        if (user.getIsUserInRole().get(Constants.ROLE_CLSRM_ADMIN) == null && getActStartTime() != null) {
+            
+            long delta = getActStartTime().getTime() - System.currentTimeMillis();
+            delta = delta/1000/60/60/24;
+            
+            if (delta > 14) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

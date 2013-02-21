@@ -718,6 +718,16 @@
         Value="BatchEffectiveDate"/>
     </validation:OnAttributes>
   </validation:CompareValidationBean>
+  <validation:ExpressionValidationBean
+    Name="ClassroomBatchReservation_Rule_11"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="END_TIME_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[ActEndTime!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

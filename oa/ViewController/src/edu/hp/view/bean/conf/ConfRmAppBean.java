@@ -86,7 +86,7 @@ public class ConfRmAppBean extends BaseBean {
             JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
         }
         
-        refreshTableIterator();
+        //refreshTableIterator();
         //}
         return null;
     }
