@@ -19,6 +19,12 @@ public class VehicleCalQueryViewImpl extends ViewObjectImpl implements VehicleCa
     public VehicleCalQueryViewImpl() {
     }
     
+    public void findByDateRange(){
+        this.setApplyViewCriteriaNames(null);
+        this.applyViewCriteria(getViewCriteria("findByDateRange"));        
+        this.executeQuery();
+    }
+    
     public void findByUserId(boolean enabled, String userId) {
 
         if (enabled) {

@@ -9,4 +9,6 @@ public interface VehicleCalQueryView extends ViewObject {
     void findByUserId(boolean enabled, String userId);
 
     void refreshCalendar(String vehicleIds);
+
+    void findByDateRange();
 }

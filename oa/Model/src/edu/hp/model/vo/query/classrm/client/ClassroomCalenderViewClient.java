@@ -16,6 +16,12 @@ public class ClassroomCalenderViewClient extends ViewUsageImpl implements Classr
     public ClassroomCalenderViewClient() {
     }
 
+
+    public void findByDateRange() {
+        Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this,"findByDateRange",null,null);
+        return;
+    }
+
     public void findByUserId(boolean enabled, String userId) {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this,"findByUserId",new String [] {"boolean","java.lang.String"},new Object[] {new Boolean(enabled), userId});

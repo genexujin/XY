@@ -79,7 +79,14 @@ WHERE
     ColumnType="DATE"
     AliasName="ACT_END_TIME"
     Expression="ACT_END_TIME"
-    SQLType="DATE"/>
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.ActEndTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ActStartTime"
     IsUpdateable="false"
@@ -89,7 +96,14 @@ WHERE
     ColumnType="TIMESTAMP"
     AliasName="ACT_START_TIME"
     Expression="ACT_START_TIME"
-    SQLType="DATE"/>
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.ActStartTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ActTitle"
     IsUpdateable="false"
@@ -104,6 +118,12 @@ WHERE
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.ActTitle_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="AllDay"
@@ -119,6 +139,12 @@ WHERE
     <DesignTime>
       <Attr Name="_DisplaySize" Value="10"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.AllDay_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="BatchId"
@@ -149,6 +175,12 @@ WHERE
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.BatchNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Classroom"
@@ -164,6 +196,12 @@ WHERE
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.Classroom_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="ClassroomId"
@@ -194,6 +232,12 @@ WHERE
     <DesignTime>
       <Attr Name="_DisplaySize" Value="200"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.Comments_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="CreatedAt"
@@ -249,6 +293,12 @@ WHERE
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.LocationName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="NumOfPeople"
@@ -261,7 +311,14 @@ WHERE
     ColumnType="NUMBER"
     AliasName="NUM_OF_PEOPLE"
     Expression="NUM_OF_PEOPLE"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.NumOfPeople_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="UserDisplayName"
     IsUpdateable="false"
@@ -276,6 +333,12 @@ WHERE
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.classrm.ClassroomCalenderView.UserDisplayName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="UserId"
@@ -328,6 +391,66 @@ WHERE
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="findByDateRange"
+    ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomCalenderView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ClassroomCalenderViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        ViewAttribute="ActStartTime">
+        <ViewCriteria
+          Name="ClassroomCalenderViewCriteria_ClassroomCalenderViewCriteria_row_0_ActStartTime_itemHolder"
+          ViewObjectName="edu.hp.model.vo.query.classrm.ClassroomCalenderView"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="ClassroomCalenderViewCriteria_ClassroomCalenderViewCriteria_row_0_ActStartTime_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="ActStartTime"
+              ViewAttribute="ActStartTime"
+              Operator="ONORBEFORE"
+              Conjunction="AND"
+              Value=":endDate"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="ClassroomCalenderViewCriteria_ClassroomCalenderViewCriteria_row_0_ActStartTime_itemHolder_row_1"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="ClassroomCalenderViewCriteria_ClassroomCalenderViewCriteria_row_0_ActStartTime_ClassroomCalenderViewCriteria_ClassroomCalenderViewCriteria_row_0_ActStartTime_itemHolder_ClassroomCalenderViewCriteria_ClassroomCalenderViewCriteria_row_0_ActStartTime_itemHolder_row_1_ActStartTime"
+              ViewAttribute="ActStartTime"
+              Operator="ONORAFTER"
+              Conjunction="AND"
+              Value=":startDate"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>
@@ -356,6 +479,12 @@ WHERE
       <Parameter
         Name="userId"
         Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findByDateRange"
+      MethodName="findByDateRange">
+      <Return
+        Type="void"/>
     </Method>
   </ClientInterface>
 </ViewObject>

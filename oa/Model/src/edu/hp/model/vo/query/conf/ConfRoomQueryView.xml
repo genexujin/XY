@@ -125,6 +125,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.UserDisplayName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="LocationId"
@@ -155,6 +161,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.LocationName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="MeetingRoom"
@@ -170,6 +182,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.MeetingRoom_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="MeetingRoomId"
@@ -200,6 +218,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.Title_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Participants"
@@ -215,6 +239,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.Participants_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="StartTime"
@@ -225,7 +255,14 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="START_TIME"
     Expression="START_TIME"
-    SQLType="DATE"/>
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.StartTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="EndTime"
     IsUpdateable="false"
@@ -235,7 +272,14 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     ColumnType="TIMESTAMP"
     AliasName="END_TIME"
     Expression="END_TIME"
-    SQLType="DATE"/>
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.EndTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Comments"
     IsUpdateable="false"
@@ -250,6 +294,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="500"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.Comments_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="NeedProjector"
@@ -265,6 +315,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="5"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.NeedProjector_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="NeedLoudspeaker"
@@ -280,6 +336,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="5"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.NeedLoudspeaker_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="NeedBeverage"
@@ -295,6 +357,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="5"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.NeedBeverage_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="NeedFruits"
@@ -310,6 +378,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="5"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.NeedFruits_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="NeedSnacks"
@@ -325,6 +399,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="5"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.NeedSnacks_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="SnackLevel"
@@ -340,6 +420,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.SnackLevel_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="NumOfPeople"
@@ -350,7 +436,14 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     ColumnType="NUMBER"
     AliasName="NUM_OF_PEOPLE"
     Expression="NUM_OF_PEOPLE"
-    SQLType="NUMERIC"/>
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.NumOfPeople_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="State"
     IsUpdateable="false"
@@ -365,6 +458,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.State_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="PrId"
@@ -390,7 +489,14 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     ColumnType="DATE"
     AliasName="SUBMIT_DATE"
     Expression="SUBMIT_DATE"
-    SQLType="DATE"/>
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.SubmitDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Allday"
     IsUpdateable="false"
@@ -405,6 +511,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.conf.ConfRoomQueryView.Allday_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewCriteria
     Name="findByUserId"
@@ -442,6 +554,66 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="findByDateRange"
+    ViewObjectName="edu.hp.model.vo.query.conf.ConfRoomQueryView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ConfRoomQueryViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        ViewAttribute="StartTime">
+        <ViewCriteria
+          Name="ConfRoomQueryViewCriteria_ConfRoomQueryViewCriteria_row_0_StartTime_itemHolder"
+          ViewObjectName="edu.hp.model.vo.query.conf.ConfRoomQueryView"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="ConfRoomQueryViewCriteria_ConfRoomQueryViewCriteria_row_0_StartTime_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="StartTime"
+              ViewAttribute="StartTime"
+              Operator="ONORBEFORE"
+              Conjunction="AND"
+              Value=":endDate"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="ConfRoomQueryViewCriteria_ConfRoomQueryViewCriteria_row_0_StartTime_itemHolder_row_1"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="ConfRoomQueryViewCriteria_ConfRoomQueryViewCriteria_row_0_StartTime_ConfRoomQueryViewCriteria_ConfRoomQueryViewCriteria_row_0_StartTime_itemHolder_ConfRoomQueryViewCriteria_ConfRoomQueryViewCriteria_row_0_StartTime_itemHolder_row_1_StartTime"
+              ViewAttribute="StartTime"
+              Operator="ONORAFTER"
+              Conjunction="AND"
+              Value=":startDate"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <AttrArray Name="KeyAttributes">
     <Item Value="Id"/>
   </AttrArray>
@@ -470,6 +642,12 @@ AND ConfRoomCalendar.STATE = :initStat]]></SQLQuery>
       <Parameter
         Name="confRmNos"
         Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findByDateRange"
+      MethodName="findByDateRange">
+      <Return
+        Type="void"/>
     </Method>
   </ClientInterface>
 </ViewObject>

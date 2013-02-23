@@ -10,16 +10,21 @@ import java.util.Date;
 import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 
+import oracle.adf.view.rich.component.rich.data.RichCalendar;
 import oracle.adf.view.rich.event.CalendarActivityDurationChangeEvent;
 import oracle.adf.view.rich.event.DialogEvent;
+import oracle.adf.view.rich.event.ItemEvent;
 import oracle.adf.view.rich.model.CalendarActivity;
 
 import oracle.binding.OperationBinding;
 
 import oracle.jbo.domain.Timestamp;
 
+import org.apache.myfaces.trinidad.event.DisclosureEvent;
+
 
 public class ClassroomCalendarBean extends CalendarBean {
+
 
     public ClassroomCalendarBean() {
 
@@ -53,12 +58,12 @@ public class ClassroomCalendarBean extends CalendarBean {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             OperationBinding binding = ADFUtils.findOperation("deleteByPK");
             String clsRmCalId = this.getCurrActivity().getActivity().getId();
-                       // System.err.println("to del act id: " + clsRmCalId);
+            // System.err.println("to del act id: " + clsRmCalId);
             binding.getParamsMap().put("clsRmCalId", clsRmCalId);
             binding.execute();
             if (binding.getErrors().isEmpty()) {
                 this._currActivity = null;
-                UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);              
+                UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
                 refreshCalendar(calendar);
             }
 
@@ -173,5 +178,21 @@ public class ClassroomCalendarBean extends CalendarBean {
         UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
         //System.err.println(calendar.getClientId());
         this.refreshCalendar(calendar);
+    }
+
+    public void onSelectTableView(DisclosureEvent disclosureEvent) {
+        //RichCalendar calendar = (RichCalendar)JSFUtils.findComponentInRoot(calendarid);
+        if (disclosureEvent.isExpanded()) {
+            //        Object startDate = JSFUtils.resolveExpression("#{bindings.Calendar.startDate}");
+            //        System.err.println(startDate);
+            //        Object endDate = JSFUtils.resolveExpression("#{bindings.Calendar.endDate}");
+            //        System.err.println(endDate);
+            ADFUtils.findOperation("findByDateRange").execute();
+        }
+    }
+
+
+    public void onTableView(ItemEvent itemEvent) {
+
     }
 }
