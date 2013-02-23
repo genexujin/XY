@@ -19,6 +19,11 @@ public class ClassroomCalenderViewImpl extends ViewObjectImpl implements Classro
     public ClassroomCalenderViewImpl() {
     }
     
+    public void findByDateRange(){
+        this.setApplyViewCriteriaNames(null);
+        this.applyViewCriteria(getViewCriteria("findByDateRange"));
+        this.executeQuery();
+    }
     
     public void findByUserId(boolean enabled, String userId) {
 
@@ -38,6 +43,7 @@ public class ClassroomCalenderViewImpl extends ViewObjectImpl implements Classro
         //System.err.println("reexecute");
         this.executeQuery();
     }
+
 
     /**
      * Returns the bind variable value for clsRmNos.

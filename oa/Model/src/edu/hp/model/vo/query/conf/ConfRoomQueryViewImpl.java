@@ -18,6 +18,11 @@ public class ConfRoomQueryViewImpl extends ViewObjectImpl implements ConfRoomQue
     public ConfRoomQueryViewImpl() {
     }
     
+    public void findByDateRange(){
+        this.setApplyViewCriteriaNames(null);
+        this.applyViewCriteria(getViewCriteria("findByDateRange"));        
+        this.executeQuery();
+    }
     
 
     public void findByUserId(boolean enabled, String userId) {

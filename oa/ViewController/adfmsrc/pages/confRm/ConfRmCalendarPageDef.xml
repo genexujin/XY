@@ -14,6 +14,8 @@
               DataControl="RootAppModuleDataControl" RangeSize="25"/>
     <iterator id="ConfRmOfLocationIterator" Binds="Root.ConfRmModule.ConfRmOfLocation"
               DataControl="RootAppModuleDataControl" RangeSize="25"/>
+    <searchRegion Binds="ConfRoomQueryIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ConfRoomQuery1Query"/>
   </executables>
   <bindings>
     <action IterBinding="ConfRoomQueryIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
@@ -127,5 +129,30 @@
         <Item Value="Id"/>
       </AttrNames>
     </attributeValues>
+    <methodAction IterBinding="ConfRoomQueryIterator" id="findByDateRange" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findByDateRange" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRoomQuery"/>
+    <tree IterBinding="ConfRoomQueryIterator" id="ConfRoomQuery1">
+      <nodeDefinition DefName="edu.hp.model.vo.query.conf.ConfRoomQueryView" Name="ConfRoomQuery10">
+        <AttrNames>
+          <Item Value="LocationName"/>
+          <Item Value="MeetingRoom"/>
+          <Item Value="Title"/>
+          <Item Value="Participants"/>
+          <Item Value="UserDisplayName"/>
+          <Item Value="NumOfPeople"/>
+          <Item Value="StartTime"/>
+          <Item Value="EndTime"/>
+          <Item Value="NeedProjector"/>
+          <Item Value="NeedLoudspeaker"/>
+          <Item Value="NeedBeverage"/>
+          <Item Value="NeedFruits"/>
+          <Item Value="NeedSnacks"/>
+          <Item Value="Allday"/>
+          <Item Value="Comments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

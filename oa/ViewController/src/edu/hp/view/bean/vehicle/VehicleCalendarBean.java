@@ -23,6 +23,8 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Timestamp;
 
+import org.apache.myfaces.trinidad.event.DisclosureEvent;
+
 
 public class VehicleCalendarBean extends CalendarBean {
 
@@ -263,5 +265,11 @@ public class VehicleCalendarBean extends CalendarBean {
 
     public boolean isMyVelView() {
         return myVelView;
+    }
+
+    public void onSelectTableView(DisclosureEvent disclosureEvent) {
+        if (disclosureEvent.isExpanded()) {
+            ADFUtils.findOperation("findByDateRange").execute();
+        }
     }
 }

@@ -9,4 +9,6 @@ public interface ConfRoomQueryView extends ViewObject {
     void findByUserId(boolean enabled, String userId);
 
     void refreshCalendar(String confRmNos);
+
+    void findByDateRange();
 }

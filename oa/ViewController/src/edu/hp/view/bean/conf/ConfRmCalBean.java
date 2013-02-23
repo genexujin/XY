@@ -18,6 +18,8 @@ import oracle.binding.OperationBinding;
 
 import oracle.jbo.domain.Timestamp;
 
+import org.apache.myfaces.trinidad.event.DisclosureEvent;
+
 
 public class ConfRmCalBean extends CalendarBean {
 
@@ -189,5 +191,11 @@ public class ConfRmCalBean extends CalendarBean {
         UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
         //System.err.println(calendar.getClientId());
         this.refreshCalendar(calendar);
+    }
+
+    public void onSelectTableView(DisclosureEvent disclosureEvent) {
+        if (disclosureEvent.isExpanded()) {
+            ADFUtils.findOperation("findByDateRange").execute();
+        }
     }
 }

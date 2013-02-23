@@ -9,4 +9,6 @@ public interface ClassroomCalenderView extends ViewObject {
     void refreshCalendar(String clsRmNos);
 
     void findByUserId(boolean enabled, String userId);
+
+    void findByDateRange();
 }

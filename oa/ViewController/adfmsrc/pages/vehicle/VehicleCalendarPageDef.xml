@@ -107,5 +107,27 @@
         <Item Value="Id"/>
       </AttrNames>
     </attributeValues>
+    <methodAction IterBinding="VehicleCalQueryIterator" id="findByDateRange" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findByDateRange" IsViewObjectMethod="true"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleCalQuery"/>
+    <tree IterBinding="VehicleCalQueryIterator" id="VehicleCalQuery1">
+      <nodeDefinition DefName="edu.hp.model.vo.query.vehicle.VehicleCalQueryView" Name="VehicleCalQuery10">
+        <AttrNames>
+          <Item Value="VehicleName"/>
+          <Item Value="Title"/>
+          <Item Value="UserDisplayName"/>
+          <Item Value="ContactName"/>
+          <Item Value="ContactPhone"/>
+          <Item Value="StartTime"/>
+          <Item Value="EndTime"/>
+          <Item Value="ReturnTrip"/>
+          <Item Value="TripStart"/>
+          <Item Value="TripDest"/>
+          <Item Value="NumOfPeople"/>
+          <Item Value="Comments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>
