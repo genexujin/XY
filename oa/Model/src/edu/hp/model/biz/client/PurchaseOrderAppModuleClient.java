@@ -16,8 +16,19 @@ public class PurchaseOrderAppModuleClient extends ApplicationModuleImpl implemen
     public PurchaseOrderAppModuleClient() {
     }
 
+
+    public void findByPoId(String poId) {
+        Object _ret = this.riInvokeExportedMethod(this,"findByPoId",new String [] {"java.lang.String"},new Object[] {poId});
+        return;
+    }
+
     public void findByUserId(String submitterId) {
         Object _ret = this.riInvokeExportedMethod(this,"findByUserId",new String [] {"java.lang.String"},new Object[] {submitterId});
+        return;
+    }
+
+    public void newPo(String userId) {
+        Object _ret = this.riInvokeExportedMethod(this,"newPo",new String [] {"java.lang.String"},new Object[] {userId});
         return;
     }
 }

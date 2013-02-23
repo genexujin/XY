@@ -7,4 +7,8 @@ import oracle.jbo.ApplicationModule;
 // ---------------------------------------------------------------------
 public interface PurchaseOrderAppModule extends ApplicationModule {
     void findByUserId(String submitterId);
+
+    void newPo(String userId);
+
+    void findByPoId(String poId);
 }

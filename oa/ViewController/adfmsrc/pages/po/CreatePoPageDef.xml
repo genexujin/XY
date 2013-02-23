@@ -91,5 +91,47 @@
                   Action="invokeMethod" MethodName="newRow" IsViewObjectMethod="true"
                   DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule.PurchaseOrderLinesView"/>
+    <methodAction id="sendNotification" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendNotification" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.sendNotification_RootAppModuleDataControl_dataProvider_sendNotification_result">
+      <NamedData NDName="notification" NDType="edu.hp.model.pojo.Notification"/>
+    </methodAction>
+    <methodAction id="createTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createTask" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.createTask_RootAppModuleDataControl_dataProvider_createTask_result">
+      <NamedData NDName="title" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="roleName" NDType="java.lang.String"/>
+      <NamedData NDName="contextTitle" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="completeTask" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="completeTask" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.completeTask_RootAppModuleDataControl_dataProvider_completeTask_result">
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="roleName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="completeTaskForUserId" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="completeTaskForUserId" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.completeTaskForUserId_RootAppModuleDataControl_dataProvider_completeTaskForUserId_result">
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="createTaskForUserId" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createTaskForUserId" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.createTaskForUserId_RootAppModuleDataControl_dataProvider_createTaskForUserId_result">
+      <NamedData NDName="title" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+      <NamedData NDName="contextTitle" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

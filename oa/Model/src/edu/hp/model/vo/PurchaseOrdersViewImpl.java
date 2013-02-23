@@ -220,4 +220,20 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
     public void setsbmtId(String value) {
         ensureVariableManager().setVariableValue("sbmtId", value);
     }
+
+    /**
+     * Returns the variable value for OrdId.
+     * @return variable value for OrdId
+     */
+    public String getOrdId() {
+        return (String)ensureVariableManager().getVariableValue("OrdId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable OrdId.
+     * @param value value to bind as OrdId
+     */
+    public void setOrdId(String value) {
+        ensureVariableManager().setVariableValue("OrdId", value);
+    }
 }

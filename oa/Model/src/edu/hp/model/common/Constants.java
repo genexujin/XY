@@ -13,8 +13,6 @@ public class Constants {
     public static final String STATE_ACCEPTED = "已受理";
     public static final String STATE_PROCESSED = "已处理";
     public static final String STATE_EVALUATED = "已评价";
-    //状态“取消”改为“撤消”可能更好，因为页面上经常需要个按钮来实现取消之前的编辑的功能
-    public static final String STATE_CANCELED_2 = "已撤消";
     public static final String STATE_NOTE_UNREAD = "UNREAD";
     public static final String STATE_NOTE_READ = "READ";
     public static final String STATE_TASK_PENDING = "PENDING";
@@ -23,6 +21,21 @@ public class Constants {
     public static final String CONTEXT_TYPE_VEHICLE = "VEHICLE";
     public static final String CONTEXT_TYPE_CONFRM = "CONFRM";
     public static final String CONTEXT_TYPE_HELPDESK = "HELPDESK";
+    public static final String CONTEXT_TYPE_PO = "PO";
+    
+    public static final String PO_STATE_INITIAL = "1";
+    public static final String PO_STATE_PENDING_REVIEW = "2";
+    public static final String PO_STATE_PENDING_APPROVAL = "3";
+    public static final String PO_STATE_REJECTED = "4";
+    public static final String PO_STATE_EXECUTING = "5";
+    public static final String PO_STATE_FINISHED = "6";
+    public static final String PO_STATE_CANCELLED = "7";
+    public static final String PO_LINE_STATE_INITIAL = "1";
+    public static final String PO_LINE_STATE_PENDING_REVIEW = "2";
+    public static final String PO_LINE_STATE_PENDING_APPROVAL = "3";
+    public static final String PO_LINE_STATE_EXECUTING = "4";
+    public static final String PO_LINE_STATE_FINISHED = "5";
+    public static final String PO_LINE_STATE_CANCELLED = "6";
     
     public static final String ROLE_OFFICE_MGR="车辆审核";
     public static final String ROLE_ZONGWU_MGR="车辆调度";
@@ -32,7 +45,9 @@ public class Constants {
     public static final String ROLE_USER="普通用户";
     public static final String ROLE_CONFRM_ADMIN="会议室审核";
     public static final String ROLE_CLSRM_ADMIN="教室管理员";
-    public static final String ROLE_HD_ADMIN="报修处理员";
+    public static final String ROLE_PO_VERIFIER="采购审核";
+    public static final String ROLE_PO_APPROVER="采购审批";
+    public static final String ROLE_PO_RECEIVER="采购收货";
     
     public static final String CONTEXT_OBJ_VEH= "VEH";
     public static final String CONTEXT_OBJ_VEH_ID = "id";
@@ -44,5 +59,7 @@ public class Constants {
         "/WEB-INF/flows/confRm/confRm-dashboard-btf.xml#confRm-dashboard-btf";
     public static final String CONTEXT_HELPDESK_TASKFLOW =
         "/WEB-INF/flows/helpdesk/MyHdCallDashboard.xml#MyHdCallDashboard";
+    public static final String CONTEXT_PO_TASKFLOW =
+        "/WEB-INF/flows/po/MyPoDashboard.xml#MyPoDashboard";
 
 }

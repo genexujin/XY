@@ -118,7 +118,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="PURCHASE_ORDER_LINES">
+    TableName="PURCHASE_ORDER_LINES"
+    DefaultValue="1">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>

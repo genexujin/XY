@@ -49,6 +49,37 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         }
     }
 
+    public void findByPoId(String poId) {
+        PurchaseOrdersViewImpl po = this.getPurchaseOrdersView();
+        po.setApplyViewCriteriaNames(null);
+        
+        //Do the query        
+        System.err.println("In AppModule: poId is: " + poId);
+        if (poId != null) {
+            po.setOrdId(poId);
+            ViewCriteria poIdCriteria = po.getViewCriteria("OrderIdCriteria");
+            po.setApplyViewCriteriaName(poIdCriteria.getName());
+            po.executeQuery();
+        }
+    }
+
+    public void newPo(String userId) {
+        System.err.println("In PO AppModule. Creating new PO. SubmitterId is: " + userId);
+        PurchaseOrdersViewImpl poView = this.getPurchaseOrdersView();
+        Row po = poView.createRow();
+        po.setAttribute("State", "1");
+        po.setAttribute("SubmitterId", userId);
+        poView.insertRow(po);
+        poView.setCurrentRow(po);
+        
+        System.err.println("Also creating a new PO Line.");
+        PurchaseOrderLinesViewImpl poLineView = this.getPurchaseOrderLinesView();
+        Row poLine = poLineView.createRow();
+        poLine.setAttribute("State", 1);
+        poLine.setAttribute("OrderId", po.getAttribute("OrderId"));
+        poLineView.insertRow(poLine);
+        poLineView.setCurrentRow(poLine);
+    }
     /**
      * Container's getter for PurchaseOrderHistorysView.
      * @return PurchaseOrderHistorysView
@@ -77,8 +108,8 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
      * Container's getter for PurchaseOrderLinesView.
      * @return PurchaseOrderLinesView
      */
-    public ViewObjectImpl getPurchaseOrderLinesView() {
-        return (ViewObjectImpl)findViewObject("PurchaseOrderLinesView");
+    public PurchaseOrderLinesViewImpl getPurchaseOrderLinesView() {
+        return (PurchaseOrderLinesViewImpl)findViewObject("PurchaseOrderLinesView");
     }
 
     /**

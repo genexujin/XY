@@ -7,6 +7,10 @@
       <value>#{pageFlowScope.fromMenu}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
+    <input-parameter-definition id="__26">
+      <name>id</name>
+      <value>#{pageFlowScope.poId}</value>
+    </input-parameter-definition>
     <managed-bean id="__1">
       <managed-bean-name>MyPoBean</managed-bean-name>
       <managed-bean-class>edu.hp.view.bean.po.MyPoBean</managed-bean-class>
@@ -37,6 +41,10 @@
         <expression>#{pageFlowScope.fromMenu == 'receiver'}</expression>
         <outcome>receiver</outcome>
       </case>
+      <case id="__30">
+        <expression>#{pageFlowScope.poId != null}</expression>
+        <outcome>byPoId</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findBySubmitterId">
@@ -61,6 +69,12 @@
       <method>#{bindings.findByState.execute}</method>
       <outcome>
         <fixed-outcome>findByState</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByPoId">
+      <method>#{bindings.findByPoId.execute}</method>
+      <outcome>
+        <fixed-outcome>byPoId</fixed-outcome>
       </outcome>
     </method-call>
     <control-flow-rule id="__2">
@@ -99,6 +113,10 @@
         <from-outcome>receiver</from-outcome>
         <to-activity-id>findByPendingReceive</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__27">
+        <from-outcome>byPoId</from-outcome>
+        <to-activity-id>findByPoId</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__15">
       <from-activity-id>findBySubmitterId</from-activity-id>
@@ -126,6 +144,20 @@
       <control-flow-case id="__24">
         <from-outcome>findByState</from-outcome>
         <to-activity-id>MyPoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>CreatePoPage</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>Router</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__28">
+      <from-activity-id>findByPoId</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome>byPoId</from-outcome>
+        <to-activity-id>CreatePoPage</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

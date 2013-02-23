@@ -64,5 +64,23 @@
         Name="submitterId"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="newPo"
+      MethodName="newPo">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findByPoId"
+      MethodName="findByPoId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="poId"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </AppModule>

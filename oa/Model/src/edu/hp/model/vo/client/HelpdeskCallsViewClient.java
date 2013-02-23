@@ -31,6 +31,15 @@ public class HelpdeskCallsViewClient extends ViewUsageImpl implements HelpdeskCa
         return;
     }
 
+
+    public void doQuery(String cReadableId, String rsnLv1, String rsnLv2, String rsnLv3, Date submitDateFrom,
+                        Date submitDateTo, String callerId, String calleeId, String state, String callResult,
+                        String callEval) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"doQuery",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String","oracle.jbo.domain.Date","oracle.jbo.domain.Date","java.lang.String","java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {cReadableId, rsnLv1, rsnLv2, rsnLv3, submitDateFrom, submitDateTo, callerId, calleeId, state, callResult, callEval});
+        return;
+    }
+
     public void doQuery(String rsnLv1, String state) {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this,"doQuery",new String [] {"java.lang.String","java.lang.String"},new Object[] {rsnLv1, state});
@@ -39,9 +48,9 @@ public class HelpdeskCallsViewClient extends ViewUsageImpl implements HelpdeskCa
 
     public void doQuery(String cReadableId, String rsnLv1, String rsnLv2, String rsnLv3, Date submitDateFrom,
                         Date submitDateTo, String callerId, String calleeId, String state, String callResult,
-                        String callEval) {
+                        String callEval, String locId) {
         Object _ret =
-            getApplicationModuleProxy().riInvokeExportedMethod(this,"doQuery",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String","oracle.jbo.domain.Date","oracle.jbo.domain.Date","java.lang.String","java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {cReadableId, rsnLv1, rsnLv2, rsnLv3, submitDateFrom, submitDateTo, callerId, calleeId, state, callResult, callEval});
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"doQuery",new String [] {"java.lang.String","java.lang.String","java.lang.String","java.lang.String","oracle.jbo.domain.Date","oracle.jbo.domain.Date","java.lang.String","java.lang.String","java.lang.String","java.lang.String","java.lang.String","java.lang.String"},new Object[] {cReadableId, rsnLv1, rsnLv2, rsnLv3, submitDateFrom, submitDateTo, callerId, calleeId, state, callResult, callEval, locId});
         return;
     }
 

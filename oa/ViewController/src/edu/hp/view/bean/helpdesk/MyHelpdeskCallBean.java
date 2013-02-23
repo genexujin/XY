@@ -77,6 +77,8 @@ public class MyHelpdeskCallBean extends BaseBean {
         System.out.println("hdResult is: " + hdResult);
         String hdEval = getLovAttrValue("HdEvalWithEmpty", "Value");
         System.out.println("hdEval is: " + hdEval);
+        String locId = getLovAttrValue("LocationsWithEmpty", "LocationId");
+        System.out.println("locationId is: " + locId);
         
         OperationBinding binding = ADFUtils.findOperation("doQuery");
         binding.getParamsMap().put("rsnLv1", reasonLv1WithEmpty);
@@ -88,6 +90,7 @@ public class MyHelpdeskCallBean extends BaseBean {
         binding.getParamsMap().put("calleeId", calleeId);
         binding.getParamsMap().put("callResult", hdResult);
         binding.getParamsMap().put("callEval", hdEval);
+        binding.getParamsMap().put("locId", locId);
                 
         binding.execute();
         

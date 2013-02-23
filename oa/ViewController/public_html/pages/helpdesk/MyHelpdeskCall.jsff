@@ -62,6 +62,12 @@
                                                 shortDesc="#{bindings.EmpWithEmptyForCallee.hints.tooltip}" id="soc11">
                                 <f:selectItems value="#{bindings.EmpWithEmptyForCallee.items}" id="si7"/>
                             </af:selectOneChoice>
+                        <af:selectOneChoice value="#{bindings.LocationsWithEmpty.inputValue}"
+                                            label="#{bindings.LocationsWithEmpty.label}"
+                                            required="#{bindings.LocationsWithEmpty.hints.mandatory}"
+                                            shortDesc="#{bindings.LocationsWithEmpty.hints.tooltip}" id="soc2">
+                            <f:selectItems value="#{bindings.LocationsWithEmpty.items}" id="si6"/>
+                        </af:selectOneChoice>
                     </af:panelFormLayout>
                 </af:panelHeader>
                 <af:spacer width="50px" height="20px"/>

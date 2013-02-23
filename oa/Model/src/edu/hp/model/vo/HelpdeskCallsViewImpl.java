@@ -42,7 +42,7 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
     
     public void doQuery(String cReadableId, String rsnLv1, String rsnLv2, String rsnLv3, 
                         Date submitDateFrom, Date submitDateTo, String callerId,
-                        String calleeId, String state, String callResult, String callEval) {
+                        String calleeId, String state, String callResult, String callEval, String locId) {
         this.setApplyViewCriteriaNames(null);
         
         System.err.println("In VO: cReadableId is: " + cReadableId);
@@ -56,6 +56,7 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
         System.err.println("In VO: calleeId is: " + calleeId);
         System.err.println("In VO: callResult is: " + callResult);
         System.err.println("In VO: callEval is: " + callEval);
+        System.err.println("In VO: locId is: " + locId);
         
         List<String> vcNames = new ArrayList<String>();
         
@@ -125,6 +126,11 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
             vcNames.add(evalCriteria.getName());
         }
         
+        if (locId != null && !"0".equals(locId)) {
+            this.setLocId(locId);
+            ViewCriteria locCriteria = this.getViewCriteria("LocationIdCriteria");
+            vcNames.add(locCriteria.getName());
+        }
         this.setApplyViewCriteriaNames(vcNames.toArray(new String[0]));
         this.executeQuery();
     }
@@ -329,5 +335,21 @@ public class HelpdeskCallsViewImpl extends ViewObjectImpl implements HelpdeskCal
      */
     public void setcallId(String value) {
         ensureVariableManager().setVariableValue("callId", value);
+    }
+
+    /**
+     * Returns the variable value for LocId.
+     * @return variable value for LocId
+     */
+    public String getLocId() {
+        return (String)ensureVariableManager().getVariableValue("LocId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable LocId.
+     * @param value value to bind as LocId
+     */
+    public void setLocId(String value) {
+        ensureVariableManager().setVariableValue("LocId", value);
     }
 }

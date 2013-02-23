@@ -33,7 +33,8 @@
   UseGlueCode="false"
   ComponentClass="edu.hp.model.vo.HelpdeskCallsViewImpl"
   ComponentInterface="edu.hp.model.vo.common.HelpdeskCallsView"
-  ClientProxyName="edu.hp.model.vo.client.HelpdeskCallsViewClient">
+  ClientProxyName="edu.hp.model.vo.client.HelpdeskCallsViewClient"
+  OrderBy="HelpdeskCalls.CALL_ID desc">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -83,6 +84,10 @@
     Type="java.lang.String"/>
   <Variable
     Name="callId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="LocId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
   <ViewAccessor
@@ -966,6 +971,42 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="LocationIdCriteria"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HelpdeskCallsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="LocationId"
+        ViewAttribute="LocationId"
+        Operator="="
+        Conjunction="AND"
+        Value=":LocId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="CalleeView"
     ViewLink="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
@@ -1001,7 +1042,7 @@
         Type="java.lang.String"/>
     </Method>
     <Method
-      Name="doQuery"
+      Name="doQuery1"
       MethodName="doQuery">
       <Return
         Type="void"/>
@@ -1037,6 +1078,9 @@
         Type="java.lang.String"/>
       <Parameter
         Name="callEval"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="locId"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

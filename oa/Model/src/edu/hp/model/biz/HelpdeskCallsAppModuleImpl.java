@@ -283,4 +283,12 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
     public HelpdeskRolesViewImpl getHelpdeskRolesView() {
         return (HelpdeskRolesViewImpl)findViewObject("HelpdeskRolesView");
     }
+
+    /**
+     * Container's getter for LocationsWithEmpty1.
+     * @return LocationsWithEmpty1
+     */
+    public ViewObjectImpl getLocationsWithEmpty() {
+        return (ViewObjectImpl)findViewObject("LocationsWithEmpty");
+    }
 }

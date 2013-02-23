@@ -72,6 +72,9 @@
   <ViewUsage
     Name="HelpdeskRolesView"
     ViewObjectName="edu.hp.model.vo.HelpdeskRolesView"/>
+  <ViewUsage
+    Name="LocationsWithEmpty"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.LocationsWithEmpty"/>
   <ViewLinkUsage
     Name="EmpHelpdeskCalleeViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"

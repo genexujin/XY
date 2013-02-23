@@ -26,6 +26,8 @@
               RangeSize="25" id="EmpWithEmptyForCalleeIterator"/>
     <iterator Binds="Root.HelpdeskCallsAppModule1.HdEvalWithEmpty" DataControl="RootAppModuleDataControl" RangeSize="25"
               id="HdEvalWithEmptyIterator"/>
+    <iterator Binds="LocationsWithEmpty" RangeSize="25" DataControl="HelpdeskCallsAppModuleDataControl"
+              id="LocationsWithEmptyIterator"/>
   </executables>
   <bindings>
     <tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView11">
@@ -65,6 +67,7 @@
       <NamedData NDName="state" NDType="java.lang.String"/>
       <NamedData NDName="callResult" NDType="java.lang.String"/>
       <NamedData NDName="callEval" NDType="java.lang.String"/>
+      <NamedData NDName="locId" NDType="java.lang.String"/>
     </methodAction>
     <list IterBinding="HdStateIterator" ListOperMode="navigation" ListIter="HdStateIterator" id="HdState"
           DTSupportsMRU="true" SelectItemValueMode="ListObject">
@@ -112,6 +115,12 @@
           id="HdEvalWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
       <AttrNames>
         <Item Value="Value"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="LocationsWithEmptyIterator" ListOperMode="navigation" ListIter="LocationsWithEmptyIterator"
+          id="LocationsWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="LocationName"/>
       </AttrNames>
     </list>
   </bindings>

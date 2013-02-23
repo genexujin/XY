@@ -15,6 +15,6 @@ public interface HelpdeskCallsView extends ViewObject {
     void newRow(String callerId);
 
     void doQuery(String cReadableId, String rsnLv1, String rsnLv2, String rsnLv3, Date submitDateFrom,
-                 Date submitDateTo, String callerId, String calleeId, String state, String callResult,
-                 String callEval);
+                 Date submitDateTo, String callerId, String calleeId, String state, String callResult, String callEval,
+                 String locId);
 }

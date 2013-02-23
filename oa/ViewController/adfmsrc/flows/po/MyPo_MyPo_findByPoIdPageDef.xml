@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="MyPo_MyPo_CreatePageDef"
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="MyPo_MyPo_findByPoIdPageDef"
                 Package="flows.po" SkipValidation="true">
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
   </executables>
   <bindings>
-    <action id="newRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="newPo"
+    <methodAction id="findByPoId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByPoId"
                   IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule">
-      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
-    </action>
+      <NamedData NDName="poId" NDValue="#{pageFlowScope.poId}" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

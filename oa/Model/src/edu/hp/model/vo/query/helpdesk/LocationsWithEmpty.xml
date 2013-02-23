@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LocationsWithEmpty"
+  Version="11.1.2.62.76"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.query.helpdesk.LocationsWithEmpty_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT Locations.LOCATION_ID, 
+       Locations.LOCATION_NAME
+FROM LOCATIONS Locations
+union
+select '0', ' ' from dual
+order by location_id]]></SQLQuery>
+  <EntityUsage
+    Name="Locations"
+    Entity="edu.hp.model.eo.Locations"/>
+  <ViewAttribute
+    Name="LocationId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LocationId"
+    EntityUsage="Locations"
+    AliasName="LOCATION_ID"/>
+  <ViewAttribute
+    Name="LocationName"
+    PrecisionRule="true"
+    EntityAttrName="LocationName"
+    EntityUsage="Locations"
+    AliasName="LOCATION_NAME"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>
