@@ -466,7 +466,7 @@ ALTER SESSION SET NLS_LANGUAGE='AMERICAN';
   CREATE TABLE "OA"."ITEM_CATEGORY_APPROVAL" 
    (	"ITEM_CATEGORY" VARCHAR2(20 BYTE), 
   "APPROVAL_LIMIT" NUMBER(12,2)
-   )；
+   );
 --------------------------------------------------------
 --  DDL for Table REPAIR_CALLS
 --------------------------------------------------------
