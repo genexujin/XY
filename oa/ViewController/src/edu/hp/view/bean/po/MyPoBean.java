@@ -106,11 +106,10 @@ public class MyPoBean extends BaseBean {
         return resultTable;
     }
     
-    public String savePo() {
+    public void savePo(ActionEvent actionEvent) {
         computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
         
         commit();
-        return null;
     }
 
     public void submitPo(ActionEvent actionEvent) {
@@ -131,10 +130,14 @@ public class MyPoBean extends BaseBean {
                     String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
                     String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
                     String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+                    
                     createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核", Constants.ROLE_PO_VERIFIER, readableId);
                     
+                    sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核", null, Constants.ROLE_PO_VERIFIER);
+                    
                     //有一种情况下需要completeTask，就是在订单被拒绝后，会为提交者创建一个新task。用户可以再次提交该订单，这时候需要complete之前的task
-                    completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, submitterId);
+                    //（后来发现这种情况下只会发通知，所以不需要了）
+//                    completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, submitterId);
                     
                     ADFUtils.findOperation("Commit").execute();
                 } else {
@@ -162,6 +165,8 @@ public class MyPoBean extends BaseBean {
             if (verifyTotal != 0) { //If verifyTotal is 0, then no need to approve.
                 //Create task for approver
                 createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批", Constants.ROLE_PO_APPROVER, readableId);
+                
+                sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批", null, Constants.ROLE_PO_APPROVER);
             }
             
             //Complete task for verifier
@@ -176,15 +181,32 @@ public class MyPoBean extends BaseBean {
     }
 
     public void approvePo(ActionEvent actionEvent) {
-        changeState(Constants.PO_STATE_EXECUTING);
-        changeLineState(Constants.PO_LINE_STATE_EXECUTING);
+        BigDecimal verifyTotal = (BigDecimal)ADFUtils.getBoundAttributeValue("VerifyTotal");
+        Integer catgId = (Integer)ADFUtils.getBoundAttributeValue("ItemCategoryId1");
+        BigDecimal limit = getApprovalLimit("IC_" + catgId.toString());
+        
+        System.out.println("Apprval Limit for Item category \"" + catgId + "\" is: " + limit);
+        if (verifyTotal.compareTo(limit) <= 0) { //No need for 2nd level approval
+            changeState(Constants.PO_STATE_EXECUTING);
+            changeLineState(Constants.PO_LINE_STATE_EXECUTING);
+        }
         
         boolean success = ADFUtils.commit("采购订单已审批！", "采购订单审批失败，请核对输入的信息或联系管理员！");
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
-            //Create task for receiver
-            createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待采购及收货", Constants.ROLE_PO_RECEIVER, readableId);
+            String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            if (verifyTotal.compareTo(limit) <= 0) {
+                sendNotification("有新的采购订单等待采购及收货", "有新的采购订单等待采购及收货", null, Constants.ROLE_PO_BUYER);
+                sendNotification("您的采购订单已审批", "您的采购订单已审批", submitterId, null);
+            } else {
+                //Should create task for 2nd level approver
+                createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批", Constants.ROLE_PO_2ND_APPROVER, readableId);
+                
+                sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批", null, Constants.ROLE_PO_2ND_APPROVER);
+            }
+            
             //Complete task for approver
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
             
@@ -192,6 +214,42 @@ public class MyPoBean extends BaseBean {
         } else {
             changeState(Constants.PO_STATE_PENDING_APPROVAL);
             changeLineState(Constants.PO_LINE_STATE_PENDING_APPROVAL);
+        }
+    }
+    
+    public void approvePo2nd(ActionEvent actionEvent) {
+        changeState(Constants.PO_STATE_EXECUTING);
+        changeLineState(Constants.PO_LINE_STATE_EXECUTING);
+        
+        boolean success = ADFUtils.commit("采购订单已审批！", "采购订单审批失败，请核对输入的信息或联系管理员！");
+        if (success) {
+            String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
+            String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
+            String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            sendNotification("有新的采购订单等待采购", "有新的采购订单等待采购", null, Constants.ROLE_PO_BUYER);
+            sendNotification("您的采购订单已审批", "您的采购订单已审批", submitterId, null);
+            
+            //Complete task for 2nd level approver
+            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_2ND_APPROVER);
+            
+            ADFUtils.findOperation("Commit").execute();
+        } else {
+            changeState(Constants.PO_STATE_PENDING_APPROVAL);
+            changeLineState(Constants.PO_LINE_STATE_PENDING_APPROVAL);
+        }
+    }
+    
+    public void executePo(ActionEvent actionEvent) {
+        boolean success = ADFUtils.commit("采购订单执行完成！", "采购订单提交失败，请核对输入的信息或联系管理员！");
+        if (success) {
+            String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
+            String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
+            String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            sendNotification("有新的采购订单等待收货", "有新的采购订单等待收货", null, Constants.ROLE_PO_RECEIVER);
+            
+            ADFUtils.findOperation("Commit").execute();
         }
     }
     
@@ -205,8 +263,8 @@ public class MyPoBean extends BaseBean {
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
-            //Complete task for receiver
-            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_RECEIVER);
+            //Only notification sent to receiver, no task created. So no task to complete
+//            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_RECEIVER);
             
             //send notification to submitter
             sendNotification("您的采购订单已完成", "您的采购订单已完成", submitterId, null);
@@ -226,8 +284,9 @@ public class MyPoBean extends BaseBean {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
-            //Create task for receiver
-            createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "您的采购订单被拒绝，请取消或者重新提交订单。", submitterId, readableId);
+            //No task created after rejection. Only notification
+//            createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "您的采购订单被拒绝，请取消或者重新提交订单。", submitterId, readableId);
+            sendNotification("您的采购订单被拒绝", "请取消或者重新提交订单。", submitterId, null);
             //Complete task for approver
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
             
@@ -250,7 +309,6 @@ public class MyPoBean extends BaseBean {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
-            //Complete task for approver
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_VERIFIER);
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
             completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, submitterId);
@@ -465,5 +523,17 @@ public class MyPoBean extends BaseBean {
     public void newPoLine(ActionEvent actionEvent) {
         OperationBinding oper = ADFUtils.findOperation("newRow");
         oper.execute();
+    }
+
+    private BigDecimal getApprovalLimit(final String catgId) {
+        OperationBinding oper = ADFUtils.findOperation("getApprovalLimitForCategoryId");
+        oper.getParamsMap().put("categoryId", catgId);
+        oper.execute();
+        BigDecimal result = (BigDecimal)oper.getResult();
+        if (result != null) {
+            return result;
+        } 
+        
+        return new BigDecimal(0);
     }
 }

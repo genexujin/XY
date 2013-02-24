@@ -133,5 +133,12 @@
       <NamedData NDName="userId" NDType="java.lang.String"/>
       <NamedData NDName="contextTitle" NDType="java.lang.String"/>
     </methodAction>
+    <methodAction id="getApprovalLimitForCategoryId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getApprovalLimitForCategoryId" IsViewObjectMethod="false"
+                  DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.getApprovalLimitForCategoryId_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_getApprovalLimitForCategoryId_result">
+      <NamedData NDName="categoryId" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

@@ -42,6 +42,9 @@
   <ViewUsage
     Name="EmpWithEmpty"
     ViewObjectName="edu.hp.model.vo.query.po.EmpWithEmpty"/>
+  <ViewUsage
+    Name="ItemCategoryApprovalView"
+    ViewObjectName="edu.hp.model.vo.ItemCategoryApprovalView"/>
   <ViewLinkUsage
     Name="PoToPoLineLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"
@@ -55,6 +58,15 @@
     DstViewUsageName="edu.hp.model.biz.PurchaseOrderAppModule.PoLineCount"
     Reversed="false"/>
   <ClientInterface>
+    <Method
+      Name="findByPoId"
+      MethodName="findByPoId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="poId"
+        Type="java.lang.String"/>
+    </Method>
     <Method
       Name="findByUserId"
       MethodName="findByUserId">
@@ -74,12 +86,12 @@
         Type="java.lang.String"/>
     </Method>
     <Method
-      Name="findByPoId"
-      MethodName="findByPoId">
+      Name="getApprovalLimitForCategoryId"
+      MethodName="getApprovalLimitForCategoryId">
       <Return
-        Type="void"/>
+        Type="java.math.BigDecimal"/>
       <Parameter
-        Name="poId"
+        Name="categoryId"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

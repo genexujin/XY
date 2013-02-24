@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ItemCategoryApprovalView"
+  Version="11.1.2.62.76"
+  SelectList="ItemCategoryApproval.ITEM_CATEGORY, 
+       ItemCategoryApproval.APPROVAL_LIMIT, 
+       ItemCategoryApproval.ROWID"
+  FromList="ITEM_CATEGORY_APPROVAL ItemCategoryApproval"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.ItemCategoryApprovalViewImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Variable
+    Name="CategoryId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <EntityUsage
+    Name="ItemCategoryApproval"
+    Entity="edu.hp.model.eo.ItemCategoryApproval"/>
+  <ViewAttribute
+    Name="ItemCategory"
+    PrecisionRule="true"
+    EntityAttrName="ItemCategory"
+    EntityUsage="ItemCategoryApproval"
+    AliasName="ITEM_CATEGORY"/>
+  <ViewAttribute
+    Name="ApprovalLimit"
+    PrecisionRule="true"
+    EntityAttrName="ApprovalLimit"
+    EntityUsage="ItemCategoryApproval"
+    AliasName="APPROVAL_LIMIT"/>
+  <ViewAttribute
+    Name="Rowid"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="Rowid"
+    EntityUsage="ItemCategoryApproval"
+    AliasName="ROWID"/>
+  <ViewCriteria
+    Name="ItemCategoryIdCriteria"
+    ViewObjectName="edu.hp.model.vo.ItemCategoryApprovalView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ItemCategoryApprovalViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ItemCategory"
+        ViewAttribute="ItemCategory"
+        Operator="="
+        Conjunction="AND"
+        Value=":CategoryId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+</ViewObject>

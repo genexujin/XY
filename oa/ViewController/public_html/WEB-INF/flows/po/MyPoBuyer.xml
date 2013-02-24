@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="MyPoBuyer">
+    <default-activity>MyPo</default-activity>
+    <task-flow-call id="MyPo">
+      <task-flow-reference>
+        <document>/WEB-INF/flows/po/MyPo.xml</document>
+        <id>MyPo</id>
+      </task-flow-reference>
+      <input-parameter id="__1">
+        <name>fromMenu</name>
+        <value>buyer</value>
+      </input-parameter>
+      <input-parameter id="__2">
+        <name>id</name>
+        <value>-</value>
+      </input-parameter>
+    </task-flow-call>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -2,11 +2,14 @@ package edu.hp.model.biz;
 
 import edu.hp.model.biz.common.PurchaseOrderAppModule;
 import edu.hp.model.vo.EmployeesViewImpl;
+import edu.hp.model.vo.ItemCategoryApprovalViewImpl;
 import edu.hp.model.vo.PurchaseOrderHistorysViewImpl;
 import edu.hp.model.vo.PurchaseOrderLinesViewImpl;
 import edu.hp.model.vo.PurchaseOrdersViewImpl;
 
 import edu.hp.model.vo.query.po.EmpWithEmptyImpl;
+
+import java.math.BigDecimal;
 
 import oracle.jbo.Row;
 import oracle.jbo.ViewCriteria;
@@ -79,6 +82,24 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         poLine.setAttribute("OrderId", po.getAttribute("OrderId"));
         poLineView.insertRow(poLine);
         poLineView.setCurrentRow(poLine);
+    }
+    
+    public BigDecimal getApprovalLimitForCategoryId(String categoryId) {
+        ItemCategoryApprovalViewImpl vo = (ItemCategoryApprovalViewImpl)this.getItemCategoryApprovalView();
+        vo.setApplyViewCriteriaNames(null);
+        
+        if (categoryId != null) {
+            vo.setCategoryId(categoryId);
+            ViewCriteria vc = vo.getViewCriteria("ItemCategoryIdCriteria");
+            vo.setApplyViewCriteriaName(vc.getName());
+            vo.executeQuery();
+            Row[] rows = vo.getAllRowsInRange();
+            if (rows != null && rows.length > 0) {
+                return (BigDecimal)rows[0].getAttribute("ApprovalLimit");
+            }
+        }
+        
+        return new BigDecimal(0);
     }
     /**
      * Container's getter for PurchaseOrderHistorysView.
@@ -175,5 +196,13 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
      */
     public ViewObjectImpl getEmpWithEmpty() {
         return (ViewObjectImpl)findViewObject("EmpWithEmpty");
+    }
+
+    /**
+     * Container's getter for ItemCategoryApprovalView1.
+     * @return ItemCategoryApprovalView1
+     */
+    public ViewObjectImpl getItemCategoryApprovalView() {
+        return (ViewObjectImpl)findViewObject("ItemCategoryApprovalView");
     }
 }

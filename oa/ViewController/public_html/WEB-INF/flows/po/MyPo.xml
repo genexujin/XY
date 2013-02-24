@@ -42,8 +42,12 @@
         <outcome>receiver</outcome>
       </case>
       <case id="__30">
-        <expression>#{pageFlowScope.poId != null}</expression>
+        <expression>#{pageFlowScope.poId != '-' &amp;&amp; pageFlowScope.poId != null}</expression>
         <outcome>byPoId</outcome>
+      </case>
+      <case id="__34">
+        <expression>#{pageFlowScope.fromMenu == 'buyer'}</expression>
+        <outcome>buyer</outcome>
       </case>
       <default-outcome>normalUser</default-outcome>
     </router>
@@ -75,6 +79,12 @@
       <method>#{bindings.findByPoId.execute}</method>
       <outcome>
         <fixed-outcome>byPoId</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByExecuting">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>findByState</fixed-outcome>
       </outcome>
     </method-call>
     <control-flow-rule id="__2">
@@ -117,6 +127,10 @@
         <from-outcome>byPoId</from-outcome>
         <to-activity-id>findByPoId</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__33">
+        <from-outcome>buyer</from-outcome>
+        <to-activity-id>findByExecuting</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__15">
       <from-activity-id>findBySubmitterId</from-activity-id>
@@ -158,6 +172,13 @@
       <control-flow-case id="__29">
         <from-outcome>byPoId</from-outcome>
         <to-activity-id>CreatePoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__31">
+      <from-activity-id>findByExecuting</from-activity-id>
+      <control-flow-case id="__32">
+        <from-outcome>findByState</from-outcome>
+        <to-activity-id>MyPoPage</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>
