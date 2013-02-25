@@ -8,9 +8,11 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.query.po.PoStateWithEmptyImpl">
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Properties>
     <SchemaBasedProperties>
@@ -18,6 +20,10 @@
         ResId="edu.hp.model.vo.query.po.PoStateWithEmpty_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="StateId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <SQLQuery><![CDATA[SELECT Lovs.ID, 
        Lovs.CODE, 
        Lovs.VALUE, 
@@ -55,6 +61,42 @@ order by id]]></SQLQuery>
     EntityAttrName="FlexCol1"
     EntityUsage="Lovs"
     AliasName="FLEX_COL1"/>
+  <ViewCriteria
+    Name="StateCriteria"
+    ViewObjectName="edu.hp.model.vo.query.po.PoStateWithEmpty"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PoStateWithEmptyCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="FlexCol1"
+        ViewAttribute="FlexCol1"
+        Operator="="
+        Conjunction="AND"
+        Value=":StateId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

@@ -32,18 +32,6 @@
     </DesignTime>
   </Attribute>
   <Attribute
-    Name="OrderHistoryDetail"
-    Precision="100"
-    ColumnName="ORDER_HISTORY_DETAIL"
-    SQLType="VARCHAR"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    TableName="PURCHASE_ORDER_HISTORYS">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="100"/>
-    </DesignTime>
-  </Attribute>
-  <Attribute
     Name="OrderId"
     Precision="20"
     ColumnName="ORDER_ID"
@@ -79,6 +67,13 @@
       <Attr Name="_DisplaySize" Value="40"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="OperationDate"
+    ColumnName="OPERATION_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="PURCHASE_ORDER_HISTORYS"/>
   <AccessorAttribute
     Name="PurchaseOrder"
     Association="edu.hp.model.eo.asso.PoPoHistoryAssoc"

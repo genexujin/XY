@@ -3,6 +3,7 @@ package edu.hp.model.eo;
 import oracle.jbo.AttributeList;
 import oracle.jbo.Key;
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Timestamp;
 import oracle.jbo.server.AttributeDefImpl;
 import oracle.jbo.server.EntityDefImpl;
 import oracle.jbo.server.EntityImpl;
@@ -25,16 +26,6 @@ public class PurchaseOrderHistorysImpl extends EntityImpl {
 
             public void put(PurchaseOrderHistorysImpl obj, Object value) {
                 obj.setOrderHistoryId((DBSequence)value);
-            }
-        }
-        ,
-        OrderHistoryDetail {
-            public Object get(PurchaseOrderHistorysImpl obj) {
-                return obj.getOrderHistoryDetail();
-            }
-
-            public void put(PurchaseOrderHistorysImpl obj, Object value) {
-                obj.setOrderHistoryDetail((String)value);
             }
         }
         ,
@@ -65,6 +56,16 @@ public class PurchaseOrderHistorysImpl extends EntityImpl {
 
             public void put(PurchaseOrderHistorysImpl obj, Object value) {
                 obj.setOperationDetail((String)value);
+            }
+        }
+        ,
+        OperationDate {
+            public Object get(PurchaseOrderHistorysImpl obj) {
+                return obj.getOperationDate();
+            }
+
+            public void put(PurchaseOrderHistorysImpl obj, Object value) {
+                obj.setOperationDate((Timestamp)value);
             }
         }
         ,
@@ -114,11 +115,13 @@ public class PurchaseOrderHistorysImpl extends EntityImpl {
             return vals;
         }
     }
+
+
     public static final int ORDERHISTORYID = AttributesEnum.OrderHistoryId.index();
-    public static final int ORDERHISTORYDETAIL = AttributesEnum.OrderHistoryDetail.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int OPERATORID = AttributesEnum.OperatorId.index();
     public static final int OPERATIONDETAIL = AttributesEnum.OperationDetail.index();
+    public static final int OPERATIONDATE = AttributesEnum.OperationDate.index();
     public static final int PURCHASEORDER = AttributesEnum.PurchaseOrder.index();
     public static final int OPERATOREMP = AttributesEnum.OperatorEmp.index();
 
@@ -126,6 +129,14 @@ public class PurchaseOrderHistorysImpl extends EntityImpl {
      * This is the default constructor (do not remove).
      */
     public PurchaseOrderHistorysImpl() {
+    }
+
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("edu.hp.model.eo.PurchaseOrderHistorys");
     }
 
     /**
@@ -144,21 +155,6 @@ public class PurchaseOrderHistorysImpl extends EntityImpl {
         setAttributeInternal(ORDERHISTORYID, value);
     }
 
-    /**
-     * Gets the attribute value for OrderHistoryDetail, using the alias name OrderHistoryDetail.
-     * @return the value of OrderHistoryDetail
-     */
-    public String getOrderHistoryDetail() {
-        return (String)getAttributeInternal(ORDERHISTORYDETAIL);
-    }
-
-    /**
-     * Sets <code>value</code> as the attribute value for OrderHistoryDetail.
-     * @param value value to set the OrderHistoryDetail
-     */
-    public void setOrderHistoryDetail(String value) {
-        setAttributeInternal(ORDERHISTORYDETAIL, value);
-    }
 
     /**
      * Gets the attribute value for OrderId, using the alias name OrderId.
@@ -206,6 +202,22 @@ public class PurchaseOrderHistorysImpl extends EntityImpl {
      */
     public void setOperationDetail(String value) {
         setAttributeInternal(OPERATIONDETAIL, value);
+    }
+
+    /**
+     * Gets the attribute value for OperationDate, using the alias name OperationDate.
+     * @return the value of OperationDate
+     */
+    public Timestamp getOperationDate() {
+        return (Timestamp)getAttributeInternal(OPERATIONDATE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for OperationDate.
+     * @param value value to set the OperationDate
+     */
+    public void setOperationDate(Timestamp value) {
+        setAttributeInternal(OPERATIONDATE, value);
     }
 
     /**
@@ -267,6 +279,7 @@ public class PurchaseOrderHistorysImpl extends EntityImpl {
         setAttributeInternal(OPERATOREMP, value);
     }
 
+
     /**
      * @param orderHistoryId key constituent
 
@@ -274,13 +287,6 @@ public class PurchaseOrderHistorysImpl extends EntityImpl {
      */
     public static Key createPrimaryKey(DBSequence orderHistoryId) {
         return new Key(new Object[]{orderHistoryId});
-    }
-
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("edu.hp.model.eo.PurchaseOrderHistorys");
     }
 
     /**

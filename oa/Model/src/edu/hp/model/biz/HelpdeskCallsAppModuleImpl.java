@@ -61,14 +61,14 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
             ViewCriteria sCriteria = hdView.getViewCriteria("StateCriteria");
             hdView.setApplyViewCriteriaName(sCriteria.getName());
             hdView.executeQuery();
+            
+            HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
+            sView.setApplyViewCriteriaNames(null);
+            sView.setstate(state);
+            ViewCriteria stateCriteria = sView.getViewCriteria("HdStateCriteria");
+            sView.setApplyViewCriteriaName(stateCriteria.getName());
+            sView.executeQuery();
         }
-        
-        HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
-        sView.setApplyViewCriteriaNames(null);
-        sView.setstate(state);
-        ViewCriteria sCriteria = sView.getViewCriteria("HdStateCriteria");
-        sView.setApplyViewCriteriaName(sCriteria.getName());
-        sView.executeQuery();
     }
     
     public void findByCallId(String id) {

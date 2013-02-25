@@ -603,10 +603,74 @@
     ViewLink="edu.hp.model.vo.link.PoToPoLineCountLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="PurchaseOrderHistorysView"
+    ViewLink="edu.hp.model.vo.link.PoToPoHistoryLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="doQuery"
+      MethodName="doQuery">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="oRdId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="state"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="category"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="submitDateFrom"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="submitDateTo"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="newRow"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
+      Name="findByState"
+      MethodName="findByState">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="state"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findBySubmitterId"
+      MethodName="findBySubmitterId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="newRow1"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ClientInterface>
     <Method
       Name="doQuery"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PoToPoHistoryLink"
+  Version="11.1.2.62.76"
+  EntityAssociation="edu.hp.model.eo.asso.PoPoHistoryAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.link.PoToPoHistoryLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="PurchaseOrdersView"
+    Cardinality="1"
+    Source="true"
+    Owner="edu.hp.model.vo.PurchaseOrdersView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="PurchaseOrdersView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.vo.PurchaseOrdersView.OrderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="PurchaseOrderHistorysView"
+    Cardinality="-1"
+    Owner="edu.hp.model.vo.PurchaseOrderHistorysView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="PurchaseOrderHistorysView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.vo.PurchaseOrderHistorysView.OrderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

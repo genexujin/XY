@@ -9,6 +9,8 @@ import edu.hp.model.vo.PurchaseOrdersViewImpl;
 
 import edu.hp.model.vo.query.po.EmpWithEmptyImpl;
 
+import edu.hp.model.vo.query.po.PoStateWithEmptyImpl;
+
 import java.math.BigDecimal;
 
 import oracle.jbo.Row;
@@ -100,13 +102,6 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         }
         
         return new BigDecimal(0);
-    }
-    /**
-     * Container's getter for PurchaseOrderHistorysView.
-     * @return PurchaseOrderHistorysView
-     */
-    public PurchaseOrderHistorysViewImpl getPurchaseOrderHistorysView() {
-        return (PurchaseOrderHistorysViewImpl)findViewObject("PurchaseOrderHistorysView");
     }
 
     /**
@@ -204,5 +199,21 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
      */
     public ViewObjectImpl getItemCategoryApprovalView() {
         return (ViewObjectImpl)findViewObject("ItemCategoryApprovalView");
+    }
+
+    /**
+     * Container's getter for PurchaseOrderHistorysView1.
+     * @return PurchaseOrderHistorysView1
+     */
+    public PurchaseOrderHistorysViewImpl getPurchaseOrderHistorysView() {
+        return (PurchaseOrderHistorysViewImpl)findViewObject("PurchaseOrderHistorysView");
+    }
+
+    /**
+     * Container's getter for PoToPoHistoryLink1.
+     * @return PoToPoHistoryLink1
+     */
+    public ViewLinkImpl getPoToPoHistoryLink1() {
+        return (ViewLinkImpl)findViewLink("PoToPoHistoryLink1");
     }
 }

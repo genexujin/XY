@@ -6,10 +6,10 @@
   Name="PurchaseOrderHistorysView"
   Version="11.1.2.62.76"
   SelectList="PurchaseOrderHistorys.ORDER_HISTORY_ID, 
-       PurchaseOrderHistorys.ORDER_HISTORY_DETAIL, 
        PurchaseOrderHistorys.ORDER_ID, 
        PurchaseOrderHistorys.OPERATOR_ID, 
-       PurchaseOrderHistorys.OPERATION_DETAIL"
+       PurchaseOrderHistorys.OPERATION_DETAIL, 
+       PurchaseOrderHistorys.OPERATION_DATE"
   FromList="PURCHASE_ORDER_HISTORYS PurchaseOrderHistorys"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -19,6 +19,28 @@
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
+  <ViewAccessor
+    Name="EmployeesView"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_OperatorId"
+    ListVOName="EmployeesView"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OperatorId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="PurchaseOrderHistorys"
     Entity="edu.hp.model.eo.PurchaseOrderHistorys"/>
@@ -31,12 +53,6 @@
     AliasName="ORDER_HISTORY_ID"
     IsUpdateable="while_insert"/>
   <ViewAttribute
-    Name="OrderHistoryDetail"
-    PrecisionRule="true"
-    EntityAttrName="OrderHistoryDetail"
-    EntityUsage="PurchaseOrderHistorys"
-    AliasName="ORDER_HISTORY_DETAIL"/>
-  <ViewAttribute
     Name="OrderId"
     PrecisionRule="true"
     EntityAttrName="OrderId"
@@ -47,11 +63,45 @@
     PrecisionRule="true"
     EntityAttrName="OperatorId"
     EntityUsage="PurchaseOrderHistorys"
-    AliasName="OPERATOR_ID"/>
+    AliasName="OPERATOR_ID"
+    LOVName="LOV_OperatorId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderHistorysView.OperatorId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="OperationDetail"
     PrecisionRule="true"
     EntityAttrName="OperationDetail"
     EntityUsage="PurchaseOrderHistorys"
-    AliasName="OPERATION_DETAIL"/>
+    AliasName="OPERATION_DETAIL">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderHistorysView.OperationDetail_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OperationDate"
+    PrecisionRule="true"
+    EntityAttrName="OperationDate"
+    EntityUsage="PurchaseOrderHistorys"
+    AliasName="OPERATION_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderHistorysView.OperationDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

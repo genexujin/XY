@@ -435,10 +435,10 @@ ALTER SESSION SET NLS_LANGUAGE='AMERICAN';
 
   CREATE TABLE "OA"."PURCHASE_ORDER_HISTORYS" 
    (	"ORDER_HISTORY_ID" VARCHAR2(20 BYTE), 
-	"ORDER_HISTORY_DETAIL" VARCHAR2(100 BYTE), 
 	"ORDER_ID" VARCHAR2(20 BYTE), 
 	"OPERATOR_ID" VARCHAR2(20 BYTE), 
-	"OPERATION_DETAIL" VARCHAR2(40 BYTE)
+	"OPERATION_DETAIL" VARCHAR2(40 BYTE),
+  "OPERATION_DATE" DATE
    ) ;
 --------------------------------------------------------
 --  DDL for Table PURCHASE_ORDER_LINES
@@ -693,7 +693,7 @@ Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGOR
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_REVIEW','审核','/WEB-INF/flows/po/MyPoVerifier.xml#MyPoVerifier','审核','PUR',null,'SYS','/images/icons/tasks.png','false','2');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_BUY','执行','/WEB-INF/flows/po/MyPoBuyer.xml#MyPoBuyer','执行','PUR',null,'SYS','/images/icons/cart.gif','false','4');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_RECEIVE','收货','/WEB-INF/flows/po/MyPoReceiver.xml#MyPoReceiver','收货','PUR',null,'SYS','/images/icons/package.png','false','5');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_PR','采购订单','/WEB-INF/flows/welcome/welcome-btf.xml#welcome-btf','采购订单','PUR',null,'SYS','/images/icons/log.png','false','6');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_PR','采购订单','/WEB-INF/flows/po/CreatePo.xml#CreatePo','采购订单','PUR',null,'SYS','/images/icons/log.png','false','6');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_MY_REQ','我的报修','/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall','我的报修','HD',null,'SYS','/images/icons/communicate.png','false','1');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_REQ','报修单','/WEB-INF/flows/helpdesk/CreateHdCall.xml#CreateHdCall','报修单','HD',null,'SYS','/images/icons/constructor.png','false','3');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_PROC','报修处理','/WEB-INF/flows/helpdesk/MyHdCallCallee.xml#MyHdCallCallee','报修处理','HD',null,'SYS','/images/icons/show_failures.png','false','2');
@@ -829,7 +829,7 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('25','
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('26','SYS_PUR_APPROVE',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('27','SYS_PUR_RECEIVE',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('28','SYS_PUR_BUY',null,to_date('01-FEB-13','DD-MON-RR'));
-Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('29','SYS_PUR_APPROVE',null,to_date('01-FEB-13','DD-MON-RR'));SYS_PUR_BUY
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('29','SYS_PUR_APPROVE',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('2','SYS_PUR_BUY',null,to_date('01-FEB-13','DD-MON-RR'));
 REM INSERTING into OA.ROLE_USERS
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','1',null,null);

@@ -8,6 +8,8 @@
               RangeSize="25" id="PurchaseOrdersViewIterator" ChangeEventPolicy="ppr"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderLinesView" DataControl="RootAppModuleDataControl"
               RangeSize="25" id="PurchaseOrderLinesViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderHistorysView" DataControl="RootAppModuleDataControl"
+              RangeSize="5" id="PurchaseOrderHistorysViewIterator" ChangeEventPolicy="ppr"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="PurchaseOrdersViewIterator" id="OrderId">
@@ -140,5 +142,14 @@
                   ReturnName="data.RootAppModuleDataControl.methodResults.getApprovalLimitForCategoryId_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_getApprovalLimitForCategoryId_result">
       <NamedData NDName="categoryId" NDType="java.lang.String"/>
     </methodAction>
+    <tree IterBinding="PurchaseOrderHistorysViewIterator" id="PurchaseOrderHistorysView">
+      <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrderHistorysView" Name="PurchaseOrderHistorysView0">
+        <AttrNames>
+          <Item Value="OperationDate"/>
+          <Item Value="OperatorId"/>
+          <Item Value="OperationDetail"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

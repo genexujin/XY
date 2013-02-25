@@ -20,7 +20,8 @@
                         <af:selectOneChoice value="#{bindings.PoStateWithEmpty.inputValue}"
                                             label="订单状态"
                                             required="#{bindings.PoStateWithEmpty.hints.mandatory}"
-                                            shortDesc="#{bindings.PoStateWithEmpty.hints.tooltip}" id="soc2">
+                                            shortDesc="#{bindings.PoStateWithEmpty.hints.tooltip}" id="soc2"
+                                            disabled="#{pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='verifier' or pageFlowScope.fromMenu=='buyer' or pageFlowScope.fromMenu=='receiver'}">
                             <f:selectItems value="#{bindings.PoStateWithEmpty.items}" id="si2"/>
                         </af:selectOneChoice>
                         <af:inputDate label="至" id="id2" columns="20" value="#{pageFlowScope.MyPoBean.submitDateTo}"/>
@@ -56,7 +57,7 @@
                         <f:facet name="toolbar">
                             <af:toolbar id="t3">
                                 <af:commandToolbarButton text="新建" id="ctb1" action="create"
-                                                         rendered="#{pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='receiver'}">
+                                                         rendered="#{pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='buyer' and pageFlowScope.fromMenu!='receiver'}">
                                     <!--<af:setActionListener from="#{sessionScope.LoginUserBean.userId}" to="#{bindings.SubmitterId.inputValue}"/>-->
                                 </af:commandToolbarButton>
                                 <af:commandToolbarButton text="更改" id="ctb2" action="edit"/>

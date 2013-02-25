@@ -2,6 +2,9 @@
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="MyPo">
     <default-activity>Router</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
     <input-parameter-definition id="__9">
       <name>fromMenu</name>
       <value>#{pageFlowScope.fromMenu}</value>
@@ -48,6 +51,10 @@
       <case id="__34">
         <expression>#{pageFlowScope.fromMenu == 'buyer'}</expression>
         <outcome>buyer</outcome>
+      </case>
+      <case id="__36">
+        <expression>#{pageFlowScope.fromMenu == 'create'}</expression>
+        <outcome>create</outcome>
       </case>
       <default-outcome>normalUser</default-outcome>
     </router>
@@ -130,6 +137,10 @@
       <control-flow-case id="__33">
         <from-outcome>buyer</from-outcome>
         <to-activity-id>findByExecuting</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__35">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>Create</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__15">

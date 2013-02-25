@@ -20,8 +20,8 @@
     <Attr Name="_appModuleNames6" Value="edu.hp.model.biz.ConfRmModule"/>
     <Attr Name="_appModuleNames7" Value="edu.hp.model.biz.VehicleModule"/>
     <Attr Name="_appModuleNames7" Value="edu.hp.model.biz.VehicleModule"/>
-    <Attr Name="_appModuleNames8" Value="edu.hp.model.biz.PurchaseOrderAppModule"/>
-    <Attr Name="_appModuleNames9" Value="edu.hp.model.biz.HomeModule"/>
+    <Attr Name="_appModuleNames8" Value="edu.hp.model.biz.HomeModule"/>
+    <Attr Name="_appModuleNames9" Value="edu.hp.model.biz.PurchaseOrderAppModule"/>
   </DesignTime>
   <Containee
     Name="biz"

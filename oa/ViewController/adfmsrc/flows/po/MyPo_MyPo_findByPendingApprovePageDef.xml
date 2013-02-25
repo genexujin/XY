@@ -7,8 +7,8 @@
   </executables>
   <bindings>
     <methodAction id="findByState" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByState"
-                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
-                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule.PurchaseOrdersView"
+                  IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule"
                   ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_PurchaseOrdersView_findByState_result">
       <NamedData NDName="state" NDValue="3" NDType="java.lang.String"/>
     </methodAction>
