@@ -27,9 +27,10 @@
                 <af:resetActionListener/>
               </af:commandToolbarButton>
               <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       action="#{pageFlowScope.MyHdCallBean.submitHdCall}">
+                                       actionListener="#{pageFlowScope.MyHdCallBean.submitHdCall}">
               </af:commandToolbarButton>
-              <af:commandToolbarButton text="取消报修单" id="ctb4" rendered="#{bindings.State.inputValue eq '未提交'}"
+              <af:commandToolbarButton text="取消报修单" id="ctb4" 
+                                       rendered="#{bindings.State.inputValue eq '未提交' or (bindings.State.inputValue eq '已受理' and pageFlowScope.fromMenu != 'callee')}"
                                        actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}"/>
             </af:toolbar>
               </f:facet>

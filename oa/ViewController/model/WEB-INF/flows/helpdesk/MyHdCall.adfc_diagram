@@ -20,9 +20,9 @@
       <property
          name="y">193.49414</property>
       <property
-         name="x">558.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">558.0</property>
    </View>
    <MethodCall
       id="MethodCall3">
@@ -50,9 +50,9 @@
       <property
          name="y">226.74121</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">918.0</property>
+      <property
+         name="pageFragment">true</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -82,7 +82,7 @@
       <property
          name="fromOutcome">edit</property>
       <property
-         name="sdm:polyPoints">T56,561.5,139.14355,918.0,139.14355,T50</property>
+         name="sdm:polyPoints">T61,565.0,139.14355,918.0,139.14355,T50</property>
    </ControlFlowCase>
    <Router
       id="Router8">
@@ -217,5 +217,25 @@
          name="fromOutcome">create</property>
       <property
          name="sdm:polyPoints">B61,133.0,251.0918,726.0,251.0918,B50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase23"
+      from="View2"
+      to="MethodCall12">
+      <property
+         name="fromOutcome">returnFromCallee</property>
+      <property
+         name="sdm:polyPoints">T39,551.0,59.0459,R54</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase24"
+      from="View2"
+      to="MethodCall9">
+      <property
+         name="fromOutcome">returnFromCaller</property>
+      <property
+         name="sdm:polyPoints">L54,434.0,196.64355,434.0,187.64355,R54</property>
    </ControlFlowCase>
 </SDM>

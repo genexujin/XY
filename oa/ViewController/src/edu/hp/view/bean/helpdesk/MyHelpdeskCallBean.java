@@ -112,7 +112,7 @@ public class MyHelpdeskCallBean extends BaseBean {
         
     }
 
-    public String submitHdCall() {
+    public void submitHdCall(ActionEvent actionEvent) {
         setSubmitDate();
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_INITIAL)) {
@@ -137,7 +137,6 @@ public class MyHelpdeskCallBean extends BaseBean {
                 ADFUtils.setBoundAttributeValue("State", state);
             }
         }
-        return null;
     }
 
     public void cancelHdCall(ActionEvent actionEvent) {
@@ -265,5 +264,42 @@ public class MyHelpdeskCallBean extends BaseBean {
         final String roleName = (String)op.getResult();
         System.out.println("Role name in bean is: " + roleName);
         return roleName;
+    }
+
+    public String returnClicked() {        
+        DCIteratorBinding state = ADFUtils.findIterator("HdStateWithEmptyIterator");
+        state.executeQuery();
+        
+        DCIteratorBinding result = ADFUtils.findIterator("HdResultWithEmptyIterator");
+        result.executeQuery();
+        
+        DCIteratorBinding reason = ADFUtils.findIterator("ReasonLevel1WithEmptyIterator");
+        reason.executeQuery();
+        
+        DCIteratorBinding callee = ADFUtils.findIterator("EmpWithEmptyForCalleeIterator");
+        callee.executeQuery();
+        
+        DCIteratorBinding caller = ADFUtils.findIterator("EmpWithEmptyForCallerIterator");
+        caller.executeQuery();
+        
+        DCIteratorBinding eval = ADFUtils.findIterator("HdEvalWithEmptyIterator");
+        eval.executeQuery();
+        
+        DCIteratorBinding location = ADFUtils.findIterator("LocationsWithEmptyIterator");
+        location.executeQuery();
+        
+        this.callReadableId = null;
+        this.submitDateFrom = null;
+        this.submitDateTo = null;
+        
+        String fromMenu = (String)JSFUtils.resolveExpression("#{pageFlowScope.fromMenu}");
+        System.out.println("from menu: " + fromMenu);
+        
+        
+        if ("callee".equals(fromMenu)) {
+            return "returnFromCallee";
+        } else {
+            return "returnFromCaller";
+        }
     }
 }

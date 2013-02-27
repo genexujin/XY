@@ -13,9 +13,8 @@
                                     <af:spacer width="10px" height="5px"/>
                                 </f:facet>
                                 <af:commandButton text="查询" id="cb1" actionListener="#{pageFlowScope.MyHdCallBean.doQuery}"/>
-                                <!--<af:commandButton text="查询" id="cb1" partialSubmit="false"
-                                                  action="#{pageFlowScope.MyHdCallBean.doQuery}"/>-->
-                                <af:resetButton text="清空条件" id="rb1"/>
+                                <af:commandButton text="清空条件" id="cb2"
+                                                  action="#{pageFlowScope.MyHdCallBean.returnClicked}"/>
                             </af:panelGroupLayout>
                         </f:facet>
                             <af:inputText label="报修单号" id="it1" value="#{pageFlowScope.MyHdCallBean.callReadableId}"
@@ -44,8 +43,7 @@
                             <af:selectOneChoice value="#{bindings.HdStateWithEmpty.inputValue}"
                                                 label="状态"
                                                 required="#{bindings.HdStateWithEmpty.hints.mandatory}"
-                                                shortDesc="#{bindings.HdStateWithEmpty.hints.tooltip}" id="soc8"
-                                                disabled="#{pageFlowScope.fromMenu=='callee'}">
+                                                shortDesc="#{bindings.HdStateWithEmpty.hints.tooltip}" id="soc8">
                                 <f:selectItems value="#{bindings.HdStateWithEmpty.items}" id="si1"/>
                             </af:selectOneChoice>
                             <af:selectOneChoice value="#{bindings.HdResultWithEmpty.inputValue}"
@@ -151,4 +149,5 @@
         <f:facet name="start"/>
         <f:facet name="end"/>
     </af:panelStretchLayout>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:MyHdCallBean-->
 </ui:composition>
