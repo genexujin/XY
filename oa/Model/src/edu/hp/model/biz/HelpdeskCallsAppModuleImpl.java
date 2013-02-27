@@ -40,15 +40,20 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
             ViewCriteria cIdCriteria = hdView.getViewCriteria("CallerCriteria");
             hdView.setApplyViewCriteriaName(cIdCriteria.getName());
             hdView.executeQuery();
+            
+            //Set the lov's value, so on page the correct user will be selected by default in the lov
+            EmpWithEmptyImpl eView = this.getEmpWithEmptyForCaller();
+            eView.setApplyViewCriteriaNames(null);
+            eView.setcId(callerId);
+            ViewCriteria empCriteria = eView.getViewCriteria("findByCallerIdCriteria");
+            eView.setApplyViewCriteriaName(empCriteria.getName());
+            eView.executeQuery();
+            
+            //Run the State view, so that it will clear the previous search
+//            HdStateWithEmptyImpl stateView = this.getHdStateWithEmpty();
+//            stateView.setApplyViewCriteriaNames(null);
+//            stateView.executeQuery();
         }
-        
-        //Set the lov's value, so on page the correct user will be selected by default in the lov
-        EmpWithEmptyImpl eView = this.getEmpWithEmptyForCaller();
-        eView.setApplyViewCriteriaNames(null);
-        eView.setcId(callerId);
-        ViewCriteria empCriteria = eView.getViewCriteria("findByCallerIdCriteria");
-        eView.setApplyViewCriteriaName(empCriteria.getName());
-        eView.executeQuery();
     }
     
     public void findByState(String state) {
@@ -62,12 +67,19 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
             hdView.setApplyViewCriteriaName(sCriteria.getName());
             hdView.executeQuery();
             
+            //Callee allow to search for "已受理", "已处理", "已评价", so here use the CalleeQueryCriteria
+            //state parameter is not necessary.
             HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
             sView.setApplyViewCriteriaNames(null);
-            sView.setstate(state);
-            ViewCriteria stateCriteria = sView.getViewCriteria("HdStateCriteria");
+//            sView.setstate(state);
+            ViewCriteria stateCriteria = sView.getViewCriteria("CalleeQueryCriteria");
             sView.setApplyViewCriteriaName(stateCriteria.getName());
             sView.executeQuery();
+            
+            //Run the employee view to clear the previous search
+//            EmpWithEmptyImpl eView = this.getEmpWithEmptyForCaller();
+//            eView.setApplyViewCriteriaNames(null);
+//            eView.executeQuery();
         }
     }
     
