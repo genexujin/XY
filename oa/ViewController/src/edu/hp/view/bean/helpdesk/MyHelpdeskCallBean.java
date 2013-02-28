@@ -140,6 +140,8 @@ public class MyHelpdeskCallBean extends BaseBean {
     }
 
     public void cancelHdCall(ActionEvent actionEvent) {
+        ADFUtils.findOperation("Commit").execute();
+        System.out.println("Commited again!");
         toState(Constants.STATE_CANCELED);
     }
 

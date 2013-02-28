@@ -9,7 +9,12 @@
   DBObjectName="HELPDESK_CALLS"
   AliasName="HelpdeskCalls"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="edu.hp.model.eo.HelpdeskCallsImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Attribute
     Name="CallId"
     ColumnName="CALL_ID"
