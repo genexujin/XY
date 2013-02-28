@@ -716,6 +716,7 @@ Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGOR
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_CLASSROOM','教室数据','/WEB-INF/flows/admin/classroom-btf.xml#classroom-btf','教室信息维护','CLSRM',null,'ADMIN','/images/icons/group.png','false','1');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_CONFROOM','会议室数据','/WEB-INF/flows/admin/conference-room-btf.xml#conference-room-btf','会议室数据','CONFRM',null,'ADMIN','/images/icons/team.png','false','2');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_VEHICLE','车辆数据','/WEB-INF/flows/admin/vehicle-btf.xml#vehicle-btf','车辆数据','VEHICLE',null,'ADMIN','/images/icons/car_arrow.png','false','3');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_HD_RESULT','报修结果数据','/WEB-INF/flows/admin/hd-result-btf.xml#hd-result-btf','报修结果数据','HD_RESULT',null,'ADMIN','/images/icons/completedthread.png','false','8');
 REM INSERTING into OA.NOTIFICATIONS
 REM INSERTING into OA.PS_TXN
 Insert into OA.PS_TXN (ID,PARENTID,COLLID,CREATION_DATE) values (1,-1,9051,to_date('18-FEB-13','DD-MON-RR'));
@@ -821,6 +822,7 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','A
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_CLASSROOM',null,to_date('18-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_CONFROOM',null,to_date('18-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_VEHICLE',null,to_date('18-FEB-13','DD-MON-RR'));
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_HD_RESULT',null,to_date('18-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('21','SYS_HD_PROC',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('22','SYS_HD_PROC',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('23','SYS_HD_PROC',null,to_date('01-FEB-13','DD-MON-RR'));

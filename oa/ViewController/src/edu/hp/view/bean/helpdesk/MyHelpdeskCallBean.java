@@ -140,9 +140,26 @@ public class MyHelpdeskCallBean extends BaseBean {
     }
 
     public void cancelHdCall(ActionEvent actionEvent) {
-        ADFUtils.findOperation("Commit").execute();
-        System.out.println("Commited again!");
-        toState(Constants.STATE_CANCELED);
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        if (state != null) {
+            ADFUtils.setBoundAttributeValue("State", Constants.STATE_CANCELED);
+            boolean success = ADFUtils.commit("报修单已取消！", "报修单取消失败，请核对输入的信息或联系管理员！");
+            if (success) {
+                //在“已受理”状态进行cancel的话，需要结束创建给报修员的task
+                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
+                
+                String locId = (String)ADFUtils.getBoundAttributeValue("LocationId");
+                String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
+                String roleName = getRoleName(locId, rsnLv1);
+                
+                //complete the task for callee
+                completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, roleName);
+                
+                ADFUtils.findOperation("Commit").execute();
+            } else {
+                ADFUtils.setBoundAttributeValue("State", state);
+            }
+        }
     }
 
     public void processHdCall(ActionEvent actionEvent) {
