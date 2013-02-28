@@ -55,6 +55,9 @@
   <ViewUsage
     Name="Vehicles"
     ViewObjectName="edu.hp.model.vo.VehicleView"/>
+  <ViewUsage
+    Name="HdResult"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdResult"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"

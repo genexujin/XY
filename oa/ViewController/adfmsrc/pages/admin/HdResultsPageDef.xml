@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="HdResultsPageDef"
+                Package="pages.admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.HdResult" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="HdResultIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="HdResultIterator" id="HdResult">
+      <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.HdResult" Name="HdResult0">
+        <AttrNames>
+          <Item Value="Value"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action IterBinding="HdResultIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

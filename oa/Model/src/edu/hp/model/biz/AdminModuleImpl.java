@@ -166,4 +166,12 @@ public class AdminModuleImpl extends ApplicationModuleImpl {
     public ViewObjectImpl getVehicles() {
         return (ViewObjectImpl)findViewObject("Vehicles");
     }
+
+    /**
+     * Container's getter for HdResult1.
+     * @return HdResult1
+     */
+    public ViewObjectImpl getHdResult() {
+        return (ViewObjectImpl)findViewObject("HdResult");
+    }
 }

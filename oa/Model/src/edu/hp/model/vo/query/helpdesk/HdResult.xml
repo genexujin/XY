@@ -35,7 +35,14 @@
     PrecisionRule="true"
     EntityAttrName="Value"
     EntityUsage="Lovs"
-    AliasName="VALUE"/>
+    AliasName="VALUE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.helpdesk.HdResult.Value_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Id"
     IsUpdateable="while_insert"
