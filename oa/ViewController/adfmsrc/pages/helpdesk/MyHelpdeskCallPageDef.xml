@@ -26,8 +26,8 @@
               RangeSize="25" id="EmpWithEmptyForCalleeIterator"/>
     <iterator Binds="Root.HelpdeskCallsAppModule1.HdEvalWithEmpty" DataControl="RootAppModuleDataControl" RangeSize="25"
               id="HdEvalWithEmptyIterator"/>
-    <iterator Binds="LocationsWithEmpty" RangeSize="25" DataControl="HelpdeskCallsAppModuleDataControl"
-              id="LocationsWithEmptyIterator"/>
+    <iterator Binds="Root.HelpdeskCallsAppModule1.LocationsWithEmpty" DataControl="RootAppModuleDataControl"
+              RangeSize="25" id="LocationsWithEmptyIterator"/>
   </executables>
   <bindings>
     <tree IterBinding="HelpdeskCallsView1Iterator" id="HelpdeskCallsView11">
