@@ -416,8 +416,8 @@
       Name="EmployeesViewCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
-        Name="Id"
-        ViewAttribute="Id"
+        Name="UserName"
+        ViewAttribute="UserName"
         Operator="="
         Conjunction="AND"
         Value=":userId"

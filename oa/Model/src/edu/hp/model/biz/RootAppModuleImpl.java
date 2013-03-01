@@ -52,7 +52,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      * @param notification
      */
     public void sendNotification(Notification notification) {
-
+        
         if (notification != null && notification.getContent() != null) {
             //如果是发给某个role，则得到所有的用户
             if (notification.getRoleName() != null) {
@@ -103,8 +103,10 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                 }
             } else if (notification.getUserId() != null) {
                 //System.err.println("sent user notification");
+                
                 AdminModuleImpl adminModule = (AdminModuleImpl)this.getAdminModule();
                 EmployeesViewImpl employees = (EmployeesViewImpl)adminModule.getEmployees();
+                
                 String mobile = employees.findUserMobile(notification.getUserId());
                 NotificationsViewImpl ntfVO = this.getNotifications();
                 NotificationsViewRowImpl newRow = (NotificationsViewRowImpl)ntfVO.createRow();
@@ -118,6 +120,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                 //INSERT IT INTO THE CURRENT RESULT SET
                 ntfVO.insertRow(newRow);
                 if (mobile != null) {
+//                    System.err.println("here");
                     String[] phoneList = new String[] { mobile };
                     SMSManager.sendSMS(phoneList, notification.getTitle() + notification.getContent(),
                                        notification.getPriority());
@@ -145,7 +148,8 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      * @param contextObjectId
      * @param roleName
      */
-    public void createTask(String title, String contextObjectType, String contextObjectId, String roleName, String contextTitle) {
+    public void createTask(String title, String contextObjectType, String contextObjectId, String roleName,
+                           String contextTitle) {
 
         if (title != null && contextObjectType != null && contextObjectId != null && roleName != null) {
             Row[] allRowsInRange = getRoleIdByName(roleName);
@@ -174,7 +178,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      */
     public void completeTask(String contextObjectType, String contextObjectId, String roleName) {
         if (contextObjectType != null && contextObjectId != null && roleName != null) {
-            
+
             Row[] roles = this.getRoleIdByName(roleName);
             if (roles != null && roles.length > 0) {
                 String roleId = ((DBSequence)roles[0].getAttribute("RoleId")).toString();
@@ -195,7 +199,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             }
         }
     }
-    
+
     /**
      * 注意：该方法不commit，需要在外部调用commit
      * @param title
@@ -203,7 +207,8 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      * @param contextObjectId
      * @param userId
      */
-    public void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId , String contextTitle) {
+    public void createTaskForUserId(String title, String contextObjectType, String contextObjectId, String userId,
+                                    String contextTitle) {
 
         if (title != null && contextObjectType != null && contextObjectId != null && userId != null) {
             ViewObjectImpl taskVO = this.getTasks();
@@ -217,7 +222,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             taskVO.insertRow(newRow);
         }
     }
-    
+
     /**
      * 将任务状态置为完成状态，没有commit
      * @param contextObjectType
@@ -240,15 +245,15 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             }
         }
     }
-    
+
     /**
      * 申请人取消申请时，同时取消任务的方法，没有commit
      * @param contextObjectType
      * @param contextObjectId
      */
-    public void cancelTask(String contextObjectType, String contextObjectId){
+    public void cancelTask(String contextObjectType, String contextObjectId) {
         if (contextObjectType != null && contextObjectId != null) {
-      
+
             TasksViewImpl taskVO = (TasksViewImpl)this.getTasks();
             taskVO.setcontextId(contextObjectId);
             taskVO.setcontextType(contextObjectType);
@@ -257,7 +262,7 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
             taskVO.setRangeSize(-1);
             taskVO.executeQuery();
             Row[] allRowsInRange = taskVO.getAllRowsInRange();
-            for( Row row : allRowsInRange) {
+            for (Row row : allRowsInRange) {
                 row.setAttribute("State", Constants.STATE_TASK_CANCELED);
                 //System.err.println("canceled");
             }

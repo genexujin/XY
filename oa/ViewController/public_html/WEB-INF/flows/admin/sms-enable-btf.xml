@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="sms-enable-btf">
+    <default-activity>SMSAdmin</default-activity>
+    <managed-bean id="__1">
+      <managed-bean-name>SMSBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.admin.SMSBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="SMSAdmin">
+      <page>/pages/admin/SMSAdmin.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

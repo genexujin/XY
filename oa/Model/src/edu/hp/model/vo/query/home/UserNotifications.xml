@@ -38,6 +38,8 @@ notifications.state state
 from
 employees,notifications
 where
+employees.user_name = notifications.to_user_id
+or
 employees.id = notifications.to_user_id
 and employees.user_name =:userName
 ORDER BY notifications.event_date desc]]></SQLQuery>

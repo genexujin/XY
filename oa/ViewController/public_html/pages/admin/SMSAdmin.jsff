@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="center">
+            <af:panelGroupLayout layout="scroll" id="pgl1">
+                <af:panelHeader text="短消息传送控制" id="ph1" icon="/images/icons/messageAsync.png">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="legend"/>
+                    <f:facet name="info"/>
+                    <af:panelFormLayout id="pfl1" rows="1">
+                        <f:facet name="footer">
+                            <af:panelGroupLayout id="g1" layout="horizontal">
+                                <af:commandButton text="打开" id="cb3" action="#{viewScope.SMSBean.enable}"
+                                                  icon="/images/icons/startserver.png"/>
+                                <af:commandButton id="cb1" action="#{viewScope.SMSBean.disable}"
+                                                  icon="/images/icons/stopserver.png" text="关闭"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:panelLabelAndMessage label="SMS网关开启：" id="plam1">
+                            <af:outputText value="#{viewScope.SMSBean.smsEnabled?'是':'否'}" id="ot1"
+                                           partialTriggers="cb1 cb3"/>
+                        </af:panelLabelAndMessage>
+                    </af:panelFormLayout>
+                </af:panelHeader>
+                <af:panelHeader text="短消息余额" id="ph2" icon="/images/icons/outcome.png">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="legend"/>
+                    <f:facet name="info"/>
+                    <af:panelFormLayout id="pfl2" rows="1">
+                        <f:facet name="footer">
+                            <af:commandButton text="刷新" id="cb2" icon="/images/icons/refresh.png"/>
+                        </f:facet>
+                        <af:panelLabelAndMessage label="余额:" id="plam2">
+                            <af:outputText value="#{viewScope.SMSBean.balance}" id="ot2" partialTriggers="cb2"/>
+                        </af:panelLabelAndMessage>
+                    </af:panelFormLayout>
+                </af:panelHeader>
+            </af:panelGroupLayout>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

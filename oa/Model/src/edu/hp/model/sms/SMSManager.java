@@ -4,12 +4,14 @@ package edu.hp.model.sms;
 public class SMSManager {
 
     private static boolean enabled = false;
-    private static String SURFFIX = " 【黄埔教育】";
+    private static String SURFFIX = " 【黄浦教育】";
 
     //发送SMS
     public static int sendSMS(String[] mobiles, String messageContent, int priority) {
+//        System.err.println("here");
         if (enabled){
             messageContent += SURFFIX;
+//            System.err.println("sent sms");
             return SingletonSMSClient.getClient().sendSMS(mobiles, messageContent, priority);
         }
         else
