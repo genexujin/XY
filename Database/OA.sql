@@ -96,7 +96,7 @@ ALTER SESSION SET NLS_LANGUAGE='AMERICAN';
 --  DDL for Sequence LOVS_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "OA"."LOVS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "OA"."LOVS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence NOTIFICATIONS_SEQ
 --------------------------------------------------------
@@ -724,8 +724,8 @@ Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGOR
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_CLASSROOM','教室数据','/WEB-INF/flows/admin/classroom-btf.xml#classroom-btf','教室信息维护','CLSRM',null,'ADMIN','/images/icons/group.png','false','01');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_CONFROOM','会议室数据','/WEB-INF/flows/admin/conference-room-btf.xml#conference-room-btf','会议室数据','CONFRM',null,'ADMIN','/images/icons/team.png','false','02');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_VEHICLE','车辆数据','/WEB-INF/flows/admin/vehicle-btf.xml#vehicle-btf','车辆数据','VEHICLE',null,'ADMIN','/images/icons/car_arrow.png','false','03');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_HD_REASSONS','报修原因数据','/WEB-INF/flows/admin/hd-reason-btf.xml#hd-reason-btf','报修原因数据','HD_REASONS',null,'ADMIN','/images/icons/notstartedthread.png','false','08');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_HD_RESULT','报修结果数据','/WEB-INF/flows/admin/hd-result-new-btf.xml#hd-result-new-btf','报修结果数据','HD_RESULT',null,'ADMIN','/images/icons/completedthread.png','false','09');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_HD_REASONS','报修原因数据','/WEB-INF/flows/admin/hd-reason-btf.xml#hd-reason-btf','报修原因数据','HD_REASONS',null,'ADMIN','/images/icons/notstartedthread.png','false','08');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_HD_RESULT','报修结果数据','/WEB-INF/flows/admin/hd-result-btf.xml#hd-result-btf','报修结果数据','HD_RESULT',null,'ADMIN','/images/icons/completedthread.png','false','09');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_SMS','SMS管理','/WEB-INF/flows/admin/sms-enable-btf.xml#sms-enable-btf','SMS管理','SMS',null,'ADMIN',null,'false','10');
 REM INSERTING into OA.NOTIFICATIONS
 Insert into OA.NOTIFICATIONS (ID,CATEGORY,PRIORITY,TITLE,CONTENT,EVENT_DATE,IS_SMS_SENT,STATE,TO_USER_ID) values ('343','DEFAULT',0,'您为事由：eeeeeeeeee 所做的教室预订已成功，请准时使用。 ',' 提交时间：2013-03-01 10:36:09',to_date('01-MAR-13','DD-MON-RR'),'Y','READ','gene');
@@ -854,6 +854,7 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','A
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_VEHICLE',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_BUY',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_SMS',null,to_date('01-MAR-13','DD-MON-RR'));
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_HD_REASONS',null,to_date('01-MAR-13','DD-MON-RR'));
 REM INSERTING into OA.ROLE_USERS
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','1',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('2','2',null,null);

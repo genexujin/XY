@@ -30,24 +30,6 @@
     Name="ReasonLevel1_1"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"
     RowLevelBinds="true"/>
-  <ListBinding
-    Name="LOV_ParentCode"
-    ListVOName="ReasonLevel1_1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
-    MRUCount="0">
-    <AttrArray Name="AttrNames">
-      <Item Value="ParentCode"/>
-    </AttrArray>
-    <AttrArray Name="ListAttrNames">
-      <Item Value="Value"/>
-    </AttrArray>
-    <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="Value"/>
-    </AttrArray>
-    <DisplayCriteria/>
-  </ListBinding>
   <EntityUsage
     Name="Lovs"
     Entity="edu.hp.model.eo.Lovs"/>
@@ -70,15 +52,7 @@
     PrecisionRule="true"
     EntityAttrName="ParentCode"
     EntityUsage="Lovs"
-    AliasName="PARENT_CODE"
-    LOVName="LOV_ParentCode">
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
+    AliasName="PARENT_CODE"/>
   <ViewAttribute
     Name="Value"
     PrecisionRule="true"

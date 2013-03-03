@@ -89,6 +89,8 @@
     <page path="/pages/admin/HdReasonLevel2.jsff" usageId="edu_hp_view_HdReasonLevel2PageDef"/>
     <page path="/pages/admin/HdReasonLevel3.jsff" usageId="edu_hp_view_HdReasonLevel3PageDef"/>
     <page path="/pages/admin/HdResultNew.jsff" usageId="edu_hp_view_HdResultNewPageDef"/>
+    <page path="/pages/admin/HdReasonLevel2New.jsff" usageId="edu_hp_view_HdReasonLevel2NewPageDef"/>
+    <page path="/pages/admin/HdReasonLevel3New.jsff" usageId="edu_hp_view_HdReasonLevel3NewPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -164,6 +166,8 @@
     <page id="edu_hp_view_HdReasonLevel2PageDef" path="pages.admin.HdReasonLevel2PageDef"/>
     <page id="edu_hp_view_HdReasonLevel3PageDef" path="pages.admin.HdReasonLevel3PageDef"/>
     <page id="edu_hp_view_HdResultNewPageDef" path="pages.admin.HdResultNewPageDef"/>
+    <page id="edu_hp_view_HdReasonLevel2NewPageDef" path="pages.admin.HdReasonLevel2NewPageDef"/>
+    <page id="edu_hp_view_HdReasonLevel3NewPageDef" path="pages.admin.HdReasonLevel3NewPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

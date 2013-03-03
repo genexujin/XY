@@ -15,7 +15,8 @@
               <af:commandToolbarButton actionListener="#{bindings.Rollback.execute}" text="取消"
                                        disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb2"
                                        icon="/images/icons/undo.png"/>              
-              <af:commandToolbarButton text="创建二级原因" id="ctb5" icon="/images/icons/messageAsync.png" action="level2"/>
+              <af:commandToolbarButton text="创建二级原因" id="ctb5" icon="/images/icons/messageAsync.png"
+                                       action="level2"/>
             </af:toolbar>
           </af:group>
         </f:facet>
@@ -28,7 +29,7 @@
               <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建" id="ctb3"
                                        icon="/images/icons/new.png"/>
               <af:commandToolbarButton text="导出" id="ctb4" icon="/images/icons/export.png">
-                  <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="报修结果数据" filename="HdReasonLevel1.xls"/>
+                  <af:exportCollectionActionListener type="excelHTML" exportedId="t3" title="报修一级原因数据" filename="HdReasonLevel1.xls"/>
               </af:commandToolbarButton>
             </af:toolbar>
           </f:facet>

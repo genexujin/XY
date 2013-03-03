@@ -2,6 +2,8 @@ package edu.hp.view.bean.admin;
 
 import edu.hp.view.utils.ADFUtils;
 
+import edu.hp.view.utils.JSFUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import javax.faces.model.SelectItem;
 import oracle.adf.model.BindingContext;
 import oracle.adf.model.binding.DCBindingContainer;
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.input.RichSelectManyShuttle;
 import oracle.adf.view.rich.event.DialogEvent;
 
@@ -21,6 +24,8 @@ import oracle.jbo.domain.DBSequence;
 
 public class AdminOperationBean {
 
+    private RichTable reasonLevel2ResultTable;
+    private RichTable reasonLevel3ResultTable;
 
     List selectedMenus;
     List allMenus;
@@ -38,6 +43,41 @@ public class AdminOperationBean {
             ADFUtils.commit("所有的操作已保存！", "无法保存当前的所有操作，请联系系统管理员！");
         }
         // Add event code here...
+    }
+    
+//    public void confirm2(DialogEvent dialogEvent) {
+//
+//        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+//            ADFUtils.commit("所有的操作已保存！", "无法保存当前的所有操作，请联系系统管理员！");
+//            
+//            DCIteratorBinding binding = ADFUtils.findIterator("ReasonLevel2Iterator");
+//            binding.executeQuery();
+//            
+//            ADFUtils.partialRefreshComponenet(resultTable);
+//            
+//        }
+//    }
+    
+    public void rollbackForReasonLevel2(ActionEvent event) {
+        //Run the query to reset the "Master" table to the first record
+        DCIteratorBinding binding = ADFUtils.findIterator("ReasonLevel1Iterator");
+        binding.executeQuery();
+        
+        ADFUtils.findOperation("Rollback").execute();
+        
+        ADFUtils.partialRefreshComponenet(reasonLevel2ResultTable);            
+        
+    }
+    
+    public void rollbackForReasonLevel3(ActionEvent event) {
+        //Run the query to reset the "Master" table to the first record
+        DCIteratorBinding binding = ADFUtils.findIterator("ReasonLevel2Iterator");
+        binding.executeQuery();
+        
+        ADFUtils.findOperation("Rollback").execute();
+        
+        ADFUtils.partialRefreshComponenet(reasonLevel3ResultTable);            
+        
     }
 
     protected void _getAllMenus() {
@@ -186,5 +226,32 @@ public class AdminOperationBean {
         Row newRow = rows.createRow();
         newRow.setAttribute("ParentCode", lv2Reason);
         rows.insertRow(newRow);
+    }
+    
+    public void insertReasonLevel2(ActionEvent actionEvent) {
+        String lv1Reason = (String)ADFUtils.getBoundAttributeValue("Value");
+        System.out.println("Current level 1 reason is: " + lv1Reason);
+        
+        DCIteratorBinding binding = ADFUtils.findIterator("ReasonLevel2_1Iterator");
+        RowSetIterator rows = binding.getRowSetIterator();
+        Row newRow = rows.createRow();
+        newRow.setAttribute("ParentCode", lv1Reason);
+        rows.insertRow(newRow);
+    }
+
+    public void setReasonLevel2ResultTable(RichTable reasonLevel2ResultTable) {
+        this.reasonLevel2ResultTable = reasonLevel2ResultTable;
+    }
+
+    public RichTable getReasonLevel2ResultTable() {
+        return reasonLevel2ResultTable;
+    }
+
+    public void setReasonLevel3ResultTable(RichTable reasonLevel3ResultTable) {
+        this.reasonLevel3ResultTable = reasonLevel3ResultTable;
+    }
+
+    public RichTable getReasonLevel3ResultTable() {
+        return reasonLevel3ResultTable;
     }
 }

@@ -3,7 +3,7 @@
                 xmlns:f="http://java.sun.com/jsf/core">
   <af:panelStretchLayout id="psl1">
     <f:facet name="center">
-      <af:panelHeader text="panelHeader 1" id="ph1">
+      <af:panelHeader text="报修三级原因" id="ph1">
         <f:facet name="context"/>
         <f:facet name="menuBar"/>
         <f:facet name="toolbar">
@@ -11,16 +11,16 @@
             <af:commandToolbarButton text="保存" id="ctb2" icon="/images/icons/filesave.png">
               <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
             </af:commandToolbarButton>
-            <af:commandToolbarButton actionListener="#{bindings.Rollback.execute}" text="取消"
+            <af:commandToolbarButton actionListener="#{viewScope.AdminOperationBean.rollbackForReasonLevel3}" text="取消"
                                      immediate="true" id="ctb3" icon="/images/icons/undo.png"/>
           </af:toolbar>
         </f:facet>
         <f:facet name="legend"/>
         <f:facet name="info"/>
         <af:panelGroupLayout layout="vertical" id="pgl1">
-          <af:panelHeader text="ReasonLevel2" id="ph2">
+          <af:panelHeader text=" " id="ph2">
             <af:panelFormLayout id="pfl1">
-              <af:panelLabelAndMessage label="#{bindings.Value.hints.label}" id="plam3">
+              <af:panelLabelAndMessage label="二级原因" id="plam3">
                 <af:outputText value="#{bindings.Value.inputValue}" id="ot3"/>
               </af:panelLabelAndMessage>
               <af:selectBooleanCheckbox value="#{bindings.Expired1.inputValue}" label="#{bindings.Expired1.label}"
@@ -30,25 +30,28 @@
                   <f:facet name="separator">
                     <af:spacer width="10" height="1" id="s1"/>
                   </f:facet>
-                  <af:commandButton actionListener="#{bindings.First.execute}" text="First"
+                  <af:commandButton actionListener="#{bindings.First.execute}" text="首项"
                                     disabled="#{!bindings.First.enabled}" partialSubmit="true" id="cb1"/>
-                  <af:commandButton actionListener="#{bindings.Previous.execute}" text="Previous"
+                  <af:commandButton actionListener="#{bindings.Previous.execute}" text="前项"
                                     disabled="#{!bindings.Previous.enabled}" partialSubmit="true" id="cb2"/>
-                  <af:commandButton actionListener="#{bindings.Next.execute}" text="Next"
+                  <af:commandButton actionListener="#{bindings.Next.execute}" text="后项"
                                     disabled="#{!bindings.Next.enabled}" partialSubmit="true" id="cb3"/>
-                  <af:commandButton actionListener="#{bindings.Last.execute}" text="Last"
+                  <af:commandButton actionListener="#{bindings.Last.execute}" text="末项"
                                     disabled="#{!bindings.Last.enabled}" partialSubmit="true" id="cb4"/>
                 </af:panelGroupLayout>
               </f:facet>
             </af:panelFormLayout>
           </af:panelHeader>
-          <af:panelHeader text="ReasonLevel3" id="ph3">
+          <af:panelHeader text="三级原因" id="ph3">
             <af:panelCollection id="pc1">
               <f:facet name="menus"/>
               <f:facet name="toolbar">
                 <af:toolbar id="t2">
                   <af:commandToolbarButton text="新建" id="ctb1" icon="/images/icons/new.png"
                                            actionListener="#{viewScope.AdminOperationBean.insertReasonLevel3}"/>
+                  <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
+                    <af:exportCollectionActionListener type="excelHTML" exportedId="t1" title="报修三级原因数据" filename="HdReasonLevel3.xls"/>
+                  </af:commandToolbarButton>
                 </af:toolbar>
               </f:facet>
               <f:facet name="statusbar"/>
@@ -57,8 +60,8 @@
                         value="#{bindings.ReasonLevel3.collectionModel}" rowBandingInterval="1"
                         selectedRowKeys="#{bindings.ReasonLevel3.collectionModel.selectedRow}"
                         selectionListener="#{bindings.ReasonLevel3.collectionModel.makeCurrent}" rowSelection="single"
-                        id="t1" partialTriggers=":::ctb3">
-                <af:column headerText="#{bindings.ReasonLevel3.hints.Value.label}"
+                        id="t1" partialTriggers=":::ctb3"  binding="#{viewScope.AdminOperationBean.reasonLevel3ResultTable}">
+                <af:column headerText="三级原因"
                            sortProperty="#{bindings.ReasonLevel3.hints.Value.name}" sortable="false" id="c3">
                   <af:inputText value="#{row.bindings.Value.inputValue}"
                                 label="#{bindings.ReasonLevel3.hints.Value.label}"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="HdReasonLevel3PageDef"
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="HdReasonLevel3NewPageDef"
                 Package="pages.admin">
   <parameters/>
   <executables>
@@ -34,6 +34,11 @@
         <Item Value="Value"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="ReasonLevel2Iterator" id="Expired">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+    </attributeValues>
     <tree IterBinding="ReasonLevel3Iterator" id="ReasonLevel3">
       <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.ReasonLevel3" Name="ReasonLevel30">
         <AttrNames>
@@ -41,11 +46,11 @@
           <Item Value="Id"/>
           <Item Value="Value"/>
           <Item Value="ParentCode"/>
-          <Item Value="Expired" Binds="Expired2"/>
+          <Item Value="Expired"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <button IterBinding="ReasonLevel2Iterator" StaticList="true" id="Expired1" DTSupportsMRU="false">
+    <button IterBinding="ReasonLevel3Iterator" StaticList="true" id="Expired1">
       <AttrNames>
         <Item Value="Expired"/>
       </AttrNames>
@@ -54,18 +59,5 @@
         <Item Value="N"/>
       </ValueList>
     </button>
-    <button IterBinding="ReasonLevel3Iterator" StaticList="true" id="Expired2">
-      <AttrNames>
-        <Item Value="Expired"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
-            RequiresUpdateModel="true" Action="commitTransaction"/>
-    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
-            RequiresUpdateModel="false" Action="rollbackTransaction"/>
   </bindings>
 </pageDefinition>

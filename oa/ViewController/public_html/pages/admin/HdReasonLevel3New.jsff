@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelHeader text="panelHeader 1" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelGroupLayout layout="vertical" id="pgl1">
+          <af:panelHeader text="ReasonLevel2" id="ph2">
+            <af:panelFormLayout id="pfl1">
+              <af:panelLabelAndMessage label="#{bindings.Value.hints.label}" id="plam4">
+                <af:outputText value="#{bindings.Value.inputValue}" id="ot4"/>
+              </af:panelLabelAndMessage>
+              <f:facet name="footer">
+                <af:panelGroupLayout layout="horizontal" id="pgl2">
+                  <f:facet name="separator">
+                    <af:spacer width="10" height="1" id="s1"/>
+                  </f:facet>
+                  <af:commandButton actionListener="#{bindings.First.execute}" text="First"
+                                    disabled="#{!bindings.First.enabled}" partialSubmit="true" id="cb1"/>
+                  <af:commandButton actionListener="#{bindings.Previous.execute}" text="Previous"
+                                    disabled="#{!bindings.Previous.enabled}" partialSubmit="true" id="cb2"/>
+                  <af:commandButton actionListener="#{bindings.Next.execute}" text="Next"
+                                    disabled="#{!bindings.Next.enabled}" partialSubmit="true" id="cb3"/>
+                  <af:commandButton actionListener="#{bindings.Last.execute}" text="Last"
+                                    disabled="#{!bindings.Last.enabled}" partialSubmit="true" id="cb4"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelFormLayout>
+          </af:panelHeader>
+          <af:panelHeader text="ReasonLevel3" id="ph3">
+            <af:table rows="#{bindings.ReasonLevel3.rangeSize}" fetchSize="#{bindings.ReasonLevel3.rangeSize}"
+                      emptyText="#{bindings.ReasonLevel3.viewable ? 'No data to display.' : 'Access Denied.'}" var="row"
+                      value="#{bindings.ReasonLevel3.collectionModel}" rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.ReasonLevel3.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.ReasonLevel3.collectionModel.makeCurrent}" rowSelection="single"
+                      id="t1">
+               
+              <af:column headerText="#{bindings.ReasonLevel3.hints.Value.label}"
+                         sortProperty="#{bindings.ReasonLevel3.hints.Value.name}" sortable="false" id="c3">
+                 <af:inputText value="#{row.bindings.Value.inputValue}"
+                                label="#{bindings.ReasonLevel3.hints.Value.label}"
+                                required="#{bindings.ReasonLevel3.hints.Value.mandatory}"
+                                columns="#{bindings.ReasonLevel3.hints.Value.displayWidth}"
+                                maximumLength="#{bindings.ReasonLevel3.hints.Value.precision}"
+                                shortDesc="#{bindings.ReasonLevel3.hints.Value.tooltip}" id="it1" autoSubmit="true">
+                    <f:validator binding="#{row.bindings.Value.validator}"/>
+                  </af:inputText>
+              </af:column>               
+              <af:column headerText="#{bindings.ReasonLevel3.hints.Expired.label}"
+                         sortProperty="#{bindings.ReasonLevel3.hints.Expired.name}" sortable="false" id="c5">
+                <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}"
+                                            label="#{row.bindings.Expired.label}"
+                                            shortDesc="#{bindings.ReasonLevel3.hints.Expired.tooltip}" id="sbc2"
+                                            autoSubmit="true"/>
+              </af:column>
+            </af:table>
+          </af:panelHeader>
+        </af:panelGroupLayout>
+      </af:panelHeader>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

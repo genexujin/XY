@@ -18,6 +18,9 @@
     <view id="HdReasonLevel3">
       <page>/pages/admin/HdReasonLevel3.jsff</page>
     </view>
+    <view id="HdReasonLevel3New">
+      <page>/pages/admin/HdReasonLevel3New.jsff</page>
+    </view>
     <control-flow-rule id="__1">
       <from-activity-id>HdReasonLevel1</from-activity-id>
       <control-flow-case id="__2">
@@ -30,6 +33,10 @@
       <control-flow-case id="__4">
         <from-outcome>level3</from-outcome>
         <to-activity-id>HdReasonLevel3</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>level3New</from-outcome>
+        <to-activity-id>HdReasonLevel3New</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>
