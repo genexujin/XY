@@ -206,4 +206,12 @@ public class AdminModuleImpl extends ApplicationModuleImpl {
     public ViewLinkImpl getHdReasonLevel2ToLevel3Link1() {
         return (ViewLinkImpl)findViewLink("HdReasonLevel2ToLevel3Link1");
     }
+
+    /**
+     * Container's getter for HdResultAll1.
+     * @return HdResultAll1
+     */
+    public ViewObjectImpl getHdResultAll() {
+        return (ViewObjectImpl)findViewObject("HdResultAll");
+    }
 }

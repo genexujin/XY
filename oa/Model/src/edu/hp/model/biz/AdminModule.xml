@@ -67,6 +67,9 @@
   <ViewUsage
     Name="ReasonLevel3"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel3"/>
+  <ViewUsage
+    Name="HdResultAll"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdResultAll"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"

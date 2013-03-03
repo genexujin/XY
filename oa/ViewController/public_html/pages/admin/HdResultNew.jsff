@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelHeader text="panelHeader 1" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t2">
+            <af:commandToolbarButton text="保存" id="ctb3">
+              <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
+            </af:commandToolbarButton>
+            <af:commandToolbarButton text="取消" id="ctb4" actionListener="#{bindings.Rollback.execute}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelCollection id="pc1">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t1">
+              <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
+                                       disabled="#{!bindings.CreateInsert.enabled}" id="ctb1"/>
+              <af:commandToolbarButton text="导出" id="ctb2"/>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.HdResultAll.collectionModel}" var="row" rows="#{bindings.HdResultAll.rangeSize}"
+                    emptyText="#{bindings.HdResultAll.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.HdResultAll.rangeSize}" rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.HdResultAll.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.HdResultAll.collectionModel.makeCurrent}" rowSelection="single"
+                    id="t3" partialTriggers=":::ctb4 ::ctb1">
+            <af:column sortProperty="#{bindings.HdResultAll.hints.Value.name}" sortable="true"
+                       headerText="#{bindings.HdResultAll.hints.Value.label}" id="c1">
+              <af:inputText value="#{row.bindings.Value.inputValue}" label="#{bindings.HdResultAll.hints.Value.label}"
+                            required="#{bindings.HdResultAll.hints.Value.mandatory}"
+                            columns="#{bindings.HdResultAll.hints.Value.displayWidth}"
+                            maximumLength="#{bindings.HdResultAll.hints.Value.precision}"
+                            shortDesc="#{bindings.HdResultAll.hints.Value.tooltip}" id="it1" autoSubmit="true">
+                <f:validator binding="#{row.bindings.Value.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.HdResultAll.hints.Expired.name}" sortable="true"
+                       headerText="#{bindings.HdResultAll.hints.Expired.label}" id="c2">
+              <af:inputText value="#{row.bindings.Expired.inputValue}"
+                            label="#{bindings.HdResultAll.hints.Expired.label}"
+                            required="#{bindings.HdResultAll.hints.Expired.mandatory}"
+                            columns="#{bindings.HdResultAll.hints.Expired.displayWidth}"
+                            maximumLength="#{bindings.HdResultAll.hints.Expired.precision}"
+                            shortDesc="#{bindings.HdResultAll.hints.Expired.tooltip}" id="it2" autoSubmit="true">
+                <f:validator binding="#{row.bindings.Expired.validator}"/>
+              </af:inputText>
+            </af:column>
+          </af:table>
+          <af:popup id="confirm" contentDelivery="lazyUncached">
+                <!-- don't render if the activity is null -->
+                <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}" title="请确认操作" id="d2">
+                    <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+                    <af:spacer height="20" id="s4"/>
+                    <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+                </af:dialog>
+          </af:popup>
+        </af:panelCollection>
+      </af:panelHeader>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>
