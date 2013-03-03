@@ -8,7 +8,8 @@
   SelectList="Lovs.ID, 
        Lovs.CODE, 
        Lovs.VALUE, 
-       Lovs.FLEX_COL1"
+       Lovs.FLEX_COL1, 
+       Lovs.EXPIRED"
   FromList="LOVS Lovs"
   Where="Lovs.CODE = 'HdRsnLv1'"
   BindingStyle="OracleName"
@@ -24,25 +25,23 @@
   <EntityUsage
     Name="Lovs"
     Entity="edu.hp.model.eo.Lovs"
-    ReadOnly="true"
     DeleteParticipant="false"/>
   <ViewAttribute
     Name="Id"
-    IsUpdateable="false"
+    IsUpdateable="while_insert"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Lovs"
     AliasName="ID"/>
   <ViewAttribute
     Name="Code"
-    IsUpdateable="false"
     PrecisionRule="true"
     EntityAttrName="Code"
     EntityUsage="Lovs"
-    AliasName="CODE"/>
+    AliasName="CODE"
+    DefaultValue="HdRsnLv1"/>
   <ViewAttribute
     Name="Value"
-    IsUpdateable="false"
     PrecisionRule="true"
     EntityAttrName="Value"
     EntityUsage="Lovs"
@@ -60,6 +59,47 @@
     EntityAttrName="FlexCol1"
     EntityUsage="Lovs"
     AliasName="FLEX_COL1"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
+  <ViewCriteria
+    Name="ExpiredCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ExpiredCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Expired"
+        ViewAttribute="Expired"
+        Operator="&lt;>"
+        Conjunction="AND"
+        Value="Y"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="ReasonLevel2"
     ViewLink="edu.hp.model.vo.link.HdReasonLevel1ToLevel2Link"

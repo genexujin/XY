@@ -8,16 +8,28 @@
               id="HdResultIterator"/>
   </executables>
   <bindings>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"/>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action IterBinding="HdResultIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.HdResult" DataControl="RootAppModuleDataControl"/>
+    <button IterBinding="HdResultIterator" StaticList="true" id="Expired">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
     <tree IterBinding="HdResultIterator" id="HdResult">
       <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.HdResult" Name="HdResult0">
         <AttrNames>
           <Item Value="Value"/>
+          <Item Value="Expired" Binds="Expired"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
-    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
-            RequiresUpdateModel="true" Action="commitTransaction"/>
-    <action IterBinding="HdResultIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
   </bindings>
 </pageDefinition>

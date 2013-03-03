@@ -331,7 +331,7 @@
     TableName="HELPDESK_CALLS"/>
   <Attribute
     Name="CalleeDisplayName"
-    Precision="20"
+    Precision="40"
     ColumnName="CALLEE_DISPLAY_NAME"
     SQLType="VARCHAR"
     Type="java.lang.String"

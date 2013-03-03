@@ -58,6 +58,15 @@
   <ViewUsage
     Name="HdResult"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.HdResult"/>
+  <ViewUsage
+    Name="ReasonLevel1"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"/>
+  <ViewUsage
+    Name="ReasonLevel2"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"/>
+  <ViewUsage
+    Name="ReasonLevel3"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel3"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"
@@ -75,5 +84,11 @@
     ViewLinkObjectName="edu.hp.model.vo.link.UserRoleDMLViewLink"
     SrcViewUsageName="edu.hp.model.biz.AdminModule.Employees"
     DstViewUsageName="edu.hp.model.biz.AdminModule.RolesOfUser"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="HdReasonLevel2ToLevel3Link1"
+    ViewLinkObjectName="edu.hp.model.vo.link.HdReasonLevel2ToLevel3Link"
+    SrcViewUsageName="edu.hp.model.biz.AdminModule.ReasonLevel2"
+    DstViewUsageName="edu.hp.model.biz.AdminModule.ReasonLevel3"
     Reversed="false"/>
 </AppModule>

@@ -8,7 +8,8 @@
   SelectList="Lovs.CODE, 
        Lovs.ID, 
        Lovs.VALUE, 
-       Lovs.PARENT_CODE"
+       Lovs.PARENT_CODE, 
+       Lovs.EXPIRED"
   FromList="LOVS Lovs"
   Where="Lovs.CODE = 'HdRsnLv3'"
   BindingStyle="OracleName"
@@ -33,7 +34,8 @@
     PrecisionRule="true"
     EntityAttrName="Code"
     EntityUsage="Lovs"
-    AliasName="CODE"/>
+    AliasName="CODE"
+    DefaultValue="HdRsnLv3"/>
   <ViewAttribute
     Name="Id"
     IsUpdateable="while_insert"
@@ -53,6 +55,12 @@
     EntityAttrName="ParentCode"
     EntityUsage="Lovs"
     AliasName="PARENT_CODE"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
   <ViewCriteria
     Name="ReasonLevel2Criteria"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel3"
@@ -86,6 +94,41 @@
         Conjunction="AND"
         Value=":rsnLevel2"
         IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="ExpiredCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel3"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ReasonLevel3Criteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Expired"
+        ViewAttribute="Expired"
+        Operator="&lt;>"
+        Conjunction="AND"
+        Value="Y"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>

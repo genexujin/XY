@@ -21,11 +21,12 @@
   <SQLQuery><![CDATA[SELECT Lovs.CODE, 
        Lovs.ID, 
        Lovs.VALUE, 
-       Lovs.PARENT_CODE
+       Lovs.PARENT_CODE,
+       Lovs.Expired
 FROM LOVS Lovs
-WHERE Lovs.CODE = 'HdRsnLv1'
+WHERE Lovs.CODE = 'HdRsnLv1' and Lovs.Expired <> 'Y'
 union 
-select 'HdRsnLv1', '-2', ' ', null from dual
+select 'HdRsnLv1', '-2', ' ', null, 'N' from dual
 order by ID]]></SQLQuery>
   <EntityUsage
     Name="Lovs"
@@ -55,6 +56,12 @@ order by ID]]></SQLQuery>
     EntityAttrName="ParentCode"
     EntityUsage="Lovs"
     AliasName="PARENT_CODE"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
   <ViewLinkAccessor
     Name="ReasonLevel2WithEmpty"
     ViewLink="edu.hp.model.vo.link.HdReasonL1ToL2EmptyLink"

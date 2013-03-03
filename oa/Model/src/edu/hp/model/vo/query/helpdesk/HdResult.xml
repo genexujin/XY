@@ -11,7 +11,8 @@
   UseGlueCode="false"
   SelectList="Lovs.CODE, 
        Lovs.VALUE, 
-       Lovs.ID"
+       Lovs.ID, 
+       Lovs.EXPIRED"
   FromList="LOVS Lovs"
   Where="Lovs.CODE = 'HdResult'"
   OrderBy="ID">
@@ -29,7 +30,8 @@
     PrecisionRule="true"
     EntityAttrName="Code"
     EntityUsage="Lovs"
-    AliasName="CODE"/>
+    AliasName="CODE"
+    DefaultValue="HdResult"/>
   <ViewAttribute
     Name="Value"
     PrecisionRule="true"
@@ -50,6 +52,47 @@
     AliasName="ID"
     EntityAttrName="Id"
     EntityUsage="Lovs"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
+  <ViewCriteria
+    Name="ExpiredCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdResult"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HdResultCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Expired"
+        ViewAttribute="Expired"
+        Operator="&lt;>"
+        Conjunction="AND"
+        Value="Y"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

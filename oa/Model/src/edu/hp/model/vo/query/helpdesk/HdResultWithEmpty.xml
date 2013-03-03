@@ -20,11 +20,12 @@
   </Properties>
   <SQLQuery><![CDATA[SELECT Lovs.CODE, 
        Lovs.ID, 
-       Lovs.VALUE
+       Lovs.VALUE,
+       Lovs.Expired
 FROM LOVS Lovs
-WHERE Lovs.CODE = 'HdResult'
+WHERE Lovs.CODE = 'HdResult' and Lovs.Expired <> 'Y'
 union
-select 'HdResult', '-1', ' ' from dual
+select 'HdResult', '-1', ' ', 'N' from dual
 order by ID]]></SQLQuery>
   <EntityUsage
     Name="Lovs"
@@ -48,6 +49,12 @@ order by ID]]></SQLQuery>
     EntityAttrName="Value"
     EntityUsage="Lovs"
     AliasName="VALUE"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

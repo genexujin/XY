@@ -5,6 +5,7 @@ import edu.hp.view.utils.ADFUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import oracle.adf.model.BindingContext;
@@ -14,6 +15,7 @@ import oracle.adf.view.rich.component.rich.input.RichSelectManyShuttle;
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.jbo.Row;
+import oracle.jbo.RowSetIterator;
 import oracle.jbo.domain.DBSequence;
 
 
@@ -175,5 +177,14 @@ public class AdminOperationBean {
         this.allRoles = allRoles;
     }
 
-
+    public void insertReasonLevel3(ActionEvent actionEvent) {
+        String lv2Reason = (String)ADFUtils.getBoundAttributeValue("Value");
+        System.out.println("Current level 2 reason is: " + lv2Reason);
+        
+        DCIteratorBinding binding = ADFUtils.findIterator("ReasonLevel3Iterator");
+        RowSetIterator rows = binding.getRowSetIterator();
+        Row newRow = rows.createRow();
+        newRow.setAttribute("ParentCode", lv2Reason);
+        rows.insertRow(newRow);
+    }
 }

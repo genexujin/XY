@@ -85,6 +85,9 @@
     <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByExecuting"
           usageId="edu_hp_view_MyPo_MyPo_findByExecutingPageDef"/>
     <page path="/pages/admin/HdResults.jsff" usageId="edu_hp_view_HdResultsPageDef"/>
+    <page path="/pages/admin/HdReasonLevel1.jsff" usageId="edu_hp_view_HdReasonLevel1PageDef"/>
+    <page path="/pages/admin/HdReasonLevel2.jsff" usageId="edu_hp_view_HdReasonLevel2PageDef"/>
+    <page path="/pages/admin/HdReasonLevel3.jsff" usageId="edu_hp_view_HdReasonLevel3PageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -156,6 +159,9 @@
     <page id="edu_hp_view_MyPo_MyPo_findByPoIdPageDef" path="flows.po.MyPo_MyPo_findByPoIdPageDef"/>
     <page id="edu_hp_view_MyPo_MyPo_findByExecutingPageDef" path="flows.po.MyPo_MyPo_findByExecutingPageDef"/>
     <page id="edu_hp_view_HdResultsPageDef" path="pages.admin.HdResultsPageDef"/>
+    <page id="edu_hp_view_HdReasonLevel1PageDef" path="pages.admin.HdReasonLevel1PageDef"/>
+    <page id="edu_hp_view_HdReasonLevel2PageDef" path="pages.admin.HdReasonLevel2PageDef"/>
+    <page id="edu_hp_view_HdReasonLevel3PageDef" path="pages.admin.HdReasonLevel3PageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

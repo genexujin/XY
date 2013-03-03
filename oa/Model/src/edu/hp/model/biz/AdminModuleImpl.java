@@ -174,4 +174,36 @@ public class AdminModuleImpl extends ApplicationModuleImpl {
     public ViewObjectImpl getHdResult() {
         return (ViewObjectImpl)findViewObject("HdResult");
     }
+
+    /**
+     * Container's getter for ReasonLevel1_1.
+     * @return ReasonLevel1_1
+     */
+    public ViewObjectImpl getReasonLevel1() {
+        return (ViewObjectImpl)findViewObject("ReasonLevel1");
+    }
+
+    /**
+     * Container's getter for ReasonLevel2_1.
+     * @return ReasonLevel2_1
+     */
+    public ViewObjectImpl getReasonLevel2() {
+        return (ViewObjectImpl)findViewObject("ReasonLevel2");
+    }
+
+    /**
+     * Container's getter for ReasonLevel3_1.
+     * @return ReasonLevel3_1
+     */
+    public ViewObjectImpl getReasonLevel3() {
+        return (ViewObjectImpl)findViewObject("ReasonLevel3");
+    }
+
+    /**
+     * Container's getter for HdReasonLevel2ToLevel3Link1.
+     * @return HdReasonLevel2ToLevel3Link1
+     */
+    public ViewLinkImpl getHdReasonLevel2ToLevel3Link1() {
+        return (ViewLinkImpl)findViewLink("HdReasonLevel2ToLevel3Link1");
+    }
 }

@@ -29,40 +29,91 @@
   <SQLQuery><![CDATA[SELECT Lovs.CODE, 
        Lovs.ID, 
        Lovs.PARENT_CODE, 
-       Lovs.VALUE
+       Lovs.VALUE,
+       Lovs.Expired
 FROM LOVS Lovs
-WHERE Lovs.CODE = 'HdRsnLv2'
+WHERE Lovs.CODE = 'HdRsnLv2' and Lovs.Expired <> 'Y'
 union 
-select 'HdRsnLv2', '-3', null, ' ' from dual
+select 'HdRsnLv2', '-3', null, ' ', 'N' from dual
 order by ID]]></SQLQuery>
   <EntityUsage
     Name="Lovs"
     Entity="edu.hp.model.eo.Lovs"/>
   <ViewAttribute
     Name="Code"
+    IsUpdateable="false"
+    IsPersistent="false"
     PrecisionRule="true"
-    EntityAttrName="Code"
-    EntityUsage="Lovs"
-    AliasName="CODE"/>
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CODE"
+    Expression="CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="Id"
-    IsUpdateable="while_insert"
+    IsUpdateable="false"
+    IsPersistent="false"
     PrecisionRule="true"
-    EntityAttrName="Id"
-    EntityUsage="Lovs"
-    AliasName="ID"/>
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="ParentCode"
+    IsUpdateable="false"
+    IsPersistent="false"
     PrecisionRule="true"
-    EntityAttrName="ParentCode"
-    EntityUsage="Lovs"
-    AliasName="PARENT_CODE"/>
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENT_CODE"
+    Expression="PARENT_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="Value"
+    IsUpdateable="false"
+    IsPersistent="false"
     PrecisionRule="true"
-    EntityAttrName="Value"
-    EntityUsage="Lovs"
-    AliasName="VALUE"/>
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VALUE"
+    Expression="VALUE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Expired"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXPIRED"
+    Expression="EXPIRED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

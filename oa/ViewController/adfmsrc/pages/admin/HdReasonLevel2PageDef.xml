@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="HdReasonLevel2PageDef"
+                Package="pages.admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.ReasonLevel2" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ReasonLevel2Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ReasonLevel2Iterator" id="ReasonLevel2">
+      <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.ReasonLevel2" Name="ReasonLevel20">
+        <AttrNames>
+          <Item Value="ParentCode"/>
+          <Item Value="Value"/>
+          <Item Value="Expired" Binds="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="ReasonLevel2Iterator" StaticList="true" id="Expired">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="ReasonLevel2Iterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.ReasonLevel2" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

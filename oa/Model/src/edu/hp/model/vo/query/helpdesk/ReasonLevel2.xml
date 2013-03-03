@@ -8,7 +8,8 @@
   SelectList="Lovs.ID, 
        Lovs.CODE, 
        Lovs.PARENT_CODE, 
-       Lovs.VALUE"
+       Lovs.VALUE, 
+       Lovs.EXPIRED"
   FromList="LOVS Lovs"
   Where="lovs.code = 'HdRsnLv2'"
   BindingStyle="OracleName"
@@ -25,14 +26,34 @@
     Name="rsnLevel1"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <ViewAccessor
+    Name="ReasonLevel1_1"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_ParentCode"
+    ListVOName="ReasonLevel1_1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ParentCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="Lovs"
-    Entity="edu.hp.model.eo.Lovs"
-    ReadOnly="true"
-    DeleteParticipant="false"/>
+    Entity="edu.hp.model.eo.Lovs"/>
   <ViewAttribute
     Name="Id"
-    IsUpdateable="false"
+    IsUpdateable="while_insert"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Lovs"
@@ -42,19 +63,34 @@
     PrecisionRule="true"
     EntityAttrName="Code"
     EntityUsage="Lovs"
-    AliasName="CODE"/>
+    AliasName="CODE"
+    DefaultValue="HdRsnLv2"/>
   <ViewAttribute
     Name="ParentCode"
     PrecisionRule="true"
     EntityAttrName="ParentCode"
     EntityUsage="Lovs"
-    AliasName="PARENT_CODE"/>
+    AliasName="PARENT_CODE"
+    LOVName="LOV_ParentCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Value"
     PrecisionRule="true"
     EntityAttrName="Value"
     EntityUsage="Lovs"
     AliasName="VALUE"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
   <ViewCriteria
     Name="ReasonLevel1Criteria"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"
@@ -88,6 +124,41 @@
         Conjunction="AND"
         Value=":rsnLevel1"
         IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="ExpiredCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ReasonLevel2Criteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Expired"
+        ViewAttribute="Expired"
+        Operator="&lt;>"
+        Conjunction="AND"
+        Value="Y"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>

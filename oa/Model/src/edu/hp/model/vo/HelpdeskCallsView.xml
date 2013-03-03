@@ -93,7 +93,11 @@
   <ViewAccessor
     Name="ReasonLevel1_1"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel1"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="ExpiredCriteria"
+      FullName="edu.hp.model.vo.query.helpdesk.ReasonLevel1.ExpiredCriteria"/>
+  </ViewAccessor>
   <ViewAccessor
     Name="EmployeesView"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
@@ -114,6 +118,9 @@
     Name="ReasonLevel2_1"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2">
     <ViewCriteriaUsage
+      Name="ExpiredCriteria"
+      FullName="edu.hp.model.vo.query.helpdesk.ReasonLevel2.ExpiredCriteria"/>
+    <ViewCriteriaUsage
       Name="ReasonLevel1Criteria"
       FullName="edu.hp.model.vo.query.helpdesk.ReasonLevel2.ReasonLevel1Criteria"/>
     <ParameterMap>
@@ -125,10 +132,17 @@
   <ViewAccessor
     Name="HdResult"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.HdResult"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="ExpiredCriteria"
+      FullName="edu.hp.model.vo.query.helpdesk.HdResult.ExpiredCriteria"/>
+  </ViewAccessor>
   <ViewAccessor
     Name="ReasonLevel3_1"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel3">
+    <ViewCriteriaUsage
+      Name="ExpiredCriteria"
+      FullName="edu.hp.model.vo.query.helpdesk.ReasonLevel3.ExpiredCriteria"/>
     <ViewCriteriaUsage
       Name="ReasonLevel2Criteria"
       FullName="edu.hp.model.vo.query.helpdesk.ReasonLevel3.ReasonLevel2Criteria"/>

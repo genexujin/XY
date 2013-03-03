@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelHeader text="报修二级原因" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t2">
+            <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png">
+              <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
+            </af:commandToolbarButton>
+            <af:commandToolbarButton actionListener="#{bindings.Rollback.execute}" text="取消"
+                                     immediate="true" id="ctb2" icon="/images/icons/undo.png"/>
+            <af:commandToolbarButton text="创建三级原因" id="ctb3" icon="/images/icons/messageAsync.png"  action="level3"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelCollection id="pc1">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t3">
+              <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" 
+                                       text="新建" id="ctb4" icon="/images/icons/new.png"/>
+              <af:commandToolbarButton text="导出" id="ctb5" icon="/images/icons/export.png">
+                <af:exportCollectionActionListener type="excelHTML" exportedId="t1" title="报修二级原因"
+                                                   filename="HdReasonLevel2.xls"/>
+              </af:commandToolbarButton>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.ReasonLevel2.collectionModel}" var="row" rows="#{bindings.ReasonLevel2.rangeSize}"
+                    emptyText="#{bindings.ReasonLevel2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.ReasonLevel2.rangeSize}" rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.ReasonLevel2.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.ReasonLevel2.collectionModel.makeCurrent}" rowSelection="single"
+                    id="t1">
+            <af:column sortProperty="#{bindings.ReasonLevel2.hints.ParentCode.name}" sortable="true"
+                       headerText="#{bindings.ReasonLevel2.hints.ParentCode.label}" id="c1">
+              <af:selectOneChoice value="#{row.bindings.ParentCode.inputValue}" label="#{row.bindings.ParentCode.label}"
+                                  required="#{bindings.ReasonLevel2.hints.ParentCode.mandatory}"
+                                  shortDesc="#{bindings.ReasonLevel2.hints.ParentCode.tooltip}" id="soc1" autoSubmit="true">
+                <f:selectItems value="#{row.bindings.ParentCode.items}" id="si1"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.ReasonLevel2.hints.Value.name}" sortable="true"
+                       headerText="#{bindings.ReasonLevel2.hints.Value.label}" id="c2">
+              <af:inputText value="#{row.bindings.Value.inputValue}" label="#{bindings.ReasonLevel2.hints.Value.label}"
+                            required="#{bindings.ReasonLevel2.hints.Value.mandatory}"
+                            columns="#{bindings.ReasonLevel2.hints.Value.displayWidth}"
+                            maximumLength="#{bindings.ReasonLevel2.hints.Value.precision}"
+                            shortDesc="#{bindings.ReasonLevel2.hints.Value.tooltip}" id="it1" autoSubmit="true">
+                <f:validator binding="#{row.bindings.Value.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.ReasonLevel2.hints.Expired.name}" sortable="true"
+                       headerText="#{bindings.ReasonLevel2.hints.Expired.label}" id="c3">
+              <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}"
+                              label="#{row.bindings.Expired.label}"
+                              shortDesc="#{bindings.ReasonLevel2.hints.Expired.tooltip}" id="sbc1"
+                              autoSubmit="true"/>
+            </af:column>
+          </af:table>
+          <af:popup id="confirm" contentDelivery="lazyUncached">
+            <!-- don't render if the activity is null -->
+            <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}" title="请确认操作" id="d2">
+                <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+                <af:spacer height="20" id="s4"/>
+                <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+            </af:dialog>
+          </af:popup>
+        </af:panelCollection>
+      </af:panelHeader>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

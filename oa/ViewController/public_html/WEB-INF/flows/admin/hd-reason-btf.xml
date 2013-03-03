@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="hd-reason-btf">
+    <template-reference>
+      <document>/WEB-INF/flows/admin/admin-btf-template.xml</document>
+      <id>admin-btf-template</id>
+    </template-reference>
+    <default-activity>HdReasonLevel1</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <view id="HdReasonLevel1">
+      <page>/pages/admin/HdReasonLevel1.jsff</page>
+    </view>
+    <view id="HdReasonLevel2">
+      <page>/pages/admin/HdReasonLevel2.jsff</page>
+    </view>
+    <view id="HdReasonLevel3">
+      <page>/pages/admin/HdReasonLevel3.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>HdReasonLevel1</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>level2</from-outcome>
+        <to-activity-id>HdReasonLevel2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>HdReasonLevel2</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>level3</from-outcome>
+        <to-activity-id>HdReasonLevel3</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

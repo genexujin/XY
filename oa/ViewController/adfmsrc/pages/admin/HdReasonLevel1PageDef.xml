@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="HdReasonLevel1PageDef"
+                Package="pages.admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.ReasonLevel1" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ReasonLevel1Iterator"/>
+    <searchRegion Binds="ReasonLevel1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ReasonLevel1Query"/>
+  </executables>
+  <bindings>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="ReasonLevel1Iterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.ReasonLevel1" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="ReasonLevel1Iterator" id="ReasonLevel1">
+      <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.ReasonLevel1" Name="ReasonLevel10">
+        <AttrNames>
+          <Item Value="Value"/>
+          <Item Value="Expired" Binds="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="ReasonLevel1Iterator" StaticList="true" id="Expired">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>
