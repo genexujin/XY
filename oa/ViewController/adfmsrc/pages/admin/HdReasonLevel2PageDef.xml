@@ -14,35 +14,17 @@
             RequiresUpdateModel="true" Action="commitTransaction"/>
     <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
             RequiresUpdateModel="false" Action="rollbackTransaction"/>
-    <action IterBinding="ReasonLevel1Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
-    <action IterBinding="ReasonLevel1Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
-    <action IterBinding="ReasonLevel1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
-    <action IterBinding="ReasonLevel1Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
-    <attributeValues IterBinding="ReasonLevel1Iterator" id="Id">
-      <AttrNames>
-        <Item Value="Id"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="ReasonLevel1Iterator" id="Code">
-      <AttrNames>
-        <Item Value="Code"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="ReasonLevel1Iterator" id="Value">
-      <AttrNames>
-        <Item Value="Value"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="ReasonLevel1Iterator" id="FlexCol1">
-      <AttrNames>
-        <Item Value="FlexCol1"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="ReasonLevel1Iterator" id="Expired">
-      <AttrNames>
-        <Item Value="Expired"/>
-      </AttrNames>
-    </attributeValues>
+    <tree IterBinding="ReasonLevel1Iterator" id="ReasonLevel1">
+      <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.ReasonLevel1" Name="ReasonLevel10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Code"/>
+          <Item Value="Value"/>
+          <Item Value="FlexCol1"/>
+          <Item Value="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
     <tree IterBinding="ReasonLevel2_1Iterator" id="ReasonLevel2_1">
       <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.ReasonLevel2" Name="ReasonLevel2_10">
         <AttrNames>
@@ -50,11 +32,11 @@
           <Item Value="Code"/>
           <Item Value="ParentCode"/>
           <Item Value="Value"/>
-          <Item Value="Expired"/>
+          <Item Value="Expired" Binds="Expired"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <button IterBinding="ReasonLevel1Iterator" StaticList="true" id="Expired1">
+    <button IterBinding="ReasonLevel2_1Iterator" StaticList="true" id="Expired">
       <AttrNames>
         <Item Value="Expired"/>
       </AttrNames>
@@ -63,23 +45,8 @@
         <Item Value="N"/>
       </ValueList>
     </button>
-    <button IterBinding="ReasonLevel2_1Iterator" StaticList="true" id="Expired2">
-      <AttrNames>
-        <Item Value="Expired"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <button IterBinding="ReasonLevel2_1Iterator" StaticList="true" id="Expired3">
-      <AttrNames>
-        <Item Value="Expired"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
+    <action IterBinding="ReasonLevel2_1Iterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.ReasonLevel2_1"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
   </bindings>
 </pageDefinition>

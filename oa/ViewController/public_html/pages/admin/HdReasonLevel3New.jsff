@@ -4,7 +4,7 @@
   <af:panelStretchLayout id="psl1">
     <f:facet name="bottom"/>
     <f:facet name="center">
-      <af:panelHeader text="panelHeader 1" id="ph1">
+      <af:panelHeader text="报修三级原因" id="ph1">
         <f:facet name="context"/>
         <f:facet name="menuBar"/>
         <f:facet name="toolbar">
@@ -14,13 +14,14 @@
             </af:commandToolbarButton>
             <af:commandToolbarButton actionListener="#{viewScope.AdminOperationBean.rollbackForReasonLevel3}" text="取消"
                                      immediate="true" id="ctb3" icon="/images/icons/undo.png"/>
+            <af:commandToolbarButton text="返回" id="ctb4" icon="/images/icons/previous.png" action="return"/>
           </af:toolbar>
         </f:facet>
         <f:facet name="legend"/>
         <f:facet name="info"/>
-        <af:panelSplitter id="ps1" splitterPosition="400">
+        <af:panelSplitter id="ps1" splitterPosition="402">
           <f:facet name="first">
-            <af:panelHeader text="panelHeader 2" id="ph2">
+            <af:panelHeader text="二级原因" id="ph2">
               <f:facet name="context"/>
               <f:facet name="menuBar"/>
               <f:facet name="toolbar"/>
@@ -34,7 +35,7 @@
                         selectionListener="#{bindings.ReasonLevel2.collectionModel.makeCurrent}" rowSelection="single"
                         id="t1">
                 <af:column sortProperty="#{bindings.ReasonLevel2.hints.Value.name}" sortable="false"
-                           headerText="#{bindings.ReasonLevel2.hints.Value.label}" id="c4">
+                           headerText="二级原因" id="c4">
                   <af:outputText value="#{row.Value}" id="ot3"/>
                 </af:column>
                 <af:column sortProperty="#{bindings.ReasonLevel2.hints.Expired.name}" sortable="false"
@@ -53,7 +54,7 @@
             </af:panelHeader>
           </f:facet>
           <f:facet name="second">
-            <af:panelHeader text="panelHeader 3" id="ph3">
+            <af:panelHeader text="三级原因" id="ph3">
               <f:facet name="context"/>
               <f:facet name="menuBar"/>
               <f:facet name="toolbar"/>
@@ -63,8 +64,9 @@
                 <f:facet name="menus"/>
                 <f:facet name="toolbar">
                   <af:toolbar id="t2">
-                    <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="CreateInsert"
-                                             disabled="#{!bindings.CreateInsert.enabled}" id="ctb1"/>
+                    <af:commandToolbarButton actionListener="#{bindings.CreateInsert.execute}" text="新建"
+                                             disabled="#{!bindings.CreateInsert.enabled}" id="ctb1"
+                                             icon="/images/icons/new.png"/>
                   </af:toolbar>
                 </f:facet>
                 <f:facet name="statusbar"/>
@@ -76,7 +78,7 @@
                           selectionListener="#{bindings.ReasonLevel3.collectionModel.makeCurrent}" rowSelection="single"
                           id="t3" partialTriggers="::ctb1">
                   <af:column sortProperty="#{bindings.ReasonLevel3.hints.Value.name}" sortable="true"
-                             headerText="#{bindings.ReasonLevel3.hints.Value.label}" id="c8">
+                             headerText="三级原因" id="c8">
                     <af:inputText value="#{row.bindings.Value.inputValue}"
                                   label="#{bindings.ReasonLevel3.hints.Value.label}"
                                   required="#{bindings.ReasonLevel3.hints.Value.mandatory}"

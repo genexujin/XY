@@ -65,7 +65,7 @@ public class AdminOperationBean {
         
         ADFUtils.findOperation("Rollback").execute();
         
-        ADFUtils.partialRefreshComponenet(reasonLevel2ResultTable);            
+//        ADFUtils.partialRefreshComponenet(reasonLevel2ResultTable);
         
     }
     
@@ -76,7 +76,7 @@ public class AdminOperationBean {
         
         ADFUtils.findOperation("Rollback").execute();
         
-        ADFUtils.partialRefreshComponenet(reasonLevel3ResultTable);            
+//        ADFUtils.partialRefreshComponenet(reasonLevel3ResultTable);            
         
     }
 

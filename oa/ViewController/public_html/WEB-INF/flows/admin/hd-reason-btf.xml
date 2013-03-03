@@ -39,6 +39,13 @@
         <to-activity-id>HdReasonLevel3New</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>HdReasonLevel3New</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>HdReasonLevel1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>
