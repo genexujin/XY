@@ -10,47 +10,7 @@
               id="ReasonLevel3Iterator" ChangeEventPolicy="ppr"/>
   </executables>
   <bindings>
-    <action IterBinding="ReasonLevel2Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
-    <action IterBinding="ReasonLevel2Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
-    <action IterBinding="ReasonLevel2Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
-    <action IterBinding="ReasonLevel2Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
-    <attributeValues IterBinding="ReasonLevel2Iterator" id="Id">
-      <AttrNames>
-        <Item Value="Id"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="ReasonLevel2Iterator" id="Code">
-      <AttrNames>
-        <Item Value="Code"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="ReasonLevel2Iterator" id="ParentCode">
-      <AttrNames>
-        <Item Value="ParentCode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="ReasonLevel2Iterator" id="Value">
-      <AttrNames>
-        <Item Value="Value"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="ReasonLevel2Iterator" id="Expired">
-      <AttrNames>
-        <Item Value="Expired"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="ReasonLevel3Iterator" id="ReasonLevel3">
-      <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.ReasonLevel3" Name="ReasonLevel30">
-        <AttrNames>
-          <Item Value="Code"/>
-          <Item Value="Id"/>
-          <Item Value="Value"/>
-          <Item Value="ParentCode"/>
-          <Item Value="Expired"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <button IterBinding="ReasonLevel3Iterator" StaticList="true" id="Expired1">
+    <button IterBinding="ReasonLevel3Iterator" StaticList="true" id="Expired" DTSupportsMRU="false">
       <AttrNames>
         <Item Value="Expired"/>
       </AttrNames>
@@ -59,5 +19,32 @@
         <Item Value="N"/>
       </ValueList>
     </button>
+    <tree IterBinding="ReasonLevel2Iterator" id="ReasonLevel2">
+      <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.ReasonLevel2" Name="ReasonLevel20">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Code"/>
+          <Item Value="ParentCode"/>
+          <Item Value="Value"/>
+          <Item Value="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ReasonLevel3Iterator" id="ReasonLevel3">
+      <nodeDefinition DefName="edu.hp.model.vo.query.helpdesk.ReasonLevel3" Name="ReasonLevel30">
+        <AttrNames>
+          <Item Value="Code"/>
+          <Item Value="Id"/>
+          <Item Value="Value"/>
+          <Item Value="ParentCode"/>
+          <Item Value="Expired" Binds="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="ReasonLevel3Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
   </bindings>
 </pageDefinition>
