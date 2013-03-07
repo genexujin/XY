@@ -103,6 +103,43 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         
         return new BigDecimal(0);
     }
+    
+    public void findByState(String state) {
+        PurchaseOrdersViewImpl poView = this.getPurchaseOrdersView();        
+        poView.setApplyViewCriteriaNames(null);
+        
+        System.err.println("In App Module: state is: " + state);
+        
+        if (state != null) {
+            poView.setOrStateId(state);
+            ViewCriteria oStateIdCriteria = poView.getViewCriteria("OrderStateCriteria");
+            poView.setApplyViewCriteriaName(oStateIdCriteria.getName());
+            poView.executeQuery();
+            
+            ViewObjectImpl stateView = this.getPoStateWithEmpty();
+            stateView.setApplyViewCriteriaNames(null);
+            ViewCriteria stateVC = stateView.getViewCriteria("StateCriteria");
+            stateView.setApplyViewCriteriaName(stateVC.getName());
+            stateView.executeQuery();
+        }
+    }
+    
+    public void findForVerifier() {
+        PurchaseOrdersViewImpl poView = this.getPurchaseOrdersView();        
+        poView.setApplyViewCriteriaNames(null);
+        
+        System.err.println("In App Module: search for verifier");
+        ViewCriteria verifierCriteria = poView.getViewCriteria("OrderForVerifierCriteria");
+        poView.setApplyViewCriteriaName(verifierCriteria.getName());
+        poView.executeQuery();
+        
+        ViewObjectImpl stateView = this.getPoStateWithEmpty();
+        stateView.setApplyViewCriteriaNames(null);
+        ViewCriteria stateVC = stateView.getViewCriteria("PoVerifierCriteria");
+        stateView.setApplyViewCriteriaName(stateVC.getName());
+        stateView.executeQuery();
+        
+    }
 
     /**
      * Container's getter for PurchaseOrdersView.

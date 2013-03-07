@@ -97,6 +97,41 @@ order by id]]></SQLQuery>
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="PoVerifierCriteria"
+    ViewObjectName="edu.hp.model.vo.query.po.PoStateWithEmpty"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PoStateWithEmptyCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="FlexCol1"
+        ViewAttribute="FlexCol1"
+        Operator="&lt;>"
+        Conjunction="AND"
+        Value="1"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

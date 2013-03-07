@@ -21,7 +21,7 @@
                                             label="订单状态"
                                             required="#{bindings.PoStateWithEmpty.hints.mandatory}"
                                             shortDesc="#{bindings.PoStateWithEmpty.hints.tooltip}" id="soc2"
-                                            disabled="#{pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='verifier' or pageFlowScope.fromMenu=='buyer' or pageFlowScope.fromMenu=='receiver'}">
+                                            disabled="#{pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='buyer' or pageFlowScope.fromMenu=='receiver'}">
                             <f:selectItems value="#{bindings.PoStateWithEmpty.items}" id="si2"/>
                         </af:selectOneChoice>
                         <af:inputDate label="至" id="id2" columns="20" value="#{pageFlowScope.MyPoBean.submitDateTo}"/>
@@ -35,7 +35,7 @@
                                             label="申请人"
                                             required="#{bindings.EmpWithEmpty.hints.mandatory}"
                                             shortDesc="#{bindings.EmpWithEmpty.hints.tooltip}" id="soc1"
-                                            disabled="#{pageFlowScope.fromMenu eq null}">
+                                            disabled="#{pageFlowScope.fromMenu eq 'normal'}">
                             <f:selectItems value="#{bindings.EmpWithEmpty.items}" id="si1"/>
                         </af:selectOneChoice>
                     </af:panelFormLayout>
@@ -98,11 +98,11 @@
                                     <!--<f:validator binding="#{row.bindings.SubmitterId.validator}"/>-->
                                 </af:inputText>
                             </af:column>
-                            <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.CreateAt.name}"
-                                       sortable="false" headerText="#{bindings.PurchaseOrdersView.hints.CreateAt.label}"
+                            <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.SubmitAt.name}"
+                                       sortable="false" headerText="#{bindings.PurchaseOrdersView.hints.SubmitAt.label}"
                                        id="c3">
-                                <af:outputText value="#{row.CreateAt}" id="ot4">
-                                    <af:convertDateTime pattern="#{bindings.PurchaseOrdersView.hints.CreateAt.format}"/>
+                                <af:outputText value="#{row.SubmitAt}" id="ot4">
+                                    <af:convertDateTime pattern="#{bindings.PurchaseOrdersView.hints.SubmitAt.format}"/>
                                 </af:outputText>
                             </af:column>
                             <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.State.name}" sortable="false"

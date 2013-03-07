@@ -188,11 +188,22 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="PURCHASE_ORDER_LINES"
     IsPersistent="false"
     IsQueriable="false">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[PurchaseOrder.ItemCategoryId]]></TransientExpression>
+  </Attribute>
+  <Attribute
+    Name="Cancelled"
+    Precision="20"
+    ColumnName="CANCELLED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDER_LINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
   </Attribute>
   <AccessorAttribute
     Name="PurchaseOrder"

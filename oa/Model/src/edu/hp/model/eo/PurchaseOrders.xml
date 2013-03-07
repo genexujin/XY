@@ -167,6 +167,25 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="CurrentVerifier"
+    Precision="20"
+    ColumnName="CURRENT_VERIFIER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SubmitAt"
+    ColumnName="SUBMIT_AT"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="PURCHASE_ORDERS"/>
   <AccessorAttribute
     Name="Submitter"
     Association="edu.hp.model.eo.asso.EmpPoAssoc"

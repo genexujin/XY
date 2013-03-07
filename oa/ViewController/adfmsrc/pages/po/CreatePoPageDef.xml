@@ -80,6 +80,7 @@
           <Item Value="VerifyNote"/>
           <Item Value="ReceiveQuantity"/>
           <Item Value="OrderId"/>
+          <Item Value="Cancelled" Binds="Cancelled"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -151,5 +152,19 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <button IterBinding="PurchaseOrderLinesViewIterator" StaticList="true" id="Cancelled">
+      <AttrNames>
+        <Item Value="Cancelled"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="SubmitAt">
+      <AttrNames>
+        <Item Value="SubmitAt"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

@@ -57,8 +57,6 @@
     <page path="/pages/admin/EmployeeRoles.jsff" usageId="edu_hp_view_EmployeeRolesPageDef"/>
     <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findBySubmitterId"
           usageId="edu_hp_view_MyPo_MyPo_findBySubmitterIdPageDef"/>
-    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByPendingVerify"
-          usageId="edu_hp_view_MyPo_MyPo_findByPendingVerifyPageDef"/>
     <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByPendingApprove"
           usageId="edu_hp_view_MyPo_MyPo_findByPendingApprovePageDef"/>
     <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByPendingReceive"
@@ -91,6 +89,8 @@
     <page path="/pages/admin/HdResultNew.jsff" usageId="edu_hp_view_HdResultNewPageDef"/>
     <page path="/pages/admin/HdReasonLevel2New.jsff" usageId="edu_hp_view_HdReasonLevel2NewPageDef"/>
     <page path="/pages/admin/HdReasonLevel3New.jsff" usageId="edu_hp_view_HdReasonLevel3NewPageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findForVerifier"
+          usageId="edu_hp_view_MyPo_MyPo_findByPendingVerifyPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>

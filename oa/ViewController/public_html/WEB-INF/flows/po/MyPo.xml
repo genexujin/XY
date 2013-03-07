@@ -56,6 +56,10 @@
         <expression>#{pageFlowScope.fromMenu == 'create'}</expression>
         <outcome>create</outcome>
       </case>
+      <case id="__37">
+        <expression>#{pageFlowScope.fromMenu == 'normal'}</expression>
+        <outcome>normalUser</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findBySubmitterId">
@@ -64,10 +68,10 @@
         <fixed-outcome>findBySubmitterId</fixed-outcome>
       </outcome>
     </method-call>
-    <method-call id="findByPendingVerify">
-      <method>#{bindings.findByState.execute}</method>
+    <method-call id="findForVerifier">
+      <method>#{bindings.findForVerifier.execute}</method>
       <outcome>
-        <fixed-outcome>findByState</fixed-outcome>
+        <fixed-outcome>findForVerifier</fixed-outcome>
       </outcome>
     </method-call>
     <method-call id="findByPendingApprove">
@@ -120,7 +124,7 @@
       </control-flow-case>
       <control-flow-case id="__17">
         <from-outcome>verifier</from-outcome>
-        <to-activity-id>findByPendingVerify</to-activity-id>
+        <to-activity-id>findForVerifier</to-activity-id>
       </control-flow-case>
       <control-flow-case id="__20">
         <from-outcome>approver</from-outcome>
@@ -151,9 +155,9 @@
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__18">
-      <from-activity-id>findByPendingVerify</from-activity-id>
+      <from-activity-id>findForVerifier</from-activity-id>
       <control-flow-case id="__19">
-        <from-outcome>findByState</from-outcome>
+        <from-outcome>findForVerifier</from-outcome>
         <to-activity-id>MyPoPage</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

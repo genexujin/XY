@@ -701,13 +701,13 @@ public class HelpdeskCallsImpl extends EntityImpl {
     
     public void lock() {
         try { 
-                super.lock(); 
-            } catch (RowInconsistentException e) { 
-                e.printStackTrace(); 
-                refresh(REFRESH_WITH_DB_ONLY_IF_UNCHANGED | REFRESH_CONTAINEES);
-                System.out.println("已被处理的异常信息："+new java.util.Date().toLocaleString()+" 更新时出现锁异常！");
-                super.lock(); 
-            } 
-        }
+            super.lock(); 
+        } catch (RowInconsistentException e) { 
+            e.printStackTrace(); 
+            refresh(REFRESH_WITH_DB_ONLY_IF_UNCHANGED | REFRESH_CONTAINEES);
+            System.out.println("已被处理的异常信息："+new java.util.Date().toLocaleString()+" 更新时出现锁异常！");
+            super.lock(); 
+        } 
+    }
     
 }

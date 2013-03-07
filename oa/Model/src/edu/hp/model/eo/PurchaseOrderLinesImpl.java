@@ -191,6 +191,16 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
             }
         }
         ,
+        Cancelled {
+            public Object get(PurchaseOrderLinesImpl obj) {
+                return obj.getCancelled();
+            }
+
+            public void put(PurchaseOrderLinesImpl obj, Object value) {
+                obj.setCancelled((String)value);
+            }
+        }
+        ,
         PurchaseOrder {
             public Object get(PurchaseOrderLinesImpl obj) {
                 return obj.getPurchaseOrder();
@@ -246,6 +256,7 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
     public static final int RECEIVEQUANTITY = AttributesEnum.ReceiveQuantity.index();
     public static final int ORDERID = AttributesEnum.OrderId.index();
     public static final int ITEMCATEGORYID = AttributesEnum.ItemCategoryId.index();
+    public static final int CANCELLED = AttributesEnum.Cancelled.index();
     public static final int PURCHASEORDER = AttributesEnum.PurchaseOrder.index();
 
     /**
@@ -532,6 +543,22 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
      */
     public void setItemCategoryId(String value) {
         setAttributeInternal(ITEMCATEGORYID, value);
+    }
+
+    /**
+     * Gets the attribute value for Cancelled, using the alias name Cancelled.
+     * @return the value of Cancelled
+     */
+    public String getCancelled() {
+        return (String)getAttributeInternal(CANCELLED);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for Cancelled.
+     * @param value value to set the Cancelled
+     */
+    public void setCancelled(String value) {
+        setAttributeInternal(CANCELLED, value);
     }
 
     /**

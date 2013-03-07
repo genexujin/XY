@@ -25,6 +25,7 @@
           <Item Value="ItemCategoryId"/>
           <Item Value="SubmitterName"/>
           <Item Value="LineNum"/>
+          <Item Value="SubmitAt"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

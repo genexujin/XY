@@ -112,6 +112,10 @@ public class MyHelpdeskCallBean extends BaseBean {
         
     }
 
+    public void saveHdCall(ActionEvent event) {
+        ADFUtils.commit("报修单已保存！", "报修单保存失败，请核对输入的信息或联系管理员！");
+    }
+
     public void submitHdCall(ActionEvent actionEvent) {
         setSubmitDate();
         String state = (String)ADFUtils.getBoundAttributeValue("State");

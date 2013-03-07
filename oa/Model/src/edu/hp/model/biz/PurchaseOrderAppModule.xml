@@ -100,5 +100,20 @@
         Name="categoryId"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="findByState"
+      MethodName="findByState">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="state"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findForVerifier"
+      MethodName="findForVerifier">
+      <Return
+        Type="void"/>
+    </Method>
   </ClientInterface>
 </AppModule>

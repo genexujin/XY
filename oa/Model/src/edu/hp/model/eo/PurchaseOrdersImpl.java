@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import oracle.jbo.AttributeList;
 import oracle.jbo.Key;
+import oracle.jbo.RowInconsistentException;
 import oracle.jbo.RowIterator;
 import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Number;
@@ -153,6 +154,26 @@ public class PurchaseOrdersImpl extends EntityImpl {
             }
         }
         ,
+        CurrentVerifier {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getCurrentVerifier();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setCurrentVerifier((String)value);
+            }
+        }
+        ,
+        SubmitAt {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getSubmitAt();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setSubmitAt((Timestamp)value);
+            }
+        }
+        ,
         Submitter {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitter();
@@ -224,6 +245,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
     public static final int ORDERNOTE = AttributesEnum.OrderNote.index();
     public static final int ITEMCATEGORYID = AttributesEnum.ItemCategoryId.index();
     public static final int LINENUM = AttributesEnum.LineNum.index();
+    public static final int CURRENTVERIFIER = AttributesEnum.CurrentVerifier.index();
+    public static final int SUBMITAT = AttributesEnum.SubmitAt.index();
     public static final int SUBMITTER = AttributesEnum.Submitter.index();
     public static final int PURCHASEORDERLINES = AttributesEnum.PurchaseOrderLines.index();
     public static final int PURCHASEORDERHISTORYS = AttributesEnum.PurchaseOrderHistorys.index();
@@ -451,6 +474,38 @@ public class PurchaseOrdersImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for CurrentVerifier, using the alias name CurrentVerifier.
+     * @return the value of CurrentVerifier
+     */
+    public String getCurrentVerifier() {
+        return (String)getAttributeInternal(CURRENTVERIFIER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for CurrentVerifier.
+     * @param value value to set the CurrentVerifier
+     */
+    public void setCurrentVerifier(String value) {
+        setAttributeInternal(CURRENTVERIFIER, value);
+    }
+
+    /**
+     * Gets the attribute value for SubmitAt, using the alias name SubmitAt.
+     * @return the value of SubmitAt
+     */
+    public Timestamp getSubmitAt() {
+        return (Timestamp)getAttributeInternal(SUBMITAT);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for SubmitAt.
+     * @param value value to set the SubmitAt
+     */
+    public void setSubmitAt(Timestamp value) {
+        setAttributeInternal(SUBMITAT, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -535,18 +590,22 @@ public class PurchaseOrdersImpl extends EntityImpl {
     }
 
     /**
-     * Add locking logic here.
-     */
-    public void lock() {
-        super.lock();
-    }
-
-    /**
      * Custom DML update/insert/delete logic here.
      * @param operation the operation type
      * @param e the transaction event
      */
     protected void doDML(int operation, TransactionEvent e) {
         super.doDML(operation, e);
+    }
+    
+    public void lock() {
+        try { 
+            super.lock(); 
+        } catch (RowInconsistentException e) { 
+            e.printStackTrace(); 
+            refresh(REFRESH_WITH_DB_ONLY_IF_UNCHANGED | REFRESH_CONTAINEES);
+            System.out.println("已被处理的异常信息："+new java.util.Date().toLocaleString()+" 更新时出现锁异常！");
+            super.lock(); 
+        } 
     }
 }

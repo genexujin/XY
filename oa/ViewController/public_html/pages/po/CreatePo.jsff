@@ -13,7 +13,7 @@
                                             valueChangeListener="#{pageFlowScope.MyPoBean.submitterChanged}" readOnly="true">
                             <f:selectItems value="#{bindings.SubmitterId.items}" id="si1"/>
                         </af:selectOneChoice>
-                        <af:inputDate value="#{bindings.CreateAt.inputValue}" id="ot4" label="提交日期" columns="20"
+                        <af:inputDate value="#{bindings.SubmitAt.inputValue}" id="ot4" label="提交日期" columns="20"
                                       readOnly="true">
                         </af:inputDate>
                         <af:selectOneChoice value="#{bindings.ItemCategoryId1.inputValue}"  autoSubmit="true"
@@ -214,16 +214,8 @@
                         <af:convertDateTime pattern="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.format}"/>
                     </af:inputDate>
                     </af:column>
-                    <af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.State.name}" sortable="false"
+                    <!--<af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.State.name}" sortable="false"
                                headerText="#{bindings.PurchaseOrderLinesView.hints.State.label}" id="c40" width="80">
-                        <!--<af:selectOneChoice value="#{row.bindings.State.inputValue}" label="#{row.bindings.State.label}"
-                                            required="#{bindings.PurchaseOrderLinesView.hints.State.mandatory}"
-                                            shortDesc="#{bindings.PurchaseOrderLinesView.hints.State.tooltip}" id="soc30"
-                                            readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
-                                                        or (bindings.State.inputValue ne '4' and bindings.State.inputValue ne '2')}"
-                                            autoSubmit="true">
-                            <f:selectItems value="#{row.bindings.State.items}" id="si30"/>
-                        </af:selectOneChoice>-->
                         <af:selectOneChoice value="#{row.bindings.State.inputValue}" label="#{row.bindings.State.label}"
                                             required="#{bindings.PurchaseOrderLinesView.hints.State.mandatory}"
                                             shortDesc="#{bindings.PurchaseOrderLinesView.hints.State.tooltip}" id="soc30"
@@ -231,6 +223,15 @@
                                             autoSubmit="true">
                             <f:selectItems value="#{row.bindings.State.items}" id="si30"/>
                         </af:selectOneChoice>
+                    </af:column>-->
+                    <af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.Cancelled.name}" sortable="true"
+                               headerText="#{bindings.PurchaseOrderLinesView.hints.Cancelled.label}" id="c20">
+                          <af:selectBooleanCheckbox value="#{row.bindings.Cancelled.inputValue}"
+                                      label="#{row.bindings.Cancelled.label}"
+                                      shortDesc="#{bindings.PurchaseOrderLinesView.hints.Cancelled.tooltip}" id="sbc1"
+                                      autoSubmit="true"
+                                      readOnly="#{!(pageFlowScope.fromMenu eq 'normal' and bindings.State.inputValue eq '1')
+                                              and !(pageFlowScope.fromMenu eq 'verifier' and bindings.State.inputValue ne '2')}"/>
                     </af:column>
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.label}"
                                sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.name}" sortable="false"

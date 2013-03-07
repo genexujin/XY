@@ -6,11 +6,9 @@
     <variableIterator id="variables"/>
   </executables>
   <bindings>
-    <methodAction id="findByState" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByState"
+    <methodAction id="findForVerifier" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findForVerifier"
                   IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule"
-                  ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_PurchaseOrdersView_findByState_result">
-      <NamedData NDName="state" NDValue="2" NDType="java.lang.String"/>
-    </methodAction>
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_PurchaseOrdersView_findByState_result"/>
   </bindings>
 </pageDefinition>

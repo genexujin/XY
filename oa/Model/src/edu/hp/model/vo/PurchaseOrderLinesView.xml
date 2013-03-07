@@ -20,7 +20,8 @@
        PurchaseOrderLines.ACTUAL_TOTAL, 
        PurchaseOrderLines.VERIFY_NOTE, 
        PurchaseOrderLines.RECEIVE_QUANTITY, 
-       PurchaseOrderLines.ORDER_ID"
+       PurchaseOrderLines.ORDER_ID, 
+       PurchaseOrderLines.CANCELLED"
   FromList="PURCHASE_ORDER_LINES PurchaseOrderLines"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -338,6 +339,19 @@
     EntityAttrName="ItemCategoryId"
     EntityUsage="PurchaseOrderLines"
     AliasName="ITEM_CATEGORY"/>
+  <ViewAttribute
+    Name="Cancelled"
+    PrecisionRule="true"
+    EntityAttrName="Cancelled"
+    EntityUsage="PurchaseOrderLines"
+    AliasName="CANCELLED">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.Cancelled_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="PurchaseOrder"
     ViewLink="edu.hp.model.vo.link.PoToPoLineLink"

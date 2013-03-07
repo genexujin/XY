@@ -109,7 +109,7 @@ public class MyPoBean extends BaseBean {
     public void savePo(ActionEvent actionEvent) {
         computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
         
-        commit();
+        ADFUtils.commit("采购订单已保存！", "采购订单保存失败，请核对输入的信息或联系管理员！");
     }
 
     public void submitPo(ActionEvent actionEvent) {
@@ -121,7 +121,6 @@ public class MyPoBean extends BaseBean {
             String state = (String)ADFUtils.getBoundAttributeValue("State");
             if (state != null && state.equals(Constants.PO_STATE_INITIAL)) {
                 computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
-                //If no need to verify for this category, then go to "待审批3"
                 changeState(Constants.PO_STATE_PENDING_REVIEW);
                 changeLineState(Constants.PO_LINE_STATE_PENDING_REVIEW);
                 setSubmitDate();
@@ -330,10 +329,10 @@ public class MyPoBean extends BaseBean {
         } else {
             System.out.println("The PO line rows count is: " + rows.length);
             for (Row row : rows) {
-                String lineState = (String)row.getAttribute("State");
-                System.out.println("The PO line state is: " + lineState);
-                //已完成的行和已取消的行不计算在总金额中！
-                if ( !lineState.equals(Constants.PO_LINE_STATE_CANCELLED) && !lineState.equals(Constants.PO_LINE_STATE_FINISHED)) {
+                String isCancelled = (String)row.getAttribute("Cancelled");
+                System.out.println("Is the PO line cancelled? " + isCancelled);
+                //已取消的行不计算在总金额中
+                if (!"Y".equals(isCancelled)) {
                     double price = 0;
                     BigDecimal p = (BigDecimal)row.getAttribute(priceAttr);
                     if (p != null) {
@@ -517,7 +516,7 @@ public class MyPoBean extends BaseBean {
         Row row = it.getCurrentRow();
         Timestamp now = new Timestamp(System.currentTimeMillis());
         System.out.println("Current time is: " + now);
-        row.setAttribute("CreateAt", now);
+        row.setAttribute("SubmitAt", now);
     }
 
     public void newPoLine(ActionEvent actionEvent) {
