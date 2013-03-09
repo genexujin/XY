@@ -236,4 +236,20 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
     public void setOrdId(String value) {
         ensureVariableManager().setVariableValue("OrdId", value);
     }
+
+    /**
+     * Returns the variable value for CurrApprover.
+     * @return variable value for CurrApprover
+     */
+    public String getCurrApprover() {
+        return (String)ensureVariableManager().getVariableValue("CurrApprover");
+    }
+
+    /**
+     * Sets <code>value</code> for variable CurrApprover.
+     * @param value value to bind as CurrApprover
+     */
+    public void setCurrApprover(String value) {
+        ensureVariableManager().setVariableValue("CurrApprover", value);
+    }
 }

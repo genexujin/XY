@@ -79,6 +79,17 @@ public class AdminOperationBean {
 //        ADFUtils.partialRefreshComponenet(reasonLevel3ResultTable);            
         
     }
+    
+    public void rollbackForPoSubCategory(ActionEvent event) {
+        //Run the query to reset the "Master" table to the first record
+        DCIteratorBinding binding = ADFUtils.findIterator("ItemCategoryIterator");
+        binding.executeQuery();
+        
+        ADFUtils.findOperation("Rollback").execute();
+        
+    //        ADFUtils.partialRefreshComponenet(reasonLevel2ResultTable);
+        
+    }
 
     protected void _getAllMenus() {
         allMenus =

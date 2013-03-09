@@ -9,7 +9,8 @@
        Lovs.CODE, 
        Lovs.VALUE, 
        Lovs.PARENT_CODE, 
-       Lovs.FLEX_COL1"
+       Lovs.FLEX_COL1, 
+       Lovs.EXPIRED"
   FromList="LOVS Lovs"
   Where="Lovs.CODE = 'ItemCatg'"
   BindingStyle="OracleName"
@@ -25,32 +26,36 @@
   <EntityUsage
     Name="Lovs"
     Entity="edu.hp.model.eo.Lovs"
-    ReadOnly="true"
     DeleteParticipant="false"/>
   <ViewAttribute
     Name="Id"
-    IsUpdateable="false"
+    IsUpdateable="while_insert"
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="Lovs"
     AliasName="ID"/>
   <ViewAttribute
     Name="Code"
-    IsUpdateable="false"
     PrecisionRule="true"
     EntityAttrName="Code"
     EntityUsage="Lovs"
-    AliasName="CODE"/>
+    AliasName="CODE"
+    DefaultValue="ItemCatg"/>
   <ViewAttribute
     Name="Value"
-    IsUpdateable="false"
     PrecisionRule="true"
     EntityAttrName="Value"
     EntityUsage="Lovs"
-    AliasName="VALUE"/>
+    AliasName="VALUE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.po.ItemCategory.Value_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ParentCode"
-    IsUpdateable="false"
     PrecisionRule="true"
     EntityAttrName="ParentCode"
     EntityUsage="Lovs"
@@ -61,6 +66,52 @@
     EntityAttrName="FlexCol1"
     EntityUsage="Lovs"
     AliasName="FLEX_COL1"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
+  <ViewCriteria
+    Name="ExpiredCriteria"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="ItemCategoryCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Expired"
+        ViewAttribute="Expired"
+        Operator="&lt;>"
+        Conjunction="AND"
+        Value="Y"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="ItemLov"
+    ViewLink="edu.hp.model.vo.link.PoCatgToSubCatgLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

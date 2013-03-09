@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">PoCategory</property>
+      <property
+         name="page">/pages/admin/PoCategory.jsff</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>PoCategory&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">197.94824</property>
+      <property
+         name="x">349.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">PoSubCategory</property>
+      <property
+         name="page">/pages/admin/PoSubCategory.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>PoSubCategory&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">191.59766</property>
+      <property
+         name="x">651.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="View3">
+      <property
+         name="fromOutcome">sub</property>
+      <property
+         name="sdm:polyPoints">R50,390.0,197.59766,610.0,191.24707,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View3"
+      to="View2">
+      <property
+         name="fromOutcome">return</property>
+      <property
+         name="sdm:polyPoints">L54,610.0,194.74707,390.101,201.09766,R54</property>
+   </ControlFlowCase>
+</SDM>

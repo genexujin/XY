@@ -42,7 +42,7 @@ public class MyPoBean extends BaseBean {
 //        System.out.println("ItemCategory Id is: " + itemCategoryId);
         String submitterId = getLovAttrValue("EmpWithEmpty", "Id");
         System.out.println("submitterId is: " + submitterId);
-        String newItemCategory = getLovAttrValue("ItemCategoryWithEmpty", "FlexCol1");
+        String newItemCategory = getLovAttrValue("ItemCategoryWithEmpty", "Value");
         System.out.println("ItemCategory is: " + newItemCategory);
         
         System.out.println("OrderReadableId is: " + orderReadableId);
@@ -119,11 +119,14 @@ public class MyPoBean extends BaseBean {
             JSFUtils.addFacesErrorMessage("必须有订单行才能提交订单！");
         } else {
             String state = (String)ADFUtils.getBoundAttributeValue("State");
-            if (state != null && state.equals(Constants.PO_STATE_INITIAL)) {
-                computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
-                changeState(Constants.PO_STATE_PENDING_REVIEW);
-                changeLineState(Constants.PO_LINE_STATE_PENDING_REVIEW);
-                setSubmitDate();
+            if (state != null && (state.equals(Constants.PO_STATE_INITIAL) || state.equals(Constants.PO_STATE_REJECTED))) {
+                if (state.equals(Constants.PO_STATE_INITIAL)) {
+                    computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
+                    setSubmitDate();
+                }
+                
+                ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_PENDING_REVIEW);
+                
                 boolean success = ADFUtils.commit("采购订单已提交！", "采购订单提交失败，请核对输入的信息或联系管理员！");
                 if (success) {
                     String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
@@ -151,10 +154,8 @@ public class MyPoBean extends BaseBean {
         if (verifyTotal == 0) {
             System.out.println("VerifyTotal is 0. No need to approve.");
             changeState(Constants.PO_STATE_FINISHED);
-            changeLineState(Constants.PO_LINE_STATE_FINISHED);
         } else {
             changeState(Constants.PO_STATE_PENDING_APPROVAL);
-            changeLineState(Constants.PO_STATE_PENDING_APPROVAL);
         }
         
         boolean success = ADFUtils.commit("采购订单已审核！", "采购订单审核失败，请核对输入的信息或联系管理员！");
@@ -162,6 +163,9 @@ public class MyPoBean extends BaseBean {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             if (verifyTotal != 0) { //If verifyTotal is 0, then no need to approve.
+                //Set the current pprover for the po
+                ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_APPROVER);
+                
                 //Create task for approver
                 createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批", Constants.ROLE_PO_APPROVER, readableId);
                 
@@ -175,31 +179,39 @@ public class MyPoBean extends BaseBean {
         } else {
             //Change back the state if commit fails
             changeState(Constants.PO_STATE_PENDING_REVIEW);
-            changeLineState(Constants.PO_LINE_STATE_PENDING_REVIEW);
         }
     }
 
     public void approvePo(ActionEvent actionEvent) {
         BigDecimal verifyTotal = (BigDecimal)ADFUtils.getBoundAttributeValue("VerifyTotal");
-        Integer catgId = (Integer)ADFUtils.getBoundAttributeValue("ItemCategoryId1");
-        BigDecimal limit = getApprovalLimit("IC_" + catgId.toString());
+        String category = (String)ADFUtils.getBoundAttributeValue("ItemCategoryId1");
+        System.out.println("Item category id is: " + category);
+        BigDecimal limit = getApprovalLimit(category);
         
-        System.out.println("Apprval Limit for Item category \"" + catgId + "\" is: " + limit);
+        System.out.println("Apprval Limit for Item category \"" + category + "\" is: " + limit);
+        boolean success = false;
         if (verifyTotal.compareTo(limit) <= 0) { //No need for 2nd level approval
             changeState(Constants.PO_STATE_EXECUTING);
-            changeLineState(Constants.PO_LINE_STATE_EXECUTING);
+            success = ADFUtils.commit("采购订单已审批，正在执行中", "采购订单审批失败，请核对输入的信息或联系管理员！");
+        } else {
+            success = ADFUtils.commit("采购订单已审批，需要下一级审批", "采购订单审批失败，请核对输入的信息或联系管理员！");
         }
         
-        boolean success = ADFUtils.commit("采购订单已审批！", "采购订单审批失败，请核对输入的信息或联系管理员！");
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
             if (verifyTotal.compareTo(limit) <= 0) {
+                ADFUtils.setBoundAttributeValue("CurrentApprover", "");
+                ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
+
                 sendNotification("有新的采购订单等待采购及收货", "有新的采购订单等待采购及收货", null, Constants.ROLE_PO_BUYER);
                 sendNotification("您的采购订单已审批", "您的采购订单已审批", submitterId, null);
             } else {
+                //Set the current verifier for the po
+                ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_2ND_APPROVER);
+                
                 //Should create task for 2nd level approver
                 createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批", Constants.ROLE_PO_2ND_APPROVER, readableId);
                 
@@ -212,19 +224,21 @@ public class MyPoBean extends BaseBean {
             ADFUtils.findOperation("Commit").execute();
         } else {
             changeState(Constants.PO_STATE_PENDING_APPROVAL);
-            changeLineState(Constants.PO_LINE_STATE_PENDING_APPROVAL);
         }
     }
     
     public void approvePo2nd(ActionEvent actionEvent) {
         changeState(Constants.PO_STATE_EXECUTING);
-        changeLineState(Constants.PO_LINE_STATE_EXECUTING);
         
         boolean success = ADFUtils.commit("采购订单已审批！", "采购订单审批失败，请核对输入的信息或联系管理员！");
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            //Clear the current approver
+            ADFUtils.setBoundAttributeValue("CurrentApprover", "");
+            ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
             
             sendNotification("有新的采购订单等待采购", "有新的采购订单等待采购", null, Constants.ROLE_PO_BUYER);
             sendNotification("您的采购订单已审批", "您的采购订单已审批", submitterId, null);
@@ -235,16 +249,18 @@ public class MyPoBean extends BaseBean {
             ADFUtils.findOperation("Commit").execute();
         } else {
             changeState(Constants.PO_STATE_PENDING_APPROVAL);
-            changeLineState(Constants.PO_LINE_STATE_PENDING_APPROVAL);
         }
     }
     
     public void executePo(ActionEvent actionEvent) {
+        computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", null);
         boolean success = ADFUtils.commit("采购订单执行完成！", "采购订单提交失败，请核对输入的信息或联系管理员！");
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_RECEIVER);
             
             sendNotification("有新的采购订单等待收货", "有新的采购订单等待收货", null, Constants.ROLE_PO_RECEIVER);
             
@@ -253,14 +269,14 @@ public class MyPoBean extends BaseBean {
     }
     
     public void finishPo(ActionEvent actionEvent) {
-        computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", null);
         changeState(Constants.PO_STATE_FINISHED);
-        changeLineState(Constants.PO_LINE_STATE_FINISHED);
         boolean success = ADFUtils.commit("采购订单收货完成！", "采购订单收货失败，请核对输入的信息或联系管理员！");
         if (success) {            
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            ADFUtils.setBoundAttributeValue("CurrentExecutor", "");
             
             //Only notification sent to receiver, no task created. So no task to complete
 //            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_RECEIVER);
@@ -271,28 +287,30 @@ public class MyPoBean extends BaseBean {
             ADFUtils.findOperation("Commit").execute();
         } else {
             changeState(Constants.PO_STATE_EXECUTING);
-            changeLineState(Constants.PO_LINE_STATE_EXECUTING);
         }
     }
     
     public void rejectPo(ActionEvent actionEvent) {
         changeState(Constants.PO_STATE_REJECTED);
-        changeLineStateForAll(Constants.PO_LINE_STATE_INITIAL);
         boolean success = ADFUtils.commit("采购订单已拒绝！", "采购订单拒绝失败！请核对输入的信息或联系管理员！");
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            //Clear the current approver
+            ADFUtils.setBoundAttributeValue("CurrentApprover", "");
+            
             //No task created after rejection. Only notification
 //            createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "您的采购订单被拒绝，请取消或者重新提交订单。", submitterId, readableId);
             sendNotification("您的采购订单被拒绝", "请取消或者重新提交订单。", submitterId, null);
             //Complete task for approver
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
+            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_2ND_APPROVER);
             
             ADFUtils.findOperation("Commit").execute();
         } else {
             changeState(Constants.PO_STATE_PENDING_APPROVAL);
-            changeLineState(Constants.PO_LINE_STATE_PENDING_APPROVAL);
         }
         
     }
@@ -301,7 +319,6 @@ public class MyPoBean extends BaseBean {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         
         changeState(Constants.PO_STATE_CANCELLED);
-        changeLineState(Constants.PO_LINE_STATE_CANCELLED);
         
         boolean success = ADFUtils.commit("采购订单已取消！", "采购订单取消失败！请核对输入的信息或联系管理员！");
         if (success) {
@@ -312,13 +329,54 @@ public class MyPoBean extends BaseBean {
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
             completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, submitterId);
             
+            sendNotification("您的采购订单已经取消", "您的采购订单已经取消", submitterId, null);
+            
             ADFUtils.findOperation("Commit").execute();
         } else {
             changeState(state);
-            //How to easily change back po lines state?
         }
     }
     
+    public void reopenPo(ActionEvent actionEvent) {
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        
+        BigDecimal verifyTotal = (BigDecimal)ADFUtils.getBoundAttributeValue("VerifyTotal");
+        if (verifyTotal.doubleValue() == 0) {
+            JSFUtils.addFacesInformationMessage("审核总金额为0，无法重新打开");
+        } else {
+            ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_EXECUTING);
+            boolean success = ADFUtils.commit("采购订单已重新打开！", "采购订单重新打开失败！请核对输入的信息或联系管理员！");
+            if (success) {
+                sendNotification("有采购订单重新打开", "有采购订单重新打开", null, Constants.ROLE_PO_BUYER);
+                
+                ADFUtils.findOperation("Commit").execute();
+            } else {
+                changeState(state);
+            }
+        }
+    }
+    
+    public void backToVerifyPo(ActionEvent actionEvent) {
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        
+        ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_PENDING_REVIEW);
+        
+        boolean success = ADFUtils.commit("采购订单已重新打开！", "采购订单重新打开失败！请核对输入的信息或联系管理员！");
+        if (success) {
+            String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
+            String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
+            createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核", Constants.ROLE_PO_VERIFIER, readableId);
+            
+            if (state != null && state.equals(Constants.PO_STATE_EXECUTING)) {                
+                sendNotification("采购订单需重新审核，暂停采购", "采购订单需重新审核，暂停采购", null, Constants.ROLE_PO_BUYER);
+            }
+            ADFUtils.findOperation("Commit").execute();
+        } else {
+            changeState(state);
+        
+        }
+    }
+           
     private double computeTotal(String priceAttr, String quantityAttr, String lineTotalAttr, String masterTotalAttr) {
         DCIteratorBinding lineIt = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
         lineIt.setRangeSize(-1);
@@ -349,10 +407,6 @@ public class MyPoBean extends BaseBean {
                     }
                     masterTotal += price * quantity;
                 }
-                
-                
-                String rowState = (String)row.getAttribute("State");
-                System.out.println("The state value before commit is: " + rowState);
             }
 
             System.out.println("Master " + masterTotalAttr + " is: " + masterTotal);
@@ -370,25 +424,6 @@ public class MyPoBean extends BaseBean {
         DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrdersViewIterator");
         Row row = it.getCurrentRow();
         row.setAttribute("State", state);
-    }
-
-    private void changeLineState(String lineState) {
-        DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
-        it.setRangeSize(-1);
-        for (Row line : it.getAllRowsInRange()) {
-            String currState = line.getAttribute("State").toString();
-            if (!currState.equals(Constants.PO_LINE_STATE_CANCELLED) && !currState.equals(Constants.PO_LINE_STATE_FINISHED)) {
-                line.setAttribute("State", lineState);
-            }
-        }
-    }
-    
-    private void changeLineStateForAll(String lineState) {
-        DCIteratorBinding it = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
-        it.setRangeSize(-1);
-        for (Row line : it.getAllRowsInRange()) {            
-            line.setAttribute("State", lineState);
-        }
     }
     
     private void commit() {

@@ -11,6 +11,8 @@
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule"
                   ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_PurchaseOrdersView_findByState_result">
       <NamedData NDName="state" NDValue="3" NDType="java.lang.String"/>
+      <NamedData NDName="isFinalApprover" NDValue="#{sessionScope.LoginUserBean.isUserInRole['采购终审']}"
+                 NDType="java.lang.String"/>
     </methodAction>
   </bindings>
 </pageDefinition>

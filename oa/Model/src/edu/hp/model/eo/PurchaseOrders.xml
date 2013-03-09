@@ -168,9 +168,16 @@
     </Properties>
   </Attribute>
   <Attribute
-    Name="CurrentVerifier"
+    Name="SubmitAt"
+    ColumnName="SUBMIT_AT"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="PURCHASE_ORDERS"/>
+  <Attribute
+    Name="CurrentApprover"
     Precision="20"
-    ColumnName="CURRENT_VERIFIER"
+    ColumnName="CURRENT_APPROVER"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
@@ -180,12 +187,17 @@
     </DesignTime>
   </Attribute>
   <Attribute
-    Name="SubmitAt"
-    ColumnName="SUBMIT_AT"
-    SQLType="DATE"
-    Type="oracle.jbo.domain.Timestamp"
-    ColumnType="DATE"
-    TableName="PURCHASE_ORDERS"/>
+    Name="CurrentExecutor"
+    Precision="20"
+    ColumnName="CURRENT_EXECUTOR"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PURCHASE_ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
   <AccessorAttribute
     Name="Submitter"
     Association="edu.hp.model.eo.asso.EmpPoAssoc"

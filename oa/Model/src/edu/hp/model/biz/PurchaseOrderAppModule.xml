@@ -101,6 +101,12 @@
         Type="java.lang.String"/>
     </Method>
     <Method
+      Name="findForVerifier"
+      MethodName="findForVerifier">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
       Name="findByState"
       MethodName="findByState">
       <Return
@@ -108,12 +114,9 @@
       <Parameter
         Name="state"
         Type="java.lang.String"/>
-    </Method>
-    <Method
-      Name="findForVerifier"
-      MethodName="findForVerifier">
-      <Return
-        Type="void"/>
+      <Parameter
+        Name="isFinalApprover"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
 </AppModule>

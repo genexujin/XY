@@ -154,16 +154,6 @@ public class PurchaseOrdersImpl extends EntityImpl {
             }
         }
         ,
-        CurrentVerifier {
-            public Object get(PurchaseOrdersImpl obj) {
-                return obj.getCurrentVerifier();
-            }
-
-            public void put(PurchaseOrdersImpl obj, Object value) {
-                obj.setCurrentVerifier((String)value);
-            }
-        }
-        ,
         SubmitAt {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitAt();
@@ -171,6 +161,26 @@ public class PurchaseOrdersImpl extends EntityImpl {
 
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitAt((Timestamp)value);
+            }
+        }
+        ,
+        CurrentApprover {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getCurrentApprover();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setCurrentApprover((String)value);
+            }
+        }
+        ,
+        CurrentExecutor {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getCurrentExecutor();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setCurrentExecutor((String)value);
             }
         }
         ,
@@ -245,8 +255,9 @@ public class PurchaseOrdersImpl extends EntityImpl {
     public static final int ORDERNOTE = AttributesEnum.OrderNote.index();
     public static final int ITEMCATEGORYID = AttributesEnum.ItemCategoryId.index();
     public static final int LINENUM = AttributesEnum.LineNum.index();
-    public static final int CURRENTVERIFIER = AttributesEnum.CurrentVerifier.index();
     public static final int SUBMITAT = AttributesEnum.SubmitAt.index();
+    public static final int CURRENTAPPROVER = AttributesEnum.CurrentApprover.index();
+    public static final int CURRENTEXECUTOR = AttributesEnum.CurrentExecutor.index();
     public static final int SUBMITTER = AttributesEnum.Submitter.index();
     public static final int PURCHASEORDERLINES = AttributesEnum.PurchaseOrderLines.index();
     public static final int PURCHASEORDERHISTORYS = AttributesEnum.PurchaseOrderHistorys.index();
@@ -473,21 +484,6 @@ public class PurchaseOrdersImpl extends EntityImpl {
         setAttributeInternal(LINENUM, value);
     }
 
-    /**
-     * Gets the attribute value for CurrentVerifier, using the alias name CurrentVerifier.
-     * @return the value of CurrentVerifier
-     */
-    public String getCurrentVerifier() {
-        return (String)getAttributeInternal(CURRENTVERIFIER);
-    }
-
-    /**
-     * Sets <code>value</code> as the attribute value for CurrentVerifier.
-     * @param value value to set the CurrentVerifier
-     */
-    public void setCurrentVerifier(String value) {
-        setAttributeInternal(CURRENTVERIFIER, value);
-    }
 
     /**
      * Gets the attribute value for SubmitAt, using the alias name SubmitAt.
@@ -503,6 +499,38 @@ public class PurchaseOrdersImpl extends EntityImpl {
      */
     public void setSubmitAt(Timestamp value) {
         setAttributeInternal(SUBMITAT, value);
+    }
+
+    /**
+     * Gets the attribute value for CurrentApprover, using the alias name CurrentApprover.
+     * @return the value of CurrentApprover
+     */
+    public String getCurrentApprover() {
+        return (String)getAttributeInternal(CURRENTAPPROVER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for CurrentApprover.
+     * @param value value to set the CurrentApprover
+     */
+    public void setCurrentApprover(String value) {
+        setAttributeInternal(CURRENTAPPROVER, value);
+    }
+
+    /**
+     * Gets the attribute value for CurrentExecutor, using the alias name CurrentExecutor.
+     * @return the value of CurrentExecutor
+     */
+    public String getCurrentExecutor() {
+        return (String)getAttributeInternal(CURRENTEXECUTOR);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for CurrentExecutor.
+     * @param value value to set the CurrentExecutor
+     */
+    public void setCurrentExecutor(String value) {
+        setAttributeInternal(CURRENTEXECUTOR, value);
     }
 
     /**

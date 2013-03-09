@@ -70,6 +70,12 @@
   <ViewUsage
     Name="ReasonLevel2_1"
     ViewObjectName="edu.hp.model.vo.query.helpdesk.ReasonLevel2"/>
+  <ViewUsage
+    Name="ItemCategory"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"/>
+  <ViewUsage
+    Name="ItemLov"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemLov"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"
@@ -99,5 +105,11 @@
     ViewLinkObjectName="edu.hp.model.vo.link.HdReasonLevel1ToLevel2Link"
     SrcViewUsageName="edu.hp.model.biz.AdminModule.ReasonLevel1"
     DstViewUsageName="edu.hp.model.biz.AdminModule.ReasonLevel2_1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="PoCatgToSubCatgLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.PoCatgToSubCatgLink"
+    SrcViewUsageName="edu.hp.model.biz.AdminModule.ItemCategory"
+    DstViewUsageName="edu.hp.model.biz.AdminModule.ItemLov"
     Reversed="false"/>
 </AppModule>

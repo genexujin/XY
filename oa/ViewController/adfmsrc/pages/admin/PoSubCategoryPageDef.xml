@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="PoSubCategoryPageDef"
+                Package="pages.admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.ItemCategory" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ItemCategoryIterator"/>
+    <iterator Binds="Root.AdminModule.ItemLov" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ItemLovIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ItemCategoryIterator" id="ItemCategory">
+      <nodeDefinition DefName="edu.hp.model.vo.query.po.ItemCategory" Name="ItemCategory0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Code"/>
+          <Item Value="Value"/>
+          <Item Value="ParentCode"/>
+          <Item Value="FlexCol1"/>
+          <Item Value="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ItemLovIterator" id="ItemLov">
+      <nodeDefinition DefName="edu.hp.model.vo.query.po.ItemLov" Name="ItemLov0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Code"/>
+          <Item Value="FlexCol1"/>
+          <Item Value="Value"/>
+          <Item Value="ParentCode"/>
+          <Item Value="Expired" Binds="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="ItemLovIterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.ItemLov" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <button IterBinding="ItemLovIterator" StaticList="true" id="Expired">
+      <AttrNames>
+        <Item Value="Expired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>

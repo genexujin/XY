@@ -222,4 +222,28 @@ public class AdminModuleImpl extends ApplicationModuleImpl {
     public ViewLinkImpl getHdReasonLevel1ToLevel2Link1() {
         return (ViewLinkImpl)findViewLink("HdReasonLevel1ToLevel2Link1");
     }
+
+    /**
+     * Container's getter for ItemCategory1.
+     * @return ItemCategory1
+     */
+    public ViewObjectImpl getItemCategory() {
+        return (ViewObjectImpl)findViewObject("ItemCategory");
+    }
+
+    /**
+     * Container's getter for ItemLov1.
+     * @return ItemLov1
+     */
+    public ViewObjectImpl getItemLov() {
+        return (ViewObjectImpl)findViewObject("ItemLov");
+    }
+
+    /**
+     * Container's getter for PoCatgToSubCatgLink1.
+     * @return PoCatgToSubCatgLink1
+     */
+    public ViewLinkImpl getPoCatgToSubCatgLink1() {
+        return (ViewLinkImpl)findViewLink("PoCatgToSubCatgLink1");
+    }
 }

@@ -9,9 +9,10 @@
        Lovs.CODE, 
        Lovs.FLEX_COL1, 
        Lovs.VALUE, 
-       Lovs.PARENT_CODE"
+       Lovs.PARENT_CODE, 
+       Lovs.EXPIRED"
   FromList="LOVS Lovs"
-  Where="Lovs.CODE = 'Item'"
+  Where="Lovs.CODE = 'Item' and Lovs.EXPIRED &lt;> 'Y'"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
@@ -41,7 +42,8 @@
     PrecisionRule="true"
     EntityAttrName="Code"
     EntityUsage="Lovs"
-    AliasName="CODE"/>
+    AliasName="CODE"
+    DefaultValue="Item"/>
   <ViewAttribute
     Name="FlexCol1"
     PrecisionRule="true"
@@ -60,6 +62,12 @@
     EntityAttrName="ParentCode"
     EntityUsage="Lovs"
     AliasName="PARENT_CODE"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
   <ViewCriteria
     Name="ItemLovCriteria"
     ViewObjectName="edu.hp.model.vo.query.po.ItemLov"

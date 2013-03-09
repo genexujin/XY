@@ -79,7 +79,7 @@
       <Item Value="ItemId"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
-      <Item Value="FlexCol1"/>
+      <Item Value="Value"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Value"/>

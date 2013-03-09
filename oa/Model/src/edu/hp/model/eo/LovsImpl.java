@@ -187,6 +187,7 @@ public class LovsImpl extends BaseEntity {
         }
     }
 
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int CODE = AttributesEnum.Code.index();
     public static final int LOVDESC = AttributesEnum.LovDesc.index();
@@ -207,6 +208,7 @@ public class LovsImpl extends BaseEntity {
      */
     public LovsImpl() {
     }
+
 
     /**
      * @return the definition object for this instance class.

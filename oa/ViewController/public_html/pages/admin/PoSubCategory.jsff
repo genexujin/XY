@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelHeader text="采购子类数据" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t2">
+            <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png">
+                <af:showPopupBehavior popupId="confirm" triggerType="action"/>
+            </af:commandToolbarButton>
+            <af:commandToolbarButton text="取消" id="ctb2" icon="/images/icons/undo.png" immediate="true"
+                                     actionListener="#{viewScope.AdminOperationBean.rollbackForPoSubCategory}"/>
+            <af:commandToolbarButton text="返回" id="ctb4" icon="/images/icons/previous.png" action="return"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelSplitter id="ps1" splitterPosition="402">
+          <f:facet name="first">
+          <af:panelHeader text="采购类别" id="ph2">
+            <af:table id="md1" rows="#{bindings.ItemCategory.rangeSize}" fetchSize="#{bindings.ItemCategory.rangeSize}"
+                      emptyText="#{bindings.ItemCategory.viewable ? 'No data to display.' : 'Access Denied.'}" var="row"
+                      value="#{bindings.ItemCategory.collectionModel}" rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.ItemCategory.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.ItemCategory.collectionModel.makeCurrent}" rowSelection="single">
+                              
+              <af:column headerText="#{bindings.ItemCategory.hints.Value.label}"
+                         sortProperty="#{bindings.ItemCategory.hints.Value.name}" sortable="false" id="c3">
+                <af:outputText value="#{row.Value}" id="ot3"/>
+              </af:column>
+              <af:column headerText="#{bindings.ItemCategory.hints.Expired.label}"
+                         sortProperty="#{bindings.ItemCategory.hints.Expired.name}" sortable="false" id="c6">
+                <af:outputText value="#{row.Expired}" id="ot6"/>
+              </af:column>
+            </af:table>
+                        <af:popup id="confirm" contentDelivery="lazyUncached">
+                <!-- don't render if the activity is null -->
+                <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}" title="请确认操作" id="d2">
+                    <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+                    <af:spacer height="20" id="s4"/>
+                    <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+                </af:dialog>
+              </af:popup>
+          </af:panelHeader>
+          </f:facet>
+          <f:facet name="second">
+          <af:panelHeader text="采购子类" id="ph3">
+              <af:panelCollection id="pc1">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                  <af:toolbar id="t3">
+                    <af:commandToolbarButton text="新建" id="ctb3" icon="/images/icons/new.png" actionListener="#{bindings.CreateInsert.execute}"/>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table rows="#{bindings.ItemLov.rangeSize}" fetchSize="#{bindings.ItemLov.rangeSize}"
+                          emptyText="#{bindings.ItemLov.viewable ? 'No data to display.' : 'Access Denied.'}" var="row"
+                          value="#{bindings.ItemLov.collectionModel}" rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.ItemLov.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.ItemLov.collectionModel.makeCurrent}" rowSelection="single"
+                          id="t1">
+                  
+                  <af:column headerText="#{bindings.ItemLov.hints.Value.label}"
+                             sortProperty="#{bindings.ItemLov.hints.Value.name}" sortable="false" id="c10">
+                    <af:inputText value="#{row.bindings.Value.inputValue}"
+                                  label="#{bindings.ItemLov.hints.Value.label}"
+                                  required="#{bindings.ItemLov.hints.Value.mandatory}"
+                                  columns="#{bindings.ItemLov.hints.Value.displayWidth}"
+                                  maximumLength="#{bindings.ItemLov.hints.Value.precision}"
+                                  shortDesc="#{bindings.ItemLov.hints.Value.tooltip}" id="it3" autoSubmit="true">
+                      <f:validator binding="#{row.bindings.Value.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="#{bindings.ItemLov.hints.Expired.label}"
+                             sortProperty="#{bindings.ItemLov.hints.Expired.name}" sortable="false" id="c12">
+                    <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}"
+                                              label="#{row.bindings.Expired.label}"
+                                              shortDesc="#{bindings.ItemLov.hints.Expired.tooltip}" id="sbc1"
+                                              autoSubmit="true"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelHeader>
+          </f:facet>
+        </af:panelSplitter>        
+      </af:panelHeader>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

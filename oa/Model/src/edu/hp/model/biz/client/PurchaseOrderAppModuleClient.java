@@ -19,13 +19,20 @@ public class PurchaseOrderAppModuleClient extends ApplicationModuleImpl implemen
     }
 
 
+    public void findByState(String state) {
+        Object _ret = this.riInvokeExportedMethod(this,"findByState",new String [] {"java.lang.String"},new Object[] {state});
+        return;
+    }
+
+
     public void findByPoId(String poId) {
         Object _ret = this.riInvokeExportedMethod(this,"findByPoId",new String [] {"java.lang.String"},new Object[] {poId});
         return;
     }
 
-    public void findByState(String state) {
-        Object _ret = this.riInvokeExportedMethod(this,"findByState",new String [] {"java.lang.String"},new Object[] {state});
+    public void findByState(String state, String isFinalApprover) {
+        Object _ret =
+            this.riInvokeExportedMethod(this,"findByState",new String [] {"java.lang.String","java.lang.String"},new Object[] {state, isFinalApprover});
         return;
     }
 

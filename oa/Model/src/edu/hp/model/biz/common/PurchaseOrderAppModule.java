@@ -16,7 +16,8 @@ public interface PurchaseOrderAppModule extends ApplicationModule {
 
     BigDecimal getApprovalLimitForCategoryId(String categoryId);
 
-    void findByState(String state);
 
     void findForVerifier();
+
+    void findByState(String state, String isFinalApprover);
 }

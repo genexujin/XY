@@ -21,11 +21,12 @@
   <SQLQuery><![CDATA[SELECT Lovs.ID, 
        Lovs.CODE, 
        Lovs.VALUE, 
-       Lovs.FLEX_COL1
+       Lovs.FLEX_COL1,
+       Lovs.Expired
 FROM LOVS Lovs
-WHERE Lovs.CODE = 'ItemCatg'
+WHERE Lovs.CODE = 'ItemCatg' and Lovs.Expired <> 'Y'
 union
-select '-10', 'ItemCatg', ' ', ' ' from dual
+select '-10', 'ItemCatg', ' ', ' ', 'N' from dual
 order by id]]></SQLQuery>
   <EntityUsage
     Name="Lovs"
@@ -55,6 +56,12 @@ order by id]]></SQLQuery>
     EntityAttrName="FlexCol1"
     EntityUsage="Lovs"
     AliasName="FLEX_COL1"/>
+  <ViewAttribute
+    Name="Expired"
+    PrecisionRule="true"
+    EntityAttrName="Expired"
+    EntityUsage="Lovs"
+    AliasName="EXPIRED"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

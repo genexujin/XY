@@ -20,8 +20,9 @@
        Employees.FIRST_NAME, 
        Employees.ID, 
        Employees.LAST_NAME, 
-       PurchaseOrders.CURRENT_VERIFIER, 
-       PurchaseOrders.SUBMIT_AT"
+       PurchaseOrders.SUBMIT_AT, 
+       PurchaseOrders.CURRENT_APPROVER, 
+       PurchaseOrders.CURRENT_EXECUTOR"
   FromList="PURCHASE_ORDERS PurchaseOrders, EMPLOYEES Employees"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -62,6 +63,10 @@
     Name="OrdId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="CurrApprover"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="PoState"
     ViewObjectName="edu.hp.model.vo.query.po.PoState"
@@ -73,7 +78,11 @@
   <ViewAccessor
     Name="ItemCategory"
     ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"
-    RowLevelBinds="true"/>
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="ExpiredCriteria"
+      FullName="edu.hp.model.vo.query.po.ItemCategory.ExpiredCriteria"/>
+  </ViewAccessor>
   <ListBinding
     Name="LOV_State"
     ListVOName="PoState"
@@ -121,7 +130,7 @@
       <Item Value="ItemCategoryId"/>
     </AttrArray>
     <AttrArray Name="ListAttrNames">
-      <Item Value="FlexCol1"/>
+      <Item Value="Value"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Value"/>
@@ -335,12 +344,6 @@
     EntityUsage="PurchaseOrders"
     AliasName="LINE_COUNT"/>
   <ViewAttribute
-    Name="CurrentVerifier"
-    PrecisionRule="true"
-    EntityAttrName="CurrentVerifier"
-    EntityUsage="PurchaseOrders"
-    AliasName="CURRENT_VERIFIER"/>
-  <ViewAttribute
     Name="SubmitAt"
     PrecisionRule="true"
     EntityAttrName="SubmitAt"
@@ -353,6 +356,18 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="CurrentApprover"
+    PrecisionRule="true"
+    EntityAttrName="CurrentApprover"
+    EntityUsage="PurchaseOrders"
+    AliasName="CURRENT_APPROVER"/>
+  <ViewAttribute
+    Name="CurrentExecutor"
+    PrecisionRule="true"
+    EntityAttrName="CurrentExecutor"
+    EntityUsage="PurchaseOrders"
+    AliasName="CURRENT_EXECUTOR"/>
   <ViewCriteria
     Name="OrderReadableIdCriteria"
     ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
@@ -640,6 +655,50 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="OrderStateAndCurrApproverCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="State"
+        ViewAttribute="State"
+        Operator="="
+        Conjunction="AND"
+        Value=":OrStateId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CurrentApprover"
+        ViewAttribute="CurrentApprover"
+        Operator="="
+        Conjunction="AND"
+        Value=":CurrApprover"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <AttrArray Name="KeyAttributes">
     <Item Value="OrderId"/>
   </AttrArray>
@@ -712,7 +771,7 @@
         Type="java.lang.String"/>
     </Method>
     <Method
-      Name="newRow1"
+      Name="newRow"
       MethodName="newRow">
       <Return
         Type="void"/>

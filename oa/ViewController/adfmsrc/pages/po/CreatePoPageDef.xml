@@ -85,7 +85,7 @@
       </nodeDefinition>
     </tree>
     <list IterBinding="PurchaseOrdersViewIterator" StaticList="false" Uses="LOV_ItemCategoryId" id="ItemCategoryId1"
-          DTSupportsMRU="true" SelectItemValueMode="ListIndex"/>
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
     <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"/>
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
     <action IterBinding="PurchaseOrderLinesViewIterator" id="Delete" RequiresUpdateModel="false"
@@ -164,6 +164,16 @@
     <attributeValues IterBinding="PurchaseOrdersViewIterator" id="SubmitAt">
       <AttrNames>
         <Item Value="SubmitAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="CurrentApprover">
+      <AttrNames>
+        <Item Value="CurrentApprover"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="CurrentExecutor">
+      <AttrNames>
+        <Item Value="CurrentExecutor"/>
       </AttrNames>
     </attributeValues>
   </bindings>

@@ -1,6 +1,7 @@
 package edu.hp.model.biz;
 
 import edu.hp.model.biz.common.PurchaseOrderAppModule;
+import edu.hp.model.common.Constants;
 import edu.hp.model.vo.EmployeesViewImpl;
 import edu.hp.model.vo.ItemCategoryApprovalViewImpl;
 import edu.hp.model.vo.PurchaseOrderHistorysViewImpl;
@@ -104,7 +105,7 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         return new BigDecimal(0);
     }
     
-    public void findByState(String state) {
+    public void findByState(String state, String isFinalApprover) {
         PurchaseOrdersViewImpl poView = this.getPurchaseOrdersView();        
         poView.setApplyViewCriteriaNames(null);
         
@@ -112,12 +113,24 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         
         if (state != null) {
             poView.setOrStateId(state);
-            ViewCriteria oStateIdCriteria = poView.getViewCriteria("OrderStateCriteria");
-            poView.setApplyViewCriteriaName(oStateIdCriteria.getName());
+            
+            ViewCriteria vc = null;
+            if (state.equals(Constants.PO_STATE_PENDING_APPROVAL) && "true".equals(isFinalApprover)) {                
+                poView.setCurrApprover(Constants.ROLE_PO_2ND_APPROVER);
+                vc = poView.getViewCriteria("OrderStateAndCurrApproverCriteria");
+            } else if (state.equals(Constants.PO_STATE_PENDING_APPROVAL)) {
+                poView.setCurrApprover(Constants.ROLE_PO_APPROVER);
+                vc = poView.getViewCriteria("OrderStateAndCurrApproverCriteria");
+            } else {
+                vc = poView.getViewCriteria("OrderStateCriteria");
+            }            
+            
+            poView.setApplyViewCriteriaName(vc.getName());
             poView.executeQuery();
             
-            ViewObjectImpl stateView = this.getPoStateWithEmpty();
+            PoStateWithEmptyImpl stateView = (PoStateWithEmptyImpl)this.getPoStateWithEmpty();            
             stateView.setApplyViewCriteriaNames(null);
+            stateView.setStateId(state);
             ViewCriteria stateVC = stateView.getViewCriteria("StateCriteria");
             stateView.setApplyViewCriteriaName(stateVC.getName());
             stateView.executeQuery();
