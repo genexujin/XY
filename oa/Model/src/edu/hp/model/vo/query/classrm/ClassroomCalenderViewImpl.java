@@ -2,6 +2,10 @@ package edu.hp.model.vo.query.classrm;
 
 import edu.hp.model.vo.query.classrm.common.ClassroomCalenderView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import oracle.jbo.ViewCriteria;
 import oracle.jbo.domain.Date;
 import oracle.jbo.server.ViewObjectImpl;
 
@@ -21,7 +25,14 @@ public class ClassroomCalenderViewImpl extends ViewObjectImpl implements Classro
     
     public void findByDateRange(){
         this.setApplyViewCriteriaNames(null);
-        this.applyViewCriteria(getViewCriteria("findByDateRange"));
+        List<String> vcNames = new ArrayList<String>();
+        vcNames.add("findByDateRange");
+        //ViewCriteria findByRange = getViewCriteria("findByDateRange");
+        if(getuserId()!=null){
+            vcNames.add("findByUserId");
+        }
+        this.setApplyViewCriteriaNames(vcNames.toArray(new String[0]));
+        //this.applyViewCriteria();
         this.executeQuery();
     }
     
