@@ -49,7 +49,8 @@
                             required="#{bindings.Menus.hints.MenuId.mandatory}"
                             columns="#{bindings.Menus.hints.MenuId.displayWidth}"
                             maximumLength="#{bindings.Menus.hints.MenuId.precision}"
-                            shortDesc="#{bindings.Menus.hints.MenuId.tooltip}" id="it1" readOnly="false">
+                            shortDesc="#{bindings.Menus.hints.MenuId.tooltip}" id="it1" readOnly="false"
+                            autoSubmit="true">
                 <f:validator binding="#{row.bindings.MenuId.validator}"/>
               </af:inputText>
             </af:column>
@@ -59,7 +60,8 @@
                             required="#{bindings.Menus.hints.MenuName.mandatory}"
                             columns="#{bindings.Menus.hints.MenuName.displayWidth}"
                             maximumLength="#{bindings.Menus.hints.MenuName.precision}"
-                            shortDesc="#{bindings.Menus.hints.MenuName.tooltip}" id="it2" readOnly="false">
+                            shortDesc="#{bindings.Menus.hints.MenuName.tooltip}" id="it2" readOnly="false"
+                            autoSubmit="true">
                 <f:validator binding="#{row.bindings.MenuName.validator}"/>
               </af:inputText>
             </af:column>
@@ -70,7 +72,8 @@
                             required="#{bindings.Menus.hints.MenuTaskflowUrl.mandatory}"
                             columns="#{bindings.Menus.hints.MenuTaskflowUrl.displayWidth}"
                             maximumLength="#{bindings.Menus.hints.MenuTaskflowUrl.precision}"
-                            shortDesc="#{bindings.Menus.hints.MenuTaskflowUrl.tooltip}" id="it3" readOnly="false">
+                            shortDesc="#{bindings.Menus.hints.MenuTaskflowUrl.tooltip}" id="it3" readOnly="false"
+                            autoSubmit="true">
                 <f:validator binding="#{row.bindings.MenuTaskflowUrl.validator}"/>
               </af:inputText>
             </af:column>
@@ -80,7 +83,8 @@
                             required="#{bindings.Menus.hints.MenuDesc.mandatory}"
                             columns="#{bindings.Menus.hints.MenuDesc.displayWidth}"
                             maximumLength="#{bindings.Menus.hints.MenuDesc.precision}"
-                            shortDesc="#{bindings.Menus.hints.MenuDesc.tooltip}" id="it4" readOnly="false">
+                            shortDesc="#{bindings.Menus.hints.MenuDesc.tooltip}" id="it4" readOnly="false"
+                            autoSubmit="true">
                 <f:validator binding="#{row.bindings.MenuDesc.validator}"/>
               </af:inputText>
             </af:column>
@@ -88,7 +92,8 @@
                        headerText="#{bindings.Menus.hints.MenuMasterCategory.label}" id="c5">
               <af:selectOneChoice id="soc1" label="#{bindings.Menus.hints.MenuMasterCategory.label}"
                                   value="#{row.bindings.MenuMasterCategory.inputValue}"
-                                  shortDesc="#{bindings.Menus.hints.MenuMasterCategory.tooltip}" readOnly="false">
+                                  shortDesc="#{bindings.Menus.hints.MenuMasterCategory.tooltip}" readOnly="false"
+                                  autoSubmit="true">
                 <af:selectItem label="平台功能" value="SYS" id="si1"/>
                 <af:selectItem label="平台管理" value="ADMIN" id="si2"/>
                 <af:selectItem label="报表" value="REPORT" id="si3"/>
@@ -101,7 +106,8 @@
                             required="#{bindings.Menus.hints.MenuCategory.mandatory}"
                             columns="#{bindings.Menus.hints.MenuCategory.displayWidth}"
                             maximumLength="#{bindings.Menus.hints.MenuCategory.precision}"
-                            shortDesc="#{bindings.Menus.hints.MenuCategory.tooltip}" id="it6" readOnly="false">
+                            shortDesc="#{bindings.Menus.hints.MenuCategory.tooltip}" id="it6" readOnly="false"
+                            autoSubmit="true">
                 <f:validator binding="#{row.bindings.MenuCategory.validator}"/>
               </af:inputText>
             </af:column>
@@ -112,7 +118,8 @@
                             required="#{bindings.Menus.hints.MenuIconUrl.mandatory}"
                             columns="#{bindings.Menus.hints.MenuIconUrl.displayWidth}"
                             maximumLength="#{bindings.Menus.hints.MenuIconUrl.precision}"
-                            shortDesc="#{bindings.Menus.hints.MenuIconUrl.tooltip}" id="it7" readOnly="false">
+                            shortDesc="#{bindings.Menus.hints.MenuIconUrl.tooltip}" id="it7" readOnly="false"
+                            autoSubmit="true">
                 <f:validator binding="#{row.bindings.MenuIconUrl.validator}"/>
               </af:inputText>
             </af:column>

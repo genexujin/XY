@@ -230,6 +230,7 @@ public class CalendarBean  extends BaseBean{
     }
 
     public DnDAction handleDrop(DropEvent dropEvent) {
+       // System.err.println("++++++++++++++++++++++++++");
         if (isEditable()) {
             //System.err.println("editable!");
             Transferable transferable = dropEvent.getTransferable();
@@ -373,6 +374,10 @@ public class CalendarBean  extends BaseBean{
                 return true;
 
             String userId = this.getCurrActivity().getUserId();
+//            System.err.println("current Activity: " + getCurrActivity().getTitle());
+//            System.err.println("current dragging user: " + userId);
+//            System.err.println("current login user: " + user.getUserName());
+            
             if (userId.equals(user.getUserName())) {
                 return true;
             }

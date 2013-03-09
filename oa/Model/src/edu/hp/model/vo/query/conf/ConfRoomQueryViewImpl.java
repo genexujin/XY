@@ -2,6 +2,9 @@ package edu.hp.model.vo.query.conf;
 
 import edu.hp.model.vo.query.conf.common.ConfRoomQueryView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import oracle.jbo.domain.Date;
 import oracle.jbo.server.ViewObjectImpl;
 
@@ -20,7 +23,13 @@ public class ConfRoomQueryViewImpl extends ViewObjectImpl implements ConfRoomQue
     
     public void findByDateRange(){
         this.setApplyViewCriteriaNames(null);
-        this.applyViewCriteria(getViewCriteria("findByDateRange"));        
+        List<String> vcNames = new ArrayList<String>();
+        vcNames.add("findByDateRange");
+        if(getuserId()!=null){
+            vcNames.add("findByUserId");
+        }
+        this.setApplyViewCriteriaNames(vcNames.toArray(new String[0]));
+        //this.applyViewCriteria(getViewCriteria("findByDateRange"));        
         this.executeQuery();
     }
     

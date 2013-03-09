@@ -12,8 +12,8 @@
                                      calendarActivityDurationChangeListener="#{pageFlowScope.clsCalBean.calDurationChanged}"
                                      startHour="8" activeDay="#{pageFlowScope.clsCalBean.activeDay}"
                                      toolboxLayout="all">
-                            <af:calendarDropTarget actions="MOVE"
-                                                   dropListener="#{pageFlowScope.clsCalBean.handleDrop}"/>
+                            <!--af:calendarDropTarget actions="MOVE"
+                                                   dropListener="#{pageFlowScope.clsCalBean.handleDrop}"/-->
                             <f:facet name="contextMenu"/>
                             <f:facet name="activityContextMenu">
                                 <af:popup id="p1" partialTriggers="::c1">
@@ -67,7 +67,10 @@
                                                           rendered="#{pageFlowScope.clsCalBean.currActivity.customAttributes['UserDisplayName']!=null}"
                                                           value="#{pageFlowScope.clsCalBean.currActivity.customAttributes['UserDisplayName']}"
                                                           id="it8"/>
-                                        </af:panelFormLayout>
+                                        <af:inputText label="批量预订号:" id="it1"
+                                                      value="#{pageFlowScope.clsCalBean.currActivity.customAttributes['BatchNo']}"
+                                                      readOnly="true"/>
+                                    </af:panelFormLayout>
                                     </af:noteWindow>
                                 </af:popup>
                             </f:facet>
@@ -183,9 +186,9 @@
                 </f:facet>
                 <f:facet name="center">
                     <af:panelGroupLayout layout="vertical" id="pgl5">
-                        <af:outputText value="说明：1. 鼠标放置在某一日历事件上可以查看详情" id="ot1"/>
+                        <!--af:outputText value="说明：1. 鼠标放置在某一日历事件上可以查看详情" id="ot1"/>
                         <af:outputText value="2. 右键菜单可以创建、编辑、删除教室预订。" id="ot10"/>
-                        <af:outputText value="3. 请在下方教室过滤条件中设置需要显示在日历上的教室" id="ot2"/>
+                        <af:outputText value="3. 请在下方教室过滤条件中设置需要显示在日历上的教室" id="ot2"/-->
                         <af:spacer width="10" height="10" id="s1"/>
                         <af:panelGroupLayout id="pgl4" layout="horizontal">
                             <af:commandButton text="新预订" id="cb1" icon="/images/icons/new_ena.png" action="create"/>

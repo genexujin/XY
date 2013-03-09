@@ -2,6 +2,9 @@ package edu.hp.model.vo.query.vehicle;
 
 import edu.hp.model.vo.query.vehicle.common.VehicleCalQueryView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import oracle.jbo.domain.Date;
 import oracle.jbo.server.ViewObjectImpl;
 
@@ -21,7 +24,13 @@ public class VehicleCalQueryViewImpl extends ViewObjectImpl implements VehicleCa
     
     public void findByDateRange(){
         this.setApplyViewCriteriaNames(null);
-        this.applyViewCriteria(getViewCriteria("findByDateRange"));        
+        List<String> vcNames = new ArrayList<String>();
+        vcNames.add("findByDateRange");
+        if(getuserId()!=null){
+            vcNames.add("findByUserId");
+        }
+        this.setApplyViewCriteriaNames(vcNames.toArray(new String[0]));
+        //this.applyViewCriteria(getViewCriteria("findByDateRange"));        
         this.executeQuery();
     }
     

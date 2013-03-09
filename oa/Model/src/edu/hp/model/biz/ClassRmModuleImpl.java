@@ -79,7 +79,7 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl implements ClassRmM
         startCalendar.setTimeInMillis(actStartTime.getTime());
         // if allday then set the start time and end time
         if (allday != null && allday.equals("ALLDAY")) {
-            System.err.println(allday);
+           // System.err.println(allday);
             if (actEndTime != null) {
                 endCalendar.set(Calendar.HOUR_OF_DAY, 23);
                 endCalendar.set(Calendar.MINUTE, 59);
