@@ -108,6 +108,26 @@
         <from-outcome>edit</from-outcome>
         <to-activity-id>CreatePoPage</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__38">
+        <from-outcome>returnFromVerifier</from-outcome>
+        <to-activity-id>findForVerifier</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__39">
+        <from-outcome>returnFromNormal</from-outcome>
+        <to-activity-id>findBySubmitterId</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__40">
+        <from-outcome>returnFromApprover</from-outcome>
+        <to-activity-id>findByPendingApprove</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__41">
+        <from-outcome>returnFromBuyer</from-outcome>
+        <to-activity-id>findByExecuting</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__42">
+        <from-outcome>returnFromReceiver</from-outcome>
+        <to-activity-id>findByPendingReceive</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__4">
       <from-activity-id>Create</from-activity-id>

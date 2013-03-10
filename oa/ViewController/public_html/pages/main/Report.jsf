@@ -31,6 +31,21 @@
                         <af:outputText value="当前用户：" id="ot3"/>
                         <af:outputText value="#{sessionScope.LoginUserBean.displayName}" id="ot4"
                                        inlineStyle="color:rgb(33,33,255);"/>
+                        <af:spacer width="12" height="10" id="s3"/>
+                        <af:commandLink text="修改密码" id="cl1">
+                          <af:showPopupBehavior popupId="password" triggerType="action"/>
+                        </af:commandLink>
+                        <af:popup id="password" contentDelivery="lazyUncached">
+                        <!-- don't render if the activity is null -->
+                        <af:dialog dialogListener="#{sessionScope.LoginUserBean.changePassword}" title="修改密码" id="d2">
+                                <af:panelFormLayout id="pfl1">
+                                    <f:facet name="footer"/>
+                                    <af:inputText label="当前密码" id="it1" required="true" value="#{sessionScope.LoginUserBean.dialogCurrPassword}" columns="20"/>
+                                    <af:inputText label="新密码" id="it2" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogNewPassword}" columns="20"/>
+                                    <af:inputText label="重复新密码" id="it3" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogNewPasswordConfirmed}" columns="20"/>
+                                </af:panelFormLayout>
+                            </af:dialog>
+                      </af:popup>                                       
                     </af:panelGroupLayout>
                 </f:facet>
                 <f:facet name="globalToolbar"/>

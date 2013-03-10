@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="po-approve-limit">
+    <template-reference>
+      <document>/WEB-INF/flows/admin/admin-btf-template.xml</document>
+      <id>admin-btf-template</id>
+    </template-reference>
+    <default-activity>PoApproveLimit</default-activity>
+    <view id="PoApproveLimit">
+      <page>/pages/admin/PoApproveLimit.jsff</page>
+    </view>
     <use-page-fragments/>
   </task-flow-definition>
 </adfc-config>

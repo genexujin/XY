@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="220px" bottomHeight="0px">
+    <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="250px" bottomHeight="0px">
         <f:facet name="top">
           <af:panelGroupLayout layout="vertical" id="pgl1">
-            <af:panelHeader text="订单" id="ph1">
-                <af:panelGroupLayout id="pg11" layout="horizontal" valign="top">
+            <af:panelHeader text="订单" id="ph1" >
+                
                     <af:panelFormLayout id="pfl1" rows="5">
                         <af:selectOneChoice value="#{bindings.SubmitterId.inputValue}" label="申请人"
                                             required="#{bindings.SubmitterId.hints.mandatory}"
@@ -32,7 +32,55 @@
                         </af:selectOneChoice>
                         <af:inputText value="#{bindings.OrderNote.inputValue}" id="ot9" label="备注" rows="5" columns="25"
                                       disabled="#{(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') or bindings.State.inputValue ne '1'}"/>
-                        
+                        <af:spacer width="5px" height="5px"/>
+                        <af:spacer width="5px" height="5px"/>
+                        <af:spacer width="5px" height="5px"/>
+                        <af:table value="#{bindings.PurchaseOrderHistorysView.collectionModel}" var="row"
+                                  rows="#{bindings.PurchaseOrderHistorysView.rangeSize}"
+                                  emptyText="#{bindings.PurchaseOrderHistorysView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.PurchaseOrderHistorysView.rangeSize}" rowBandingInterval="0"
+                                  id="t3" autoHeightRows="7" width="300" columnStretching="last">
+                            <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.label}"
+                                       id="c1" width="60">
+                                <af:inputDate value="#{row.bindings.OperationDate.inputValue}"
+                                              label="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.label}"
+                                              required="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.mandatory}"
+                                              columns="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.displayWidth}"
+                                              shortDesc="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.tooltip}"
+                                              id="id2" readOnly="true">
+                                    <f:validator binding="#{row.bindings.OperationDate.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.format}"/>
+                                </af:inputDate>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.label}"
+                                       id="c2" width="60">
+                                <af:selectOneChoice value="#{row.bindings.OperatorId.inputValue}"
+                                                    label="#{row.bindings.OperatorId.label}"
+                                                    required="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.mandatory}"
+                                                    shortDesc="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.tooltip}"
+                                                    id="soc4" readOnly="true">
+                                    <f:selectItems value="#{row.bindings.OperatorId.items}" id="si4"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.label}"
+                                       id="c10">
+                                <af:inputText value="#{row.bindings.OperationDetail.inputValue}"
+                                              label="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.label}"
+                                              required="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.mandatory}"
+                                              columns="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.displayWidth}"
+                                              maximumLength="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.precision}"
+                                              shortDesc="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.tooltip}"
+                                              id="it1" readOnly="true">
+                                    <f:validator binding="#{row.bindings.OperationDetail.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                        </af:table>
                         <f:facet name="footer">
                             <af:panelGroupLayout layout="horizontal" id="pgl2">
                                 <f:facet name="separator">
@@ -80,31 +128,6 @@
                         </f:facet>
                     </af:panelFormLayout>
                 
-                    <af:table value="#{bindings.PurchaseOrderHistorysView.collectionModel}" var="row" 
-                              fetchSize="#{bindings.PurchaseOrderHistorysView.rangeSize}" rowBandingInterval="0"
-                              id="t3" autoHeightRows="5">
-                        <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.name}"
-                                   sortable="false"
-                                   headerText="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.label}"
-                                   id="c1">
-                            <af:outputText value="#{row.OperationDate}" id="ot1">
-                                <af:convertDateTime pattern="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.format}"/>
-                            </af:outputText>
-                        </af:column>
-                        <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.name}"
-                                   sortable="false"
-                                   headerText="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.label}"
-                                   id="c2">
-                            <af:outputText value="#{row.OperatorId}" id="ot2"/>
-                        </af:column>
-                        <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.name}"
-                                   sortable="false"
-                                   headerText="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.label}"
-                                   id="c10">
-                            <af:outputText value="#{row.OperationDetail}" id="ot3"/>
-                        </af:column>
-                    </af:table>
-                </af:panelGroupLayout>
             </af:panelHeader>
             <af:spacer width="50px" height="20px"/>
             <af:panelHeader text="订单行" id="ph2">

@@ -93,6 +93,7 @@
           usageId="edu_hp_view_MyPo_MyPo_findByPendingVerifyPageDef"/>
     <page path="/pages/admin/PoCategory.jsff" usageId="edu_hp_view_PoCategoryPageDef"/>
     <page path="/pages/admin/PoSubCategory.jsff" usageId="edu_hp_view_PoSubCategoryPageDef"/>
+    <page path="/pages/admin/PoApproveLimit.jsff" usageId="edu_hp_view_PoApproveLimitPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -172,6 +173,7 @@
     <page id="edu_hp_view_HdReasonLevel3NewPageDef" path="pages.admin.HdReasonLevel3NewPageDef"/>
     <page id="edu_hp_view_PoCategoryPageDef" path="pages.admin.PoCategoryPageDef"/>
     <page id="edu_hp_view_PoSubCategoryPageDef" path="pages.admin.PoSubCategoryPageDef"/>
+    <page id="edu_hp_view_PoApproveLimitPageDef" path="pages.admin.PoApproveLimitPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

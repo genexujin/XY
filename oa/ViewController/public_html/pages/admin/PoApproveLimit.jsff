@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelHeader text="采购审批上限数据" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t2">
+            <af:commandToolbarButton text="保存" id="ctb1" icon="/images/icons/filesave.png">
+              <af:showPopupBehavior popupId="pc1:confirm" triggerType="action"/>
+            </af:commandToolbarButton>
+            <af:commandToolbarButton text="取消" id="ctb2" icon="/images/icons/undo.png"
+                                     actionListener="#{bindings.Rollback.execute}" immediate="true" />
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelCollection id="pc1">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t3">
+              <af:commandToolbarButton text="新建" id="ctb3" icon="/images/icons/new.png" actionListener="#{bindings.CreateInsert.execute}"/>
+              <af:commandToolbarButton text="导出" id="ctb4" icon="/images/icons/export.png">
+                <af:exportCollectionActionListener type="excelHTML" exportedId="t1" title="采购审批上限" filename="PoApproveLimit.xls"/>
+              </af:commandToolbarButton>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.ItemCategoryApprovalView.collectionModel}" var="row"
+                    rows="#{bindings.ItemCategoryApprovalView.rangeSize}"
+                    emptyText="#{bindings.ItemCategoryApprovalView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.ItemCategoryApprovalView.rangeSize}" rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.ItemCategoryApprovalView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.ItemCategoryApprovalView.collectionModel.makeCurrent}"
+                    rowSelection="single" id="t1" partialTriggers=":::ctb1 :::ctb2">
+            <af:column sortProperty="#{bindings.ItemCategoryApprovalView.hints.ItemCategory.name}" sortable="true"
+                       headerText="#{bindings.ItemCategoryApprovalView.hints.ItemCategory.label}" id="c1">
+              <af:selectOneChoice value="#{row.bindings.ItemCategory.inputValue}"
+                                  label="#{row.bindings.ItemCategory.label}"
+                                  required="#{bindings.ItemCategoryApprovalView.hints.ItemCategory.mandatory}"
+                                  shortDesc="#{bindings.ItemCategoryApprovalView.hints.ItemCategory.tooltip}" id="soc1"
+                                  autoSubmit="true">
+                <f:selectItems value="#{row.bindings.ItemCategory.items}" id="si1"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.ItemCategoryApprovalView.hints.ApprovalLimit.name}" sortable="true"
+                       headerText="#{bindings.ItemCategoryApprovalView.hints.ApprovalLimit.label}" id="c2">
+              <af:inputText value="#{row.bindings.ApprovalLimit.inputValue}"
+                            label="#{bindings.ItemCategoryApprovalView.hints.ApprovalLimit.label}"
+                            required="#{bindings.ItemCategoryApprovalView.hints.ApprovalLimit.mandatory}"
+                            columns="#{bindings.ItemCategoryApprovalView.hints.ApprovalLimit.displayWidth}"
+                            maximumLength="#{bindings.ItemCategoryApprovalView.hints.ApprovalLimit.precision}"
+                            shortDesc="#{bindings.ItemCategoryApprovalView.hints.ApprovalLimit.tooltip}" id="it1"
+                            autoSubmit="true">
+                <f:validator binding="#{row.bindings.ApprovalLimit.validator}"/>
+              </af:inputText>
+            </af:column>
+          </af:table>
+          <af:popup id="confirm" contentDelivery="lazyUncached">
+            <!-- don't render if the activity is null -->
+            <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}" title="请确认操作" id="d2">
+                <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+                <af:spacer height="20" id="s4"/>
+                <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+            </af:dialog>
+          </af:popup>
+        </af:panelCollection>
+      </af:panelHeader>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

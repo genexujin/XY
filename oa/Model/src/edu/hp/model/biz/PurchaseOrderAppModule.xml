@@ -118,5 +118,50 @@
         Name="isFinalApprover"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="insertPoHistory"
+      MethodName="insertPoHistory">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="orderId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="operatorId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="operationDetail"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="createPo"
+      MethodName="createPo">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="poNote"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="hasFruit"
+        Type="boolean"/>
+      <Parameter
+        Name="fruitPrice"
+        Type="double"/>
+      <Parameter
+        Name="fruitExpectDate"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="hasDessert"
+        Type="boolean"/>
+      <Parameter
+        Name="dessertPrice"
+        Type="double"/>
+      <Parameter
+        Name="dessertExpectDate"
+        Type="oracle.jbo.domain.Date"/>
+    </Method>
   </ClientInterface>
 </AppModule>

@@ -344,7 +344,8 @@
     PrecisionRule="true"
     EntityAttrName="Cancelled"
     EntityUsage="PurchaseOrderLines"
-    AliasName="CANCELLED">
+    AliasName="CANCELLED"
+    DefaultValue="N">
     <Properties>
       <SchemaBasedProperties>
         <LABEL

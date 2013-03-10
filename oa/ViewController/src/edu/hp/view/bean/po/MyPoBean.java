@@ -133,6 +133,8 @@ public class MyPoBean extends BaseBean {
                     String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
                     String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
                     
+                    insertPoHistory(id, submitterId, "提交了该订单");
+                    
                     createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核", Constants.ROLE_PO_VERIFIER, readableId);
                     
                     sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核", null, Constants.ROLE_PO_VERIFIER);
@@ -162,6 +164,9 @@ public class MyPoBean extends BaseBean {
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
+            String verifier = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, verifier, "审核了该订单");
+            
             if (verifyTotal != 0) { //If verifyTotal is 0, then no need to approve.
                 //Set the current pprover for the po
                 ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_APPROVER);
@@ -202,6 +207,9 @@ public class MyPoBean extends BaseBean {
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
+            String approver = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, approver, "审批了该订单");
+            
             if (verifyTotal.compareTo(limit) <= 0) {
                 ADFUtils.setBoundAttributeValue("CurrentApprover", "");
                 ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
@@ -236,6 +244,9 @@ public class MyPoBean extends BaseBean {
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
+            String approver = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, approver, "审批了该订单");
+            
             //Clear the current approver
             ADFUtils.setBoundAttributeValue("CurrentApprover", "");
             ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
@@ -260,6 +271,9 @@ public class MyPoBean extends BaseBean {
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
+            String buyer = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, buyer, "执行了该订单");
+            
             ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_RECEIVER);
             
             sendNotification("有新的采购订单等待收货", "有新的采购订单等待收货", null, Constants.ROLE_PO_RECEIVER);
@@ -275,6 +289,9 @@ public class MyPoBean extends BaseBean {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            String receiver = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, receiver, "对该订单进行了收货");
             
             ADFUtils.setBoundAttributeValue("CurrentExecutor", "");
             
@@ -297,6 +314,9 @@ public class MyPoBean extends BaseBean {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            String approver = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, approver, "拒绝了该订单");
             
             //Clear the current approver
             ADFUtils.setBoundAttributeValue("CurrentApprover", "");
@@ -325,6 +345,9 @@ public class MyPoBean extends BaseBean {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
+            String operator = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, operator, "取消了该订单");
+            
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_VERIFIER);
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
             completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, submitterId);
@@ -347,6 +370,10 @@ public class MyPoBean extends BaseBean {
             ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_EXECUTING);
             boolean success = ADFUtils.commit("采购订单已重新打开！", "采购订单重新打开失败！请核对输入的信息或联系管理员！");
             if (success) {
+                String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
+                String operator = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+                insertPoHistory(id, operator, "重新打开了该订单");
+            
                 sendNotification("有采购订单重新打开", "有采购订单重新打开", null, Constants.ROLE_PO_BUYER);
                 
                 ADFUtils.findOperation("Commit").execute();
@@ -365,7 +392,15 @@ public class MyPoBean extends BaseBean {
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
+            
+            String operator = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, operator, "将该订单重新变为待审核");
+            
             createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核", Constants.ROLE_PO_VERIFIER, readableId);
+            
+            //Need to clear the following values
+            ADFUtils.setBoundAttributeValue("CurrentApprover", "");
+            ADFUtils.setBoundAttributeValue("CurrentExecutor", "");
             
             if (state != null && state.equals(Constants.PO_STATE_EXECUTING)) {                
                 sendNotification("采购订单需重新审核，暂停采购", "采购订单需重新审核，暂停采购", null, Constants.ROLE_PO_BUYER);
@@ -569,5 +604,44 @@ public class MyPoBean extends BaseBean {
         } 
         
         return new BigDecimal(0);
+    }
+    
+    public String returnClicked() {        
+        DCIteratorBinding state = ADFUtils.findIterator("PoStateWithEmptyIterator");
+        state.executeQuery();
+        
+        DCIteratorBinding category = ADFUtils.findIterator("ItemCategoryWithEmptyIterator");
+        category.executeQuery();
+        
+        DCIteratorBinding emp = ADFUtils.findIterator("EmpWithEmptyIterator");
+        emp.executeQuery();
+                
+        this.orderReadableId = null;
+        this.submitDateFrom = null;
+        this.submitDateTo = null;
+        
+        String fromMenu = (String)JSFUtils.resolveExpression("#{pageFlowScope.fromMenu}");
+        System.out.println("from menu: " + fromMenu);
+        
+        if ("verifier".equals(fromMenu)) {
+            return "returnFromVerifier";
+        } else if ("normal".equals(fromMenu)) {
+            return "returnFromNormal";
+        } else if ("approver".equals(fromMenu)) {
+            return "returnFromApprover";
+        } else if ("buyer".equals(fromMenu)) {
+            return "returnFromBuyer";
+        } else {
+            return "returnFromReceiver";
+        }
+    }
+    
+    private void insertPoHistory(String orderId, String operatorId, String operationDetail) {
+        OperationBinding oper = ADFUtils.findOperation("insertPoHistory");
+        oper.getParamsMap().put("orderId", orderId);
+        oper.getParamsMap().put("operatorId", operatorId);
+        oper.getParamsMap().put("operationDetail", operationDetail);
+        
+        oper.execute();
     }
 }

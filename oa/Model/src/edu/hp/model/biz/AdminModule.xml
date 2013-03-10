@@ -76,6 +76,9 @@
   <ViewUsage
     Name="ItemLov"
     ViewObjectName="edu.hp.model.vo.query.po.ItemLov"/>
+  <ViewUsage
+    Name="ItemCategoryApprovalView"
+    ViewObjectName="edu.hp.model.vo.ItemCategoryApprovalView"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"

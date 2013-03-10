@@ -10,7 +10,7 @@
                         <f:facet name="footer">
                             <af:toolbar id="t1">
                                 <af:commandButton text="查询" id="cb1" action="#{pageFlowScope.MyPoBean.doQuery}"/>
-                                <af:resetButton text="清空条件" id="rb1"/>
+                                <af:commandButton text="清空条件" id="rb1" action="#{pageFlowScope.MyPoBean.returnClicked}"/>
                             </af:toolbar>
                         </f:facet>
                         <af:inputText label="订单号" id="it1" columns="20"

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="PoApproveLimitPageDef"
+                Package="pages.admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.AdminModule.ItemCategoryApprovalView" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="ItemCategoryApprovalViewIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ItemCategoryApprovalViewIterator" id="ItemCategoryApprovalView">
+      <nodeDefinition DefName="edu.hp.model.vo.ItemCategoryApprovalView" Name="ItemCategoryApprovalView0">
+        <AttrNames>
+          <Item Value="ItemCategory"/>
+          <Item Value="ApprovalLimit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="ItemCategoryApprovalViewIterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.AdminModule.ItemCategoryApprovalView"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

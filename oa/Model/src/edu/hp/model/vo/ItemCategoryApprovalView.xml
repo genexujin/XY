@@ -21,6 +21,28 @@
     Name="CategoryId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <ViewAccessor
+    Name="ItemCategory1"
+    ViewObjectName="edu.hp.model.vo.query.po.ItemCategory"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_ItemCategory"
+    ListVOName="ItemCategory1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ItemCategory"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="ItemCategoryApproval"
     Entity="edu.hp.model.eo.ItemCategoryApproval"/>
@@ -29,13 +51,30 @@
     PrecisionRule="true"
     EntityAttrName="ItemCategory"
     EntityUsage="ItemCategoryApproval"
-    AliasName="ITEM_CATEGORY"/>
+    AliasName="ITEM_CATEGORY"
+    LOVName="LOV_ItemCategory">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="edu.hp.model.vo.ItemCategoryApprovalView.ItemCategory_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ApprovalLimit"
     PrecisionRule="true"
     EntityAttrName="ApprovalLimit"
     EntityUsage="ItemCategoryApproval"
-    AliasName="APPROVAL_LIMIT"/>
+    AliasName="APPROVAL_LIMIT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.ItemCategoryApprovalView.ApprovalLimit_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Rowid"
     IsUpdateable="false"
@@ -79,4 +118,8 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

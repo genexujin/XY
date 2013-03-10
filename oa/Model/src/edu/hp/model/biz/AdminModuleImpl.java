@@ -1,6 +1,7 @@
 package edu.hp.model.biz;
 
 import edu.hp.model.vo.EmployeesViewImpl;
+import edu.hp.model.vo.ItemCategoryApprovalViewImpl;
 import edu.hp.model.vo.LovsViewImpl;
 import edu.hp.model.vo.RoleMenusViewImpl;
 import edu.hp.model.vo.RolesViewImpl;
@@ -245,5 +246,13 @@ public class AdminModuleImpl extends ApplicationModuleImpl {
      */
     public ViewLinkImpl getPoCatgToSubCatgLink1() {
         return (ViewLinkImpl)findViewLink("PoCatgToSubCatgLink1");
+    }
+
+    /**
+     * Container's getter for ItemCategoryApprovalView1.
+     * @return ItemCategoryApprovalView1
+     */
+    public ItemCategoryApprovalViewImpl getItemCategoryApprovalView() {
+        return (ItemCategoryApprovalViewImpl)findViewObject("ItemCategoryApprovalView");
     }
 }

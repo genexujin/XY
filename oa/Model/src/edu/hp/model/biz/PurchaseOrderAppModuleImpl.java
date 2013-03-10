@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import oracle.jbo.Row;
 import oracle.jbo.ViewCriteria;
 import oracle.jbo.domain.DBSequence;
+import oracle.jbo.domain.Date;
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
@@ -152,6 +153,67 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         stateView.setApplyViewCriteriaName(stateVC.getName());
         stateView.executeQuery();
         
+    }
+    
+    public void insertPoHistory(String orderId, String operatorId, String operationDetail) {
+        PurchaseOrderHistorysViewImpl poHist = this.getPurchaseOrderHistorysView();
+        Row row = poHist.createRow();
+        row.setAttribute("OrderId", orderId);
+        row.setAttribute("OperatorId", operatorId);
+        row.setAttribute("OperationDetail", operationDetail);
+        row.setAttribute("OperationDate", Date.getCurrentDate());
+        
+        poHist.insertRow(row);
+    }
+    
+    public void createPo(String submitterId, String poNote, boolean hasFruit, double fruitPrice, Date fruitExpectDate, boolean hasDessert, double dessertPrice, Date dessertExpectDate) {
+        PurchaseOrdersViewImpl poView = this.getPurchaseOrdersView();
+        Row po = poView.createRow();
+        po.setAttribute("SubmitterId", submitterId);
+        po.setAttribute("ItemCategoryId", "水果点心");
+        po.setAttribute("State", Constants.PO_STATE_PENDING_REVIEW);
+        po.setAttribute("SubmitAt", Date.getCurrentDate());
+        po.setAttribute("OrderNote", poNote);
+        po.setAttribute("SubmitTotal", fruitPrice + dessertPrice);
+        
+        poView.insertRow(po);
+        
+        PurchaseOrderLinesViewImpl poLineView = this.getPurchaseOrderLinesView();
+        if (hasFruit) {
+            Row poLineFruit = poLineView.createRow();
+            poLineFruit.setAttribute("OrderId", po.getAttribute("OrderId"));
+            poLineFruit.setAttribute("ItemId", "水果");
+            poLineFruit.setAttribute("ItemDescription", "供会议食用");
+            poLineFruit.setAttribute("SubmitQuantity", new BigDecimal(1));
+            poLineFruit.setAttribute("SubmitUnit", "份");
+            poLineFruit.setAttribute("SubmitPrice", new BigDecimal(fruitPrice));
+            poLineFruit.setAttribute("SubmitTotal", new BigDecimal(fruitPrice));
+            poLineFruit.setAttribute("ExpectedDate", fruitExpectDate);
+            poLineFruit.setAttribute("SubmitNote", "供会议食用");
+            poLineView.insertRow(poLineFruit);
+        }
+        
+        if (hasDessert) {
+            Row poLineDessert = poLineView.createRow();
+            poLineDessert.setAttribute("OrderId", po.getAttribute("OrderId"));
+            poLineDessert.setAttribute("ItemId", "点心");
+            poLineDessert.setAttribute("ItemDescription", "供会议食用");
+            poLineDessert.setAttribute("SubmitQuantity", new BigDecimal(1));
+            poLineDessert.setAttribute("SubmitUnit", "份");
+            poLineDessert.setAttribute("SubmitPrice", new BigDecimal(dessertPrice));
+            poLineDessert.setAttribute("SubmitTotal", new BigDecimal(dessertPrice));
+            poLineDessert.setAttribute("ExpectedDate", dessertExpectDate);
+            poLineDessert.setAttribute("SubmitNote", "供会议食用");
+            poLineView.insertRow(poLineDessert);
+        }
+        
+        PurchaseOrderHistorysViewImpl poHistView = this.getPurchaseOrderHistorysView();
+        Row histRow = poHistView.createRow();
+        histRow.setAttribute("OrderId", po.getAttribute("OrderId"));
+        histRow.setAttribute("OperatorId", submitterId);
+        histRow.setAttribute("OperationDetail", "提交了该订单");
+        histRow.setAttribute("OperationDate", Date.getCurrentDate());        
+        poHistView.insertRow(histRow);
     }
 
     /**
