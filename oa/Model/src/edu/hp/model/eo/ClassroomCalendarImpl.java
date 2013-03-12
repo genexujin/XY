@@ -590,14 +590,17 @@ public class ClassroomCalendarImpl extends EntityImpl {
      */
     public boolean validateStartDate() {
 
-        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-        if (user.getIsUserInRole().get(Constants.ROLE_CLSRM_ADMIN) == null && getActStartTime() != null) {
-            
-            long delta = getActStartTime().getTime() - System.currentTimeMillis();
-            delta = delta/1000/60/60/24;
-            
-            if (delta > 14) {
-                return false;
+        if (this.getBatchNo() == null) {
+
+            LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+            if (user.getIsUserInRole().get(Constants.ROLE_CLSRM_ADMIN) == null && getActStartTime() != null) {
+
+                long delta = getActStartTime().getTime() - System.currentTimeMillis();
+                delta = delta / 1000 / 60 / 60 / 24;
+
+                if (delta > 14) {
+                    return false;
+                }
             }
         }
 

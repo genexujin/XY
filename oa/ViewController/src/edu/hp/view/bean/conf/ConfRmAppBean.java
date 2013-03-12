@@ -69,14 +69,17 @@ public class ConfRmAppBean extends BaseBean {
                 String dateStr = getDateString();
                 String noteContent = " 提交时间：" + dateStr;
                 //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
+                if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null)
+                    sendNotification(noteTitle, noteContent, userId, null);
 
                 String apprvTitle = "有新的会议室申请等待您的审核。";
                 String apprvContent = " 会议主题：" + title + " 申请人： " + userDisplayName;
-                sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_CONFRM_ADMIN);
-
+                if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null)
+                    sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_CONFRM_ADMIN);
+                
                 //create task
-                createTask(id, Constants.CONTEXT_TYPE_CONFRM, apprvTitle, Constants.ROLE_CONFRM_ADMIN,title);
+                if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null)
+                    createTask(id, Constants.CONTEXT_TYPE_CONFRM, apprvTitle, Constants.ROLE_CONFRM_ADMIN,title);
 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -169,6 +172,7 @@ public class ConfRmAppBean extends BaseBean {
                     ADFUtils.setBoundAttributeValue("State", state);
                 }
             } else {
+                ADFUtils.setBoundAttributeValue("State", state);
                 JSFUtils.addFacesErrorMessage("该会议室该时间段已经有其他预订，无法创建新的预定，请更换时间段！");
             }
         }
