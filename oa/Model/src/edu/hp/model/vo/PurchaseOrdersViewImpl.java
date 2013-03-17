@@ -1,5 +1,6 @@
 package edu.hp.model.vo;
 
+import edu.hp.model.common.Constants;
 import edu.hp.model.vo.common.PurchaseOrdersView;
 
 import java.util.ArrayList;
@@ -16,21 +17,13 @@ import oracle.jbo.server.ViewObjectImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOrdersView {
-
-    private static final String STATE_UN_SUBMITTED = "1";
-    private static final String STATE_UN_VERIFIED = "2";
-    private static final String STATE_UN_APPROVED = "3";
-    private static final String STATE_REJECTED = "4";
-    private static final String STATE_IN_EXEC = "5";
-    private static final String STATE_FINISHED = "6";
-    private static final String STATE_CANCELLED = "7";
     /**
      * This is the default constructor (do not remove).
      */
     public PurchaseOrdersViewImpl() {
     }
     
-    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo, String submitterId) {
+    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo, String submitterId, String fromMenu) {
         this.setApplyViewCriteriaNames(null);
         
         System.err.println("In VO: oRdId is: " + oRdId);
@@ -50,7 +43,10 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
                 
         if (state != null && !"0".equals(state)) {
             this.setOrStateId(state);
-            ViewCriteria oStateIdCriteria = this.getViewCriteria("OrderStateCriteria");
+            ViewCriteria oStateIdCriteria = this.getViewCriteria("OrderStateCriteria");            
+            vcNames.add(oStateIdCriteria.getName());
+        } else if (fromMenu != null && "verifier".equals(fromMenu)) {            
+            ViewCriteria oStateIdCriteria = this.getViewCriteria("OrderForVerifierCriteria");
             vcNames.add(oStateIdCriteria.getName());
         }
         
@@ -85,7 +81,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
     public void newRow() {
         System.err.println("here");
         Row newRow = this.createRow();
-        newRow.setAttribute("State", STATE_UN_SUBMITTED);
+        newRow.setAttribute("State", Constants.PO_STATE_INITIAL);
         this.insertRow(newRow);        
         this.setCurrentRow(newRow);
     }
@@ -93,7 +89,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
     public void newRow(String userId) {
         System.err.println("Creating new PO. SubmitterId is: " + userId);
         Row newRow = this.createRow();
-        newRow.setAttribute("State", STATE_UN_SUBMITTED);
+        newRow.setAttribute("State", Constants.PO_STATE_INITIAL);
         newRow.setAttribute("SubmitterId", userId);
         this.insertRow(newRow);        
         this.setCurrentRow(newRow);

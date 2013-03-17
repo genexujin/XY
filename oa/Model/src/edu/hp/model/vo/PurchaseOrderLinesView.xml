@@ -142,6 +142,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitQuantity_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitQuantity_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitQuantity_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -174,6 +178,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitPrice_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitPrice_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitPrice_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -190,6 +198,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitTotal_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitTotal_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitTotal_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -274,6 +286,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrderLinesView.ActualPrice_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ActualPrice_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ActualPrice_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -290,6 +306,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrderLinesView.ActualTotal_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ActualTotal_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.vo.PurchaseOrderLinesView.ActualTotal_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

@@ -22,6 +22,8 @@ import oracle.adf.model.binding.DCIteratorBinding;
 
 import oracle.adf.view.rich.component.rich.data.RichTable;
 
+import oracle.adf.view.rich.event.DialogEvent;
+
 import oracle.binding.BindingContainer;
 
 import oracle.binding.OperationBinding;
@@ -47,6 +49,8 @@ public class MyHelpdeskCallBean extends BaseBean {
     private String callReadableId;
     private Date submitDateFrom;
     private Date submitDateTo;
+    
+    private String fromButton;
 
     public MyHelpdeskCallBean() {
     }
@@ -324,5 +328,18 @@ public class MyHelpdeskCallBean extends BaseBean {
         } else {
             return "returnFromCaller";
         }
+    }
+
+    public void confirm(DialogEvent dialogEvent) {
+        System.out.println("fromButton: " + fromButton);
+    }
+
+    public void setFromButton(String fromButton) {
+        System.out.println("set the fromButton: " + fromButton);
+        this.fromButton = fromButton;
+    }
+
+    public String getFromButton() {
+        return fromButton;
     }
 }

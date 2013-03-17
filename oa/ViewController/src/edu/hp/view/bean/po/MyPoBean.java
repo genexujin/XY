@@ -9,13 +9,14 @@ import edu.hp.view.utils.JSFUtils;
 import java.math.BigDecimal;
 
 import java.sql.Date;
-
 import javax.faces.event.ActionEvent;
 
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTable;
+
+import oracle.adf.view.rich.component.rich.input.RichInputText;
 
 import oracle.binding.BindingContainer;
 
@@ -31,6 +32,8 @@ public class MyPoBean extends BaseBean {
     private Date submitDateFrom;
     private Date submitDateTo;
     private RichTable resultTable;
+    private RichInputText submitTotalComp;
+    //    private Date currDate;
 
     public MyPoBean() {
     }
@@ -431,10 +434,10 @@ public class MyPoBean extends BaseBean {
                     if (p != null) {
                         price = p.doubleValue();
                     }
-                    long quantity = 0;
+                    double quantity = 0;
                     BigDecimal q = (BigDecimal)row.getAttribute(quantityAttr);
                     if (q != null) {
-                        quantity = q.longValue();
+                        quantity = q.doubleValue();
                     }
                     System.out.println(priceAttr + " is: " + price + " " + quantityAttr +" is: " + quantity);
                     if (lineTotalAttr != null) {
@@ -475,35 +478,19 @@ public class MyPoBean extends BaseBean {
     }
 
     public void submitPriceChanged(ValueChangeEvent valueChangeEvent) {
-        double newPrice = ((BigDecimal)valueChangeEvent.getNewValue()).doubleValue();
-        System.out.println("newPrice is: " + newPrice);
-        DCIteratorBinding lineIt = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
-        Row row = lineIt.getCurrentRow();
-        long quantity = 0;
-        BigDecimal q = (BigDecimal)row.getAttribute("SubmitQuantity");
-        if (q != null) {
-            quantity = q.longValue();
-        }
-        System.out.println("Quantity is: " + quantity);
-        row.setAttribute("SubmitTotal", newPrice * quantity);
+        String newPriceStr = (String)valueChangeEvent.getNewValue();
+        System.out.println("newPrice is: " + newPriceStr);
         
-        computePoSubmitTotal(lineIt);
+        computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
+        ADFUtils.partialRefreshComponenet(submitTotalComp);
     }
 
     public void submitQuantityChanged(ValueChangeEvent valueChangeEvent) {
         long newQuantity = ((BigDecimal)valueChangeEvent.getNewValue()).longValue();
         System.out.println("newQuantity is: " + newQuantity);
-        DCIteratorBinding lineIt = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
-        Row row = lineIt.getCurrentRow();
-        double price = 0;
-        BigDecimal p = (BigDecimal)row.getAttribute("SubmitPrice");
-        if (p != null) {
-            price = p.doubleValue();
-        }
-        System.out.println("Price is: " + price);
-        row.setAttribute("SubmitTotal", price * newQuantity);
         
-        computePoSubmitTotal(lineIt);
+        computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
+        ADFUtils.partialRefreshComponenet(submitTotalComp);
     }
 
     public void purchaseQuantityChanged(ValueChangeEvent valueChangeEvent) {
@@ -643,5 +630,22 @@ public class MyPoBean extends BaseBean {
         oper.getParamsMap().put("operationDetail", operationDetail);
         
         oper.execute();
+    }
+//
+//    public void setCurrDate(Date currDate) {
+//        this.currDate = currDate;
+//    }
+
+    public Date getCurrDate() {
+        Date now = new Date(System.currentTimeMillis());
+        return now;
+    }
+
+    public void setSubmitTotalComp(RichInputText submitTotalComp) {
+        this.submitTotalComp = submitTotalComp;
+    }
+
+    public RichInputText getSubmitTotalComp() {
+        return submitTotalComp;
     }
 }

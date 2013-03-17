@@ -21,7 +21,7 @@
               <f:facet name="footer">
                 <af:toolbar id="t1">
               <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       actionListener="#{pageFlowScope.MyHdCallBean.saveHdCall}"/>
+                                       actionListener="#{pageFlowScope.MyHdCallBean.saveHdCall}"/>              
               <af:commandToolbarButton text="返回" id="ctb2" immediate="true" rendered="#{pageFlowScope.fromMenu ne '-' and pageFlowScope.fromMenu ne 'create'}"
                                        actionListener="#{bindings.Rollback.execute}" action="return">
                 <af:resetActionListener/>
@@ -173,7 +173,18 @@
               </f:facet>
             </af:panelFormLayout>
           </af:panelHeader>
-        </af:panelGroupLayout>        
+        </af:panelGroupLayout>  
+        <af:popup id="confirm" contentDelivery="lazyUncached">
+            <!-- don't render if the activity is null -->
+            <af:dialog  title="请确认操作" id="d2" dialogListener="#{pageFlowScope.MyHdCallBean.confirm}">
+                <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
+                <af:spacer height="20" id="s5"/>
+                <af:outputText value="#{pageFlowScope.MyHdCallBean.fromButton}" id="ot11"/>
+                <af:spacer height="20" id="s4"/>
+                <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+                <af:outputText value="aaa" id="ot12"/>
+            </af:dialog>
+          </af:popup>
       </af:panelHeader>
     </f:facet>
     <f:facet name="start"/>

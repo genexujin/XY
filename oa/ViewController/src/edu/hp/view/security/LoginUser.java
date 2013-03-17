@@ -1,5 +1,6 @@
 package edu.hp.view.security;
 
+import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
 import java.sql.Connection;
@@ -15,6 +16,8 @@ import javax.naming.InitialContext;
 
 import javax.sql.DataSource;
 
+import oracle.adf.view.rich.component.rich.RichForm;
+import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.event.DialogEvent;
 
 public class LoginUser {
@@ -29,7 +32,10 @@ public class LoginUser {
     private String dialogCurrPassword;
     private String dialogNewPassword;
     private String dialogNewPasswordConfirmed;
-    
+    private RichInputText currPasswdComp;
+    private RichInputText newPasswdComp;
+    private RichInputText newPasswdCnfmComp;
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -88,9 +94,23 @@ public class LoginUser {
     
     public void changePassword(DialogEvent event) {
         if (!dialogCurrPassword.equals(currentPassword)) {
-            JSFUtils.addFacesErrorMessage("当前密码不正确，请重新输入");            
+            JSFUtils.addFacesErrorMessage("当前密码不正确，请重新输入");   
+            dialogCurrPassword = null;
+            dialogNewPassword = null;
+            dialogNewPasswordConfirmed = null;
+            
+            ADFUtils.partialRefreshComponenet(currPasswdComp);
+            ADFUtils.partialRefreshComponenet(newPasswdComp);
+            ADFUtils.partialRefreshComponenet(newPasswdCnfmComp);
         } else if (!dialogNewPassword.equals(dialogNewPasswordConfirmed)) {
-            JSFUtils.addFacesErrorMessage("输入的两次新密码不匹配，请重新输入");            
+            JSFUtils.addFacesErrorMessage("输入的两次新密码不匹配，请重新输入"); 
+            dialogCurrPassword = null;
+            dialogNewPassword = null;
+            dialogNewPasswordConfirmed = null;
+            
+            ADFUtils.partialRefreshComponenet(currPasswdComp);
+            ADFUtils.partialRefreshComponenet(newPasswdComp);
+            ADFUtils.partialRefreshComponenet(newPasswdCnfmComp);
         } else {
             String sql = "update employees set employees.password = ? where employees.id = ?";
             Connection conn = null;
@@ -108,6 +128,7 @@ public class LoginUser {
                 stmt.executeUpdate();
                 
                 this.currentPassword = this.dialogNewPassword;
+                JSFUtils.addFacesInformationMessage("密码修改成功！");
                 
             } catch (Exception sqle) {
                 // TODO: Add catch code
@@ -125,6 +146,14 @@ public class LoginUser {
                     sqle.printStackTrace();
                 }
             }
+            
+            dialogCurrPassword = null;
+            dialogNewPassword = null;
+            dialogNewPasswordConfirmed = null;
+            
+            ADFUtils.partialRefreshComponenet(currPasswdComp);
+            ADFUtils.partialRefreshComponenet(newPasswdComp);
+            ADFUtils.partialRefreshComponenet(newPasswdCnfmComp);
         }
     }
 
@@ -150,5 +179,29 @@ public class LoginUser {
 
     public String getDialogNewPasswordConfirmed() {
         return dialogNewPasswordConfirmed;
+    }
+
+    public void setCurrPasswdComp(RichInputText currPasswdComp) {
+        this.currPasswdComp = currPasswdComp;
+    }
+
+    public RichInputText getCurrPasswdComp() {
+        return currPasswdComp;
+    }
+
+    public void setNewPasswdComp(RichInputText newPasswdComp) {
+        this.newPasswdComp = newPasswdComp;
+    }
+
+    public RichInputText getNewPasswdComp() {
+        return newPasswdComp;
+    }
+
+    public void setNewPasswdCnfmComp(RichInputText newPasswdCnfmComp) {
+        this.newPasswdCnfmComp = newPasswdCnfmComp;
+    }
+
+    public RichInputText getNewPasswdCnfmComp() {
+        return newPasswdCnfmComp;
     }
 }

@@ -53,12 +53,16 @@
                         </af:commandLink>
                         <af:popup id="password" contentDelivery="lazyUncached">
                         <!-- don't render if the activity is null -->
-                        <af:dialog dialogListener="#{sessionScope.LoginUserBean.changePassword}" title="修改密码" id="d2">
+                            <af:dialog dialogListener="#{sessionScope.LoginUserBean.changePassword}" title="修改密码" id="d2" contentHeight="100" contentWidth="250"
+                                   resize="on">
                                 <af:panelFormLayout id="pfl1">
                                     <f:facet name="footer"/>
-                                    <af:inputText label="当前密码" id="it1" required="true" value="#{sessionScope.LoginUserBean.dialogCurrPassword}" columns="20"/>
-                                    <af:inputText label="新密码" id="it2" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogNewPassword}" columns="20"/>
-                                    <af:inputText label="重复新密码" id="it3" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogNewPasswordConfirmed}" columns="20"/>
+                                    <af:inputText label="当前密码" id="it1" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogCurrPassword}" columns="20"
+                                                  binding="#{LoginUserBean.currPasswdComp}"/>
+                                    <af:inputText label="新密码" id="it2" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogNewPassword}" columns="20"
+                                                  binding="#{LoginUserBean.newPasswdComp}"/>
+                                    <af:inputText label="重复新密码" id="it3" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogNewPasswordConfirmed}" columns="20"
+                                                  binding="#{LoginUserBean.newPasswdCnfmComp}"/>
                                 </af:panelFormLayout>
                             </af:dialog>
                       </af:popup>

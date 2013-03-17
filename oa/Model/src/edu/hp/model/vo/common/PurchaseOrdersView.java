@@ -7,8 +7,6 @@ import oracle.jbo.domain.Date;
 // ---    Thu Mar 07 19:04:51 CST 2013
 // ---------------------------------------------------------------------
 public interface PurchaseOrdersView extends ViewObject {
-    void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo,
-                 String submitterId);
 
     void findByState(String state);
 
@@ -17,4 +15,7 @@ public interface PurchaseOrdersView extends ViewObject {
     void newRow();
 
     void newRow(String userId);
+
+    void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo,
+                 String submitterId, String fromMenu);
 }

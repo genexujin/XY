@@ -31,7 +31,8 @@
   ComponentClass="edu.hp.model.vo.PurchaseOrdersViewImpl"
   Where="PurchaseOrders.SUBMITTER_ID = Employees.ID(+)"
   ComponentInterface="edu.hp.model.vo.common.PurchaseOrdersView"
-  ClientProxyName="edu.hp.model.vo.client.PurchaseOrdersViewClient">
+  ClientProxyName="edu.hp.model.vo.client.PurchaseOrdersViewClient"
+  OrderBy="PurchaseOrders.ORDER_ID desc">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -253,6 +254,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrdersView.SubmitTotal_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.vo.PurchaseOrdersView.SubmitTotal_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.vo.PurchaseOrdersView.SubmitTotal_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -266,6 +271,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrdersView.VerifyTotal_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.vo.PurchaseOrdersView.VerifyTotal_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.vo.PurchaseOrdersView.VerifyTotal_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -503,8 +512,8 @@
       Name="PurchaseOrdersViewCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
-        Name="PurchaseOrdersViewCriteria_PurchaseOrdersViewCriteria_row_0_CreateAt"
-        ViewAttribute="CreateAt"
+        Name="SubmitAt"
+        ViewAttribute="SubmitAt"
         Operator="AFTER"
         Conjunction="AND"
         Value=":submitDateFm"
@@ -539,8 +548,8 @@
       Name="PurchaseOrdersViewCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
-        Name="PurchaseOrdersViewCriteria_PurchaseOrdersViewCriteria_row_0_CreateAt"
-        ViewAttribute="CreateAt"
+        Name="SubmitAt"
+        ViewAttribute="SubmitAt"
         Operator="BEFORE"
         Conjunction="AND"
         Value=":submitDateTo"
@@ -729,6 +738,39 @@
   </ResourceBundle>
   <ClientInterface>
     <Method
+      Name="findByState"
+      MethodName="findByState">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="state"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findBySubmitterId"
+      MethodName="findBySubmitterId">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="newRow1"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
+      Name="newRow"
+      MethodName="newRow">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
       Name="doQuery"
       MethodName="doQuery">
       <Return
@@ -751,38 +793,8 @@
       <Parameter
         Name="submitterId"
         Type="java.lang.String"/>
-    </Method>
-    <Method
-      Name="findByState"
-      MethodName="findByState">
-      <Return
-        Type="void"/>
       <Parameter
-        Name="state"
-        Type="java.lang.String"/>
-    </Method>
-    <Method
-      Name="findBySubmitterId"
-      MethodName="findBySubmitterId">
-      <Return
-        Type="void"/>
-      <Parameter
-        Name="submitterId"
-        Type="java.lang.String"/>
-    </Method>
-    <Method
-      Name="newRow"
-      MethodName="newRow">
-      <Return
-        Type="void"/>
-    </Method>
-    <Method
-      Name="newRow"
-      MethodName="newRow">
-      <Return
-        Type="void"/>
-      <Parameter
-        Name="userId"
+        Name="fromMenu"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

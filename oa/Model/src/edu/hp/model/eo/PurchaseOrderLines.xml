@@ -76,8 +76,6 @@
   </Attribute>
   <Attribute
     Name="SubmitPrice"
-    Precision="12"
-    Scale="2"
     ColumnName="SUBMIT_PRICE"
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
@@ -85,8 +83,6 @@
     TableName="PURCHASE_ORDER_LINES"/>
   <Attribute
     Name="SubmitTotal"
-    Precision="12"
-    Scale="2"
     ColumnName="SUBMIT_TOTAL"
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
@@ -133,8 +129,6 @@
     TableName="PURCHASE_ORDER_LINES"/>
   <Attribute
     Name="ActualPrice"
-    Precision="12"
-    Scale="2"
     ColumnName="ACTUAL_PRICE"
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
@@ -142,8 +136,6 @@
     TableName="PURCHASE_ORDER_LINES"/>
   <Attribute
     Name="ActualTotal"
-    Precision="12"
-    Scale="2"
     ColumnName="ACTUAL_TOTAL"
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"

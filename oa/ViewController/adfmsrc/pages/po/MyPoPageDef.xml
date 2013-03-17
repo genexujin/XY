@@ -39,7 +39,8 @@
       <NamedData NDName="category" NDType="java.lang.String"/>
       <NamedData NDName="submitDateFrom" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="submitDateTo" NDType="oracle.jbo.domain.Date"/>
-      <NamedData NDName="submitterId" NDType="java.lang.String"/>
+      <NamedData NDName="submitterId" NDValue="" NDType="java.lang.String"/>
+      <NamedData NDName="fromMenu" NDValue="#{pageFlowScope.fromMenu}" NDType="java.lang.String"/>
     </methodAction>
     <list IterBinding="ItemCategoryWithEmptyIterator" ListOperMode="navigation" ListIter="ItemCategoryWithEmptyIterator"
           id="ItemCategoryWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">

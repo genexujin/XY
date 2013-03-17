@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import oracle.jbo.AttributeList;
 import oracle.jbo.Key;
+import oracle.jbo.RowInconsistentException;
 import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Timestamp;
 import oracle.jbo.server.AttributeDefImpl;
@@ -636,7 +637,14 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
      * Add locking logic here.
      */
     public void lock() {
-        super.lock();
+        try { 
+            super.lock(); 
+        } catch (RowInconsistentException e) { 
+            e.printStackTrace(); 
+            refresh(REFRESH_WITH_DB_ONLY_IF_UNCHANGED | REFRESH_CONTAINEES);
+            System.out.println("已被处理的异常信息："+new java.util.Date().toLocaleString()+" 更新时出现锁异常！");
+            super.lock(); 
+        } 
     }
 
     /**

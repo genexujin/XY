@@ -110,8 +110,6 @@
   </Attribute>
   <Attribute
     Name="SubmitTotal"
-    Precision="12"
-    Scale="2"
     ColumnName="SUBMIT_TOTAL"
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
@@ -119,8 +117,6 @@
     TableName="PURCHASE_ORDERS"/>
   <Attribute
     Name="VerifyTotal"
-    Precision="12"
-    Scale="2"
     ColumnName="VERIFY_TOTAL"
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"

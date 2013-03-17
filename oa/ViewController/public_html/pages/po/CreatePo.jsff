@@ -23,7 +23,8 @@
                                             disabled="#{(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') or bindings.State.inputValue ne '1'}">
                             <f:selectItems value="#{bindings.ItemCategoryId1.items}" id="si3"/>
                         </af:selectOneChoice>
-                        <af:inputText value="#{bindings.SubmitTotal.inputValue}" id="ot7" label="预算总金额" disabled="true" columns="20"/>
+                        <af:inputText value="#{bindings.SubmitTotal.inputValue}" id="ot7" label="预算总金额" disabled="true" columns="20"
+                                      binding="#{pageFlowScope.MyPoBean.submitTotalComp}"/>
                         <af:inputText value="#{bindings.VerifyTotal.inputValue}" id="ot8" label="审核总金额" disabled="true" columns="20"/>
                         <af:selectOneChoice value="#{bindings.State.inputValue}" label="订单状态"
                                             required="#{bindings.State.hints.mandatory}"
@@ -37,7 +38,7 @@
                         <af:spacer width="5px" height="5px"/>
                         <af:table value="#{bindings.PurchaseOrderHistorysView.collectionModel}" var="row"
                                   rows="#{bindings.PurchaseOrderHistorysView.rangeSize}"
-                                  emptyText="#{bindings.PurchaseOrderHistorysView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  emptyText="#{bindings.PurchaseOrderHistorysView.viewable ? '暂无数据' : 'Access Denied.'}"
                                   fetchSize="#{bindings.PurchaseOrderHistorysView.rangeSize}" rowBandingInterval="0"
                                   id="t3" autoHeightRows="7" width="300" columnStretching="last">
                             <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.name}"
@@ -196,7 +197,7 @@
                                   shortDesc="#{bindings.PurchaseOrderLinesView.hints.SubmitQuantity.tooltip}" id="it3"
                                   readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
                                               or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}">
-                        <!--<f:validator binding="#{row.bindings.SubmitQuantity.validator}"/>-->
+                        <f:validator binding="#{row.bindings.SubmitQuantity.validator}"/>
                     </af:inputText>
                     </af:column>
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitUnit.label}"
@@ -224,7 +225,7 @@
                                   shortDesc="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.tooltip}" id="it5"
                                   readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
                                               or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}">
-                        <!--<f:validator binding="#{row.bindings.SubmitPrice.validator}"/>-->
+                        <f:validator binding="#{row.bindings.SubmitPrice.validator}"/>
                     </af:inputText>
                     </af:column>
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitTotal.label}"
@@ -241,7 +242,8 @@
                                   columns="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.displayWidth}"
                                   shortDesc="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.tooltip}" id="id1"
                                   readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
-                                              or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}">
+                                              or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}"
+                                      minValue="#{pageFlowScope.MyPoBean.currDate}">
                         <!--<f:validator binding="#{row.bindings.ExpectedDate.validator}"/>-->
                         <af:convertDateTime pattern="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.format}"/>
                     </af:inputDate>
