@@ -9,8 +9,10 @@
                     <af:panelFormLayout id="pfl1" rows="2">
                         <f:facet name="footer">
                             <af:toolbar id="t1">
-                                <af:commandButton text="查询" id="cb1" action="#{pageFlowScope.MyPoBean.doQuery}"/>
-                                <af:commandButton text="清空条件" id="rb1" action="#{pageFlowScope.MyPoBean.returnClicked}"/>
+                                <af:commandButton text="查询" id="cb1" action="#{pageFlowScope.MyPoBean.doQuery}"
+                                                  icon="/images/icons/quick_query.png"/>
+                                <af:commandButton text="清空条件" id="rb1" action="#{pageFlowScope.MyPoBean.returnClicked}"
+                                                  icon="/images/icons/clear.png"/>
                             </af:toolbar>
                         </f:facet>
                         <af:inputText label="订单号" id="it1" columns="20"
@@ -57,16 +59,18 @@
                         <f:facet name="toolbar">
                             <af:toolbar id="t3">
                                 <af:commandToolbarButton text="新建" id="ctb1" action="create"
-                                                         rendered="#{pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='buyer' and pageFlowScope.fromMenu!='receiver'}">
+                                                         rendered="#{pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='buyer' and pageFlowScope.fromMenu!='receiver'}"
+                                                         icon="/images/icons/new_ena.png">
                                     <!--<af:setActionListener from="#{sessionScope.LoginUserBean.userId}" to="#{bindings.SubmitterId.inputValue}"/>-->
                                 </af:commandToolbarButton>
-                                <af:commandToolbarButton text="更改" id="ctb2" action="edit"/>
+                                <af:commandToolbarButton text="更改" id="ctb2" action="edit"
+                                                         icon="/images/icons/edit.png"/>
                             </af:toolbar>
                         </f:facet>
                         <f:facet name="statusbar"/>
                         <af:table value="#{bindings.PurchaseOrdersView.collectionModel}" var="row"
                                   rows="#{bindings.PurchaseOrdersView.rangeSize}"
-                                  emptyText="#{bindings.PurchaseOrdersView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  emptyText="#{bindings.PurchaseOrdersView.viewable ? '暂无数据。' : 'Access Denied.'}"
                                   fetchSize="#{bindings.PurchaseOrdersView.rangeSize}" rowBandingInterval="0"
                                   selectedRowKeys="#{bindings.PurchaseOrdersView.collectionModel.selectedRow}"
                                   selectionListener="#{bindings.PurchaseOrdersView.collectionModel.makeCurrent}"

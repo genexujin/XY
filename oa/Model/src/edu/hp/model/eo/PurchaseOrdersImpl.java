@@ -1,9 +1,12 @@
 package edu.hp.model.eo;
 
+import edu.hp.model.common.Constants;
+
 import java.math.BigDecimal;
 
 import oracle.jbo.AttributeList;
 import oracle.jbo.Key;
+import oracle.jbo.Row;
 import oracle.jbo.RowInconsistentException;
 import oracle.jbo.RowIterator;
 import oracle.jbo.domain.DBSequence;
@@ -32,8 +35,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setOrderId((DBSequence)value);
             }
-        }
-        ,
+        },
         OrderReadableId {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getOrderReadableId();
@@ -42,8 +44,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setOrderReadableId((String)value);
             }
-        }
-        ,
+        },
         SubmitterId {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitterId();
@@ -52,8 +53,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitterId((String)value);
             }
-        }
-        ,
+        },
         CreateBy {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getCreateBy();
@@ -62,8 +62,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setCreateBy((String)value);
             }
-        }
-        ,
+        },
         CreateAt {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getCreateAt();
@@ -72,8 +71,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setCreateAt((Timestamp)value);
             }
-        }
-        ,
+        },
         LastUpdatedBy {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getLastUpdatedBy();
@@ -82,8 +80,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setLastUpdatedBy((String)value);
             }
-        }
-        ,
+        },
         LastUpdatedAt {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getLastUpdatedAt();
@@ -92,8 +89,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setLastUpdatedAt((Timestamp)value);
             }
-        }
-        ,
+        },
         State {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getState();
@@ -102,8 +98,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setState((String)value);
             }
-        }
-        ,
+        },
         SubmitTotal {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitTotal();
@@ -112,8 +107,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitTotal((BigDecimal)value);
             }
-        }
-        ,
+        },
         VerifyTotal {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getVerifyTotal();
@@ -122,8 +116,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setVerifyTotal((BigDecimal)value);
             }
-        }
-        ,
+        },
         OrderNote {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getOrderNote();
@@ -132,8 +125,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setOrderNote((String)value);
             }
-        }
-        ,
+        },
         ItemCategoryId {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getItemCategoryId();
@@ -142,8 +134,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setItemCategoryId((String)value);
             }
-        }
-        ,
+        },
         LineNum {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getLineNum();
@@ -152,8 +143,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setLineNum((Number)value);
             }
-        }
-        ,
+        },
         SubmitAt {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitAt();
@@ -162,8 +152,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitAt((Timestamp)value);
             }
-        }
-        ,
+        },
         CurrentApprover {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getCurrentApprover();
@@ -172,8 +161,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setCurrentApprover((String)value);
             }
-        }
-        ,
+        },
         CurrentExecutor {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getCurrentExecutor();
@@ -182,8 +170,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setCurrentExecutor((String)value);
             }
-        }
-        ,
+        },
         Submitter {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitter();
@@ -192,8 +179,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitter((EmployeesImpl)value);
             }
-        }
-        ,
+        },
         PurchaseOrderLines {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getPurchaseOrderLines();
@@ -202,8 +188,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        }
-        ,
+        },
         PurchaseOrderHistorys {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getPurchaseOrderHistorys();
@@ -212,8 +197,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        }
-        ;
+        };
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
 
@@ -594,12 +578,32 @@ public class PurchaseOrdersImpl extends EntityImpl {
 
 
     /**
+     * Validation method for PurchaseOrders.
+     */
+    public boolean validatePurchaseQuantity() {
+
+        RowIterator iterator = this.getPurchaseOrderLines();
+      
+        while (iterator.hasNext()) {
+            Row next = iterator.next();
+            System.err.println(this.getAttribute("State"));
+            System.err.println(next.getAttribute("PurchaseQuantity"));
+            if (this.getAttribute("State").equals(Constants.PO_STATE_PENDING_APPROVAL) &&
+                next.getAttribute("PurchaseQuantity") == null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * @param orderId key constituent
 
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(DBSequence orderId) {
-        return new Key(new Object[]{orderId});
+        return new Key(new Object[] { orderId });
     }
 
     /**
@@ -625,15 +629,15 @@ public class PurchaseOrdersImpl extends EntityImpl {
     protected void doDML(int operation, TransactionEvent e) {
         super.doDML(operation, e);
     }
-    
+
     public void lock() {
-        try { 
-            super.lock(); 
-        } catch (RowInconsistentException e) { 
-            e.printStackTrace(); 
+        try {
+            super.lock();
+        } catch (RowInconsistentException e) {
+            e.printStackTrace();
             refresh(REFRESH_WITH_DB_ONLY_IF_UNCHANGED | REFRESH_CONTAINEES);
-            System.out.println("已被处理的异常信息："+new java.util.Date().toLocaleString()+" 更新时出现锁异常！");
-            super.lock(); 
-        } 
+            System.out.println("已被处理的异常信息：" + new java.util.Date().toLocaleString() + " 更新时出现锁异常！");
+            super.lock();
+        }
     }
 }

@@ -17,7 +17,7 @@ import oracle.jbo.server.EntityImpl;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class EmployeesImpl extends BaseEntity {
+public class EmployeesImpl extends EntityImpl {
     /**
      * AttributesEnum: generated enum for identifying attributes and accessors. Do not modify.
      */

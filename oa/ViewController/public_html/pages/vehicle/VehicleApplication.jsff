@@ -63,7 +63,7 @@
                               varStatus="vs" selectedRowKeys="#{bindings.VehicleDML.collectionModel.selectedRow}"
                               selectionListener="#{bindings.VehicleDML.collectionModel.makeCurrent}"
                               rowSelection="single" id="t2"
-                              partialTriggers="::ctb1 ::ctb4 :::cb1 :::cb2 :::cb3 :::cb7 :::cb4 :::cb5 ::ctb3 ::ctb2">
+                              partialTriggers="::ctb1 ::ctb2 ::ctb4">
                         <af:column sortProperty="#{bindings.VehicleDML.hints.VehicleName.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.VehicleName.label}" id="c1">
                             <af:selectOneChoice value="#{row.bindings.VehicleName.inputValue}"

@@ -42,6 +42,7 @@ public class VehicleCalQueryViewImpl extends ViewObjectImpl implements VehicleCa
             this.setuserId(userId);
             this.executeQuery();
         } else {
+            this.setuserId(null);
             this.setApplyViewCriteriaNames(null);
             this.executeQuery();
         }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="CreatePoPageDef"
-                Package="pages.po">
+                Package="pages.po" SkipValidation="true">
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrdersView" DataControl="RootAppModuleDataControl"
               RangeSize="25" id="PurchaseOrdersViewIterator" ChangeEventPolicy="ppr"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderLinesView" DataControl="RootAppModuleDataControl"
-              RangeSize="25" id="PurchaseOrderLinesViewIterator" ChangeEventPolicy="ppr"/>
+              RangeSize="25" id="PurchaseOrderLinesViewIterator" ChangeEventPolicy="none"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderHistorysView" DataControl="RootAppModuleDataControl"
               RangeSize="25" id="PurchaseOrderHistorysViewIterator" ChangeEventPolicy="ppr"/>
   </executables>

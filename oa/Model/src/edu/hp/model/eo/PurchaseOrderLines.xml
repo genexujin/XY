@@ -10,7 +10,8 @@
   AliasName="PurchaseOrderLines"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  RowClass="edu.hp.model.eo.PurchaseOrderLinesImpl">
+  RowClass="edu.hp.model.eo.PurchaseOrderLinesImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -126,7 +127,8 @@
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="PURCHASE_ORDER_LINES"/>
+    TableName="PURCHASE_ORDER_LINES"
+    DefaultValue="0"/>
   <Attribute
     Name="ActualPrice"
     ColumnName="ACTUAL_PRICE"
@@ -215,4 +217,48 @@
       <Item Value="edu.hp.model.eo.PurchaseOrderLines.OrderId"/>
     </AttrArray>
   </Key>
+  <validation:ExpressionValidationBean
+    Name="PurchaseOrderLines_Rule_0"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="ITEMID_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[ItemId!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="PurchaseOrderLines_Rule_1"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="ITEM_DESCRIPTION_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[ItemDescription!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="PurchaseOrderLines_Rule_2"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="SUBMIT_QUANTITY_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[SubmitQuantity!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <validation:ExpressionValidationBean
+    Name="PurchaseOrderLines_Rule_3"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="SUBMIT_UNIT_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[SubmitUnit!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

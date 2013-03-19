@@ -94,7 +94,7 @@
   </Attribute>
   <Attribute
     Name="Title"
-    Precision="20"
+    Precision="200"
     ColumnName="TITLE"
     SQLType="VARCHAR"
     Type="java.lang.String"
