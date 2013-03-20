@@ -91,7 +91,7 @@
                                     <af:spacer width="5" height="1" id="s1"/>
                                 </f:facet>
                                 <af:commandButton text="保存" partialSubmit="true" id="cb1" actionListener="#{pageFlowScope.MyPoBean.savePo}"
-                                                  rendered="#{(pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='receiver') 
+                                                  rendered="#{(pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier') 
                                                               and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '4' or bindings.State.inputValue eq '5')}"
                                                   icon="/images/icons/filesave.png"/>
                                 <af:commandButton text="返回" partialSubmit="true" id="rb1" actionListener="#{bindings.Rollback.execute}" immediate="true" 
@@ -352,7 +352,7 @@
                                   columns="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.displayWidth}"
                                   maximumLength="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.precision}"
                                   shortDesc="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.tooltip}" id="it10"
-                                  readOnly="#{bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'buyer' or pageFlowScope.fromMenu eq 'receiver'))}">
+                                  readOnly="#{bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'buyer'))}">
                         <f:validator binding="#{row.bindings.ActualPrice.validator}"/>
                     </af:inputText>
                     </af:column>

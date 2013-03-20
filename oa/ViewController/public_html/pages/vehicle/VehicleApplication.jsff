@@ -308,7 +308,7 @@
                         <af:spacer width="10" height="10" id="s1"/>
                         <af:commandButton text="取消" id="cb5" icon="/images/icons/undo.png"
                                           visible="#{bindings.State.inputValue!='未提交'}"
-                                          rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId}"
+                                          rendered="#{bindings.UserId.inputValue== sessionScope.LoginUserBean.userId and bindings.State.inputValue!='已调度'}"
                                           action="#{viewScope.vehicleApplicationBean.cancel}"/>
                     </af:panelGroupLayout>
                 </af:panelGroupLayout>
