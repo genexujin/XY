@@ -23,7 +23,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
     public PurchaseOrdersViewImpl() {
     }
     
-    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo, String submitterId, String fromMenu) {
+    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo, String submitterId, String fromMenu, String isFinalApprover) {
         this.setApplyViewCriteriaNames(null);
         
         System.err.println("In VO: oRdId is: " + oRdId);
@@ -32,6 +32,8 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
         System.err.println("In VO: submitDateFrom is: " + submitDateFrom);
         System.err.println("In VO: submitDateTo is: " + submitDateTo);
         System.err.println("In VO: submitterId is: " + submitterId);
+        System.err.println("In VO: fromMenu is: " + fromMenu);
+        System.err.println("In VO: isFinalApprover is: " + isFinalApprover);
         
         List<String> vcNames = new ArrayList<String>();
         
@@ -40,8 +42,17 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
             ViewCriteria oRdIdCriteria = this.getViewCriteria("OrderReadableIdCriteria");
             vcNames.add(oRdIdCriteria.getName());
         }
-                
-        if (state != null && !"0".equals(state)) {
+          
+        if (state != null && state.equals(Constants.PO_STATE_PENDING_APPROVAL) 
+            && fromMenu != null && "approver".equals(fromMenu)) {
+            if ("true".equals(isFinalApprover)) {
+                this.setCurrApprover(Constants.ROLE_PO_2ND_APPROVER);                
+            } else {
+                this.setCurrApprover(Constants.ROLE_PO_APPROVER);
+            }
+            ViewCriteria vc = this.getViewCriteria("OrderStateAndCurrApproverCriteria");
+            vcNames.add(vc.getName());
+        } else if (state != null && !"0".equals(state)) {
             this.setOrStateId(state);
             ViewCriteria oStateIdCriteria = this.getViewCriteria("OrderStateCriteria");            
             vcNames.add(oStateIdCriteria.getName());

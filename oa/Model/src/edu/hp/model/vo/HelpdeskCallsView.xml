@@ -724,8 +724,8 @@
       Name="HelpdeskCallsViewCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
-        Name="CreateAt"
-        ViewAttribute="CreateAt"
+        Name="SubmitAt"
+        ViewAttribute="SubmitAt"
         Operator="AFTER"
         Conjunction="AND"
         Value=":SubmitDateFm"
@@ -760,8 +760,8 @@
       Name="HelpdeskCallsViewCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
-        Name="CreateAt"
-        ViewAttribute="CreateAt"
+        Name="SubmitAt"
+        ViewAttribute="SubmitAt"
         Operator="BEFORE"
         Conjunction="AND"
         Value=":SubmitDateTo"

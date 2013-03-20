@@ -138,9 +138,9 @@ public class MyPoBean extends BaseBean {
                     
                     insertPoHistory(id, submitterId, "提交了该订单");
                     
-                    createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核", Constants.ROLE_PO_VERIFIER, readableId);
+                    createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId, Constants.ROLE_PO_VERIFIER, readableId);
                     
-                    sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核", null, Constants.ROLE_PO_VERIFIER);
+                    sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId, null, Constants.ROLE_PO_VERIFIER);
                     
                     //有一种情况下需要completeTask，就是在订单被拒绝后，会为提交者创建一个新task。用户可以再次提交该订单，这时候需要complete之前的task
                     //（后来发现这种情况下只会发通知，所以不需要了）
@@ -175,9 +175,9 @@ public class MyPoBean extends BaseBean {
                 ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_APPROVER);
                 
                 //Create task for approver
-                createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批", Constants.ROLE_PO_APPROVER, readableId);
+                createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId, Constants.ROLE_PO_APPROVER, readableId);
                 sendNotificationForVerify();
-                sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批", null, Constants.ROLE_PO_APPROVER);
+                sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId, null, Constants.ROLE_PO_APPROVER);
             }else{
                 sendNotificationForFinish();
             }
@@ -419,6 +419,15 @@ public class MyPoBean extends BaseBean {
             
             String operator = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
             insertPoHistory(id, operator, "将该订单重新变为待审核");
+            
+            //need to complete task which is opened for other roles
+            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
+            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_2ND_APPROVER);
+            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_BUYER);
+            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_RECEIVER);
+            
+            ADFUtils.setBoundAttributeValue("CurrentApprover", "");
+            ADFUtils.setBoundAttributeValue("CurrentExecutor", "");
             
             createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号： " + readableId, Constants.ROLE_PO_VERIFIER, readableId);
             

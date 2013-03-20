@@ -32,6 +32,14 @@ public class PurchaseOrdersViewClient extends ViewUsageImpl implements PurchaseO
         return;
     }
 
+
+    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo,
+                        String submitterId, String fromMenu, String isFinalApprover) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"doQuery",new String [] {"java.lang.String","java.lang.String","java.lang.String","oracle.jbo.domain.Date","oracle.jbo.domain.Date","java.lang.String","java.lang.String","java.lang.String"},new Object[] {oRdId, state, category, submitDateFrom, submitDateTo, submitterId, fromMenu, isFinalApprover});
+        return;
+    }
+
     public void findByState(String state) {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this,"findByState",new String [] {"java.lang.String"},new Object[] {state});

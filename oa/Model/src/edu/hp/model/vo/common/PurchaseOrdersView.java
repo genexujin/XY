@@ -17,5 +17,5 @@ public interface PurchaseOrdersView extends ViewObject {
     void newRow(String userId);
 
     void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo,
-                 String submitterId, String fromMenu);
+                 String submitterId, String fromMenu, String isFinalApprover);
 }

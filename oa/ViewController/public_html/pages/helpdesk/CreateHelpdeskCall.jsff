@@ -55,14 +55,14 @@
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl4" layout="horizontal">
                 <af:selectOneChoice value="#{bindings.LocationId.inputValue}" label="#{bindings.LocationId.label}"
-                                    required="#{bindings.LocationId.hints.mandatory}"
+                                    required="true"
                                     shortDesc="#{bindings.LocationId.hints.tooltip}" id="soc4"
                                     disabled="#{bindings.State.inputValue ne '未提交'}" autoSubmit="true">
                   <f:selectItems value="#{bindings.LocationId.items}" id="si4"/>
                 </af:selectOneChoice>
                 <af:inputText value="#{bindings.LocationDetail.inputValue}"
                               label="#{bindings.LocationDetail.hints.label}"
-                              required="#{bindings.LocationDetail.hints.mandatory}"
+                              required="true"
                               columns="#{bindings.LocationDetail.hints.displayWidth}"
                               maximumLength="#{bindings.LocationDetail.hints.precision}"
                               shortDesc="#{bindings.LocationDetail.hints.tooltip}" id="it4"
@@ -72,7 +72,7 @@
               </af:panelGroupLayout>
               <af:panelGroupLayout id="pgl6" layout="horizontal" valign="top">
                 <af:selectOneChoice value="#{bindings.ReasonLevel1.inputValue}" label="#{bindings.ReasonLevel1.label}"
-                                    required="#{bindings.ReasonLevel1.hints.mandatory}"
+                                    required="true"
                                     shortDesc="#{bindings.ReasonLevel1.hints.tooltip}" id="soc5" autoSubmit="true"
                                     valueChangeListener="#{pageFlowScope.MyHdCallBean.reasonLevelChanged}"
                                     disabled="#{bindings.State.inputValue ne '未提交'}">
@@ -115,7 +115,7 @@
             <af:panelFormLayout id="pfl3" rows="1">
               <af:panelGroupLayout id="pgl7" layout="horizontal" valign="top">
                 <af:selectOneChoice value="#{bindings.CallResult.inputValue}" label="#{bindings.CallResult.label}"
-                                    required="#{bindings.CallResult.hints.mandatory}"
+                                    required="true"
                                     shortDesc="#{bindings.CallResult.hints.tooltip}" id="soc8" disabled="#{bindings.State.inputValue ne '已受理'}">
                   <f:selectItems value="#{bindings.CallResult.items}" id="si8"/>
                 </af:selectOneChoice>
@@ -152,7 +152,7 @@
             <f:facet name="info"/>
             <af:panelFormLayout id="pfl4">
               <af:selectOneRadio value="#{bindings.CallEval.inputValue}" label="#{bindings.CallEval.label}"
-                                 required="#{bindings.CallEval.hints.mandatory}"
+                                 required="true"
                                  shortDesc="#{bindings.CallEval.hints.tooltip}" id="sor1" layout="horizontal"
                                  disabled="#{bindings.State.inputValue ne '已处理'}">
                 <f:selectItems value="#{bindings.CallEval.items}" id="si9"/>

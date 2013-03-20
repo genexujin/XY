@@ -9,7 +9,7 @@
               RangeSize="25" id="ItemCategoryWithEmptyIterator"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PoStateWithEmpty" DataControl="RootAppModuleDataControl" RangeSize="25"
               id="PoStateWithEmptyIterator"/>
-    <iterator Binds="Root.PurchaseOrderAppModule.EmpWithEmpty" DataControl="RootAppModuleDataControl" RangeSize="25"
+    <iterator Binds="Root.PurchaseOrderAppModule.EmpWithEmpty" DataControl="RootAppModuleDataControl" RangeSize="-1"
               id="EmpWithEmptyIterator"/>
   </executables>
   <bindings>
@@ -38,9 +38,11 @@
       <NamedData NDName="state" NDType="java.lang.String"/>
       <NamedData NDName="category" NDType="java.lang.String"/>
       <NamedData NDName="submitDateFrom" NDType="oracle.jbo.domain.Date"/>
-      <NamedData NDName="submitDateTo" NDType="oracle.jbo.domain.Date"/>
-      <NamedData NDName="submitterId" NDValue="" NDType="java.lang.String"/>
+      <NamedData NDName="submitDateTo" NDValue="" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="submitterId" NDType="java.lang.String"/>
       <NamedData NDName="fromMenu" NDValue="#{pageFlowScope.fromMenu}" NDType="java.lang.String"/>
+      <NamedData NDName="isFinalApprover" NDValue="#{sessionScope.LoginUserBean.isUserInRole['采购终审']}"
+                 NDType="java.lang.String"/>
     </methodAction>
     <list IterBinding="ItemCategoryWithEmptyIterator" ListOperMode="navigation" ListIter="ItemCategoryWithEmptyIterator"
           id="ItemCategoryWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">

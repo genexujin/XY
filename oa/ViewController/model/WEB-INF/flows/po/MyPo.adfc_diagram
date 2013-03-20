@@ -20,9 +20,9 @@
       <property
          name="y">57.28711</property>
       <property
-         name="x">469.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">469.0</property>
    </View>
    <MethodCall
       id="MethodCall3">
@@ -60,9 +60,9 @@
       <property
          name="y">54.28711</property>
       <property
-         name="x">919.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">919.0</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -163,7 +163,7 @@
       <property
          name="fromOutcome">findForVerifier</property>
       <property
-         name="sdm:polyPoints">R54,306.5,61.03418,306.5,53.436523,L46</property>
+         name="sdm:polyPoints">T50,169.0,2.9365234,469.0,2.9365234,T50</property>
    </ControlFlowCase>
    <MethodCall
       id="MethodCall16">
@@ -272,7 +272,7 @@
       <property
          name="fromOutcome">byPoId</property>
       <property
-         name="sdm:polyPoints">R50,922.5,599.8447,B56</property>
+         name="sdm:polyPoints">R50,922.5,599.49414,B56</property>
    </ControlFlowCase>
    <MethodCall
       id="MethodCall26">
