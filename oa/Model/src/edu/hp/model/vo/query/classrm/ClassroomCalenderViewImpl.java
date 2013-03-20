@@ -44,6 +44,7 @@ public class ClassroomCalenderViewImpl extends ViewObjectImpl implements Classro
             this.setuserId(userId);
             this.executeQuery();
         } else {
+            this.setuserId(null);
             this.setApplyViewCriteriaNames(null);
             this.executeQuery();
         }

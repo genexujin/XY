@@ -1,5 +1,7 @@
 package edu.hp.model.eo;
 
+import edu.hp.model.common.Constants;
+
 import java.math.BigDecimal;
 
 import oracle.jbo.AttributeList;
@@ -607,6 +609,19 @@ public class PurchaseOrderLinesImpl extends EntityImpl {
         setAttributeInternal(PURCHASEORDER, value);
     }
 
+
+    /**
+     * Validation method for PurchaseOrderLines.
+     */
+    public boolean validatePurchaseQuantity() {
+        
+        
+        if(this.getState().equals(Constants.PO_STATE_PENDING_APPROVAL)&& this.getPurchaseQuantity()==null){
+            return false;
+        }
+        
+        return true;
+    }
 
     /**
      * @param orderLineId key constituent

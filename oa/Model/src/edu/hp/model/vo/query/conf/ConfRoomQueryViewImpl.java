@@ -42,6 +42,7 @@ public class ConfRoomQueryViewImpl extends ViewObjectImpl implements ConfRoomQue
             this.setuserId(userId);
             this.executeQuery();
         } else {
+            this.setuserId(null);
             this.setApplyViewCriteriaNames(null);
             this.executeQuery();
         }

@@ -48,10 +48,10 @@ public class ClassroomCalendarConflitQueryImpl extends ViewObjectImpl implements
             
             setRangeSize(-1);
             executeQuery();
-            Row[] allRowsInRange = this.getAllRowsInRange();
-            if(allRowsInRange!=null)
-                System.err.println(allRowsInRange.length);
-            System.err.println(first());
+//            Row[] allRowsInRange = this.getAllRowsInRange();
+//            if(allRowsInRange!=null)
+//                System.err.println(allRowsInRange.length);
+//            System.err.println(first());
             if (first() !=null){
                 return false;                
             }

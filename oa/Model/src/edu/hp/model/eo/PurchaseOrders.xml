@@ -10,7 +10,8 @@
   AliasName="PurchaseOrders"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  RowClass="edu.hp.model.eo.PurchaseOrdersImpl">
+  RowClass="edu.hp.model.eo.PurchaseOrdersImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
     <Attr Name="_isCodegen" Value="true"/>
