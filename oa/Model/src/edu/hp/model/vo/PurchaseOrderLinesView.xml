@@ -142,10 +142,6 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitQuantity_LABEL"/>
-        <FMT_FORMATTER
-          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitQuantity_FMT_FORMATTER"/>
-        <FMT_FORMAT
-          ResId="edu.hp.model.vo.PurchaseOrderLinesView.SubmitQuantity_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

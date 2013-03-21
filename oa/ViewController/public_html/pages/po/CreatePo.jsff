@@ -125,13 +125,13 @@
                                                   rendered="#{(pageFlowScope.fromMenu eq 'normal' and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '2' or bindings.State.inputValue eq '4'))
                                                               or (sessionScope.LoginUserBean.isUserInRole['采购审核'] and bindings.State.inputValue ne '1')}"
                                                   icon="/images/icons/undo.png"/>
-                                <af:commandButton text="采购完成" partialSubmit="true" id="cb7" actionListener="#{pageFlowScope.MyPoBean.executePo}"
+                                <af:commandButton text="完成" partialSubmit="true" id="cb7" actionListener="#{pageFlowScope.MyPoBean.executePo}"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'buyer' or sessionScope.LoginUserBean.isUserInRole['采购执行'])
-                                                              and bindings.State.inputValue eq '5' and bindings.CurrentExecutor.inputValue eq '采购执行'}"
+                                                              and bindings.State.inputValue eq '5'}"
                                                   icon="/images/icons/check.png"/>
                                 <af:commandButton text="收货" partialSubmit="true" id="cb8" actionListener="#{pageFlowScope.MyPoBean.finishPo}"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'receiver' or sessionScope.LoginUserBean.isUserInRole['采购收货'])
-                                                              and bindings.State.inputValue eq '5' and bindings.CurrentExecutor.inputValue eq '采购收货'}"
+                                                              and bindings.State.inputValue eq '5'}"
                                                   icon="/images/icons/package.png"/>
                                 <af:commandButton text="重新打开" partialSubmit="true" id="cb18" actionListener="#{pageFlowScope.MyPoBean.reopenPo}"
                                                   rendered="#{(sessionScope.LoginUserBean.isUserInRole['采购审核'] or sessionScope.LoginUserBean.isUserInRole['采购执行'])

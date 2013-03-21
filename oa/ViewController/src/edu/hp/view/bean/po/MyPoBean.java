@@ -111,6 +111,10 @@ public class MyPoBean extends BaseBean {
     
     public void savePo(ActionEvent actionEvent) {
         computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
+        String fromMenu = JSFUtils.resolveExpressionAsString("#{pageFlowScope.fromMenu}");
+        if ("buyer".equals(fromMenu)) {
+            computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", null);
+        }
         
         ADFUtils.commit("采购订单已保存！", "采购订单保存失败，请核对输入的信息或联系管理员！");
     }
@@ -270,6 +274,7 @@ public class MyPoBean extends BaseBean {
             ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
             
             sendNotification("有新的采购订单等待采购", "有新的采购订单等待采购，订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
+            sendNotification("有新的采购订单等待收货", "有新的采购订单等待收货，订单号： " + readableId, null, Constants.ROLE_PO_RECEIVER);
             sendNotification("您的采购订单已审批", "您的采购订单已审批，订单号： " + readableId, submitterId, null);
             
             //Complete task for 2nd level approver
@@ -282,26 +287,25 @@ public class MyPoBean extends BaseBean {
     }
     
     public void executePo(ActionEvent actionEvent) {
+        changeState(Constants.PO_STATE_FINISHED);
         computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", null);
-        boolean success = ADFUtils.commit("采购订单执行完成！", "采购订单提交失败，请核对输入的信息或联系管理员！");
+        boolean success = ADFUtils.commit("采购订单已完成！", "采购订单提交失败，请核对输入的信息或联系管理员！");
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
             String buyer = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
-            insertPoHistory(id, buyer, "执行了该订单");
+            insertPoHistory(id, buyer, "完成了该订单");
             
-            ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_RECEIVER);
-            
-            sendNotification("有新的采购订单等待收货", "有新的采购订单等待收货，订单号： " + readableId, null, Constants.ROLE_PO_RECEIVER);
+//            ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_RECEIVER);
             
             ADFUtils.findOperation("Commit").execute();
         }
     }
     
     public void finishPo(ActionEvent actionEvent) {
-        changeState(Constants.PO_STATE_FINISHED);
+        
         boolean success = ADFUtils.commit("采购订单收货完成！", "采购订单收货失败，请核对输入的信息或联系管理员！");
         if (success) {            
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
@@ -310,7 +314,7 @@ public class MyPoBean extends BaseBean {
 //            
             String receiver = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
             insertPoHistory(id, receiver, "对该订单进行了收货");            
-            ADFUtils.setBoundAttributeValue("CurrentExecutor", "");
+//            ADFUtils.setBoundAttributeValue("CurrentExecutor", "");
             
             //Only notification sent to receiver, no task created. So no task to complete
 //            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_RECEIVER);
@@ -387,8 +391,8 @@ public class MyPoBean extends BaseBean {
     public void reopenPo(ActionEvent actionEvent) {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
-        BigDecimal verifyTotal = (BigDecimal)ADFUtils.getBoundAttributeValue("VerifyTotal");
-        if (verifyTotal.doubleValue() == 0) {
+        String verifyTotal = (String)ADFUtils.getBoundAttributeValue("VerifyTotal");
+        if (Double.parseDouble(verifyTotal) == 0.0) {
             JSFUtils.addFacesInformationMessage("审核总金额为0，无法重新打开");
         } else {
             ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_EXECUTING);
