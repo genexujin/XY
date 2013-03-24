@@ -9,14 +9,18 @@
        PurchaseOrderHistorys.ORDER_ID, 
        PurchaseOrderHistorys.OPERATOR_ID, 
        PurchaseOrderHistorys.OPERATION_DETAIL, 
-       PurchaseOrderHistorys.OPERATION_DATE"
-  FromList="PURCHASE_ORDER_HISTORYS PurchaseOrderHistorys"
+       PurchaseOrderHistorys.OPERATION_DATE, 
+       Employees.LAST_NAME, 
+       Employees.ID, 
+       Employees.FIRST_NAME"
+  FromList="PURCHASE_ORDER_HISTORYS PurchaseOrderHistorys, EMPLOYEES Employees"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false"
   ComponentClass="edu.hp.model.vo.PurchaseOrderHistorysViewImpl"
-  OrderBy="PurchaseOrderHistorys.OPERATION_DATE">
+  OrderBy="PurchaseOrderHistorys.OPERATION_DATE"
+  Where="PurchaseOrderHistorys.OPERATOR_ID = Employees.ID(+)">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -44,6 +48,25 @@
   <EntityUsage
     Name="PurchaseOrderHistorys"
     Entity="edu.hp.model.eo.PurchaseOrderHistorys"/>
+  <EntityUsage
+    Name="Employees"
+    Entity="edu.hp.model.eo.Employees"
+    Association="edu.hp.model.eo.asso.EmpPoHistoryAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.EmpPoHistoryAssoc.OperatorEmp"
+    SourceUsage="edu.hp.model.vo.PurchaseOrderHistorysView.PurchaseOrderHistorys"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="LEFT OUTER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="edu.hp.model.eo.PurchaseOrderHistorys.OperatorId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="edu.hp.model.eo.Employees.Id"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
   <ViewAttribute
     Name="OrderHistoryId"
     IsNotNull="true"
@@ -100,6 +123,47 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="LastName"
+    PrecisionRule="true"
+    EntityAttrName="LastName"
+    EntityUsage="Employees"
+    AliasName="LAST_NAME"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="Employees"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="FirstName"
+    PrecisionRule="true"
+    EntityAttrName="FirstName"
+    EntityUsage="Employees"
+    AliasName="FIRST_NAME"/>
+  <ViewAttribute
+    Name="OperatorName"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[LastName+FirstName]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrderHistorysView.OperatorName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="OrderHistoryId"/>
+  </AttrArray>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

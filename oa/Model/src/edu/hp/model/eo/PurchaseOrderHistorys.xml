@@ -73,7 +73,16 @@
     SQLType="DATE"
     Type="oracle.jbo.domain.Timestamp"
     ColumnType="DATE"
-    TableName="PURCHASE_ORDER_HISTORYS"/>
+    TableName="PURCHASE_ORDER_HISTORYS">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.PurchaseOrderHistorys.OperationDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.PurchaseOrderHistorys.OperationDate_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="PurchaseOrder"
     Association="edu.hp.model.eo.asso.PoPoHistoryAssoc"
@@ -109,4 +118,8 @@
       <Item Value="edu.hp.model.eo.PurchaseOrderHistorys.OperatorId"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

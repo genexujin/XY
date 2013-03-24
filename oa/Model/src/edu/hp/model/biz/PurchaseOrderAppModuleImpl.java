@@ -18,6 +18,7 @@ import oracle.jbo.Row;
 import oracle.jbo.ViewCriteria;
 import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Date;
+import oracle.jbo.domain.Timestamp;
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
@@ -161,7 +162,8 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         row.setAttribute("OrderId", orderId);
         row.setAttribute("OperatorId", operatorId);
         row.setAttribute("OperationDetail", operationDetail);
-        row.setAttribute("OperationDate", Date.getCurrentDate());
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        row.setAttribute("OperationDate", now);
         
         poHist.insertRow(row);
     }

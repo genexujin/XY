@@ -9,7 +9,7 @@
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderLinesView" DataControl="RootAppModuleDataControl"
               RangeSize="25" id="PurchaseOrderLinesViewIterator" ChangeEventPolicy="none"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderHistorysView" DataControl="RootAppModuleDataControl"
-              RangeSize="-1" id="PurchaseOrderHistorysViewIterator" ChangeEventPolicy="ppr"/>
+              RangeSize="25" id="PurchaseOrderHistorysViewIterator" ChangeEventPolicy="ppr"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="PurchaseOrdersViewIterator" id="OrderId">
@@ -178,7 +178,7 @@
       <nodeDefinition DefName="edu.hp.model.vo.PurchaseOrderHistorysView" Name="PurchaseOrderHistorysView0">
         <AttrNames>
           <Item Value="OperationDate"/>
-          <Item Value="OperatorId"/>
+          <Item Value="OperatorName"/>
           <Item Value="OperationDetail"/>
         </AttrNames>
       </nodeDefinition>

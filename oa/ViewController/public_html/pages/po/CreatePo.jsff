@@ -41,48 +41,28 @@
                         <af:spacer width="5px" height="5px"/>
                         <af:table value="#{bindings.PurchaseOrderHistorysView.collectionModel}" var="row"
                                   rows="#{bindings.PurchaseOrderHistorysView.rangeSize}"
-                                  emptyText="#{bindings.PurchaseOrderHistorysView.viewable ? '暂无数据' : 'Access Denied.'}"
+                                  emptyText="#{bindings.PurchaseOrderHistorysView.viewable ? 'No data to display.' : 'Access Denied.'}"
                                   fetchSize="#{bindings.PurchaseOrderHistorysView.rangeSize}" rowBandingInterval="0"
-                                  id="t3" autoHeightRows="7" width="300" columnStretching="last">
+                                  id="t3" autoHeightRows="7" width="400" columnStretching="last">
                             <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.name}"
-                                       sortable="false"
+                                       sortable="true"
                                        headerText="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.label}"
-                                       id="c1" width="60">
-                                <af:inputDate value="#{row.bindings.OperationDate.inputValue}"
-                                              label="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.label}"
-                                              required="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.mandatory}"
-                                              columns="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.displayWidth}"
-                                              shortDesc="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.tooltip}"
-                                              id="id2" readOnly="true">
-                                    <f:validator binding="#{row.bindings.OperationDate.validator}"/>
+                                       id="c1" width="150"> 
+                                <af:outputText value="#{row.OperationDate}" id="ot1">
                                     <af:convertDateTime pattern="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.format}"/>
-                                </af:inputDate>
+                                </af:outputText>
                             </af:column>
-                            <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.name}"
-                                       sortable="false"
-                                       headerText="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.label}"
+                            <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperatorName.name}"
+                                       sortable="true"
+                                       headerText="#{bindings.PurchaseOrderHistorysView.hints.OperatorName.label}"
                                        id="c2" width="60">
-                                <af:selectOneChoice value="#{row.bindings.OperatorId.inputValue}"
-                                                    label="#{row.bindings.OperatorId.label}"
-                                                    required="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.mandatory}"
-                                                    shortDesc="#{bindings.PurchaseOrderHistorysView.hints.OperatorId.tooltip}"
-                                                    id="soc4" readOnly="true">
-                                    <f:selectItems value="#{row.bindings.OperatorId.items}" id="si4"/>
-                                </af:selectOneChoice>
+                                <af:outputText value="#{row.OperatorName}" id="ot2"/>
                             </af:column>
                             <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.name}"
-                                       sortable="false"
+                                       sortable="true"
                                        headerText="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.label}"
                                        id="c10">
-                                <af:inputText value="#{row.bindings.OperationDetail.inputValue}"
-                                              label="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.label}"
-                                              required="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.mandatory}"
-                                              columns="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.displayWidth}"
-                                              maximumLength="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.precision}"
-                                              shortDesc="#{bindings.PurchaseOrderHistorysView.hints.OperationDetail.tooltip}"
-                                              id="it1" readOnly="true">
-                                    <f:validator binding="#{row.bindings.OperationDetail.validator}"/>
-                                </af:inputText>
+                                <af:outputText value="#{row.OperationDetail}" id="ot3"/>
                             </af:column>
                         </af:table>
                         <f:facet name="footer">
