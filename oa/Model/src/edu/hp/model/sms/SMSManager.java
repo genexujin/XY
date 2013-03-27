@@ -22,7 +22,9 @@ public class SMSManager {
         double result = 0;
 
         try {
-            result = SingletonSMSClient.getClient().getBalance();
+            result = SingletonSMSClient.getClient().getBalance();            
+            result = result / 0.09;
+            result = Math.floor(result);
         } catch (Exception e) {
             // TODO: Add catch code
             e.printStackTrace();

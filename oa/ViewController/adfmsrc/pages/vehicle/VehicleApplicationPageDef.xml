@@ -5,7 +5,7 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="Root.VehicleModule.VehicleDML" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="VehicleDMLIterator"/>
+              id="VehicleDMLIterator" ChangeEventPolicy="none"/>
     <searchRegion Binds="VehicleDMLIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="VehicleDMLQuery"/>
   </executables>

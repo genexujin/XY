@@ -35,7 +35,7 @@
                         <f:facet name="footer">
                             <af:commandButton text="刷新" id="cb2" icon="/images/icons/refresh.png"/>
                         </f:facet>
-                        <af:panelLabelAndMessage label="余额:" id="plam2">
+                        <af:panelLabelAndMessage label="余额(条数):" id="plam2">
                             <af:outputText value="#{viewScope.SMSBean.balance}" id="ot2" partialTriggers="cb2"/>
                         </af:panelLabelAndMessage>
                     </af:panelFormLayout>

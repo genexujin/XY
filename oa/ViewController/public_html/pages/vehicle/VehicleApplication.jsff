@@ -177,7 +177,7 @@
                 <f:facet name="toolbar"/>
                 <f:facet name="legend"/>
                 <f:facet name="info"/>
-                <af:panelGroupLayout id="pgl1" layout="scroll">
+                <af:panelGroupLayout id="pgl1" layout="scroll" partialTriggers="pc1:ctb1 pc1:ctb2 pc1:ctb4 pc1:t2">
                     <af:outputText value="车辆预订信息" id="ot14" inlineStyle="color:Black; font-size:small;"/>
                     <af:panelFormLayout id="pfl2" rows="4">
                         <af:inputComboboxListOfValues id="iclov1"
@@ -244,7 +244,7 @@
                             <af:convertDateTime pattern="#{bindings.EndTime.format}" type="both"/>
                         </af:inputDate>
                         <af:inputComboboxListOfValues id="iclov2"
-                                                      popupTitle="Search and Select: #{bindings.ContactName.hints.label}"
+                                                      popupTitle="选择联系人：#{bindings.ContactName.hints.label}"
                                                       value="#{bindings.ContactName.inputValue}"
                                                       label="#{bindings.ContactName.hints.label}"
                                                       model="#{bindings.ContactName.listOfValuesModel}"
@@ -258,7 +258,8 @@
                                       columns="#{bindings.ContactPhone.hints.displayWidth}"
                                       maximumLength="#{bindings.ContactPhone.hints.precision}"
                                       shortDesc="#{bindings.ContactPhone.hints.tooltip}" id="it18"
-                                      readOnly="#{pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='planner'}">
+                                      readOnly="#{pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='planner'}"
+                                      partialTriggers="iclov2">
                             <f:validator binding="#{bindings.ContactPhone.validator}"/>
                         </af:inputText>
                         <af:selectBooleanCheckbox value="#{bindings.ReturnTrip.inputValue}"
