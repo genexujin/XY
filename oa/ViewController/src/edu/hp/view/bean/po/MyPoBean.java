@@ -18,6 +18,10 @@ import oracle.adf.view.rich.component.rich.data.RichTable;
 
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 
+import oracle.adf.view.rich.event.DialogEvent;
+
+import oracle.adf.view.rich.render.ClientEvent;
+
 import oracle.binding.BindingContainer;
 
 import oracle.binding.OperationBinding;
@@ -33,6 +37,7 @@ public class MyPoBean extends BaseBean {
     private Date submitDateTo;
     private RichTable resultTable;
     private RichInputText submitTotalComp;
+    private String action;
     //    private Date currDate;
 
     public MyPoBean() {
@@ -681,5 +686,27 @@ public class MyPoBean extends BaseBean {
 
     public RichInputText getSubmitTotalComp() {
         return submitTotalComp;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void onConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            if(this.action.equals("submit")){
+                this.submitPo(null);
+            }
+        }
+    }
+
+    public void setActionListener(ClientEvent clientEvent) {
+        System.err.println("here");
+        String newAction  = (String) clientEvent.getParameters().get("payload");
+        this.setAction(newAction);
     }
 }

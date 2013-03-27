@@ -212,5 +212,6 @@ false);
             </af:group>
         </f:facet>
         <af:serverListener type="launchDefaultTab" method="#{viewScope.SystemBean.launchDefaultTab}"/>
+        
     </af:document>
 </f:view>
