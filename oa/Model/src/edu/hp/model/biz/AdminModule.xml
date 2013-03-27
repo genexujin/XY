@@ -79,6 +79,9 @@
   <ViewUsage
     Name="ItemCategoryApprovalView"
     ViewObjectName="edu.hp.model.vo.ItemCategoryApprovalView"/>
+  <ViewUsage
+    Name="EmpOfRoles"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"/>
   <ViewLinkUsage
     Name="EmpMgrViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.EmpMgrViewLink"
@@ -115,4 +118,10 @@
     SrcViewUsageName="edu.hp.model.biz.AdminModule.ItemCategory"
     DstViewUsageName="edu.hp.model.biz.AdminModule.ItemLov"
     Reversed="false"/>
+  <ViewLinkUsage
+    Name="UserRoleViewLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.UserRoleViewLink"
+    SrcViewUsageName="edu.hp.model.biz.AdminModule.Roles"
+    DstViewUsageName="edu.hp.model.biz.AdminModule.EmpOfRoles"
+    Reversed="true"/>
 </AppModule>

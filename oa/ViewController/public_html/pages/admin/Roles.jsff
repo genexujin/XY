@@ -1,10 +1,38 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-  <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="0px">
-    <f:facet name="bottom"/>
+  <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="0px" bottomHeight="200px">
+    <f:facet name="bottom">
+      <af:panelHeader text="角色用户" id="ph2">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:table value="#{bindings.EmpOfRoles.collectionModel}" var="row" rows="#{bindings.EmpOfRoles.rangeSize}"
+                  emptyText="#{bindings.EmpOfRoles.viewable ? '暂无数据。' : 'Access Denied.'}"
+                  fetchSize="#{bindings.EmpOfRoles.rangeSize}" rowBandingInterval="0" id="t4">
+          <af:column sortProperty="#{bindings.EmpOfRoles.hints.DisplayName.name}" sortable="false"
+                     headerText="#{bindings.EmpOfRoles.hints.DisplayName.label}" id="c4">
+            <af:outputText value="#{row.DisplayName}" id="ot1"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.EmpOfRoles.hints.UserName.name}" sortable="false"
+                     headerText="#{bindings.EmpOfRoles.hints.UserName.label}" id="c5">
+            <af:outputText value="#{row.UserName}" id="ot2"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.EmpOfRoles.hints.MgrName.name}" sortable="false"
+                     headerText="#{bindings.EmpOfRoles.hints.MgrName.label}" id="c7">
+            <af:outputText value="#{row.MgrName}" id="ot4"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.EmpOfRoles.hints.DeptName.name}" sortable="false"
+                     headerText="#{bindings.EmpOfRoles.hints.DeptName.label}" id="c8">
+            <af:outputText value="#{row.DeptName}" id="ot5"/>
+          </af:column>
+        </af:table>
+      </af:panelHeader>
+    </f:facet>
     <f:facet name="center">
-      <af:panelHeader text="系统菜单维护" id="ph1">
+      <af:panelHeader text=" 系统角色维护" id="ph1">
         <f:facet name="context"/>
         <f:facet name="menuBar"/>
         <f:facet name="toolbar">
@@ -21,7 +49,7 @@
         </f:facet>
         <f:facet name="legend"/>
         <f:facet name="info"/>
-        <af:panelCollection id="pc1">
+        <af:panelCollection id="pc1" featuresOff="statusBar">
           <f:facet name="menus"/>
           <f:facet name="toolbar">
             <af:toolbar id="t2">

@@ -7,6 +7,8 @@
     <iterator Binds="Root.AdminModule.Roles" DataControl="RootAppModuleDataControl" RangeSize="25" id="RolesIterator"/>
     <searchRegion Binds="RolesIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="RolesQuery"/>
+    <iterator Binds="Root.AdminModule.EmpOfRoles" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="EmpOfRolesIterator"/>
   </executables>
   <bindings>
     <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
@@ -38,5 +40,17 @@
         <Item Value="N"/>
       </ValueList>
     </button>
+    <tree IterBinding="EmpOfRolesIterator" id="EmpOfRoles">
+      <nodeDefinition DefName="edu.hp.model.vo.EmployeesView" Name="EmpOfRoles0">
+        <AttrNames>
+          <Item Value="DisplayName"/>
+          <Item Value="UserName"/>
+          <Item Value="Title"/>
+          <Item Value="MgrName"/>
+          <Item Value="DeptName"/>
+          <Item Value="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

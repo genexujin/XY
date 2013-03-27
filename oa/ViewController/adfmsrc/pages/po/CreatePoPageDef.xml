@@ -5,11 +5,11 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrdersView" DataControl="RootAppModuleDataControl"
-              RangeSize="25" id="PurchaseOrdersViewIterator" ChangeEventPolicy="ppr"/>
+              RangeSize="25" id="PurchaseOrdersViewIterator" ChangeEventPolicy="none"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderLinesView" DataControl="RootAppModuleDataControl"
               RangeSize="25" id="PurchaseOrderLinesViewIterator" ChangeEventPolicy="none"/>
     <iterator Binds="Root.PurchaseOrderAppModule.PurchaseOrderHistorysView" DataControl="RootAppModuleDataControl"
-              RangeSize="25" id="PurchaseOrderHistorysViewIterator" ChangeEventPolicy="ppr"/>
+              RangeSize="25" id="PurchaseOrderHistorysViewIterator" ChangeEventPolicy="none"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="PurchaseOrdersViewIterator" id="OrderId">

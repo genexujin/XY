@@ -255,4 +255,20 @@ public class AdminModuleImpl extends ApplicationModuleImpl {
     public ItemCategoryApprovalViewImpl getItemCategoryApprovalView() {
         return (ItemCategoryApprovalViewImpl)findViewObject("ItemCategoryApprovalView");
     }
+
+    /**
+     * Container's getter for EmployeesView1.
+     * @return EmployeesView1
+     */
+    public EmployeesViewImpl getEmpOfRoles() {
+        return (EmployeesViewImpl)findViewObject("EmpOfRoles");
+    }
+
+    /**
+     * Container's getter for UserRoleViewLink1.
+     * @return UserRoleViewLink1
+     */
+    public ViewLinkImpl getUserRoleViewLink1() {
+        return (ViewLinkImpl)findViewLink("UserRoleViewLink1");
+    }
 }

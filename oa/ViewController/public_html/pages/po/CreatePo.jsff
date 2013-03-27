@@ -41,9 +41,10 @@
                         <af:spacer width="5px" height="5px"/>
                         <af:table value="#{bindings.PurchaseOrderHistorysView.collectionModel}" var="row"
                                   rows="#{bindings.PurchaseOrderHistorysView.rangeSize}"
-                                  emptyText="#{bindings.PurchaseOrderHistorysView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  emptyText="#{bindings.PurchaseOrderHistorysView.viewable ? '暂无数据。' : 'Access Denied.'}"
                                   fetchSize="#{bindings.PurchaseOrderHistorysView.rangeSize}" rowBandingInterval="0"
-                                  id="t3" autoHeightRows="7" width="400" columnStretching="last">
+                                  id="t3" autoHeightRows="7" width="400" columnStretching="last"
+                                  partialTriggers="::cb2 ::cb3 ::cb4 ::cb40 ::cb5 ::cb50 ::cb6 ::cb7 ::cb8 ::cb18 ::cb19">
                             <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.name}"
                                        sortable="true"
                                        headerText="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.label}"
