@@ -2,7 +2,8 @@ package edu.hp.model.common;
 
 public class Constants {
 
-    public static final String CLSRM_BATCH_PREFIX = "CLSRM-BATCH-";
+    //public static final String CLSRM_BATCH_PREFIX = "CLSRM-BATCH-";
+    public static final String CLSRM_BATCH_PREFIX = "B-";
     public static final String STATE_INITIAL = "未提交";
     public static final String STATE_PENDING_REVIEW = "待审核";
     public static final String STATE_REVIEWED = "已审核";

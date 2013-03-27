@@ -46,6 +46,9 @@
       Name="ClsBatchSeq"
       FullName="edu.hp.model.vo.LovsView.ClsBatchSeq"/>
   </ViewUsage>
+  <ViewUsage
+    Name="BatchSeq"
+    ViewObjectName="edu.hp.model.vo.query.classrm.BatchSeq"/>
   <ViewLinkUsage
     Name="LocClsRmViewLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.LocClsRmViewLink"

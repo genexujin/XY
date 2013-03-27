@@ -39,30 +39,51 @@ public class VehicleApplicationBean extends BaseBean {
         ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
 
         LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-        if (user.getIsUserInRole().get(Constants.ROLE_ZONGWU_MGR) != null)
+        int needNotification = 0;
+        if (user.getIsUserInRole().get(Constants.ROLE_ZONGWU_MGR) != null) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_TRIP_PLANNED);
-        else
+            needNotification = 0;
+        } else if (user.getIsUserInRole().get(Constants.ROLE_OFFICE_MGR) != null) {
+            ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
+            needNotification = 1;
+        } else {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_PENDING_REVIEW);
-
+            needNotification = 2;
+        }
         boolean success = ADFUtils.commit("车辆预订已提交审核！", "车辆预订提交审核失败，请核对输入的信息或联系管理员！");
+
         if (success) {
             String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
             String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
             String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
             String title = (String)ADFUtils.getBoundAttributeValue("Title");
 
-            String noteTitle = "您为事由：" + title + " 所做的用车申请已提交审核 ";
-            String dateStr = getDateString();
-            String noteContent = " 提交时间：" + dateStr;
-            //send to requester
-            sendNotification(noteTitle, noteContent, userId, null);
-            //send to approver
-            String apprvTitle = "有新的用车申请等待您的审核";
-            String apprvContent = " 事由：" + title + " 申请人： " + userDisplayName;
-            sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_OFFICE_MGR);
+            if (needNotification == 2) {
+                String noteTitle = "您为事由：" + title + " 所做的用车申请已提交审核 ";
+                String dateStr = getDateString();
+                String noteContent = " 提交时间：" + dateStr;
+                //send to requester
+                sendNotification(noteTitle, noteContent, userId, null);
+                //send to approver
+                String apprvTitle = "有新的用车申请等待您的审核";
+                String apprvContent = " 事由：" + title + " 申请人： " + userDisplayName;
+                sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_OFFICE_MGR);
+                //create task
+                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_OFFICE_MGR, title);
+            } else if (needNotification == 1) {
+                String noteTitle = "您为事由：" + title + " 所做的用车申请已审核完成，等待调度中。 ";
+                String dateStr = getDateString();
+                String noteContent = "审核时间：" + dateStr;
+                //send to requester
+                sendNotification(noteTitle, noteContent, userId, null);
+                //send to approver
+                String apprvTitle = "有新的用车申请已审核完成，等待您调度车辆。";
+                String apprvContent = " 事由：" + title + " 申请人： " + userDisplayName;
+                sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_ZONGWU_MGR);
+                //create task
+                createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_ZONGWU_MGR, title);
+            }
 
-            //create task
-            createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_OFFICE_MGR, title);
 
             ADFUtils.findOperation("Commit").execute();
         } else {
@@ -109,8 +130,8 @@ public class VehicleApplicationBean extends BaseBean {
         }
         return null;
     }
-    
-    public String refreshTableIterator(){
+
+    public String refreshTableIterator() {
         ADFUtils.findIterator("VehicleDMLIterator").executeQuery();
         return null;
     }

@@ -18,9 +18,9 @@
                                                 valueChangeListener="#{viewScope.HomeOperationBean.onTaskSateChange}"
                                                 id="soc1" simple="false" autoSubmit="true"
                                                 value="#{viewScope.HomeOperationBean.defaultTaskState}">
-                                <af:selectItem label="全部" value="ALL" id="si3"/>
                                 <af:selectItem label="待处理" value="PENDING" id="si1"/>
                                 <af:selectItem label="已处理" value="COMPLETED" id="si2"/>
+                                <af:selectItem label="全部" value="ALL" id="si3"/>
                             </af:selectOneChoice>
                             <af:commandImageLink text="刷新" id="cil10" icon="/images/icons/refresh.png"
                                                  actionListener="#{viewScope.HomeOperationBean.refreshTaskList}"/>

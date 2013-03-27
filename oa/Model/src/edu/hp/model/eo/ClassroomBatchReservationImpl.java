@@ -37,7 +37,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setId((DBSequence)value);
             }
-        },
+        }
+        ,
         BatchNo {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getBatchNo();
@@ -46,7 +47,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setBatchNo((String)value);
             }
-        },
+        }
+        ,
         ActTitle {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getActTitle();
@@ -55,7 +57,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setActTitle((String)value);
             }
-        },
+        }
+        ,
         ActStartTime {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getActStartTime();
@@ -64,7 +67,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setActStartTime((Timestamp)value);
             }
-        },
+        }
+        ,
         ActEndTime {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getActEndTime();
@@ -73,7 +77,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setActEndTime((Timestamp)value);
             }
-        },
+        }
+        ,
         UserId {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getUserId();
@@ -82,7 +87,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setUserId((String)value);
             }
-        },
+        }
+        ,
         UserDisplayName {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getUserDisplayName();
@@ -91,7 +97,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setUserDisplayName((String)value);
             }
-        },
+        }
+        ,
         NumOfPeople {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getNumOfPeople();
@@ -100,7 +107,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setNumOfPeople((BigDecimal)value);
             }
-        },
+        }
+        ,
         Classroom {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getClassroom();
@@ -109,7 +117,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setClassroom((String)value);
             }
-        },
+        }
+        ,
         Comments {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getComments();
@@ -118,7 +127,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setComments((String)value);
             }
-        },
+        }
+        ,
         BatchEffectiveDate {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getBatchEffectiveDate();
@@ -127,7 +137,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setBatchEffectiveDate((Timestamp)value);
             }
-        },
+        }
+        ,
         BatchExpireDate {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getBatchExpireDate();
@@ -136,7 +147,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setBatchExpireDate((Timestamp)value);
             }
-        },
+        }
+        ,
         RecurrenceType {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getRecurrenceType();
@@ -145,7 +157,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setRecurrenceType((String)value);
             }
-        },
+        }
+        ,
         FstWkMon {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getFstWkMon();
@@ -154,7 +167,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setFstWkMon((String)value);
             }
-        },
+        }
+        ,
         FstWkTue {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getFstWkTue();
@@ -163,7 +177,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setFstWkTue((String)value);
             }
-        },
+        }
+        ,
         FstWkWed {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getFstWkWed();
@@ -172,7 +187,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setFstWkWed((String)value);
             }
-        },
+        }
+        ,
         FstWkThu {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getFstWkThu();
@@ -181,7 +197,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setFstWkThu((String)value);
             }
-        },
+        }
+        ,
         FstWkFri {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getFstWkFri();
@@ -190,7 +207,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setFstWkFri((String)value);
             }
-        },
+        }
+        ,
         FstWkSat {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getFstWkSat();
@@ -199,7 +217,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setFstWkSat((String)value);
             }
-        },
+        }
+        ,
         FstWkSun {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getFstWkSun();
@@ -208,7 +227,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setFstWkSun((String)value);
             }
-        },
+        }
+        ,
         SndWkMon {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getSndWkMon();
@@ -217,7 +237,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setSndWkMon((String)value);
             }
-        },
+        }
+        ,
         SndWkTue {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getSndWkTue();
@@ -226,7 +247,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setSndWkTue((String)value);
             }
-        },
+        }
+        ,
         SndWkWed {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getSndWkWed();
@@ -235,7 +257,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setSndWkWed((String)value);
             }
-        },
+        }
+        ,
         SndWkThu {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getSndWkThu();
@@ -244,7 +267,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setSndWkThu((String)value);
             }
-        },
+        }
+        ,
         SndWkFri {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getSndWkFri();
@@ -253,7 +277,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setSndWkFri((String)value);
             }
-        },
+        }
+        ,
         SndWkSat {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getSndWkSat();
@@ -262,7 +287,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setSndWkSat((String)value);
             }
-        },
+        }
+        ,
         SndWkSun {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getSndWkSun();
@@ -271,7 +297,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setSndWkSun((String)value);
             }
-        },
+        }
+        ,
         LocationId {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getLocationId();
@@ -280,7 +307,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setLocationId((String)value);
             }
-        },
+        }
+        ,
         LocationName {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getLocationName();
@@ -289,7 +317,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setLocationName((String)value);
             }
-        },
+        }
+        ,
         ClassroomId {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getClassroomId();
@@ -298,7 +327,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setClassroomId((String)value);
             }
-        },
+        }
+        ,
         AllDay {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getAllDay();
@@ -307,7 +337,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setAllDay((String)value);
             }
-        },
+        }
+        ,
         BatchInstances {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getBatchInstances();
@@ -316,7 +347,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        },
+        }
+        ,
         BatchNoSeq {
             public Object get(ClassroomBatchReservationImpl obj) {
                 return obj.getBatchNoSeq();
@@ -325,7 +357,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             public void put(ClassroomBatchReservationImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        };
+        }
+        ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
 
@@ -352,6 +385,7 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
             return vals;
         }
     }
+
 
     public static final int ID = AttributesEnum.Id.index();
     public static final int BATCHNO = AttributesEnum.BatchNo.index();
@@ -393,14 +427,8 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
     public ClassroomBatchReservationImpl() {
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("edu.hp.model.eo.ClassroomBatchReservation");
-    }
-    
-//    protected void doDML(int operation, TransactionEvent e) {
+
+    //    protected void doDML(int operation, TransactionEvent e) {
 //        if (operation == DML_INSERT || operation == DML_UPDATE) {
 //            if (this.getAllDay().equals("ALLDAY")) {
 //                Timestamp actEndTime = this.getActEndTime();
@@ -427,6 +455,14 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
 //        super.doDML(operation, e);
 //    }
 
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("edu.hp.model.eo.ClassroomBatchReservation");
+    }
+
     /**
      * Add attribute defaulting logic in this method.
      * @param attributeList list of attribute names/values to initialize the row
@@ -439,7 +475,7 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
         batchNoSeq.executeQuery();
         Row[] allRowsInRange = batchNoSeq.getAllRowsInRange();
         if (allRowsInRange != null && allRowsInRange.length > 0) {
-            String currentValue = (String)(allRowsInRange[0].getAttribute("Value"));
+            String currentValue = (String)(allRowsInRange[0].getAttribute("SEQ"));
             DecimalFormat format = new DecimalFormat("00000");
             String batchNo = format.format(new Integer(currentValue).intValue() + 1);
             String finalBatchNO = Constants.CLSRM_BATCH_PREFIX + batchNo;
@@ -995,7 +1031,7 @@ public class ClassroomBatchReservationImpl extends EntityImpl {
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(DBSequence id) {
-        return new Key(new Object[] { id });
+        return new Key(new Object[]{id});
     }
 
 

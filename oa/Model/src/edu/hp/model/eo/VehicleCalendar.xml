@@ -224,6 +224,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.VehicleCalendar.StartTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.VehicleCalendar.StartTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.VehicleCalendar.StartTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -238,6 +242,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.VehicleCalendar.EndTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.VehicleCalendar.EndTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.VehicleCalendar.EndTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -413,6 +421,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.VehicleCalendar.SubmitDate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.VehicleCalendar.SubmitDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.VehicleCalendar.SubmitDate_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

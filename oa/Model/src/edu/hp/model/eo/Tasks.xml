@@ -55,6 +55,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.Tasks.AssignedDate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.Tasks.AssignedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.Tasks.AssignedDate_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

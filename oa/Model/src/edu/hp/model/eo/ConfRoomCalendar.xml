@@ -181,6 +181,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ConfRoomCalendar.StartTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ConfRoomCalendar.StartTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ConfRoomCalendar.StartTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -197,6 +201,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ConfRoomCalendar.EndTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ConfRoomCalendar.EndTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ConfRoomCalendar.EndTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -411,6 +419,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ConfRoomCalendar.SubmitDate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ConfRoomCalendar.SubmitDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ConfRoomCalendar.SubmitDate_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

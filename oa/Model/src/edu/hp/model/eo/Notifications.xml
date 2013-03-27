@@ -110,6 +110,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.Notifications.EventDate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.Notifications.EventDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.Notifications.EventDate_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

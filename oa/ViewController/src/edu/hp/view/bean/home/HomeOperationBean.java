@@ -19,7 +19,7 @@ public class HomeOperationBean {
     private UIXIterator notesIterator;
     private int rangeSize = 10;
     private int selectDefault = 0;
-    private String defaultTaskState = "ALL";
+    private String defaultTaskState = "PENDING";
     private String defaultNoteState = "ALL";
 
     public HomeOperationBean() {

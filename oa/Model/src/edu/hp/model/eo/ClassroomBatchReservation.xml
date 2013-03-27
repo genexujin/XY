@@ -18,12 +18,8 @@
   </DesignTime>
   <ViewAccessor
     Name="BatchNoSeq"
-    ViewObjectName="edu.hp.model.vo.LovsView"
-    RowLevelBinds="true">
-    <ViewCriteriaUsage
-      Name="ClsBatchSeq"
-      FullName="edu.hp.model.vo.LovsView.ClsBatchSeq"/>
-  </ViewAccessor>
+    ViewObjectName="edu.hp.model.vo.query.classrm.BatchSeq"
+    RowLevelBinds="true"/>
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -97,6 +93,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomBatchReservation.ActStartTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.ActStartTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.ActStartTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -112,6 +112,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomBatchReservation.ActEndTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.ActEndTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.ActEndTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -214,6 +218,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchEffectiveDate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchEffectiveDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchEffectiveDate_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -228,6 +236,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchExpireDate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchExpireDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ClassroomBatchReservation.BatchExpireDate_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

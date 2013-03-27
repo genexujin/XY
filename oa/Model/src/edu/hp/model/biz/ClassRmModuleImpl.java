@@ -3,6 +3,7 @@ package edu.hp.model.biz;
 import edu.hp.model.biz.common.ClassRmModule;
 import edu.hp.model.vo.ClsRmBtchRsvtnViewImpl;
 import edu.hp.model.vo.ClsRmCalDMLViewImpl;
+import edu.hp.model.vo.LovsViewImpl;
 import edu.hp.model.vo.query.classrm.ClassroomCalendarConflitQueryImpl;
 import edu.hp.model.vo.query.classrm.ClassroomCalenderViewImpl;
 import edu.hp.model.vo.query.classrm.ClassroomQueryImpl;
@@ -306,5 +307,13 @@ public class ClassRmModuleImpl extends ApplicationModuleImpl implements ClassRmM
      */
     public ViewObjectImpl getClsRmBatchSeqView() {
         return (ViewObjectImpl)findViewObject("ClsRmBatchSeqView");
+    }
+
+    /**
+     * Container's getter for BatchSeq1.
+     * @return BatchSeq1
+     */
+    public ViewObjectImpl getBatchSeq() {
+        return (ViewObjectImpl)findViewObject("BatchSeq");
     }
 }

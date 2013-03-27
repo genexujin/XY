@@ -68,6 +68,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomCalendar.ActStartTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ClassroomCalendar.ActStartTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ClassroomCalendar.ActStartTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -83,6 +87,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomCalendar.ActEndTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ClassroomCalendar.ActEndTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ClassroomCalendar.ActEndTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -192,6 +200,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.ClassroomCalendar.CreatedAt_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.ClassroomCalendar.CreatedAt_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.ClassroomCalendar.CreatedAt_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
