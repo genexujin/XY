@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="InputLOVDemo.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:panelStretchLayout id="psl1">
+                <f:facet name="bottom"/>
+                <f:facet name="center">
+                    <af:panelGroupLayout layout="scroll" id="pgl1">
+                        <af:inputListOfValues popupTitle="查询并选择用户" id="ilov1" label="用户"
+                                              returnPopupListener="#{viewScope.LOVBean.onReturnValue}"
+                                              value="#{viewScope.LOVBean.userName}" autoSubmit="true">
+                            <f:facet name="searchContent">                              
+                                        <af:panelStretchLayout id="psl2">
+                                            <f:facet name="bottom"/>
+                                            <f:facet name="center">
+                                                <af:table value="#{bindings.Employees.collectionModel}" var="row"
+                                                          rows="#{bindings.Employees.rangeSize}"
+                                                          emptyText="#{bindings.Employees.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.Employees.rangeSize}"
+                                                          rowBandingInterval="1"
+                                                          selectedRowKeys="#{bindings.Employees.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.Employees.collectionModel.makeCurrent}"
+                                                          rowSelection="single" id="t1"
+                                                          filterModel="#{bindings.EmployeesQuery.queryDescriptor}"
+                                                          queryListener="#{bindings.EmployeesQuery.processQuery}"
+                                                          filterVisible="true" varStatus="vs">
+                                                    <af:column sortProperty="#{bindings.Employees.hints.DisplayName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.Employees.hints.DisplayName.label}"
+                                                               id="c1">
+                                                        <af:outputText value="#{row.DisplayName}" id="ot1"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.Employees.hints.MgrName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.Employees.hints.MgrName.label}"
+                                                               id="c2">
+                                                        <af:outputText value="#{row.MgrName}" id="ot2"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.Employees.hints.DeptName.name}"
+                                                               sortable="true"
+                                                               headerText="#{bindings.Employees.hints.DeptName.label}"
+                                                               id="c3">
+                                                        <af:outputText value="#{row.DeptName}" id="ot3"/>
+                                                    </af:column>
+                                                </af:table>
+                                            </f:facet>
+                                            <f:facet name="start"/>
+                                            <f:facet name="end"/>
+                                            <f:facet name="top"/>
+                                        </af:panelStretchLayout>
+                                  
+                              
+                            </f:facet>
+                        </af:inputListOfValues>
+                        <af:outputText value="#{viewScope.LOVBean.userName}" id="ot4"
+                                       styleClass="AFTaskStampTextLabel" partialTriggers="ilov1"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="start"/>
+                <f:facet name="end"/>
+                <f:facet name="top"/>
+            </af:panelStretchLayout>
+        </af:form>
+    </af:document>
+</f:view>

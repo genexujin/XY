@@ -66,4 +66,9 @@
     <managed-bean-class>edu.hp.view.bean.repaircall.MyRepairCallBean</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
+  <managed-bean id="__13">
+    <managed-bean-name>LOVBean</managed-bean-name>
+    <managed-bean-class>edu.hp.view.bean.test.LOVBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
 </adfc-config>
