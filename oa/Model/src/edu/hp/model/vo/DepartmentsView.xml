@@ -14,19 +14,27 @@
        Departments.LOCATION_ID, 
        Departments.MGR_ID, 
        Departments.MGR_NAME, 
-       Departments.EXPIRED"
+       Departments.EXPIRED, 
+       Departments.SUPERVISOR_ID"
   FromList="DEPARTMENTS Departments"
   BindingStyle="OracleName"
   CustomQuery="false"
-  ComponentClass="edu.hp.model.common.BaseView"
+  ComponentClass="edu.hp.model.vo.DepartmentsViewImpl"
   PageIterMode="Full"
   UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
         ResId="edu.hp.model.vo.DepartmentsView_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="DpId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="Locations"
     ViewObjectName="edu.hp.model.vo.LocationsView"
@@ -165,6 +173,12 @@
     EntityAttrName="Expired"
     EntityUsage="Departments"
     AliasName="EXPIRED"/>
+  <ViewAttribute
+    Name="SupervisorId"
+    PrecisionRule="true"
+    EntityAttrName="SupervisorId"
+    EntityUsage="Departments"
+    AliasName="SUPERVISOR_ID"/>
   <ViewCriteria
     Name="filterByExpired"
     ViewObjectName="edu.hp.model.vo.DepartmentsView"
@@ -197,6 +211,42 @@
         Operator="&lt;>"
         Conjunction="AND"
         Value="Y"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByIdCriteria"
+    ViewObjectName="edu.hp.model.vo.DepartmentsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="DepartmentsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DeptId"
+        ViewAttribute="DeptId"
+        Operator="="
+        Conjunction="AND"
+        Value=":DpId"
+        IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>

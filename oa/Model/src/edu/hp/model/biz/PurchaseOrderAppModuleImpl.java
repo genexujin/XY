@@ -2,6 +2,7 @@ package edu.hp.model.biz;
 
 import edu.hp.model.biz.common.PurchaseOrderAppModule;
 import edu.hp.model.common.Constants;
+import edu.hp.model.vo.DepartmentsViewImpl;
 import edu.hp.model.vo.EmployeesViewImpl;
 import edu.hp.model.vo.ItemCategoryApprovalViewImpl;
 import edu.hp.model.vo.PurchaseOrderHistorysViewImpl;
@@ -105,6 +106,36 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         }
         
         return new BigDecimal(0);
+    }
+    
+    public String getDeptSupervisorId(String submitterId) {
+        EmployeesViewImpl empView = (EmployeesViewImpl)this.getEmployeesViewForLOV();
+        empView.setApplyViewCriteriaNames(null);
+        
+        if (submitterId != null) {
+            empView.setuId(submitterId);
+            ViewCriteria vc = empView.getViewCriteria("findByIdCriteria");
+            empView.setApplyViewCriteriaName(vc.getName());
+            empView.executeQuery();
+            Row[] rows = empView.getAllRowsInRange();
+            if (rows != null && rows.length > 0) {
+                String deptId = (String)rows[0].getAttribute("DeptId");
+                
+                DepartmentsViewImpl dView = this.getDepartmentsView();
+                dView.setApplyViewCriteriaNames(null);
+                
+                dView.setDpId(deptId);
+                ViewCriteria dvc = dView.getViewCriteria("findByIdCriteria");
+                dView.setApplyViewCriteriaName(dvc.getName());
+                dView.executeQuery();
+                Row[] drows = dView.getAllRowsInRange();
+                if (drows != null && drows.length > 0) {
+                    return (String)rows[0].getAttribute("SupervisorId");
+                }
+            }
+        }
+        
+        return null;
     }
     
     public void findByState(String state, String isFinalApprover) {
@@ -217,6 +248,8 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         histRow.setAttribute("OperationDate", Date.getCurrentDate());        
         poHistView.insertRow(histRow);
     }
+    
+    
 
     /**
      * Container's getter for PurchaseOrdersView.
@@ -329,5 +362,13 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
      */
     public ViewLinkImpl getPoToPoHistoryLink1() {
         return (ViewLinkImpl)findViewLink("PoToPoHistoryLink1");
+    }
+
+    /**
+     * Container's getter for DepartmentsView1.
+     * @return DepartmentsView1
+     */
+    public DepartmentsViewImpl getDepartmentsView() {
+        return (DepartmentsViewImpl)findViewObject("DepartmentsView");
     }
 }

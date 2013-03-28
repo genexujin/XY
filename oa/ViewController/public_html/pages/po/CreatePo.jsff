@@ -4,20 +4,17 @@
     <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="250px" bottomHeight="0px">
         <f:facet name="top">
             <af:panelGroupLayout layout="vertical" id="pgl1">
-            
                 <af:resource type="javascript">
                 function setSubmit(event) {
-                          setAction(event, 'submit');
-                      }
+                    setAction(event, 'submit');
+                }
 
-                      function setAction(event, action) {
-                          var source = event.getSource();
-                          AdfCustomEvent.queue(source, "setActionListener", 
-                          {payload : action},true);
-                      }
+                function setAction(event, action) {
+                    var source = event.getSource();
+                    AdfCustomEvent.queue(source, "setActionListener", 
+                    {payload : action},true);
+                }
                 </af:resource>
-               
-                
                 
                 <af:popup id="confirm" contentDelivery="lazyUncached">
                 
@@ -117,6 +114,14 @@
                                     <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
                                     <af:showPopupBehavior triggerType="action" popupId="confirm"/>
                                 </af:commandButton>
+                                <af:commandButton text="审核" partialSubmit="true" id="cb30"
+                                                  actionListener="#{pageFlowScope.MyPoBean.verifyPoInDept}" rendered="#{(pageFlowScope.fromMenu eq 'verifier' or sessionScope.LoginUserBean.isUserInRole['采购审核'])
+                                                               and bindings.State.inputValue eq '2'}"
+                                                  icon="/images/icons/check.png"/>
+                                <af:commandButton text="拒绝" partialSubmit="true" id="cb31"
+                                                  actionListener="#{pageFlowScope.MyPoBean.rejectPoInDept}" rendered="#{(pageFlowScope.fromMenu eq 'verifier' or sessionScope.LoginUserBean.isUserInRole['采购审核'])
+                                                               and bindings.State.inputValue eq '2'}"
+                                                  icon="/images/icons/terminate.png"/>
                                 <af:commandButton text="审核" partialSubmit="true" id="cb3"
                                                   actionListener="#{pageFlowScope.MyPoBean.verifyPo}" rendered="#{(pageFlowScope.fromMenu eq 'verifier' or sessionScope.LoginUserBean.isUserInRole['采购审核'])
                                                                and bindings.State.inputValue eq '2'}"

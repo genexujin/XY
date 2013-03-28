@@ -119,6 +119,16 @@ public class DepartmentsImpl extends BaseEntity {
                 obj.setExpired((String)value);
             }
         }
+        ,
+        SupervisorId {
+            public Object get(DepartmentsImpl obj) {
+                return obj.getSupervisorId();
+            }
+
+            public void put(DepartmentsImpl obj, Object value) {
+                obj.setSupervisorId((String)value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -158,6 +168,7 @@ public class DepartmentsImpl extends BaseEntity {
     public static final int LASTUPDATEDBY = AttributesEnum.LastUpdatedBy.index();
     public static final int MGRNAME = AttributesEnum.MgrName.index();
     public static final int EXPIRED = AttributesEnum.Expired.index();
+    public static final int SUPERVISORID = AttributesEnum.SupervisorId.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -315,6 +326,22 @@ public class DepartmentsImpl extends BaseEntity {
      */
     public void setExpired(String value) {
         setAttributeInternal(EXPIRED, value);
+    }
+
+    /**
+     * Gets the attribute value for SupervisorId, using the alias name SupervisorId.
+     * @return the value of SupervisorId
+     */
+    public String getSupervisorId() {
+        return (String)getAttributeInternal(SUPERVISORID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for SupervisorId.
+     * @param value value to set the SupervisorId
+     */
+    public void setSupervisorId(String value) {
+        setAttributeInternal(SUPERVISORID, value);
     }
 
     /**

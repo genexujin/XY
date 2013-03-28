@@ -25,6 +25,7 @@ public class Constants {
     public static final String CONTEXT_TYPE_PO = "PO";
     
     public static final String PO_STATE_INITIAL = "1";
+    public static final String PO_STATE_DEPT_REVIEW = "8";
     public static final String PO_STATE_PENDING_REVIEW = "2";
     public static final String PO_STATE_PENDING_APPROVAL = "3";
     public static final String PO_STATE_REJECTED = "4";

@@ -183,5 +183,11 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="getDeptSupervisorId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getDeptSupervisorId" IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.getDeptSupervisorId_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_getDeptSupervisorId_result">
+      <NamedData NDName="submitterId" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

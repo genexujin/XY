@@ -137,7 +137,8 @@ public class MyPoBean extends BaseBean {
                     setSubmitDate();
                 }
                 
-                ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_PENDING_REVIEW);
+//                ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_PENDING_REVIEW);
+                ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_DEPT_REVIEW);
                 
                 boolean success = ADFUtils.commit("采购订单已提交！", "采购订单提交失败，请核对输入的信息或联系管理员！");
                 if (success) {
@@ -146,10 +147,11 @@ public class MyPoBean extends BaseBean {
                     String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
                     
                     insertPoHistory(id, submitterId, "提交了该订单");
+                    String supervisorId = getDeptSupervisorId(submitterId);                    
+//                    createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId, Constants.ROLE_PO_VERIFIER, readableId);
+                    createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId, supervisorId, readableId);
                     
-                    createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId, Constants.ROLE_PO_VERIFIER, readableId);
-                    
-                    sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId, null, Constants.ROLE_PO_VERIFIER);
+                    sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId, supervisorId, null);
                     
                     //有一种情况下需要completeTask，就是在订单被拒绝后，会为提交者创建一个新task。用户可以再次提交该订单，这时候需要complete之前的task
                     //（后来发现这种情况下只会发通知，所以不需要了）
@@ -198,6 +200,33 @@ public class MyPoBean extends BaseBean {
         } else {
             //Change back the state if commit fails
             changeState(Constants.PO_STATE_PENDING_REVIEW);
+        }
+    }
+    
+    public void verifyPoForDept(ActionEvent actionEvent) {
+        changeState(Constants.PO_STATE_PENDING_REVIEW);
+        
+        boolean success = ADFUtils.commit("采购订单部门审核通过！", "采购订单审核失败，请核对输入的信息或联系管理员！");
+        if (success) {
+            String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
+            String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
+            String verifier = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");
+            String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            insertPoHistory(id, verifier, "完成了部门审核");
+            
+            //Create task for approver
+            createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId, Constants.ROLE_PO_VERIFIER, readableId);
+            sendNotification("您的采购订单已完成部门审核", "您的采购订单已完成审核,等待审批中！ 订单号： " + readableId, submitterId, null);
+            sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId, null, Constants.ROLE_PO_VERIFIER);
+            
+            //Complete task for dept verifier
+            completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, verifier);
+            
+            ADFUtils.findOperation("Commit").execute();
+        } else {
+            //Change back the state if commit fails
+            changeState(Constants.PO_STATE_DEPT_REVIEW);
         }
     }
 
@@ -357,6 +386,30 @@ public class MyPoBean extends BaseBean {
             ADFUtils.findOperation("Commit").execute();
         } else {
             changeState(Constants.PO_STATE_PENDING_APPROVAL);
+        }
+        
+    }
+    
+    public void rejectPoInDept(ActionEvent actionEvent) {
+        changeState(Constants.PO_STATE_REJECTED);
+        boolean success = ADFUtils.commit("采购订单已拒绝！", "采购订单拒绝失败！请核对输入的信息或联系管理员！");
+        if (success) {
+            String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
+            String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
+            String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            
+            String verifier = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
+            insertPoHistory(id, verifier, "拒绝了该订单");
+            
+            //No task created after rejection. Only notification
+    //            createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "您的采购订单被拒绝，请取消或者重新提交订单。", submitterId, readableId);
+            sendNotification("您的采购订单被拒绝", "您的采购订单被拒绝,请取消或者重新提交订单，订单号： " + readableId, submitterId, null);
+            
+            completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, verifier);
+            
+            ADFUtils.findOperation("Commit").execute();
+        } else {
+            changeState(Constants.PO_STATE_DEPT_REVIEW);
         }
         
     }
@@ -630,6 +683,18 @@ public class MyPoBean extends BaseBean {
         } 
         
         return new BigDecimal(0);
+    }
+    
+    private String getDeptSupervisorId(final String submitterId) {
+        OperationBinding oper = ADFUtils.findOperation("getDeptSupervisorId");
+        oper.getParamsMap().put("submitterId", submitterId);
+        oper.execute();
+        String result = (String)oper.getResult();
+        if (result != null) {
+            return result;
+        } 
+        
+        return "";
     }
     
     public String returnClicked() {        

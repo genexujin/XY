@@ -60,6 +60,11 @@ public class PurchaseOrderAppModuleClient extends ApplicationModuleImpl implemen
         return (BigDecimal)_ret;
     }
 
+    public String getDeptSupervisorId(String submitterId) {
+        Object _ret = this.riInvokeExportedMethod(this,"getDeptSupervisorId",new String [] {"java.lang.String"},new Object[] {submitterId});
+        return (String)_ret;
+    }
+
     public void insertPoHistory(String orderId, String operatorId, String operationDetail) {
         Object _ret =
             this.riInvokeExportedMethod(this,"insertPoHistory",new String [] {"java.lang.String","java.lang.String","java.lang.String"},new Object[] {orderId, operatorId, operationDetail});

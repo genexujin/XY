@@ -45,6 +45,9 @@
   <ViewUsage
     Name="PurchaseOrderHistorysView"
     ViewObjectName="edu.hp.model.vo.PurchaseOrderHistorysView"/>
+  <ViewUsage
+    Name="DepartmentsView"
+    ViewObjectName="edu.hp.model.vo.DepartmentsView"/>
   <ViewLinkUsage
     Name="PoToPoLineLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"
@@ -162,6 +165,15 @@
       <Parameter
         Name="dessertExpectDate"
         Type="oracle.jbo.domain.Date"/>
+    </Method>
+    <Method
+      Name="getDeptSupervisorId"
+      MethodName="getDeptSupervisorId">
+      <Return
+        Type="java.lang.String"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
 </AppModule>

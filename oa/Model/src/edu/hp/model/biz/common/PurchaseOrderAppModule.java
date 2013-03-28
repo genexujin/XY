@@ -26,4 +26,6 @@ public interface PurchaseOrderAppModule extends ApplicationModule {
 
     void createPo(String submitterId, String poNote, boolean hasFruit, double fruitPrice, Date fruitExpectDate,
                   boolean hasDessert, double dessertPrice, Date dessertExpectDate);
+
+    String getDeptSupervisorId(String submitterId);
 }
