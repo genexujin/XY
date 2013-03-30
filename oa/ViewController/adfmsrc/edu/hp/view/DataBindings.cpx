@@ -95,6 +95,9 @@
     <page path="/pages/admin/PoSubCategory.jsff" usageId="edu_hp_view_PoSubCategoryPageDef"/>
     <page path="/pages/admin/PoApproveLimit.jsff" usageId="edu_hp_view_PoApproveLimitPageDef"/>
     <page path="/pages/Test/InputLOVDemo.jsf" usageId="edu_hp_view_InputLOVDemoPageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByDeptReview"
+          usageId="edu_hp_view_MyPo_MyPo_findByDeptReviewPageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findForQuery" usageId="edu_hp_view_MyPo_MyPo_findForQueryPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -176,6 +179,8 @@
     <page id="edu_hp_view_PoSubCategoryPageDef" path="pages.admin.PoSubCategoryPageDef"/>
     <page id="edu_hp_view_PoApproveLimitPageDef" path="pages.admin.PoApproveLimitPageDef"/>
     <page id="edu_hp_view_InputLOVDemoPageDef" path="pages.Test.InputLOVDemoPageDef"/>
+    <page id="edu_hp_view_MyPo_MyPo_findByDeptReviewPageDef" path="flows.po.MyPo_MyPo_findByDeptReviewPageDef"/>
+    <page id="edu_hp_view_MyPo_MyPo_findForQueryPageDef" path="flows.po.MyPo_MyPo_findForQueryPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

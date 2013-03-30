@@ -445,7 +445,8 @@ ALTER SESSION SET NLS_LANGUAGE='AMERICAN';
 	"VERIFY_TOTAL" NUMBER(12,2), 
 	"ORDER_NOTE" VARCHAR2(500 BYTE), 
 	"CURRENT_APPROVER" VARCHAR2(20 BYTE), 
-	"CURRENT_EXECUTOR" VARCHAR2(20 BYTE)
+	"CURRENT_EXECUTOR" VARCHAR2(20 BYTE),
+	"DEPT_VERIFIER" VARCHAR2(20 BYTE)
    ) ;
 --------------------------------------------------------
 --  DDL for Table PURCHASE_ORDER_HISTORYS
@@ -951,14 +952,16 @@ Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LA
 Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('175','Item',null,'其它','其它',null,null,null,null,null,null,null,'N');
 REM INSERTING into OA.MENUS
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_MY_PR','我的采购申请','/WEB-INF/flows/po/MyPoNormalUser.xml#MyPoNormalUser','我的采购申请','PUR',null,'SYS','/images/icons/user.png','false','1');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_APPROVE','采购审批','/WEB-INF/flows/po/MyPoApprover.xml#MyPoApprover','审批','PUR',null,'SYS','/images/icons/check.png','false','3');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_REVIEW','采购审核','/WEB-INF/flows/po/MyPoVerifier.xml#MyPoVerifier','审核','PUR',null,'SYS','/images/icons/tasks.png','false','2');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_BUY','采购执行','/WEB-INF/flows/po/MyPoBuyer.xml#MyPoBuyer','执行','PUR',null,'SYS','/images/icons/cart.gif','false','4');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_RECEIVE','采购收货','/WEB-INF/flows/po/MyPoReceiver.xml#MyPoReceiver','收货','PUR',null,'SYS','/images/icons/package.png','false','5');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_PR','采购订单','/WEB-INF/flows/po/CreatePo.xml#CreatePo','采购订单','PUR',null,'SYS','/images/icons/log.png','false','6');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_DEPT_REVIEW','部门审核','/WEB-INF/flows/po/MyPoDeptVerifier.xml#MyPoDeptVerifier','部门审核','PUR',null,'SYS','/images/icons/forum.png','false','3');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_APPROVE','采购审批','/WEB-INF/flows/po/MyPoApprover.xml#MyPoApprover','采购审批','PUR',null,'SYS','/images/icons/check.png','false','5');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_REVIEW','采购审核','/WEB-INF/flows/po/MyPoVerifier.xml#MyPoVerifier','采购审核','PUR',null,'SYS','/images/icons/tasks.png','false','4');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_BUY','采购执行','/WEB-INF/flows/po/MyPoBuyer.xml#MyPoBuyer','采购执行','PUR',null,'SYS','/images/icons/cart.gif','false','6');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_RECEIVE','采购收货','/WEB-INF/flows/po/MyPoReceiver.xml#MyPoReceiver','采购收货','PUR',null,'SYS','/images/icons/package.png','false','7');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_PR','创建采购订单','/WEB-INF/flows/po/CreatePo.xml#CreatePo','创建采购订单','PUR',null,'SYS','/images/icons/log.png','false','2');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_QUERY','采购订单查询','/WEB-INF/flows/po/PoQuery.xml#PoQuery','采购订单查询','PUR',null,'SYS','/images/icons/properties.png','false','8');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_MY_REQ','我的报修','/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall','我的报修','HD',null,'SYS','/images/icons/communicate.png','false','1');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_REQ','报修单','/WEB-INF/flows/helpdesk/CreateHdCall.xml#CreateHdCall','报修单','HD',null,'SYS','/images/icons/constructor.png','false','3');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_PROC','报修处理','/WEB-INF/flows/helpdesk/MyHdCallCallee.xml#MyHdCallCallee','报修处理','HD',null,'SYS','/images/icons/show_failures.png','false','2');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_REQ','创建报修单','/WEB-INF/flows/helpdesk/CreateHdCall.xml#CreateHdCall','创建报修单','HD',null,'SYS','/images/icons/constructor.png','false','2');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_PROC','报修处理','/WEB-INF/flows/helpdesk/MyHdCallCallee.xml#MyHdCallCallee','报修处理','HD',null,'SYS','/images/icons/show_failures.png','false','3');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CLSRM_CAL','教室日历','/WEB-INF/flows/clsrm/ClsRmCalendar.xml#ClsRmCalendar','教室日历','CLSRM',null,'SYS','/images/icons/chooseDate.png','false','1');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CLSRM_BATCH','批量预订','/WEB-INF/flows/clsrm/batch-reservation-btf.xml#batch-reservation-btf','批量预定','CLSRM',null,'SYS','/images/icons/group.png','false','2');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CONFRM_CAL','会议室日历','/WEB-INF/flows/confRm/confRm-calendar-btf.xml#confRm-calendar-btf','会议室日历','CONFRM',null,'SYS','/images/icons/chooseDate.png','false','1');
@@ -1006,6 +1009,7 @@ Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPD
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('14','采购执行','采购执行',null,null,null,null,'N');
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('15','采购收货','采购收货',null,null,null,null,'N');
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('16','普通用户','普通用户',null,null,null,null,'N');
+Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('17','采购部门审核','采购部门审核',null,null,null,null,'N');
 REM INSERTING into OA.ROLE_MENUS
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_ANCMT_REQ',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_ANCMT_LIST',null,to_date('01-MAR-13','DD-MON-RR'));
@@ -1033,6 +1037,8 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','S
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_REVIEW',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_APPROVE',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_MY_PR',null,to_date('01-MAR-13','DD-MON-RR'));
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_DEPT_REVIEW',null,to_date('01-MAR-13','DD-MON-RR'));
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_QUERY',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_ROLE',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_VEHICLE',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_BUY',null,to_date('01-MAR-13','DD-MON-RR'));
@@ -1056,8 +1062,11 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('8','S
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('9','SYS_HD_PROC',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('10','SYS_HD_PROC',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('11','SYS_PUR_REVIEW',null,to_date('01-FEB-13','DD-MON-RR'));
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('11','SYS_PUR_QUERY',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('12','SYS_PUR_APPROVE',null,to_date('01-FEB-13','DD-MON-RR'));
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('12','SYS_PUR_QUERY',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('13','SYS_PUR_APPROVE',null,to_date('01-FEB-13','DD-MON-RR'));
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('13','SYS_PUR_QUERY',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('14','SYS_PUR_BUY',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('15','SYS_PUR_RECEIVE',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_CLSRM_CAL',null,null);
@@ -1068,6 +1077,7 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_PUR_PR',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_HD_MY_REQ',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_HD_REQ',null,null);
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('17','SYS_PUR_DEPT_REVIEW',null,null);
 REM INSERTING into OA.ROLE_USERS
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','273',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('2','282',null,null);
@@ -1107,6 +1117,13 @@ Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('14','
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('14','300',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('15','304',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('15','305',null,null);
+Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('17','151',null,null);
+Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('17','152',null,null);
+Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('17','154',null,null);
+Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('17','157',null,null);
+Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('17','153',null,null);
+Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('17','155',null,null);
+Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('17','156',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('16','151',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('16','152',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('16','153',null,null);

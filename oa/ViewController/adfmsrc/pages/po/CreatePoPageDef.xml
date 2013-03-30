@@ -29,14 +29,14 @@
         <Item Value="CreateBy"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="CreateAt">
-      <AttrNames>
-        <Item Value="CreateAt"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="PurchaseOrdersViewIterator" id="LastUpdatedBy">
       <AttrNames>
         <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="CreateAt">
+      <AttrNames>
+        <Item Value="CreateAt"/>
       </AttrNames>
     </attributeValues>
     <attributeValues IterBinding="PurchaseOrdersViewIterator" id="LastUpdatedAt">
@@ -189,5 +189,10 @@
                   ReturnName="data.RootAppModuleDataControl.methodResults.getDeptSupervisorId_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_getDeptSupervisorId_result">
       <NamedData NDName="submitterId" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="DeptVerifier">
+      <AttrNames>
+        <Item Value="DeptVerifier"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

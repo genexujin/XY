@@ -53,15 +53,15 @@ public class EmployeesViewImpl extends BaseView {
      * Returns the variable value for uId.
      * @return variable value for uId
      */
-    public String getuId() {
-        return (String)ensureVariableManager().getVariableValue("uId");
+    public String getud() {
+        return (String)ensureVariableManager().getVariableValue("ud");
     }
 
     /**
      * Sets <code>value</code> for variable uId.
      * @param value value to bind as uId
      */
-    public void setuId(String value) {
-        ensureVariableManager().setVariableValue("uId", value);
+    public void setud(String value) {
+        ensureVariableManager().setVariableValue("ud", value);
     }
 }

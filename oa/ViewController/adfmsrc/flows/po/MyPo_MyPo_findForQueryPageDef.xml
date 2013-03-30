@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="MyPo_MyPo_findForQueryPageDef"
+                Package="flows.po" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="findForVerifier" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findForVerifier"
+                  IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findForVerifier_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_findForVerifier_result"/>
+  </bindings>
+</pageDefinition>

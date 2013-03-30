@@ -175,5 +175,14 @@
         Name="submitterId"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="findForDeptVerifier"
+      MethodName="findForDeptVerifier">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="deptVerifierId"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </AppModule>

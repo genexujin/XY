@@ -23,7 +23,8 @@
                                             label="订单状态"
                                             required="#{bindings.PoStateWithEmpty.hints.mandatory}"
                                             shortDesc="#{bindings.PoStateWithEmpty.hints.tooltip}" id="soc2"
-                                            disabled="#{pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='buyer' or pageFlowScope.fromMenu=='receiver'}">
+                                            disabled="#{pageFlowScope.fromMenu=='verifier' or pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='buyer' 
+                                                      or pageFlowScope.fromMenu=='receiver' or pageFlowScope.fromMenu=='dept'}">
                             <f:selectItems value="#{bindings.PoStateWithEmpty.items}" id="si2"/>
                         </af:selectOneChoice>
                         <af:inputDate label="至" id="id2" columns="20" value="#{pageFlowScope.MyPoBean.submitDateTo}"/>
@@ -59,7 +60,8 @@
                         <f:facet name="toolbar">
                             <af:toolbar id="t3">
                                 <af:commandToolbarButton text="新建" id="ctb1" action="create"
-                                                         rendered="#{pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='buyer' and pageFlowScope.fromMenu!='receiver'}"
+                                                         rendered="#{pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='buyer' 
+                                                         and pageFlowScope.fromMenu!='receiver' and pageFlowScope.fromMenu!='dept' and pageFlowScope.fromMenu!='query'}"
                                                          icon="/images/icons/new_ena.png">
                                     <!--<af:setActionListener from="#{sessionScope.LoginUserBean.userId}" to="#{bindings.SubmitterId.inputValue}"/>-->
                                 </af:commandToolbarButton>
@@ -121,12 +123,14 @@
                             </af:column>
                             <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.SubmitTotal.name}"
                                        sortable="false"
-                                       headerText="#{bindings.PurchaseOrdersView.hints.SubmitTotal.label}" id="c5">
+                                       headerText="#{bindings.PurchaseOrdersView.hints.SubmitTotal.label}" id="c5"
+                                       align="right">
                                 <af:outputText value="#{row.SubmitTotal}" id="ot7"/>
                             </af:column>
                             <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.VerifyTotal.name}"
                                        sortable="false"
-                                       headerText="#{bindings.PurchaseOrdersView.hints.VerifyTotal.label}" id="c6">
+                                       headerText="#{bindings.PurchaseOrdersView.hints.VerifyTotal.label}" id="c6"
+                                       align="right">
                                 <af:outputText value="#{row.VerifyTotal}" id="ot8"/>
                             </af:column>
                             <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.ItemCategoryId.name}"

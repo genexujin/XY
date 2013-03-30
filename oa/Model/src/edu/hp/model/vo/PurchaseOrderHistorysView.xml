@@ -19,7 +19,7 @@
   PageIterMode="Full"
   UseGlueCode="false"
   ComponentClass="edu.hp.model.vo.PurchaseOrderHistorysViewImpl"
-  OrderBy="PurchaseOrderHistorys.OPERATION_DATE"
+  OrderBy="PurchaseOrderHistorys.OPERATION_DATE desc"
   Where="PurchaseOrderHistorys.OPERATOR_ID = Employees.ID(+)">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>

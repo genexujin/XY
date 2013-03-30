@@ -123,13 +123,36 @@ order by id]]></SQLQuery>
     <ViewCriteriaRow
       Name="PoStateWithEmptyCriteria_row_0"
       UpperColumns="1">
-      <ViewCriteriaItem
-        Name="FlexCol1"
-        ViewAttribute="FlexCol1"
-        Operator="&lt;>"
-        Conjunction="AND"
-        Value="1"
-        Required="Optional"/>
+      <ViewCriteriaItemCompound
+        ViewAttribute="FlexCol1">
+        <ViewCriteria
+          Name="PoVerifierCriteria_PoStateWithEmptyCriteria_row_0_FlexCol1_itemHolder"
+          ViewObjectName="edu.hp.model.vo.query.po.PoStateWithEmpty"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="PoVerifierCriteria_PoStateWithEmptyCriteria_row_0_FlexCol1_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="FlexCol1"
+              ViewAttribute="FlexCol1"
+              Operator="&lt;>"
+              Conjunction="AND"
+              Value="1"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="PoVerifierCriteria_PoStateWithEmptyCriteria_row_0_FlexCol1_itemHolder_row_1"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="PoVerifierCriteria_PoStateWithEmptyCriteria_row_0_FlexCol1_PoVerifierCriteria_PoStateWithEmptyCriteria_row_0_FlexCol1_itemHolder_PoVerifierCriteria_PoStateWithEmptyCriteria_row_0_FlexCol1_itemHolder_row_1_FlexCol1"
+              ViewAttribute="FlexCol1"
+              Operator="&lt;>"
+              Conjunction="AND"
+              Value="8"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ResourceBundle>

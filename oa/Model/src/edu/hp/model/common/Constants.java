@@ -52,6 +52,7 @@ public class Constants {
     public static final String ROLE_PO_2ND_APPROVER="采购终审";
     public static final String ROLE_PO_BUYER="采购执行";
     public static final String ROLE_PO_RECEIVER="采购收货";
+    public static final String ROLE_PO_DEPT_VERIFIER="采购部门审核";
     
     public static final String CONTEXT_OBJ_VEH= "VEH";
     public static final String CONTEXT_OBJ_VEH_ID = "id";

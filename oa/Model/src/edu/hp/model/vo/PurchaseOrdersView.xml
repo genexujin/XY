@@ -22,7 +22,8 @@
        Employees.LAST_NAME, 
        PurchaseOrders.SUBMIT_AT, 
        PurchaseOrders.CURRENT_APPROVER, 
-       PurchaseOrders.CURRENT_EXECUTOR"
+       PurchaseOrders.CURRENT_EXECUTOR, 
+       PurchaseOrders.DEPT_VERIFIER"
   FromList="PURCHASE_ORDERS PurchaseOrders, EMPLOYEES Employees"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -66,6 +67,10 @@
     Type="java.lang.String"/>
   <Variable
     Name="CurrApprover"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="DpVerifier"
     Kind="viewcriteria"
     Type="java.lang.String"/>
   <ViewAccessor
@@ -377,6 +382,12 @@
     EntityAttrName="CurrentExecutor"
     EntityUsage="PurchaseOrders"
     AliasName="CURRENT_EXECUTOR"/>
+  <ViewAttribute
+    Name="DeptVerifier"
+    PrecisionRule="true"
+    EntityAttrName="DeptVerifier"
+    EntityUsage="PurchaseOrders"
+    AliasName="DEPT_VERIFIER"/>
   <ViewCriteria
     Name="OrderReadableIdCriteria"
     ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
@@ -655,13 +666,36 @@
     <ViewCriteriaRow
       Name="PurchaseOrdersViewCriteria_row_0"
       UpperColumns="1">
-      <ViewCriteriaItem
-        Name="State"
-        ViewAttribute="State"
-        Operator="&lt;>"
-        Conjunction="AND"
-        Value="1"
-        Required="Optional"/>
+      <ViewCriteriaItemCompound
+        ViewAttribute="State">
+        <ViewCriteria
+          Name="OrderForVerifierCriteria_PurchaseOrdersViewCriteria_row_0_State_itemHolder"
+          ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="OrderForVerifierCriteria_PurchaseOrdersViewCriteria_row_0_State_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="State"
+              ViewAttribute="State"
+              Operator="&lt;>"
+              Conjunction="AND"
+              Value="1"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="OrderForVerifierCriteria_PurchaseOrdersViewCriteria_row_0_State_itemHolder_row_1"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="OrderForVerifierCriteria_PurchaseOrdersViewCriteria_row_0_State_OrderForVerifierCriteria_PurchaseOrdersViewCriteria_row_0_State_itemHolder_OrderForVerifierCriteria_PurchaseOrdersViewCriteria_row_0_State_itemHolder_row_1_State"
+              ViewAttribute="State"
+              Operator="&lt;>"
+              Conjunction="AND"
+              Value="8"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewCriteria
@@ -704,6 +738,50 @@
         Operator="="
         Conjunction="AND"
         Value=":CurrApprover"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="OrderForDeptVerifierCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="State"
+        ViewAttribute="State"
+        Operator="="
+        Conjunction="AND"
+        Value=":OrStateId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="DeptVerifier"
+        ViewAttribute="DeptVerifier"
+        Operator="="
+        Conjunction="AND"
+        Value=":DpVerifier"
         IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>

@@ -113,7 +113,7 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         empView.setApplyViewCriteriaNames(null);
         
         if (submitterId != null) {
-            empView.setuId(submitterId);
+            empView.setud(submitterId);
             ViewCriteria vc = empView.getViewCriteria("findByIdCriteria");
             empView.setApplyViewCriteriaName(vc.getName());
             empView.executeQuery();
@@ -130,7 +130,7 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
                 dView.executeQuery();
                 Row[] drows = dView.getAllRowsInRange();
                 if (drows != null && drows.length > 0) {
-                    return (String)rows[0].getAttribute("SupervisorId");
+                    return (String)drows[0].getAttribute("SupervisorId");
                 }
             }
         }
@@ -169,7 +169,7 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
             stateView.executeQuery();
         }
     }
-    
+        
     public void findForVerifier() {
         PurchaseOrdersViewImpl poView = this.getPurchaseOrdersView();        
         poView.setApplyViewCriteriaNames(null);
@@ -185,6 +185,25 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         stateView.setApplyViewCriteriaName(stateVC.getName());
         stateView.executeQuery();
         
+    }
+    
+    public void findForDeptVerifier(String deptVerifierId) {
+        PurchaseOrdersViewImpl poView = this.getPurchaseOrdersView();        
+        poView.setApplyViewCriteriaNames(null);
+        
+        System.err.println("In App Module: search for dept verifier: " + deptVerifierId);
+        poView.setOrStateId(Constants.PO_STATE_DEPT_REVIEW);
+        poView.setDpVerifier(deptVerifierId);
+        ViewCriteria vc = poView.getViewCriteria("OrderForDeptVerifierCriteria");
+        poView.setApplyViewCriteriaName(vc.getName());
+        poView.executeQuery();
+        
+        PoStateWithEmptyImpl stateView = (PoStateWithEmptyImpl)this.getPoStateWithEmpty();
+        stateView.setApplyViewCriteriaNames(null);
+        stateView.setStateId(Constants.PO_STATE_DEPT_REVIEW);
+        ViewCriteria stateVC = stateView.getViewCriteria("StateCriteria");
+        stateView.setApplyViewCriteriaName(stateVC.getName());
+        stateView.executeQuery();
     }
     
     public void insertPoHistory(String orderId, String operatorId, String operationDetail) {

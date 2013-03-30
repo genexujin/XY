@@ -49,6 +49,11 @@ public class PurchaseOrderAppModuleClient extends ApplicationModuleImpl implemen
         return;
     }
 
+    public void findForDeptVerifier(String deptVerifierId) {
+        Object _ret = this.riInvokeExportedMethod(this,"findForDeptVerifier",new String [] {"java.lang.String"},new Object[] {deptVerifierId});
+        return;
+    }
+
     public void findForVerifier() {
         Object _ret = this.riInvokeExportedMethod(this,"findForVerifier",null,null);
         return;

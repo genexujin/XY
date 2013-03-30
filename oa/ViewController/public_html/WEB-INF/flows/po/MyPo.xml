@@ -60,6 +60,14 @@
         <expression>#{pageFlowScope.fromMenu == 'normal'}</expression>
         <outcome>normalUser</outcome>
       </case>
+      <case id="__43">
+        <expression>#{pageFlowScope.fromMenu == 'dept'}</expression>
+        <outcome>dept</outcome>
+      </case>
+      <case id="__49">
+        <expression>#{pageFlowScope.fromMenu == 'query'}</expression>
+        <outcome>query</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findBySubmitterId">
@@ -98,6 +106,18 @@
         <fixed-outcome>findByState</fixed-outcome>
       </outcome>
     </method-call>
+    <method-call id="findByDeptReview">
+      <method>#{bindings.findForDeptVerifier.execute}</method>
+      <outcome>
+        <fixed-outcome>findByDeptVerifier</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findForQuery">
+      <method>#{bindings.findForVerifier.execute}</method>
+      <outcome>
+        <fixed-outcome>findForQuery</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__2">
       <from-activity-id>MyPoPage</from-activity-id>
       <control-flow-case id="__3">
@@ -127,6 +147,14 @@
       <control-flow-case id="__42">
         <from-outcome>returnFromReceiver</from-outcome>
         <to-activity-id>findByPendingReceive</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__47">
+        <from-outcome>returnFromDept</from-outcome>
+        <to-activity-id>findByDeptReview</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__52">
+        <from-outcome>returnFromQuery</from-outcome>
+        <to-activity-id>findForQuery</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__4">
@@ -165,6 +193,14 @@
       <control-flow-case id="__35">
         <from-outcome>create</from-outcome>
         <to-activity-id>Create</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__44">
+        <from-outcome>dept</from-outcome>
+        <to-activity-id>findByDeptReview</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__48">
+        <from-outcome>query</from-outcome>
+        <to-activity-id>findForQuery</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__15">
@@ -213,6 +249,20 @@
       <from-activity-id>findByExecuting</from-activity-id>
       <control-flow-case id="__32">
         <from-outcome>findByState</from-outcome>
+        <to-activity-id>MyPoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__45">
+      <from-activity-id>findByDeptReview</from-activity-id>
+      <control-flow-case id="__46">
+        <from-outcome>findByDeptVerifier</from-outcome>
+        <to-activity-id>MyPoPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__50">
+      <from-activity-id>findForQuery</from-activity-id>
+      <control-flow-case id="__51">
+        <from-outcome>findForQuery</from-outcome>
         <to-activity-id>MyPoPage</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

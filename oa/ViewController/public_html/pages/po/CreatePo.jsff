@@ -8,6 +8,50 @@
                 function setSubmit(event) {
                     setAction(event, 'submit');
                 }
+                
+                function setDeptVerify(event) {
+                    setAction(event, 'deptVerify');
+                }
+                
+                function setDeptReject(event) {
+                    setAction(event, 'deptReject');
+                }
+                
+                function setCancel(event) {
+                    setAction(event, 'cancel');
+                }
+                
+                function setVerify(event) {
+                    setAction(event, 'verify');
+                }
+                
+                function setApprove(event) {
+                    setAction(event, 'approve');
+                }
+                
+                function setApprove2nd(event) {
+                    setAction(event, 'approve2nd');
+                }
+                
+                function setReject(event) {
+                    setAction(event, 'reject');
+                }
+                
+                function setExecute(event) {
+                    setAction(event, 'execute');
+                }
+                
+                function setFinish(event) {
+                    setAction(event, 'finish');
+                }
+                
+                function setReopen(event) {
+                    setAction(event, 'reopen');
+                }
+                
+                function setBackToVerify(event) {
+                    setAction(event, 'backToVerify');
+                }
 
                 function setAction(event, action) {
                     var source = event.getSource();
@@ -27,7 +71,7 @@
                     </af:dialog>
                 </af:popup>
                 <af:panelHeader text="订单" id="ph1">
-                    <af:panelFormLayout id="pfl1" rows="5">
+                    <af:panelFormLayout id="pfl1" rows="5" binding="#{pageFlowScope.MyPoBean.poForm}">
                         <af:selectOneChoice value="#{bindings.SubmitterId.inputValue}" label="申请人"
                                             required="#{bindings.SubmitterId.hints.mandatory}"
                                             shortDesc="#{bindings.SubmitterId.hints.tooltip}" id="soc1"
@@ -47,16 +91,18 @@
                             <f:selectItems value="#{bindings.ItemCategoryId1.items}" id="si3"/>
                         </af:selectOneChoice>
                         <af:inputText value="#{bindings.SubmitTotal.inputValue}" id="ot7" label="预算总金额" disabled="true"
-                                      columns="20" binding="#{pageFlowScope.MyPoBean.submitTotalComp}">
+                                      columns="20" binding="#{pageFlowScope.MyPoBean.submitTotalComp}"
+                                      contentStyle="text-align:right;">
                             <af:convertNumber type="currency"/>
                         </af:inputText>
                         <af:inputText value="#{bindings.VerifyTotal.inputValue}" id="ot8" label="审核总金额" disabled="true"
-                                      columns="20">
+                                      columns="20" contentStyle="text-align:right;">
                             <af:convertNumber type="currency"/>
                         </af:inputText>
                         <af:selectOneChoice value="#{bindings.State.inputValue}" label="订单状态"
                                             required="#{bindings.State.hints.mandatory}"
-                                            shortDesc="#{bindings.State.hints.tooltip}" id="soc2" disabled="true">
+                                            shortDesc="#{bindings.State.hints.tooltip}" id="soc2" disabled="true"
+                                            partialTriggers="cb2 cb3 cb4 cb40 cb5 cb50 cb6 cb7 cb8 cb18 cb19 cb30 cb31">
                             <f:selectItems value="#{bindings.State.items}" id="si2"/>
                         </af:selectOneChoice>
                         <af:inputText value="#{bindings.OrderNote.inputValue}" id="ot9" label="备注" rows="5" columns="25"
@@ -69,7 +115,7 @@
                                   emptyText="#{bindings.PurchaseOrderHistorysView.viewable ? '暂无数据。' : 'Access Denied.'}"
                                   fetchSize="#{bindings.PurchaseOrderHistorysView.rangeSize}" rowBandingInterval="0"
                                   id="t3" autoHeightRows="7" width="400" columnStretching="last"
-                                  partialTriggers="::cb2 ::cb3 ::cb4 ::cb40 ::cb5 ::cb50 ::cb6 ::cb7 ::cb8 ::cb18 ::cb19">
+                                  binding="#{pageFlowScope.MyPoBean.poHistoryTable}">
                             <af:column sortProperty="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.name}"
                                        sortable="true"
                                        headerText="#{bindings.PurchaseOrderHistorysView.hints.OperationDate.label}"
@@ -98,8 +144,8 @@
                                 </f:facet>
                                 <af:commandButton text="保存" partialSubmit="true" id="cb1"
                                                   actionListener="#{pageFlowScope.MyPoBean.savePo}"
-                                                  rendered="#{(pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier') 
-                                                              and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '4' or bindings.State.inputValue eq '5')}"
+                                                  rendered="#{(pageFlowScope.fromMenu!='query' and pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier') 
+                                                              and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '4' or (bindings.State.inputValue eq '5' and sessionScope.LoginUserBean.isUserInRole['采购执行']))}"
                                                   icon="/images/icons/filesave.png"/>
                                 <af:commandButton text="返回" partialSubmit="true" id="rb1"
                                                   actionListener="#{bindings.Rollback.execute}" immediate="true"
@@ -107,7 +153,7 @@
                                                   rendered="#{pageFlowScope.fromMenu != '-' and pageFlowScope.fromMenu!='create'}"
                                                   icon="/images/icons/rollback.png"/>
                                 <af:commandButton text="提交" partialSubmit="true" id="cb2"
-                                                  rendered="#{(pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='receiver')
+                                                  rendered="#{(pageFlowScope.fromMenu!='query' and pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='receiver')
                                                               and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '4')}"
                                                   icon="/images/icons/run.png">
                                     <af:clientListener method="setSubmit" type="click"/>
@@ -115,59 +161,101 @@
                                     <af:showPopupBehavior triggerType="action" popupId="confirm"/>
                                 </af:commandButton>
                                 <af:commandButton text="审核" partialSubmit="true" id="cb30"
-                                                  actionListener="#{pageFlowScope.MyPoBean.verifyPoInDept}" rendered="#{(pageFlowScope.fromMenu eq 'verifier' or sessionScope.LoginUserBean.isUserInRole['采购审核'])
-                                                               and bindings.State.inputValue eq '2'}"
-                                                  icon="/images/icons/check.png"/>
-                                <af:commandButton text="拒绝" partialSubmit="true" id="cb31"
-                                                  actionListener="#{pageFlowScope.MyPoBean.rejectPoInDept}" rendered="#{(pageFlowScope.fromMenu eq 'verifier' or sessionScope.LoginUserBean.isUserInRole['采购审核'])
-                                                               and bindings.State.inputValue eq '2'}"
-                                                  icon="/images/icons/terminate.png"/>
+                                                  rendered="#{(pageFlowScope.fromMenu eq 'dept' or sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
+                                                               and bindings.State.inputValue eq '8'}"
+                                                  icon="/images/icons/check.png">
+                                    <af:clientListener method="setDeptVerify" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                </af:commandButton>
+                                <af:commandButton text="拒绝" partialSubmit="true" id="cb31" 
+                                                  rendered="#{(pageFlowScope.fromMenu eq 'dept' or sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
+                                                               and bindings.State.inputValue eq '8'}"
+                                                  icon="/images/icons/terminate.png">
+                                    <af:clientListener method="setDeptReject" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                </af:commandButton>
                                 <af:commandButton text="审核" partialSubmit="true" id="cb3"
-                                                  actionListener="#{pageFlowScope.MyPoBean.verifyPo}" rendered="#{(pageFlowScope.fromMenu eq 'verifier' or sessionScope.LoginUserBean.isUserInRole['采购审核'])
+                                                  rendered="#{(pageFlowScope.fromMenu eq 'verifier' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购审核']))
                                                                and bindings.State.inputValue eq '2'}"
-                                                  icon="/images/icons/check.png"/>
+                                                  icon="/images/icons/check.png">
+                                    <af:clientListener method="setVerify" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                </af:commandButton>
                                 <af:commandButton text="审批" partialSubmit="true" id="cb4"
-                                                  actionListener="#{pageFlowScope.MyPoBean.approvePo}"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购审批'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购审批'}"
-                                                  icon="/images/icons/check.png"/>
+                                                  icon="/images/icons/check.png">
+                                    <af:clientListener method="setApprove" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>             
+                                </af:commandButton>
                                 <af:commandButton text="审批" partialSubmit="true" id="cb40"
-                                                  actionListener="#{pageFlowScope.MyPoBean.approvePo2nd}"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购终审'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购终审'}"
-                                                  icon="/images/icons/check.png"/>
+                                                  icon="/images/icons/check.png">
+                                    <af:clientListener method="setApprove2nd" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
+                                </af:commandButton>
                                 <af:commandButton text="拒绝" partialSubmit="true" id="cb5"
-                                                  actionListener="#{pageFlowScope.MyPoBean.rejectPo}"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购审批'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购审批'}"
-                                                  icon="/images/icons/terminate.png"/>
+                                                  icon="/images/icons/terminate.png">
+                                    <af:clientListener method="setReject" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
+                                </af:commandButton>
                                 <af:commandButton text="拒绝" partialSubmit="true" id="cb50"
-                                                  actionListener="#{pageFlowScope.MyPoBean.rejectPo}"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购终审'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购终审'}"
-                                                  icon="/images/icons/terminate.png"/>
+                                                  icon="/images/icons/terminate.png">
+                                    <af:clientListener method="setReject" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
+                                </af:commandButton>
                                 <af:commandButton text="取消" partialSubmit="true" id="cb6"
-                                                  actionListener="#{pageFlowScope.MyPoBean.cancelPo}"
-                                                  rendered="#{(pageFlowScope.fromMenu eq 'normal' and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '2' or bindings.State.inputValue eq '4'))
-                                                              or (sessionScope.LoginUserBean.isUserInRole['采购审核'] and bindings.State.inputValue ne '1')}"
-                                                  icon="/images/icons/undo.png"/>
+                                                  rendered="#{(pageFlowScope.fromMenu eq 'normal' and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '2' or bindings.State.inputValue eq '4' or bindings.State.inputValue eq '8'))
+                                                              or (pageFlowScope.fromMenu ne 'query' and sessionScope.LoginUserBean.isUserInRole['采购审核'] and bindings.State.inputValue ne '1')}"
+                                                  icon="/images/icons/undo.png">
+                                    <af:clientListener method="setCancel" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                </af:commandButton>
                                 <af:commandButton text="完成" partialSubmit="true" id="cb7"
-                                                  actionListener="#{pageFlowScope.MyPoBean.executePo}" rendered="#{(pageFlowScope.fromMenu eq 'buyer' or sessionScope.LoginUserBean.isUserInRole['采购执行'])
+                                                  rendered="#{(pageFlowScope.fromMenu eq 'buyer' or sessionScope.LoginUserBean.isUserInRole['采购执行'])
                                                               and bindings.State.inputValue eq '5'}"
-                                                  icon="/images/icons/check.png"/>
+                                                  icon="/images/icons/check.png">
+                                    <af:clientListener method="setExecute" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                </af:commandButton>
                                 <af:commandButton text="收货" partialSubmit="true" id="cb8"
-                                                  actionListener="#{pageFlowScope.MyPoBean.finishPo}" rendered="#{(pageFlowScope.fromMenu eq 'receiver' or sessionScope.LoginUserBean.isUserInRole['采购收货'])
+                                                  rendered="#{(pageFlowScope.fromMenu eq 'receiver' or sessionScope.LoginUserBean.isUserInRole['采购收货'])
                                                               and bindings.State.inputValue eq '5'}"
-                                                  icon="/images/icons/package.png"/>
+                                                  icon="/images/icons/package.png">
+                                    <af:clientListener method="setFinish" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                </af:commandButton>
                                 <af:commandButton text="重新打开" partialSubmit="true" id="cb18"
-                                                  actionListener="#{pageFlowScope.MyPoBean.reopenPo}" rendered="#{(sessionScope.LoginUserBean.isUserInRole['采购审核'] or sessionScope.LoginUserBean.isUserInRole['采购执行'])
+                                                  rendered="#{(sessionScope.LoginUserBean.isUserInRole['采购审核'] or sessionScope.LoginUserBean.isUserInRole['采购执行'])
                                                               and bindings.State.inputValue eq '6'}"
-                                                  icon="/images/icons/open.png"/>
+                                                  icon="/images/icons/open.png">
+                                    <af:clientListener method="setReopen" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                </af:commandButton>
                                 <af:commandButton text="重新审核" partialSubmit="true" id="cb19"
-                                                  actionListener="#{pageFlowScope.MyPoBean.backToVerifyPo}"
                                                   rendered="#{sessionScope.LoginUserBean.isUserInRole['采购审核'] 
                                                               and (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '2')}"
-                                                  icon="/images/icons/redo.png"/>
+                                                  icon="/images/icons/redo.png">
+                                    <af:clientListener method="setBackToVerify" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                </af:commandButton>
                             </af:panelGroupLayout>
                         </f:facet>
                     </af:panelFormLayout>
@@ -199,9 +287,9 @@
                           value="#{bindings.PurchaseOrderLinesView.collectionModel}" rowBandingInterval="0"
                           selectedRowKeys="#{bindings.PurchaseOrderLinesView.collectionModel.selectedRow}"
                           selectionListener="#{bindings.PurchaseOrderLinesView.collectionModel.makeCurrent}"
-                          rowSelection="single" id="t1"
-                          partialTriggers=":::soc3 ::ctb1 ::ctb2 :::cb1 :::rb1 :::cb2 :::cb3 :::cb4 :::cb40 :::cb5 :::cb50 :::cb6 :::cb7 :::cb8 :::cb18 :::cb19"
-                          columnStretching="last">
+                          rowSelection="single" id="t1"                          
+                          columnStretching="last" binding="#{pageFlowScope.MyPoBean.poLinesTable}"
+                          partialTriggers=":::soc3">
                     <af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemId.name}" sortable="false"
                                headerText="#{bindings.PurchaseOrderLinesView.hints.ItemId.label}" id="c41" width="100">
                         <af:selectOneChoice value="#{row.bindings.ItemId.inputValue}"
@@ -209,16 +297,12 @@
                                             required="#{bindings.PurchaseOrderLinesView.hints.ItemId.mandatory}"
                                             shortDesc="#{bindings.PurchaseOrderLinesView.hints.ItemId.tooltip}"
                                             id="soc31"
-                                            readOnly="#{(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') 
+                                            readOnly="#{(pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') 
                                                          or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}"
                                             showRequired="false" autoSubmit="true">
                             <f:selectItems value="#{row.bindings.ItemId.items}" id="si31"/>
                         </af:selectOneChoice>
                     </af:column>
-                    <!--<af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemId.name}" sortable="false"
-                               headerText="#{bindings.PurchaseOrderLinesView.hints.ItemId.label}" id="c41">
-                        <af:outputText value="#{row.ItemId}" id="ot2"/>
-                    </af:column>-->
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ItemDescription.label}"
                                sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemDescription.name}"
                                sortable="false" id="c3" width="120">
@@ -229,7 +313,7 @@
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.ItemDescription.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.ItemDescription.tooltip}"
                                       id="it2"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
                                               or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}"
                                       showRequired="false" autoSubmit="true">
                             <!--<f:validator binding="#{row.bindings.ItemDescription.validator}"/>-->
@@ -245,7 +329,7 @@
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.SubmitQuantity.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.SubmitQuantity.tooltip}"
                                       id="it3"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
                                               or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}"
                                       autoSubmit="true">
                             <f:validator binding="#{row.bindings.SubmitQuantity.validator}"/>
@@ -260,7 +344,7 @@
                                       columns="#{bindings.PurchaseOrderLinesView.hints.SubmitUnit.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.SubmitUnit.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.SubmitUnit.tooltip}" id="it4"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
                                               or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}"
                                       autoSubmit="true">
                             <!--<f:validator binding="#{row.bindings.SubmitUnit.validator}"/>-->
@@ -268,14 +352,14 @@
                     </af:column>
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.label}"
                                sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.name}" sortable="false"
-                               id="c6" width="60">
+                               id="c6" width="60" align="right">
                         <af:inputText value="#{row.bindings.SubmitPrice.inputValue}"
                                       label="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.label}"
                                       required="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.mandatory}"
                                       columns="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.SubmitPrice.tooltip}" id="it5"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or pageFlowScope.fromMenu eq 'dept' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
                                               or (bindings.State.inputValue ne '2' and bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}"
                                       autoSubmit="true">
                             <f:validator binding="#{row.bindings.SubmitPrice.validator}"/>
@@ -283,7 +367,7 @@
                     </af:column>
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitTotal.label}"
                                sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitTotal.name}" sortable="false"
-                               id="c7" width="80">
+                               id="c7" width="80" align="right">
                         <af:outputText value="#{row.SubmitTotal}" id="ot17"/>
                     </af:column>
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.label}"
@@ -294,32 +378,23 @@
                                       required="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.mandatory}"
                                       columns="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.displayWidth}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.tooltip}" id="id1"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
                                               or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}"
                                       minValue="#{pageFlowScope.MyPoBean.currDate}" autoSubmit="true">
                             <!--<f:validator binding="#{row.bindings.ExpectedDate.validator}"/>-->
                             <af:convertDateTime pattern="#{bindings.PurchaseOrderLinesView.hints.ExpectedDate.format}"/>
                         </af:inputDate>
                     </af:column>
-                    <!--<af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.State.name}" sortable="false"
-                               headerText="#{bindings.PurchaseOrderLinesView.hints.State.label}" id="c40" width="80">
-                        <af:selectOneChoice value="#{row.bindings.State.inputValue}" label="#{row.bindings.State.label}"
-                                            required="#{bindings.PurchaseOrderLinesView.hints.State.mandatory}"
-                                            shortDesc="#{bindings.PurchaseOrderLinesView.hints.State.tooltip}" id="soc30"
-                                            readOnly="#{!sessionScope.LoginUserBean.isUserInRole['采购审核']}"
-                                            autoSubmit="true">
-                            <f:selectItems value="#{row.bindings.State.items}" id="si30"/>
-                        </af:selectOneChoice>
-                    </af:column>-->
                     <af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.Cancelled.name}" sortable="true"
                                headerText="#{bindings.PurchaseOrderLinesView.hints.Cancelled.label}" id="c20">
                         <af:selectBooleanCheckbox value="#{row.bindings.Cancelled.inputValue}"
                                                   label="#{row.bindings.Cancelled.label}"
                                                   shortDesc="#{bindings.PurchaseOrderLinesView.hints.Cancelled.tooltip}"
                                                   id="sbc1" autoSubmit="true"
-                                                  readOnly="#{!(pageFlowScope.fromMenu eq 'normal' and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '4'))
-                                              and !(pageFlowScope.fromMenu eq 'verifier' and bindings.State.inputValue eq '2')
-                                              and !(pageFlowScope.fromMenu eq '-' and bindings.State.inputValue eq '2')}"/>
+                                                  readOnly="#{pageFlowScope.fromMenu eq 'query' or 
+                                                  (!(pageFlowScope.fromMenu eq 'normal' and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '4'))
+                                               and !(pageFlowScope.fromMenu eq 'verifier' and bindings.State.inputValue eq '2')
+                                               and !(pageFlowScope.fromMenu eq '-' and bindings.State.inputValue eq '2'))}"/>
                     </af:column>
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.label}"
                                sortProperty="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.name}" sortable="false"
@@ -329,8 +404,8 @@
                                       required="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.mandatory}"
                                       columns="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.precision}"
-                                      shortDesc="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.tooltip}" id="it7"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
+                                      shortDesc="#{bindings.PurchaseOrderLinesView.hints.SubmitNote.tooltip}" id="it7" autoSubmit="true"
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' 
                                               or (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '4')}">
                             <f:validator binding="#{row.bindings.SubmitNote.validator}"/>
                         </af:inputText>
@@ -346,8 +421,8 @@
                                       columns="#{bindings.PurchaseOrderLinesView.hints.PurchaseQuantity.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.PurchaseQuantity.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.PurchaseQuantity.tooltip}"
-                                      id="it9"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or bindings.State.inputValue ne '2'
+                                      id="it9" autoSubmit="true"
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or bindings.State.inputValue ne '2' or pageFlowScope.fromMenu eq 'dept' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
                                    or (not(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'buyer' or pageFlowScope.fromMenu eq 'receiver'
                                            or sessionScope.LoginUserBean.isUserInRole['采购审核'] or sessionScope.LoginUserBean.isUserInRole['采购审批']))}">
                             <f:validator binding="#{row.bindings.PurchaseQuantity.validator}"/>
@@ -363,8 +438,8 @@
                                       required="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.mandatory}"
                                       columns="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.precision}"
-                                      shortDesc="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.tooltip}" id="it12"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or bindings.State.inputValue ne '2'
+                                      shortDesc="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.tooltip}" id="it12" autoSubmit="true"
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or bindings.State.inputValue ne '2' or pageFlowScope.fromMenu eq 'dept' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
                                   or (not (pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'buyer' or pageFlowScope.fromMenu eq 'receiver'
                                            or sessionScope.LoginUserBean.isUserInRole['采购审核'] or sessionScope.LoginUserBean.isUserInRole['采购审批']))}">
                             <!--<f:validator binding="#{row.bindings.VerifyNote.validator}"/>-->
@@ -379,14 +454,14 @@
                                       required="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.mandatory}"
                                       columns="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.precision}"
-                                      shortDesc="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.tooltip}" id="it10"
-                                      readOnly="#{bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'buyer'))}">
+                                      shortDesc="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.tooltip}" id="it10" autoSubmit="true"
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'buyer'))}">
                             <f:validator binding="#{row.bindings.ActualPrice.validator}"/>
                         </af:inputText>
                     </af:column>
                     <af:column headerText="#{bindings.PurchaseOrderLinesView.hints.ActualTotal.label}"
                                sortProperty="#{bindings.PurchaseOrderLinesView.hints.ActualTotal.name}" sortable="false"
-                               id="c13" width="80">
+                               id="c13" width="80" align="right">
                         <!--rendered="#{pageFlowScope.fromMenu eq 'buyer' or pageFlowScope.fromMenu eq 'receiver'}"-->
                         <af:outputText value="#{row.ActualTotal}" id="ot23"/>
                     </af:column>
@@ -400,8 +475,8 @@
                                       columns="#{bindings.PurchaseOrderLinesView.hints.ReceiveQuantity.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.ReceiveQuantity.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.ReceiveQuantity.tooltip}"
-                                      id="it13"
-                                      readOnly="#{bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'receiver'))}">
+                                      id="it13" autoSubmit="true"
+                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'receiver'))}">
                             <!--<f:validator binding="#{row.bindings.ReceiveQuantity.validator}"/>-->
                         </af:inputText>
                     </af:column>

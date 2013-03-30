@@ -35,7 +35,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setOrderId((DBSequence)value);
             }
-        },
+        }
+        ,
         OrderReadableId {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getOrderReadableId();
@@ -44,7 +45,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setOrderReadableId((String)value);
             }
-        },
+        }
+        ,
         SubmitterId {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitterId();
@@ -53,7 +55,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitterId((String)value);
             }
-        },
+        }
+        ,
         CreateBy {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getCreateBy();
@@ -62,7 +65,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setCreateBy((String)value);
             }
-        },
+        }
+        ,
         CreateAt {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getCreateAt();
@@ -71,7 +75,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setCreateAt((Timestamp)value);
             }
-        },
+        }
+        ,
         LastUpdatedBy {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getLastUpdatedBy();
@@ -80,7 +85,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setLastUpdatedBy((String)value);
             }
-        },
+        }
+        ,
         LastUpdatedAt {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getLastUpdatedAt();
@@ -89,7 +95,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setLastUpdatedAt((Timestamp)value);
             }
-        },
+        }
+        ,
         State {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getState();
@@ -98,7 +105,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setState((String)value);
             }
-        },
+        }
+        ,
         SubmitTotal {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitTotal();
@@ -107,7 +115,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitTotal((BigDecimal)value);
             }
-        },
+        }
+        ,
         VerifyTotal {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getVerifyTotal();
@@ -116,7 +125,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setVerifyTotal((BigDecimal)value);
             }
-        },
+        }
+        ,
         OrderNote {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getOrderNote();
@@ -125,7 +135,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setOrderNote((String)value);
             }
-        },
+        }
+        ,
         ItemCategoryId {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getItemCategoryId();
@@ -134,7 +145,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setItemCategoryId((String)value);
             }
-        },
+        }
+        ,
         LineNum {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getLineNum();
@@ -143,7 +155,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setLineNum((Number)value);
             }
-        },
+        }
+        ,
         SubmitAt {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitAt();
@@ -152,7 +165,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitAt((Timestamp)value);
             }
-        },
+        }
+        ,
         CurrentApprover {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getCurrentApprover();
@@ -161,7 +175,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setCurrentApprover((String)value);
             }
-        },
+        }
+        ,
         CurrentExecutor {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getCurrentExecutor();
@@ -170,7 +185,18 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setCurrentExecutor((String)value);
             }
-        },
+        }
+        ,
+        DeptVerifier {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getDeptVerifier();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setDeptVerifier((String)value);
+            }
+        }
+        ,
         Submitter {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitter();
@@ -179,7 +205,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setSubmitter((EmployeesImpl)value);
             }
-        },
+        }
+        ,
         PurchaseOrderLines {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getPurchaseOrderLines();
@@ -188,7 +215,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        },
+        }
+        ,
         PurchaseOrderHistorys {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getPurchaseOrderHistorys();
@@ -197,7 +225,8 @@ public class PurchaseOrdersImpl extends EntityImpl {
             public void put(PurchaseOrdersImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
             }
-        };
+        }
+        ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
 
@@ -242,6 +271,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
     public static final int SUBMITAT = AttributesEnum.SubmitAt.index();
     public static final int CURRENTAPPROVER = AttributesEnum.CurrentApprover.index();
     public static final int CURRENTEXECUTOR = AttributesEnum.CurrentExecutor.index();
+    public static final int DEPTVERIFIER = AttributesEnum.DeptVerifier.index();
     public static final int SUBMITTER = AttributesEnum.Submitter.index();
     public static final int PURCHASEORDERLINES = AttributesEnum.PurchaseOrderLines.index();
     public static final int PURCHASEORDERHISTORYS = AttributesEnum.PurchaseOrderHistorys.index();
@@ -518,6 +548,22 @@ public class PurchaseOrdersImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for DeptVerifier, using the alias name DeptVerifier.
+     * @return the value of DeptVerifier
+     */
+    public String getDeptVerifier() {
+        return (String)getAttributeInternal(DEPTVERIFIER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DeptVerifier.
+     * @param value value to set the DeptVerifier
+     */
+    public void setDeptVerifier(String value) {
+        setAttributeInternal(DEPTVERIFIER, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -578,6 +624,15 @@ public class PurchaseOrdersImpl extends EntityImpl {
 
 
     /**
+     * @param orderId key constituent
+
+     * @return a Key object based on given key constituents.
+     */
+    public static Key createPrimaryKey(DBSequence orderId) {
+        return new Key(new Object[]{orderId});
+    }
+
+    /**
      * Validation method for PurchaseOrders.
      */
     public boolean validatePurchaseQuantity() {
@@ -597,14 +652,6 @@ public class PurchaseOrdersImpl extends EntityImpl {
         return true;
     }
 
-    /**
-     * @param orderId key constituent
-
-     * @return a Key object based on given key constituents.
-     */
-    public static Key createPrimaryKey(DBSequence orderId) {
-        return new Key(new Object[] { orderId });
-    }
 
     /**
      * Add attribute defaulting logic in this method.

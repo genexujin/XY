@@ -259,4 +259,20 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
     public void setCurrApprover(String value) {
         ensureVariableManager().setVariableValue("CurrApprover", value);
     }
+
+    /**
+     * Returns the variable value for DpVerifier.
+     * @return variable value for DpVerifier
+     */
+    public String getDpVerifier() {
+        return (String)ensureVariableManager().getVariableValue("DpVerifier");
+    }
+
+    /**
+     * Sets <code>value</code> for variable DpVerifier.
+     * @param value value to bind as DpVerifier
+     */
+    public void setDpVerifier(String value) {
+        ensureVariableManager().setVariableValue("DpVerifier", value);
+    }
 }

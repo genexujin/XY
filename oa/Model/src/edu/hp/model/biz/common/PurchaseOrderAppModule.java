@@ -28,4 +28,6 @@ public interface PurchaseOrderAppModule extends ApplicationModule {
                   boolean hasDessert, double dessertPrice, Date dessertExpectDate);
 
     String getDeptSupervisorId(String submitterId);
+
+    void findForDeptVerifier(String deptVerifierId);
 }
