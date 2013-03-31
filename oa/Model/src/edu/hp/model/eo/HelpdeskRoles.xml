@@ -74,4 +74,16 @@
     ColumnType="ROWID"
     TableName="HELPDESK_ROLES"
     PrimaryKey="true"/>
+  <Attribute
+    Name="DeptId"
+    Precision="20"
+    ColumnName="DEPT_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="HELPDESK_ROLES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
 </Entity>

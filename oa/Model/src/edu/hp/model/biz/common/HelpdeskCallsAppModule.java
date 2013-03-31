@@ -11,4 +11,8 @@ public interface HelpdeskCallsAppModule extends ApplicationModule {
     void findByState(String state);
 
     void findByCallId(String id);
+
+    void findByStateAndRole(String state, String isIT);
+
+    void findByStateAndCallee(String state, String callee);
 }

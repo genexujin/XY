@@ -12,9 +12,11 @@
                                 <f:facet name="separator">
                                     <af:spacer width="10px" height="5px"/>
                                 </f:facet>
-                                <af:commandButton text="查询" id="cb1" actionListener="#{pageFlowScope.MyHdCallBean.doQuery}"/>
+                                <af:commandButton text="查询" id="cb1" actionListener="#{pageFlowScope.MyHdCallBean.doQuery}"
+                                                  icon="/images/icons/quick_query.png"/>
                                 <af:commandButton text="清空条件" id="cb2"
-                                                  action="#{pageFlowScope.MyHdCallBean.returnClicked}"/>
+                                                  action="#{pageFlowScope.MyHdCallBean.returnClicked}"
+                                                  icon="/images/icons/clear.png"/>
                             </af:panelGroupLayout>
                         </f:facet>
                             <af:inputText label="报修单号" id="it1" value="#{pageFlowScope.MyHdCallBean.callReadableId}"
@@ -23,7 +25,7 @@
                                                 label="申请人"
                                                 required="#{bindings.EmpWithEmptyForCaller.hints.mandatory}"
                                                 shortDesc="#{bindings.EmpWithEmptyForCaller.hints.tooltip}" id="soc10"
-                                                disabled="#{pageFlowScope.fromMenu!='callee'}">
+                                                disabled="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign'}">
                                 <f:selectItems value="#{bindings.EmpWithEmptyForCaller.items}" id="si5"/>
                             </af:selectOneChoice>
                             <af:selectOneChoice value="#{bindings.ReasonLevel1WithEmpty.inputValue}"
@@ -33,17 +35,18 @@
                                                 valueChangeListener="#{pageFlowScope.MyHdCallBean.onReasonLevel1Change}">
                                 <f:selectItems value="#{bindings.ReasonLevel1WithEmpty.items}" id="si3"/>
                             </af:selectOneChoice>
-                        <af:selectOneChoice value="#{bindings.HdEvalWithEmpty.inputValue}"
-                                            label="用户评价"
-                                            required="#{bindings.HdEvalWithEmpty.hints.mandatory}"
-                                            shortDesc="#{bindings.HdEvalWithEmpty.hints.tooltip}" id="soc1">
-                            <f:selectItems value="#{bindings.HdEvalWithEmpty.items}" id="si4"/>
-                        </af:selectOneChoice>
-                        <af:inputDate label="提交日期自" id="id1" value="#{pageFlowScope.MyHdCallBean.submitDateFrom}"/>
+                            <af:selectOneChoice value="#{bindings.HdEvalWithEmpty.inputValue}"
+                                                label="用户评价"
+                                                required="#{bindings.HdEvalWithEmpty.hints.mandatory}"
+                                                shortDesc="#{bindings.HdEvalWithEmpty.hints.tooltip}" id="soc1">
+                                <f:selectItems value="#{bindings.HdEvalWithEmpty.items}" id="si4"/>
+                            </af:selectOneChoice>
+                            <af:inputDate label="提交日期自" id="id1" value="#{pageFlowScope.MyHdCallBean.submitDateFrom}"/>
                             <af:selectOneChoice value="#{bindings.HdStateWithEmpty.inputValue}"
                                                 label="状态"
                                                 required="#{bindings.HdStateWithEmpty.hints.mandatory}"
-                                                shortDesc="#{bindings.HdStateWithEmpty.hints.tooltip}" id="soc8">
+                                                shortDesc="#{bindings.HdStateWithEmpty.hints.tooltip}" id="soc8"
+                                                disabled="#{pageFlowScope.fromMenu=='callee'}">
                                 <f:selectItems value="#{bindings.HdStateWithEmpty.items}" id="si1"/>
                             </af:selectOneChoice>
                             <af:selectOneChoice value="#{bindings.HdResultWithEmpty.inputValue}"
@@ -57,7 +60,8 @@
                             <af:selectOneChoice value="#{bindings.EmpWithEmptyForCallee.inputValue}"
                                                 label="处理人"
                                                 required="#{bindings.EmpWithEmptyForCallee.hints.mandatory}"
-                                                shortDesc="#{bindings.EmpWithEmptyForCallee.hints.tooltip}" id="soc11">
+                                                shortDesc="#{bindings.EmpWithEmptyForCallee.hints.tooltip}" id="soc11"
+                                                disabled="#{pageFlowScope.fromMenu=='callee'}">
                                 <f:selectItems value="#{bindings.EmpWithEmptyForCallee.items}" id="si7"/>
                             </af:selectOneChoice>
                         <af:selectOneChoice value="#{bindings.LocationsWithEmpty.inputValue}"
@@ -80,8 +84,9 @@
                 <f:facet name="toolbar">
                     <af:toolbar id="t1">
                         <af:commandToolbarButton text="新建" id="ctb1" action="create"
-                                                 rendered="#{pageFlowScope.fromMenu!='callee'}"/>
-                        <af:commandToolbarButton text="更改" id="ctb2" action="edit"/>
+                                                 rendered="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign'}"
+                                                 icon="/images/icons/new_ena.png"/>
+                        <af:commandToolbarButton text="更改" id="ctb2" action="edit" icon="/images/icons/edit.png"/>
                     </af:toolbar>
                 </f:facet>
                 <f:facet name="statusbar"/>
@@ -106,9 +111,9 @@
                             <f:selectItems value="#{row.bindings.CallerId.items}" id="si30"/>
                         </af:selectOneChoice>
                     </af:column>
-                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CalleeDisplayName.name}" sortable="true"
-                               headerText="#{bindings.HelpdeskCallsView11.hints.CalleeDisplayName.label}" id="resId1c3">
-                        <af:outputText value="#{row.CalleeDisplayName}" id="ot11"/>
+                    <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CalleeFullName.name}" sortable="true"
+                               headerText="#{bindings.HelpdeskCallsView11.hints.CalleeFullName.label}" id="resId1c3">
+                        <af:outputText value="#{row.CalleeFullName}" id="ot11"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.SubmitAt.name}"
                                        sortable="false" headerText="#{bindings.HelpdeskCallsView11.hints.SubmitAt.label}"

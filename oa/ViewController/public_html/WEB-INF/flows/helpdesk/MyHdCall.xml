@@ -44,6 +44,10 @@
         <expression>#{pageFlowScope.fromMenu == 'create'}</expression>
         <outcome>create</outcome>
       </case>
+      <case id="__27">
+        <expression>#{pageFlowScope.fromMenu == 'assign'}</expression>
+        <outcome>assign</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findByCallerId">
@@ -52,16 +56,22 @@
         <fixed-outcome>byCallerId</fixed-outcome>
       </outcome>
     </method-call>
-    <method-call id="findByPendingProcess">
-      <method>#{bindings.findByState.execute}</method>
+    <method-call id="findForCallee">
+      <method>#{bindings.findByStateAndCallee.execute}</method>
       <outcome>
-        <fixed-outcome>byState</fixed-outcome>
+        <fixed-outcome>forCallee</fixed-outcome>
       </outcome>
     </method-call>
     <method-call id="findByCallId">
       <method>#{bindings.findByCallId.execute}</method>
       <outcome>
         <fixed-outcome>byCallId</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByProcess">
+      <method>#{bindings.findByStateAndRole.execute}</method>
+      <outcome>
+        <fixed-outcome>findByProcess</fixed-outcome>
       </outcome>
     </method-call>
     <control-flow-rule id="__2">
@@ -76,11 +86,15 @@
       </control-flow-case>
       <control-flow-case id="__23">
         <from-outcome>returnFromCallee</from-outcome>
-        <to-activity-id>findByPendingProcess</to-activity-id>
+        <to-activity-id>findForCallee</to-activity-id>
       </control-flow-case>
       <control-flow-case id="__26">
         <from-outcome>returnFromCaller</from-outcome>
         <to-activity-id>findByCallerId</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__31">
+        <from-outcome>returnFromAssigner</from-outcome>
+        <to-activity-id>findByProcess</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__4">
@@ -98,7 +112,7 @@
       </control-flow-case>
       <control-flow-case id="__11">
         <from-outcome>callee</from-outcome>
-        <to-activity-id>findByPendingProcess</to-activity-id>
+        <to-activity-id>findForCallee</to-activity-id>
       </control-flow-case>
       <control-flow-case id="__18">
         <from-outcome>byCallId</from-outcome>
@@ -107,6 +121,10 @@
       <control-flow-case id="__24">
         <from-outcome>create</from-outcome>
         <to-activity-id>Create</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__28">
+        <from-outcome>assign</from-outcome>
+        <to-activity-id>findByProcess</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__12">
@@ -117,9 +135,9 @@
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__14">
-      <from-activity-id>findByPendingProcess</from-activity-id>
+      <from-activity-id>findForCallee</from-activity-id>
       <control-flow-case id="__15">
-        <from-outcome>byState</from-outcome>
+        <from-outcome>forCallee</from-outcome>
         <to-activity-id>MyHelpdeskCall</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
@@ -135,6 +153,13 @@
       <control-flow-case id="__22">
         <from-outcome>return</from-outcome>
         <to-activity-id>Router</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__29">
+      <from-activity-id>findByProcess</from-activity-id>
+      <control-flow-case id="__30">
+        <from-outcome>findByProcess</from-outcome>
+        <to-activity-id>MyHelpdeskCall</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

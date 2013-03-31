@@ -11,5 +11,11 @@
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1">
       <NamedData NDName="state" NDValue="已受理" NDType="java.lang.String"/>
     </methodAction>
+    <methodAction id="findByStateAndCallee" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findByStateAndCallee" IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1">
+      <NamedData NDName="state" NDValue="已分派" NDType="java.lang.String"/>
+      <NamedData NDName="callee" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

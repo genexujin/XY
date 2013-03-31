@@ -31,4 +31,16 @@ public class HelpdeskCallsAppModuleClient extends ApplicationModuleImpl implemen
         Object _ret = this.riInvokeExportedMethod(this,"findByState",new String [] {"java.lang.String"},new Object[] {state});
         return;
     }
+
+    public void findByStateAndCallee(String state, String callee) {
+        Object _ret =
+            this.riInvokeExportedMethod(this,"findByStateAndCallee",new String [] {"java.lang.String","java.lang.String"},new Object[] {state, callee});
+        return;
+    }
+
+    public void findByStateAndRole(String state, String isIT) {
+        Object _ret =
+            this.riInvokeExportedMethod(this,"findByStateAndRole",new String [] {"java.lang.String","java.lang.String"},new Object[] {state, isIT});
+        return;
+    }
 }

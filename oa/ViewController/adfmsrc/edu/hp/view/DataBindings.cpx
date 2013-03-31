@@ -72,8 +72,6 @@
           usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_queryByPKPageDef"/>
     <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findByCallerId"
           usageId="edu_hp_view_MyHdCall_MyHdCall_findByCallerIdPageDef"/>
-    <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findByPendingProcess"
-          usageId="edu_hp_view_MyHdCall_MyHdCall_findByPendingProcessPageDef"/>
     <page path="/pages/admin/Classrooms.jsff" usageId="edu_hp_view_ClassroomsPageDef"/>
     <page path="/pages/admin/ConferenceRooms.jsff" usageId="edu_hp_view_ConferenceRoomsPageDef"/>
     <page path="/pages/admin/Vehicles.jsff" usageId="edu_hp_view_VehiclesPageDef"/>
@@ -98,6 +96,10 @@
     <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByDeptReview"
           usageId="edu_hp_view_MyPo_MyPo_findByDeptReviewPageDef"/>
     <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findForQuery" usageId="edu_hp_view_MyPo_MyPo_findForQueryPageDef"/>
+    <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findByProcess"
+          usageId="edu_hp_view_MyHdCall_MyHdCall_findByProcessPageDef"/>
+    <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findForCallee"
+          usageId="edu_hp_view_MyHdCall_MyHdCall_findByPendingProcessPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -181,6 +183,8 @@
     <page id="edu_hp_view_InputLOVDemoPageDef" path="pages.Test.InputLOVDemoPageDef"/>
     <page id="edu_hp_view_MyPo_MyPo_findByDeptReviewPageDef" path="flows.po.MyPo_MyPo_findByDeptReviewPageDef"/>
     <page id="edu_hp_view_MyPo_MyPo_findForQueryPageDef" path="flows.po.MyPo_MyPo_findForQueryPageDef"/>
+    <page id="edu_hp_view_MyHdCall_MyHdCall_findByProcessPageDef"
+          path="flows.helpdesk.MyHdCall_MyHdCall_findByProcessPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

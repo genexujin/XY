@@ -48,6 +48,10 @@
     Name="ud"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="DpId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="Managers"
     ViewObjectName="edu.hp.model.vo.EmployeesView"
@@ -186,8 +190,7 @@
     EntityAttrName="DeptId"
     EntityUsage="Employees"
     AliasName="DEPT_ID"
-    LOVName="LOV_DeptId"
-    IsQueriable="false">
+    LOVName="LOV_DeptId">
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
@@ -553,6 +556,42 @@
         Operator="="
         Conjunction="AND"
         Value=":ud"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByDeptIdCriteria"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EmployeesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DeptId"
+        ViewAttribute="DeptId"
+        Operator="="
+        Conjunction="AND"
+        Value=":DpId"
         IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>

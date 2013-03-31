@@ -122,5 +122,23 @@
         <Item Value="CalleeDisplayName"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="findByHdReason" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByHdReason"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskRolesView"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByHdReason_RootAppModuleDataControl_dataProvider_Root_HelpdeskCallsAppModule1_HelpdeskRolesView_findByHdReason_result">
+      <NamedData NDName="hdReason" NDType="java.lang.String"/>
+    </methodAction>
+    <listOfValues StaticList="false" IterBinding="HelpdeskCallsViewIterator" Uses="LOV_CalleeId_Retry" id="CalleeId"/>
+    <methodAction id="findDeptIdByHdReason" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findDeptIdByHdReason" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1.HelpdeskRolesView"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findDeptIdByHdReason_RootAppModuleDataControl_dataProvider_Root_HelpdeskCallsAppModule1_HelpdeskRolesView_findDeptIdByHdReason_result">
+      <NamedData NDName="hdReason" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="BelongToDept">
+      <AttrNames>
+        <Item Value="BelongToDept"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

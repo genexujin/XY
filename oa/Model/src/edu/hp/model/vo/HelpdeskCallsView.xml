@@ -25,8 +25,12 @@
        HelpdeskCalls.REASON_LEVEL_3, 
        HelpdeskCalls.REASON_DETAIL, 
        HelpdeskCalls.SUBMIT_AT, 
-       HelpdeskCalls.CALLEE_DISPLAY_NAME"
-  FromList="HELPDESK_CALLS HelpdeskCalls"
+       HelpdeskCalls.CALLEE_DISPLAY_NAME, 
+       HelpdeskCalls.BELONG_TO_DEPT, 
+       EmployeesForCallee.FIRST_NAME, 
+       EmployeesForCallee.ID, 
+       EmployeesForCallee.LAST_NAME"
+  FromList="HELPDESK_CALLS HelpdeskCalls, EMPLOYEES EmployeesForCallee"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
@@ -34,7 +38,8 @@
   ComponentClass="edu.hp.model.vo.HelpdeskCallsViewImpl"
   ComponentInterface="edu.hp.model.vo.common.HelpdeskCallsView"
   ClientProxyName="edu.hp.model.vo.client.HelpdeskCallsViewClient"
-  OrderBy="HelpdeskCalls.CALL_ID desc">
+  OrderBy="HelpdeskCalls.CALL_ID desc"
+  Where="HelpdeskCalls.CALLEE_ID = EmployeesForCallee.ID(+)">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -158,11 +163,18 @@
     RowLevelBinds="true"/>
   <ViewAccessor
     Name="EmployeeAsCallee"
-    ViewObjectName="edu.hp.model.vo.EmployeesView"
-    RowLevelBinds="true">
+    ViewObjectName="edu.hp.model.vo.EmployeesView">
     <ViewCriteriaUsage
       Name="filterByExpired"
       FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
+    <ViewCriteriaUsage
+      Name="findByDeptIdCriteria"
+      FullName="edu.hp.model.vo.EmployeesView.findByDeptIdCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="DpId">
+        <TransientExpression><![CDATA[BelongToDept]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
   </ViewAccessor>
   <ListBinding
     Name="LOV_CallerId"
@@ -310,7 +322,7 @@
     Name="LOV_CalleeId_Retry"
     ListVOName="EmployeeAsCallee"
     ListRangeSize="10"
-    ComboRowCountHint="5"
+    ComboRowCountHint="25"
     NullValueFlag="none"
     MRUCount="0">
     <AttrArray Name="AttrNames">
@@ -329,6 +341,25 @@
   <EntityUsage
     Name="HelpdeskCalls"
     Entity="edu.hp.model.eo.HelpdeskCalls"/>
+  <EntityUsage
+    Name="EmployeesForCallee"
+    Entity="edu.hp.model.eo.Employees"
+    Association="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc.Callee"
+    SourceUsage="edu.hp.model.vo.HelpdeskCallsView.HelpdeskCalls"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="LEFT OUTER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="edu.hp.model.eo.HelpdeskCalls.CalleeId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="edu.hp.model.eo.Employees.Id"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
   <ViewAttribute
     Name="CallId"
     IsNotNull="true"
@@ -553,6 +584,50 @@
     EntityAttrName="CalleeDisplayName"
     EntityUsage="HelpdeskCalls"
     AliasName="CALLEE_DISPLAY_NAME"/>
+  <ViewAttribute
+    Name="BelongToDept"
+    PrecisionRule="true"
+    EntityAttrName="BelongToDept"
+    EntityUsage="HelpdeskCalls"
+    AliasName="BELONG_TO_DEPT"/>
+  <ViewAttribute
+    Name="FirstName"
+    PrecisionRule="true"
+    EntityAttrName="FirstName"
+    EntityUsage="EmployeesForCallee"
+    AliasName="FIRST_NAME"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="EmployeesForCallee"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="LastName"
+    PrecisionRule="true"
+    EntityAttrName="LastName"
+    EntityUsage="EmployeesForCallee"
+    AliasName="LAST_NAME"/>
+  <ViewAttribute
+    Name="CalleeFullName"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[LastName+FirstName]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.HelpdeskCallsView.CalleeFullName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewCriteria
     Name="ReasonLevel1Criteria"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
@@ -1021,6 +1096,97 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="StateAndRsnLv1Criteria"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HelpdeskCallsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="State"
+        ViewAttribute="State"
+        Operator="="
+        Conjunction="AND"
+        Value=":StateV"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ReasonLevel1"
+        ViewAttribute="ReasonLevel1"
+        Operator="="
+        Conjunction="AND"
+        Value=":RsnLv1"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="StateAndCalleeCriteria"
+    ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HelpdeskCallsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CalleeId"
+        ViewAttribute="CalleeId"
+        Operator="="
+        Conjunction="AND"
+        Value=":calleeId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="State"
+        ViewAttribute="State"
+        Operator="="
+        Conjunction="AND"
+        Value=":StateV"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="CallId"/>
+  </AttrArray>
   <ViewLinkAccessor
     Name="CalleeView"
     ViewLink="edu.hp.model.vo.link.EmpHelpdeskCalleeViewLink"
@@ -1056,7 +1222,7 @@
         Type="java.lang.String"/>
     </Method>
     <Method
-      Name="doQuery1"
+      Name="doQuery"
       MethodName="doQuery">
       <Return
         Type="void"/>

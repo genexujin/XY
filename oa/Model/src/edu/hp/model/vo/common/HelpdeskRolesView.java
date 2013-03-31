@@ -7,4 +7,8 @@ import oracle.jbo.ViewObject;
 // ---------------------------------------------------------------------
 public interface HelpdeskRolesView extends ViewObject {
     String findByLocationIdAndHdReason(String locationId, String hdReason);
+
+    String findByHdReason(String hdReason);
+
+    String findDeptIdByHdReason(String hdReason);
 }

@@ -10,7 +10,8 @@
        HelpdeskRoles.ROLE_NAME, 
        HelpdeskRoles.CREATED_AT, 
        HelpdeskRoles.CREATED_BY, 
-       HelpdeskRoles.ROWID"
+       HelpdeskRoles.ROWID, 
+       HelpdeskRoles.DEPT_ID"
   FromList="HELPDESK_ROLES HelpdeskRoles"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -70,6 +71,12 @@
     EntityAttrName="Rowid"
     EntityUsage="HelpdeskRoles"
     AliasName="ROWID"/>
+  <ViewAttribute
+    Name="DeptId"
+    PrecisionRule="true"
+    EntityAttrName="DeptId"
+    EntityUsage="HelpdeskRoles"
+    AliasName="DEPT_ID"/>
   <ViewCriteria
     Name="findByLocationAndHdReason"
     ViewObjectName="edu.hp.model.vo.HelpdeskRolesView"
@@ -114,6 +121,42 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="findByHdReasonCriteria"
+    ViewObjectName="edu.hp.model.vo.HelpdeskRolesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HelpdeskRolesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="HelpdeskReason"
+        ViewAttribute="HelpdeskReason"
+        Operator="="
+        Conjunction="AND"
+        Value=":hdRsnLv1"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ClientInterface>
     <Method
       Name="findByLocationIdAndHdReason"
@@ -122,6 +165,24 @@
         Type="java.lang.String"/>
       <Parameter
         Name="locationId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="hdReason"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findByHdReason"
+      MethodName="findByHdReason">
+      <Return
+        Type="java.lang.String"/>
+      <Parameter
+        Name="hdReason"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findDeptIdByHdReason"
+      MethodName="findDeptIdByHdReason">
+      <Return
         Type="java.lang.String"/>
       <Parameter
         Name="hdReason"

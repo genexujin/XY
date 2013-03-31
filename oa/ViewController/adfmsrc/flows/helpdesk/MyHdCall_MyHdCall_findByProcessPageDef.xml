@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="MyHdCall_MyHdCall_findByProcessPageDef" Package="flows.helpdesk" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="findByStateAndRole" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findByStateAndRole" IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1">
+      <NamedData NDName="state" NDValue="已受理" NDType="java.lang.String"/>
+      <NamedData NDName="isIT" NDValue="#{sessionScope.LoginUserBean.isUserInRole['信息报修分派']}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

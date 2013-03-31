@@ -12,6 +12,7 @@ public class Constants {
     public static final String STATE_PENDING_APPROVAL = "待审批";
     public static final String STATE_TRIP_PLANNED = "已调度";
     public static final String STATE_ACCEPTED = "已受理";
+    public static final String STATE_ASSIGNED = "已分派";
     public static final String STATE_PROCESSED = "已处理";
     public static final String STATE_EVALUATED = "已评价";
     public static final String STATE_NOTE_UNREAD = "UNREAD";
@@ -53,6 +54,9 @@ public class Constants {
     public static final String ROLE_PO_BUYER="采购执行";
     public static final String ROLE_PO_RECEIVER="采购收货";
     public static final String ROLE_PO_DEPT_VERIFIER="采购部门审核";
+    
+    public static final String HD_REASON_IT = "信息";
+    public static final String HD_REASON_AFF = "总务";
     
     public static final String CONTEXT_OBJ_VEH= "VEH";
     public static final String CONTEXT_OBJ_VEH_ID = "id";

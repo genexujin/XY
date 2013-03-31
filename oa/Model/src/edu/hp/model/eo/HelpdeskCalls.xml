@@ -347,6 +347,18 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="BelongToDept"
+    Precision="20"
+    ColumnName="BELONG_TO_DEPT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="HELPDESK_CALLS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
   <AccessorAttribute
     Name="Callee"
     Association="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc"

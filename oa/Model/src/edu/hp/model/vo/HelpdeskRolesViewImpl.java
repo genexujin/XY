@@ -37,6 +37,44 @@ public class HelpdeskRolesViewImpl extends ViewObjectImpl implements HelpdeskRol
         
         return null;
     }
+    
+    public String findByHdReason(final String hdReason) {
+        this.setApplyViewCriteriaNames(null);
+        this.setRangeSize(-1);
+        
+        this.sethdRsnLv1(hdReason);
+        ViewCriteria vc = this.getViewCriteria("findByHdReasonCriteria");
+        this.setApplyViewCriteriaName(vc.getName());
+        
+        this.executeQuery();
+        Row[] rows = this.getAllRowsInRange();
+        if (rows != null && rows.length > 0) {
+            String roleName = (String)rows[0].getAttribute("RoleName");
+            System.out.println("Role name is: " + roleName);
+            return roleName;
+        }
+        
+        return null;
+    }
+    
+    public String findDeptIdByHdReason(final String hdReason) {
+        this.setApplyViewCriteriaNames(null);
+        this.setRangeSize(-1);
+        
+        this.sethdRsnLv1(hdReason);
+        ViewCriteria vc = this.getViewCriteria("findByHdReasonCriteria");
+        this.setApplyViewCriteriaName(vc.getName());
+        
+        this.executeQuery();
+        Row[] rows = this.getAllRowsInRange();
+        if (rows != null && rows.length > 0) {
+            String dId = (String)rows[0].getAttribute("DeptId");
+            System.out.println("Dept Id is: " + dId);
+            return dId;
+        }
+        
+        return null;
+    }
 
     /**
      * Returns the variable value for locId.

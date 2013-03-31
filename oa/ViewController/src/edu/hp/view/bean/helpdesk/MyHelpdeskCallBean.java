@@ -51,6 +51,8 @@ public class MyHelpdeskCallBean extends BaseBean {
     private Date submitDateTo;
     
     private String fromButton;
+    
+    private String oldCallee;
 
     public MyHelpdeskCallBean() {
     }
@@ -125,20 +127,26 @@ public class MyHelpdeskCallBean extends BaseBean {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_INITIAL)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_ACCEPTED);
+            
+            String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
+            String deptId = getProcessDept(rsnLv1);
+            ADFUtils.setBoundAttributeValue("BelongToDept", deptId);
+            
             boolean success = ADFUtils.commit("报修单已提交！", "报修单提交失败，请核对输入的信息或联系管理员！");
             if (success) {
-                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
+                String id = (ADFUtils.getBoundAttributeValue("CallId")).toString();
+                String readableId = (ADFUtils.getBoundAttributeValue("CallReadableId")).toString();
                 String locId = (String)ADFUtils.getBoundAttributeValue("LocationId");
                 String locationDetail = (String)ADFUtils.getBoundAttributeValue("LocationDetail");
-                String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
-                String roleName = getRoleName(locId, rsnLv1);
+//                String roleName = getRoleName(locId, rsnLv1);
+                String roleName = getRoleName(rsnLv1);
                 
-                //send to callee
-                String noteTitle = "有新的报修请求等待处理";
-                String noteContent = "详细地址：" + locationDetail + " 报修原因：" + rsnLv1 + " 提交时间：" + getDateString();                
+                //send to assigner
+                String noteTitle = "有新的报修请求等待分派，报修单号：" + readableId;
+                String noteContent = "报修原因：" + rsnLv1 + " 详细地址：" + locationDetail + " 提交时间：" + getDateString();
                 sendNotification(noteTitle, noteContent, null, roleName);
                 
-                createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, roleName,id);
+                createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, roleName, readableId);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -147,6 +155,46 @@ public class MyHelpdeskCallBean extends BaseBean {
         }
     }
 
+    public void assignHdCall(ActionEvent event) {
+        String originState = (String)ADFUtils.getBoundAttributeValue("State");
+        String calleeId = ADFUtils.getBoundAttributeValue("CalleeId").toString();
+        if (calleeId == null || calleeId.equals("")) {
+            JSFUtils.addFacesErrorMessage("受理人不能为空");
+        } else {
+            ADFUtils.setBoundAttributeValue("State", Constants.STATE_ASSIGNED);
+            
+            boolean success = ADFUtils.commit("报修单已分派！", "报修单分派失败，请核对输入的信息或联系管理员！");
+            if (success) {
+                String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
+                String id = (ADFUtils.getBoundAttributeValue("CallId")).toString();
+                String readableId = (ADFUtils.getBoundAttributeValue("CallReadableId")).toString();
+                String locationDetail = (String)ADFUtils.getBoundAttributeValue("LocationDetail");
+            //            String calleeId = (String)ADFUtils.getBoundAttributeValue("CalleeId");
+                
+                //Complete task for assigner
+                String roleName = getRoleName(rsnLv1);
+                completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, roleName);
+                
+                //Complete task for callee if it is assigned before
+                System.out.println("之前分派的处理人id：" + oldCallee);
+                if (oldCallee != null) {
+                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, oldCallee);
+                }
+                
+                String noteTitle = "有新的报修请求等待分派，报修单号：" + readableId;
+                String noteContent = "报修原因：" + rsnLv1 + " 详细地址：" + locationDetail;
+                sendNotification(noteTitle, noteContent, calleeId, null);
+                
+                createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, calleeId, readableId);
+                
+                ADFUtils.findOperation("Commit").execute();
+                
+            } else {
+                ADFUtils.setBoundAttributeValue("State", originState);
+            }
+        }
+    }
+    
     public void cancelHdCall(ActionEvent actionEvent) {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null) {
@@ -156,12 +204,13 @@ public class MyHelpdeskCallBean extends BaseBean {
                 //在“已受理”状态进行cancel的话，需要结束创建给报修员的task
                 String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
                 
-                String locId = (String)ADFUtils.getBoundAttributeValue("LocationId");
+                String calleeId = (String)ADFUtils.getBoundAttributeValue("CalleeId");
                 String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
-                String roleName = getRoleName(locId, rsnLv1);
+                String roleName = getRoleName(rsnLv1);
                 
                 //complete the task for callee
                 completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, roleName);
+                completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, calleeId);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -292,6 +341,16 @@ public class MyHelpdeskCallBean extends BaseBean {
         System.out.println("Role name in bean is: " + roleName);
         return roleName;
     }
+    
+    private String getRoleName(final String rsnLv1) {
+        OperationBinding op = ADFUtils.findOperation("findByHdReason");
+        op.getParamsMap().put("hdReason", rsnLv1);
+        op.execute();
+        
+        final String roleName = (String)op.getResult();
+        System.out.println("Role name in bean is: " + roleName);
+        return roleName;
+    }
 
     public String returnClicked() {        
         DCIteratorBinding state = ADFUtils.findIterator("HdStateWithEmptyIterator");
@@ -322,9 +381,10 @@ public class MyHelpdeskCallBean extends BaseBean {
         String fromMenu = (String)JSFUtils.resolveExpression("#{pageFlowScope.fromMenu}");
         System.out.println("from menu: " + fromMenu);
         
-        
         if ("callee".equals(fromMenu)) {
             return "returnFromCallee";
+        } else if ("assign".equals(fromMenu)) {
+            return "returnFromAssigner";
         } else {
             return "returnFromCaller";
         }
@@ -341,5 +401,28 @@ public class MyHelpdeskCallBean extends BaseBean {
 
     public String getFromButton() {
         return fromButton;
+    }
+
+    private String getProcessDept(String rsnLv1) {
+        OperationBinding op = ADFUtils.findOperation("findDeptIdByHdReason");
+        op.getParamsMap().put("hdReason", rsnLv1);
+        op.execute();
+        
+        final String deptId = (String)op.getResult();
+        System.out.println("Dept id in bean is: " + deptId);
+        return deptId;
+    }
+
+    public void setOldCallee(String oldCallee) {
+        this.oldCallee = oldCallee;
+    }
+
+    public String getOldCallee() {
+        return oldCallee;
+    }
+
+    public void calleeChanged(ValueChangeEvent event) {
+        //Set the old value so that it can be used to complete the task
+        oldCallee = (String)event.getOldValue();
     }
 }

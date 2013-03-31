@@ -1,6 +1,7 @@
 package edu.hp.model.biz;
 
 import edu.hp.model.biz.common.HelpdeskCallsAppModule;
+import edu.hp.model.common.Constants;
 import edu.hp.model.vo.EmployeesViewImpl;
 import edu.hp.model.vo.HelpdeskCallsViewImpl;
 
@@ -80,6 +81,60 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
 //            EmpWithEmptyImpl eView = this.getEmpWithEmptyForCaller();
 //            eView.setApplyViewCriteriaNames(null);
 //            eView.executeQuery();
+        }
+    }
+    
+    public void findByStateAndRole(String state, String isIT) {
+        HelpdeskCallsViewImpl hdView = this.getHelpdeskCallsView();
+        hdView.setApplyViewCriteriaNames(null);
+        
+        String rsnLv1 = "true".equals(isIT) ? Constants.HD_REASON_IT : Constants.HD_REASON_AFF;
+        
+        System.err.println("In AppModule: 状态: " + state + "; 一级原因：" + rsnLv1);
+        if (state != null) {
+            hdView.setStateV(state);
+            hdView.setRsnLv1(rsnLv1);
+            ViewCriteria sCriteria = hdView.getViewCriteria("StateAndRsnLv1Criteria");
+            hdView.setApplyViewCriteriaName(sCriteria.getName());
+            hdView.executeQuery();
+            
+            //Assinger allow to search for "已受理", "已派发" "已处理", "已评价", so here use the CalleeQueryCriteria
+            //state parameter is not necessary.
+            HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
+            sView.setApplyViewCriteriaNames(null);
+            ViewCriteria stateCriteria = sView.getViewCriteria("CalleeQueryCriteria");
+            sView.setApplyViewCriteriaName(stateCriteria.getName());
+            sView.executeQuery();
+        }
+    }
+    
+    public void findByStateAndCallee(String state, String callee) {
+        HelpdeskCallsViewImpl hdView = this.getHelpdeskCallsView();
+        hdView.setApplyViewCriteriaNames(null);
+        
+        System.err.println("In AppModule: state is: " + state + " callee is: " + callee);
+        if (state != null) {
+            hdView.setStateV(state);
+            hdView.setcalleeId(callee);
+            ViewCriteria sCriteria = hdView.getViewCriteria("StateAndCalleeCriteria");
+            hdView.setApplyViewCriteriaName(sCriteria.getName());
+            hdView.executeQuery();
+            
+            //Callee allow to search for "已受理", "已处理", "已评价", so here use the CalleeQueryCriteria
+            //state parameter is not necessary.
+            HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
+            sView.setApplyViewCriteriaNames(null);
+            sView.setstate(state);
+            ViewCriteria stateCriteria = sView.getViewCriteria("HdStateCriteria");
+            sView.setApplyViewCriteriaName(stateCriteria.getName());
+            sView.executeQuery();
+            
+            EmpWithEmptyImpl eView = this.getEmpWithEmptyForCallee();
+            eView.setApplyViewCriteriaNames(null);
+            eView.setcId(callee);
+            ViewCriteria cVC = eView.getViewCriteria("findByCalleeIdCriteria");
+            eView.setApplyViewCriteriaName(cVC.getName());            
+            eView.executeQuery();
         }
     }
     

@@ -45,6 +45,7 @@
           <Item Value="CreateAt"/>
           <Item Value="SubmitAt"/>
           <Item Value="CalleeDisplayName"/>
+          <Item Value="CalleeFullName"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

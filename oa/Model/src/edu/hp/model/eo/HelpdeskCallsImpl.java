@@ -228,6 +228,16 @@ public class HelpdeskCallsImpl extends EntityImpl {
             }
         }
         ,
+        BelongToDept {
+            public Object get(HelpdeskCallsImpl obj) {
+                return obj.getBelongToDept();
+            }
+
+            public void put(HelpdeskCallsImpl obj, Object value) {
+                obj.setBelongToDept((String)value);
+            }
+        }
+        ,
         Callee {
             public Object get(HelpdeskCallsImpl obj) {
                 return obj.getCallee();
@@ -274,6 +284,7 @@ public class HelpdeskCallsImpl extends EntityImpl {
             return vals;
         }
     }
+
     public static final int CALLID = AttributesEnum.CallId.index();
     public static final int CALLREADABLEID = AttributesEnum.CallReadableId.index();
     public static final int CALLERID = AttributesEnum.CallerId.index();
@@ -295,6 +306,7 @@ public class HelpdeskCallsImpl extends EntityImpl {
     public static final int REASONDETAIL = AttributesEnum.ReasonDetail.index();
     public static final int SUBMITAT = AttributesEnum.SubmitAt.index();
     public static final int CALLEEDISPLAYNAME = AttributesEnum.CalleeDisplayName.index();
+    public static final int BELONGTODEPT = AttributesEnum.BelongToDept.index();
     public static final int CALLEE = AttributesEnum.Callee.index();
     public static final int CALLER = AttributesEnum.Caller.index();
 
@@ -302,6 +314,13 @@ public class HelpdeskCallsImpl extends EntityImpl {
      * This is the default constructor (do not remove).
      */
     public HelpdeskCallsImpl() {
+    }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("edu.hp.model.eo.HelpdeskCalls");
     }
 
     /**
@@ -625,6 +644,22 @@ public class HelpdeskCallsImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for BelongToDept, using the alias name BelongToDept.
+     * @return the value of BelongToDept
+     */
+    public String getBelongToDept() {
+        return (String)getAttributeInternal(BELONGTODEPT);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for BelongToDept.
+     * @param value value to set the BelongToDept
+     */
+    public void setBelongToDept(String value) {
+        setAttributeInternal(BELONGTODEPT, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -683,6 +718,7 @@ public class HelpdeskCallsImpl extends EntityImpl {
         setAttributeInternal(CALLER, value);
     }
 
+
     /**
      * @param callId key constituent
 
@@ -692,13 +728,6 @@ public class HelpdeskCallsImpl extends EntityImpl {
         return new Key(new Object[]{callId});
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("edu.hp.model.eo.HelpdeskCalls");
-    }
-    
     public void lock() {
         try { 
             super.lock(); 

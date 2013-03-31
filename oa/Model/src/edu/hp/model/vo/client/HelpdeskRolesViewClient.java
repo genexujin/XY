@@ -16,9 +16,22 @@ public class HelpdeskRolesViewClient extends ViewUsageImpl implements HelpdeskRo
     public HelpdeskRolesViewClient() {
     }
 
+
+    public String findByHdReason(String hdReason) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"findByHdReason",new String [] {"java.lang.String"},new Object[] {hdReason});
+        return (String)_ret;
+    }
+
     public String findByLocationIdAndHdReason(String locationId, String hdReason) {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this,"findByLocationIdAndHdReason",new String [] {"java.lang.String","java.lang.String"},new Object[] {locationId, hdReason});
+        return (String)_ret;
+    }
+
+    public String findDeptIdByHdReason(String hdReason) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"findDeptIdByHdReason",new String [] {"java.lang.String"},new Object[] {hdReason});
         return (String)_ret;
     }
 }

@@ -20,19 +20,21 @@
             <af:panelFormLayout id="pfl1">
               <f:facet name="footer">
                 <af:toolbar id="t1">
-              <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       actionListener="#{pageFlowScope.MyHdCallBean.saveHdCall}"/>              
-              <af:commandToolbarButton text="返回" id="ctb2" immediate="true" rendered="#{pageFlowScope.fromMenu ne '-' and pageFlowScope.fromMenu ne 'create'}"
-                                       actionListener="#{bindings.Rollback.execute}" action="return">
-                <af:resetActionListener/>
-              </af:commandToolbarButton>
-              <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                       actionListener="#{pageFlowScope.MyHdCallBean.submitHdCall}">
-              </af:commandToolbarButton>
-              <af:commandToolbarButton text="取消报修单" id="ctb4" 
-                                       rendered="#{bindings.State.inputValue eq '未提交' or (bindings.State.inputValue eq '已受理' and pageFlowScope.fromMenu != 'callee')}"
-                                       actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}"/>
-            </af:toolbar>
+                  <af:commandToolbarButton text="保存" id="ctb1" rendered="#{bindings.State.inputValue eq '未提交'}"
+                                           actionListener="#{pageFlowScope.MyHdCallBean.saveHdCall}" icon="/images/icons/filesave.png"/>              
+                  <af:commandToolbarButton text="返回" id="ctb2" immediate="true" rendered="#{pageFlowScope.fromMenu ne '-' and pageFlowScope.fromMenu ne 'create'}"
+                                           actionListener="#{bindings.Rollback.execute}" action="return" icon="/images/icons/rollback.png">
+                    <af:resetActionListener/>
+                  </af:commandToolbarButton>
+                  <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '未提交'}"
+                                           actionListener="#{pageFlowScope.MyHdCallBean.submitHdCall}" icon="/images/icons/run.png">
+                  </af:commandToolbarButton>
+                  <af:commandToolbarButton text="分派报修单" id="ctb7" icon="/images/icons/index.png" actionListener="#{pageFlowScope.MyHdCallBean.assignHdCall}"
+                                           rendered="#{sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派']}"/>
+                  <af:commandToolbarButton text="取消报修单" id="ctb4" 
+                                           rendered="#{bindings.State.inputValue eq '未提交' or (bindings.State.inputValue eq '已受理' and pageFlowScope.fromMenu != 'callee')}"
+                                           actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}" icon="/images/icons/undo.png"/>                  
+                </af:toolbar>
               </f:facet>
               <af:panelGroupLayout id="pgl3" layout="horizontal">
                 <af:selectOneChoice value="#{bindings.CallerId.inputValue}" label="#{bindings.CallerId.label}"
@@ -40,6 +42,21 @@
                                     shortDesc="#{bindings.CallerId.hints.tooltip}" id="soc1" disabled="true">
                   <f:selectItems value="#{bindings.CallerId.items}" id="si1"/>
                 </af:selectOneChoice>
+                <af:inputComboboxListOfValues id="calleeIdId"
+                                              popupTitle="搜索受理人: #{bindings.CalleeId.hints.label}"
+                                              value="#{bindings.CalleeId.inputValue}"
+                                              label="#{bindings.CalleeId.hints.label}"
+                                              model="#{bindings.CalleeId.listOfValuesModel}"
+                                              required="#{bindings.CalleeId.hints.mandatory}"
+                                              columns="#{bindings.CalleeId.hints.displayWidth}"
+                                              shortDesc="#{bindings.CalleeId.hints.tooltip}"
+                                              rendered="#{sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'] 
+                                                          or (bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已取消')}"
+                                              autoSubmit="true"
+                                              valueChangeListener="#{pageFlowScope.MyHdCallBean.calleeChanged}"
+                                              disabled="false">
+                  <f:validator binding="#{bindings.CalleeId.validator}"/>
+                </af:inputComboboxListOfValues>
                 <!--af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
                                     required="#{bindings.CalleeId.hints.mandatory}"
                                     shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2" autoSubmit="true">
