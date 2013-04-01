@@ -238,6 +238,16 @@ public class HelpdeskCallsImpl extends EntityImpl {
             }
         }
         ,
+        AffairReviewNote {
+            public Object get(HelpdeskCallsImpl obj) {
+                return obj.getAffairReviewNote();
+            }
+
+            public void put(HelpdeskCallsImpl obj, Object value) {
+                obj.setAffairReviewNote((String)value);
+            }
+        }
+        ,
         Callee {
             public Object get(HelpdeskCallsImpl obj) {
                 return obj.getCallee();
@@ -285,6 +295,7 @@ public class HelpdeskCallsImpl extends EntityImpl {
         }
     }
 
+
     public static final int CALLID = AttributesEnum.CallId.index();
     public static final int CALLREADABLEID = AttributesEnum.CallReadableId.index();
     public static final int CALLERID = AttributesEnum.CallerId.index();
@@ -307,6 +318,7 @@ public class HelpdeskCallsImpl extends EntityImpl {
     public static final int SUBMITAT = AttributesEnum.SubmitAt.index();
     public static final int CALLEEDISPLAYNAME = AttributesEnum.CalleeDisplayName.index();
     public static final int BELONGTODEPT = AttributesEnum.BelongToDept.index();
+    public static final int AFFAIRREVIEWNOTE = AttributesEnum.AffairReviewNote.index();
     public static final int CALLEE = AttributesEnum.Callee.index();
     public static final int CALLER = AttributesEnum.Caller.index();
 
@@ -315,6 +327,7 @@ public class HelpdeskCallsImpl extends EntityImpl {
      */
     public HelpdeskCallsImpl() {
     }
+
 
     /**
      * @return the definition object for this instance class.
@@ -657,6 +670,22 @@ public class HelpdeskCallsImpl extends EntityImpl {
      */
     public void setBelongToDept(String value) {
         setAttributeInternal(BELONGTODEPT, value);
+    }
+
+    /**
+     * Gets the attribute value for AffairReviewNote, using the alias name AffairReviewNote.
+     * @return the value of AffairReviewNote
+     */
+    public String getAffairReviewNote() {
+        return (String)getAttributeInternal(AFFAIRREVIEWNOTE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for AffairReviewNote.
+     * @param value value to set the AffairReviewNote
+     */
+    public void setAffairReviewNote(String value) {
+        setAttributeInternal(AFFAIRREVIEWNOTE, value);
     }
 
     /**

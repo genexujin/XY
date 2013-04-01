@@ -359,6 +359,24 @@
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="AffairReviewNote"
+    Precision="500"
+    ColumnName="AFFAIR_REVIEW_NOTE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="HELPDESK_CALLS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.HelpdeskCalls.AffairReviewNote_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <AccessorAttribute
     Name="Callee"
     Association="edu.hp.model.eo.asso.EmpHelpdeskCalleeAssoc"

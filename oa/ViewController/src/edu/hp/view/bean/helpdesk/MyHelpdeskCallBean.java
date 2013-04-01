@@ -181,7 +181,7 @@ public class MyHelpdeskCallBean extends BaseBean {
                     completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, oldCallee);
                 }
                 
-                String noteTitle = "有新的报修请求等待分派，报修单号：" + readableId;
+                String noteTitle = "有新的报修请求等待处理，报修单号：" + readableId;
                 String noteContent = "报修原因：" + rsnLv1 + " 详细地址：" + locationDetail;
                 sendNotification(noteTitle, noteContent, calleeId, null);
                 
@@ -222,34 +222,76 @@ public class MyHelpdeskCallBean extends BaseBean {
     public void processHdCall(ActionEvent actionEvent) {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         //String calleeId = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");
-        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-        String calleeId = user.getUserId();
+//        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+//        String calleeId = user.getUserId();
         
         String callerId = ADFUtils.getBoundAttributeValue("CallerId").toString();
+        String calleeId = ADFUtils.getBoundAttributeValue("CalleeId").toString();
         System.out.println("calleeId is: " + calleeId);
         System.out.println("callerId is: " + callerId);
         
         if (state != null && state.equals(Constants.STATE_ACCEPTED)) {
+            String callResult = (String)ADFUtils.getBoundAttributeValue("CallResult");
+            String id = (ADFUtils.getBoundAttributeValue("CallId")).toString();
+            String readableId = (String)ADFUtils.getBoundAttributeValue("CallReadableId");
+            //修复了，让用户评价
+            if (callResult.equals(Constants.HD_RESULT_FIXED)) {
+                ADFUtils.setBoundAttributeValue("State", Constants.STATE_PROCESSED);
+                boolean success = ADFUtils.commit("报修单已处理！", "报修单处理失败，请核对输入的信息或联系管理员！");
+                if (success) {                    
+                    //complete the task for callee
+                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, calleeId);
+                    
+                    //create evaluation task for caller
+                    createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价", callerId, readableId);
+                    
+                    ADFUtils.findOperation("Commit").execute();
+                } else {
+                    ADFUtils.setBoundAttributeValue("State", state);
+                }
+            } else { //转总务复核
+                ADFUtils.setBoundAttributeValue("State", Constants.STATE_AFF_REVIEW);
+                
+                boolean success = ADFUtils.commit("报修单已转总务复核！", "报修单处理失败，请核对输入的信息或联系管理员！");
+                
+                if (success) {                
+                    //complete the task for callee
+                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, calleeId);
+                    
+                    //create task for hd affair review
+                    createTask(id, Constants.CONTEXT_TYPE_HELPDESK, "您有新的报修请求等待复核，报修单号：" + readableId, Constants.ROLE_HD_REVIEW, readableId);
+                    
+                    ADFUtils.findOperation("Commit").execute();
+                    
+                } else {
+                    ADFUtils.setBoundAttributeValue("State", state);
+                }
+            }
+        }
+    }
+
+    public void reviewHdCall(ActionEvent actionEvent) {
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        String reviewNote = (String)ADFUtils.getBoundAttributeValue("AffairReviewNote");
+        if (reviewNote == null || reviewNote.isEmpty()) {
+            JSFUtils.addFacesErrorMessage("复核意见不能为空！");
+            
+        } else if (state != null && state.equals(Constants.STATE_AFF_REVIEW)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_PROCESSED);
-            ADFUtils.setBoundAttributeValue("CalleeId1", calleeId);
-            ADFUtils.setBoundAttributeValue("CalleeDisplayName", user.getDisplayName());
-            boolean success = ADFUtils.commit("报修单已处理！", "报修单处理失败，请核对输入的信息或联系管理员！");
+            
+            boolean success = ADFUtils.commit("报修单复核完成！", "报修单复核失败，请核对输入的信息或联系管理员！");
+            
             if (success) {
-                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("CallId")).toString();
+                String callerId = ADFUtils.getBoundAttributeValue("CallerId").toString();
                 
-                String locId = (String)ADFUtils.getBoundAttributeValue("LocationId");
-                String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
-                String roleName = getRoleName(locId, rsnLv1);
+                String id = (ADFUtils.getBoundAttributeValue("CallId")).toString();
+                String readableId = (String)ADFUtils.getBoundAttributeValue("CallReadableId");
                 
-                //complete the task for callee
-                completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, roleName);
-                
+                //complete the task for affair review
+                completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, Constants.ROLE_HD_REVIEW);
+                        
                 //create evaluation task for caller
-                this.createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价", callerId,id);
-                
-                ADFUtils.findOperation("Commit").execute();
-            } else {
-                ADFUtils.setBoundAttributeValue("State", state);
+                createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价", callerId, readableId);
             }
         }
     }

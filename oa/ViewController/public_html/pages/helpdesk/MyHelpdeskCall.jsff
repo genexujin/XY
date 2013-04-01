@@ -113,7 +113,7 @@
                     </af:column>
                     <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.CalleeFullName.name}" sortable="true"
                                headerText="#{bindings.HelpdeskCallsView11.hints.CalleeFullName.label}" id="resId1c3">
-                        <af:outputText value="#{row.CalleeFullName}" id="ot11"/>
+                        <af:outputText value="#{row.CalleeFullName}" id="ot11" rendered="#{row.CalleeFullName ne 'nullnull'}"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.HelpdeskCallsView11.hints.SubmitAt.name}"
                                        sortable="false" headerText="#{bindings.HelpdeskCallsView11.hints.SubmitAt.label}"

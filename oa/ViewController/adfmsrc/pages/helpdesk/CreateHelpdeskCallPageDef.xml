@@ -140,5 +140,10 @@
         <Item Value="BelongToDept"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="AffairReviewNote">
+      <AttrNames>
+        <Item Value="AffairReviewNote"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

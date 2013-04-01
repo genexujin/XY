@@ -29,7 +29,8 @@
        HelpdeskCalls.BELONG_TO_DEPT, 
        EmployeesForCallee.FIRST_NAME, 
        EmployeesForCallee.ID, 
-       EmployeesForCallee.LAST_NAME"
+       EmployeesForCallee.LAST_NAME, 
+       HelpdeskCalls.AFFAIR_REVIEW_NOTE"
   FromList="HELPDESK_CALLS HelpdeskCalls, EMPLOYEES EmployeesForCallee"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -628,6 +629,12 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="AffairReviewNote"
+    PrecisionRule="true"
+    EntityAttrName="AffairReviewNote"
+    EntityUsage="HelpdeskCalls"
+    AliasName="AFFAIR_REVIEW_NOTE"/>
   <ViewCriteria
     Name="ReasonLevel1Criteria"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"

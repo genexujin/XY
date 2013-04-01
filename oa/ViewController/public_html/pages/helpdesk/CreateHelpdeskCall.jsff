@@ -50,11 +50,11 @@
                                               required="#{bindings.CalleeId.hints.mandatory}"
                                               columns="#{bindings.CalleeId.hints.displayWidth}"
                                               shortDesc="#{bindings.CalleeId.hints.tooltip}"
-                                              rendered="#{sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'] 
-                                                          or (bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已取消')}"
+                                              rendered="#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'] 
+                                                          or (bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已取消'))}"
                                               autoSubmit="true"
                                               valueChangeListener="#{pageFlowScope.MyHdCallBean.calleeChanged}"
-                                              disabled="false">
+                                              disabled="#{!sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and !sessionScope.LoginUserBean.isUserInRole['信息报修分派']}">
                   <f:validator binding="#{bindings.CalleeId.validator}"/>
                 </af:inputComboboxListOfValues>
                 <!--af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
@@ -133,7 +133,7 @@
               <af:panelGroupLayout id="pgl7" layout="horizontal" valign="top">
                 <af:selectOneChoice value="#{bindings.CallResult.inputValue}" label="#{bindings.CallResult.label}"
                                     required="true"
-                                    shortDesc="#{bindings.CallResult.hints.tooltip}" id="soc8" disabled="#{bindings.State.inputValue ne '已受理'}">
+                                    shortDesc="#{bindings.CallResult.hints.tooltip}" id="soc8" disabled="#{bindings.State.inputValue ne '已分派'}">
                   <f:selectItems value="#{bindings.CallResult.items}" id="si8"/>
                 </af:selectOneChoice>
                 <af:inputText value="#{bindings.CallResultDetail.inputValue}"
@@ -141,17 +141,28 @@
                               columns="#{bindings.CallResultDetail.hints.displayWidth}"
                               maximumLength="#{bindings.CallResultDetail.hints.precision}"
                               shortDesc="#{bindings.CallResultDetail.hints.tooltip}" id="it7" rows="4"
-                              disabled="#{bindings.State.inputValue ne '已受理'}">
+                              disabled="#{bindings.State.inputValue ne '已分派'}">
                   <f:validator binding="#{bindings.CallResultDetail.validator}"/>
                 </af:inputText>
-                <af:panelLabelAndMessage label="#{bindings.CalleeDisplayName.hints.label}" id="plam1">
+                <af:panelLabelAndMessage label="#{bindings.CalleeDisplayName.hints.label}" id="plam1" rendered="false">
                   <af:outputText value="#{bindings.CalleeDisplayName.inputValue}" id="ot1"/>
                 </af:panelLabelAndMessage>
               </af:panelGroupLayout>
+              <af:inputText value="#{bindings.AffairReviewNote.inputValue}"
+                            label="#{bindings.AffairReviewNote.hints.label}"
+                            required="#{bindings.AffairReviewNote.hints.mandatory}"
+                            columns="#{bindings.AffairReviewNote.hints.displayWidth}"
+                            maximumLength="#{bindings.AffairReviewNote.hints.precision}"
+                            shortDesc="#{bindings.AffairReviewNote.hints.tooltip}" id="it1" rows="4">
+                <f:validator binding="#{bindings.AffairReviewNote.validator}"/>
+              </af:inputText>
               <f:facet name="footer">
                 <af:toolbar id="t2">
-                  <af:commandToolbarButton text="处理完成" id="ctb5" rendered="#{bindings.State.inputValue eq '已受理'}"
-                                           actionListener="#{pageFlowScope.MyHdCallBean.processHdCall}"/>
+                  <af:commandToolbarButton text="处理" id="ctb5" rendered="#{bindings.State.inputValue eq '已分派'}"
+                                           actionListener="#{pageFlowScope.MyHdCallBean.processHdCall}"
+                                           icon="/images/icons/check.png"/>
+                  <af:commandToolbarButton text="复核" id="ctb8" icon="/images/icons/check.png"
+                                           actionListener="#{pageFlowScope.MyHdCallBean.reviewHdCall}"/>
                 </af:toolbar>
               </f:facet>
             </af:panelFormLayout>
