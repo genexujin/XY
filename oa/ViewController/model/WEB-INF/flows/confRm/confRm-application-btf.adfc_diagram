@@ -20,9 +20,9 @@
       <property
          name="y">292.89648</property>
       <property
-         name="x">570.0</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">570.0</property>
    </View>
    <Router
       id="Router3">
@@ -80,7 +80,7 @@
       <property
          name="fromOutcome">findByUserid</property>
       <property
-         name="sdm:polyPoints">R50,570.0,445.39648,B50</property>
+         name="sdm:polyPoints">R50,566.5,445.39648,B44</property>
    </ControlFlowCase>
    <MethodCall
       id="MethodCall8">
