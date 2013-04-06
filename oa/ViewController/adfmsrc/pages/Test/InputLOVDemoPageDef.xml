@@ -6,7 +6,7 @@
     <variableIterator id="variables"/>
     <iterator Binds="Root.AdminModule.Employees" DataControl="RootAppModuleDataControl" RangeSize="25"
               id="EmployeesIterator"/>
-    <searchRegion Binds="EmployeesIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+    <searchRegion Binds="EmployeesIterator" Criteria="findByUserName" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="EmployeesQuery"/>
   </executables>
   <bindings>

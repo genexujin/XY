@@ -402,6 +402,8 @@
       <SchemaBasedProperties>
         <CONTROLTYPE
           Value="combo_lov"/>
+        <LABEL
+          ResId="edu.hp.model.vo.HelpdeskCallsView.CalleeId_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -634,7 +636,16 @@
     PrecisionRule="true"
     EntityAttrName="AffairReviewNote"
     EntityUsage="HelpdeskCalls"
-    AliasName="AFFAIR_REVIEW_NOTE"/>
+    AliasName="AFFAIR_REVIEW_NOTE">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+        <DISPLAYHEIGHT
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewCriteria
     Name="ReasonLevel1Criteria"
     ViewObjectName="edu.hp.model.vo.HelpdeskCallsView"

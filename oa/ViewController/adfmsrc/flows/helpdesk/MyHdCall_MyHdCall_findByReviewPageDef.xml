@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="MyHdCall_MyHdCall_findByReviewPageDef" Package="flows.helpdesk" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="findByState" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByState"
+                  IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.HelpdeskCallsAppModule1"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_HelpdeskCallsAppModule1_findByState_result">
+      <NamedData NDName="state" NDValue="总务复核" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

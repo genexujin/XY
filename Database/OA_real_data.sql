@@ -92,7 +92,7 @@ ALTER SESSION SET NLS_LANGUAGE='AMERICAN';
 --  DDL for Sequence HELPDESK_CALLS_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "OA"."HELPDESK_CALLS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "OA"."HELPDESK_CALLS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100001 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence LOCATIONS_SEQ
 --------------------------------------------------------
@@ -117,7 +117,7 @@ ALTER SESSION SET NLS_LANGUAGE='AMERICAN';
 --  DDL for Sequence PURCHASE_ORDERS_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "OA"."PURCHASE_ORDERS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "OA"."PURCHASE_ORDERS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100001 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence PURCHASE_ORDER_HISTORYS_SEQ
 --------------------------------------------------------
@@ -876,13 +876,13 @@ Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LA
 Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('92','HdEval',null,null,'一般',null,null,null,null,null,null,null,'N');
 Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('93','HdEval',null,null,'不满意',null,null,null,null,null,null,null,'N');
 Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('94','HdEval',null,null,'非常不满意',null,null,null,null,null,null,null,'N');
-Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('95','HdState',null,null,'未提交',null,null,null,null,'1',null,null,'N');
-Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('96','HdState',null,null,'已受理',null,null,null,null,'2',null,null,'N');
-Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('97','HdState',null,null,'已分派',null,null,null,null,'3',null,null,'N');
-Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('98','HdState',null,null,'总务复核',null,null,null,null,'4',null,null,'N');
-Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('99','HdState',null,null,'已处理',null,null,null,null,'5',null,null,'N');
-Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('100','HdState',null,null,'已评价',null,null,null,null,'6',null,null,'N');
-Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('101','HdState',null,null,'已取消',null,null,null,null,'7',null,null,'N');
+Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('201','HdState',null,null,'未提交',null,null,null,null,'1',null,null,'N');
+Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('202','HdState',null,null,'已受理',null,null,null,null,'2',null,null,'N');
+Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('203','HdState',null,null,'已分派',null,null,null,null,'3',null,null,'N');
+Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('204','HdState',null,null,'总务复核',null,null,null,null,'4',null,null,'N');
+Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('205','HdState',null,null,'已处理',null,null,null,null,'5',null,null,'N');
+Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('206','HdState',null,null,'已评价',null,null,null,null,'6',null,null,'N');
+Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('207','HdState',null,null,'已取消',null,null,null,null,'7',null,null,'N');
 Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('102','PoState',null,null,'未提交',null,null,null,null,'1',null,null,'N');
 Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('103','PoState',null,null,'部门审核',null,null,null,null,'8',null,null,'N');
 Insert into OA.LOVS (ID,CODE,LOV_DESC,PARENT_CODE,VALUE,CREATED_AT,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATED_AT,FLEX_COL1,FLEX_COL2,FLEX_COL3,EXPIRED) values ('104','PoState',null,null,'待审核',null,null,null,null,'2',null,null,'N');
@@ -970,6 +970,7 @@ Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGOR
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_REQ','创建报修单','/WEB-INF/flows/helpdesk/CreateHdCall.xml#CreateHdCall','创建报修单','HD',null,'SYS','/images/icons/constructor.png','false','2');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_ASSIGN','报修分派','/WEB-INF/flows/helpdesk/HdAssign.xml#HdAssign','报修分派','HD',null,'SYS','/images/icons/index.png','false','3');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_PROC','报修处理','/WEB-INF/flows/helpdesk/MyHdCallCallee.xml#MyHdCallCallee','报修处理','HD',null,'SYS','/images/icons/show_failures.png','false','4');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_REVIEW','报修复核','/WEB-INF/flows/helpdesk/MyHdCallReview.xml#MyHdCallReview','报修复核','HD',null,'SYS','/images/icons/tasks.png','false','5');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CLSRM_CAL','教室日历','/WEB-INF/flows/clsrm/ClsRmCalendar.xml#ClsRmCalendar','教室日历','CLSRM',null,'SYS','/images/icons/chooseDate.png','false','1');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CLSRM_BATCH','批量预订','/WEB-INF/flows/clsrm/batch-reservation-btf.xml#batch-reservation-btf','批量预定','CLSRM',null,'SYS','/images/icons/group.png','false','2');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CONFRM_CAL','会议室日历','/WEB-INF/flows/confRm/confRm-calendar-btf.xml#confRm-calendar-btf','会议室日历','CONFRM',null,'SYS','/images/icons/chooseDate.png','false','1');
@@ -1038,13 +1039,13 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','S
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_CONFRM_CAL',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_DEPT',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_EMP',null,to_date('01-MAR-13','DD-MON-RR'));
-Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_HD_REQ',null,to_date('01-MAR-13','DD-MON-RR'));
+--Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_HD_REQ',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_HD_MY_REQ',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_HD_PROC',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_HD_RESULT',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_MEAL_REQ',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','ADMIN_MENUS',null,to_date('01-MAR-13','DD-MON-RR'));
-Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_PR',null,to_date('01-MAR-13','DD-MON-RR'));
+--Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_PR',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_RECEIVE',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_REVIEW',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('1','SYS_PUR_APPROVE',null,to_date('01-MAR-13','DD-MON-RR'));
@@ -1087,13 +1088,14 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_CONFRM_REQ',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_CAR_CAL',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_PUR_MY_PR',null,null);
-Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_PUR_PR',null,null);
+--Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_PUR_PR',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_HD_MY_REQ',null,null);
-Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_HD_REQ',null,null);
+--Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_HD_REQ',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('17','SYS_PUR_DEPT_REVIEW',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('18','SYS_HD_ASSIGN',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('19','SYS_HD_ASSIGN',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('20','SYS_HD_PROC',null,null);
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('21','SYS_HD_REVIEW',null,null);
 REM INSERTING into OA.ROLE_USERS
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','273',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('2','282',null,null);

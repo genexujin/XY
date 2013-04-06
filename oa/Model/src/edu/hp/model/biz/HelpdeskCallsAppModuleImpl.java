@@ -50,10 +50,11 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
             eView.setApplyViewCriteriaName(empCriteria.getName());
             eView.executeQuery();
             
-            //Run the State view, so that it will clear the previous search
-//            HdStateWithEmptyImpl stateView = this.getHdStateWithEmpty();
-//            stateView.setApplyViewCriteriaNames(null);
-//            stateView.executeQuery();
+            EmpWithEmptyImpl calleeView = this.getEmpWithEmptyForCallee();
+            calleeView.setApplyViewCriteriaNames(null);
+            ViewCriteria vc = calleeView.getViewCriteria("CalleeCriteria");
+            calleeView.setApplyViewCriteriaName(vc.getName());
+            calleeView.executeQuery();
         }
     }
     
@@ -68,19 +69,18 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
             hdView.setApplyViewCriteriaName(sCriteria.getName());
             hdView.executeQuery();
             
-            //Callee allow to search for "已受理", "已处理", "已评价", so here use the CalleeQueryCriteria
-            //state parameter is not necessary.
             HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
             sView.setApplyViewCriteriaNames(null);
-//            sView.setstate(state);
-            ViewCriteria stateCriteria = sView.getViewCriteria("CalleeQueryCriteria");
+            sView.setstate(state);
+            ViewCriteria stateCriteria = sView.getViewCriteria("HdStateCriteria");
             sView.setApplyViewCriteriaName(stateCriteria.getName());
             sView.executeQuery();
             
-            //Run the employee view to clear the previous search
-//            EmpWithEmptyImpl eView = this.getEmpWithEmptyForCaller();
-//            eView.setApplyViewCriteriaNames(null);
-//            eView.executeQuery();
+            EmpWithEmptyImpl calleeView = this.getEmpWithEmptyForCallee();
+            calleeView.setApplyViewCriteriaNames(null);
+            ViewCriteria vc = calleeView.getViewCriteria("CalleeCriteria");
+            calleeView.setApplyViewCriteriaName(vc.getName());
+            calleeView.executeQuery();
         }
     }
     
@@ -98,13 +98,42 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
             hdView.setApplyViewCriteriaName(sCriteria.getName());
             hdView.executeQuery();
             
-            //Assinger allow to search for "已受理", "已派发" "已处理", "已评价", so here use the CalleeQueryCriteria
+            //Assinger allow to search for "已受理", "已分派", so here use the AssignerQueryCriteria
             //state parameter is not necessary.
             HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
             sView.setApplyViewCriteriaNames(null);
-            ViewCriteria stateCriteria = sView.getViewCriteria("CalleeQueryCriteria");
+            ViewCriteria stateCriteria = sView.getViewCriteria("AssignerQueryCriteria");
             sView.setApplyViewCriteriaName(stateCriteria.getName());
             sView.executeQuery();
+            Row[] rows = sView.getAllRowsInRange();
+            for (int i = 0; i < rows.length; i++) {
+                if (rows[i].getAttribute("Value").equals(Constants.STATE_ACCEPTED)) {
+                    sView.setCurrentRow(rows[i]);
+                    break;
+                }
+            }
+            
+            ViewObjectImpl rsn1 = this.getReasonLevel1WithEmpty();
+            rsn1.setApplyViewCriteriaNames(null);
+            ViewCriteria rVC = null;
+            if (rsnLv1.equals(Constants.HD_REASON_AFF)) {
+                rVC = rsn1.getViewCriteria("AffairCriteria");
+            } else {
+                rVC = rsn1.getViewCriteria("ITCriteria");
+            }
+            rsn1.setApplyViewCriteriaName(rVC.getName());
+            rsn1.executeQuery();
+            
+            EmpWithEmptyImpl calleeView = this.getEmpWithEmptyForCallee();
+            calleeView.setApplyViewCriteriaNames(null);
+            ViewCriteria vc = null;
+            if ("true".equals(isIT)) {
+                vc = calleeView.getViewCriteria("CalleeITCriteria");
+            } else {
+                vc = calleeView.getViewCriteria("CalleeAffairCriteria");
+            }
+            calleeView.setApplyViewCriteriaName(vc.getName());
+            calleeView.executeQuery();
         }
     }
     
@@ -120,8 +149,6 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
             hdView.setApplyViewCriteriaName(sCriteria.getName());
             hdView.executeQuery();
             
-            //Callee allow to search for "已受理", "已处理", "已评价", so here use the CalleeQueryCriteria
-            //state parameter is not necessary.
             HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
             sView.setApplyViewCriteriaNames(null);
             sView.setstate(state);

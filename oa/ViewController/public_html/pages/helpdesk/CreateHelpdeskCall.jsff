@@ -6,11 +6,52 @@
     <f:facet name="center">
       <af:panelHeader text="报修单 #{bindings.CallReadableId}" id="ph1" messageType="confirmation">
         <f:facet name="context"/>
-        <f:facet name="menuBar"/>
+        <f:facet name="menuBar"/> 
         <f:facet name="toolbar"/>
         <f:facet name="legend"/>
         <f:facet name="info"/>
         <af:panelGroupLayout id="pgl1" layout="scroll">
+            <af:resource type="javascript">
+                function setSubmit(event) {
+                    setAction(event, 'submit');
+                }
+                
+                function setAssign(event) {
+                    setAction(event, 'assign');
+                }
+                
+                function setCancel(event) {
+                    setAction(event, 'cancel');
+                }
+
+                function setProcess(event) {
+                    setAction(event, 'process');
+                }
+                
+                function setReview(event) {
+                    setAction(event, 'review');
+                }
+                
+                function setEvaluate(event) {
+                    setAction(event, 'evaluate');
+                }
+                
+                function setAction(event, action) {
+                    var source = event.getSource();
+                    AdfCustomEvent.queue(source, "setActionListener", 
+                    {payload : action},true);
+                }
+            </af:resource>
+            <af:popup id="confirm" contentDelivery="lazyUncached">
+            
+                <!-- don't render if the activity is null -->
+                <af:dialog dialogListener="#{pageFlowScope.MyHdCallBean.onConfirm}" title="请确认操作" id="d2"
+                           contentWidth="200" contentHeight="50">
+                    <af:outputText value="请注意：该操作会改变订单状态！" id="ot10"/>
+                    <af:spacer height="20" id="s4"/>
+                    <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+                </af:dialog>
+            </af:popup>
           <af:panelHeader text="报修单" id="ph2" messageType="info">
             <f:facet name="context"/>
             <f:facet name="menuBar"/>
@@ -27,13 +68,25 @@
                     <af:resetActionListener/>
                   </af:commandToolbarButton>
                   <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '未提交'}"
-                                           actionListener="#{pageFlowScope.MyHdCallBean.submitHdCall}" icon="/images/icons/run.png">
+                                           icon="/images/icons/run.png">
+                    <af:clientListener method="setSubmit" type="click"/>
+                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
+                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
                   </af:commandToolbarButton>
-                  <af:commandToolbarButton text="分派报修单" id="ctb7" icon="/images/icons/index.png" actionListener="#{pageFlowScope.MyHdCallBean.assignHdCall}"
-                                           rendered="#{sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派']}"/>
+                  <af:commandToolbarButton text="分派报修单" id="ctb7" icon="/images/icons/index.png"
+                                           rendered="#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'])
+                                                       and (bindings.State.inputValue eq '已受理' or bindings.State.inputValue eq '已分派')}">
+                    <af:clientListener method="setAssign" type="click"/>
+                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
+                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                  </af:commandToolbarButton>
                   <af:commandToolbarButton text="取消报修单" id="ctb4" 
                                            rendered="#{bindings.State.inputValue eq '未提交' or (bindings.State.inputValue eq '已受理' and pageFlowScope.fromMenu != 'callee')}"
-                                           actionListener="#{pageFlowScope.MyHdCallBean.cancelHdCall}" icon="/images/icons/undo.png"/>                  
+                                           icon="/images/icons/undo.png">
+                    <af:clientListener method="setCancel" type="click"/>
+                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
+                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                  </af:commandToolbarButton>
                 </af:toolbar>
               </f:facet>
               <af:panelGroupLayout id="pgl3" layout="horizontal">
@@ -50,13 +103,21 @@
                                               required="#{bindings.CalleeId.hints.mandatory}"
                                               columns="#{bindings.CalleeId.hints.displayWidth}"
                                               shortDesc="#{bindings.CalleeId.hints.tooltip}"
-                                              rendered="#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'] 
-                                                          or (bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已取消'))}"
+                                              rendered="#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'])}"
                                               autoSubmit="true"
                                               valueChangeListener="#{pageFlowScope.MyHdCallBean.calleeChanged}"
                                               disabled="#{!sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and !sessionScope.LoginUserBean.isUserInRole['信息报修分派']}">
                   <f:validator binding="#{bindings.CalleeId.validator}"/>
                 </af:inputComboboxListOfValues>
+                <af:inputText value="#{bindings.CalleeFullName.inputValue}"
+                              label="#{bindings.CalleeFullName.hints.label}"
+                              required="#{bindings.CalleeFullName.hints.mandatory}"
+                              columns="#{bindings.CalleeFullName.hints.displayWidth}"
+                              maximumLength="#{bindings.CalleeFullName.hints.precision}"
+                              shortDesc="#{bindings.CalleeFullName.hints.tooltip}" id="it2"
+                              rendered="#{bindings.CalleeFullName.inputValue ne 'nullnull'}">
+                  <f:validator binding="#{bindings.CalleeFullName.validator}"/>
+                </af:inputText>
                 <!--af:selectOneChoice value="#{bindings.CalleeId.inputValue}" label="#{bindings.CalleeId.label}"
                                     required="#{bindings.CalleeId.hints.mandatory}"
                                     shortDesc="#{bindings.CalleeId.hints.tooltip}" id="soc2" autoSubmit="true">
@@ -103,7 +164,7 @@
                   <f:selectItems value="#{bindings.ReasonLevel2.items}" id="si6"/>
                 </af:selectOneChoice>
                 <af:selectOneChoice value="#{bindings.ReasonLevel3.inputValue}"
-                                    required="#{bindings.ReasonLevel3.hints.mandatory}"
+                                    required="#{bindings.ReasonLevel3.hints.mandatory}" autoSubmit="true"
                                     shortDesc="#{bindings.ReasonLevel3.hints.tooltip}" id="soc7"
                                     disabled="#{bindings.State.inputValue ne '未提交'}"  partialTriggers="soc6">
                   <f:selectItems value="#{bindings.ReasonLevel3.items}" id="si7"/>
@@ -121,9 +182,9 @@
           </af:panelHeader>
           <af:spacer id="s1" width="10px" height="10px"/>
           <af:panelHeader text="报修单处理" id="ph3" messageType="info"
-                          rendered="#{(bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已撤消' 
-                                          and (pageFlowScope.fromMenu eq 'callee' or pageFlowScope.fromMenu eq '-') )
-                                      or (bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价')}">
+                          rendered="#{(bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已撤消' and bindings.State.inputValue ne '已受理' 
+                                          and (pageFlowScope.fromMenu eq 'callee' or (pageFlowScope.fromMenu eq '-' and !sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and !sessionScope.LoginUserBean.isUserInRole['信息报修分派'])) )
+                                      or (bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价' or bindings.State.inputValue eq '总务复核')}">
             <f:facet name="context"/>
             <f:facet name="menuBar"/>
             <f:facet name="toolbar"/>
@@ -132,7 +193,7 @@
             <af:panelFormLayout id="pfl3" rows="1">
               <af:panelGroupLayout id="pgl7" layout="horizontal" valign="top">
                 <af:selectOneChoice value="#{bindings.CallResult.inputValue}" label="#{bindings.CallResult.label}"
-                                    required="true"
+                                    required="true" autoSubmit="true"
                                     shortDesc="#{bindings.CallResult.hints.tooltip}" id="soc8" disabled="#{bindings.State.inputValue ne '已分派'}">
                   <f:selectItems value="#{bindings.CallResult.items}" id="si8"/>
                 </af:selectOneChoice>
@@ -141,36 +202,45 @@
                               columns="#{bindings.CallResultDetail.hints.displayWidth}"
                               maximumLength="#{bindings.CallResultDetail.hints.precision}"
                               shortDesc="#{bindings.CallResultDetail.hints.tooltip}" id="it7" rows="4"
-                              disabled="#{bindings.State.inputValue ne '已分派'}">
+                              disabled="#{bindings.State.inputValue ne '已分派'}" autoSubmit="true">
                   <f:validator binding="#{bindings.CallResultDetail.validator}"/>
                 </af:inputText>
                 <af:panelLabelAndMessage label="#{bindings.CalleeDisplayName.hints.label}" id="plam1" rendered="false">
                   <af:outputText value="#{bindings.CalleeDisplayName.inputValue}" id="ot1"/>
                 </af:panelLabelAndMessage>
               </af:panelGroupLayout>
-              <af:inputText value="#{bindings.AffairReviewNote.inputValue}"
+              <af:inputText value="#{bindings.AffairReviewNote.inputValue}" autoSubmit="true"
                             label="#{bindings.AffairReviewNote.hints.label}"
                             required="#{bindings.AffairReviewNote.hints.mandatory}"
                             columns="#{bindings.AffairReviewNote.hints.displayWidth}"
                             maximumLength="#{bindings.AffairReviewNote.hints.precision}"
-                            shortDesc="#{bindings.AffairReviewNote.hints.tooltip}" id="it1" rows="4">
+                            shortDesc="#{bindings.AffairReviewNote.hints.tooltip}" id="it1" rows="4"
+                            rendered="#{(bindings.State.inputValue eq '总务复核' or bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价') and bindings.CallResult.inputValue ne '修复'}"
+                            disabled="#{!sessionScope.LoginUserBean.isUserInRole['报修总务复核'] or bindings.State.inputValue ne '总务复核'}">
                 <f:validator binding="#{bindings.AffairReviewNote.validator}"/>
               </af:inputText>
               <f:facet name="footer">
                 <af:toolbar id="t2">
                   <af:commandToolbarButton text="处理" id="ctb5" rendered="#{bindings.State.inputValue eq '已分派'}"
-                                           actionListener="#{pageFlowScope.MyHdCallBean.processHdCall}"
-                                           icon="/images/icons/check.png"/>
+                                           icon="/images/icons/check.png">
+                    <af:clientListener method="setProcess" type="click"/>
+                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
+                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                  </af:commandToolbarButton>
                   <af:commandToolbarButton text="复核" id="ctb8" icon="/images/icons/check.png"
-                                           actionListener="#{pageFlowScope.MyHdCallBean.reviewHdCall}"/>
+                                           rendered="#{bindings.State.inputValue eq '总务复核' and sessionScope.LoginUserBean.isUserInRole['报修总务复核'] }">
+                    <af:clientListener method="setReview" type="click"/>
+                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
+                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                  </af:commandToolbarButton>
                 </af:toolbar>
               </f:facet>
             </af:panelFormLayout>
           </af:panelHeader>
           <af:spacer id="s2" width="10px" height="10px"/>
           <af:panelHeader text="用户评价" id="ph4"
-                          rendered="#{(bindings.State.inputValue eq '已处理' and pageFlowScope.fromMenu ne 'callee'
-                                      and !sessionScope.LoginUserBean.isUserInRole['丽园IT报修处理员'] and !sessionScope.LoginUserBean.isUserInRole['丽园电工报修处理员'] and !sessionScope.LoginUserBean.isUserInRole['自忠IT报修处理员'] and !sessionScope.LoginUserBean.isUserInRole['自忠电工报修处理员'] )
+                          rendered="#{(bindings.State.inputValue eq '已处理' and pageFlowScope.fromMenu ne 'callee' and pageFlowScope.fromMenu ne 'review' and sessionScope.LoginUserBean.userId eq bindings.CallerId.inputValue
+                                      and !sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and !sessionScope.LoginUserBean.isUserInRole['信息报修分派'] and !sessionScope.LoginUserBean.isUserInRole['报修总务复核'] )
                                       or bindings.State.inputValue eq '已评价'}"
                           messageType="info">
             <f:facet name="context"/>
@@ -180,13 +250,13 @@
             <f:facet name="info"/>
             <af:panelFormLayout id="pfl4">
               <af:selectOneRadio value="#{bindings.CallEval.inputValue}" label="#{bindings.CallEval.label}"
-                                 required="true"
+                                 required="true" autoSubmit="true"
                                  shortDesc="#{bindings.CallEval.hints.tooltip}" id="sor1" layout="horizontal"
                                  disabled="#{bindings.State.inputValue ne '已处理'}">
                 <f:selectItems value="#{bindings.CallEval.items}" id="si9"/>
               </af:selectOneRadio>
               <af:inputText value="#{bindings.CallEvalDetail.inputValue}" label="#{bindings.CallEvalDetail.hints.label}"
-                            required="#{bindings.CallEvalDetail.hints.mandatory}"
+                            required="#{bindings.CallEvalDetail.hints.mandatory}" autoSubmit="true"
                             columns="#{bindings.CallEvalDetail.hints.displayWidth}"
                             maximumLength="#{bindings.CallEvalDetail.hints.precision}"
                             shortDesc="#{bindings.CallEvalDetail.hints.tooltip}" id="it9" rows="4"
@@ -196,23 +266,16 @@
               <f:facet name="footer">
                 <af:toolbar id="t3">
                   <af:commandToolbarButton text="评价" id="ctb6" rendered="#{bindings.State.inputValue eq '已处理'}"
-                                           actionListener="#{pageFlowScope.MyHdCallBean.evaluateHdCall}"/>
+                                           icon="/images/icons/archivefile.png">
+                    <af:clientListener method="setEvaluate" type="click"/>
+                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
+                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                  </af:commandToolbarButton>
                 </af:toolbar>
               </f:facet>
             </af:panelFormLayout>
           </af:panelHeader>
-        </af:panelGroupLayout>  
-        <af:popup id="confirm" contentDelivery="lazyUncached">
-            <!-- don't render if the activity is null -->
-            <af:dialog  title="请确认操作" id="d2" dialogListener="#{pageFlowScope.MyHdCallBean.confirm}">
-                <af:outputText value="请注意：该操作无法恢复！" id="ot10"/>
-                <af:spacer height="20" id="s5"/>
-                <af:outputText value="#{pageFlowScope.MyHdCallBean.fromButton}" id="ot11"/>
-                <af:spacer height="20" id="s4"/>
-                <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
-                <af:outputText value="aaa" id="ot12"/>
-            </af:dialog>
-          </af:popup>
+        </af:panelGroupLayout>
       </af:panelHeader>
     </f:facet>
     <f:facet name="start"/>

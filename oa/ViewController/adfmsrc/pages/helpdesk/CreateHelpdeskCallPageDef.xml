@@ -145,5 +145,10 @@
         <Item Value="AffairReviewNote"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="HelpdeskCallsViewIterator" id="CalleeFullName">
+      <AttrNames>
+        <Item Value="CalleeFullName"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

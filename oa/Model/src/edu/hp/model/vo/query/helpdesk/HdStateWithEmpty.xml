@@ -148,6 +148,64 @@ select 'HdState', '0', ' ' from dual]]></SQLQuery>
       </ViewCriteriaItemCompound>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="AssignerQueryCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.HdStateWithEmpty"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HdStateWithEmptyCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        ViewAttribute="Value">
+        <ViewCriteria
+          Name="HdStateWithEmptyCriteria_HdStateWithEmptyCriteria_row_0_Value_itemHolder"
+          ViewObjectName="edu.hp.model.vo.query.helpdesk.HdStateWithEmpty"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="HdStateWithEmptyCriteria_HdStateWithEmptyCriteria_row_0_Value_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="Value"
+              ViewAttribute="Value"
+              Operator="="
+              Conjunction="AND"
+              Value="已受理"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="HdStateWithEmptyCriteria_HdStateWithEmptyCriteria_row_0_Value_itemHolder_row_1"
+            Conjunction="OR">
+            <ViewCriteriaItem
+              Name="HdStateWithEmptyCriteria_HdStateWithEmptyCriteria_row_0_Value_HdStateWithEmptyCriteria_HdStateWithEmptyCriteria_row_0_Value_itemHolder_HdStateWithEmptyCriteria_HdStateWithEmptyCriteria_row_0_Value_itemHolder_row_1_Value"
+              ViewAttribute="Value"
+              Operator="="
+              Conjunction="OR"
+              Value="已分派"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

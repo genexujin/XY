@@ -48,6 +48,10 @@
         <expression>#{pageFlowScope.fromMenu == 'assign'}</expression>
         <outcome>assign</outcome>
       </case>
+      <case id="__33">
+        <expression>#{pageFlowScope.fromMenu == 'review'}</expression>
+        <outcome>review</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findByCallerId">
@@ -74,6 +78,12 @@
         <fixed-outcome>findByProcess</fixed-outcome>
       </outcome>
     </method-call>
+    <method-call id="findByReview">
+      <method>#{bindings.findByState.execute}</method>
+      <outcome>
+        <fixed-outcome>byReview</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__2">
       <from-activity-id>MyHelpdeskCall</from-activity-id>
       <control-flow-case id="__3">
@@ -95,6 +105,10 @@
       <control-flow-case id="__31">
         <from-outcome>returnFromAssigner</from-outcome>
         <to-activity-id>findByProcess</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__36">
+        <from-outcome>returnFromReview</from-outcome>
+        <to-activity-id>findByReview</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__4">
@@ -125,6 +139,10 @@
       <control-flow-case id="__28">
         <from-outcome>assign</from-outcome>
         <to-activity-id>findByProcess</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__32">
+        <from-outcome>review</from-outcome>
+        <to-activity-id>findByReview</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__12">
@@ -159,6 +177,13 @@
       <from-activity-id>findByProcess</from-activity-id>
       <control-flow-case id="__30">
         <from-outcome>findByProcess</from-outcome>
+        <to-activity-id>MyHelpdeskCall</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__34">
+      <from-activity-id>findByReview</from-activity-id>
+      <control-flow-case id="__35">
+        <from-outcome>byReview</from-outcome>
         <to-activity-id>MyHelpdeskCall</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

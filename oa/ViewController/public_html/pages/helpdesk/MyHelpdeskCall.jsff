@@ -25,14 +25,15 @@
                                                 label="申请人"
                                                 required="#{bindings.EmpWithEmptyForCaller.hints.mandatory}"
                                                 shortDesc="#{bindings.EmpWithEmptyForCaller.hints.tooltip}" id="soc10"
-                                                disabled="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign'}">
+                                                disabled="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign' and pageFlowScope.fromMenu!='review'}">
                                 <f:selectItems value="#{bindings.EmpWithEmptyForCaller.items}" id="si5"/>
                             </af:selectOneChoice>
                             <af:selectOneChoice value="#{bindings.ReasonLevel1WithEmpty.inputValue}"
                                                 label="报修原因"
                                                 required="#{bindings.ReasonLevel1WithEmpty.hints.mandatory}"
                                                 shortDesc="#{bindings.ReasonLevel1WithEmpty.hints.tooltip}" id="soc3" autoSubmit="true"
-                                                valueChangeListener="#{pageFlowScope.MyHdCallBean.onReasonLevel1Change}">
+                                                valueChangeListener="#{pageFlowScope.MyHdCallBean.onReasonLevel1Change}"
+                                                disabled="#{pageFlowScope.fromMenu=='assign'}">
                                 <f:selectItems value="#{bindings.ReasonLevel1WithEmpty.items}" id="si3"/>
                             </af:selectOneChoice>
                             <af:selectOneChoice value="#{bindings.HdEvalWithEmpty.inputValue}"
@@ -46,7 +47,7 @@
                                                 label="状态"
                                                 required="#{bindings.HdStateWithEmpty.hints.mandatory}"
                                                 shortDesc="#{bindings.HdStateWithEmpty.hints.tooltip}" id="soc8"
-                                                disabled="#{pageFlowScope.fromMenu=='callee'}">
+                                                disabled="#{pageFlowScope.fromMenu=='callee' or pageFlowScope.fromMenu=='review'}">
                                 <f:selectItems value="#{bindings.HdStateWithEmpty.items}" id="si1"/>
                             </af:selectOneChoice>
                             <af:selectOneChoice value="#{bindings.HdResultWithEmpty.inputValue}"
@@ -84,7 +85,7 @@
                 <f:facet name="toolbar">
                     <af:toolbar id="t1">
                         <af:commandToolbarButton text="新建" id="ctb1" action="create"
-                                                 rendered="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign'}"
+                                                 rendered="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign' and pageFlowScope.fromMenu!='review'}"
                                                  icon="/images/icons/new_ena.png"/>
                         <af:commandToolbarButton text="更改" id="ctb2" action="edit" icon="/images/icons/edit.png"/>
                     </af:toolbar>

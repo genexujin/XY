@@ -24,6 +24,8 @@ import oracle.adf.view.rich.component.rich.data.RichTable;
 
 import oracle.adf.view.rich.event.DialogEvent;
 
+import oracle.adf.view.rich.render.ClientEvent;
+
 import oracle.binding.BindingContainer;
 
 import oracle.binding.OperationBinding;
@@ -53,6 +55,8 @@ public class MyHelpdeskCallBean extends BaseBean {
     private String fromButton;
     
     private String oldCallee;
+    
+    private String action;
 
     public MyHelpdeskCallBean() {
     }
@@ -123,34 +127,41 @@ public class MyHelpdeskCallBean extends BaseBean {
     }
 
     public void submitHdCall(ActionEvent actionEvent) {
-        setSubmitDate();
-        String state = (String)ADFUtils.getBoundAttributeValue("State");
-        if (state != null && state.equals(Constants.STATE_INITIAL)) {
-            ADFUtils.setBoundAttributeValue("State", Constants.STATE_ACCEPTED);
-            
-            String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
-            String deptId = getProcessDept(rsnLv1);
-            ADFUtils.setBoundAttributeValue("BelongToDept", deptId);
-            
-            boolean success = ADFUtils.commit("报修单已提交！", "报修单提交失败，请核对输入的信息或联系管理员！");
-            if (success) {
-                String id = (ADFUtils.getBoundAttributeValue("CallId")).toString();
-                String readableId = (ADFUtils.getBoundAttributeValue("CallReadableId")).toString();
-                String locId = (String)ADFUtils.getBoundAttributeValue("LocationId");
-                String locationDetail = (String)ADFUtils.getBoundAttributeValue("LocationDetail");
-//                String roleName = getRoleName(locId, rsnLv1);
-                String roleName = getRoleName(rsnLv1);
+        String rsnLv2 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel2");
+        String rsnLv3 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel3");
+        
+        if (rsnLv2 == null || rsnLv2.isEmpty() || rsnLv3 == null || rsnLv3.isEmpty()) {
+            JSFUtils.addFacesErrorMessage("二级原因和三级原因都不能为空！");
+        } else {
+            setSubmitDate();
+            String state = (String)ADFUtils.getBoundAttributeValue("State");
+            if (state != null && state.equals(Constants.STATE_INITIAL)) {
+                ADFUtils.setBoundAttributeValue("State", Constants.STATE_ACCEPTED);
                 
-                //send to assigner
-                String noteTitle = "有新的报修请求等待分派，报修单号：" + readableId;
-                String noteContent = "报修原因：" + rsnLv1 + " 详细地址：" + locationDetail + " 提交时间：" + getDateString();
-                sendNotification(noteTitle, noteContent, null, roleName);
+                String rsnLv1 = (String)ADFUtils.getBoundAttributeValue("ReasonLevel1");
+                String deptId = getProcessDept(rsnLv1);
+                ADFUtils.setBoundAttributeValue("BelongToDept", deptId);
                 
-                createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, roleName, readableId);
-                
-                ADFUtils.findOperation("Commit").execute();
-            } else {
-                ADFUtils.setBoundAttributeValue("State", state);
+                boolean success = ADFUtils.commit("报修单已提交！", "报修单提交失败，请核对输入的信息或联系管理员！");
+                if (success) {
+                    String id = (ADFUtils.getBoundAttributeValue("CallId")).toString();
+                    String readableId = (ADFUtils.getBoundAttributeValue("CallReadableId")).toString();
+                    String locId = (String)ADFUtils.getBoundAttributeValue("LocationId");
+                    String locationDetail = (String)ADFUtils.getBoundAttributeValue("LocationDetail");
+            //                String roleName = getRoleName(locId, rsnLv1);
+                    String roleName = getRoleName(rsnLv1);
+                    
+                    //send to assigner
+                    String noteTitle = "有新的报修请求等待分派，报修单号：" + readableId;
+                    String noteContent = "报修原因：" + rsnLv1 + " 详细地址：" + locationDetail + " 提交时间：" + getDateString();
+                    sendNotification(noteTitle, noteContent, null, roleName);
+                    
+                    createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, roleName, readableId);
+                    
+                    ADFUtils.findOperation("Commit").execute();
+                } else {
+                    ADFUtils.setBoundAttributeValue("State", state);
+                }
             }
         }
     }
@@ -230,7 +241,7 @@ public class MyHelpdeskCallBean extends BaseBean {
         System.out.println("calleeId is: " + calleeId);
         System.out.println("callerId is: " + callerId);
         
-        if (state != null && state.equals(Constants.STATE_ACCEPTED)) {
+        if (state != null && state.equals(Constants.STATE_ASSIGNED)) {
             String callResult = (String)ADFUtils.getBoundAttributeValue("CallResult");
             String id = (ADFUtils.getBoundAttributeValue("CallId")).toString();
             String readableId = (String)ADFUtils.getBoundAttributeValue("CallReadableId");
@@ -291,7 +302,11 @@ public class MyHelpdeskCallBean extends BaseBean {
                 completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, Constants.ROLE_HD_REVIEW);
                         
                 //create evaluation task for caller
-                createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价", callerId, readableId);
+                createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价，报修单号：" + readableId, callerId, readableId);
+                
+                ADFUtils.findOperation("Commit").execute();
+            } else {
+                ADFUtils.setBoundAttributeValue("State", state);
             }
         }
     }
@@ -427,6 +442,8 @@ public class MyHelpdeskCallBean extends BaseBean {
             return "returnFromCallee";
         } else if ("assign".equals(fromMenu)) {
             return "returnFromAssigner";
+        } else if ("review".equals(fromMenu)) {
+            return "returnFromReview";
         } else {
             return "returnFromCaller";
         }
@@ -466,5 +483,41 @@ public class MyHelpdeskCallBean extends BaseBean {
     public void calleeChanged(ValueChangeEvent event) {
         //Set the old value so that it can be used to complete the task
         oldCallee = (String)event.getOldValue();
+    }
+    
+    public void onConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            if(action.equals("submit")){
+                submitHdCall(null);
+            } else if (action.equals("assign")) {
+                assignHdCall(null);
+            } else if (action.equals("cancel")) {
+                cancelHdCall(null);
+            } else if (action.equals("process")) {
+                processHdCall(null);
+            } else if (action.equals("review")) {
+                reviewHdCall(null);
+            } else if (action.equals("evaluate")) {
+                evaluateHdCall(null);
+            }
+                        
+//            ADFUtils.partialRefreshComponenet(poLinesTable);
+//            ADFUtils.partialRefreshComponenet(poHistoryTable);
+//            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getAction() {
+        return action;
+    }
+    
+    public void setActionListener(ClientEvent clientEvent) {
+        System.err.println("here");
+        String newAction  = (String) clientEvent.getParameters().get("payload");
+        this.setAction(newAction);
     }
 }

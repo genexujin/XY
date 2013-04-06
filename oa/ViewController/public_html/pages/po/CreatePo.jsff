@@ -85,7 +85,7 @@
                         <af:selectOneChoice value="#{bindings.ItemCategoryId1.inputValue}" autoSubmit="true"
                                             label="采购类别"
                                             valueChangeListener="#{pageFlowScope.MyPoBean.itemCategoryChanged}"
-                                            required="#{bindings.ItemCategoryId1.hints.mandatory}"
+                                            required="true"
                                             shortDesc="#{bindings.ItemCategoryId1.hints.tooltip}" id="soc3"
                                             disabled="#{(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') or bindings.State.inputValue ne '1'}">
                             <f:selectItems value="#{bindings.ItemCategoryId1.items}" id="si3"/>
@@ -289,7 +289,7 @@
                           selectionListener="#{bindings.PurchaseOrderLinesView.collectionModel.makeCurrent}"
                           rowSelection="single" id="t1"                          
                           columnStretching="last" binding="#{pageFlowScope.MyPoBean.poLinesTable}"
-                          partialTriggers=":::soc3">
+                          partialTriggers=":::soc3 ::ctb1 ::ctb2">
                     <af:column sortProperty="#{bindings.PurchaseOrderLinesView.hints.ItemId.name}" sortable="false"
                                headerText="#{bindings.PurchaseOrderLinesView.hints.ItemId.label}" id="c41" width="100">
                         <af:selectOneChoice value="#{row.bindings.ItemId.inputValue}"

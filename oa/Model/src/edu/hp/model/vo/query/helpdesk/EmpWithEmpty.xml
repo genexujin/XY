@@ -26,11 +26,12 @@
     Type="java.lang.String"/>
   <SQLQuery><![CDATA[SELECT Employees.LAST_NAME, 
        Employees.ID, 
-       Employees.FIRST_NAME
+       Employees.FIRST_NAME,
+       Employees.DEPT_ID
 FROM EMPLOYEES Employees
 where Employees.EXPIRED <> 'Y'
 union
-select ' ', '0', ' ' from dual
+select ' ', '0', ' ', ' ' from dual
 order by ID]]></SQLQuery>
   <EntityUsage
     Name="Employees"
@@ -38,22 +39,63 @@ order by ID]]></SQLQuery>
   <ViewAttribute
     Name="LastName"
     PrecisionRule="true"
-    EntityAttrName="LastName"
-    EntityUsage="Employees"
-    AliasName="LAST_NAME"/>
+    AliasName="LAST_NAME"
+    IsUpdateable="false"
+    IsPersistent="false"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    Expression="LAST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="Id"
-    IsUpdateable="while_insert"
+    IsUpdateable="false"
     PrecisionRule="true"
-    EntityAttrName="Id"
-    EntityUsage="Employees"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsPersistent="false"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    Expression="ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="FirstName"
     PrecisionRule="true"
-    EntityAttrName="FirstName"
-    EntityUsage="Employees"
-    AliasName="FIRST_NAME"/>
+    AliasName="FIRST_NAME"
+    IsUpdateable="false"
+    IsPersistent="false"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    Expression="FIRST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DeptId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEPT_ID"
+    Expression="DEPT_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewAttribute
     Name="DisplayName"
     IsUpdateable="false"
@@ -137,6 +179,191 @@ order by ID]]></SQLQuery>
         Value=":cId"
         IsBindVarValue="true"
         Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="CalleeAffairCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EmpWithEmptyCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        ViewAttribute="DeptId">
+        <ViewCriteria
+          Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder"
+          ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId"
+              ViewAttribute="DeptId"
+              Operator="="
+              Conjunction="AND"
+              Value="14"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_1"
+            Conjunction="OR">
+            <ViewCriteriaItem
+              Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_1_DeptId"
+              ViewAttribute="DeptId"
+              Operator="="
+              Conjunction="OR"
+              Value=" "
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="CalleeITCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EmpWithEmptyCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        ViewAttribute="DeptId">
+        <ViewCriteria
+          Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder"
+          ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId"
+              ViewAttribute="DeptId"
+              Operator="="
+              Conjunction="AND"
+              Value="11"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_1"
+            Conjunction="OR">
+            <ViewCriteriaItem
+              Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_1_DeptId"
+              ViewAttribute="DeptId"
+              Operator="="
+              Conjunction="OR"
+              Value=" "
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="CalleeCriteria"
+    ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EmpWithEmptyCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItemCompound
+        ViewAttribute="DeptId">
+        <ViewCriteria
+          Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder"
+          ViewObjectName="edu.hp.model.vo.query.helpdesk.EmpWithEmpty"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId"
+              ViewAttribute="DeptId"
+              Operator="="
+              Conjunction="AND"
+              Value="11"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_1"
+            Conjunction="OR">
+            <ViewCriteriaItem
+              Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_1_DeptId"
+              ViewAttribute="DeptId"
+              Operator="="
+              Conjunction="OR"
+              Value="14"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_2"
+            Conjunction="OR">
+            <ViewCriteriaItem
+              Name="EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_EmpWithEmptyCriteria_EmpWithEmptyCriteria_row_0_DeptId_itemHolder_row_2_DeptId"
+              ViewAttribute="DeptId"
+              Operator="="
+              Conjunction="OR"
+              Value=" "
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ResourceBundle>

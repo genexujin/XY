@@ -81,13 +81,13 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
         poView.insertRow(po);
         poView.setCurrentRow(po);
         
-        System.err.println("Also creating a new PO Line.");
-        PurchaseOrderLinesViewImpl poLineView = this.getPurchaseOrderLinesView();
-        Row poLine = poLineView.createRow();
-        poLine.setAttribute("State", 1);
-        poLine.setAttribute("OrderId", po.getAttribute("OrderId"));
-        poLineView.insertRow(poLine);
-        poLineView.setCurrentRow(poLine);
+//        System.err.println("Also creating a new PO Line.");
+//        PurchaseOrderLinesViewImpl poLineView = this.getPurchaseOrderLinesView();
+//        Row poLine = poLineView.createRow();
+//        poLine.setAttribute("State", 1);
+//        poLine.setAttribute("OrderId", po.getAttribute("OrderId"));
+//        poLineView.insertRow(poLine);
+//        poLineView.setCurrentRow(poLine);
     }
     
     public BigDecimal getApprovalLimitForCategoryId(String categoryId) {

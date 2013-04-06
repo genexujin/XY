@@ -127,8 +127,7 @@
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="PURCHASE_ORDER_LINES"
-    DefaultValue="0"/>
+    TableName="PURCHASE_ORDER_LINES"/>
   <Attribute
     Name="ActualPrice"
     ColumnName="ACTUAL_PRICE"
