@@ -75,7 +75,7 @@
                   </af:commandToolbarButton>
                   <af:commandToolbarButton text="分派报修单" id="ctb7" icon="/images/icons/index.png"
                                            rendered="#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'])
-                                                       and (bindings.State.inputValue eq '已受理' or bindings.State.inputValue eq '已分派')}">
+                                                       and (bindings.State.inputValue eq '已受理' or bindings.State.inputValue eq '已分派') and  pageFlowScope.fromMenu != 'query'}">
                     <af:clientListener method="setAssign" type="click"/>
                     <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
                     <af:showPopupBehavior triggerType="action" popupId="confirm"/>
@@ -103,7 +103,7 @@
                                               required="#{bindings.CalleeId.hints.mandatory}"
                                               columns="#{bindings.CalleeId.hints.displayWidth}"
                                               shortDesc="#{bindings.CalleeId.hints.tooltip}"
-                                              rendered="#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'])}"
+                                              rendered="#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派']) and pageFlowScope.fromMenu ne 'query'}"
                                               autoSubmit="true"
                                               valueChangeListener="#{pageFlowScope.MyHdCallBean.calleeChanged}"
                                               disabled="#{!sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and !sessionScope.LoginUserBean.isUserInRole['信息报修分派']}">
@@ -216,7 +216,7 @@
                             maximumLength="#{bindings.AffairReviewNote.hints.precision}"
                             shortDesc="#{bindings.AffairReviewNote.hints.tooltip}" id="it1" rows="4"
                             rendered="#{(bindings.State.inputValue eq '总务复核' or bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价') and bindings.CallResult.inputValue ne '修复'}"
-                            disabled="#{!sessionScope.LoginUserBean.isUserInRole['报修总务复核'] or bindings.State.inputValue ne '总务复核'}">
+                            disabled="#{!sessionScope.LoginUserBean.isUserInRole['报修总务复核'] or bindings.State.inputValue ne '总务复核' or pageFlowScope.fromMenu == 'query'}">
                 <f:validator binding="#{bindings.AffairReviewNote.validator}"/>
               </af:inputText>
               <f:facet name="footer">
@@ -228,7 +228,7 @@
                     <af:showPopupBehavior triggerType="action" popupId="confirm"/>
                   </af:commandToolbarButton>
                   <af:commandToolbarButton text="复核" id="ctb8" icon="/images/icons/check.png"
-                                           rendered="#{bindings.State.inputValue eq '总务复核' and sessionScope.LoginUserBean.isUserInRole['报修总务复核'] }">
+                                           rendered="#{bindings.State.inputValue eq '总务复核' and sessionScope.LoginUserBean.isUserInRole['报修总务复核'] and pageFlowScope.fromMenu != 'query'}">
                     <af:clientListener method="setReview" type="click"/>
                     <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
                     <af:showPopupBehavior triggerType="action" popupId="confirm"/>

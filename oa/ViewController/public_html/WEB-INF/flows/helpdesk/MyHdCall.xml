@@ -52,6 +52,10 @@
         <expression>#{pageFlowScope.fromMenu == 'review'}</expression>
         <outcome>review</outcome>
       </case>
+      <case id="__37">
+        <expression>#{pageFlowScope.fromMenu == 'query'}</expression>
+        <outcome>query</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <method-call id="findByCallerId">
@@ -84,6 +88,12 @@
         <fixed-outcome>byReview</fixed-outcome>
       </outcome>
     </method-call>
+    <method-call id="findForQuery">
+      <method>#{bindings.findForQuery.execute}</method>
+      <outcome>
+        <fixed-outcome>byQuery</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__2">
       <from-activity-id>MyHelpdeskCall</from-activity-id>
       <control-flow-case id="__3">
@@ -109,6 +119,10 @@
       <control-flow-case id="__36">
         <from-outcome>returnFromReview</from-outcome>
         <to-activity-id>findByReview</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__41">
+        <from-outcome>returnFromQuery</from-outcome>
+        <to-activity-id>findForQuery</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__4">
@@ -143,6 +157,10 @@
       <control-flow-case id="__32">
         <from-outcome>review</from-outcome>
         <to-activity-id>findByReview</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__38">
+        <from-outcome>query</from-outcome>
+        <to-activity-id>findForQuery</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__12">
@@ -184,6 +202,13 @@
       <from-activity-id>findByReview</from-activity-id>
       <control-flow-case id="__35">
         <from-outcome>byReview</from-outcome>
+        <to-activity-id>MyHelpdeskCall</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__39">
+      <from-activity-id>findForQuery</from-activity-id>
+      <control-flow-case id="__40">
+        <from-outcome>byQuery</from-outcome>
         <to-activity-id>MyHelpdeskCall</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

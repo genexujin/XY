@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="HdCallQuery">
+    <default-activity>MyHdCall</default-activity>
+    <task-flow-call id="MyHdCall">
+      <task-flow-reference>
+        <document>/WEB-INF/flows/helpdesk/MyHdCall.xml</document>
+        <id>MyHdCall</id>
+      </task-flow-reference>
+      <input-parameter id="__1">
+        <name>fromMenu</name>
+        <value>query</value>
+      </input-parameter>
+    </task-flow-call>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

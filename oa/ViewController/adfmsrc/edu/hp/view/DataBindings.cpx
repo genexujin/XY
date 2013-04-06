@@ -102,6 +102,8 @@
           usageId="edu_hp_view_MyHdCall_MyHdCall_findByPendingProcessPageDef"/>
     <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findByReview"
           usageId="edu_hp_view_MyHdCall_MyHdCall_findByReviewPageDef"/>
+    <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findForQuery"
+          usageId="edu_hp_view_MyHdCall_MyHdCall_findForQueryPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -189,6 +191,8 @@
           path="flows.helpdesk.MyHdCall_MyHdCall_findByProcessPageDef"/>
     <page id="edu_hp_view_MyHdCall_MyHdCall_findByReviewPageDef"
           path="flows.helpdesk.MyHdCall_MyHdCall_findByReviewPageDef"/>
+    <page id="edu_hp_view_MyHdCall_MyHdCall_findForQueryPageDef"
+          path="flows.helpdesk.MyHdCall_MyHdCall_findForQueryPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

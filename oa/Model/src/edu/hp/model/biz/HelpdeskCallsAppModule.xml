@@ -157,5 +157,11 @@
         Name="callee"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="findForQuery"
+      MethodName="findForQuery">
+      <Return
+        Type="void"/>
+    </Method>
   </ClientInterface>
 </AppModule>

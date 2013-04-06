@@ -177,6 +177,26 @@ public class HelpdeskCallsAppModuleImpl extends ApplicationModuleImpl implements
             hdView.executeQuery();
         }
     }
+    
+    public void findForQuery() {
+        HelpdeskCallsViewImpl hdView = this.getHelpdeskCallsView();
+        hdView.setApplyViewCriteriaNames(null);
+        ViewCriteria sCriteria = hdView.getViewCriteria("findForQueryCriteria");
+        hdView.setApplyViewCriteriaName(sCriteria.getName());
+        hdView.executeQuery();
+        
+        HdStateWithEmptyImpl sView = this.getHdStateWithEmpty();
+        sView.setApplyViewCriteriaNames(null);
+        ViewCriteria stateCriteria = sView.getViewCriteria("CalleeQueryCriteria");
+        sView.setApplyViewCriteriaName(stateCriteria.getName());
+        sView.executeQuery();
+        
+        EmpWithEmptyImpl eView = this.getEmpWithEmptyForCallee();
+        eView.setApplyViewCriteriaNames(null);
+        ViewCriteria cVC = eView.getViewCriteria("CalleeCriteria");
+        eView.setApplyViewCriteriaName(cVC.getName());            
+        eView.executeQuery();
+    }
 
     /**
      * Container's getter for HelpdeskCallsView.

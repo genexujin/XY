@@ -781,10 +781,10 @@ Insert into OA.EMPLOYEES (USER_NAME,PASSWORD,FIRST_NAME,LAST_NAME,GENDER,MGR_ID,
 Insert into OA.EMPLOYEES (USER_NAME,PASSWORD,FIRST_NAME,LAST_NAME,GENDER,MGR_ID,DEPT_ID,EMAIL,MOBILE,OFFICE_PHONE,HOME_PHONE,FAX,LOCATION_ID,HOME_ADDRESS,OFFICE_ADDRESS,LAST_UPDATED_BY,LAST_UPDATED_AT,CREATED_BY,CREATED_AT,TITLE,ID,MGR_NAME,DEPT_NAME,EXPIRED) values ('chenfl','welcome1','福林','陈','男',null,'14',null,'13501630255',null,null,null,null,null,null,null,null,null,null,null,'316','张增康','总务处','N');
 REM INSERTING into OA.HELPDESK_CALLS
 REM INSERTING into OA.HELPDESK_ROLES
-Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values ('LOC-1','IT','丽园IT报修处理员',null,null,null);
-Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values ('LOC-1','后勤','丽园电工报修处理员',null,null,null);
-Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values ('LOC-2','IT','自忠IT报修处理员',null,null,null);
-Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values ('LOC-2','后勤','自忠电工报修处理员',null,null,null);
+--Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values ('LOC-1','IT','丽园IT报修处理员',null,null,null);
+--Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values ('LOC-1','后勤','丽园电工报修处理员',null,null,null);
+--Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values ('LOC-2','IT','自忠IT报修处理员',null,null,null);
+--Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values ('LOC-2','后勤','自忠电工报修处理员',null,null,null);
 Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values (null,'总务','总务报修分派','14',null,null);
 Insert into OA.HELPDESK_ROLES (LOCATION_ID,HELPDESK_REASON,ROLE_NAME,DEPT_ID,CREATED_AT,CREATED_BY) values (null,'信息','信息报修分派','11',null,null);
 REM INSERTING into OA.ITEM_CATEGORY_APPROVAL
@@ -971,6 +971,7 @@ Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGOR
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_ASSIGN','报修分派','/WEB-INF/flows/helpdesk/HdAssign.xml#HdAssign','报修分派','HD',null,'SYS','/images/icons/index.png','false','3');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_PROC','报修处理','/WEB-INF/flows/helpdesk/MyHdCallCallee.xml#MyHdCallCallee','报修处理','HD',null,'SYS','/images/icons/show_failures.png','false','4');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_REVIEW','报修复核','/WEB-INF/flows/helpdesk/MyHdCallReview.xml#MyHdCallReview','报修复核','HD',null,'SYS','/images/icons/tasks.png','false','5');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_HD_QUERY','报修单查询','/WEB-INF/flows/helpdesk/HdCallQuery.xml#HdCallQuery','报修单查询','HD',null,'SYS','/images/icons/properties.png','false','6');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CLSRM_CAL','教室日历','/WEB-INF/flows/clsrm/ClsRmCalendar.xml#ClsRmCalendar','教室日历','CLSRM',null,'SYS','/images/icons/chooseDate.png','false','1');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CLSRM_BATCH','批量预订','/WEB-INF/flows/clsrm/batch-reservation-btf.xml#batch-reservation-btf','批量预定','CLSRM',null,'SYS','/images/icons/group.png','false','2');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_CONFRM_CAL','会议室日历','/WEB-INF/flows/confRm/confRm-calendar-btf.xml#confRm-calendar-btf','会议室日历','CONFRM',null,'SYS','/images/icons/chooseDate.png','false','1');
@@ -1008,10 +1009,10 @@ Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPD
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('4','车辆审核','车辆审核',null,null,null,null,'N');
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('5','车辆调度','车辆调度',null,null,null,null,'N');
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('6','教室管理员','教室管理员',null,null,null,null,'N');
-Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('7','丽园IT报修处理员','丽园IT报修处理员',null,null,null,null,'N');
-Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('8','丽园电工报修处理员','丽园电工报修处理员',null,null,null,null,'N');
-Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('9','自忠IT报修处理员','自忠IT报修处理员',null,null,null,null,'N');
-Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('10','自忠电工报修处理员','自忠电工报修处理员',null,null,null,null,'N');
+--Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('7','丽园IT报修处理员','丽园IT报修处理员',null,null,null,null,'N');
+--Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('8','丽园电工报修处理员','丽园电工报修处理员',null,null,null,null,'N');
+--Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('9','自忠IT报修处理员','自忠IT报修处理员',null,null,null,null,'N');
+--Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('10','自忠电工报修处理员','自忠电工报修处理员',null,null,null,null,'N');
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('11','采购审核','采购审核',null,null,null,null,'N');
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('12','采购审批','采购审批',null,null,null,null,'N');
 Insert into OA.ROLES (ROLE_ID,ROLE_NAME,ROLE_DESC,CREATED_AT,CREATED_BY,LAST_UPDATED_AT,LAST_UPDATED_BY,EXPIRED) values ('13','采购终审','采购终审',null,null,null,null,'N');
@@ -1096,6 +1097,10 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('18','
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('19','SYS_HD_ASSIGN',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('20','SYS_HD_PROC',null,null);
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('21','SYS_HD_REVIEW',null,null);
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('18','SYS_HD_QUERY',null,null);
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('19','SYS_HD_QUERY',null,null);
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('20','SYS_HD_QUERY',null,null);
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('21','SYS_HD_QUERY',null,null);
 REM INSERTING into OA.ROLE_USERS
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('1','273',null,null);
 Insert into OA.ROLE_USERS (ROLE_ID,USER_ID,CREATED_AT,CREATED_BY) values ('2','282',null,null);

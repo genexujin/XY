@@ -444,6 +444,8 @@ public class MyHelpdeskCallBean extends BaseBean {
             return "returnFromAssigner";
         } else if ("review".equals(fromMenu)) {
             return "returnFromReview";
+        } else if ("query".equals(fromMenu)) {
+            return "returnFromQuery";
         } else {
             return "returnFromCaller";
         }

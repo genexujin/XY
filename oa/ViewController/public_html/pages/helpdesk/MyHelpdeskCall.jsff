@@ -25,7 +25,7 @@
                                                 label="申请人"
                                                 required="#{bindings.EmpWithEmptyForCaller.hints.mandatory}"
                                                 shortDesc="#{bindings.EmpWithEmptyForCaller.hints.tooltip}" id="soc10"
-                                                disabled="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign' and pageFlowScope.fromMenu!='review'}">
+                                                disabled="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign' and pageFlowScope.fromMenu!='review' and pageFlowScope.fromMenu!='query'}">
                                 <f:selectItems value="#{bindings.EmpWithEmptyForCaller.items}" id="si5"/>
                             </af:selectOneChoice>
                             <af:selectOneChoice value="#{bindings.ReasonLevel1WithEmpty.inputValue}"
@@ -85,7 +85,7 @@
                 <f:facet name="toolbar">
                     <af:toolbar id="t1">
                         <af:commandToolbarButton text="新建" id="ctb1" action="create"
-                                                 rendered="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign' and pageFlowScope.fromMenu!='review'}"
+                                                 rendered="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign' and pageFlowScope.fromMenu!='review' and pageFlowScope.fromMenu!='query'}"
                                                  icon="/images/icons/new_ena.png"/>
                         <af:commandToolbarButton text="更改" id="ctb2" action="edit" icon="/images/icons/edit.png"/>
                     </af:toolbar>
