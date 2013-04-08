@@ -200,6 +200,14 @@
                                     <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
                                     <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
                                 </af:commandButton>
+								<af:commandButton text="拒绝" partialSubmit="true" id="cb51"
+                                                  rendered="#{(pageFlowScope.fromMenu eq 'verifier' or sessionScope.LoginUserBean.isUserInRole['采购审核'])
+                                                               and bindings.State.inputValue eq '2'}"
+                                                  icon="/images/icons/terminate.png">
+                                    <af:clientListener method="setReject" type="click"/>
+                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
+                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
+                                </af:commandButton>
                                 <af:commandButton text="拒绝" partialSubmit="true" id="cb5"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购审批'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购审批'}"
@@ -217,8 +225,7 @@
                                     <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
                                 </af:commandButton>
                                 <af:commandButton text="取消" partialSubmit="true" id="cb6"
-                                                  rendered="#{(pageFlowScope.fromMenu eq 'normal' and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '2' or bindings.State.inputValue eq '4' or bindings.State.inputValue eq '8'))
-                                                              or (pageFlowScope.fromMenu ne 'query' and sessionScope.LoginUserBean.isUserInRole['采购审核'] and bindings.State.inputValue ne '1')}"
+                                                  rendered="#{pageFlowScope.MyPoBean.cancelButtonRendered}"
                                                   icon="/images/icons/undo.png">
                                     <af:clientListener method="setCancel" type="click"/>
                                     <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>

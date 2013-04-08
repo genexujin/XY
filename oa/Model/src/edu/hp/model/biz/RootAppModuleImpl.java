@@ -230,13 +230,18 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
      * @param userId
      */
     public void completeTaskForUserId(String contextObjectType, String contextObjectId, String userId) {
-        if (contextObjectType != null && contextObjectId != null && userId != null) {
+        if (contextObjectType != null && contextObjectId != null) {
             TasksViewImpl taskVO = (TasksViewImpl)this.getTasks();
+            taskVO.setApplyViewCriteriaNames(null);
+            
             taskVO.setcontextId(contextObjectId);
             taskVO.setcontextType(contextObjectType);
-            taskVO.setuserId(userId);
-            taskVO.setApplyViewCriteriaNames(null);
-            taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContextAndUserId"));
+            if (userId != null) {
+                taskVO.setuserId(userId);
+                taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContextAndUserId"));
+            } else {
+                taskVO.applyViewCriteria(taskVO.getViewCriteria("findByContextOnlyCriteria"));
+            }
             taskVO.setRangeSize(-1);
             taskVO.executeQuery();
             Row[] allRowsInRange = taskVO.getAllRowsInRange();

@@ -54,9 +54,11 @@ public class MyHelpdeskCallBean extends BaseBean {
     
     private String fromButton;
     
-    private String oldCallee;
-    
     private String action;
+    
+    private boolean assignButtonRendered;
+    private boolean processPanelRendered;
+    private boolean assignLovRendered;
 
     public MyHelpdeskCallBean() {
     }
@@ -187,10 +189,11 @@ public class MyHelpdeskCallBean extends BaseBean {
                 completeTask(Constants.CONTEXT_TYPE_HELPDESK, id, roleName);
                 
                 //Complete task for callee if it is assigned before
-                System.out.println("之前分派的处理人id：" + oldCallee);
-                if (oldCallee != null) {
-                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, oldCallee);
-                }
+//                System.out.println("之前分派的处理人id：" + oldCallee);
+//                if (oldCallee != null) {
+//                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, oldCallee);
+//                }
+                completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, null);
                 
                 String noteTitle = "有新的报修请求等待处理，报修单号：" + readableId;
                 String noteContent = "报修原因：" + rsnLv1 + " 详细地址：" + locationDetail;
@@ -474,17 +477,9 @@ public class MyHelpdeskCallBean extends BaseBean {
         return deptId;
     }
 
-    public void setOldCallee(String oldCallee) {
-        this.oldCallee = oldCallee;
-    }
-
-    public String getOldCallee() {
-        return oldCallee;
-    }
-
     public void calleeChanged(ValueChangeEvent event) {
         //Set the old value so that it can be used to complete the task
-        oldCallee = (String)event.getOldValue();
+//        oldCallee = (String)event.getOldValue();
     }
     
     public void onConfirm(DialogEvent dialogEvent) {
@@ -521,5 +516,39 @@ public class MyHelpdeskCallBean extends BaseBean {
         System.err.println("here");
         String newAction  = (String) clientEvent.getParameters().get("payload");
         this.setAction(newAction);
+    }
+    
+    public void setAssignButtonRendered(boolean assignButtonRendered) {
+        this.assignButtonRendered = assignButtonRendered;
+    }
+
+    public boolean isAssignButtonRendered() {
+        assignButtonRendered = 
+            JSFUtils.resolveExpressionAsBoolean("#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'])" 
+                                                + " and (bindings.State.inputValue eq '已受理' or bindings.State.inputValue eq '已分派') and pageFlowScope.fromMenu != 'query' and (pageFlowScope.fromMenu != '-' or (pageFlowScope.fromMenu == '-' and bindings.CalleeFullName == 'nullnull'))}");
+        
+        return assignButtonRendered;
+    }
+
+    public void setProcessPanelRendered(boolean processPanelRendered) {
+        this.processPanelRendered = processPanelRendered;
+    }
+
+    public boolean isProcessPanelRendered() {
+        processPanelRendered = 
+            JSFUtils.resolveExpressionAsBoolean("#{(bindings.State.inputValue ne '未提交' and bindings.State.inputValue ne '已撤消' and bindings.State.inputValue ne '已受理'" + 
+                                                " and (pageFlowScope.fromMenu eq 'callee' or (pageFlowScope.fromMenu eq '-' and ((!sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and !sessionScope.LoginUserBean.isUserInRole['信息报修分派']) or sessionScope.LoginUserBean.userId eq bindings.CalleeId.inputValue))) )" + 
+                                                " or (bindings.State.inputValue eq '已处理' or bindings.State.inputValue eq '已评价' or bindings.State.inputValue eq '总务复核')}");
+        return processPanelRendered;
+    }
+
+    public void setAssignLovRendered(boolean assignLovRendered) {
+        this.assignLovRendered = assignLovRendered;
+    }
+
+    public boolean isAssignLovRendered() {
+        assignLovRendered = 
+            JSFUtils.resolveExpressionAsBoolean("#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派']) and pageFlowScope.fromMenu ne 'query'}");
+        return assignLovRendered;
     }
 }
