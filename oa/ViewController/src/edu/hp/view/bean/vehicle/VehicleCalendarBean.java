@@ -9,6 +9,8 @@ import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 import javax.faces.component.UIComponent;
@@ -174,15 +176,23 @@ public class VehicleCalendarBean extends CalendarBean {
         this.refreshCalendar(calendar);
     }
 
-    public String save() {
+    public String save() throws Exception {
         
         String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
         if (Integer.valueOf(id) > 0 && action.equals("new"))
             action = "save";
         
-        startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
-        Timestamp submit = (Timestamp)ADFUtils.getBoundAttributeValue("SubmitDate");
-        if (submit == null)
+        String time = (String)ADFUtils.getBoundAttributeValue("StartTime");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = format.parse(time);
+        startDayTime = new Timestamp(date);
+        
+        time = (String)ADFUtils.getBoundAttributeValue("SubmitDate");
+//        date = format.parse(time);
+//        Timestamp submit = new Timestamp(date);
+        //startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
+        //Timestamp submit = (Timestamp)ADFUtils.getBoundAttributeValue("SubmitDate");
+        if (time == null)
             ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
         vehicleId = (String)ADFUtils.getBoundAttributeValue("VehicleId");
         boolean success = ADFUtils.commit("车辆预订已保存！", "车辆预订保存失败，请核对输入的信息或联系管理员！");
