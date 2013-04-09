@@ -43,6 +43,8 @@ public class MyPoBean extends BaseBean {
     private RichTable poLinesTable;
     private RichTable poHistoryTable;
     private RichPanelFormLayout poForm;
+    
+    private boolean cancelButtonRendered;
 
     public MyPoBean() {
     }
@@ -396,7 +398,8 @@ public class MyPoBean extends BaseBean {
             //No task created after rejection. Only notification
 //            createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "您的采购订单被拒绝，请取消或者重新提交订单。", submitterId, readableId);
             sendNotification("您的采购订单被拒绝", "您的采购订单被拒绝,请取消或者重新提交订单，订单号： " + readableId, submitterId, null);
-            //Complete task for approver
+            //Complete task for approver or verifier
+            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_VERIFIER);
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_2ND_APPROVER);
             
@@ -900,5 +903,16 @@ public class MyPoBean extends BaseBean {
 
     public RichPanelFormLayout getPoForm() {
         return poForm;
+    }
+
+    public void setCancelButtonRendered(boolean cancelButtonRendered) {
+        this.cancelButtonRendered = cancelButtonRendered;
+    }
+
+    public boolean isCancelButtonRendered() {
+        cancelButtonRendered = 
+            JSFUtils.resolveExpressionAsBoolean("#{(pageFlowScope.fromMenu eq 'normal' and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '2' or bindings.State.inputValue eq '4' or bindings.State.inputValue eq '8'))" + 
+                                                " or (pageFlowScope.fromMenu ne 'query' and sessionScope.LoginUserBean.isUserInRole['采购审核'] and bindings.State.inputValue ne '1' and bindings.State.inputValue ne '2')}");
+        return cancelButtonRendered;
     }
 }
