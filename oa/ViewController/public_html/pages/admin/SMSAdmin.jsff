@@ -25,6 +25,7 @@
                         </af:panelLabelAndMessage>
                     </af:panelFormLayout>
                 </af:panelHeader>
+                <af:spacer width="10" height="10" id="s1"/>
                 <af:panelHeader text="短消息余额" id="ph2" icon="/images/icons/outcome.png">
                     <f:facet name="context"/>
                     <f:facet name="menuBar"/>
@@ -38,6 +39,24 @@
                         <af:panelLabelAndMessage label="余额(条数):" id="plam2">
                             <af:outputText value="#{viewScope.SMSBean.balance}" id="ot2" partialTriggers="cb2"/>
                         </af:panelLabelAndMessage>
+                    </af:panelFormLayout>
+                </af:panelHeader>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:panelHeader text="短消息测试" id="ph3" icon="/images/icons/outcome.png">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="legend"/>
+                    <f:facet name="info"/>
+                    <af:panelFormLayout id="pfl3" rows="2">
+                        <f:facet name="footer">
+                            <af:commandButton text="发送" id="cb4" icon="/images/icons/run.png"
+                                              actionListener="#{viewScope.SMSBean.send}"/>
+                        </f:facet>
+                        <af:inputText label="测试接收手机号码" id="it1" value="#{viewScope.SMSBean.phoneNumber}">
+                            <af:validateLength minimum="11" maximum="11" messageDetailNotInRange="手机号码必须为11位"/>
+                        </af:inputText>
+                        <af:inputText label="测试消息内容" id="it2" value="#{viewScope.SMSBean.testMsg}"/>
                     </af:panelFormLayout>
                 </af:panelHeader>
             </af:panelGroupLayout>
