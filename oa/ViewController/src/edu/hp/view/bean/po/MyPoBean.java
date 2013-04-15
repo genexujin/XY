@@ -400,7 +400,7 @@ public class MyPoBean extends BaseBean {
         } else {
             changeState(Constants.PO_STATE_FINISHED);
             
-            computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", "ActualTotal");
+            computeTotal("ActualPrice", "ReceiveQuantity", "ActualTotal", "ActualTotal");
             boolean success = ADFUtils.commit("采购订单已完成！", "采购订单提交失败，请核对输入的信息或联系管理员！");
             if (success) {
                 String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
@@ -419,7 +419,6 @@ public class MyPoBean extends BaseBean {
     }
     
     public void finishPo(ActionEvent actionEvent) {
-        
         boolean success = ADFUtils.commit("采购订单收货完成！", "采购订单收货失败，请核对输入的信息或联系管理员！");
         if (success) {            
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
@@ -507,14 +506,20 @@ public class MyPoBean extends BaseBean {
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
-            String deptVerifier = ADFUtils.getBoundAttributeValue("DeptVerifier").toString();
+            
+            String deptVerifier = null;
+            if (ADFUtils.getBoundAttributeValue("DeptVerifier") != null) {
+                deptVerifier = ADFUtils.getBoundAttributeValue("DeptVerifier").toString();
+            }
             
             String operator = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
             insertPoHistory(id, operator, "取消了该订单");
             
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_VERIFIER);
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
-            completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, deptVerifier);
+            if (deptVerifier != null) {
+                completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, deptVerifier);
+            }
             completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, submitterId);
             
             String fromMenu = JSFUtils.resolveExpressionAsString("#{pageFlowScope.fromMenu}");
