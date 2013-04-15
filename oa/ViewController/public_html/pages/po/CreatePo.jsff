@@ -4,74 +4,116 @@
     <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="250px" bottomHeight="0px">
         <f:facet name="top">
             <af:panelGroupLayout layout="vertical" id="pgl1">
-                <af:resource type="javascript">
-                function setSubmit(event) {
-                    setAction(event, 'submit');
-                }
-                
-                function setDeptVerify(event) {
-                    setAction(event, 'deptVerify');
-                }
-                
-                function setDeptReject(event) {
-                    setAction(event, 'deptReject');
-                }
-                
-                function setCancel(event) {
-                    setAction(event, 'cancel');
-                }
-                
-                function setVerify(event) {
-                    setAction(event, 'verify');
-                }
-                
-                function setApprove(event) {
-                    setAction(event, 'approve');
-                }
-                
-                function setApprove2nd(event) {
-                    setAction(event, 'approve2nd');
-                }
-                
-                function setReject(event) {
-                    setAction(event, 'reject');
-                }
-                
-                function setExecute(event) {
-                    setAction(event, 'execute');
-                }
-                
-                function setFinish(event) {
-                    setAction(event, 'finish');
-                }
-                
-                function setReopen(event) {
-                    setAction(event, 'reopen');
-                }
-                
-                function setBackToVerify(event) {
-                    setAction(event, 'backToVerify');
-                }
-
-                function setAction(event, action) {
-                    var source = event.getSource();
-                    AdfCustomEvent.queue(source, "setActionListener", 
-                    {payload : action},true);
-                }
-                </af:resource>
-                
-                <af:popup id="confirm" contentDelivery="lazyUncached">
-                
+                <af:popup id="submitConfirm" contentDelivery="lazyUncached">
                     <!-- don't render if the activity is null -->
-                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.onConfirm}" title="请确认操作" id="d2"
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.submitConfirm}" title="请确认操作" id="d2"
                                contentWidth="200" contentHeight="50">
                         <af:outputText value="请注意：该操作会改变订单状态！" id="ot10"/>
                         <af:spacer height="20" id="s4"/>
                         <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot15"/>
                     </af:dialog>
                 </af:popup>
+                <af:popup id="deptConfirm" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.deptVerifyConfirm}" title="请确认操作" id="d3"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot11"/>
+                        <af:spacer height="20" id="s5"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot16"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="deptReject" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.deptRejectConfirm}" title="请确认操作" id="d4"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot12"/>
+                        <af:spacer height="20" id="s6"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot27"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="verifyConfirm" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.verifyConfirm}" title="请确认操作" id="d5"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot13"/>
+                        <af:spacer height="20" id="s7"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot28"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="approve1" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.approve1Confirm}" title="请确认操作" id="d6"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot14"/>
+                        <af:spacer height="20" id="s8"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot29"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="approve2" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.approve2Confirm}" title="请确认操作" id="d7"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot25"/>
+                        <af:spacer height="20" id="s9"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot30"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="reject" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.rejectConfirm}" title="请确认操作" id="d8"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot26"/>
+                        <af:spacer height="20" id="s10"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot31"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="cancel" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.cancelConfirm}" title="请确认操作" id="d11"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot49"/>
+                        <af:spacer height="20" id="s13"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot34"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="execute" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.executeConfirm}" title="请确认操作" id="d22"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot60"/>
+                        <af:spacer height="20" id="s24"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot39"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="receive" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.receiveConfirm}" title="请确认操作" id="d13"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot51"/>
+                        <af:spacer height="20" id="s15"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot36"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="reopen" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.reopenConfirm}" title="请确认操作" id="d14"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot52"/>
+                        <af:spacer height="20" id="s16"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot37"/>
+                    </af:dialog>
+                </af:popup>
+                <af:popup id="reverify" contentDelivery="lazyUncached">
+                    <!-- don't render if the activity is null -->
+                    <af:dialog dialogListener="#{pageFlowScope.MyPoBean.reverifyConfirm}" title="请确认操作" id="d15"
+                               contentWidth="200" contentHeight="50">
+                        <af:outputText value="请注意：该操作会改变订单状态！" id="ot53"/>
+                        <af:spacer height="20" id="s17"/>
+                        <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot38"/>
+                    </af:dialog>
+                </af:popup>
                 <af:panelHeader text="订单" id="ph1">
-                    <af:panelFormLayout id="pfl1" rows="5" binding="#{pageFlowScope.MyPoBean.poForm}">
+                    <af:panelFormLayout id="pfl1" rows="6" binding="#{pageFlowScope.MyPoBean.poForm}">
                         <af:selectOneChoice value="#{bindings.SubmitterId.inputValue}" label="申请人"
                                             required="#{bindings.SubmitterId.hints.mandatory}"
                                             shortDesc="#{bindings.SubmitterId.hints.tooltip}" id="soc1"
@@ -99,6 +141,10 @@
                                       columns="20" contentStyle="text-align:right;">
                             <af:convertNumber type="currency"/>
                         </af:inputText>
+                        <af:inputText value="#{bindings.ActualTotal.inputValue}" id="ot90" label="实际总金额" disabled="true"
+                                      columns="20" contentStyle="text-align:right;">
+                            <af:convertNumber type="currency"/>
+                        </af:inputText>
                         <af:selectOneChoice value="#{bindings.State.inputValue}" label="订单状态"
                                             required="#{bindings.State.hints.mandatory}"
                                             shortDesc="#{bindings.State.hints.tooltip}" id="soc2" disabled="true"
@@ -107,6 +153,7 @@
                         </af:selectOneChoice>
                         <af:inputText value="#{bindings.OrderNote.inputValue}" id="ot9" label="备注" rows="5" columns="25"
                                       disabled="#{(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') or bindings.State.inputValue ne '1'}"/>
+                        <af:spacer width="5px" height="5px"/>
                         <af:spacer width="5px" height="5px"/>
                         <af:spacer width="5px" height="5px"/>
                         <af:spacer width="5px" height="5px"/>
@@ -156,112 +203,112 @@
                                                   rendered="#{(pageFlowScope.fromMenu!='query' and pageFlowScope.fromMenu!='approver' and pageFlowScope.fromMenu!='verifier' and pageFlowScope.fromMenu!='receiver')
                                                               and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '4')}"
                                                   icon="/images/icons/run.png">
-                                    <af:clientListener method="setSubmit" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setSubmit" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="submitConfirm"/>
                                 </af:commandButton>
                                 <af:commandButton text="审核" partialSubmit="true" id="cb30"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'dept' or sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
                                                                and bindings.State.inputValue eq '8'}"
                                                   icon="/images/icons/check.png">
-                                    <af:clientListener method="setDeptVerify" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setDeptVerify" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="deptConfirm"/>
                                 </af:commandButton>
                                 <af:commandButton text="拒绝" partialSubmit="true" id="cb31" 
                                                   rendered="#{(pageFlowScope.fromMenu eq 'dept' or sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
                                                                and bindings.State.inputValue eq '8'}"
                                                   icon="/images/icons/terminate.png">
-                                    <af:clientListener method="setDeptReject" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setDeptReject" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="deptReject"/>
                                 </af:commandButton>
                                 <af:commandButton text="审核" partialSubmit="true" id="cb3"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'verifier' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购审核']))
                                                                and bindings.State.inputValue eq '2'}"
                                                   icon="/images/icons/check.png">
-                                    <af:clientListener method="setVerify" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setVerify" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="verifyConfirm"/>
                                 </af:commandButton>
                                 <af:commandButton text="审批" partialSubmit="true" id="cb4"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购审批'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购审批'}"
                                                   icon="/images/icons/check.png">
-                                    <af:clientListener method="setApprove" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>             
+                                    <!--<af:clientListener method="setApprove" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="approve1"/>             
                                 </af:commandButton>
                                 <af:commandButton text="审批" partialSubmit="true" id="cb40"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购终审'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购终审'}"
                                                   icon="/images/icons/check.png">
-                                    <af:clientListener method="setApprove2nd" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
+                                    <!--<af:clientListener method="setApprove2nd" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="approve2"/>   
                                 </af:commandButton>
-								<af:commandButton text="拒绝" partialSubmit="true" id="cb51"
+                                <af:commandButton text="拒绝" partialSubmit="true" id="cb51"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'verifier' or sessionScope.LoginUserBean.isUserInRole['采购审核'])
                                                                and bindings.State.inputValue eq '2'}"
                                                   icon="/images/icons/terminate.png">
-                                    <af:clientListener method="setReject" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
+                                    <!--<af:clientListener method="setReject" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="reject"/>   
                                 </af:commandButton>
                                 <af:commandButton text="拒绝" partialSubmit="true" id="cb5"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购审批'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购审批'}"
                                                   icon="/images/icons/terminate.png">
-                                    <af:clientListener method="setReject" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
+                                    <!--<af:clientListener method="setReject" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="reject"/>   
                                 </af:commandButton>
                                 <af:commandButton text="拒绝" partialSubmit="true" id="cb50"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'approver' or sessionScope.LoginUserBean.isUserInRole['采购终审'])
                                                                and bindings.State.inputValue eq '3' and bindings.CurrentApprover.inputValue eq '采购终审'}"
                                                   icon="/images/icons/terminate.png">
-                                    <af:clientListener method="setReject" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>   
+                                    <!--<af:clientListener method="setReject" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="reject"/>   
                                 </af:commandButton>
                                 <af:commandButton text="取消" partialSubmit="true" id="cb6"
                                                   rendered="#{pageFlowScope.MyPoBean.cancelButtonRendered}"
                                                   icon="/images/icons/undo.png">
-                                    <af:clientListener method="setCancel" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setCancel" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="cancel"/>
                                 </af:commandButton>
                                 <af:commandButton text="完成" partialSubmit="true" id="cb7"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'buyer' or sessionScope.LoginUserBean.isUserInRole['采购执行'])
                                                               and bindings.State.inputValue eq '5'}"
                                                   icon="/images/icons/check.png">
-                                    <af:clientListener method="setExecute" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setExecute" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="execute"/>
                                 </af:commandButton>
                                 <af:commandButton text="收货" partialSubmit="true" id="cb8"
                                                   rendered="#{(pageFlowScope.fromMenu eq 'receiver' or sessionScope.LoginUserBean.isUserInRole['采购收货'])
                                                               and bindings.State.inputValue eq '5'}"
                                                   icon="/images/icons/package.png">
-                                    <af:clientListener method="setFinish" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setFinish" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="receive"/>
                                 </af:commandButton>
                                 <af:commandButton text="重新打开" partialSubmit="true" id="cb18"
                                                   rendered="#{(sessionScope.LoginUserBean.isUserInRole['采购审核'] or sessionScope.LoginUserBean.isUserInRole['采购执行'])
                                                               and bindings.State.inputValue eq '6'}"
                                                   icon="/images/icons/open.png">
-                                    <af:clientListener method="setReopen" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setReopen" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="reopen"/>
                                 </af:commandButton>
                                 <af:commandButton text="重新审核" partialSubmit="true" id="cb19"
                                                   rendered="#{sessionScope.LoginUserBean.isUserInRole['采购审核'] 
                                                               and (bindings.State.inputValue ne '1' and bindings.State.inputValue ne '2')}"
                                                   icon="/images/icons/redo.png">
-                                    <af:clientListener method="setBackToVerify" type="click"/>
-                                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>
-                                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                                    <!--<af:clientListener method="setBackToVerify" type="click"/>-->
+                                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyPoBean.setActionListener}"/>-->
+                                    <af:showPopupBehavior triggerType="action" popupId="reverify"/>
                                 </af:commandButton>
                             </af:panelGroupLayout>
                         </f:facet>
@@ -429,7 +476,7 @@
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.PurchaseQuantity.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.PurchaseQuantity.tooltip}"
                                       id="it9" autoSubmit="true"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or bindings.State.inputValue ne '2' or pageFlowScope.fromMenu eq 'dept' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
+                                      readOnly="#{pageFlowScope.fromMenu eq 'normal' or pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or bindings.State.inputValue ne '2' or pageFlowScope.fromMenu eq 'dept' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
                                    or (not(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'buyer' or pageFlowScope.fromMenu eq 'receiver'
                                            or sessionScope.LoginUserBean.isUserInRole['采购审核'] or sessionScope.LoginUserBean.isUserInRole['采购审批']))}">
                             <f:validator binding="#{row.bindings.PurchaseQuantity.validator}"/>
@@ -446,7 +493,7 @@
                                       columns="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.VerifyNote.tooltip}" id="it12" autoSubmit="true"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or bindings.State.inputValue ne '2' or pageFlowScope.fromMenu eq 'dept' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
+                                      readOnly="#{pageFlowScope.fromMenu eq 'normal' or pageFlowScope.fromMenu eq 'query' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver' or bindings.State.inputValue ne '2' or pageFlowScope.fromMenu eq 'dept' or (pageFlowScope.fromMenu eq '-' and sessionScope.LoginUserBean.isUserInRole['采购部门审核'])
                                   or (not (pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'buyer' or pageFlowScope.fromMenu eq 'receiver'
                                            or sessionScope.LoginUserBean.isUserInRole['采购审核'] or sessionScope.LoginUserBean.isUserInRole['采购审批']))}">
                             <!--<f:validator binding="#{row.bindings.VerifyNote.validator}"/>-->
@@ -462,7 +509,7 @@
                                       columns="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.displayWidth}"
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.ActualPrice.tooltip}" id="it10" autoSubmit="true"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'buyer'))}">
+                                      readOnly="#{pageFlowScope.MyPoBean.actualPriceReadonly}">
                             <f:validator binding="#{row.bindings.ActualPrice.validator}"/>
                         </af:inputText>
                     </af:column>
@@ -483,7 +530,7 @@
                                       maximumLength="#{bindings.PurchaseOrderLinesView.hints.ReceiveQuantity.precision}"
                                       shortDesc="#{bindings.PurchaseOrderLinesView.hints.ReceiveQuantity.tooltip}"
                                       id="it13" autoSubmit="true"
-                                      readOnly="#{pageFlowScope.fromMenu eq 'query' or bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'receiver'))}">
+                                      readOnly="#{pageFlowScope.MyPoBean.receiveQuantityReadonly}">
                             <!--<f:validator binding="#{row.bindings.ReceiveQuantity.validator}"/>-->
                         </af:inputText>
                     </af:column>

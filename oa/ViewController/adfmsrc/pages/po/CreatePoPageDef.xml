@@ -194,5 +194,17 @@
         <Item Value="DeptVerifier"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="isUserInRole" RequiresUpdateModel="true" Action="invokeMethod" MethodName="isUserInRole"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule.RoleUsersView"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.isUserInRole_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_RoleUsersView_isUserInRole_result">
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+      <NamedData NDName="roleName" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="ActualTotal">
+      <AttrNames>
+        <Item Value="ActualTotal"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

@@ -446,6 +446,7 @@ ALTER SESSION SET NLS_LANGUAGE='AMERICAN';
 	"STATE" VARCHAR2(20 BYTE), 
 	"SUBMIT_TOTAL" NUMBER(12,2), 
 	"VERIFY_TOTAL" NUMBER(12,2), 
+  "ACTUAL_TOTAL" NUMBER(12,2), 
 	"ORDER_NOTE" VARCHAR2(500 BYTE), 
 	"CURRENT_APPROVER" VARCHAR2(20 BYTE), 
 	"CURRENT_EXECUTOR" VARCHAR2(20 BYTE),
@@ -961,6 +962,7 @@ REM INSERTING into OA.MENUS
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_MY_PR','我的采购申请','/WEB-INF/flows/po/MyPoNormalUser.xml#MyPoNormalUser','我的采购申请','PUR',null,'SYS','/images/icons/user.png','false','1');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_DEPT_REVIEW','部门审核','/WEB-INF/flows/po/MyPoDeptVerifier.xml#MyPoDeptVerifier','部门审核','PUR',null,'SYS','/images/icons/forum.png','false','3');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_APPROVE','采购审批','/WEB-INF/flows/po/MyPoApprover.xml#MyPoApprover','采购审批','PUR',null,'SYS','/images/icons/check.png','false','5');
+Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_LIMIT','采购终审下限','/WEB-INF/flows/admin/po-approve-limit.xml#po-approve-limit','采购终审下限','PUR',null,'SYS','/images/icons/clearhighlight.png','false','9');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_REVIEW','采购审核','/WEB-INF/flows/po/MyPoVerifier.xml#MyPoVerifier','采购审核','PUR',null,'SYS','/images/icons/tasks.png','false','4');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_BUY','采购执行','/WEB-INF/flows/po/MyPoBuyer.xml#MyPoBuyer','采购执行','PUR',null,'SYS','/images/icons/cart.gif','false','6');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('SYS_PUR_RECEIVE','采购收货','/WEB-INF/flows/po/MyPoReceiver.xml#MyPoReceiver','采购收货','PUR',null,'SYS','/images/icons/package.png','false','7');
@@ -995,7 +997,7 @@ Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGOR
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_HD_RESULT','报修结果数据','/WEB-INF/flows/admin/hd-result-btf.xml#hd-result-btf','报修结果数据','HD_RESULT',null,'ADMIN','/images/icons/completedthread.png','false','09');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_SMS','SMS管理','/WEB-INF/flows/admin/sms-enable-btf.xml#sms-enable-btf','SMS管理','SMS',null,'ADMIN',null,'false','10');
 Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_PO_CATEGORY','采购类别数据','/WEB-INF/flows/admin/po-category-btf.xml#po-category-btf','采购类别数据','PO_CATEGORY',null,'ADMIN','/images/icons/accessors.png','false','11');
-Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_PO_LIMIT','采购审批上限','/WEB-INF/flows/admin/po-approve-limit.xml#po-approve-limit','采购审批上限','PO_APPROVE_LIMIT',null,'ADMIN','/images/icons/clearhighlight.png','false','12');
+--Insert into OA.MENUS (MENU_ID,MENU_NAME,MENU_TASKFLOW_URL,MENU_DESC,MENU_CATEGORY,PARENT_MENU_ID,MENU_MASTER_CATEGORY,MENU_ICON_URL,EXPIRED,SEQ) values ('ADMIN_PO_LIMIT','采购终审下限','/WEB-INF/flows/admin/po-approve-limit.xml#po-approve-limit','采购终审下限','PO_APPROVE_LIMIT',null,'ADMIN','/images/icons/clearhighlight.png','false','12');
 REM INSERTING into OA.NOTIFICATIONS
 REM INSERTING into OA.PS_TXN
 REM INSERTING into OA.PURCHASE_ORDERS
@@ -1082,6 +1084,7 @@ Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('12','
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('12','SYS_PUR_QUERY',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('13','SYS_PUR_APPROVE',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('13','SYS_PUR_QUERY',null,to_date('01-MAR-13','DD-MON-RR'));
+Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('13','SYS_PUR_LIMIT',null,to_date('01-MAR-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('14','SYS_PUR_BUY',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('15','SYS_PUR_RECEIVE',null,to_date('01-FEB-13','DD-MON-RR'));
 Insert into OA.ROLE_MENUS (ROLE_ID,MENU_ID,CREATED_BY,CREATED_AT) values ('16','SYS_CLSRM_CAL',null,null);

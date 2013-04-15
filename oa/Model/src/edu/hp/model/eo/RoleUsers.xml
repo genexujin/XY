@@ -64,6 +64,13 @@
     AssociationOtherEnd="edu.hp.model.eo.asso.UserRoleDMLAssoc.RoleUsers"
     Type="edu.hp.model.eo.EmployeesImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Roles"
+    Association="edu.hp.model.eo.asso.RoleUserDMLAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.RoleUserDMLAssoc.Roles"
+    AssociationOtherEnd="edu.hp.model.eo.asso.RoleUserDMLAssoc.RoleUsers"
+    Type="edu.hp.model.eo.RolesImpl"
+    IsUpdateable="true"/>
   <Key
     Name="RoleUsersPk"
     PrimaryKey="true">
@@ -84,6 +91,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.RoleUsers.UserId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_RoleUsers1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="ROLES_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_ROLE_USERS1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.RoleUsers.RoleId"/>
     </AttrArray>
   </Key>
 </Entity>

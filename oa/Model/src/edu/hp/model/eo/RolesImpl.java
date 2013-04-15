@@ -120,6 +120,16 @@ public class RolesImpl extends BaseEntity {
                 obj.setAttributeInternal(index(), value);
             }
         }
+        ,
+        RoleUsers {
+            public Object get(RolesImpl obj) {
+                return obj.getRoleUsers();
+            }
+
+            public void put(RolesImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -148,6 +158,7 @@ public class RolesImpl extends BaseEntity {
         }
     }
 
+
     public static final int ROLEID = AttributesEnum.RoleId.index();
     public static final int ROLENAME = AttributesEnum.RoleName.index();
     public static final int ROLEDESC = AttributesEnum.RoleDesc.index();
@@ -158,12 +169,14 @@ public class RolesImpl extends BaseEntity {
     public static final int EXPIRED = AttributesEnum.Expired.index();
     public static final int EMPLOYEES = AttributesEnum.Employees.index();
     public static final int ROLEMENUS = AttributesEnum.RoleMenus.index();
+    public static final int ROLEUSERS = AttributesEnum.RoleUsers.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public RolesImpl() {
     }
+
 
     /**
      * @return the definition object for this instance class.
@@ -327,6 +340,13 @@ public class RolesImpl extends BaseEntity {
      */
     public RowIterator getRoleMenus() {
         return (RowIterator)getAttributeInternal(ROLEMENUS);
+    }
+
+    /**
+     * @return the associated entity oracle.jbo.RowIterator.
+     */
+    public RowIterator getRoleUsers() {
+        return (RowIterator)getAttributeInternal(ROLEUSERS);
     }
 
     /**

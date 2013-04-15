@@ -8,15 +8,55 @@
   SelectList="RoleUsers.ROLE_ID, 
        RoleUsers.USER_ID, 
        RoleUsers.CREATED_AT, 
-       RoleUsers.CREATED_BY"
-  FromList="ROLE_USERS RoleUsers"
+       RoleUsers.CREATED_BY, 
+       Roles.ROLE_NAME, 
+       Roles.ROLE_ID AS ROLE_ID1"
+  FromList="ROLE_USERS RoleUsers, ROLES Roles"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.RoleUsersViewImpl"
+  Where="RoleUsers.ROLE_ID = Roles.ROLE_ID(+)"
+  ComponentInterface="edu.hp.model.vo.common.RoleUsersView"
+  ClientProxyName="edu.hp.model.vo.client.RoleUsersViewClient">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Variable
+    Name="UserBV"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="RoleBV"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="RolesView"
+    ViewObjectName="edu.hp.model.vo.RolesView"
+    RowLevelBinds="true"/>
   <EntityUsage
     Name="RoleUsers"
     Entity="edu.hp.model.eo.RoleUsers"/>
+  <EntityUsage
+    Name="Roles"
+    Entity="edu.hp.model.eo.Roles"
+    Association="edu.hp.model.eo.asso.RoleUserDMLAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.RoleUserDMLAssoc.Roles"
+    SourceUsage="edu.hp.model.vo.RoleUsersView.RoleUsers"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="LEFT OUTER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="edu.hp.model.eo.RoleUsers.RoleId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="edu.hp.model.eo.Roles.RoleId"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
   <ViewAttribute
     Name="RoleId"
     IsNotNull="true"
@@ -43,10 +83,85 @@
     EntityAttrName="CreatedBy"
     EntityUsage="RoleUsers"
     AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="RoleName"
+    PrecisionRule="true"
+    EntityAttrName="RoleName"
+    EntityUsage="Roles"
+    AliasName="ROLE_NAME"/>
+  <ViewAttribute
+    Name="RoleId1"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="RoleId"
+    EntityUsage="Roles"
+    AliasName="ROLE_ID1"/>
+  <ViewCriteria
+    Name="RoleUserIdCriteria"
+    ViewObjectName="edu.hp.model.vo.RoleUsersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="RoleUsersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="UserId"
+        ViewAttribute="UserId"
+        Operator="="
+        Conjunction="AND"
+        Value=":UserBV"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="RoleName"
+        ViewAttribute="RoleName"
+        Operator="="
+        Conjunction="AND"
+        Value=":RoleBV"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="RoleId"/>
+    <Item Value="UserId"/>
+  </AttrArray>
   <ViewLinkAccessor
     Name="EmployeesDMLVA"
     ViewLink="edu.hp.model.vo.link.UserRoleDMLViewLink"
     Type="oracle.jbo.Row"
     Reversed="true"
     IsUpdateable="false"/>
+  <ClientInterface>
+    <Method
+      Name="isUserInRole"
+      MethodName="isUserInRole">
+      <Return
+        Type="boolean"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="roleName"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

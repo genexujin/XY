@@ -133,6 +133,12 @@
                                        align="right">
                                 <af:outputText value="#{row.VerifyTotal}" id="ot8"/>
                             </af:column>
+                            <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.ActualTotal.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.PurchaseOrdersView.hints.ActualTotal.label}" id="c61"
+                                       align="right">
+                                <af:outputText value="#{row.ActualTotal}" id="ot81"/>
+                            </af:column>
                             <af:column sortProperty="#{bindings.PurchaseOrdersView.hints.ItemCategoryId.name}"
                                        sortable="false"
                                        headerText="#{bindings.PurchaseOrdersView.hints.ItemCategoryId.label}" id="c7">

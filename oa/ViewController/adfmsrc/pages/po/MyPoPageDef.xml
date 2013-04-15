@@ -22,6 +22,7 @@
           <Item Value="State"/>
           <Item Value="SubmitTotal"/>
           <Item Value="VerifyTotal"/>
+          <Item Value="ActualTotal"/>
           <Item Value="ItemCategoryId"/>
           <Item Value="SubmitterName"/>
           <Item Value="LineNum"/>

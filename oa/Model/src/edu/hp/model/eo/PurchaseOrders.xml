@@ -207,6 +207,15 @@
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="ActualTotal"
+    Precision="12"
+    Scale="2"
+    ColumnName="ACTUAL_TOTAL"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="PURCHASE_ORDERS"/>
   <AccessorAttribute
     Name="Submitter"
     Association="edu.hp.model.eo.asso.EmpPoAssoc"

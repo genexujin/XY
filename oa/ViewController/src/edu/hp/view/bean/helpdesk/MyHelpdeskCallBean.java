@@ -254,7 +254,7 @@ public class MyHelpdeskCallBean extends BaseBean {
                 boolean success = ADFUtils.commit("报修单已处理！", "报修单处理失败，请核对输入的信息或联系管理员！");
                 if (success) {                    
                     //complete the task for callee
-                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, calleeId);
+                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, null);
                     
                     //create evaluation task for caller
                     createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, "您的报修请求已处理，请评价", callerId, readableId);
@@ -270,7 +270,7 @@ public class MyHelpdeskCallBean extends BaseBean {
                 
                 if (success) {                
                     //complete the task for callee
-                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, calleeId);
+                    completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, null);
                     
                     //create task for hd affair review
                     createTask(id, Constants.CONTEXT_TYPE_HELPDESK, "您有新的报修请求等待复核，报修单号：" + readableId, Constants.ROLE_HD_REVIEW, readableId);
@@ -482,25 +482,43 @@ public class MyHelpdeskCallBean extends BaseBean {
 //        oldCallee = (String)event.getOldValue();
     }
     
-    public void onConfirm(DialogEvent dialogEvent) {
+    public void submitConfirm(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
-            if(action.equals("submit")){
-                submitHdCall(null);
-            } else if (action.equals("assign")) {
-                assignHdCall(null);
-            } else if (action.equals("cancel")) {
-                cancelHdCall(null);
-            } else if (action.equals("process")) {
-                processHdCall(null);
-            } else if (action.equals("review")) {
-                reviewHdCall(null);
-            } else if (action.equals("evaluate")) {
-                evaluateHdCall(null);
-            }
-                        
+            submitHdCall(null);
+            
 //            ADFUtils.partialRefreshComponenet(poLinesTable);
 //            ADFUtils.partialRefreshComponenet(poHistoryTable);
 //            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void assignConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            assignHdCall(null);
+        }
+    }
+    
+    public void cancelConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            cancelHdCall(null);
+        }
+    }
+    
+    public void processConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            processHdCall(null);
+        }
+    }
+    
+    public void reviewConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            reviewHdCall(null);
+        }
+    }
+    
+    public void evalConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            evaluateHdCall(null);
         }
     }
 

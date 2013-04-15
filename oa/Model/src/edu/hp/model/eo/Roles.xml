@@ -151,6 +151,13 @@
     AssociationOtherEnd="edu.hp.model.eo.asso.RoleMenuAssoc.Roles"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="RoleUsers"
+    Association="edu.hp.model.eo.asso.RoleUserDMLAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.RoleUserDMLAssoc.RoleUsers"
+    AssociationOtherEnd="edu.hp.model.eo.asso.RoleUserDMLAssoc.Roles"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
     Name="RolesPk"
     PrimaryKey="true">

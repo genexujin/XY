@@ -48,6 +48,9 @@
   <ViewUsage
     Name="DepartmentsView"
     ViewObjectName="edu.hp.model.vo.DepartmentsView"/>
+  <ViewUsage
+    Name="RoleUsersView"
+    ViewObjectName="edu.hp.model.vo.RoleUsersView"/>
   <ViewLinkUsage
     Name="PoToPoLineLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"

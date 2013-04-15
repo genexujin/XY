@@ -197,6 +197,16 @@ public class PurchaseOrdersImpl extends EntityImpl {
             }
         }
         ,
+        ActualTotal {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getActualTotal();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setActualTotal((BigDecimal)value);
+            }
+        }
+        ,
         Submitter {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitter();
@@ -272,6 +282,7 @@ public class PurchaseOrdersImpl extends EntityImpl {
     public static final int CURRENTAPPROVER = AttributesEnum.CurrentApprover.index();
     public static final int CURRENTEXECUTOR = AttributesEnum.CurrentExecutor.index();
     public static final int DEPTVERIFIER = AttributesEnum.DeptVerifier.index();
+    public static final int ACTUALTOTAL = AttributesEnum.ActualTotal.index();
     public static final int SUBMITTER = AttributesEnum.Submitter.index();
     public static final int PURCHASEORDERLINES = AttributesEnum.PurchaseOrderLines.index();
     public static final int PURCHASEORDERHISTORYS = AttributesEnum.PurchaseOrderHistorys.index();
@@ -561,6 +572,22 @@ public class PurchaseOrdersImpl extends EntityImpl {
      */
     public void setDeptVerifier(String value) {
         setAttributeInternal(DEPTVERIFIER, value);
+    }
+
+    /**
+     * Gets the attribute value for ActualTotal, using the alias name ActualTotal.
+     * @return the value of ActualTotal
+     */
+    public BigDecimal getActualTotal() {
+        return (BigDecimal)getAttributeInternal(ACTUALTOTAL);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ActualTotal.
+     * @param value value to set the ActualTotal
+     */
+    public void setActualTotal(BigDecimal value) {
+        setAttributeInternal(ACTUALTOTAL, value);
     }
 
     /**

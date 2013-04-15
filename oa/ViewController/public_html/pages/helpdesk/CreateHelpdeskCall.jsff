@@ -11,45 +11,58 @@
         <f:facet name="legend"/>
         <f:facet name="info"/>
         <af:panelGroupLayout id="pgl1" layout="scroll">
-            <af:resource type="javascript">
-                function setSubmit(event) {
-                    setAction(event, 'submit');
-                }
-                
-                function setAssign(event) {
-                    setAction(event, 'assign');
-                }
-                
-                function setCancel(event) {
-                    setAction(event, 'cancel');
-                }
-
-                function setProcess(event) {
-                    setAction(event, 'process');
-                }
-                
-                function setReview(event) {
-                    setAction(event, 'review');
-                }
-                
-                function setEvaluate(event) {
-                    setAction(event, 'evaluate');
-                }
-                
-                function setAction(event, action) {
-                    var source = event.getSource();
-                    AdfCustomEvent.queue(source, "setActionListener", 
-                    {payload : action},true);
-                }
-            </af:resource>
-            <af:popup id="confirm" contentDelivery="lazyUncached">
-            
+            <af:popup id="submitConfirm" contentDelivery="lazyUncached">
                 <!-- don't render if the activity is null -->
-                <af:dialog dialogListener="#{pageFlowScope.MyHdCallBean.onConfirm}" title="请确认操作" id="d2"
+                <af:dialog dialogListener="#{pageFlowScope.MyHdCallBean.submitConfirm}" title="请确认操作" id="d2"
                            contentWidth="200" contentHeight="50">
                     <af:outputText value="请注意：该操作会改变订单状态！" id="ot10"/>
                     <af:spacer height="20" id="s4"/>
                     <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot15"/>
+                </af:dialog>
+            </af:popup>
+            <af:popup id="assignConfirm" contentDelivery="lazyUncached">
+                <!-- don't render if the activity is null -->
+                <af:dialog dialogListener="#{pageFlowScope.MyHdCallBean.assignConfirm}" title="请确认操作" id="d3"
+                           contentWidth="200" contentHeight="50">
+                    <af:outputText value="请注意：该操作会改变订单状态！" id="ot11"/>
+                    <af:spacer height="20" id="s5"/>
+                    <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot16"/>
+                </af:dialog>
+            </af:popup>
+            <af:popup id="cancelConfirm" contentDelivery="lazyUncached">
+                <!-- don't render if the activity is null -->
+                <af:dialog dialogListener="#{pageFlowScope.MyHdCallBean.cancelConfirm}" title="请确认操作" id="d4"
+                           contentWidth="200" contentHeight="50">
+                    <af:outputText value="请注意：该操作会改变订单状态！" id="ot12"/>
+                    <af:spacer height="20" id="s6"/>
+                    <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot17"/>
+                </af:dialog>
+            </af:popup>
+            <af:popup id="processConfirm" contentDelivery="lazyUncached">
+                <!-- don't render if the activity is null -->
+                <af:dialog dialogListener="#{pageFlowScope.MyHdCallBean.processConfirm}" title="请确认操作" id="d5"
+                           contentWidth="200" contentHeight="50">
+                    <af:outputText value="请注意：该操作会改变订单状态！" id="ot13"/>
+                    <af:spacer height="20" id="s7"/>
+                    <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot18"/>
+                </af:dialog>
+            </af:popup>
+            <af:popup id="reviewConfirm" contentDelivery="lazyUncached">
+                <!-- don't render if the activity is null -->
+                <af:dialog dialogListener="#{pageFlowScope.MyHdCallBean.reviewConfirm}" title="请确认操作" id="d6"
+                           contentWidth="200" contentHeight="50">
+                    <af:outputText value="请注意：该操作会改变订单状态！" id="ot14"/>
+                    <af:spacer height="20" id="s8"/>
+                    <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot19"/>
+                </af:dialog>
+            </af:popup>
+            <af:popup id="evalConfirm" contentDelivery="lazyUncached">
+                <!-- don't render if the activity is null -->
+                <af:dialog dialogListener="#{pageFlowScope.MyHdCallBean.evalConfirm}" title="请确认操作" id="d7"
+                           contentWidth="200" contentHeight="50">
+                    <af:outputText value="请注意：该操作会改变订单状态！" id="ot21"/>
+                    <af:spacer height="20" id="s9"/>
+                    <af:outputText value="请确认当前操作！如果要放弃现有操作请点击取消按钮。" id="ot20"/>
                 </af:dialog>
             </af:popup>
           <af:panelHeader text="报修单" id="ph2" messageType="info">
@@ -69,22 +82,22 @@
                   </af:commandToolbarButton>
                   <af:commandToolbarButton text="提交报修单" id="ctb3" rendered="#{bindings.State.inputValue eq '未提交'}"
                                            icon="/images/icons/run.png">
-                    <af:clientListener method="setSubmit" type="click"/>
-                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
-                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                    <!--<af:clientListener method="setSubmit" type="click"/>-->
+                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>-->
+                    <af:showPopupBehavior triggerType="action" popupId="submitConfirm"/>
                   </af:commandToolbarButton>
                   <af:commandToolbarButton text="分派报修单" id="ctb7" icon="/images/icons/index.png"
                                            rendered="#{pageFlowScope.MyHdCallBean.assignButtonRendered}">
-                    <af:clientListener method="setAssign" type="click"/>
-                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
-                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                    <!--<af:clientListener method="setAssign" type="click"/>-->
+                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>-->
+                    <af:showPopupBehavior triggerType="action" popupId="assignConfirm"/>
                   </af:commandToolbarButton>
                   <af:commandToolbarButton text="取消报修单" id="ctb4" 
                                            rendered="#{bindings.State.inputValue eq '未提交' or (bindings.State.inputValue eq '已受理' and pageFlowScope.fromMenu != 'callee')}"
                                            icon="/images/icons/undo.png">
-                    <af:clientListener method="setCancel" type="click"/>
-                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
-                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                    <!--<af:clientListener method="setCancel" type="click"/>-->
+                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>-->
+                    <af:showPopupBehavior triggerType="action" popupId="cancelConfirm"/>
                   </af:commandToolbarButton>
                 </af:toolbar>
               </f:facet>
@@ -220,15 +233,15 @@
                 <af:toolbar id="t2">
                   <af:commandToolbarButton text="处理" id="ctb5" rendered="#{bindings.State.inputValue eq '已分派'}"
                                            icon="/images/icons/check.png">
-                    <af:clientListener method="setProcess" type="click"/>
-                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
-                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                    <!--<af:clientListener method="setProcess" type="click"/>-->
+                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>-->
+                    <af:showPopupBehavior triggerType="action" popupId="processConfirm"/>
                   </af:commandToolbarButton>
                   <af:commandToolbarButton text="复核" id="ctb8" icon="/images/icons/check.png"
                                            rendered="#{bindings.State.inputValue eq '总务复核' and sessionScope.LoginUserBean.isUserInRole['报修总务复核'] and pageFlowScope.fromMenu != 'query'}">
-                    <af:clientListener method="setReview" type="click"/>
-                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
-                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                    <!--<af:clientListener method="setReview" type="click"/>-->
+                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>-->
+                    <af:showPopupBehavior triggerType="action" popupId="reviewConfirm"/>
                   </af:commandToolbarButton>
                 </af:toolbar>
               </f:facet>
@@ -264,9 +277,9 @@
                 <af:toolbar id="t3">
                   <af:commandToolbarButton text="评价" id="ctb6" rendered="#{bindings.State.inputValue eq '已处理'}"
                                            icon="/images/icons/archivefile.png">
-                    <af:clientListener method="setEvaluate" type="click"/>
-                    <af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>
-                    <af:showPopupBehavior triggerType="action" popupId="confirm"/>
+                    <!--<af:clientListener method="setEvaluate" type="click"/>-->
+                    <!--<af:serverListener type="setActionListener" method="#{pageFlowScope.MyHdCallBean.setActionListener}"/>-->
+                    <af:showPopupBehavior triggerType="action" popupId="evalConfirm"/>
                   </af:commandToolbarButton>
                 </af:toolbar>
               </f:facet>

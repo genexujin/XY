@@ -45,6 +45,8 @@ public class MyPoBean extends BaseBean {
     private RichPanelFormLayout poForm;
     
     private boolean cancelButtonRendered;
+    private boolean receiveQuantityReadonly;
+    private boolean actualPriceReadonly;
 
     public MyPoBean() {
     }
@@ -124,7 +126,7 @@ public class MyPoBean extends BaseBean {
         computeTotal("SubmitPrice", "SubmitQuantity", "SubmitTotal", "SubmitTotal");
         String fromMenu = JSFUtils.resolveExpressionAsString("#{pageFlowScope.fromMenu}");
         if ("buyer".equals(fromMenu)) {
-            computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", null);
+            computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", "ActualTotal");
         }
         
         ADFUtils.commit("采购订单已保存！", "采购订单保存失败，请核对输入的信息或联系管理员！");
@@ -143,24 +145,41 @@ public class MyPoBean extends BaseBean {
                     setSubmitDate();
                 }
                 
-//                ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_PENDING_REVIEW);
-                ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_DEPT_REVIEW);
+                String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+                boolean skip = submitterIsDeptSuporvisor(submitterId);
+                
+                //If submitter is dept suporvisor, then go to PO_STATE_PENDING_REVIEW directly
+                if (skip) {
+                    ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_PENDING_REVIEW);
+                } else {
+                    ADFUtils.setBoundAttributeValue("State", Constants.PO_STATE_DEPT_REVIEW);
+                }
                 
                 boolean success = ADFUtils.commit("采购订单已提交！", "采购订单提交失败，请核对输入的信息或联系管理员！");
                 if (success) {
                     String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
                     String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
-                    String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
                     String submitTotal = ADFUtils.getBoundAttributeValue("SubmitTotal").toString();
                     
                     insertPoHistory(id, submitterId, "提交了该订单");
-                    String supervisorId = getDeptSupervisorId(submitterId);
-                    ADFUtils.setBoundAttributeValue("DeptVerifier", supervisorId);
-
-                    createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal
-                                      , supervisorId, readableId);
                     
-                    sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, supervisorId, null);
+                    if (skip) {
+                        createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal,
+                                   Constants.ROLE_PO_VERIFIER, readableId);
+                        
+                        sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, null, Constants.ROLE_PO_VERIFIER);
+                        
+                    } else {
+                        String supervisorId = getDeptSupervisorId(submitterId);
+                        ADFUtils.setBoundAttributeValue("DeptVerifier", supervisorId);
+
+                        createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待部门审核，订单号：" + readableId + "，预算总金额：" + submitTotal
+                                          , supervisorId, readableId);
+                        
+                        sendNotification("有新的采购订单等待部门审核", "有新的采购订单等待部门审核，订单号：" + readableId + "，预算总金额：" + submitTotal, supervisorId, null);
+                    }
+                    
+                    
                     
                     //有一种情况下需要completeTask，就是在订单被拒绝后，会为提交者创建一个新task。用户可以再次提交该订单，这时候需要complete之前的task
                     //（后来发现这种情况下只会发通知，所以不需要了）
@@ -179,9 +198,19 @@ public class MyPoBean extends BaseBean {
             JSFUtils.addFacesErrorMessage("所有未取消的行都必须有采购数量");
         } else {
             double verifyTotal = computeTotal("SubmitPrice", "PurchaseQuantity", null, "VerifyTotal");
+            
+            String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+            boolean skip = submitterIsApprover(submitterId);
+            //不但可能跳过第一级审批，如果小于终审下限的话，还会跳过第二级审批
+            String category = (String)ADFUtils.getBoundAttributeValue("ItemCategoryId1");
+            System.out.println("Item category id is: " + category);
+            BigDecimal limit = getApprovalLimit(category);
+            
             if (verifyTotal == 0) {
                 System.out.println("VerifyTotal is 0. No need to approve.");
                 changeState(Constants.PO_STATE_FINISHED);
+            } else if (skip && new BigDecimal(verifyTotal).compareTo(limit) <= 0) {
+                changeState(Constants.PO_STATE_EXECUTING);
             } else {
                 changeState(Constants.PO_STATE_PENDING_APPROVAL);
             }
@@ -194,13 +223,25 @@ public class MyPoBean extends BaseBean {
                 insertPoHistory(id, verifier, "审核了该订单");
                 
                 if (verifyTotal != 0) { //If verifyTotal is 0, then no need to approve.
-                    //Set the current pprover for the po
-                    ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_APPROVER);
+                    if (skip && new BigDecimal(verifyTotal).compareTo(limit) <= 0) {
+                        ADFUtils.setBoundAttributeValue("CurrentApprover", "");
+                        ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
+        
+                        sendNotification("有新的采购订单等待采购及收货", "有新的采购订单等待采购及收货, 订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
+                        sendNotification("您的采购订单已审批", "您的采购订单已审批，订单号： " + readableId, submitterId, null);
+                    } else if (skip) {
+                        ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_2ND_APPROVER);
+                        //Create task for 2nd approver
+                        createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + verifyTotal, Constants.ROLE_PO_2ND_APPROVER, readableId);
+                        sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId, null, Constants.ROLE_PO_2ND_APPROVER);
+                    } else {
+                        ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_APPROVER);
+                        //Create task for approver
+                        createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + verifyTotal, Constants.ROLE_PO_APPROVER, readableId);
+                        sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId, null, Constants.ROLE_PO_APPROVER);
+                    }
                     
-                    //Create task for approver
-                    createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + verifyTotal, Constants.ROLE_PO_APPROVER, readableId);
                     sendNotificationForVerify(verifyTotal);
-                    sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId, null, Constants.ROLE_PO_APPROVER);
                 }else{
                     sendNotificationForFinish();
                 }
@@ -218,22 +259,39 @@ public class MyPoBean extends BaseBean {
     }
     
     public void verifyPoInDept(ActionEvent actionEvent) {
-        changeState(Constants.PO_STATE_PENDING_REVIEW);
+        String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+        boolean skip = submitterIsVerifier(submitterId);
+        //如果申请人是本身就是总务审核，则跳过总务审核
+        //跳过时，采购价格则直接用预算价格。审核备注则为空
+        if (skip) {
+            changeState(Constants.PO_STATE_PENDING_APPROVAL);
+            setPurchaseQuantityAndComputeTotal();
+        } else {
+            changeState(Constants.PO_STATE_PENDING_REVIEW);
+        }
         
         boolean success = ADFUtils.commit("采购订单部门审核通过！", "采购订单审核失败，请核对输入的信息或联系管理员！");
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
             String verifier = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");
-            String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             String submitTotal = ADFUtils.getBoundAttributeValue("SubmitTotal").toString();
+            
             
             insertPoHistory(id, verifier, "完成了部门审核");
             
-            //Create task for approver
-            createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, Constants.ROLE_PO_VERIFIER, readableId);
-            sendNotification("您的采购订单已完成部门审核", "您的采购订单已完成部门审核,等待采购审核中！ 订单号： " + readableId, submitterId, null);
-            sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, null, Constants.ROLE_PO_VERIFIER);
+            if (skip) {
+                String verifyTotal = ADFUtils.getBoundAttributeValue("VerifyTotal").toString();
+                createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + verifyTotal, Constants.ROLE_PO_APPROVER, readableId);                
+                sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + submitTotal, null, Constants.ROLE_PO_APPROVER);
+                
+                sendNotification("您的采购订单已完成部门审核", "您的采购订单已完成部门审核,等待审批中！ 订单号： " + readableId, submitterId, null);
+            } else {
+                createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, Constants.ROLE_PO_VERIFIER, readableId);                
+                sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, null, Constants.ROLE_PO_VERIFIER);
+                
+                sendNotification("您的采购订单已完成部门审核", "您的采购订单已完成部门审核,等待采购审核中！ 订单号： " + readableId, submitterId, null);
+            }
             
             //Complete task for dept verifier
             completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, verifier);
@@ -258,15 +316,16 @@ public class MyPoBean extends BaseBean {
     }
 
     public void approvePo(ActionEvent actionEvent) {
-        
         BigDecimal verifyTotal = new BigDecimal((String)ADFUtils.getBoundAttributeValue("VerifyTotal"));
         String category = (String)ADFUtils.getBoundAttributeValue("ItemCategoryId1");
         System.out.println("Item category id is: " + category);
         BigDecimal limit = getApprovalLimit(category);
+        String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
+        boolean skip = submitterIs2ndApprover(submitterId);
         
         System.out.println("Apprval Limit for Item category \"" + category + "\" is: " + limit);
         boolean success = false;
-        if (verifyTotal.compareTo(limit) <= 0) { //No need for 2nd level approval
+        if (verifyTotal.compareTo(limit) <= 0 || skip) { //No need for 2nd level approval
             changeState(Constants.PO_STATE_EXECUTING);
             success = ADFUtils.commit("采购订单已审批，正在执行中", "采购订单审批失败，请核对输入的信息或联系管理员！");
         } else {
@@ -276,12 +335,11 @@ public class MyPoBean extends BaseBean {
         if (success) {
             String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
             String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
-            String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
             
             String approver = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
             insertPoHistory(id, approver, "审批了该订单");
             
-            if (verifyTotal.compareTo(limit) <= 0) {
+            if (verifyTotal.compareTo(limit) <= 0 || skip) {
                 ADFUtils.setBoundAttributeValue("CurrentApprover", "");
                 ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
 
@@ -342,7 +400,7 @@ public class MyPoBean extends BaseBean {
         } else {
             changeState(Constants.PO_STATE_FINISHED);
             
-            computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", null);
+            computeTotal("ActualPrice", "PurchaseQuantity", "ActualTotal", "ActualTotal");
             boolean success = ADFUtils.commit("采购订单已完成！", "采购订单提交失败，请核对输入的信息或联系管理员！");
             if (success) {
                 String id = ADFUtils.getBoundAttributeValue("OrderId").toString();
@@ -542,8 +600,8 @@ public class MyPoBean extends BaseBean {
         } else {
             for (Row row : rows) {
                 String isCancelled = (String)row.getAttribute("Cancelled");
-                //已取消的行不需要设置ActualPrice
-                if (!"Y".equals(isCancelled)) {
+                //已取消或者采购数量为0的行不需要设置ActualPrice
+                if (!"Y".equals(isCancelled) && !(((BigDecimal)row.getAttribute("PurchaseQuantity")).intValue() == 0)) {
                     double price = 0;
                     BigDecimal p = (BigDecimal)row.getAttribute("ActualPrice");
                      if (p == null) {
@@ -841,33 +899,129 @@ public class MyPoBean extends BaseBean {
         return action;
     }
 
-    public void onConfirm(DialogEvent dialogEvent) {
+    public void submitConfirm(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
-            if(action.equals("submit")){
-                submitPo(null);
-            } else if (action.equals("deptVerify")) {
-                verifyPoInDept(null);
-            } else if (action.equals("deptReject")) {
-                rejectPoInDept(null);
-            } else if (action.equals("cancel")) {
-                cancelPo(null);
-            } else if (action.equals("verify")) {
-                verifyPo(null);
-            } else if (action.equals("approve")) {
-                approvePo(null);
-            } else if (action.equals("approve2nd")) {
-                approvePo2nd(null);
-            } else if (action.equals("reject")) {
-                rejectPo(null);
-            } else if (action.equals("execute")) {
-                executePo(null);
-            } else if (action.equals("finish")) {
-                finishPo(null);
-            } else if (action.equals("reopen")) {
-                reopenPo(null);
-            } else if (action.equals("backToVerify")) {
-                backToVerifyPo(null);
-            }
+            submitPo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void deptVerifyConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            verifyPoInDept(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void deptRejectConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            rejectPoInDept(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void verifyConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            verifyPo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void approve1Confirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            approvePo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void approve2Confirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            approvePo2nd(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void rejectConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            rejectPo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void cancelConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            cancelPo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+             
+    public void finishConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            finishPo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void receiveConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            finishPo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void executeConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            executePo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void reopenConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            reopenPo(null);
+                        
+            ADFUtils.partialRefreshComponenet(poLinesTable);
+            ADFUtils.partialRefreshComponenet(poHistoryTable);
+            ADFUtils.partialRefreshComponenet(poForm);
+        }
+    }
+    
+    public void reverifyConfirm(DialogEvent dialogEvent) {
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+            backToVerifyPo(null);
                         
             ADFUtils.partialRefreshComponenet(poLinesTable);
             ADFUtils.partialRefreshComponenet(poHistoryTable);
@@ -914,5 +1068,67 @@ public class MyPoBean extends BaseBean {
             JSFUtils.resolveExpressionAsBoolean("#{(pageFlowScope.fromMenu eq 'normal' and (bindings.State.inputValue eq '1' or bindings.State.inputValue eq '2' or bindings.State.inputValue eq '4' or bindings.State.inputValue eq '8'))" + 
                                                 " or (pageFlowScope.fromMenu ne 'query' and sessionScope.LoginUserBean.isUserInRole['采购审核'] and bindings.State.inputValue ne '1' and bindings.State.inputValue ne '2')}");
         return cancelButtonRendered;
+    }
+
+    private boolean submitterIsDeptSuporvisor(String submitterId) {
+        return isSubmitterInRole(submitterId, Constants.ROLE_PO_DEPT_VERIFIER);
+    }
+
+    private boolean submitterIsVerifier(String submitterId) {
+        return isSubmitterInRole(submitterId, Constants.ROLE_PO_VERIFIER);
+    }
+    
+    private boolean submitterIsApprover(String submitterId) {
+        return isSubmitterInRole(submitterId, Constants.ROLE_PO_APPROVER);
+    }
+    
+    private boolean submitterIs2ndApprover(String submitterId) {
+        return isSubmitterInRole(submitterId, Constants.ROLE_PO_2ND_APPROVER);
+    }
+    
+    private boolean isSubmitterInRole(String submitterId, String roleName) {
+        OperationBinding oper = ADFUtils.findOperation("isUserInRole");
+        oper.getParamsMap().put("userId", submitterId);
+        oper.getParamsMap().put("roleName", roleName);
+        oper.execute();
+        boolean result = (Boolean)oper.getResult();
+        
+        return result;
+    }
+
+    public void setReceiveQuantityReadonly(boolean receiveQuantityReadonly) {
+        this.receiveQuantityReadonly = receiveQuantityReadonly;
+    }
+
+    public boolean isReceiveQuantityReadonly() {
+        receiveQuantityReadonly = JSFUtils.resolveExpressionAsBoolean("#{pageFlowScope.fromMenu eq 'query' or bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'receiver')) or row.bindings.Cancelled.inputValue eq true or row.bindings.PurchaseQuantity.inputValue eq 0}");
+        
+        return receiveQuantityReadonly;
+    }
+
+    public void setActualPriceReadonly(boolean actualPriceReadonly) {
+        this.actualPriceReadonly = actualPriceReadonly;
+    }
+
+    public boolean isActualPriceReadonly() {
+        actualPriceReadonly = JSFUtils.resolveExpressionAsBoolean("#{pageFlowScope.fromMenu eq 'query' or bindings.State.inputValue ne '5' or (not (pageFlowScope.fromMenu eq 'buyer')) or row.bindings.Cancelled.inputValue eq true or row.bindings.PurchaseQuantity.inputValue eq 0}");
+        return actualPriceReadonly;
+    }
+
+    private void setPurchaseQuantityAndComputeTotal() {
+        DCIteratorBinding lineIt = ADFUtils.findIterator("PurchaseOrderLinesViewIterator");
+        lineIt.setRangeSize(-1);
+        Row[] rows = lineIt.getAllRowsInRange();
+        if (rows != null && rows.length > 0) {
+            for (Row row : rows) {
+                String isCancelled = (String)row.getAttribute("Cancelled");
+                //已取消或者采购数量为0的行不需要设置ActualPrice
+                if (!"Y".equals(isCancelled)) {
+                    row.setAttribute("PurchaseQuantity", row.getAttribute("SubmitQuantity"));
+                }
+            }
+        }
+        
+        computeTotal("SubmitPrice", "PurchaseQuantity", null, "VerifyTotal");
     }
 }

@@ -9,6 +9,7 @@ import edu.hp.model.vo.PurchaseOrderHistorysViewImpl;
 import edu.hp.model.vo.PurchaseOrderLinesViewImpl;
 import edu.hp.model.vo.PurchaseOrdersViewImpl;
 
+import edu.hp.model.vo.RoleUsersViewImpl;
 import edu.hp.model.vo.query.po.EmpWithEmptyImpl;
 
 import edu.hp.model.vo.query.po.PoStateWithEmptyImpl;
@@ -389,5 +390,13 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
      */
     public DepartmentsViewImpl getDepartmentsView() {
         return (DepartmentsViewImpl)findViewObject("DepartmentsView");
+    }
+
+    /**
+     * Container's getter for RoleUsersView1.
+     * @return RoleUsersView1
+     */
+    public RoleUsersViewImpl getRoleUsersView() {
+        return (RoleUsersViewImpl)findViewObject("RoleUsersView");
     }
 }
