@@ -18,7 +18,7 @@
                 <f:facet name="navigation"/>
                 <f:facet name="globalLinks">
                     <af:group id="g1">
-                        <af:panelGroupLayout id="pgl4" layout="horizontal" halign="end"/>
+                        <af:goImageLink text="用户手册" id="gil1" destination="/guides/用户手册.zip"/>
                     </af:group>
                 </f:facet>
                 <f:facet name="status">

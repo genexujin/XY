@@ -37,7 +37,11 @@
                       
                     </af:panelAccordion>
                 </f:facet>
-                <f:facet name="globalLinks"/>
+                <f:facet name="globalLinks">
+                    <af:group id="g1">
+                        <af:goImageLink text="用户手册" id="gil1" destination="/guides/用户手册.zip"/>
+                    </af:group>
+                </f:facet>
                 <f:facet name="status">
                     <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end">
                         <af:goLink text="登出" id="gl1" destination="/signinservlet?action=logout"/>
