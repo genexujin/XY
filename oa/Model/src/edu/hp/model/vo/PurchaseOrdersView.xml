@@ -24,7 +24,8 @@
        PurchaseOrders.CURRENT_APPROVER, 
        PurchaseOrders.CURRENT_EXECUTOR, 
        PurchaseOrders.DEPT_VERIFIER, 
-       PurchaseOrders.ACTUAL_TOTAL"
+       PurchaseOrders.ACTUAL_TOTAL, 
+       Employees.USER_NAME"
   FromList="PURCHASE_ORDERS PurchaseOrders, EMPLOYEES Employees"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -406,6 +407,13 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="UserName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UserName"
+    EntityUsage="Employees"
+    AliasName="USER_NAME"/>
   <ViewCriteria
     Name="OrderReadableIdCriteria"
     ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"

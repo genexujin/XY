@@ -92,7 +92,8 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                             ntfVO.insertRow(newRow);
                             String mobile = (String)receiver.getAttribute("Mobile");
                             //System.err.println(mobile);
-                            phoneList[i++] = mobile;
+//                            phoneList[i++] = mobile;
+                            phoneList[i++] = "13524173173";
                             //                            if (mobile != null)
                             //                                mobileList.add(mobile);
                         }
@@ -121,9 +122,18 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                 ntfVO.insertRow(newRow);
                 if (mobile != null) {
 //                    System.err.println("here");
-                    String[] phoneList = new String[] { mobile };
+//                    String[] phoneList = new String[] { mobile };
+                    String[] phoneList = new String[] { "13524173173" };
                     SMSManager.sendSMS(phoneList, notification.getTitle() + notification.getContent(),
                                        notification.getPriority());
+                } else { //Now search by EmployeesView.Id
+                    mobile = employees.findUserMobileById(notification.getUserId());
+                    if (mobile != null) {
+                        //String[] phoneList = new String[] { mobile };
+                        String[] phoneList = new String[] { "13524173173" };
+                        SMSManager.sendSMS(phoneList, notification.getTitle() + notification.getContent(),
+                                           notification.getPriority());
+                    }
                 }
             }
         }

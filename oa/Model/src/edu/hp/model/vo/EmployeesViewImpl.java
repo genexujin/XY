@@ -31,6 +31,16 @@ public class EmployeesViewImpl extends BaseView {
         }
         return mobile;
     }
+    
+    public String findUserMobileById(String id){
+        this.queryByVC("findByIdCriteria","ud",id);
+        String mobile = null;
+        Row[] allRowsInRange = this.getAllRowsInRange();
+        if(allRowsInRange!=null && allRowsInRange.length>0){
+            mobile = (String)allRowsInRange[0].getAttribute("Mobile");
+        }
+        return mobile;
+    }
 
 
     /**
