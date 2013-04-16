@@ -6,6 +6,8 @@ import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 import javax.faces.event.ValueChangeEvent;
@@ -25,13 +27,17 @@ public class ConfCalDetailBean extends BaseBean {
     private String meetingroomId = null;
     private String action = "new";
 
-    public String save() {
+    public String save() throws Exception{
 
         if (ensureTimeConflicts()) {
             String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
             if (Integer.valueOf(id) > 0 && action.equals("new"))
                 action = "save";
-            startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
+            String time = (String)ADFUtils.getBoundAttributeValue("StartTime");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = format.parse(time);
+            startDayTime = new Timestamp(date);
+//            startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
             meetingroomId = (String)ADFUtils.getBoundAttributeValue("MeetingRoomId");
             //ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
             String state = (String)ADFUtils.getBoundAttributeValue("State");

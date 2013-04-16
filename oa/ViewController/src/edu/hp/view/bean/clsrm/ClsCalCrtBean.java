@@ -5,6 +5,8 @@ import edu.hp.view.bean.BaseBean;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 
 import java.util.Date;
@@ -31,13 +33,17 @@ public class ClsCalCrtBean extends BaseBean {
     private String clsRmId = null;
     
 
-    public String save() {
+    public String save() throws Exception{
         
         if (ensureTimeConflicts()) {
             boolean success = ADFUtils.commit("教室预订已保存！", "预订保存失败，请核对输入的信息或联系管理员！");
             if (success) {
                 
-                startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("ActStartTime");
+                String time = (String)ADFUtils.getBoundAttributeValue("ActStartTime");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = format.parse(time);
+                startDayTime = new Timestamp(date);
+                //startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("ActStartTime");
                 clsRmId = (String)ADFUtils.getBoundAttributeValue("ClassroomId");
 
                 String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
