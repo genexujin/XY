@@ -167,7 +167,7 @@ public class MyPoBean extends BaseBean {
                         createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal,
                                    Constants.ROLE_PO_VERIFIER, readableId);
                         
-                        sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, null, Constants.ROLE_PO_VERIFIER);
+                        sendNotification("有新的采购订单等待审核。", "订单号：" + readableId + "，预算总金额：" + submitTotal, null, Constants.ROLE_PO_VERIFIER);
                         
                     } else {
                         String supervisorId = getDeptSupervisorId(submitterId);
@@ -176,7 +176,7 @@ public class MyPoBean extends BaseBean {
                         createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待部门审核，订单号：" + readableId + "，预算总金额：" + submitTotal
                                           , supervisorId, readableId);
                         
-                        sendNotification("有新的采购订单等待部门审核", "有新的采购订单等待部门审核，订单号：" + readableId + "，预算总金额：" + submitTotal, supervisorId, null);
+                        sendNotification("有新的采购订单等待部门审核。", "订单号：" + readableId + "，预算总金额：" + submitTotal, supervisorId, null);
                     }
                     
                     
@@ -227,18 +227,18 @@ public class MyPoBean extends BaseBean {
                         ADFUtils.setBoundAttributeValue("CurrentApprover", "");
                         ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
         
-                        sendNotification("有新的采购订单等待采购及收货", "有新的采购订单等待采购及收货, 订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
-                        sendNotification("您的采购订单已审批", "您的采购订单已审批，订单号： " + readableId, submitterId, null);
+                        sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
+                        sendNotification("您的采购订单已审批。", "订单号： " + readableId, submitterId, null);
                     } else if (skip) {
                         ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_2ND_APPROVER);
                         //Create task for 2nd approver
                         createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + verifyTotal, Constants.ROLE_PO_2ND_APPROVER, readableId);
-                        sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId, null, Constants.ROLE_PO_2ND_APPROVER);
+                        sendNotification("有新的采购订单等待审批。", "订单号：" + readableId, null, Constants.ROLE_PO_2ND_APPROVER);
                     } else {
                         ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_APPROVER);
                         //Create task for approver
                         createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + verifyTotal, Constants.ROLE_PO_APPROVER, readableId);
-                        sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId, null, Constants.ROLE_PO_APPROVER);
+                        sendNotification("有新的采购订单等待审批。", "订单号：" + readableId, null, Constants.ROLE_PO_APPROVER);
                     }
                     
                     sendNotificationForVerify(verifyTotal);
@@ -283,14 +283,14 @@ public class MyPoBean extends BaseBean {
             if (skip) {
                 String verifyTotal = ADFUtils.getBoundAttributeValue("VerifyTotal").toString();
                 createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + verifyTotal, Constants.ROLE_PO_APPROVER, readableId);                
-                sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId + "，审核总金额：" + submitTotal, null, Constants.ROLE_PO_APPROVER);
+                sendNotification("有新的采购订单等待审批。", "订单号：" + readableId + "，审核总金额：" + submitTotal, null, Constants.ROLE_PO_APPROVER);
                 
-                sendNotification("您的采购订单已完成部门审核", "您的采购订单已完成部门审核,等待审批中！ 订单号： " + readableId, submitterId, null);
+                sendNotification("您的采购订单已完成部门审核。", "订单号： " + readableId, submitterId, null);
             } else {
                 createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, Constants.ROLE_PO_VERIFIER, readableId);                
-                sendNotification("有新的采购订单等待审核", "有新的采购订单等待审核，订单号：" + readableId + "，预算总金额：" + submitTotal, null, Constants.ROLE_PO_VERIFIER);
+                sendNotification("有新的采购订单等待审核。", "订单号：" + readableId + "，预算总金额：" + submitTotal, null, Constants.ROLE_PO_VERIFIER);
                 
-                sendNotification("您的采购订单已完成部门审核", "您的采购订单已完成部门审核,等待采购审核中！ 订单号： " + readableId, submitterId, null);
+                sendNotification("您的采购订单已完成部门审核,等待采购审核中。", "订单号： " + readableId, submitterId, null);
             }
             
             //Complete task for dept verifier
@@ -306,13 +306,13 @@ public class MyPoBean extends BaseBean {
     private void sendNotificationForFinish() {
         String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
         String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
-        sendNotification("您的采购订单已完成", "您的采购订单已完成, 订单号： " + readableId, submitterId, null);
+        sendNotification("您的采购订单已完成。", "订单号： " + readableId, submitterId, null);
     }
     
     private void sendNotificationForVerify(double verifyTotal) {
         String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
         String submitterId = ADFUtils.getBoundAttributeValue("SubmitterId").toString();
-        sendNotification("您的采购订单已完成审核", "您的采购订单已完成审核,等待审批中！ 订单号：" + readableId + "，审核总金额：" + verifyTotal, submitterId, null);
+        sendNotification("您的采购订单已完成审核,等待审批中。", "订单号：" + readableId + "，审核总金额：" + verifyTotal, submitterId, null);
     }
 
     public void approvePo(ActionEvent actionEvent) {
@@ -343,8 +343,8 @@ public class MyPoBean extends BaseBean {
                 ADFUtils.setBoundAttributeValue("CurrentApprover", "");
                 ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
 
-                sendNotification("有新的采购订单等待采购及收货", "有新的采购订单等待采购及收货, 订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
-                sendNotification("您的采购订单已审批", "您的采购订单已审批，订单号： " + readableId, submitterId, null);
+                sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
+                sendNotification("您的采购订单已审批。", "订单号： " + readableId, submitterId, null);
             } else {
                 //Set the current verifier for the po
                 ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_2ND_APPROVER);
@@ -352,7 +352,7 @@ public class MyPoBean extends BaseBean {
                 //Should create task for 2nd level approver
                 createTask(id, Constants.CONTEXT_TYPE_PO, "有新的采购订单等待审批，订单号：" + readableId + "，总金额：" + verifyTotal, Constants.ROLE_PO_2ND_APPROVER, readableId);
                 
-                sendNotification("有新的采购订单等待审批", "有新的采购订单等待审批，订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_2ND_APPROVER);
+                sendNotification("有新的采购订单等待审批。", "订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_2ND_APPROVER);
             }
             
             //Complete task for approver
@@ -380,9 +380,9 @@ public class MyPoBean extends BaseBean {
             ADFUtils.setBoundAttributeValue("CurrentApprover", "");
             ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
             
-            sendNotification("有新的采购订单等待采购", "有新的采购订单等待采购，订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
-            sendNotification("有新的采购订单等待收货", "有新的采购订单等待收货，订单号： " + readableId, null, Constants.ROLE_PO_RECEIVER);
-            sendNotification("您的采购订单已审批", "您的采购订单已审批，订单号： " + readableId, submitterId, null);
+            sendNotification("有新的采购订单等待采购。", "订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
+            sendNotification("有新的采购订单等待收货。", "订单号： " + readableId, null, Constants.ROLE_PO_RECEIVER);
+            sendNotification("您的采购订单已审批。", "订单号： " + readableId, submitterId, null);
             
             //Complete task for 2nd level approver
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_2ND_APPROVER);
@@ -454,7 +454,7 @@ public class MyPoBean extends BaseBean {
             
             //No task created after rejection. Only notification
 //            createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "您的采购订单被拒绝，请取消或者重新提交订单。", submitterId, readableId);
-            sendNotification("您的采购订单被拒绝", "您的采购订单被拒绝,请取消或者重新提交订单，订单号： " + readableId, submitterId, null);
+            sendNotification("您的采购订单被拒绝,请取消或者重新提交订单。", "订单号： " + readableId, submitterId, null);
             //Complete task for approver or verifier
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_VERIFIER);
             completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_APPROVER);
@@ -480,7 +480,7 @@ public class MyPoBean extends BaseBean {
             
             //No task created after rejection. Only notification
     //            createTaskForUser(id, Constants.CONTEXT_TYPE_PO, "您的采购订单被拒绝，请取消或者重新提交订单。", submitterId, readableId);
-            sendNotification("您的采购订单被拒绝", "您的采购订单被拒绝,请取消或者重新提交订单，订单号： " + readableId, submitterId, null);
+            sendNotification("您的采购订单被拒绝,请取消或者重新提交订单。", "订单号： " + readableId, submitterId, null);
             
             completeTaskForUser(Constants.CONTEXT_TYPE_PO, id, verifier);
             
@@ -525,7 +525,7 @@ public class MyPoBean extends BaseBean {
             String fromMenu = JSFUtils.resolveExpressionAsString("#{pageFlowScope.fromMenu}");
             if (!"normal".equals(fromMenu)) {
                 String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
-                sendNotification("您的采购订单已经取消", "您的采购订单已经取消，订单号： " + readableId, submitterId, null);
+                sendNotification("您的采购订单已经取消。", "订单号： " + readableId, submitterId, null);
             }
             
             ADFUtils.findOperation("Commit").execute();
@@ -548,7 +548,7 @@ public class MyPoBean extends BaseBean {
                 String operator = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");            
                 insertPoHistory(id, operator, "重新打开了该订单");
             
-                sendNotification("有采购订单重新打开", "有采购订单重新打开，订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
+                sendNotification("有采购订单重新打开。", "订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
                 
                 ADFUtils.findOperation("Commit").execute();
             } else {
@@ -586,7 +586,7 @@ public class MyPoBean extends BaseBean {
             ADFUtils.setBoundAttributeValue("CurrentExecutor", "");
             
             if (state != null && state.equals(Constants.PO_STATE_EXECUTING)) {                
-                sendNotification("采购订单需重新审核，暂停采购", "采购订单需重新审核，暂停采购，订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
+                sendNotification("采购订单需重新审核，暂停采购。", "订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
             }
             ADFUtils.findOperation("Commit").execute();
         } else {

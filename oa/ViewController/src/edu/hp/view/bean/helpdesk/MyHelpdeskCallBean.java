@@ -155,7 +155,7 @@ public class MyHelpdeskCallBean extends BaseBean {
                     
                     //send to assigner
                     String noteTitle = "有新的报修请求等待分派，报修单号：" + readableId;
-                    String noteContent = "报修原因：" + rsnLv1 + " 详细地址：" + locationDetail + " 提交时间：" + getDateString();
+                    String noteContent = " 报修原因：" + rsnLv1 + " 详细地址：" + locationDetail + " 提交时间：" + getDateString();
                     sendNotification(noteTitle, noteContent, null, roleName);
                     
                     createTask(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, roleName, readableId);
@@ -196,7 +196,7 @@ public class MyHelpdeskCallBean extends BaseBean {
                 completeTaskForUser(Constants.CONTEXT_TYPE_HELPDESK, id, null);
                 
                 String noteTitle = "有新的报修请求等待处理，报修单号：" + readableId;
-                String noteContent = "报修原因：" + rsnLv1 + " 详细地址：" + locationDetail;
+                String noteContent = " 报修原因：" + rsnLv1 + " 详细地址：" + locationDetail;
                 sendNotification(noteTitle, noteContent, calleeId, null);
                 
                 createTaskForUser(id, Constants.CONTEXT_TYPE_HELPDESK, noteTitle, calleeId, readableId);
