@@ -152,9 +152,122 @@
             <value n="profileClass" v="oracle.adfdt.common.deploy.impl.AdfLibraryProfile"/>
             <value n="profileName" v="oa_Model_adflib"/>
          </hash>
+         <hash n="smsclient">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="edu.hp.model.sms.SingletonSMSClient"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="edu/hp/model/sms/SMSManager.class"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="edu/hp/model/ModelBundle.properties"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="edu/hp/model/Model.jpx"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="edu/hp/view/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="edu/hp/model/vo/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="edu/hp/model/pojo/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="edu/hp/model/eo/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="edu/hp/model/common/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="edu/hp/model/biz/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="flows/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="tester.xcfg"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="tester.properties"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="config.properties"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="repair_call/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="pages/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="META-INF/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
+                              <value n="DefaultFilters" v=""/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/smsclient.jar"/>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="false"/>
+               <list n="unselectedLibraries">
+                  <string v="ADF Model Runtime"/>
+                  <string v="BC4J Oracle Domains"/>
+                  <string v="BC4J Runtime"/>
+                  <string v="BC4J Security"/>
+                  <string v="MDS Runtime"/>
+                  <string v="MDS Runtime Dependencies"/>
+                  <string v="Oracle JDBC"/>
+                  <string v="oa_security"/>
+                  <string v="Resource Bundle Support"/>
+                  <string v="ADF Common Runtime"/>
+               </list>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ArchiveProfile"/>
+            <value n="profileName" v="smsclient"/>
+         </hash>
       </hash>
       <list n="profileList">
          <string v="oa_Model_adflib"/>
+         <string v="smsclient"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.model.J2eeSettings">
