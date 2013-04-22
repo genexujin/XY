@@ -4,7 +4,7 @@ package edu.hp.model.sms;
 public class SMSManager {
 
     private static boolean enabled = false;
-    private static String SURFFIX = " 【黄浦教育】";
+    private static String SURFFIX = " 【黄教院】";
 
     //发送SMS
     public static int sendSMS(String[] mobiles, String messageContent, int priority) {
