@@ -779,7 +779,7 @@ public class ConfRoomCalendarImpl extends EntityImpl {
             long delta = this.getStartTime().getTime() - System.currentTimeMillis();
             delta = delta/1000/60/60/24;
             
-            if (delta > 14) {
+            if (delta >= 30) {
                 return false;
             }
         }        

@@ -92,7 +92,8 @@
                             <af:outputText value="#{row.ContactPhone}" id="ot4"/>
                         </af:column>
                         <af:column sortProperty="#{bindings.VehicleDML.hints.StartTime.name}" filterable="true"
-                                   sortable="true" headerText="#{bindings.VehicleDML.hints.StartTime.label}" id="c6">
+                                   sortable="true" headerText="#{bindings.VehicleDML.hints.StartTime.label}" id="c6"
+                                   width="130">
                             <af:outputText value="#{row.StartTime}" id="ot5">
                                 <af:convertDateTime pattern="#{bindings.VehicleDML.hints.StartTime.format}"
                                                     type="both"/>
@@ -104,7 +105,8 @@
                             </f:facet>
                         </af:column>
                         <af:column sortProperty="#{bindings.VehicleDML.hints.EndTime.name}" filterable="true"
-                                   sortable="true" headerText="#{bindings.VehicleDML.hints.EndTime.label}" id="c7">
+                                   sortable="true" headerText="#{bindings.VehicleDML.hints.EndTime.label}" id="c7"
+                                   width="130">
                             <af:outputText value="#{row.EndTime}" id="ot6">
                                 <af:convertDateTime pattern="#{bindings.VehicleDML.hints.EndTime.format}" type="both"/>
                             </af:outputText>
@@ -128,7 +130,7 @@
                         </af:column>
                         <af:column sortProperty="#{bindings.VehicleDML.hints.ReturnTrip.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.ReturnTrip.label}" id="c11">
-                            <af:outputText value="#{row.ReturnTrip}" id="ot11"/>
+                            <af:outputText value="#{row.ReturnTrip=='Y'?'是':'否'}" id="ot11"/>
                         </af:column>
                         <af:column sortProperty="#{bindings.VehicleDML.hints.Comments.name}" filterable="true"
                                    sortable="true" headerText="#{bindings.VehicleDML.hints.Comments.label}" id="c12">
@@ -297,7 +299,7 @@
                         <af:spacer width="10" height="10" id="s9"/>
                         <af:commandButton text="审核" id="cb3" icon="/images/icons/check.png"
                                           visible="#{bindings.State.inputValue=='待审核' and  sessionScope.LoginUserBean.isUserInRole['车辆审核']}"
-                                          action="#{viewScope.vehicleApplicationBean.approve}"/>
+                                          action="#{viewScope.vehicleApplicationBean.approve}" rendered="false"/>
                         <af:spacer width="10" height="10" id="s10"/>
                         <af:commandButton id="cb7" text="完成调度" icon="/images/icons/activity.png"
                                           visible="#{bindings.State.inputValue=='已审核' and sessionScope.LoginUserBean.isUserInRole['车辆调度']}"

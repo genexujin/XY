@@ -172,5 +172,15 @@
       <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="VehicleNameVal">
+      <AttrNames>
+        <Item Value="VehicleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="VehicleId">
+      <AttrNames>
+        <Item Value="VehicleId"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
