@@ -51,7 +51,7 @@ public class SignInServlet extends HttpServlet {
                 "select employees.user_name," + "employees.first_name, " + "employees.last_name, " + "employees.gender," +
                 "roles.role_name, employees.id, employees.password " + " from employees,role_users,roles " + " where " +
                 " employees.id = role_users.user_id " + " and roles.role_id = role_users.role_id " +
-                " and employees.user_name = ? " + " and employees.password = ? and employees.expired ='N'";
+                " and employees.user_name = ? " + " and employees.password = ? and employees.expired ='N' and roles.expired ='N'";
             Connection conn = null;
             PreparedStatement stmt = null;
             ResultSet rs = null;

@@ -52,7 +52,8 @@ employees.id = role_users.user_id
 and role_users.role_id = roles.role_id
 and roles.role_id = role_menus.role_id
 and role_menus.menu_id = menus.menu_id
-and employees.user_name = :userName]]></SQLQuery>
+and employees.user_name = :userName
+and menus.expired!='true']]></SQLQuery>
   <ViewAttribute
     Name="MenuId"
     IsUpdateable="false"
