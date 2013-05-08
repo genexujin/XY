@@ -175,7 +175,7 @@
   </Attribute>
   <Attribute
     Name="ContextTitle"
-    Precision="20"
+    Precision="200"
     ColumnName="CONTEXT_TITLE"
     SQLType="VARCHAR"
     Type="java.lang.String"
