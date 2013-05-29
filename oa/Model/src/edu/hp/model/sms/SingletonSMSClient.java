@@ -11,10 +11,10 @@ public class SingletonSMSClient {
 
     private static Client client = null;
     //开发环境账号
-//    public static String password="220235";
+    public static String password="220235";
     
     //生成环境账号
-    public static String password = "704168";
+//    public static String password = "704168";
 
     private SingletonSMSClient() {
     }

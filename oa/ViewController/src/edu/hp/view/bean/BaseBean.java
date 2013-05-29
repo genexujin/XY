@@ -31,7 +31,7 @@ public class BaseBean {
     }
     
     protected String getDateString() {
-        java.text.DateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        java.text.DateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm");
         String  dateStr = format.format(new Date());
         return dateStr;
     }

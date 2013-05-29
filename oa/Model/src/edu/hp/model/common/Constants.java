@@ -11,6 +11,7 @@ public class Constants {
     public static final String STATE_CANCELED = "已取消";
     public static final String STATE_PENDING_APPROVAL = "待审批";
     public static final String STATE_TRIP_PLANNED = "已调度";
+    public static final String STATE_TRIP_CONFIRMED = "已确认";
     public static final String STATE_ACCEPTED = "已受理";
     public static final String STATE_ASSIGNED = "已分派";
     public static final String STATE_AFF_REVIEW = "总务复核";
@@ -43,6 +44,7 @@ public class Constants {
     
     public static final String ROLE_OFFICE_MGR="车辆审核";
     public static final String ROLE_ZONGWU_MGR="车辆调度";
+    public static final String ROLE_DRIVER="司机";
     public static final String ROLE_VP="副院长";
     public static final String ROLE_CEO="院长";
     public static final String ROLE_BUYER="采购员";

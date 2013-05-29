@@ -71,7 +71,10 @@
        VehicleCalendar.NUM_OF_PEOPLE, 
        VehicleCalendar.COMMENTS, 
        VehicleCalendar.USER_ID,
-       VehicleCalendar.SUBMIT_DATE
+       VehicleCalendar.SUBMIT_DATE,
+       VehicleCalendar.DRIVER_ID,
+VehicleCalendar.DRIVER_NAME,
+VehicleCalendar.DRIVER_MOBILE
 FROM VEHICLE_CALENDAR VehicleCalendar
 WHERE VehicleCalendar.VEHICLE_ID IN
   (
@@ -466,6 +469,63 @@ AND VehicleCalendar.STATE = '已调度']]></SQLQuery>
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.vo.query.vehicle.VehicleCalQueryView.SubmitDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DriverId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DRIVER_ID"
+    Expression="DRIVER_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DriverName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DRIVER_NAME"
+    Expression="DRIVER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.vehicle.VehicleCalQueryView.DriverName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DriverMobile"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DRIVER_MOBILE"
+    Expression="DRIVER_MOBILE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.vehicle.VehicleCalQueryView.DriverMobile_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

@@ -37,7 +37,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setId((DBSequence)value);
             }
-        },
+        }
+        ,
         UserDisplayName {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getUserDisplayName();
@@ -46,7 +47,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setUserDisplayName((String)value);
             }
-        },
+        }
+        ,
         VehicleName {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getVehicleName();
@@ -55,7 +57,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setVehicleName((String)value);
             }
-        },
+        }
+        ,
         VehicleId {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getVehicleId();
@@ -64,7 +67,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setVehicleId((String)value);
             }
-        },
+        }
+        ,
         Title {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getTitle();
@@ -73,7 +77,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setTitle((String)value);
             }
-        },
+        }
+        ,
         ContactId {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getContactId();
@@ -82,7 +87,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setContactId((String)value);
             }
-        },
+        }
+        ,
         ContactName {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getContactName();
@@ -91,7 +97,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setContactName((String)value);
             }
-        },
+        }
+        ,
         ContactPhone {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getContactPhone();
@@ -100,7 +107,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setContactPhone((String)value);
             }
-        },
+        }
+        ,
         State {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getState();
@@ -109,7 +117,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setState((String)value);
             }
-        },
+        }
+        ,
         ReturnTrip {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getReturnTrip();
@@ -118,7 +127,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setReturnTrip((String)value);
             }
-        },
+        }
+        ,
         StartTime {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getStartTime();
@@ -127,7 +137,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setStartTime((Timestamp)value);
             }
-        },
+        }
+        ,
         EndTime {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getEndTime();
@@ -136,7 +147,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setEndTime((Timestamp)value);
             }
-        },
+        }
+        ,
         ReturnStartTime {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getReturnStartTime();
@@ -145,7 +157,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setReturnStartTime((Timestamp)value);
             }
-        },
+        }
+        ,
         ReturnEndTime {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getReturnEndTime();
@@ -154,7 +167,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setReturnEndTime((Timestamp)value);
             }
-        },
+        }
+        ,
         TripStart {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getTripStart();
@@ -163,7 +177,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setTripStart((String)value);
             }
-        },
+        }
+        ,
         TripDest {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getTripDest();
@@ -172,7 +187,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setTripDest((String)value);
             }
-        },
+        }
+        ,
         ReturnTripStart {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getReturnTripStart();
@@ -181,7 +197,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setReturnTripStart((String)value);
             }
-        },
+        }
+        ,
         ReturnTripEnd {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getReturnTripEnd();
@@ -190,7 +207,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setReturnTripEnd((String)value);
             }
-        },
+        }
+        ,
         NumOfPeople {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getNumOfPeople();
@@ -199,7 +217,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setNumOfPeople((BigDecimal)value);
             }
-        },
+        }
+        ,
         Comments {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getComments();
@@ -208,7 +227,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setComments((String)value);
             }
-        },
+        }
+        ,
         UserId {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getUserId();
@@ -217,7 +237,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setUserId((String)value);
             }
-        },
+        }
+        ,
         SubmitDate {
             public Object get(VehicleCalendarImpl obj) {
                 return obj.getSubmitDate();
@@ -226,7 +247,38 @@ public class VehicleCalendarImpl extends EntityImpl {
             public void put(VehicleCalendarImpl obj, Object value) {
                 obj.setSubmitDate((Timestamp)value);
             }
-        };
+        }
+        ,
+        DriverId {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getDriverId();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setDriverId((String)value);
+            }
+        }
+        ,
+        DriverName {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getDriverName();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setDriverName((String)value);
+            }
+        }
+        ,
+        DriverMobile {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getDriverMobile();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setDriverMobile((String)value);
+            }
+        }
+        ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
 
@@ -253,6 +305,8 @@ public class VehicleCalendarImpl extends EntityImpl {
             return vals;
         }
     }
+
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int USERDISPLAYNAME = AttributesEnum.UserDisplayName.index();
     public static final int VEHICLENAME = AttributesEnum.VehicleName.index();
@@ -275,13 +329,24 @@ public class VehicleCalendarImpl extends EntityImpl {
     public static final int COMMENTS = AttributesEnum.Comments.index();
     public static final int USERID = AttributesEnum.UserId.index();
     public static final int SUBMITDATE = AttributesEnum.SubmitDate.index();
+    public static final int DRIVERID = AttributesEnum.DriverId.index();
+    public static final int DRIVERNAME = AttributesEnum.DriverName.index();
+    public static final int DRIVERMOBILE = AttributesEnum.DriverMobile.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public VehicleCalendarImpl() {
     }
-    
+
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("edu.hp.model.eo.VehicleCalendar");
+    }
+
     public void lock() {
         try { 
             super.lock(); 
@@ -659,6 +724,54 @@ public class VehicleCalendarImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for DriverId, using the alias name DriverId.
+     * @return the value of DriverId
+     */
+    public String getDriverId() {
+        return (String)getAttributeInternal(DRIVERID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DriverId.
+     * @param value value to set the DriverId
+     */
+    public void setDriverId(String value) {
+        setAttributeInternal(DRIVERID, value);
+    }
+
+    /**
+     * Gets the attribute value for DriverName, using the alias name DriverName.
+     * @return the value of DriverName
+     */
+    public String getDriverName() {
+        return (String)getAttributeInternal(DRIVERNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DriverName.
+     * @param value value to set the DriverName
+     */
+    public void setDriverName(String value) {
+        setAttributeInternal(DRIVERNAME, value);
+    }
+
+    /**
+     * Gets the attribute value for DriverMobile, using the alias name DriverMobile.
+     * @return the value of DriverMobile
+     */
+    public String getDriverMobile() {
+        return (String)getAttributeInternal(DRIVERMOBILE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for DriverMobile.
+     * @param value value to set the DriverMobile
+     */
+    public void setDriverMobile(String value) {
+        setAttributeInternal(DRIVERMOBILE, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -689,20 +802,14 @@ public class VehicleCalendarImpl extends EntityImpl {
         super.setAttrInvokeAccessor(index, value, attrDef);
     }
 
+
     /**
      * @param id key constituent
 
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(DBSequence id) {
-        return new Key(new Object[] { id });
-    }
-
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("edu.hp.model.eo.VehicleCalendar");
+        return new Key(new Object[]{id});
     }
 
     /**

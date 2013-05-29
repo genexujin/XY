@@ -31,6 +31,10 @@
         <expression>#{pageFlowScope.id!=null}</expression>
         <outcome>findByid</outcome>
       </case>
+      <case id="__20">
+        <expression>#{pageFlowScope.fromMenu=='driver'}</expression>
+        <outcome>driver</outcome>
+      </case>
       <default-outcome>normalUser</default-outcome>
     </router>
     <view id="VehicleApplication">
@@ -60,6 +64,12 @@
         <fixed-outcome>queryByPK</fixed-outcome>
       </outcome>
     </method-call>
+    <method-call id="findByDriver">
+      <method>#{bindings.findByDriver.execute}</method>
+      <outcome>
+        <fixed-outcome>findByDriver</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__1">
       <from-activity-id>findByUserid</from-activity-id>
       <control-flow-case id="__2">
@@ -85,6 +95,10 @@
         <from-outcome>findByid</from-outcome>
         <to-activity-id>queryByPK</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__21">
+        <from-outcome>driver</from-outcome>
+        <to-activity-id>findByDriver</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__5">
       <from-activity-id>findPendingApproval</from-activity-id>
@@ -104,6 +118,13 @@
       <from-activity-id>queryByPK</from-activity-id>
       <control-flow-case id="__18">
         <from-outcome>queryByPK</from-outcome>
+        <to-activity-id>VehicleApplication</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__22">
+      <from-activity-id>findByDriver</from-activity-id>
+      <control-flow-case id="__23">
+        <from-outcome>findByDriver</from-outcome>
         <to-activity-id>VehicleApplication</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

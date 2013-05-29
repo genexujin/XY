@@ -26,7 +26,10 @@
        VehicleCalendar.NUM_OF_PEOPLE, 
        VehicleCalendar.COMMENTS, 
        VehicleCalendar.USER_ID, 
-       VehicleCalendar.SUBMIT_DATE"
+       VehicleCalendar.SUBMIT_DATE, 
+       VehicleCalendar.DRIVER_ID, 
+       VehicleCalendar.DRIVER_NAME, 
+       VehicleCalendar.DRIVER_MOBILE"
   FromList="VEHICLE_CALENDAR VehicleCalendar"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -50,6 +53,10 @@
     Name="state"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="driverId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="Vehicle"
     ViewObjectName="edu.hp.model.vo.LovsView"
@@ -66,6 +73,10 @@
       Name="filterByExpired"
       FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
   </ViewAccessor>
+  <ViewAccessor
+    Name="Drivers"
+    ViewObjectName="edu.hp.model.vo.query.vehicle.DriverQuery"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_ContactName"
     ListVOName="Employees"
@@ -137,6 +148,30 @@
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="Value"/>
       <Item Value="FlexCol1"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DriverId"
+    ListVOName="Drivers"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DriverId"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="DriverName"/>
+      <Item Value="DriverMobile"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+      <Item Value="Userdisplayname"/>
+      <Item Value="Mobile"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Userdisplayname"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -301,6 +336,32 @@
     EntityAttrName="SubmitDate"
     EntityUsage="VehicleCalendar"
     AliasName="SUBMIT_DATE"/>
+  <ViewAttribute
+    Name="DriverId"
+    PrecisionRule="true"
+    EntityAttrName="DriverId"
+    EntityUsage="VehicleCalendar"
+    AliasName="DRIVER_ID"
+    LOVName="LOV_DriverId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DriverName"
+    PrecisionRule="true"
+    EntityAttrName="DriverName"
+    EntityUsage="VehicleCalendar"
+    AliasName="DRIVER_NAME"/>
+  <ViewAttribute
+    Name="DriverMobile"
+    PrecisionRule="true"
+    EntityAttrName="DriverMobile"
+    EntityUsage="VehicleCalendar"
+    AliasName="DRIVER_MOBILE"/>
   <ViewCriteria
     Name="findById"
     ViewObjectName="edu.hp.model.vo.VehicleCalendarView"
@@ -409,6 +470,42 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="findByDriver"
+    ViewObjectName="edu.hp.model.vo.VehicleCalendarView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VehicleCalendarViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DriverId"
+        ViewAttribute="DriverId"
+        Operator="="
+        Conjunction="AND"
+        Value=":driverId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ClientInterface>
     <Method
       Name="deleteByPK"
@@ -484,6 +581,15 @@
       <Parameter
         Name="endTime"
         Type="oracle.jbo.domain.Timestamp"/>
+    </Method>
+    <Method
+      Name="findByDriver"
+      MethodName="findByDriver">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="driverId"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
 </ViewObject>

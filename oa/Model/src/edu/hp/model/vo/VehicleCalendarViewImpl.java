@@ -6,6 +6,7 @@ import edu.hp.model.vo.common.VehicleCalendarView;
 
 import oracle.jbo.Row;
 import oracle.jbo.domain.Timestamp;
+import oracle.jbo.server.ViewObjectImpl;
 
 
 // ---------------------------------------------------------------------
@@ -78,6 +79,11 @@ public class VehicleCalendarViewImpl extends BaseView implements VehicleCalendar
     public void findByState(String state) {
         super.queryByVC("findByState", "state", state);
     }
+                                                           
+    public void findByDriver(String driverId) {
+        super.queryByVC("findByDriver", "driverId", driverId);
+    }
+
 
     /**
      * Returns the variable value for vehicleActId.
@@ -125,5 +131,21 @@ public class VehicleCalendarViewImpl extends BaseView implements VehicleCalendar
      */
     public void setstate(String value) {
         ensureVariableManager().setVariableValue("state", value);
+    }
+
+    /**
+     * Returns the variable value for driverId.
+     * @return variable value for driverId
+     */
+    public String getdriverId() {
+        return (String)ensureVariableManager().getVariableValue("driverId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable driverId.
+     * @param value value to bind as driverId
+     */
+    public void setdriverId(String value) {
+        ensureVariableManager().setVariableValue("driverId", value);
     }
 }

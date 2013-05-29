@@ -30,6 +30,8 @@
       <nodeDefinition DefName="edu.hp.model.vo.VehicleCalendarView" Name="VehicleDML0">
         <AttrNames>
           <Item Value="VehicleName"/>
+          <Item Value="DriverName"/>
+          <Item Value="DriverMobile"/>
           <Item Value="Title"/>
           <Item Value="UserDisplayName"/>
           <Item Value="ContactName"/>
@@ -182,5 +184,35 @@
         <Item Value="VehicleId"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="VehicleDMLIterator" StaticList="false" Uses="LOV_DriverId" id="DriverId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="VehicleDMLIterator" id="DriverMobile">
+      <AttrNames>
+        <Item Value="DriverMobile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="DriverName">
+      <AttrNames>
+        <Item Value="DriverName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="completeTaskForUserId" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="completeTaskForUserId" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.completeTaskForUserId_RootAppModuleDataControl_dataProvider_completeTaskForUserId_result">
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="createTaskForUserId" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createTaskForUserId" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.createTaskForUserId_RootAppModuleDataControl_dataProvider_createTaskForUserId_result">
+      <NamedData NDName="title" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
+      <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+      <NamedData NDName="contextTitle" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

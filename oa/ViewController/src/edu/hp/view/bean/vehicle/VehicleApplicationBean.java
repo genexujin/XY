@@ -31,9 +31,9 @@ public class VehicleApplicationBean extends BaseBean {
 
         return null;
     }
-    
+
     public String submit() {
-        
+
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
         ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
@@ -47,11 +47,11 @@ public class VehicleApplicationBean extends BaseBean {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
             needNotification = 2;
         }
-        
+
         boolean success = ADFUtils.commit("车辆预订已提交并等待调度！", "车辆预订提交失败，请核对输入的信息或联系管理员！");
 
         if (success) {
-        
+
             String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
             String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
             String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
@@ -69,7 +69,7 @@ public class VehicleApplicationBean extends BaseBean {
                 sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_ZONGWU_MGR);
                 //create task
                 createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_ZONGWU_MGR, title);
-            }             
+            }
             ADFUtils.findOperation("Commit").execute();
         } else {
             ADFUtils.setBoundAttributeValue("State", state);
@@ -77,8 +77,8 @@ public class VehicleApplicationBean extends BaseBean {
 
         return null;
     }
-    
-        /**  根据2013-05-02 需求变更，用车不需要审核直接到调度
+
+    /**  根据2013-05-02 需求变更，用车不需要审核直接到调度
     public String submit() {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
 
@@ -176,7 +176,7 @@ public class VehicleApplicationBean extends BaseBean {
         return null;
     }
 
-*/
+     */
 
     public String refreshTableIterator() {
         ADFUtils.findIterator("VehicleDMLIterator").executeQuery();
@@ -189,8 +189,8 @@ public class VehicleApplicationBean extends BaseBean {
         if (state != null &&
             (state.equals(Constants.STATE_PENDING_REVIEW) || state.equals(Constants.STATE_REVIEWED))) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_REJECTED);
-            ADFUtils.setBoundAttributeValue("VehicleId",null);
-            ADFUtils.setBoundAttributeValue("VehicleNameVal",null);
+            ADFUtils.setBoundAttributeValue("VehicleId", null);
+            ADFUtils.setBoundAttributeValue("VehicleNameVal", null);
             //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
             boolean success = ADFUtils.commit("车辆预订已拒绝！", "车辆预订拒绝失败，请核对输入的信息或联系管理员！");
 
@@ -247,6 +247,29 @@ public class VehicleApplicationBean extends BaseBean {
         return null;
     }
 
+    public String confirm() {
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        if (state != null && state.equals(Constants.STATE_TRIP_PLANNED)) {
+            ADFUtils.setBoundAttributeValue("State", Constants.STATE_TRIP_CONFIRMED);
+            boolean success = ADFUtils.commit("您已确认该次用车！", "车辆预订调度失败，请核对输入的信息或联系管理员！");
+            if (success) {
+                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+                LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+                completeTaskForUser(Constants.CONTEXT_TYPE_VEHICLE, id, user.getUserId());
+                String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
+                String driverName = (String)ADFUtils.getBoundAttributeValue("DriverName");
+                String title = (String)ADFUtils.getBoundAttributeValue("Title");
+
+                sendNotification(driverName + "已确认用车单！", "事由: " + title + " 车辆：" + vehicleName, null,
+                                 Constants.ROLE_ZONGWU_MGR);
+                ADFUtils.findOperation("Commit").execute();
+            } else {
+                ADFUtils.setBoundAttributeValue("State", state);
+            }
+        }
+        return null;
+    }
+
 
     public String planTrip() {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
@@ -258,19 +281,27 @@ public class VehicleApplicationBean extends BaseBean {
             if (success) {
                 String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
                 String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+                String ContactPhone = (String)ADFUtils.getBoundAttributeValue("ContactPhone");
                 String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
                 String title = (String)ADFUtils.getBoundAttributeValue("Title");
                 String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
-
+                String driverName = (String)ADFUtils.getBoundAttributeValue("DriverName");
                 String noteTitle = "您为事由：" + title + " 所做的用车申请已完成调度。 ";
                 String dateStr = getDateString();
-
-                String noteContent = "完成调度时间：" + dateStr + " 使用的车辆为：" + vehicleName;
+                String noteContent = "完成调度时间：" + dateStr + " 使用的车辆为：" + vehicleName + " 司机：" + driverName;
                 //send to requester
                 sendNotification(noteTitle, noteContent, userId, null);
-
                 completeTask(Constants.CONTEXT_TYPE_VEHICLE, id, Constants.ROLE_ZONGWU_MGR);
 
+                //如果选择了一个司机，则发通知给司机并要求其在系统中确认
+                String driverId = (String)ADFUtils.getBoundAttributeValue("DriverId");
+                if (driverId != null) {
+                    String smsTitle = "有新的派车单发送给您，请进系统查看并确认 ！";
+                    String smsContent =
+                        " 使用车辆为： " + vehicleName + " 申请人为：" + userDisplayName + " 申请人电话：" + ContactPhone;
+                    sendNotification(smsTitle, smsContent, driverId, null);
+                    createTaskForUser(id, Constants.CONTEXT_TYPE_VEHICLE, smsTitle, driverId, "确认调度");
+                }
                 ADFUtils.findOperation("Commit").execute();
             } else {
                 ADFUtils.setBoundAttributeValue("State", state);
@@ -293,6 +324,33 @@ public class VehicleApplicationBean extends BaseBean {
         return null;
     }
 
+    public boolean isVehicleVisible() {
+        String state = (String)ADFUtils.getBoundAttributeValue("State");
+        if (state == null) {
+            return false;
+        }
+
+        Boolean isPlanner = JSFUtils.resolveExpressionAsBoolean("#{sessionScope.LoginUserBean.isUserInRole['车辆调度']}");
+
+        //如果已经调度或者已经确认，则可见
+        if (state.equals(Constants.STATE_TRIP_PLANNED) || state.equals(Constants.STATE_TRIP_CONFIRMED))
+            return true;
+        //如果已经审核且当前登录用户为调度员则可见
+        else if (isPlanner != null && state.equals(Constants.STATE_REVIEWED) && isPlanner)
+            return true;
+        //否则不可见
+        else
+            return false;
+    }
+
+    public boolean isVehichleReadonly() {
+        //仅当为调度员时可以修改
+        Boolean isPlanner = (Boolean)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean.isUserInRole['车辆调度']}");
+        if (isPlanner == null)
+            return true;
+        return !isPlanner;
+    }
+
     public void setQueryState(String queryState) {
         this.queryState = queryState;
     }
@@ -300,4 +358,6 @@ public class VehicleApplicationBean extends BaseBean {
     public String getQueryState() {
         return queryState;
     }
+
+
 }

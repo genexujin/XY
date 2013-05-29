@@ -17,9 +17,16 @@ public class VehicleCalendarViewClient extends ViewUsageImpl implements VehicleC
     public VehicleCalendarViewClient() {
     }
 
+
     public void deleteByPK(String vehicleActId) {
         Object _ret =
             getApplicationModuleProxy().riInvokeExportedMethod(this,"deleteByPK",new String [] {"java.lang.String"},new Object[] {vehicleActId});
+        return;
+    }
+
+    public void findByDriver(String driverId) {
+        Object _ret =
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"findByDriver",new String [] {"java.lang.String"},new Object[] {driverId});
         return;
     }
 

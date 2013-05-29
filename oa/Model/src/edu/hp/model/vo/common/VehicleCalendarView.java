@@ -20,4 +20,6 @@ public interface VehicleCalendarView extends ViewObject {
     void updateActivityTime(String vehicleActId, Timestamp startTime, Timestamp endTime);
 
     void updateEndTime(String vehicleActId, Timestamp endTime);
+
+    void findByDriver(String driverId);
 }

@@ -115,15 +115,17 @@
       <nodeDefinition DefName="edu.hp.model.vo.query.vehicle.VehicleCalQueryView" Name="VehicleCalQuery10">
         <AttrNames>
           <Item Value="VehicleName"/>
+          <Item Value="DriverName"/>
+          <Item Value="DriverMobile"/>
           <Item Value="Title"/>
           <Item Value="UserDisplayName"/>
           <Item Value="ContactName"/>
           <Item Value="ContactPhone"/>
           <Item Value="StartTime"/>
           <Item Value="EndTime"/>
-          <Item Value="ReturnTrip"/>
           <Item Value="TripStart"/>
           <Item Value="TripDest"/>
+          <Item Value="ReturnTrip"/>
           <Item Value="NumOfPeople"/>
           <Item Value="Comments"/>
         </AttrNames>

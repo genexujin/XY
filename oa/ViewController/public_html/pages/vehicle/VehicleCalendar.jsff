@@ -113,13 +113,23 @@
                         <f:facet name="statusbar"/>
                         <af:table value="#{bindings.VehicleCalQuery1.collectionModel}" var="row"
                                   rows="#{bindings.VehicleCalQuery1.rangeSize}"
-                                  emptyText="#{bindings.VehicleCalQuery1.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                  emptyText="#{bindings.VehicleCalQuery1.viewable ? 'No data to display.' : 'Access Denied.'}"
                                   fetchSize="#{bindings.VehicleCalQuery1.rangeSize}" rowBandingInterval="1" id="t2"
                                   filterVisible="false">
                             <af:column sortProperty="#{bindings.VehicleCalQuery1.hints.VehicleName.name}"
                                        sortable="true" headerText="#{bindings.VehicleCalQuery1.hints.VehicleName.label}"
                                        id="c1">
                                 <af:outputText value="#{row.VehicleName}" id="ot7"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.VehicleCalQuery1.hints.DriverName.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.VehicleCalQuery1.hints.DriverName.label}" id="c15">
+                                <af:outputText value="#{row.DriverName}" id="ot2"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.VehicleCalQuery1.hints.DriverMobile.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.VehicleCalQuery1.hints.DriverMobile.label}" id="c14">
+                                <af:outputText value="#{row.DriverMobile}" id="ot1"/>
                             </af:column>
                             <af:column sortProperty="#{bindings.VehicleCalQuery1.hints.Title.name}" sortable="true"
                                        headerText="#{bindings.VehicleCalQuery1.hints.Title.label}" id="c2">
@@ -144,16 +154,14 @@
                                        headerText="#{bindings.VehicleCalQuery1.hints.StartTime.label}" id="c7"
                                        width="120">
                                 <af:outputText value="#{row.StartTime}" id="ot13">
-                                    <af:convertDateTime pattern="#{bindings.VehicleCalQuery1.hints.StartTime.format}"
-                                                        type="both"/>
+                                    <af:convertDateTime pattern="#{bindings.VehicleCalQuery1.hints.StartTime.format}"/>
                                 </af:outputText>
                             </af:column>
                             <af:column sortProperty="#{bindings.VehicleCalQuery1.hints.EndTime.name}" sortable="true"
                                        headerText="#{bindings.VehicleCalQuery1.hints.EndTime.label}" id="c8"
                                        width="120">
                                 <af:outputText value="#{row.EndTime}" id="ot14">
-                                    <af:convertDateTime pattern="#{bindings.VehicleCalQuery1.hints.EndTime.format}"
-                                                        type="both"/>
+                                    <af:convertDateTime pattern="#{bindings.VehicleCalQuery1.hints.EndTime.format}"/>
                                 </af:outputText>
                             </af:column>
                             <af:column sortProperty="#{bindings.VehicleCalQuery1.hints.TripStart.name}" sortable="true"
@@ -166,7 +174,7 @@
                             </af:column>
                             <af:column sortProperty="#{bindings.VehicleCalQuery1.hints.ReturnTrip.name}" sortable="true"
                                        headerText="#{bindings.VehicleCalQuery1.hints.ReturnTrip.label}" id="c9">
-                                <af:outputText value="#{row.ReturnTrip=='N'?'否':'是'}" id="ot15"/>
+                                <af:outputText value="#{row.ReturnTrip}" id="ot15"/>
                             </af:column>
                             <af:column sortProperty="#{bindings.VehicleCalQuery1.hints.NumOfPeople.name}"
                                        sortable="true" headerText="#{bindings.VehicleCalQuery1.hints.NumOfPeople.label}"

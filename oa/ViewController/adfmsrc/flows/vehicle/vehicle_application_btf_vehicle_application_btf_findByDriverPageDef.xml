@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="vehicle_application_btf_vehicle_application_btf_findByDriverPageDef" Package="flows.vehicle"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="findByDriver" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByDriver"
+            IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleDML">
+      <NamedData NDName="driverId" NDValue="#{LoginUserBean.userId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>
