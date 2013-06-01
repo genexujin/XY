@@ -109,8 +109,8 @@
                   IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule.ConfRmConflict"
                   ReturnName="data.RootAppModuleDataControl.methodResults.ifConflict_RootAppModuleDataControl_dataProvider_Root_ConfRmModule_ConfRmConflict_ifConflict_result">
-      <NamedData NDName="actStartTime" NDValue="#{bindings.StartTime.inputValue}" NDType="java.sql.Timestamp"/>
-      <NamedData NDName="actEndTime" NDValue="#{bindings.EndTime.inputValue}" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="actStartTime" NDValue="" NDType="java.sql.Timestamp"/>
+      <NamedData NDName="actEndTime" NDValue="" NDType="java.sql.Timestamp"/>
       <NamedData NDName="clsRmId" NDValue="#{bindings.MeetingRoomId.inputValue}" NDType="java.lang.String"/>
       <NamedData NDName="actId" NDValue="#{bindings.Id.inputValue}" NDType="java.lang.String"/>
     </methodAction>

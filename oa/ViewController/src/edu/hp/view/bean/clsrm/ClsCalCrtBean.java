@@ -40,7 +40,7 @@ public class ClsCalCrtBean extends BaseBean {
             if (success) {
                 
                 String time = (String)ADFUtils.getBoundAttributeValue("ActStartTime");
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date date = format.parse(time);
                 startDayTime = new Timestamp(date);
                 //startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("ActStartTime");
@@ -64,10 +64,21 @@ public class ClsCalCrtBean extends BaseBean {
         return null;
     }
 
-    protected Boolean ensureTimeConflicts() {
-
+    protected Boolean ensureTimeConflicts() throws Exception{
+        
+        String startTime = (String)ADFUtils.getBoundAttributeValue("ActStartTime");        
+        String endTime = (String)ADFUtils.getBoundAttributeValue("ActEndTime");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date startDate = format.parse(startTime);
+        Date endDate = format.parse(endTime);
+        
+        java.sql.Timestamp actStartTime = new java.sql.Timestamp(startDate.getTime());
+        java.sql.Timestamp actEndTime = new java.sql.Timestamp(endDate.getTime());
+        
         Boolean result = false;
         OperationBinding binding = ADFUtils.findOperation("ifConflict");
+        binding.getParamsMap().put("actStartTime", actStartTime);
+        binding.getParamsMap().put("actEndTime", actEndTime);
         binding.execute();
         result = (Boolean)binding.getResult();
         return result;

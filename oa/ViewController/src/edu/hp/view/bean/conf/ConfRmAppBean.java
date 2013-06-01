@@ -6,6 +6,10 @@ import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.binding.OperationBinding;
@@ -27,7 +31,7 @@ public class ConfRmAppBean extends BaseBean {
         return null;
     }
 
-    public String save() {
+    public String save() throws Exception{
 
         if (ensureTimeConflicts()) {
             //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
@@ -43,7 +47,7 @@ public class ConfRmAppBean extends BaseBean {
         return null;
     }
 
-    public String submit() {
+    public String submit() throws Exception {
 
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         //if (state != null && state.equals(Constants.STATE_INITIAL)) {
@@ -148,7 +152,7 @@ public class ConfRmAppBean extends BaseBean {
         return null;
     }
 
-    public String approve() {
+    public String approve() throws Exception{
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_PENDING_REVIEW)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
@@ -179,10 +183,21 @@ public class ConfRmAppBean extends BaseBean {
         return null;
     }
 
-    protected Boolean ensureTimeConflicts() {
-
+    protected Boolean ensureTimeConflicts() throws Exception {
+        String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");        
+        String endTime = (String)ADFUtils.getBoundAttributeValue("EndTime");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date startDate = format.parse(startTime);
+        Date endDate = format.parse(endTime);
+        
+        java.sql.Timestamp actStartTime = new java.sql.Timestamp(startDate.getTime());
+        java.sql.Timestamp actEndTime = new java.sql.Timestamp(endDate.getTime());
+        
         Boolean result = false;
-        OperationBinding binding = ADFUtils.findOperation("ifConflict1");
+        OperationBinding binding = ADFUtils.findOperation("ifConflict");
+        binding.getParamsMap().put("actStartTime", actStartTime);
+        binding.getParamsMap().put("actEndTime", actEndTime);
+        
         binding.execute();
         result = (Boolean)binding.getResult();
         return result;

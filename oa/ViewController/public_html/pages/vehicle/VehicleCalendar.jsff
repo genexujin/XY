@@ -9,7 +9,8 @@
                                  calendarActivityListener="#{pageFlowScope.vehiclesCalBean.activityListener}"
                                  activityStyles="#{pageFlowScope.vehiclesCalBean.activityStyles}" view="week"
                                  calendarActivityDurationChangeListener="#{pageFlowScope.vehiclesCalBean.calDurationChanged}"
-                                 startHour="8" activeDay="#{pageFlowScope.vehiclesCalBean.activeDay}">
+                                 startHour="8" activeDay="#{pageFlowScope.vehiclesCalBean.activeDay}"
+                                 startDayOfWeek="mon">
                         <!--af:calendarDropTarget actions="MOVE"
                                                dropListener="#{pageFlowScope.vehiclesCalBean.handleDrop}"/-->
                         <f:facet name="contextMenu">
