@@ -216,6 +216,10 @@
                                                       autoSubmit="true"/>
                         </af:panelGroupLayout>
                         <af:spacer width="10" height="10" id="s2"/>
+                        <af:selectBooleanCheckbox label="全选" id="sbc3"
+                                                      value="#{pageFlowScope.vehiclesCalBean.selectAll}"
+                                                      valueChangeListener="#{pageFlowScope.vehiclesCalBean.onSelectAll}"
+                                                      autoSubmit="true"/>
                         <af:panelGroupLayout id="pgl3" layout="scroll">
                             <af:forEach items="#{pageFlowScope.vehiclesCalBean.providerList}" var="provider">
                                 <af:panelGroupLayout layout="horizontal" id="pgl2">
@@ -232,7 +236,8 @@
                                     <af:selectBooleanCheckbox id="sbc1" autoSubmit="true"
                                                               valueChangeListener="#{pageFlowScope.vehiclesCalBean.providerEnabledChange}"
                                                               text="#{provider.displayName}"
-                                                              value="#{pageFlowScope.vehiclesCalBean.providerData[provider].enabled}">
+                                                              value="#{pageFlowScope.vehiclesCalBean.providerData[provider].enabled}"
+                                                              partialTriggers="sbc3">
                                         <f:attribute name="providerId" value="#{provider.id}"/>
                                     </af:selectBooleanCheckbox>
                                     <af:outputText value="#{provider.noOfPpl}" id="ot3"/>
