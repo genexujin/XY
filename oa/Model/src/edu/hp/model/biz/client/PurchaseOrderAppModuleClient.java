@@ -49,6 +49,11 @@ public class PurchaseOrderAppModuleClient extends ApplicationModuleImpl implemen
         return;
     }
 
+    public void findForBuyer(String buyerId) {
+        Object _ret = this.riInvokeExportedMethod(this,"findForBuyer",new String [] {"java.lang.String"},new Object[] {buyerId});
+        return;
+    }
+
     public void findForDeptVerifier(String deptVerifierId) {
         Object _ret = this.riInvokeExportedMethod(this,"findForDeptVerifier",new String [] {"java.lang.String"},new Object[] {deptVerifierId});
         return;
@@ -63,6 +68,11 @@ public class PurchaseOrderAppModuleClient extends ApplicationModuleImpl implemen
         Object _ret =
             this.riInvokeExportedMethod(this,"getApprovalLimitForCategoryId",new String [] {"java.lang.String"},new Object[] {categoryId});
         return (BigDecimal)_ret;
+    }
+
+    public String getDeptMgrId(String submitterId) {
+        Object _ret = this.riInvokeExportedMethod(this,"getDeptMgrId",new String [] {"java.lang.String"},new Object[] {submitterId});
+        return (String)_ret;
     }
 
     public String getDeptSupervisorId(String submitterId) {

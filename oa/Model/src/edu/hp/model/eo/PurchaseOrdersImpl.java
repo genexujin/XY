@@ -207,6 +207,36 @@ public class PurchaseOrdersImpl extends EntityImpl {
             }
         }
         ,
+        UsageInfo {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getUsageInfo();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setUsageInfo((String)value);
+            }
+        }
+        ,
+        CurrentBuyerId {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getCurrentBuyerId();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setCurrentBuyerId((String)value);
+            }
+        }
+        ,
+        CurrentBuyerName {
+            public Object get(PurchaseOrdersImpl obj) {
+                return obj.getCurrentBuyerName();
+            }
+
+            public void put(PurchaseOrdersImpl obj, Object value) {
+                obj.setCurrentBuyerName((String)value);
+            }
+        }
+        ,
         Submitter {
             public Object get(PurchaseOrdersImpl obj) {
                 return obj.getSubmitter();
@@ -283,6 +313,9 @@ public class PurchaseOrdersImpl extends EntityImpl {
     public static final int CURRENTEXECUTOR = AttributesEnum.CurrentExecutor.index();
     public static final int DEPTVERIFIER = AttributesEnum.DeptVerifier.index();
     public static final int ACTUALTOTAL = AttributesEnum.ActualTotal.index();
+    public static final int USAGEINFO = AttributesEnum.UsageInfo.index();
+    public static final int CURRENTBUYERID = AttributesEnum.CurrentBuyerId.index();
+    public static final int CURRENTBUYERNAME = AttributesEnum.CurrentBuyerName.index();
     public static final int SUBMITTER = AttributesEnum.Submitter.index();
     public static final int PURCHASEORDERLINES = AttributesEnum.PurchaseOrderLines.index();
     public static final int PURCHASEORDERHISTORYS = AttributesEnum.PurchaseOrderHistorys.index();
@@ -588,6 +621,54 @@ public class PurchaseOrdersImpl extends EntityImpl {
      */
     public void setActualTotal(BigDecimal value) {
         setAttributeInternal(ACTUALTOTAL, value);
+    }
+
+    /**
+     * Gets the attribute value for UsageInfo, using the alias name UsageInfo.
+     * @return the value of UsageInfo
+     */
+    public String getUsageInfo() {
+        return (String)getAttributeInternal(USAGEINFO);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for UsageInfo.
+     * @param value value to set the UsageInfo
+     */
+    public void setUsageInfo(String value) {
+        setAttributeInternal(USAGEINFO, value);
+    }
+
+    /**
+     * Gets the attribute value for CurrentBuyerId, using the alias name CurrentBuyerId.
+     * @return the value of CurrentBuyerId
+     */
+    public String getCurrentBuyerId() {
+        return (String)getAttributeInternal(CURRENTBUYERID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for CurrentBuyerId.
+     * @param value value to set the CurrentBuyerId
+     */
+    public void setCurrentBuyerId(String value) {
+        setAttributeInternal(CURRENTBUYERID, value);
+    }
+
+    /**
+     * Gets the attribute value for CurrentBuyerName, using the alias name CurrentBuyerName.
+     * @return the value of CurrentBuyerName
+     */
+    public String getCurrentBuyerName() {
+        return (String)getAttributeInternal(CURRENTBUYERNAME);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for CurrentBuyerName.
+     * @param value value to set the CurrentBuyerName
+     */
+    public void setCurrentBuyerName(String value) {
+        setAttributeInternal(CURRENTBUYERNAME, value);
     }
 
     /**

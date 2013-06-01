@@ -51,6 +51,9 @@
   <ViewUsage
     Name="RoleUsersView"
     ViewObjectName="edu.hp.model.vo.RoleUsersView"/>
+  <ViewUsage
+    Name="EmpAsBuyer"
+    ViewObjectName="edu.hp.model.vo.query.po.EmpAsBuyer"/>
   <ViewLinkUsage
     Name="PoToPoLineLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.PoToPoLineLink"
@@ -185,6 +188,24 @@
         Type="void"/>
       <Parameter
         Name="deptVerifierId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getDeptMgrId"
+      MethodName="getDeptMgrId">
+      <Return
+        Type="java.lang.String"/>
+      <Parameter
+        Name="submitterId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findForBuyer"
+      MethodName="findForBuyer">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="buyerId"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

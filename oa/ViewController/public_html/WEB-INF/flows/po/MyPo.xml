@@ -100,10 +100,10 @@
         <fixed-outcome>byPoId</fixed-outcome>
       </outcome>
     </method-call>
-    <method-call id="findByExecuting">
-      <method>#{bindings.findByState.execute}</method>
+    <method-call id="findForBuyer">
+      <method>#{bindings.findForBuyer.execute}</method>
       <outcome>
-        <fixed-outcome>findByState</fixed-outcome>
+        <fixed-outcome>findForBuyer</fixed-outcome>
       </outcome>
     </method-call>
     <method-call id="findByDeptReview">
@@ -142,7 +142,7 @@
       </control-flow-case>
       <control-flow-case id="__41">
         <from-outcome>returnFromBuyer</from-outcome>
-        <to-activity-id>findByExecuting</to-activity-id>
+        <to-activity-id>findForBuyer</to-activity-id>
       </control-flow-case>
       <control-flow-case id="__42">
         <from-outcome>returnFromReceiver</from-outcome>
@@ -188,7 +188,7 @@
       </control-flow-case>
       <control-flow-case id="__33">
         <from-outcome>buyer</from-outcome>
-        <to-activity-id>findByExecuting</to-activity-id>
+        <to-activity-id>findForBuyer</to-activity-id>
       </control-flow-case>
       <control-flow-case id="__35">
         <from-outcome>create</from-outcome>
@@ -246,9 +246,9 @@
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__31">
-      <from-activity-id>findByExecuting</from-activity-id>
+      <from-activity-id>findForBuyer</from-activity-id>
       <control-flow-case id="__32">
-        <from-outcome>findByState</from-outcome>
+        <from-outcome>findForBuyer</from-outcome>
         <to-activity-id>MyPoPage</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

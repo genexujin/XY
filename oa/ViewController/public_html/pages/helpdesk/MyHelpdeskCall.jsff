@@ -87,7 +87,7 @@
                         <af:commandToolbarButton text="新建" id="ctb1" action="create"
                                                  rendered="#{pageFlowScope.fromMenu!='callee' and pageFlowScope.fromMenu!='assign' and pageFlowScope.fromMenu!='review' and pageFlowScope.fromMenu!='query'}"
                                                  icon="/images/icons/new_ena.png"/>
-                        <af:commandToolbarButton text="更改" id="ctb2" action="edit" icon="/images/icons/edit.png"/>
+                        <af:commandToolbarButton text="打开" id="ctb2" action="edit" icon="/images/icons/edit.png"/>
                     </af:toolbar>
                 </f:facet>
                 <f:facet name="statusbar"/>

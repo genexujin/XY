@@ -72,6 +72,13 @@ public class MyPoBean extends BaseBean {
         binding.getParamsMap().put("submitDateFrom", submitDateFrom);
         binding.getParamsMap().put("submitDateTo", submitDateTo);
         binding.getParamsMap().put("submitterId", submitterId);
+        //
+        String buyerId = null;
+        if (JSFUtils.resolveExpressionAsBoolean("#{pageFlowScope.fromMenu=='buyer'}")) {
+            buyerId = JSFUtils.resolveExpressionAsString("#{sessionScope.LoginUserBean.userId}");
+            System.out.println("BuyerId is: " + buyerId);
+        }
+        binding.getParamsMap().put("buyerId", buyerId);
         binding.execute();
         
         ADFUtils.partialRefreshComponenet(resultTable);
@@ -177,6 +184,10 @@ public class MyPoBean extends BaseBean {
                                           , supervisorId, readableId);
                         
                         sendNotification("有新的采购订单等待部门审核。", "订单号：" + readableId + "，预算总金额：" + submitTotal, supervisorId, null);
+                        //还得发消息给部门经理！Supervisor不是部门经理！
+                        String mgrId = getDeptMgrId(submitterId);
+                        String submitterName = ADFUtils.getBoundAttributeValue("SubmitterName").toString();
+                        sendNotification("有新的采购订单发给部门主管审核。", "订单号：" + readableId + "，申请人：" + submitterName + "，预算总金额：" + submitTotal, mgrId, null);
                     }
                     
                     
@@ -196,6 +207,8 @@ public class MyPoBean extends BaseBean {
     public void verifyPo(ActionEvent actionEvent) {
         if (!checkAllRowsHasPurchaseQuantity()) {
             JSFUtils.addFacesErrorMessage("所有未取消的行都必须有采购数量");
+        } else if (!checkAssignedBuyer()) {
+            JSFUtils.addFacesErrorMessage("必须指派采购员");
         } else {
             double verifyTotal = computeTotal("SubmitPrice", "PurchaseQuantity", null, "VerifyTotal");
             
@@ -226,8 +239,11 @@ public class MyPoBean extends BaseBean {
                     if (skip && new BigDecimal(verifyTotal).compareTo(limit) <= 0) {
                         ADFUtils.setBoundAttributeValue("CurrentApprover", "");
                         ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
-        
-                        sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
+                        
+                        //需要发送消息给真正的采购者
+                        String buyerId = (String)ADFUtils.getBoundAttributeValue("CurrentBuyerId");
+                        sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId + "，总金额：" + verifyTotal, buyerId, null);
+//                        sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
                         sendNotification("您的采购订单已审批。", "订单号： " + readableId, submitterId, null);
                     } else if (skip) {
                         ADFUtils.setBoundAttributeValue("CurrentApprover", Constants.ROLE_PO_2ND_APPROVER);
@@ -342,8 +358,11 @@ public class MyPoBean extends BaseBean {
             if (verifyTotal.compareTo(limit) <= 0 || skip) {
                 ADFUtils.setBoundAttributeValue("CurrentApprover", "");
                 ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
-
-                sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
+                
+                //需要发送给真正的采购者
+                String buyerId = (String)ADFUtils.getBoundAttributeValue("CurrentBuyerId");
+                sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId + "，总金额：" + verifyTotal, buyerId, null);
+//                sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId + "，总金额：" + verifyTotal, null, Constants.ROLE_PO_BUYER);
                 sendNotification("您的采购订单已审批。", "订单号： " + readableId, submitterId, null);
             } else {
                 //Set the current verifier for the po
@@ -380,7 +399,10 @@ public class MyPoBean extends BaseBean {
             ADFUtils.setBoundAttributeValue("CurrentApprover", "");
             ADFUtils.setBoundAttributeValue("CurrentExecutor", Constants.ROLE_PO_BUYER);
             
-            sendNotification("有新的采购订单等待采购。", "订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
+            //需要发送给真正的采购者
+            String buyerId = (String)ADFUtils.getBoundAttributeValue("CurrentBuyerId");
+            sendNotification("有新的采购订单等待采购及收货。", "订单号：" + readableId, buyerId, null);
+//            sendNotification("有新的采购订单等待采购。", "订单号： " + readableId, null, Constants.ROLE_PO_BUYER);
             sendNotification("有新的采购订单等待收货。", "订单号： " + readableId, null, Constants.ROLE_PO_RECEIVER);
             sendNotification("您的采购订单已审批。", "订单号： " + readableId, submitterId, null);
             
@@ -1135,5 +1157,26 @@ public class MyPoBean extends BaseBean {
         }
         
         computeTotal("SubmitPrice", "PurchaseQuantity", null, "VerifyTotal");
+    }
+
+    private String getDeptMgrId(String submitterId) {
+        OperationBinding oper = ADFUtils.findOperation("getDeptMgrId");
+        oper.getParamsMap().put("submitterId", submitterId);
+        oper.execute();
+        String result = (String)oper.getResult();
+        if (result != null) {
+            return result;
+        } 
+        
+        return "";
+    }
+
+    private boolean checkAssignedBuyer() {
+        String buyerName = (String)ADFUtils.getBoundAttributeValue("CurrentBuyerName");
+        System.err.println("buyerName is: " + buyerName);
+        if (buyerName != null) {
+            return true;
+        }
+        return false;
     }
 }

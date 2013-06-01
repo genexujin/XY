@@ -6,12 +6,11 @@
     <variableIterator id="variables"/>
   </executables>
   <bindings>
-    <methodAction id="findByState" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByState"
+    <methodAction id="findForBuyer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findForBuyer"
                   IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule"
                   ReturnName="data.RootAppModuleDataControl.methodResults.findByState_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_findByState_result">
-      <NamedData NDName="state" NDValue="5" NDType="java.lang.String"/>
-      <NamedData NDName="isFinalApprover" NDValue="" NDType="java.lang.String"/>
+      <NamedData NDName="buyerId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
     </methodAction>
   </bindings>
 </pageDefinition>

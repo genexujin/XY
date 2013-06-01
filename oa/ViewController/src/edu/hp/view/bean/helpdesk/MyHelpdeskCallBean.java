@@ -542,7 +542,7 @@ public class MyHelpdeskCallBean extends BaseBean {
 
     public boolean isAssignButtonRendered() {
         assignButtonRendered = 
-            JSFUtils.resolveExpressionAsBoolean("#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派'])" 
+            JSFUtils.resolveExpressionAsBoolean("#{((sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and bindings.ReasonLevel1.inputValue eq '总务') or (sessionScope.LoginUserBean.isUserInRole['信息报修分派'] and bindings.ReasonLevel1.inputValue eq '信息'))" 
                                                 + " and (bindings.State.inputValue eq '已受理' or bindings.State.inputValue eq '已分派') and pageFlowScope.fromMenu != 'query' and (pageFlowScope.fromMenu != '-' or (pageFlowScope.fromMenu == '-' and bindings.CalleeFullName == 'nullnull'))}");
         
         return assignButtonRendered;
@@ -566,7 +566,7 @@ public class MyHelpdeskCallBean extends BaseBean {
 
     public boolean isAssignLovRendered() {
         assignLovRendered = 
-            JSFUtils.resolveExpressionAsBoolean("#{(sessionScope.LoginUserBean.isUserInRole['总务报修分派'] or sessionScope.LoginUserBean.isUserInRole['信息报修分派']) and pageFlowScope.fromMenu ne 'query'}");
+            JSFUtils.resolveExpressionAsBoolean("#{((sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and bindings.ReasonLevel1.inputValue eq '总务') or (sessionScope.LoginUserBean.isUserInRole['信息报修分派'] and bindings.ReasonLevel1.inputValue eq '信息')) and pageFlowScope.fromMenu ne 'query' and bindings.State.inputValue ne '未提交'}");
         return assignLovRendered;
     }
 }

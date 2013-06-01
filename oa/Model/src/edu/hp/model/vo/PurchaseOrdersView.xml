@@ -25,7 +25,10 @@
        PurchaseOrders.CURRENT_EXECUTOR, 
        PurchaseOrders.DEPT_VERIFIER, 
        PurchaseOrders.ACTUAL_TOTAL, 
-       Employees.USER_NAME"
+       Employees.USER_NAME, 
+       PurchaseOrders.USAGE_INFO, 
+       PurchaseOrders.CURRENT_BUYER_ID, 
+       PurchaseOrders.CURRENT_BUYER_NAME"
   FromList="PURCHASE_ORDERS PurchaseOrders, EMPLOYEES Employees"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -75,6 +78,10 @@
     Name="DpVerifier"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="BuyerId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="PoState"
     ViewObjectName="edu.hp.model.vo.query.po.PoState"
@@ -91,6 +98,10 @@
       Name="ExpiredCriteria"
       FullName="edu.hp.model.vo.query.po.ItemCategory.ExpiredCriteria"/>
   </ViewAccessor>
+  <ViewAccessor
+    Name="EmpAsBuyer"
+    ViewObjectName="edu.hp.model.vo.query.po.EmpAsBuyer"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_State"
     ListVOName="PoState"
@@ -144,6 +155,29 @@
       <Item Value="Value"/>
     </AttrArray>
     <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CurrentBuyerName"
+    ListVOName="EmpAsBuyer"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CurrentBuyerName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CurrentBuyerId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayName"/>
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="hide"/>
   </ListBinding>
   <EntityUsage
     Name="PurchaseOrders"
@@ -414,6 +448,36 @@
     EntityAttrName="UserName"
     EntityUsage="Employees"
     AliasName="USER_NAME"/>
+  <ViewAttribute
+    Name="UsageInfo"
+    PrecisionRule="true"
+    EntityAttrName="UsageInfo"
+    EntityUsage="PurchaseOrders"
+    AliasName="USAGE_INFO"/>
+  <ViewAttribute
+    Name="CurrentBuyerId"
+    PrecisionRule="true"
+    EntityAttrName="CurrentBuyerId"
+    EntityUsage="PurchaseOrders"
+    AliasName="CURRENT_BUYER_ID"/>
+  <ViewAttribute
+    Name="CurrentBuyerName"
+    PrecisionRule="true"
+    EntityAttrName="CurrentBuyerName"
+    EntityUsage="PurchaseOrders"
+    AliasName="CURRENT_BUYER_NAME"
+    LOVName="LOV_CurrentBuyerName">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.PurchaseOrdersView.CurrentBuyerName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="25"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewCriteria
     Name="OrderReadableIdCriteria"
     ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
@@ -812,6 +876,85 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="BuyerPoCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="State"
+        ViewAttribute="State"
+        Operator="="
+        Conjunction="AND"
+        Value="5"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CurrentBuyerId"
+        ViewAttribute="CurrentBuyerId"
+        Operator="="
+        Conjunction="AND"
+        Value=":BuyerId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="BuyerIdCriteria"
+    ViewObjectName="edu.hp.model.vo.PurchaseOrdersView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PurchaseOrdersViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CurrentBuyerId"
+        ViewAttribute="CurrentBuyerId"
+        Operator="="
+        Conjunction="AND"
+        Value=":BuyerId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <AttrArray Name="KeyAttributes">
     <Item Value="OrderId"/>
   </AttrArray>
@@ -875,7 +1018,7 @@
         Type="java.lang.String"/>
     </Method>
     <Method
-      Name="doQuery"
+      Name="doQuery1"
       MethodName="doQuery">
       <Return
         Type="void"/>
@@ -902,6 +1045,9 @@
         Type="java.lang.String"/>
       <Parameter
         Name="isFinalApprover"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="buyerId"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

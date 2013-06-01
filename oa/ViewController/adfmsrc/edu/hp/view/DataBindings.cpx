@@ -78,8 +78,6 @@
     <page path="/WEB-INF/flows/helpdesk/MyHdCall.xml#MyHdCall@findByCallId"
           usageId="edu_hp_view_MyHdCall_MyHdCall_findByCallIdPageDef"/>
     <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByPoId" usageId="edu_hp_view_MyPo_MyPo_findByPoIdPageDef"/>
-    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findByExecuting"
-          usageId="edu_hp_view_MyPo_MyPo_findByExecutingPageDef"/>
     <page path="/pages/admin/HdResults.jsff" usageId="edu_hp_view_HdResultsPageDef"/>
     <page path="/pages/admin/HdReasonLevel1.jsff" usageId="edu_hp_view_HdReasonLevel1PageDef"/>
     <page path="/pages/admin/HdReasonLevel2.jsff" usageId="edu_hp_view_HdReasonLevel2PageDef"/>
@@ -106,6 +104,7 @@
           usageId="edu_hp_view_MyHdCall_MyHdCall_findForQueryPageDef"/>
     <page path="/WEB-INF/flows/vehicle/vehicle-application-btf.xml#vehicle-application-btf@findByDriver"
           usageId="edu_hp_view_vehicle_application_btf_vehicle_application_btf_findByDriverPageDef"/>
+    <page path="/WEB-INF/flows/po/MyPo.xml#MyPo@findForBuyer" usageId="edu_hp_view_MyPo_MyPo_findByExecutingPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>

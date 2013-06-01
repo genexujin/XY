@@ -206,5 +206,28 @@
         <Item Value="ActualTotal"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="UsageInfo">
+      <AttrNames>
+        <Item Value="UsageInfo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getDeptMgrId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getDeptMgrId"
+                  IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.PurchaseOrderAppModule"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.getDeptMgrId_RootAppModuleDataControl_dataProvider_Root_PurchaseOrderAppModule_getDeptMgrId_result">
+      <NamedData NDName="submitterId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="SubmitterName">
+      <AttrNames>
+        <Item Value="SubmitterName"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="PurchaseOrdersViewIterator" Uses="LOV_CurrentBuyerName"
+                  id="CurrentBuyerName"/>
+    <attributeValues IterBinding="PurchaseOrdersViewIterator" id="CurrentBuyerId">
+      <AttrNames>
+        <Item Value="CurrentBuyerId"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

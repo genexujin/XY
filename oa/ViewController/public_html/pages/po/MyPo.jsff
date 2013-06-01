@@ -65,7 +65,7 @@
                                                          icon="/images/icons/new_ena.png">
                                     <!--<af:setActionListener from="#{sessionScope.LoginUserBean.userId}" to="#{bindings.SubmitterId.inputValue}"/>-->
                                 </af:commandToolbarButton>
-                                <af:commandToolbarButton text="更改" id="ctb2" action="edit"
+                                <af:commandToolbarButton text="打开" id="ctb2" action="edit"
                                                          icon="/images/icons/edit.png"/>
                             </af:toolbar>
                         </f:facet>

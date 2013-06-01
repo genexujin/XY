@@ -30,4 +30,8 @@ public interface PurchaseOrderAppModule extends ApplicationModule {
     String getDeptSupervisorId(String submitterId);
 
     void findForDeptVerifier(String deptVerifierId);
+
+    String getDeptMgrId(String submitterId);
+
+    void findForBuyer(String buyerId);
 }

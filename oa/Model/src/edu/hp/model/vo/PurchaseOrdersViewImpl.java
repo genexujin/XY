@@ -23,7 +23,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
     public PurchaseOrdersViewImpl() {
     }
     
-    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo, String submitterId, String fromMenu, String isFinalApprover) {
+    public void doQuery(String oRdId, String state, String category, Date submitDateFrom, Date submitDateTo, String submitterId, String fromMenu, String isFinalApprover, String buyerId) {
         this.setApplyViewCriteriaNames(null);
         
         System.err.println("In VO: oRdId is: " + oRdId);
@@ -34,6 +34,7 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
         System.err.println("In VO: submitterId is: " + submitterId);
         System.err.println("In VO: fromMenu is: " + fromMenu);
         System.err.println("In VO: isFinalApprover is: " + isFinalApprover);
+        System.err.println("In VO: buyerId is: " + buyerId);
         
         List<String> vcNames = new ArrayList<String>();
         
@@ -83,6 +84,12 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
             this.setsbmtId(submitterId);
             ViewCriteria sIdCriteria = this.getViewCriteria("SubmitterIdCriteria");
             vcNames.add(sIdCriteria.getName());
+        }
+        
+        if (buyerId != null) {
+            this.setBuyerId(buyerId);
+            ViewCriteria bIdCriteria = this.getViewCriteria("BuyerIdCriteria");
+            vcNames.add(bIdCriteria.getName());
         }
         
         this.setApplyViewCriteriaNames(vcNames.toArray(new String[0]));
@@ -274,5 +281,21 @@ public class PurchaseOrdersViewImpl extends ViewObjectImpl implements PurchaseOr
      */
     public void setDpVerifier(String value) {
         ensureVariableManager().setVariableValue("DpVerifier", value);
+    }
+
+    /**
+     * Returns the variable value for BuyerId.
+     * @return variable value for BuyerId
+     */
+    public String getBuyerId() {
+        return (String)ensureVariableManager().getVariableValue("BuyerId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable BuyerId.
+     * @param value value to bind as BuyerId
+     */
+    public void setBuyerId(String value) {
+        ensureVariableManager().setVariableValue("BuyerId", value);
     }
 }

@@ -110,6 +110,14 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
     }
     
     public String getDeptSupervisorId(String submitterId) {
+        return getDeptAttributeBySubmitterId(submitterId, "SupervisorId");
+    }
+
+    public String getDeptMgrId(String submitterId) {
+        return getDeptAttributeBySubmitterId(submitterId, "MgrId");
+    }
+    
+    private String getDeptAttributeBySubmitterId(String submitterId, String attr) {
         EmployeesViewImpl empView = (EmployeesViewImpl)this.getEmployeesViewForLOV();
         empView.setApplyViewCriteriaNames(null);
         
@@ -131,13 +139,15 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
                 dView.executeQuery();
                 Row[] drows = dView.getAllRowsInRange();
                 if (drows != null && drows.length > 0) {
-                    return (String)drows[0].getAttribute("SupervisorId");
+                    return (String)drows[0].getAttribute(attr);
                 }
             }
         }
         
         return null;
     }
+    
+    
     
     public void findByState(String state, String isFinalApprover) {
         PurchaseOrdersViewImpl poView = this.getPurchaseOrdersView();        
@@ -165,6 +175,27 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
             PoStateWithEmptyImpl stateView = (PoStateWithEmptyImpl)this.getPoStateWithEmpty();            
             stateView.setApplyViewCriteriaNames(null);
             stateView.setStateId(state);
+            ViewCriteria stateVC = stateView.getViewCriteria("StateCriteria");
+            stateView.setApplyViewCriteriaName(stateVC.getName());
+            stateView.executeQuery();
+        }
+    }
+    
+    public void findForBuyer(String buyerId) {
+        PurchaseOrdersViewImpl po = this.getPurchaseOrdersView();
+        po.setApplyViewCriteriaNames(null);
+        
+        //Do the query        
+        System.err.println("In AppModule: buyerId is: " + buyerId);
+        if (buyerId != null) {
+            po.setBuyerId(buyerId);
+            ViewCriteria bIdCriteria = po.getViewCriteria("BuyerPoCriteria");
+            po.setApplyViewCriteriaName(bIdCriteria.getName());
+            po.executeQuery();            
+            
+            PoStateWithEmptyImpl stateView = (PoStateWithEmptyImpl)this.getPoStateWithEmpty();            
+            stateView.setApplyViewCriteriaNames(null);
+            stateView.setStateId("5");
             ViewCriteria stateVC = stateView.getViewCriteria("StateCriteria");
             stateView.setApplyViewCriteriaName(stateVC.getName());
             stateView.executeQuery();
@@ -398,5 +429,13 @@ public class PurchaseOrderAppModuleImpl extends ApplicationModuleImpl implements
      */
     public RoleUsersViewImpl getRoleUsersView() {
         return (RoleUsersViewImpl)findViewObject("RoleUsersView");
+    }
+
+    /**
+     * Container's getter for EmpAsBuyer1.
+     * @return EmpAsBuyer1
+     */
+    public ViewObjectImpl getEmpAsBuyer() {
+        return (ViewObjectImpl)findViewObject("EmpAsBuyer");
     }
 }

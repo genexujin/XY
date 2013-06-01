@@ -39,11 +39,11 @@
       <NamedData NDName="state" NDType="java.lang.String"/>
       <NamedData NDName="category" NDType="java.lang.String"/>
       <NamedData NDName="submitDateFrom" NDType="oracle.jbo.domain.Date"/>
-      <NamedData NDName="submitDateTo" NDValue="" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="submitDateTo" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="submitterId" NDType="java.lang.String"/>
-      <NamedData NDName="fromMenu" NDValue="#{pageFlowScope.fromMenu}" NDType="java.lang.String"/>
-      <NamedData NDName="isFinalApprover" NDValue="#{sessionScope.LoginUserBean.isUserInRole['采购终审']}"
-                 NDType="java.lang.String"/>
+      <NamedData NDName="fromMenu" NDType="java.lang.String"/>
+      <NamedData NDName="isFinalApprover" NDType="java.lang.String"/>
+      <NamedData NDName="buyerId" NDType="java.lang.String"/>
     </methodAction>
     <list IterBinding="ItemCategoryWithEmptyIterator" ListOperMode="navigation" ListIter="ItemCategoryWithEmptyIterator"
           id="ItemCategoryWithEmpty" DTSupportsMRU="true" SelectItemValueMode="ListObject">

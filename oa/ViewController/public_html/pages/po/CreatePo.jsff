@@ -151,9 +151,24 @@
                                             partialTriggers="cb2 cb3 cb4 cb40 cb5 cb50 cb6 cb7 cb8 cb18 cb19 cb30 cb31">
                             <f:selectItems value="#{bindings.State.items}" id="si2"/>
                         </af:selectOneChoice>
-                        <af:inputText value="#{bindings.OrderNote.inputValue}" id="ot9" label="备注" rows="5" columns="25"
+                        <af:inputText value="#{bindings.UsageInfo.inputValue}" id="ot19" label="用途" rows="2" columns="25" required="true"
+                                      autoSubmit="true"
                                       disabled="#{(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') or bindings.State.inputValue ne '1'}"/>
-                        <af:spacer width="5px" height="5px"/>
+                        <af:inputText value="#{bindings.OrderNote.inputValue}" id="ot9" label="备注" rows="2" columns="25"
+                                       autoSubmit="true"
+                                      disabled="#{(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') or bindings.State.inputValue ne '1'}"/>
+                        <af:inputComboboxListOfValues id="currentBuyerNameId"
+                                                      popupTitle="Search and Select: #{bindings.CurrentBuyerName.hints.label}"
+                                                      value="#{bindings.CurrentBuyerName.inputValue}"
+                                                      label="#{bindings.CurrentBuyerName.hints.label}"
+                                                      model="#{bindings.CurrentBuyerName.listOfValuesModel}"
+                                                      required="#{bindings.CurrentBuyerName.hints.mandatory}"
+                                                      columns="#{bindings.CurrentBuyerName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.CurrentBuyerName.hints.tooltip}"
+                                                      rendered="#{bindings.State.inputValue ne '1' and bindings.State.inputValue ne '8' }"
+                                                      disabled="#{bindings.State.inputValue ne '2' or !sessionScope.LoginUserBean.isUserInRole['采购审核']}">
+                            <f:validator binding="#{bindings.CurrentBuyerName.validator}"/>
+                        </af:inputComboboxListOfValues>
                         <af:spacer width="5px" height="5px"/>
                         <af:spacer width="5px" height="5px"/>
                         <af:spacer width="5px" height="5px"/>

@@ -250,7 +250,7 @@
           <af:spacer id="s2" width="10px" height="10px"/>
           <af:panelHeader text="用户评价" id="ph4"
                           rendered="#{(bindings.State.inputValue eq '已处理' and pageFlowScope.fromMenu ne 'callee' and pageFlowScope.fromMenu ne 'review' and sessionScope.LoginUserBean.userId eq bindings.CallerId.inputValue
-                                      and !sessionScope.LoginUserBean.isUserInRole['总务报修分派'] and !sessionScope.LoginUserBean.isUserInRole['信息报修分派'] and !sessionScope.LoginUserBean.isUserInRole['报修总务复核'] )
+                                       )
                                       or bindings.State.inputValue eq '已评价'}"
                           messageType="info">
             <f:facet name="context"/>
