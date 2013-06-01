@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VehicleUsuageByDay"
+  Version="11.1.2.62.76"
+  OrderBy='"VEHICLE_NAME"'
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.query.vehicle.VehicleUsuageByDayImpl"
+  ComponentInterface="edu.hp.model.vo.query.vehicle.common.VehicleUsuageByDay"
+  ClientProxyName="edu.hp.model.vo.query.vehicle.client.VehicleUsuageByDayClient">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.query.vehicle.VehicleUsuageByDay_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="day"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select 
+USER_DISPLAY_NAME,
+VEHICLE_NAME,
+START_TIME,
+END_TIME
+from vehicle_calendar
+WHERE to_char(START_TIME, 'yyyy/mm/dd') = :day
+and vehicle_name is not null]]></SQLQuery>
+  <ViewAttribute
+    Name="UserDisplayName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="USER_DISPLAY_NAME"
+    Expression="USER_DISPLAY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.vehicle.VehicleUsuageByDay.UserDisplayName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VehicleName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VEHICLE_NAME"
+    Expression="VEHICLE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.vehicle.VehicleUsuageByDay.VehicleName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StartTime"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="TIMESTAMP"
+    AliasName="START_TIME"
+    Expression="START_TIME"
+    SQLType="TIMESTAMP">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.vehicle.VehicleUsuageByDay.StartTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EndTime"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="TIMESTAMP"
+    AliasName="END_TIME"
+    Expression="END_TIME"
+    SQLType="TIMESTAMP">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.query.vehicle.VehicleUsuageByDay.EndTime_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="setday"
+      MethodName="setday">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="value"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="doQuery"
+      MethodName="doQuery">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="day"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</ViewObject>

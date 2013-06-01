@@ -65,6 +65,12 @@
                             <af:selectItem label="全天" value="ALLDAY" id="si4"/>
                             <af:selectItem label="非全天" value="TIME" id="si5"/>
                         </af:selectOneRadio>
+                        <af:selectOneRadio label="常用时间段"
+                                           valueChangeListener="#{viewScope.confCalDetailBean.onAMPMChange}"
+                                           id="sor2" autoSubmit="true">
+                            <af:selectItem label="上午 8：30～11：30" value="AM" id="si3"/>
+                            <af:selectItem label="下午 13：30～16：30" value="PM" id="si6"/>
+                        </af:selectOneRadio>
                         <af:inputDate value="#{bindings.StartTime.inputValue}" label="#{bindings.StartTime.hints.label}"
                                       required="#{bindings.StartTime.hints.mandatory}"
                                       columns="#{bindings.StartTime.hints.displayWidth}"

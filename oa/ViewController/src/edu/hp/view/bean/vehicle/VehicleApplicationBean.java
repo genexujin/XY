@@ -7,8 +7,17 @@ import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import java.sql.SQLException;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
+import javax.faces.event.ActionEvent;
+
+import oracle.adf.view.rich.component.rich.RichPopup;
+import oracle.adf.view.rich.event.ContextInfoEvent;
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.binding.OperationBinding;
@@ -20,8 +29,12 @@ import oracle.jbo.domain.Timestamp;
 public class VehicleApplicationBean extends BaseBean {
 
     private String queryState;
+    private String day;
+    private RichPopup usuagePopup;
 
     public VehicleApplicationBean() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        day = formatter.format(new Date());
     }
 
     public String save() {
@@ -359,5 +372,43 @@ public class VehicleApplicationBean extends BaseBean {
         return queryState;
     }
 
+    public void openVehicleUsuage(ActionEvent actionEvent) {
 
+        String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
+//        System.err.println(startTime);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = null;
+        try {
+            if (startTime != null)
+                date = format.parse(startTime);
+//            System.err.println(date);
+        } catch (ParseException pe) {
+            // TODO: Add catch code
+            pe.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        if (date != null) {
+            this.day = formatter.format(date);
+        }
+        RichPopup.PopupHints hints = new RichPopup.PopupHints();
+//        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN_ID, "ot14");
+//        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN, RichPopup.PopupHints.AlignTypes.ALIGN_END_AFTER);
+        this.usuagePopup.show(hints);
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setUsuagePopup(RichPopup usuagePopup) {
+        this.usuagePopup = usuagePopup;
+    }
+
+    public RichPopup getUsuagePopup() {
+        return usuagePopup;
+    }
 }

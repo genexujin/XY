@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="vehicle_usuage_btf_vehicle_usuage_btf_doQueryPageDef" Package="flows.vehicle" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="doQuery" RequiresUpdateModel="true" Action="invokeMethod" MethodName="doQuery" IsViewObjectMethod="true"
+            DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleUsuageByDay">
+      <NamedData NDName="day" NDValue="#{pageFlowScope.day}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

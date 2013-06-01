@@ -56,7 +56,7 @@
                     <f:facet name="statusbar"/>
                     <af:table value="#{bindings.VehicleDML.collectionModel}" var="row"
                               rows="#{bindings.VehicleDML.rangeSize}"
-                              emptyText="#{bindings.VehicleDML.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              emptyText="#{bindings.VehicleDML.viewable ? '暂无数据。' : 'Access Denied.'}"
                               fetchSize="#{bindings.VehicleDML.rangeSize}" rowBandingInterval="1"
                               filterModel="#{bindings.VehicleDMLQuery.queryDescriptor}"
                               queryListener="#{bindings.VehicleDMLQuery.processQuery}" filterVisible="false"
@@ -204,7 +204,11 @@
                 <f:facet name="legend"/>
                 <f:facet name="info"/>
                 <af:panelGroupLayout id="pgl1" layout="scroll" partialTriggers="pc1:ctb1 pc1:ctb2 pc1:ctb4 pc1:t2">
-                    <af:outputText value="车辆预订信息" id="ot14" inlineStyle="color:Black; font-size:small;"/>
+                    <af:panelGroupLayout id="pgl3" layout="horizontal">
+                        <af:commandImageLink id="cil1" icon="/images/icons/info.png"
+                                             actionListener="#{viewScope.vehicleApplicationBean.openVehicleUsuage}"
+                                             text="用车日预订记录"/>
+                    </af:panelGroupLayout>
                     <af:panelFormLayout id="pfl2" rows="4">
                         <af:inputComboboxListOfValues id="iclov1"
                                                       popupTitle="#{bindings.UserDisplayName.hints.label}"
@@ -217,14 +221,15 @@
                                                       readOnly="true">
                             <f:validator binding="#{bindings.UserDisplayName.validator}"/>
                         </af:inputComboboxListOfValues>
-                       
                         <af:selectOneChoice value="#{bindings.VehicleName.inputValue}"
                                             label="#{bindings.VehicleName.label}"
                                             required="#{bindings.VehicleName.hints.mandatory}"
                                             shortDesc="#{bindings.VehicleName.hints.tooltip}" id="soc3"
                                             rendered="#{viewScope.vehicleApplicationBean.vehicleVisible}"
-                                            readOnly="#{viewScope.vehicleApplicationBean.vehichleReadonly}">
+                                            readOnly="#{viewScope.vehicleApplicationBean.vehichleReadonly}"
+                                            clientComponent="true">
                             <f:selectItems value="#{bindings.VehicleName.items}" id="si3"/>
+                            
                         </af:selectOneChoice>
                         <af:selectOneChoice value="#{bindings.DriverId.inputValue}" label="#{bindings.DriverId.label}"
                                             required="#{bindings.DriverId.hints.mandatory}"
@@ -272,7 +277,7 @@
                         <af:inputDate value="#{bindings.StartTime.inputValue}" label="#{bindings.StartTime.hints.label}"
                                       required="#{bindings.StartTime.hints.mandatory}"
                                       columns="#{bindings.StartTime.hints.displayWidth}"
-                                      shortDesc="#{bindings.StartTime.hints.tooltip}" id="id7">
+                                      shortDesc="#{bindings.StartTime.hints.tooltip}" id="id7" autoSubmit="true">
                             <f:validator binding="#{bindings.StartTime.validator}"/>
                             <af:convertDateTime pattern="#{bindings.StartTime.format}" type="both"/>
                         </af:inputDate>
@@ -356,6 +361,25 @@
                                           rendered="#{sessionScope.LoginUserBean.isUserInRole['司机'] and bindings.State.inputValue=='已调度'}"
                                           visible="#{bindings.DriverId.inputValue == LoginUserBean.userId}"/>
                     </af:panelGroupLayout>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached"
+                              binding="#{viewScope.vehicleApplicationBean.usuagePopup}">
+                        <af:dialog id="d1" modal="false" title="#{viewScope.vehicleApplicationBean.day} 车辆使用情况：" stretchChildren="first"
+                                   contentWidth="400" contentHeight="150">
+                            <f:facet name="buttonBar"/>
+                            <af:panelStretchLayout id="psl1" topHeight="0px" startWidth="0px" endWidth="0px"
+                                                   bottomHeight="0px">
+                                <f:facet name="bottom"/>
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.vehicleusuagebtf1.regionModel}" id="r1"/>
+                                </f:facet>
+                                <f:facet name="start"/>
+                                <f:facet name="end"/>
+                                <f:facet name="top">
+                                    <af:outputText id="ot17"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                    </af:popup>
                 </af:panelGroupLayout>
             </af:panelHeader>
         </f:facet>

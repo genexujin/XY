@@ -44,7 +44,7 @@ import oracle.jbo.Row;
 import oracle.jbo.domain.Array;
 
 
-public class CalendarBean  extends BaseBean{
+public class CalendarBean extends BaseBean {
 
     protected boolean needCheckConflict = true;
     protected List<OACalendarProvider> _providerList;
@@ -72,24 +72,51 @@ public class CalendarBean  extends BaseBean{
     protected Key currentLocationKey;
     protected String providerIds;
     protected Date activeDay;
-    
+    protected Boolean selectAll;
+
 
     public CalendarBean() {
     }
 
-    protected void setCurrentLocation(int id) {
-        DCIteratorBinding it = ADFUtils.findIterator(locationIteratorName);        
-        it.setCurrentRowIndexInRange(id);
-        location = it.getCurrentRowIndexInRange();  
+    public void onSelectAll(ValueChangeEvent valueChangeEvent) {
+        Boolean newVal = (Boolean)valueChangeEvent.getNewValue();
+
+        if (newVal) {
+            if (_providerList != null) {
+                for (OACalendarProvider provider : _providerList) {
+                    provider.setEnabled(CalendarProvider.Enabled.ENABLED);
+                }
+                
+            }
+        }else{
+            if (_providerList != null) {
+                for (OACalendarProvider provider : _providerList) {
+                    provider.setEnabled(CalendarProvider.Enabled.DISABLED);
+                }               
+            }
+        }
+        UIComponent calendar =
+            JSFUtils.findComponent(valueChangeEvent.getComponent().getNamingContainer(), calendarid);
+        if (calendar != null)
+            refreshCalendar(calendar);
     }
+
+    protected void setCurrentLocation(int id) {
+        DCIteratorBinding it = ADFUtils.findIterator(locationIteratorName);
+        it.setCurrentRowIndexInRange(id);
+        location = it.getCurrentRowIndexInRange();
+    }
+
 
     protected void reload() {
         //System.err.println("reloaded!");
         try {
-            if(location==null){              
-                location = 0;                          
+            if (location == null) {
+                location = 0;
             }
-         
+            
+            selectAll = false;
+
             List<Color> defaultOrderProviderColors = getDefaultOrderProviderColors();
 
             DCIteratorBinding it = ADFUtils.findIterator(providerIteratorName);
@@ -203,7 +230,7 @@ public class CalendarBean  extends BaseBean{
 
 
     protected void refreshCalendar(UIComponent calendar) {
-        
+
         StringBuffer clsRmNos = new StringBuffer();
 
         for (OACalendarProvider provider : _providerList) {
@@ -230,7 +257,7 @@ public class CalendarBean  extends BaseBean{
     }
 
     public DnDAction handleDrop(DropEvent dropEvent) {
-       // System.err.println("++++++++++++++++++++++++++");
+        // System.err.println("++++++++++++++++++++++++++");
         if (isEditable()) {
             //System.err.println("editable!");
             Transferable transferable = dropEvent.getTransferable();
@@ -263,7 +290,7 @@ public class CalendarBean  extends BaseBean{
             binding.execute();
             result = (Boolean)binding.getResult();
             return result;
-        }else
+        } else
             return true;
 
     }
@@ -312,16 +339,16 @@ public class CalendarBean  extends BaseBean{
             Date endDate = new Date(_proposedStartDate.getTime() + delta);
 
 
-//            Boolean hasNoConflict =
-//                ensureTimeConflicts(new Timestamp(_proposedStartDate.getTime()), new Timestamp(endDate.getTime()),
-//                                    (String)(movingActivity.getCustomAttributes().get(this.locationIdFieldName)),
-//                                    movingActivity.getId());
+            //            Boolean hasNoConflict =
+            //                ensureTimeConflicts(new Timestamp(_proposedStartDate.getTime()), new Timestamp(endDate.getTime()),
+            //                                    (String)(movingActivity.getCustomAttributes().get(this.locationIdFieldName)),
+            //                                    movingActivity.getId());
             //System.err.println("here " + hasNoConflict);
             //if (hasNoConflict)
-                // update to the new start and end day
-                doUpdateCalendar(movingActivity, _proposedStartDate, endDate);
+            // update to the new start and end day
+            doUpdateCalendar(movingActivity, _proposedStartDate, endDate);
             //else
-                //JSFUtils.addFacesErrorMessage("该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
+            //JSFUtils.addFacesErrorMessage("该时间段已经有其他预订，无法创建新的预订，请更换时间段！");
 
 
         } else {
@@ -374,10 +401,10 @@ public class CalendarBean  extends BaseBean{
                 return true;
 
             String userId = this.getCurrActivity().getUserId();
-//            System.err.println("current Activity: " + getCurrActivity().getTitle());
-//            System.err.println("current dragging user: " + userId);
-//            System.err.println("current login user: " + user.getUserName());
-            
+            //            System.err.println("current Activity: " + getCurrActivity().getTitle());
+            //            System.err.println("current dragging user: " + userId);
+            //            System.err.println("current login user: " + user.getUserName());
+
             if (userId.equals(user.getUserName())) {
                 return true;
             }
@@ -461,6 +488,15 @@ public class CalendarBean  extends BaseBean{
     public Date getActiveDay() {
         return activeDay;
     }
+
+    public void setSelectAll(Boolean selectAll) {
+        this.selectAll = selectAll;
+    }
+
+    public Boolean getSelectAll() {
+        return selectAll;
+    }
+
 
     public static class ProviderData implements Serializable {
 

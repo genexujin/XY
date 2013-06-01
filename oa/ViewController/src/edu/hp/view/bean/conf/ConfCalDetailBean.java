@@ -34,7 +34,7 @@ public class ConfCalDetailBean extends BaseBean {
             if (Integer.valueOf(id) > 0 && action.equals("new"))
                 action = "save";
             String time = (String)ADFUtils.getBoundAttributeValue("StartTime");
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date date = format.parse(time);
             startDayTime = new Timestamp(date);
 //            startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
@@ -79,10 +79,21 @@ public class ConfCalDetailBean extends BaseBean {
 
     }
 
-    protected Boolean ensureTimeConflicts() {
+    protected Boolean ensureTimeConflicts() throws Exception{
+        
+        String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");        
+        String endTime = (String)ADFUtils.getBoundAttributeValue("EndTime");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date startDate = format.parse(startTime);
+        Date endDate = format.parse(endTime);
+        
+        java.sql.Timestamp actStartTime = new java.sql.Timestamp(startDate.getTime());
+        java.sql.Timestamp actEndTime = new java.sql.Timestamp(endDate.getTime());
 
         Boolean result = false;
         OperationBinding binding = ADFUtils.findOperation("ifConflict");
+        binding.getParamsMap().put("actStartTime", actStartTime);
+        binding.getParamsMap().put("actEndTime", actEndTime);
         binding.execute();
         result = (Boolean)binding.getResult();
         return result;
@@ -125,5 +136,9 @@ public class ConfCalDetailBean extends BaseBean {
         } else {
             action = "save";
         }
+    }
+
+    public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception {
+        super.onAMPMChange(valueChangeEvent, "StartTime", "EndTime", Constants.TIME_FORMAT_FULL);
     }
 }

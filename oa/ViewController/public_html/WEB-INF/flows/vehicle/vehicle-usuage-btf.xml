@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="vehicle-usuage-btf">
+    <default-activity>doQuery</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>day</name>
+      <value>#{pageFlowScope.day}</value>
+      <class>java.lang.String</class>
+      <required/>
+    </input-parameter-definition>
+    <view id="VehicleUsuage">
+      <page>/pages/vehicle/VehicleUsuage.jsff</page>
+    </view>
+    <method-call id="doQuery">
+      <method>#{bindings.doQuery.execute}</method>
+      <outcome>
+        <fixed-outcome>doQuery</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__6">
+      <from-activity-id>doQuery</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>doQuery</from-outcome>
+        <to-activity-id>VehicleUsuage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

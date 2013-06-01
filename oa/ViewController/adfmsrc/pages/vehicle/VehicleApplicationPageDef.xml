@@ -8,6 +8,13 @@
               id="VehicleDMLIterator" ChangeEventPolicy="none"/>
     <searchRegion Binds="VehicleDMLIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="VehicleDMLQuery"/>
+    <taskFlow id="vehicleusuagebtf1" taskFlowId="/WEB-INF/flows/vehicle/vehicle-usuage-btf.xml#vehicle-usuage-btf"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded"
+              RefreshCondition="#{true}">
+      <parameters>
+        <parameter id="day" value="#{viewScope.vehicleApplicationBean.day}"/>
+      </parameters>
+    </taskFlow>
   </executables>
   <bindings>
     <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"

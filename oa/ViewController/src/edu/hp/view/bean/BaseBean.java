@@ -3,11 +3,43 @@ package edu.hp.view.bean;
 import edu.hp.model.pojo.Notification;
 import edu.hp.view.utils.ADFUtils;
 
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
+
+import javax.faces.event.ValueChangeEvent;
 
 import oracle.binding.OperationBinding;
 
 public class BaseBean {
+    
+    public void onAMPMChange(ValueChangeEvent valueChangeEvent, String startFieldName, String endFieldName, String pattern) throws Exception {
+        String startTime = (String)ADFUtils.getBoundAttributeValue(startFieldName);
+        String endTime = (String)ADFUtils.getBoundAttributeValue(endFieldName);
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        Date startDate = format.parse(startTime);
+        Date endDate = format.parse(endTime);
+        if (valueChangeEvent.getNewValue().equals("AM")) {
+            startDate.setHours(8);
+            startDate.setMinutes(30);
+            startDate.setSeconds(0);
+            endDate.setHours(11);
+            endDate.setMinutes(30);
+            endDate.setSeconds(0);
+        } else {
+            startDate.setHours(13);
+            startDate.setMinutes(30);
+            startDate.setSeconds(0);
+            endDate.setHours(16);
+            endDate.setMinutes(30);
+            endDate.setSeconds(0);
+        }
+       
+        String startStr = format.format(startDate);
+        String endStr = format.format(endDate);
+        ADFUtils.setBoundAttributeValue(startFieldName, startStr);
+        ADFUtils.setBoundAttributeValue(endFieldName, endStr);
+    }
 
     protected void sendNotification(String title, String content, String userId, String roleName) {
         Notification notification = new Notification();
