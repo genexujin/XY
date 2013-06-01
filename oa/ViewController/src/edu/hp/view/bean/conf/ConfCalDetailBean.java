@@ -137,4 +137,8 @@ public class ConfCalDetailBean extends BaseBean {
             action = "save";
         }
     }
+
+    public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception {
+        super.onAMPMChange(valueChangeEvent, "StartTime", "EndTime", Constants.TIME_FORMAT_FULL);
+    }
 }

@@ -31,14 +31,14 @@ public class ClsCalCrtBean extends BaseBean {
     private boolean changeMade = false;
     private Timestamp startDayTime = null;
     private String clsRmId = null;
-    
 
-    public String save() throws Exception{
-        
+
+    public String save() throws Exception {
+
         if (ensureTimeConflicts()) {
             boolean success = ADFUtils.commit("教室预订已保存！", "预订保存失败，请核对输入的信息或联系管理员！");
             if (success) {
-                
+
                 String time = (String)ADFUtils.getBoundAttributeValue("ActStartTime");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date date = format.parse(time);
@@ -64,17 +64,17 @@ public class ClsCalCrtBean extends BaseBean {
         return null;
     }
 
-    protected Boolean ensureTimeConflicts() throws Exception{
-        
-        String startTime = (String)ADFUtils.getBoundAttributeValue("ActStartTime");        
+    protected Boolean ensureTimeConflicts() throws Exception {
+
+        String startTime = (String)ADFUtils.getBoundAttributeValue("ActStartTime");
         String endTime = (String)ADFUtils.getBoundAttributeValue("ActEndTime");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date startDate = format.parse(startTime);
         Date endDate = format.parse(endTime);
-        
+
         java.sql.Timestamp actStartTime = new java.sql.Timestamp(startDate.getTime());
         java.sql.Timestamp actEndTime = new java.sql.Timestamp(endDate.getTime());
-        
+
         Boolean result = false;
         OperationBinding binding = ADFUtils.findOperation("ifConflict");
         binding.getParamsMap().put("actStartTime", actStartTime);
@@ -101,20 +101,24 @@ public class ClsCalCrtBean extends BaseBean {
         if (clsRmId != null && startDayTime != null && changeMade) {
             String ids = (String)JSFUtils.resolveExpression("#{pageFlowScope.clsCalBean.providerIds}");
             if (ids != null && ids.indexOf(clsRmId) < 0 && !ids.equals("NA")) {
-                    ids = ids + "," + clsRmId;
-            }else if(ids == null || ids.equals("NA")){
+                ids = ids + "," + clsRmId;
+            } else if (ids == null || ids.equals("NA")) {
                 ids = clsRmId;
             }
-            
-            Date activeDay = new Date(startDayTime.getTime());            
+
+            Date activeDay = new Date(startDayTime.getTime());
             JSFUtils.setExpressionValue("#{pageFlowScope.clsCalBean.activeDay}", activeDay);
             OperationBinding refreshOp = ADFUtils.findOperation("refreshCalendar");
             refreshOp.getParamsMap().put("clsRmNos", ids);
-            refreshOp.execute();            
-            
+            refreshOp.execute();
+
         }
         return "Calendar";
     }
-    
+
+
+    public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception {        
+        super.onAMPMChange(valueChangeEvent, "ActStartTime", "ActEndTime", Constants.TIME_FORMAT_FULL);
+    }    
     
 }

@@ -1,7 +1,11 @@
 package edu.hp.view.bean.clsrm;
 
+import edu.hp.model.common.Constants;
+import edu.hp.view.bean.BaseBean;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
+
+import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.event.DialogEvent;
@@ -11,7 +15,7 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.domain.DBSequence;
 
 
-public class ClsRmBatchBean {
+public class ClsRmBatchBean extends BaseBean{
     
     private RichPopup updateConfirmPopup;
 
@@ -69,5 +73,9 @@ public class ClsRmBatchBean {
 
     public RichPopup getUpdateConfirmPopup() {
         return updateConfirmPopup;
+    }
+
+    public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception{
+        super.onAMPMChange(valueChangeEvent, "ActStartTime", "ActEndTime", Constants.TIME_FORMAT_SHORT);
     }
 }

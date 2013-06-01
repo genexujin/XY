@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
+import javax.faces.event.ValueChangeEvent;
+
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.binding.OperationBinding;
@@ -217,5 +219,9 @@ public class ConfRmAppBean extends BaseBean {
 
     public String getQueryState() {
         return queryState;
+    }
+
+    public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception{
+        super.onAMPMChange(valueChangeEvent, "StartTime", "EndTime", Constants.TIME_FORMAT_FULL);
     }
 }
