@@ -25,6 +25,9 @@
   <ViewUsage
     Name="VehicleCalQuery"
     ViewObjectName="edu.hp.model.vo.query.vehicle.VehicleCalQueryView"/>
+  <ViewUsage
+    Name="VehicleUsuageByDay"
+    ViewObjectName="edu.hp.model.vo.query.vehicle.VehicleUsuageByDay"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

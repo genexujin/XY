@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:table value="#{bindings.VehicleUsuageByDay.collectionModel}" var="row"
+            rows="#{bindings.VehicleUsuageByDay.rangeSize}"
+            emptyText="#{bindings.VehicleUsuageByDay.viewable ? '该天无用车预订记录' : 'Access Denied.'}"
+            fetchSize="#{bindings.VehicleUsuageByDay.rangeSize}" rowBandingInterval="0" id="t1" autoHeightRows="10">
+    <af:column sortProperty="#{bindings.VehicleUsuageByDay.hints.VehicleName.name}" sortable="false"
+               headerText="#{bindings.VehicleUsuageByDay.hints.VehicleName.label}" id="c2" width="60">
+      <af:outputText value="#{row.VehicleName}" id="ot2"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.VehicleUsuageByDay.hints.UserDisplayName.name}" sortable="false"
+               headerText="#{bindings.VehicleUsuageByDay.hints.UserDisplayName.label}" id="c1" width="40">
+      <af:outputText value="#{row.UserDisplayName}" id="ot1"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.VehicleUsuageByDay.hints.StartTime.name}" sortable="false"
+               headerText="#{bindings.VehicleUsuageByDay.hints.StartTime.label}" id="c3" width="120">
+      <af:outputText value="#{row.StartTime}" id="ot3">
+        <af:convertDateTime pattern="yyyy-MM-dd HH:mm" type="both"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.VehicleUsuageByDay.hints.EndTime.name}" sortable="false"
+               headerText="#{bindings.VehicleUsuageByDay.hints.EndTime.label}" id="c4" width="120">
+      <af:outputText value="#{row.EndTime}" id="ot4">
+        <af:convertDateTime pattern="yyyy-MM-dd HH:mm" type="both"/>
+      </af:outputText>
+    </af:column>
+  </af:table>
+</ui:composition>

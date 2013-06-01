@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="VehicleUsuagePageDef"
+                Package="pages.vehicle">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.VehicleModule.VehicleUsuageByDay" DataControl="RootAppModuleDataControl" RangeSize="10"
+              id="VehicleUsuageByDayIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VehicleUsuageByDayIterator" id="VehicleUsuageByDay">
+      <nodeDefinition DefName="edu.hp.model.vo.query.vehicle.VehicleUsuageByDay" Name="VehicleUsuageByDay0">
+        <AttrNames>
+          <Item Value="UserDisplayName"/>
+          <Item Value="VehicleName"/>
+          <Item Value="StartTime"/>
+          <Item Value="EndTime"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

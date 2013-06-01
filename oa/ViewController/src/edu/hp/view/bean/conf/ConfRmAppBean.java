@@ -182,7 +182,7 @@ public class ConfRmAppBean extends BaseBean {
     protected Boolean ensureTimeConflicts() {
 
         Boolean result = false;
-        OperationBinding binding = ADFUtils.findOperation("ifConflict");
+        OperationBinding binding = ADFUtils.findOperation("ifConflict1");
         binding.execute();
         result = (Boolean)binding.getResult();
         return result;
