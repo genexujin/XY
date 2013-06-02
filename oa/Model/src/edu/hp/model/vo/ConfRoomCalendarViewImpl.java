@@ -6,6 +6,7 @@ import edu.hp.model.vo.common.ConfRoomCalendarView;
 
 import oracle.jbo.Row;
 import oracle.jbo.domain.Timestamp;
+import oracle.jbo.server.ViewObjectImpl;
 
 
 // ---------------------------------------------------------------------
@@ -130,5 +131,21 @@ public class ConfRoomCalendarViewImpl extends BaseView implements ConfRoomCalend
      */
     public void setstate(String value) {
         ensureVariableManager().setVariableValue("state", value);
+    }
+
+    /**
+     * Returns the variable value for batchNo.
+     * @return variable value for batchNo
+     */
+    public String getbatchNo() {
+        return (String)ensureVariableManager().getVariableValue("batchNo");
+    }
+
+    /**
+     * Sets <code>value</code> for variable batchNo.
+     * @param value value to bind as batchNo
+     */
+    public void setbatchNo(String value) {
+        ensureVariableManager().setVariableValue("batchNo", value);
     }
 }

@@ -108,6 +108,7 @@
     <page path="/pages/vehicle/VehicleUsuage.jsff" usageId="edu_hp_view_VehicleUsuagePageDef"/>
     <page path="/WEB-INF/flows/vehicle/vehicle-usuage-btf.xml#vehicle-usuage-btf@doQuery"
           usageId="edu_hp_view_vehicle_usuage_btf_vehicle_usuage_btf_doQueryPageDef"/>
+    <page path="/pages/confRm/ConfRmBatchRsv.jsff" usageId="edu_hp_view_ConfRmBatchRsvPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -202,6 +203,7 @@
     <page id="edu_hp_view_VehicleUsuagePageDef" path="pages.vehicle.VehicleUsuagePageDef"/>
     <page id="edu_hp_view_vehicle_usuage_btf_vehicle_usuage_btf_doQueryPageDef"
           path="flows.vehicle.vehicle_usuage_btf_vehicle_usuage_btf_doQueryPageDef"/>
+    <page id="edu_hp_view_ConfRmBatchRsvPageDef" path="pages.confRm.ConfRmBatchRsvPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

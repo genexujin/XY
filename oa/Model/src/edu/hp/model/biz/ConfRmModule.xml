@@ -5,7 +5,13 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="ConfRmModule"
   Version="11.1.2.62.76"
-  ClearCacheOnRollback="true">
+  ClearCacheOnRollback="true"
+  ComponentClass="edu.hp.model.biz.ConfRmModuleImpl"
+  ComponentInterface="edu.hp.model.biz.common.ConfRmModule"
+  ClientProxyName="edu.hp.model.biz.client.ConfRmModuleClient">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
@@ -27,6 +33,9 @@
   <ViewUsage
     Name="ConfRmConflict"
     ViewObjectName="edu.hp.model.vo.query.conf.ConfRmConflictView"/>
+  <ViewUsage
+    Name="ConfRoomBatch"
+    ViewObjectName="edu.hp.model.vo.ConfRoomBatchReservationView"/>
   <ViewLinkUsage
     Name="LocConfRmLink1"
     ViewLinkObjectName="edu.hp.model.vo.link.LocConfRmLink"
@@ -37,4 +46,18 @@
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="deleteCurrentBatchOrder"
+      MethodName="deleteCurrentBatchOrder">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
+      Name="saveBatchOrders"
+      MethodName="saveBatchOrders">
+      <Return
+        Type="boolean"/>
+    </Method>
+  </ClientInterface>
 </AppModule>

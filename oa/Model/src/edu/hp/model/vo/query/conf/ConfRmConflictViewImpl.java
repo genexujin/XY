@@ -21,6 +21,47 @@ public class ConfRmConflictViewImpl extends ViewObjectImpl implements ConfRmConf
      */
     public ConfRmConflictViewImpl() {
     }
+    /**
+     * 带批次号查询是否重复，忽略自身
+     * @param actStartTime
+     * @param actEndTime
+     * @param clsRmId
+     * @param actId
+     * @param batchId
+     * @return
+     */
+    public Boolean ifConflict(Timestamp actStartTime, Timestamp actEndTime, String clsRmId, String actId, String batchId){
+        
+        try {
+            
+            if(actStartTime.equals(actEndTime)){                
+                if (actEndTime != null) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(actEndTime.getTime());
+                    calendar.set(Calendar.HOUR_OF_DAY, 23);
+                    calendar.set(Calendar.MINUTE, 59);
+                    calendar.set(Calendar.SECOND, 59);
+                    actEndTime = new Timestamp(calendar.getTimeInMillis());
+                }                      
+            }
+            
+            ensureVariableManager().setVariableValue("endQueryTime", actEndTime);
+            ensureVariableManager().setVariableValue("startQueryTime", actStartTime);
+            ensureVariableManager().setVariableValue("confRoomId", clsRmId);
+            ensureVariableManager().setVariableValue("actId", actId);
+            ensureVariableManager().setVariableValue("actBatchId", batchId);
+            setRangeSize(-1);
+            executeQuery();
+            if (first() !=null){
+                return false;                
+            }
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
     
     /**
      * return true if no conflict
@@ -148,5 +189,21 @@ public class ConfRmConflictViewImpl extends ViewObjectImpl implements ConfRmConf
      */
     public void setapproved(String value) {
         setNamedWhereClauseParam("approved", value);
+    }
+
+    /**
+     * Returns the bind variable value for actBatchId.
+     * @return bind variable value for actBatchId
+     */
+    public String getactBatchId() {
+        return (String)getNamedWhereClauseParam("actBatchId");
+    }
+
+    /**
+     * Sets <code>value</code> for bind variable actBatchId.
+     * @param value value to bind as actBatchId
+     */
+    public void setactBatchId(String value) {
+        setNamedWhereClauseParam("actBatchId", value);
     }
 }

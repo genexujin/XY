@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ConfRmBthCalLink"
+  Version="11.1.2.62.76"
+  EntityAssociation="edu.hp.model.eo.asso.ConfRmBthCalAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.link.ConfRmBthCalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="ConfRoomBatchReservationView"
+    Cardinality="1"
+    Source="true"
+    Owner="edu.hp.model.vo.ConfRoomBatchReservationView">
+    <DesignTime>
+      <Attr Name="_accessor" Value="true"/>
+      <Attr Name="_finderName" Value="ConfRoomBatchReservationView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.vo.ConfRoomBatchReservationView.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="ConfRoomCalendarView"
+    Cardinality="-1"
+    Owner="edu.hp.model.vo.ConfRoomCalendarView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="ConfRoomCalendarView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.vo.ConfRoomCalendarView.BatchId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

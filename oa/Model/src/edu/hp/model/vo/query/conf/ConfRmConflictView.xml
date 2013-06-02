@@ -44,6 +44,11 @@
     Type="java.lang.String">
     <TransientExpression><![CDATA[edu.hp.model.common.Constants.STATE_REVIEWED]]></TransientExpression>
   </Variable>
+  <Variable
+    Name="actBatchId"
+    Kind="where"
+    Type="java.lang.String"
+    DefaultValue="NA"/>
   <SQLQuery><![CDATA[SELECT ConfRoomCalendar.ID, 
        ConfRoomCalendar.USER_ID, 
        ConfRoomCalendar.USER_DISPLAY_NAME, 
@@ -66,7 +71,7 @@
        ConfRoomCalendar.STATE, 
        ConfRoomCalendar.PR_ID
 FROM CONF_ROOM_CALENDAR ConfRoomCalendar
-WHERE (NOT( ConfRoomCalendar.END_TIME <= :startQueryTime  OR ConfRoomCalendar.START_TIME >= :endQueryTime)) AND  ConfRoomCalendar.MEETING_ROOM_ID =:confRoomId AND ConfRoomCalendar.ID <> :actId AND ConfRoomCalendar.STATE = :approved]]></SQLQuery>
+WHERE (NOT( ConfRoomCalendar.END_TIME <= :startQueryTime  OR ConfRoomCalendar.START_TIME >= :endQueryTime)) AND  ConfRoomCalendar.MEETING_ROOM_ID =:confRoomId AND ConfRoomCalendar.ID <> :actId AND ConfRoomCalendar.STATE = :approved AND (ConfRoomCalendar.BATCH_NO <> :actBatchId OR :actBatchId IS NULL OR batch_no is null)]]></SQLQuery>
   <ViewAttribute
     Name="Id"
     IsUpdateable="false"

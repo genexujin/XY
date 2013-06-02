@@ -41,7 +41,7 @@ public class ConfCalDetailBean extends BaseBean {
             meetingroomId = (String)ADFUtils.getBoundAttributeValue("MeetingRoomId");
             //ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
             String state = (String)ADFUtils.getBoundAttributeValue("State");
-            Timestamp submit = (Timestamp)ADFUtils.getBoundAttributeValue("SubmitDate");
+            String submit = (String)ADFUtils.getBoundAttributeValue("SubmitDate");
             if (submit == null)
                 ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
             boolean success = ADFUtils.commit("会议室预订已保存！", "会议室预订保存失败，请核对输入的信息或联系管理员！");

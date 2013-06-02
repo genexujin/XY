@@ -160,5 +160,15 @@
         <Item Value="SubmitDate"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="ConfLevel">
+      <AttrNames>
+        <Item Value="ConfLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="BatchNo">
+      <AttrNames>
+        <Item Value="BatchNo"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

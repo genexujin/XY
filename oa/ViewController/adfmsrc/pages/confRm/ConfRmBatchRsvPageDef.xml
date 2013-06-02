@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="ConfRmBatchRsvPageDef"
+                Package="pages.confRm" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="ConfRoomBatchIterator" Binds="Root.ConfRmModule.ConfRoomBatch" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
+              <searchRegion Binds="ConfRoomBatchIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ConfRmBtchRsvtnViewQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ConfRoomBatchIterator" id="ConfRoomBatch">
+      <nodeDefinition DefName="edu.hp.model.vo.ConfRoomBatchReservationView" Name="ConfRoomBatch0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Allday"/>
+          <Item Value="BatchEffectiveDate"/>
+          <Item Value="BatchExpireDate"/>
+          <Item Value="BatchNo"/>
+          <Item Value="Comments"/>
+          <Item Value="EndTime"/>
+          <Item Value="FstWkFri"/>
+          <Item Value="FstWkMon"/>
+          <Item Value="FstWkSat"/>
+          <Item Value="FstWkSun"/>
+          <Item Value="FstWkThu"/>
+          <Item Value="FstWkTue"/>
+          <Item Value="FstWkWed"/>
+          <Item Value="LocationId"/>
+          <Item Value="LocationName"/>
+          <Item Value="MeetingRoom"/>
+          <Item Value="MeetingRoomId"/>
+          <Item Value="NeedBeverage"/>
+          <Item Value="NeedFruits"/>
+          <Item Value="NeedLoudspeaker"/>
+          <Item Value="NeedProjector"/>
+          <Item Value="NeedSnacks"/>
+          <Item Value="NumOfPeople"/>
+          <Item Value="Participants"/>
+          <Item Value="PrId"/>
+          <Item Value="RecurrenceType"/>
+          <Item Value="SnackLevel"/>
+          <Item Value="SndWkFri"/>
+          <Item Value="SndWkMon"/>
+          <Item Value="SndWkSat"/>
+          <Item Value="SndWkSun"/>
+          <Item Value="SndWkThu"/>
+          <Item Value="SndWkTue"/>
+          <Item Value="SndWkWed"/>
+          <Item Value="StartTime"/>
+          <Item Value="Title"/>
+          <Item Value="UserDisplayName"/>
+          <Item Value="UserId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="ConfRoomBatchIterator" StaticList="false" Uses="LOV_SnackLevel" id="SnackLevel"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues StaticList="false" IterBinding="ConfRoomBatchIterator" Uses="LOV_UserDisplayName"
+                  id="UserDisplayName"/>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="BatchNo">
+      <AttrNames>
+        <Item Value="BatchNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="ActTitle">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="AllDay">
+      <AttrNames>
+        <Item Value="Allday"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="ActStartTime">
+      <AttrNames>
+        <Item Value="StartTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="ActEndTime">
+      <AttrNames>
+        <Item Value="EndTime"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ConfRoomBatchIterator" StaticList="false" Uses="LOV_LocationName" id="LocationName"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ConfRoomBatchIterator" StaticList="false" Uses="LOV_MeetingRoom" id="Classroom"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="NumOfPeople">
+      <AttrNames>
+        <Item Value="NumOfPeople"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="Comments">
+      <AttrNames>
+        <Item Value="Comments"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="BatchEffectiveDate">
+      <AttrNames>
+        <Item Value="BatchEffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="BatchExpireDate">
+      <AttrNames>
+        <Item Value="BatchExpireDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="RecurrenceType">
+      <AttrNames>
+        <Item Value="RecurrenceType"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="ConfRoomBatchIterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="ConfRoomBatchIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="RootAppModuleDataControl"/>
+    <button IterBinding="ConfRoomBatchIterator" id="FstWkMon" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkMon"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="FstWkTue" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkTue"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="FstWkWed" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkWed"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="FstWkThu" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkThu"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="FstWkFri" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkFri"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="FstWkSat" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkSat"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="FstWkSun" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FstWkSun"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="SndWkMon" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkMon"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="SndWkTue" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkTue"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="SndWkWed" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkWed"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="SndWkThu" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkThu"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="SndWkFri" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkFri"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="SndWkSat" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkSat"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="SndWkSun" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SndWkSun"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="deleteCurrentBatchOrder" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteCurrentBatchOrder" IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule"/>
+    <methodAction id="saveBatchOrders" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveBatchOrders"
+                  IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ConfRmModule"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.saveBatchOrders_RootAppModuleDataControl_dataProvider_Root_ConfRmModule_saveBatchOrders_result"/>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="ConfLevel">
+      <AttrNames>
+        <Item Value="ConfLevel"/>
+      </AttrNames>
+    </attributeValues>
+   <button IterBinding="ConfRoomBatchIterator" id="NeedProjector" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedProjector"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="NeedBeverage" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedBeverage"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="NeedLoudspeaker" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedLoudspeaker"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="NeedFruits" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedFruits"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="ConfRoomBatchIterator" id="NeedSnacks" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NeedSnacks"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="ConfRoomBatchIterator" id="Participants">
+      <AttrNames>
+        <Item Value="Participants"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

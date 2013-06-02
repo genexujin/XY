@@ -258,6 +258,46 @@ public class ConfRoomCalendarImpl extends EntityImpl {
                 obj.setSubmitDate((Timestamp)value);
             }
         }
+        ,
+        ConfLevel {
+            public Object get(ConfRoomCalendarImpl obj) {
+                return obj.getConfLevel();
+            }
+
+            public void put(ConfRoomCalendarImpl obj, Object value) {
+                obj.setConfLevel((String)value);
+            }
+        }
+        ,
+        BatchId {
+            public Object get(ConfRoomCalendarImpl obj) {
+                return obj.getBatchId();
+            }
+
+            public void put(ConfRoomCalendarImpl obj, Object value) {
+                obj.setBatchId((String)value);
+            }
+        }
+        ,
+        BatchNo {
+            public Object get(ConfRoomCalendarImpl obj) {
+                return obj.getBatchNo();
+            }
+
+            public void put(ConfRoomCalendarImpl obj, Object value) {
+                obj.setBatchNo((String)value);
+            }
+        }
+        ,
+        ConfRoomBatchReservation {
+            public Object get(ConfRoomCalendarImpl obj) {
+                return obj.getConfRoomBatchReservation();
+            }
+
+            public void put(ConfRoomCalendarImpl obj, Object value) {
+                obj.setConfRoomBatchReservation((ConfRoomBatchReservationImpl)value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -310,13 +350,25 @@ public class ConfRoomCalendarImpl extends EntityImpl {
     public static final int PRID = AttributesEnum.PrId.index();
     public static final int ALLDAY = AttributesEnum.Allday.index();
     public static final int SUBMITDATE = AttributesEnum.SubmitDate.index();
+    public static final int CONFLEVEL = AttributesEnum.ConfLevel.index();
+    public static final int BATCHID = AttributesEnum.BatchId.index();
+    public static final int BATCHNO = AttributesEnum.BatchNo.index();
+    public static final int CONFROOMBATCHRESERVATION = AttributesEnum.ConfRoomBatchReservation.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public ConfRoomCalendarImpl() {
     }
-    
+
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("edu.hp.model.eo.ConfRoomCalendar");
+    }
+
     public void lock() {
         try { 
             super.lock(); 
@@ -334,13 +386,6 @@ public class ConfRoomCalendarImpl extends EntityImpl {
         //System.err.println("set status");
     }
 
-
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("edu.hp.model.eo.ConfRoomCalendar");
-    }
 
     /**
      * Custom DML update/insert/delete logic here.
@@ -738,6 +783,54 @@ public class ConfRoomCalendarImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for ConfLevel, using the alias name ConfLevel.
+     * @return the value of ConfLevel
+     */
+    public String getConfLevel() {
+        return (String)getAttributeInternal(CONFLEVEL);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ConfLevel.
+     * @param value value to set the ConfLevel
+     */
+    public void setConfLevel(String value) {
+        setAttributeInternal(CONFLEVEL, value);
+    }
+
+    /**
+     * Gets the attribute value for BatchId, using the alias name BatchId.
+     * @return the value of BatchId
+     */
+    public String getBatchId() {
+        return (String)getAttributeInternal(BATCHID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for BatchId.
+     * @param value value to set the BatchId
+     */
+    public void setBatchId(String value) {
+        setAttributeInternal(BATCHID, value);
+    }
+
+    /**
+     * Gets the attribute value for BatchNo, using the alias name BatchNo.
+     * @return the value of BatchNo
+     */
+    public String getBatchNo() {
+        return (String)getAttributeInternal(BATCHNO);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for BatchNo.
+     * @param value value to set the BatchNo
+     */
+    public void setBatchNo(String value) {
+        setAttributeInternal(BATCHNO, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -768,6 +861,31 @@ public class ConfRoomCalendarImpl extends EntityImpl {
         super.setAttrInvokeAccessor(index, value, attrDef);
     }
 
+
+    /**
+     * @return the associated entity ConfRoomBatchReservationImpl.
+     */
+    public ConfRoomBatchReservationImpl getConfRoomBatchReservation() {
+        return (ConfRoomBatchReservationImpl)getAttributeInternal(CONFROOMBATCHRESERVATION);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity ConfRoomBatchReservationImpl.
+     */
+    public void setConfRoomBatchReservation(ConfRoomBatchReservationImpl value) {
+        setAttributeInternal(CONFROOMBATCHRESERVATION, value);
+    }
+
+
+    /**
+     * @param id key constituent
+
+     * @return a Key object based on given key constituents.
+     */
+    public static Key createPrimaryKey(DBSequence id) {
+        return new Key(new Object[]{id});
+    }
+
     /**
      * Validation method for ConfRoomCalendar.
      */
@@ -784,15 +902,6 @@ public class ConfRoomCalendarImpl extends EntityImpl {
             }
         }        
         return true;
-    }
-
-    /**
-     * @param id key constituent
-
-     * @return a Key object based on given key constituents.
-     */
-    public static Key createPrimaryKey(DBSequence id) {
-        return new Key(new Object[]{id});
     }
 
 

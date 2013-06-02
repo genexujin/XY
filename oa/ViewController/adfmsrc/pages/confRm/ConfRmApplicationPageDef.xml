@@ -14,6 +14,7 @@
       <nodeDefinition DefName="edu.hp.model.vo.ConfRoomCalendarView" Name="ConfRoomCalendarView0">
         <AttrNames>
           <Item Value="Title"/>
+          <Item Value="ConfLevel"/>
           <Item Value="Participants"/>
           <Item Value="UserDisplayName"/>
           <Item Value="LocationName"/>
@@ -217,5 +218,10 @@
       <NamedData NDName="contextObjectType" NDType="java.lang.String"/>
       <NamedData NDName="contextObjectId" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="ConfRoomCalendarViewIterator" id="ConfLevel">
+      <AttrNames>
+        <Item Value="ConfLevel"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

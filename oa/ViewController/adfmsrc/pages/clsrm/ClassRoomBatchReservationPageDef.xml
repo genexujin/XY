@@ -216,17 +216,18 @@
         <Item Value="N"/>
       </ValueList>
     </button>
+    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
     <methodAction id="saveBatchOrders" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveBatchOrders"
                   IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule"
                   ReturnName="data.RootAppModuleDataControl.methodResults.saveBatchOrders_RootAppModuleDataControl_dataProvider_Root_ClassRmModule_saveBatchOrders_result"/>
     <methodAction id="deleteCurrentBatchOrder" RequiresUpdateModel="true" Action="invokeMethod"
                   MethodName="deleteCurrentBatchOrder" IsViewObjectMethod="false" DataControl="RootAppModuleDataControl"
-                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule"/>
-    <attributeValues IterBinding="ClsRmBtchRsvtnViewIterator" id="Id">
-      <AttrNames>
-        <Item Value="Id"/>
-      </AttrNames>
-    </attributeValues>
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.ClassRmModule"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.deleteCurrentBatchOrder_RootAppModuleDataControl_dataProvider_Root_ClassRmModule_deleteCurrentBatchOrder_result"/>
   </bindings>
 </pageDefinition>

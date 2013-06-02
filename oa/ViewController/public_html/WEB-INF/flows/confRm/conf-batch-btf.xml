@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="conf-batch-btf">
+    <default-activity>ConfRmBatchRsv</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>ConfBatchBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.conf.ConfBatchBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="ConfRmBatchRsv">
+      <page>/pages/confRm/ConfRmBatchRsv.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

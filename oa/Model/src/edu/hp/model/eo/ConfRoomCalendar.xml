@@ -426,6 +426,61 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="ConfLevel"
+    Precision="20"
+    ColumnName="CONF_LEVEL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONF_ROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ConfRoomCalendar.ConfLevel_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="BatchId"
+    Precision="20"
+    ColumnName="BATCH_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONF_ROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BatchNo"
+    Precision="20"
+    ColumnName="BATCH_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="CONF_ROOM_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.ConfRoomCalendar.BatchNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="ConfRoomBatchReservation"
+    Association="edu.hp.model.eo.asso.ConfRmBthCalAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.ConfRmBthCalAssoc.ConfRoomBatchReservation"
+    AssociationOtherEnd="edu.hp.model.eo.asso.ConfRmBthCalAssoc.ConfRoomCalendar"
+    Type="edu.hp.model.eo.ConfRoomBatchReservationImpl"
+    IsUpdateable="true"/>
   <Key
     Name="ConfRoomCalendarPk"
     PrimaryKey="true">
