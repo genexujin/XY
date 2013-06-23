@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelSplitter id="ps1" orientation="vertical" splitterPosition="220">
+    <af:panelSplitter id="ps1" orientation="vertical" splitterPosition="150">
         <f:facet name="first">
             <af:panelHeader text="会议室预订" id="ph1">
                 <f:facet name="context"/>
@@ -228,17 +228,12 @@
                             <af:selectItem label="全天" value="ALLDAY" id="si11"/>
                             <af:selectItem label="非全天" value="TIME" id="si12"/>
                         </af:selectOneRadio>
-                        <af:selectOneRadio label="常用时间段"
-                                           valueChangeListener="#{viewScope.ConfRmAppBean.onAMPMChange}"
-                                           id="sor2" autoSubmit="true">
-                            <af:selectItem label="上午 8：30～11：30" value="AM" id="si3"/>
-                            <af:selectItem label="下午 13：30～16：30" value="PM" id="si6"/>
-                        </af:selectOneRadio>
                         
                         <af:inputDate value="#{bindings.StartTime.inputValue}" label="#{bindings.StartTime.hints.label}"
                                       required="#{bindings.StartTime.hints.mandatory}"
                                       columns="#{bindings.StartTime.hints.displayWidth}"
-                                      shortDesc="#{bindings.StartTime.hints.tooltip}" id="id3" partialTriggers="sor1">
+                                      shortDesc="#{bindings.StartTime.hints.tooltip}" id="id3" partialTriggers="sor1"
+                                      autoSubmit="true">
                             <f:validator binding="#{bindings.StartTime.validator}"/>
                             <af:convertDateTime pattern="#{bindings.StartTime.format}"
                                                 type="#{bindings.Allday.inputValue=='ALLDAY'?'date':'both'}"/>
@@ -246,11 +241,17 @@
                         <af:inputDate value="#{bindings.EndTime.inputValue}" label="#{bindings.EndTime.hints.label}"
                                       required="#{bindings.EndTime.hints.mandatory}"
                                       columns="#{bindings.EndTime.hints.displayWidth}"
-                                      shortDesc="#{bindings.EndTime.hints.tooltip}" id="id4" partialTriggers="sor1">
+                                      shortDesc="#{bindings.EndTime.hints.tooltip}" id="id4" partialTriggers="sor1"
+                                      autoSubmit="true">
                             <f:validator binding="#{bindings.EndTime.validator}"/>
                             <af:convertDateTime pattern="#{bindings.EndTime.format}"
                                                 type="#{bindings.Allday.inputValue=='ALLDAY'?'date':'both'}"/>
                         </af:inputDate>
+                        <af:selectOneRadio label="常用时间段" valueChangeListener="#{viewScope.ConfRmAppBean.onAMPMChange}"
+                                           id="sor2" autoSubmit="true">
+                            <af:selectItem label="上午 8：30～11：30" value="AM" id="si3"/>
+                            <af:selectItem label="下午 13：30～16：30" value="PM" id="si6"/>
+                        </af:selectOneRadio>
                         <af:inputComboboxListOfValues id="userDisplayNameId"
                                                       popupTitle="Search and Select: #{bindings.UserDisplayName.hints.label}"
                                                       value="#{bindings.UserDisplayName.inputValue}"

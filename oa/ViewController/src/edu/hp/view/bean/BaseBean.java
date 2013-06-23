@@ -7,15 +7,25 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
+import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.binding.OperationBinding;
 
 public class BaseBean {
-    
-    public void onAMPMChange(ValueChangeEvent valueChangeEvent, String startFieldName, String endFieldName, String pattern) throws Exception {
-        String startTime = (String)ADFUtils.getBoundAttributeValue(startFieldName);
-        String endTime = (String)ADFUtils.getBoundAttributeValue(endFieldName);
+
+    public void onAMPMChange(ValueChangeEvent valueChangeEvent, String startFieldName, String endFieldName,
+                             String pattern) throws Exception {
+        //        String startTime = (String)ADFUtils.getBoundAttributeValue(startFieldName);
+        //        String endTime = (String)ADFUtils.getBoundAttributeValue(endFieldName);
+
+        UIComponent startComponent = valueChangeEvent.getComponent().findComponent(startFieldName);
+        UIComponent endComponent = valueChangeEvent.getComponent().findComponent(endFieldName);
+        String startTime = (String)(startComponent).getAttributes().get("value");
+        String endTime = (String)(endComponent).getAttributes().get("value");
+//        System.err.println(startTime);
+//        System.err.println(endTime);
+
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         Date startDate = format.parse(startTime);
         Date endDate = format.parse(endTime);
@@ -34,11 +44,16 @@ public class BaseBean {
             endDate.setMinutes(30);
             endDate.setSeconds(0);
         }
-       
+
         String startStr = format.format(startDate);
         String endStr = format.format(endDate);
-        ADFUtils.setBoundAttributeValue(startFieldName, startStr);
-        ADFUtils.setBoundAttributeValue(endFieldName, endStr);
+        startComponent.getAttributes().put("value", startStr);
+        endComponent.getAttributes().put("value", endStr);
+        ADFUtils.partialRefreshComponenet(startComponent);
+        ADFUtils.partialRefreshComponenet(endComponent);
+        
+//        ADFUtils.setBoundAttributeValue("ActStartTime", startStr);
+//        ADFUtils.setBoundAttributeValue("ActEndTime", endStr);
     }
 
     protected void sendNotification(String title, String content, String userId, String roleName) {
@@ -49,9 +64,9 @@ public class BaseBean {
         notification.setRoleName(roleName);
         OperationBinding op = ADFUtils.findOperation("sendNotification");
         op.getParamsMap().put("notification", notification);
-        op.execute();     
+        op.execute();
     }
-    
+
     protected void createTask(String id, String contextType, String apprvTitle, String roleName, String contextTitle) {
         OperationBinding createTaskOp = ADFUtils.findOperation("createTask");
         createTaskOp.getParamsMap().put("title", apprvTitle);
@@ -61,22 +76,23 @@ public class BaseBean {
         createTaskOp.getParamsMap().put("contextTitle", contextTitle);
         createTaskOp.execute();
     }
-    
+
     protected String getDateString() {
         java.text.DateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm");
-        String  dateStr = format.format(new Date());
+        String dateStr = format.format(new Date());
         return dateStr;
     }
-    
+
     protected void completeTask(String contextType, String id, String roleName) {
         OperationBinding binding = ADFUtils.findOperation("completeTask");
-        binding.getParamsMap().put("contextObjectType",contextType);
+        binding.getParamsMap().put("contextObjectType", contextType);
         binding.getParamsMap().put("contextObjectId", id);
         binding.getParamsMap().put("roleName", roleName);
         binding.execute();
     }
-    
-    protected void createTaskForUser(String id, String contextType, String apprvTitle, String userId, String contextTitle) {
+
+    protected void createTaskForUser(String id, String contextType, String apprvTitle, String userId,
+                                     String contextTitle) {
         OperationBinding createTaskOp = ADFUtils.findOperation("createTaskForUserId");
         createTaskOp.getParamsMap().put("title", apprvTitle);
         createTaskOp.getParamsMap().put("contextObjectType", contextType);
@@ -85,19 +101,19 @@ public class BaseBean {
         createTaskOp.getParamsMap().put("contextTitle", contextTitle);
         createTaskOp.execute();
     }
-    
+
     protected void completeTaskForUser(String contextType, String id, String userId) {
         OperationBinding binding = ADFUtils.findOperation("completeTaskForUserId");
-        binding.getParamsMap().put("contextObjectType",contextType);
+        binding.getParamsMap().put("contextObjectType", contextType);
         binding.getParamsMap().put("contextObjectId", id);
         binding.getParamsMap().put("userId", userId);
         binding.execute();
     }
-    
+
     protected void cancelTask(String contextType, String id) {
         OperationBinding binding = ADFUtils.findOperation("cancelTask");
-        binding.getParamsMap().put("contextObjectType",contextType);
-        binding.getParamsMap().put("contextObjectId", id);        
+        binding.getParamsMap().put("contextObjectType", contextType);
+        binding.getParamsMap().put("contextObjectId", id);
         binding.execute();
     }
 

@@ -158,7 +158,7 @@
                                        autoSubmit="true"
                                       disabled="#{(pageFlowScope.fromMenu eq 'verifier' or pageFlowScope.fromMenu eq 'approver' or pageFlowScope.fromMenu eq 'receiver') or bindings.State.inputValue ne '1'}"/>
                         <af:inputComboboxListOfValues id="currentBuyerNameId"
-                                                      popupTitle="Search and Select: #{bindings.CurrentBuyerName.hints.label}"
+                                                      popupTitle="请选择: #{bindings.CurrentBuyerName.hints.label}"
                                                       value="#{bindings.CurrentBuyerName.inputValue}"
                                                       label="#{bindings.CurrentBuyerName.hints.label}"
                                                       model="#{bindings.CurrentBuyerName.listOfValuesModel}"

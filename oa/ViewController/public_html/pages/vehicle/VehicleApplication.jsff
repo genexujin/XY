@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelSplitter id="ps1" orientation="vertical" splitterPosition="180">
+    <af:panelSplitter id="ps1" orientation="vertical" splitterPosition="150">
         <f:facet name="first">
             <af:panelHeader text="用车申请" id="ph1">
                 <f:facet name="context"/>
@@ -205,7 +205,7 @@
                 <f:facet name="info"/>
                 <af:panelGroupLayout id="pgl1" layout="scroll" partialTriggers="pc1:ctb1 pc1:ctb2 pc1:ctb4 pc1:t2">
                     <af:panelGroupLayout id="pgl3" layout="horizontal">
-                        <af:commandImageLink id="cil1" icon="/images/icons/info.png"
+                        <af:commandImageLink id="cil1" icon="/images/icons/find.png"
                                              actionListener="#{viewScope.vehicleApplicationBean.openVehicleUsuage}"
                                              text="用车日预订记录"/>
                     </af:panelGroupLayout>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelSplitter orientation="vertical" splitterPosition="270" id="ps1" positionedFromEnd="false">
+    <af:panelSplitter orientation="vertical" splitterPosition="150" id="ps1" positionedFromEnd="false">
         <f:facet name="first">
             <af:panelHeader text="批量登记汇总" id="ph1" type="stretch">
                 <f:facet name="context"/>
@@ -236,12 +236,6 @@
                                         <af:selectItem label="全天" value="ALLDAY" id="si5"/>
                                         <af:selectItem label="非全天" value="TIME" id="si6"/>
                                     </af:selectOneRadio>
-                                    <af:selectOneRadio label="常用时间段"
-                                                       valueChangeListener="#{viewScope.ConfBatchBean.onAMPMChange}"
-                                                       id="sor2" autoSubmit="true">
-                                        <af:selectItem label="上午 8：30～11：30" value="AM" id="si9"/>
-                                        <af:selectItem label="下午 13：30～16：30" value="PM" id="si10"/>
-                                    </af:selectOneRadio>
                                     <af:inputDate value="#{bindings.ActStartTime.inputValue}"
                                                   label="#{bindings.ActStartTime.hints.label}"
                                                   required="#{bindings.ActStartTime.hints.mandatory}"
@@ -262,6 +256,12 @@
                                         <f:validator binding="#{bindings.ActEndTime.validator}"/>
                                         <af:convertDateTime pattern="#{bindings.ActEndTime.format}" type="time"/>
                                     </af:inputDate>
+                                    <af:selectOneRadio label="常用时间段"
+                                                       valueChangeListener="#{viewScope.ConfBatchBean.onAMPMChange}"
+                                                       id="sor2" autoSubmit="true">
+                                        <af:selectItem label="上午 8：30～11：30" value="AM" id="si9"/>
+                                        <af:selectItem label="下午 13：30～16：30" value="PM" id="si10"/>
+                                    </af:selectOneRadio>
                                     <af:selectOneChoice label="会议等级" id="soc5" value="#{bindings.ConfLevel.inputValue}"
                                                         required="#{bindings.ConfLevel.hints.mandatory}">
                                         <af:selectItem label="市" value="市" id="si11"/>

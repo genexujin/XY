@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <af:panelSplitter orientation="vertical" splitterPosition="270" id="ps1" positionedFromEnd="false">
+    <af:panelSplitter orientation="vertical" splitterPosition="200" id="ps1" positionedFromEnd="false">
         <f:facet name="first">
             <af:panelHeader text="批量登记汇总" id="ph1" type="stretch">
                 <f:facet name="context"/>

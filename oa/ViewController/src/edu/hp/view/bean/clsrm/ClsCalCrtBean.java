@@ -117,8 +117,10 @@ public class ClsCalCrtBean extends BaseBean {
     }
 
 
-    public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception {        
-        super.onAMPMChange(valueChangeEvent, "ActStartTime", "ActEndTime", Constants.TIME_FORMAT_FULL);
-    }    
-    
+    public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception {
+      
+//        super.onAMPMChange(valueChangeEvent, "ActStartTime", "ActEndTime", Constants.TIME_FORMAT_FULL);
+         super.onAMPMChange(valueChangeEvent, "id1", "id2", Constants.TIME_FORMAT_FULL);
+    }
+
 }
