@@ -890,17 +890,17 @@ public class ConfRoomCalendarImpl extends EntityImpl {
      * Validation method for ConfRoomCalendar.
      */
     public boolean validateStartDate() {
-        
-        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-        if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null && getStartTime() != null) {
-            
-            long delta = this.getStartTime().getTime() - System.currentTimeMillis();
-            delta = delta/1000/60/60/24;
-            
-            if (delta >= 30) {
-                return false;
-            }
-        }        
+//        根据客户要求，暂时取消30天的限制        
+//        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+//        if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null && getStartTime() != null) {
+//            
+//            long delta = this.getStartTime().getTime() - System.currentTimeMillis();
+//            delta = delta/1000/60/60/24;
+//            
+//            if (delta >= 30) {
+//                return false;
+//            }
+//        }        
         return true;
     }
 
