@@ -183,7 +183,7 @@ public class VehicleCalendarBean extends CalendarBean {
             action = "save";
         
         String time = (String)ADFUtils.getBoundAttributeValue("StartTime");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date date = format.parse(time);
         startDayTime = new Timestamp(date);
         
