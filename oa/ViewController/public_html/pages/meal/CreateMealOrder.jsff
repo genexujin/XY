@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="center">
+            <af:panelHeader text="用餐申请" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelFormLayout id="pfl1" partialTriggers="ctb4">
+                    <af:panelLabelAndMessage label="#{bindings.RequesterName.hints.label}" id="plam1">
+                        <af:outputText value="#{bindings.RequesterName.inputValue}" id="ot1" partialTriggers="ctb4"/>
+                    </af:panelLabelAndMessage>
+                    <af:inputDate value="#{bindings.MealDate.inputValue}" label="#{bindings.MealDate.hints.label}"
+                                  required="#{bindings.MealDate.hints.mandatory}"
+                                  columns="#{bindings.MealDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.MealDate.hints.tooltip}" id="id1" partialTriggers="ctb4">
+                        <f:validator binding="#{bindings.MealDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.MealDate.format}"/>
+                    </af:inputDate>
+                    <af:selectOneChoice value="#{bindings.Location.inputValue}" label="#{bindings.Location.label}"
+                                        required="#{bindings.Location.hints.mandatory}"
+                                        shortDesc="#{bindings.Location.hints.tooltip}" id="soc1" partialTriggers="ctb4">
+                        <f:selectItems value="#{bindings.Location.items}" id="si1"/>
+                    </af:selectOneChoice>
+                    <af:inputNumberSpinbox value="#{bindings.NumOfBreakfirst.inputValue}"
+                                           label="#{bindings.NumOfBreakfirst.hints.label}"
+                                           required="#{bindings.NumOfBreakfirst.hints.mandatory}"
+                                           columns="#{bindings.NumOfBreakfirst.hints.displayWidth}"
+                                           shortDesc="#{bindings.NumOfBreakfirst.hints.tooltip}" id="it1"
+                                           partialTriggers="ctb4">
+                        <f:validator binding="#{bindings.NumOfBreakfirst.validator}"/>
+                    </af:inputNumberSpinbox>
+                    <af:inputNumberSpinbox value="#{bindings.NumberOfLunch.inputValue}"
+                                           label="#{bindings.NumberOfLunch.hints.label}"
+                                           required="#{bindings.NumberOfLunch.hints.mandatory}"
+                                           columns="#{bindings.NumberOfLunch.hints.displayWidth}"
+                                           shortDesc="#{bindings.NumberOfLunch.hints.tooltip}" id="it2"
+                                           partialTriggers="ctb4">
+                        <f:validator binding="#{bindings.NumberOfLunch.validator}"/>
+                    </af:inputNumberSpinbox>
+                    <af:inputText value="#{bindings.Justification.inputValue}"
+                                  label="#{bindings.Justification.hints.label}"
+                                  required="#{bindings.Justification.hints.mandatory}"
+                                  columns="#{bindings.Justification.hints.displayWidth}"
+                                  maximumLength="#{bindings.Justification.hints.precision}"
+                                  shortDesc="#{bindings.Justification.hints.tooltip}" id="it3" rows="4"
+                                  contentStyle="width:300px;" partialTriggers="ctb4">
+                        <f:validator binding="#{bindings.Justification.validator}"/>
+                    </af:inputText>
+                    <f:facet name="footer">
+                        <af:toolbar id="t1">
+                            <af:commandToolbarButton id="ctb1"
+                                                     icon="/images/icons/filesave.png" text="保存申请">
+                                <af:showPopupBehavior triggerType="click" popupId="p1"/>
+                            </af:commandToolbarButton>
+                            <af:commandToolbarButton text="重置" id="ctb2" immediate="true"
+                                                     icon="/images/icons/rollback.png">
+                                <af:resetActionListener/>
+                            </af:commandToolbarButton>
+                            <af:commandToolbarButton id="ctb3" text="返回列表" icon="/images/icons/listview.png"
+                                                     action="list" immediate="true"/>
+                            <af:commandToolbarButton text="新申请" id="ctb4"
+                                                     icon="/images/icons/new.png" immediate="false"
+                                                     action="#{viewScope.MealEditBean.newRow}"/>
+                        </af:toolbar>
+                    </f:facet>
+                </af:panelFormLayout>
+            </af:panelHeader>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+        <f:facet name="bottom">
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                <af:dialog id="d1" title="请确认" dialogListener="#{viewScope.MealEditBean.onSaveConfirm}">
+                    <f:facet name="buttonBar"/>
+                    <af:outputText value="请注意：申请提交后将即时生效，您确定要提交该申请吗 ？" id="ot2"/>
+                </af:dialog>
+            </af:popup>
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

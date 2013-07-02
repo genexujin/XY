@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="center">
+            <af:panelHeader text="用餐申请报告" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelStretchLayout id="psl2" startWidth="0px" endWidth="0px" topHeight="31px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl2">
+                            <af:separator id="s5"/>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t1">
+                                        <af:commandToolbarButton text="导出" id="ctb1" icon="/images/icons/export.png">
+                                            <af:exportCollectionActionListener type="excelHTML" exportedId="t2"/>
+                                        </af:commandToolbarButton>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.MealReport.collectionModel}" var="row"
+                                          rows="#{bindings.MealReport.rangeSize}"
+                                          emptyText="#{bindings.MealReport.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.MealReport.rangeSize}" rowBandingInterval="0" id="t2">
+                                    <af:column sortProperty="#{bindings.MealReport.hints.MealDate.name}"
+                                               sortable="false" headerText="#{bindings.MealReport.hints.MealDate.label}"
+                                               id="c3">
+                                        <af:outputText value="#{row.MealDate}" id="ot5">
+                                            <af:convertDateTime pattern="#{bindings.MealReport.hints.MealDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MealReport.hints.TotalBf.name}" sortable="false"
+                                               headerText="#{bindings.MealReport.hints.TotalBf.label}" id="c1">
+                                        <af:outputText value="#{row.TotalBf}" id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MealReport.hints.TotalLunch.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.MealReport.hints.TotalLunch.label}" id="c2">
+                                        <af:outputText value="#{row.TotalLunch}" id="ot4"/>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelGroupLayout id="pgl1" layout="horizontal">
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:selectOneChoice label="办公地点" id="soc1" value="#{viewScope.MealReportBean.location}">
+                                <af:selectItem label="自忠" value="ZZ" id="si1"/>
+                                <af:selectItem label="丽园" value="LY" id="si2"/>
+                                <af:selectItem label="全部" value="ALL" id="si3"/>
+                            </af:selectOneChoice>
+                            <af:inputDate label="起始日期" id="id1" value="#{viewScope.MealReportBean.startDate}">
+                                <af:convertDateTime type="date"/>
+                            </af:inputDate>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:spacer width="10" height="10" id="s3"/>
+                            <af:outputText value="查看" id="ot2"/>
+                            <af:inputNumberSpinbox id="ins1" value="#{viewScope.MealReportBean.duration}"/>
+                            <af:outputText value="天内的预订报告" id="ot1"/>
+                            <af:spacer width="10" height="10" id="s4"/>
+                            <af:commandButton id="cb1" icon="/images/icons/run.png" text="运行报告"
+                                              action="#{viewScope.MealReportBean.runReport}"/>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:panelHeader>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

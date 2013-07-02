@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="meal-order-btf">
+    <default-activity>Router</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>action</name>
+      <value>#{pageFlowScope.action}</value>
+      <required/>
+    </input-parameter-definition>
+    <managed-bean id="__13">
+      <managed-bean-name>MealEditBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.meal.MealEditBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__16">
+      <managed-bean-name>MealListBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.meal.MealListBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <router id="Router">
+      <case id="__11">
+        <expression>#{pageFlowScope.action eq 'new'}</expression>
+        <outcome>new</outcome>
+      </case>
+      <default-outcome>list</default-outcome>
+    </router>
+    <view id="Create">
+      <page>/pages/meal/CreateMealOrder.jsff</page>
+    </view>
+    <view id="List">
+      <page>/pages/meal/List.jsff</page>
+    </view>
+    <method-call id="newRow">
+      <method>#{bindings.newRow.execute}</method>
+      <outcome>
+        <fixed-outcome>newRow</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="findByUserId">
+      <method>#{bindings.findByUserId.execute}</method>
+      <outcome>
+        <fixed-outcome>findByUserId</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>Router</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>new</from-outcome>
+        <to-activity-id>newRow</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome>list</from-outcome>
+        <to-activity-id>findByUserId</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>newRow</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>newRow</from-outcome>
+        <to-activity-id>Create</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>Create</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>list</from-outcome>
+        <to-activity-id>findByUserId</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome>new</from-outcome>
+        <to-activity-id>newRow</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>List</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>new</from-outcome>
+        <to-activity-id>newRow</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__17">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>Create</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>findByUserId</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>findByUserId</from-outcome>
+        <to-activity-id>List</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

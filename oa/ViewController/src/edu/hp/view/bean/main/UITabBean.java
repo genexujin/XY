@@ -98,7 +98,7 @@ public class UITabBean {
         menus.setSysMealMenus(new ArrayList<LoginUserMenu>());
         menus.setSysPurMenus(new ArrayList<LoginUserMenu>());
         menus.setAdminMenus(new ArrayList<LoginUserMenu>());
-
+        menus.setReportMenus(new ArrayList<LoginUserMenu>());
 
         DCIteratorBinding it = ADFUtils.findIterator("UserMenusIterator");
         //it.executeQuery();
@@ -131,6 +131,9 @@ public class UITabBean {
                     menus.getSysPurMenus().add(menu);
                 } else if (menu.getMenuMasterCategory().equals("ADMIN")) {
                     menus.getAdminMenus().add(menu);
+                }else if (menu.getMenuMasterCategory().equals("RPT")) {
+//                    System.err.println("Added!");
+                    menus.getReportMenus().add(menu);
                 }
             }
         }
@@ -163,6 +166,7 @@ public class UITabBean {
             UIComponent component = actionEvent.getComponent();
             String title = (String)(component.getAttributes().get("title"));
             String taskflowId = (String)(component.getAttributes().get("taskflow"));
+//            System.err.println(taskflowId);
             HashMap<String, Object> parameters = new HashMap<String, Object>();
             TabContext.getCurrentInstance().addOrSelectTab(title, taskflowId, parameters);
 

@@ -88,6 +88,11 @@
                             <f:validator binding="#{bindings.EndTime.validator}"/>
                             <af:convertDateTime pattern="#{bindings.EndTime.format}" type="both"/>
                         </af:inputDate>
+                        <af:selectOneChoice value="#{bindings.DriverId.inputValue}" label="#{bindings.DriverId.label}"
+                                            required="#{bindings.DriverId.hints.mandatory}"
+                                            shortDesc="#{bindings.DriverId.hints.tooltip}" id="soc2" autoSubmit="true">
+                            <f:selectItems value="#{bindings.DriverId.items}" id="si3"/>
+                        </af:selectOneChoice>
                         <af:inputComboboxListOfValues id="contactNameId"
                                                       popupTitle="Search and Select: #{bindings.ContactName.hints.label}"
                                                       value="#{bindings.ContactName.inputValue}"

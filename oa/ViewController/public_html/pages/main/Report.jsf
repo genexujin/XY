@@ -17,7 +17,22 @@
                 </f:facet>
                 <f:facet name="navigation">
                     <af:panelAccordion id="pa1">
-                        <af:showDetailItem text="所有报表" id="sdi1" icon="/images/icons/library.png"/>
+                        <af:showDetailItem text="" id="sdi1" icon="/images/icons/library.png">
+                            <af:spacer width="10" height="5" id="s7"/>
+                            <af:panelList id="pl1">
+                                <af:forEach items="#{sessionScope.LoginUserMenuBean.reportMenus}" var="menu">
+                                    <af:panelGroupLayout id="pgl8" layout="vertical">
+                                        <af:commandImageLink text="#{menu.menuName}" id="cil5"
+                                                             actionListener="#{viewScope.ReportBean.openMenu}"
+                                                             icon="#{menu.menuIconURL}">
+                                            <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                            <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                        </af:commandImageLink>
+                                        <af:spacer width="10" height="3" id="s4"/>
+                                    </af:panelGroupLayout>
+                                </af:forEach>
+                            </af:panelList>
+                        </af:showDetailItem>
                        
                     </af:panelAccordion>
                 </f:facet>

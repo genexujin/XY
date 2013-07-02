@@ -106,5 +106,7 @@
         <Item Value="Id"/>
       </AttrNames>
     </attributeValues>
+    <list IterBinding="VehicleDMLIterator" StaticList="false" Uses="LOV_DriverId" id="DriverId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

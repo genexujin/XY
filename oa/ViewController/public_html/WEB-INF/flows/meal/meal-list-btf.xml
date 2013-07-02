@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="meal-list-btf">
+    <default-activity>meal-order-btf</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <task-flow-call id="meal-order-btf">
+      <task-flow-reference>
+        <document>/WEB-INF/flows/meal/meal-order-btf.xml</document>
+        <id>meal-order-btf</id>
+      </task-flow-reference>
+      <input-parameter id="__1">
+        <name>action</name>
+        <value>list</value>
+      </input-parameter>
+    </task-flow-call>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

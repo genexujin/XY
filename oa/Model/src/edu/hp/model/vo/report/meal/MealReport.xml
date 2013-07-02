@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MealReport"
+  Version="11.1.2.62.76"
+  OrderBy='"MEAL_DATE"'
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="edu.hp.model.vo.report.meal.MealReportImpl"
+  ComponentInterface="edu.hp.model.vo.report.meal.common.MealReport"
+  ClientProxyName="edu.hp.model.vo.report.meal.client.MealReportClient">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="edu.hp.model.vo.report.meal.MealReport_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="loc"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="ml_ed"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="ml_st"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <SQLQuery><![CDATA[select sum(num_of_breakfirst) total_bf, sum(number_of_lunch) total_lunch, meal_date from meal_order
+where location = nvl(:loc,location)
+and meal_date <= :ml_ed
+and meal_date >= :ml_st
+group by meal_date]]></SQLQuery>
+  <ViewAttribute
+    Name="TotalBf"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_BF"
+    Expression="TOTAL_BF"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.report.meal.MealReport.TotalBf_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalLunch"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_LUNCH"
+    Expression="TOTAL_LUNCH"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.report.meal.MealReport.TotalLunch_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MealDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="MEAL_DATE"
+    Expression="MEAL_DATE"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.vo.report.meal.MealReport.MealDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="edu.hp.model.ModelBundle"/>
+  </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="runReport"
+      MethodName="runReport">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="location"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="startDt"
+        Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="endDt"
+        Type="oracle.jbo.domain.Date"/>
+    </Method>
+  </ClientInterface>
+</ViewObject>

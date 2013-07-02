@@ -376,4 +376,12 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
     public ReceiverMobileListViewImpl getReceiverMobileList() {
         return (ReceiverMobileListViewImpl)findViewObject("ReceiverMobileList");
     }
+
+    /**
+     * Container's getter for MealModule1.
+     * @return MealModule1
+     */
+    public ApplicationModuleImpl getMealModule() {
+        return (ApplicationModuleImpl)findApplicationModule("MealModule");
+    }
 }

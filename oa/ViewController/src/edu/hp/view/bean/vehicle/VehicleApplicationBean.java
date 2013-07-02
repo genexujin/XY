@@ -309,10 +309,17 @@ public class VehicleApplicationBean extends BaseBean {
                 //如果选择了一个司机，则发通知给司机并要求其在系统中确认
                 String driverId = (String)ADFUtils.getBoundAttributeValue("DriverId");
                 if (driverId != null) {
-                    String smsTitle = "有新的派车单发送给您，请进系统查看并确认 ！";
-                    String smsContent =
-                        " 使用车辆为： " + vehicleName + " 申请人为：" + userDisplayName + " 申请人电话：" + ContactPhone;
-                    sendNotification(smsTitle, smsContent, driverId, null);
+                    String contactName = (String)ADFUtils.getBoundAttributeValue("ContactName");
+                    String contactPhone = (String)ADFUtils.getBoundAttributeValue("ContactPhone");
+                    String tripStart = (String)ADFUtils.getBoundAttributeValue("TripStart");
+                    String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
+                    String smsTitle = "有新的派车单发送给您！";
+                    //                    String smsContent =
+                    //                        " 使用车辆为： " + vehicleName + " 申请人为：" + userDisplayName + " 申请人电话：" + ContactPhone;
+                    //                    sendNotification(smsTitle, smsContent, driverId, null);
+                    this.sendNotification("您有新的出车单！",
+                                          "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone +
+                                          "开始用车时间: " + startTime + " 目的地:" + tripStart, driverId, null);
                     createTaskForUser(id, Constants.CONTEXT_TYPE_VEHICLE, smsTitle, driverId, "确认调度");
                 }
                 ADFUtils.findOperation("Commit").execute();
@@ -375,13 +382,13 @@ public class VehicleApplicationBean extends BaseBean {
     public void openVehicleUsuage(ActionEvent actionEvent) {
 
         String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
-//        System.err.println(startTime);
+        //        System.err.println(startTime);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date date = null;
         try {
             if (startTime != null)
                 date = format.parse(startTime);
-//            System.err.println(date);
+            //            System.err.println(date);
         } catch (ParseException pe) {
             // TODO: Add catch code
             pe.printStackTrace();
@@ -391,8 +398,8 @@ public class VehicleApplicationBean extends BaseBean {
             this.day = formatter.format(date);
         }
         RichPopup.PopupHints hints = new RichPopup.PopupHints();
-//        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN_ID, "ot14");
-//        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN, RichPopup.PopupHints.AlignTypes.ALIGN_END_AFTER);
+        //        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN_ID, "ot14");
+        //        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN, RichPopup.PopupHints.AlignTypes.ALIGN_END_AFTER);
         this.usuagePopup.show(hints);
     }
 

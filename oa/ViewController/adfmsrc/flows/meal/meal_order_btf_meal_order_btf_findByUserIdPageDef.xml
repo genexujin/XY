@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="meal_order_btf_meal_order_btf_findByUserIdPageDef" Package="flows.meal" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="findByUserId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByUserId"
+            IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.MealModule.MealOrder">
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

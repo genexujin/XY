@@ -205,9 +205,13 @@ public class VehicleCalendarBean extends CalendarBean {
 
         String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
         String contactId = (String)ADFUtils.getBoundAttributeValue("ContactId");
+        String contactName = (String)ADFUtils.getBoundAttributeValue("ContactName");
+        String contactPhone = (String)ADFUtils.getBoundAttributeValue("ContactPhone");
+        String tripStart = (String)ADFUtils.getBoundAttributeValue("TripStart");
         String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
         String title = (String)ADFUtils.getBoundAttributeValue("Title");
         String state = (String)ADFUtils.getBoundAttributeValue("State");
+        String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
         String noteTitle;
         String noteContent;
         String dateStr = getDateString();
@@ -227,6 +231,13 @@ public class VehicleCalendarBean extends CalendarBean {
         }
         this.sendNotification(noteTitle, noteContent, userId, null);
         this.sendNotification(noteTitle, noteContent, contactId, null);
+        
+        String driverId = (String)ADFUtils.getBoundAttributeValue("DriverId");
+        if(driverId!=null)
+            this.sendNotification("您有新的出车单","联系人：" + contactName + " 使用车辆：" 
+                                            + vehicleName +" 联系人电话："+contactPhone
+                                            +" 开始用车时间: " + startTime + " 目的地:"+tripStart
+                                  , driverId,null);
         
         changeMade = true;
         ADFUtils.findOperation("Commit").execute();

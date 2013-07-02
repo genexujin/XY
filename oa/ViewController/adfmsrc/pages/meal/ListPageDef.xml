@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="ListPageDef"
+                Package="pages.meal">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.MealModule.MealOrder" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="MealOrderIterator"/>
+    <searchRegion Binds="MealOrderIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MealOrderQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MealOrderIterator" id="MealOrder">
+      <nodeDefinition DefName="edu.hp.model.vo.MealOrderView" Name="MealOrder0">
+        <AttrNames>
+          <Item Value="RequesterName"/>
+          <Item Value="MealDate"/>
+          <Item Value="Location"/>
+          <Item Value="NumOfBreakfirst"/>
+          <Item Value="NumberOfLunch"/>
+          <Item Value="Justification"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MealOrderIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

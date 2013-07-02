@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="CreateMealOrderPageDef"
+                Package="pages.meal" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.MealModule.MealOrder" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="MealOrderIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MealOrderIterator" id="RequesterName">
+      <AttrNames>
+        <Item Value="RequesterName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MealOrderIterator" id="MealDate">
+      <AttrNames>
+        <Item Value="MealDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MealOrderIterator" StaticList="false" Uses="LOV_Location" id="Location" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="MealOrderIterator" id="NumOfBreakfirst">
+      <AttrNames>
+        <Item Value="NumOfBreakfirst"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MealOrderIterator" id="NumberOfLunch">
+      <AttrNames>
+        <Item Value="NumberOfLunch"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MealOrderIterator" id="Justification">
+      <AttrNames>
+        <Item Value="Justification"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <methodAction IterBinding="MealOrderIterator" id="newRow" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="newRow" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.MealModule.MealOrder">
+      <NamedData NDName="userId" NDValue="#{sessionScope.LoginUserBean.userId}" NDType="java.lang.String"/>
+      <NamedData NDName="userName" NDValue="#{sessionScope.LoginUserBean.displayName}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

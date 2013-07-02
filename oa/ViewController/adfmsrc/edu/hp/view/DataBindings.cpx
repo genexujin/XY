@@ -109,6 +109,13 @@
     <page path="/WEB-INF/flows/vehicle/vehicle-usuage-btf.xml#vehicle-usuage-btf@doQuery"
           usageId="edu_hp_view_vehicle_usuage_btf_vehicle_usuage_btf_doQueryPageDef"/>
     <page path="/pages/confRm/ConfRmBatchRsv.jsff" usageId="edu_hp_view_ConfRmBatchRsvPageDef"/>
+    <page path="/WEB-INF/flows/meal/meal-order-btf.xml#meal-order-btf@newRow"
+          usageId="edu_hp_view_meal_order_btf_meal_order_btf_newRowPageDef"/>
+    <page path="/pages/meal/CreateMealOrder.jsff" usageId="edu_hp_view_CreateMealOrderPageDef"/>
+    <page path="/pages/meal/List.jsff" usageId="edu_hp_view_ListPageDef"/>
+    <page path="/WEB-INF/flows/meal/meal-order-btf.xml#meal-order-btf@findByUserId"
+          usageId="edu_hp_view_meal_order_btf_meal_order_btf_findByUserIdPageDef"/>
+    <page path="/pages/meal/MealReport.jsff" usageId="edu_hp_view_MealReportPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -204,6 +211,13 @@
     <page id="edu_hp_view_vehicle_usuage_btf_vehicle_usuage_btf_doQueryPageDef"
           path="flows.vehicle.vehicle_usuage_btf_vehicle_usuage_btf_doQueryPageDef"/>
     <page id="edu_hp_view_ConfRmBatchRsvPageDef" path="pages.confRm.ConfRmBatchRsvPageDef"/>
+    <page id="edu_hp_view_meal_order_btf_meal_order_btf_newRowPageDef"
+          path="flows.meal.meal_order_btf_meal_order_btf_newRowPageDef"/>
+    <page id="edu_hp_view_CreateMealOrderPageDef" path="pages.meal.CreateMealOrderPageDef"/>
+    <page id="edu_hp_view_ListPageDef" path="pages.meal.ListPageDef"/>
+    <page id="edu_hp_view_meal_order_btf_meal_order_btf_findByUserIdPageDef"
+          path="flows.meal.meal_order_btf_meal_order_btf_findByUserIdPageDef"/>
+    <page id="edu_hp_view_MealReportPageDef" path="pages.meal.MealReportPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

@@ -91,10 +91,10 @@
                                     </af:panelGroupLayout>
                                 </af:forEach>
                             </af:panelList>
-                           <af:clientAttribute name="menuCode" value="CONFRM"/>
+                            <af:clientAttribute name="menuCode" value="CONFRM"/>
                         </af:showDetailItem>
                         <af:showDetailItem text="车辆管理" id="sdi5" icon="/images/icons/car_arrow.png"
-                         disclosureListener="#{viewScope.SystemBean.onItemDisclosed}"
+                                           disclosureListener="#{viewScope.SystemBean.onItemDisclosed}"
                                            disclosed="#{pageFlowScope.openMenu=='VEH'}">
                             <af:spacer width="10" height="5" id="s12"/>
                             <af:panelList id="pl4">
@@ -110,20 +110,27 @@
                                     </af:panelGroupLayout>
                                 </af:forEach>
                             </af:panelList>
-                             <af:clientAttribute name="menuCode" value="VEH"/>
+                            <af:clientAttribute name="menuCode" value="VEH"/>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="订餐管理" id="sdi7" icon="/images/icons/coffee.png"
+                                           disclosureListener="#{viewScope.SystemBean.onItemDisclosed}"
+                                           disclosed="#{pageFlowScope.openMenu=='MEAL'}">
+                            <af:spacer width="10" height="5" id="s14"/>
+                            <af:panelList id="pl3">
+                                <af:forEach items="#{sessionScope.LoginUserMenuBean.sysMealMenus}" var="menu">
+                                    <af:panelGroupLayout id="pgl9" layout="vertical">
+                                        <af:commandImageLink text="#{menu.menuName}" id="cil6"
+                                                             actionListener="#{viewScope.SystemBean.openMenu}"
+                                                             icon="#{menu.menuIconURL}">
+                                            <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                            <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                        </af:commandImageLink>
+                                    </af:panelGroupLayout>
+                                </af:forEach>
+                            </af:panelList>
+                            <af:clientAttribute name="menuCode" value="MEAL"/>
                         </af:showDetailItem>
                         <!--
-                        <af:showDetailItem text="订餐管理" id="sdi7" icon="/images/icons/coffee.png">
-                            <af:forEach items="#{sessionScope.LoginUserMenuBean.sysMealMenus}" var="menu">
-                                <af:panelList id="pl3">
-                                    <af:commandImageLink text="#{menu.menuName}" id="cil6"
-                                                         actionListener="#{viewScope.SystemBean.openMenu}">
-                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
-                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
-                                    </af:commandImageLink>
-                                </af:panelList>
-                            </af:forEach>
-                        </af:showDetailItem>
                         <af:showDetailItem text="通知下达" id="sdi6" icon="/images/icons/history.png">
                             <af:forEach items="#{sessionScope.LoginUserMenuBean.sysAncmtMenus}" var="menu">
                                 <af:panelList id="pl2">
@@ -152,23 +159,26 @@
                                        inlineStyle="color:rgb(33,33,255);"/>
                         <af:spacer width="12" height="10" id="s13"/>
                         <af:commandLink text="修改密码" id="cl1">
-                          <af:showPopupBehavior popupId="password" triggerType="action"/>
+                            <af:showPopupBehavior popupId="password" triggerType="action"/>
                         </af:commandLink>
                         <af:popup id="password" contentDelivery="lazyUncached">
-                        <!-- don't render if the activity is null -->
-                            <af:dialog dialogListener="#{sessionScope.LoginUserBean.changePassword}" title="修改密码" id="d2" contentHeight="100" contentWidth="250"
-                                   resize="on">
+                            <!-- don't render if the activity is null -->
+                            <af:dialog dialogListener="#{sessionScope.LoginUserBean.changePassword}" title="修改密码"
+                                       id="d2" contentHeight="100" contentWidth="250" resize="on">
                                 <af:panelFormLayout id="pfl1">
                                     <f:facet name="footer"/>
-                                    <af:inputText label="当前密码" id="it1" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogCurrPassword}" columns="20"
+                                    <af:inputText label="当前密码" id="it1" secret="true" required="true"
+                                                  value="#{sessionScope.LoginUserBean.dialogCurrPassword}" columns="20"
                                                   binding="#{LoginUserBean.currPasswdComp}"/>
-                                    <af:inputText label="新密码" id="it2" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogNewPassword}" columns="20"
+                                    <af:inputText label="新密码" id="it2" secret="true" required="true"
+                                                  value="#{sessionScope.LoginUserBean.dialogNewPassword}" columns="20"
                                                   binding="#{LoginUserBean.newPasswdComp}"/>
-                                    <af:inputText label="重复新密码" id="it3" secret="true" required="true" value="#{sessionScope.LoginUserBean.dialogNewPasswordConfirmed}" columns="20"
-                                                  binding="#{LoginUserBean.newPasswdCnfmComp}"/>
+                                    <af:inputText label="重复新密码" id="it3" secret="true" required="true"
+                                                  value="#{sessionScope.LoginUserBean.dialogNewPasswordConfirmed}"
+                                                  columns="20" binding="#{LoginUserBean.newPasswdCnfmComp}"/>
                                 </af:panelFormLayout>
                             </af:dialog>
-                      </af:popup>      
+                        </af:popup>
                     </af:panelGroupLayout>
                 </f:facet>
                 <f:facet name="globalToolbar"/>
@@ -214,6 +224,5 @@ false);
             </af:group>
         </f:facet>
         <af:serverListener type="launchDefaultTab" method="#{viewScope.SystemBean.launchDefaultTab}"/>
-        
     </af:document>
 </f:view>

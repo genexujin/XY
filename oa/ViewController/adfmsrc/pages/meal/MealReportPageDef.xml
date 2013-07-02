@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="MealReportPageDef"
+                Package="pages.meal">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.MealModule.MealReport" DataControl="RootAppModuleDataControl" RangeSize="-1"
+              id="MealReportIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MealReportIterator" id="MealReport">
+      <nodeDefinition DefName="edu.hp.model.vo.report.meal.MealReport" Name="MealReport0">
+        <AttrNames>
+          <Item Value="TotalBf"/>
+          <Item Value="TotalLunch"/>
+          <Item Value="MealDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction IterBinding="MealReportIterator" id="runReport" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="runReport" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.MealModule.MealReport">
+      <NamedData NDName="location" NDValue="" NDType="java.lang.String"/>
+      <NamedData NDName="startDt" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="endDt" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

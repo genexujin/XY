@@ -9,6 +9,7 @@ public class ReportBean extends UITabBean{
     private RichDocument document;
 
     public ReportBean() {
+        initMenus();
     }
 
     public TaskFlowId getDynamicTaskFlowId() {

@@ -63,6 +63,10 @@
     Name="HomeModule"
     FullName="edu.hp.model.biz.HomeModule"
     SharedScope="0"/>
+  <AppModuleUsage
+    Name="MealModule"
+    FullName="edu.hp.model.biz.MealModule"
+    SharedScope="0"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
