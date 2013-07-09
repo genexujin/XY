@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="document-task-btf">
+    <default-activity>DocumentExplorer</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>DocExpBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.doc.DocExpBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="DocumentExplorer">
+      <page>/pages/document/DocumentExplorer.jsff</page>
+    </view>
+    <view id="NewDocTask">
+      <page>/pages/document/NewDocTask.jsff</page>
+    </view>
+    <view id="ViewDetail">
+      <page>/pages/document/ViewDetail.jsff</page>
+    </view>
+    <control-flow-rule id="__3">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>new</from-outcome>
+        <to-activity-id>NewDocTask</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>detail</from-outcome>
+        <to-activity-id>ViewDetail</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>list</from-outcome>
+        <to-activity-id>DocumentExplorer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

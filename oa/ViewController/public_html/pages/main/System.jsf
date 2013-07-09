@@ -130,19 +130,19 @@
                             </af:panelList>
                             <af:clientAttribute name="menuCode" value="MEAL"/>
                         </af:showDetailItem>
-                        <!--
-                        <af:showDetailItem text="通知下达" id="sdi6" icon="/images/icons/history.png">
-                            <af:forEach items="#{sessionScope.LoginUserMenuBean.sysAncmtMenus}" var="menu">
-                                <af:panelList id="pl2">
+                        <af:showDetailItem text="公文管理" id="sdi6" icon="/images/icons/explain.png">
+                            <af:spacer width="10" height="5" id="s15"/>
+                            <af:panelList id="pl2">
+                                <af:forEach items="#{sessionScope.LoginUserMenuBean.sysDocMenus}" var="menu">
                                     <af:commandImageLink text="#{menu.menuName}" id="cil7"
-                                                         actionListener="#{viewScope.SystemBean.openMenu}">
+                                                         actionListener="#{viewScope.SystemBean.openMenu}"
+                                                         icon="#{menu.menuIconURL}">
                                         <af:clientAttribute name="title" value="#{menu.menuName}"/>
                                         <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
                                     </af:commandImageLink>
-                                </af:panelList>
-                            </af:forEach>
+                                </af:forEach>
+                            </af:panelList>
                         </af:showDetailItem>
-                        -->
                     </af:panelAccordion>
                 </f:facet>
                 <f:facet name="globalLinks">

@@ -23,6 +23,7 @@
     <Attr Name="_appModuleNames8" Value="edu.hp.model.biz.HomeModule"/>
     <Attr Name="_appModuleNames9" Value="edu.hp.model.biz.PurchaseOrderAppModule"/>
     <Attr Name="_appModuleNames10" Value="edu.hp.model.biz.MealModule"/>
+    <Attr Name="_appModuleNames11" Value="edu.hp.model.biz.DocumentModule"/>
   </DesignTime>
   <Containee
     Name="biz"

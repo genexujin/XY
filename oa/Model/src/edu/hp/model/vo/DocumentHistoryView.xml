@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DocumentHistoryView"
+  Version="11.1.2.62.76"
+  SelectList="DocumentHistory.ID, 
+       DocumentHistory.DEPT_TASK_ID, 
+       DocumentHistory.EDITOR_NAME, 
+       DocumentHistory.EDITOR_ID, 
+       DocumentHistory.UPLOAD_TIME, 
+       DocumentHistory.FILE_URL"
+  FromList="DOCUMENT_HISTORY DocumentHistory"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="DocumentHistory"
+    Entity="edu.hp.model.eo.DocumentHistory"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="DocumentHistory"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="DeptTaskId"
+    PrecisionRule="true"
+    EntityAttrName="DeptTaskId"
+    EntityUsage="DocumentHistory"
+    AliasName="DEPT_TASK_ID"/>
+  <ViewAttribute
+    Name="EditorName"
+    PrecisionRule="true"
+    EntityAttrName="EditorName"
+    EntityUsage="DocumentHistory"
+    AliasName="EDITOR_NAME"/>
+  <ViewAttribute
+    Name="EditorId"
+    PrecisionRule="true"
+    EntityAttrName="EditorId"
+    EntityUsage="DocumentHistory"
+    AliasName="EDITOR_ID"/>
+  <ViewAttribute
+    Name="UploadTime"
+    PrecisionRule="true"
+    EntityAttrName="UploadTime"
+    EntityUsage="DocumentHistory"
+    AliasName="UPLOAD_TIME"/>
+  <ViewAttribute
+    Name="FileUrl"
+    PrecisionRule="true"
+    EntityAttrName="FileUrl"
+    EntityUsage="DocumentHistory"
+    AliasName="FILE_URL"/>
+  <ViewLinkAccessor
+    Name="DocumentDeptTaskView"
+    ViewLink="edu.hp.model.vo.link.DocDept2HistoryViewLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+</ViewObject>

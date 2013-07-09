@@ -384,4 +384,12 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
     public ApplicationModuleImpl getMealModule() {
         return (ApplicationModuleImpl)findApplicationModule("MealModule");
     }
+
+    /**
+     * Container's getter for DocumentModule1.
+     * @return DocumentModule1
+     */
+    public ApplicationModuleImpl getDocumentModule() {
+        return (ApplicationModuleImpl)findApplicationModule("DocumentModule");
+    }
 }

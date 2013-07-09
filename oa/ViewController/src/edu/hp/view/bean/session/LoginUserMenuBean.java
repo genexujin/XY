@@ -14,6 +14,7 @@ public class LoginUserMenuBean{
     public ArrayList<LoginUserMenu> sysAncmtMenus;
     public ArrayList<LoginUserMenu> sysHdMenus;
     public ArrayList<LoginUserMenu> sysCarMenus;
+    public ArrayList<LoginUserMenu> sysDocMenus;
     public ArrayList<LoginUserMenu> adminMenus;
     public ArrayList<LoginUserMenu> reportMenus;
 
@@ -88,5 +89,13 @@ public class LoginUserMenuBean{
 
     public ArrayList<LoginUserMenu> getReportMenus() {
         return reportMenus;
+    }
+
+    public void setSysDocMenus(ArrayList<LoginUserMenu> sysDocMenus) {
+        this.sysDocMenus = sysDocMenus;
+    }
+
+    public ArrayList<LoginUserMenu> getSysDocMenus() {
+        return sysDocMenus;
     }
 }

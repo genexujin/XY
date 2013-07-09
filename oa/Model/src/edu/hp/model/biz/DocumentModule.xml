@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DocumentModule"
+  Version="11.1.2.62.76"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="DocumentHistory"
+    ViewObjectName="edu.hp.model.vo.DocumentHistoryView"/>
+  <ViewUsage
+    Name="DocumentTask"
+    ViewObjectName="edu.hp.model.vo.DocumentTaskView"/>
+  <ViewUsage
+    Name="DeptTasks"
+    ViewObjectName="edu.hp.model.vo.DocumentDeptTaskView"/>
+  <ViewUsage
+    Name="DocumentDeptTask"
+    ViewObjectName="edu.hp.model.vo.DocumentDeptTaskView"/>
+  <ViewUsage
+    Name="HistoryOfDeptDoc"
+    ViewObjectName="edu.hp.model.vo.DocumentHistoryView"/>
+  <ViewUsage
+    Name="History"
+    ViewObjectName="edu.hp.model.vo.DocumentHistoryView"/>
+  <ViewLinkUsage
+    Name="Doc2DeptViewLink"
+    ViewLinkObjectName="edu.hp.model.vo.link.Doc2DeptViewLink"
+    SrcViewUsageName="edu.hp.model.biz.DocumentModule.DocumentTask"
+    DstViewUsageName="edu.hp.model.biz.DocumentModule.DeptTasks"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="DocDept2HistoryViewLink"
+    ViewLinkObjectName="edu.hp.model.vo.link.DocDept2HistoryViewLink"
+    SrcViewUsageName="edu.hp.model.biz.DocumentModule.DocumentDeptTask"
+    DstViewUsageName="edu.hp.model.biz.DocumentModule.HistoryOfDeptDoc"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="DocDept2HistoryViewLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.DocDept2HistoryViewLink"
+    SrcViewUsageName="edu.hp.model.biz.DocumentModule.DeptTasks"
+    DstViewUsageName="edu.hp.model.biz.DocumentModule.History"
+    Reversed="false"/>
+</AppModule>

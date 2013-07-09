@@ -67,6 +67,10 @@
     Name="MealModule"
     FullName="edu.hp.model.biz.MealModule"
     SharedScope="0"/>
+  <AppModuleUsage
+    Name="DocumentModule"
+    FullName="edu.hp.model.biz.DocumentModule"
+    SharedScope="0"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

@@ -60,6 +60,7 @@ public class Constants {
     public static final String ROLE_PO_RECEIVER="采购收货";
     public static final String ROLE_PO_DEPT_VERIFIER="采购部门审核";
     public static final String ROLE_HD_REVIEW="报修总务复核";
+    public static final String ROLE_DOC_REVIEW="公文管理员";
            
     public static final String HD_REASON_IT = "信息";
     public static final String HD_REASON_AFF = "总务";

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="DocumentExplorerPageDef"
+                Package="pages.document">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.DocumentModule.DocumentTask" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="DocumentTaskIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DocumentTaskIterator" id="DocumentTask">
+      <nodeDefinition DefName="edu.hp.model.vo.DocumentTaskView" Name="DocumentTask0">
+        <AttrNames>
+          <Item Value="TaskName"/>
+          <Item Value="TaskDescription"/>
+          <Item Value="TaskState"/>
+          <Item Value="SubmitBy"/>
+          <Item Value="SubmitDate"/>
+          <Item Value="ExpireDate"/>
+          <Item Value="SampleFileUrl"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction IterBinding="DocumentTaskIterator" id="search" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="search" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.DocumentTask">
+      <NamedData NDName="taskName" NDType="java.lang.String"/>
+      <NamedData NDName="state" NDType="java.lang.String"/>
+      <NamedData NDName="startDate" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="endDate" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>
