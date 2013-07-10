@@ -3,7 +3,90 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <af:panelStretchLayout id="psl1">
         <f:facet name="center">
+            <af:panelHeader text="新公文项目" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelFormLayout id="pfl1">
+                    <af:inputText value="#{bindings.TaskName.inputValue}" label="#{bindings.TaskName.hints.label}"
+                                  required="#{bindings.TaskName.hints.mandatory}"
+                                  columns="#{bindings.TaskName.hints.displayWidth}"
+                                  maximumLength="#{bindings.TaskName.hints.precision}"
+                                  shortDesc="#{bindings.TaskName.hints.tooltip}" id="it1" autoSubmit="true">
+                        <f:validator binding="#{bindings.TaskName.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.TaskDescription.inputValue}"
+                                  label="#{bindings.TaskDescription.hints.label}"
+                                  required="#{bindings.TaskDescription.hints.mandatory}"
+                                  columns="#{bindings.TaskDescription.hints.displayWidth}"
+                                  maximumLength="#{bindings.TaskDescription.hints.precision}"
+                                  shortDesc="#{bindings.TaskDescription.hints.tooltip}" id="it2" rows="3"
+                                  autoSubmit="true">
+                        <f:validator binding="#{bindings.TaskDescription.validator}"/>
+                    </af:inputText>
+                    <af:selectManyShuttle label="部门" value="#{viewScope.NewDocBean.selectedDepts}" id="sms1"
+                                          layout="horizontal" trailingHeader="已选部门" leadingHeader="可选部门"
+                                          autoSubmit="true" size="10" binding="#{viewScope.NewDocBean.theShuttle}">
+                        <f:selectItems value="#{viewScope.NewDocBean.allDepts}" id="si1"/>
+                    </af:selectManyShuttle>
+                    <af:inputDate value="#{bindings.ExpireDate.inputValue}" label="#{bindings.ExpireDate.hints.label}"
+                                  required="#{bindings.ExpireDate.hints.mandatory}"
+                                  columns="#{bindings.ExpireDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.ExpireDate.hints.tooltip}" id="id1" autoSubmit="true">
+                        <f:validator binding="#{bindings.ExpireDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.ExpireDate.format}"/>
+                    </af:inputDate>
+                    <af:selectBooleanCheckbox value="#{bindings.IsPublic.inputValue}" label="#{bindings.IsPublic.label}"
+                                              shortDesc="#{bindings.IsPublic.hints.tooltip}" id="sbc1"
+                                              autoSubmit="true"/>
+                    <af:panelLabelAndMessage label="#{bindings.TaskState.hints.label}" id="plam1">
+                        <af:outputText value="#{bindings.TaskState.inputValue}" id="ot1"/>
+                        <af:spacer width="40" height="10" id="s3"/>
+                        <af:commandLink text="查看公文模板" id="cl1" disabled="#{bindings.SampleFileUrl.inputValue == null}">
+                            <af:fileDownloadActionListener method="#{viewScope.NewDocBean.fileDownload}"
+                                                           filename="#{viewScope.NewDocBean.sampleFileName}"/>
+                        </af:commandLink>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{bindings.SubmitBy.hints.label}" id="plam2">
+                        <af:outputText value="#{bindings.SubmitBy.inputValue}" id="ot2"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{bindings.SubmitDate.hints.label}" id="plam3">
+                        <af:outputText value="#{bindings.SubmitDate.inputValue}" id="ot3">
+                            <af:convertDateTime pattern="#{bindings.SubmitDate.format}"/>
+                        </af:outputText>
+                    </af:panelLabelAndMessage>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                        <af:panelWindow id="pw1" title="上传模板" modal="true" contentHeight="50" contentWidth="300">
+                            <af:inputFile id="if1" label="模板文件" clientComponent="true" autoSubmit="true"
+                                          value="#{viewScope.NewDocBean.uploadFile}"
+                                          binding="#{viewScope.NewDocBean.inputFile}"
+                                          valueChangeListener="#{viewScope.NewDocBean.fileUploaded}"/>
+                        </af:panelWindow>
+                    </af:popup>
+                    <f:facet name="footer">
+                        <af:toolbar id="t1">
+                            <af:commandButton text="保存" id="cb1" icon="/images/icons/filesave.png"
+                                              action="#{viewScope.NewDocBean.saveDoc}"/>
+                            <af:commandButton text="项目启动" id="cb2" action="#{viewScope.NewDocBean.startDoc}"
+                                              icon="/images/icons/startserver.png"/>
+                            <af:commandButton text="返回项目搜索" id="ctb1" icon="/images/icons/listview.png"
+                                              actionListener="#{bindings.Rollback.execute}" immediate="true"
+                                              action="list">
+                                <af:resetActionListener/>
+                            </af:commandButton>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:commandButton text="上传模板" id="cb4" icon="/images/icons/file_upload.png">
+                                <af:showPopupBehavior popupId="p1" triggerType="action"/>
+                            </af:commandButton>
+                        </af:toolbar>
+                    </f:facet>
+                </af:panelFormLayout>
+            </af:panelHeader>
             <!-- id="af_one_column_stretched"   -->
         </f:facet>
     </af:panelStretchLayout>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:NewDocBean-->
 </ui:composition>

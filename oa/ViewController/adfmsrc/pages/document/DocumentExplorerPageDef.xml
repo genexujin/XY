@@ -5,19 +5,27 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="Root.DocumentModule.DocumentTask" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="DocumentTaskIterator"/>
+              id="DocumentTaskIterator">
+      <sortCriteria>
+        <sort attribute="SubmitDate" ascending="false"/>
+      </sortCriteria>
+    </iterator>
+    <iterator Binds="Root.AdminModule.Departments" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="DepartmentsIterator"/>
   </executables>
   <bindings>
     <tree IterBinding="DocumentTaskIterator" id="DocumentTask">
       <nodeDefinition DefName="edu.hp.model.vo.DocumentTaskView" Name="DocumentTask0">
         <AttrNames>
           <Item Value="TaskName"/>
-          <Item Value="TaskDescription"/>
+          <Item Value="DeptList"/>
+          <Item Value="IsPublic"/>
           <Item Value="TaskState"/>
+          <Item Value="SampleFileUrl"/>
           <Item Value="SubmitBy"/>
           <Item Value="SubmitDate"/>
           <Item Value="ExpireDate"/>
-          <Item Value="SampleFileUrl"/>
+          <Item Value="TaskDescription"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -28,6 +36,14 @@
       <NamedData NDName="state" NDType="java.lang.String"/>
       <NamedData NDName="startDate" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="endDate" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="dept" NDType="java.lang.String"/>
     </methodAction>
+    <list IterBinding="DepartmentsIterator" ListOperMode="navigation" ListIter="DepartmentsIterator" id="Departments"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DeptName"/>
+      </AttrNames>
+    </list>
+    <action IterBinding="DocumentTaskIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
   </bindings>
 </pageDefinition>

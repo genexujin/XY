@@ -12,7 +12,9 @@
        DocumentTask.SAMPLE_FILE_URL, 
        DocumentTask.SUBMIT_BY, 
        DocumentTask.SUBMIT_DATE, 
-       DocumentTask.EXPIRE_DATE"
+       DocumentTask.EXPIRE_DATE, 
+       DocumentTask.DEPT_LIST, 
+       DocumentTask.IS_PUBLIC"
   FromList="DOCUMENT_TASK DocumentTask"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -38,6 +40,10 @@
     Type="java.lang.String"/>
   <Variable
     Name="taskName"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="dept"
     Kind="viewcriteria"
     Type="java.lang.String"/>
   <EntityUsage
@@ -93,6 +99,18 @@
     EntityAttrName="ExpireDate"
     EntityUsage="DocumentTask"
     AliasName="EXPIRE_DATE"/>
+  <ViewAttribute
+    Name="DeptList"
+    PrecisionRule="true"
+    EntityAttrName="DeptList"
+    EntityUsage="DocumentTask"
+    AliasName="DEPT_LIST"/>
+  <ViewAttribute
+    Name="IsPublic"
+    PrecisionRule="true"
+    EntityAttrName="IsPublic"
+    EntityUsage="DocumentTask"
+    AliasName="IS_PUBLIC"/>
   <ViewCriteria
     Name="mainSearch"
     ViewObjectName="edu.hp.model.vo.DocumentTaskView"
@@ -167,6 +185,14 @@
           </ViewCriteriaRow>
         </ViewCriteria>
       </ViewCriteriaItemCompound>
+      <ViewCriteriaItem
+        Name="mainSearch_DocumentTaskViewCriteria_row_0_DeptList"
+        ViewAttribute="DeptList"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":dept"
+        IsBindVarValue="true"
+        Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewLinkAccessor
@@ -192,6 +218,15 @@
       <Parameter
         Name="endDate"
         Type="oracle.jbo.domain.Date"/>
+      <Parameter
+        Name="dept"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="executeEmptyQuery"
+      MethodName="executeEmptyQuery">
+      <Return
+        Type="void"/>
     </Method>
   </ClientInterface>
 </ViewObject>

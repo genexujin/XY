@@ -20,12 +20,17 @@ public class DocumentTaskViewImpl extends ViewObjectImpl implements DocumentTask
     public DocumentTaskViewImpl() {
     }
 
-    public void search(String taskName, String state, Date startDate, Date endDate) {
-        System.err.println(taskName);
-        System.err.println(state);
-        System.err.println(startDate);
-        System.err.println(endDate);
-        
+    public void executeEmptyQuery() {
+        executeEmptyRowSet();
+    }
+
+    public void search(String taskName, String state, Date startDate, Date endDate, String dept) {
+        //        System.err.println(taskName);
+        //        System.err.println(state);
+        //        System.err.println(startDate);
+        //        System.err.println(endDate);
+        System.err.println(dept);
+
         this.setApplyViewCriteriaNames(null);
         ViewCriteria criteria = this.getViewCriteria("mainSearch");
         this.setRangeSize(-1);
@@ -34,20 +39,8 @@ public class DocumentTaskViewImpl extends ViewObjectImpl implements DocumentTask
         this.setstate(state);
         this.setstartDate(startDate);
         this.setendDate(endDate);
+        this.setdept(dept);
         this.executeQuery();
-
-//        VariableImpl taskNameVar = new VariableImpl();
-//        taskNameVar.setName("taskName");
-//        VariableImpl stateVar = new VariableImpl();
-//        stateVar.setName("state");
-//        VariableImpl startDateVar = new VariableImpl();
-//        startDateVar.setName("startDate");
-//        VariableImpl endDateVar = new VariableImpl();
-//        endDateVar.setName("endDate");
-//        this.findByViewCriteriaWithBindVars(this.getViewCriteria("mainSearch"), -1,
-//                                            this.QUERY_MODE_SCAN_DATABASE_TABLES,
-//                                            new Variable[] { taskNameVar, stateVar, startDateVar, endDateVar },
-//                                            new Object[] { taskName, state, startDate, endDate });
     }
 
     /**
@@ -112,5 +105,21 @@ public class DocumentTaskViewImpl extends ViewObjectImpl implements DocumentTask
      */
     public void settaskName(String value) {
         ensureVariableManager().setVariableValue("taskName", value);
+    }
+
+    /**
+     * Returns the variable value for dept.
+     * @return variable value for dept
+     */
+    public String getdept() {
+        return (String)ensureVariableManager().getVariableValue("dept");
+    }
+
+    /**
+     * Sets <code>value</code> for variable dept.
+     * @param value value to bind as dept
+     */
+    public void setdept(String value) {
+        ensureVariableManager().setVariableValue("dept", value);
     }
 }

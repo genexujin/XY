@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="document-task-btf">
-    <default-activity>DocumentExplorer</default-activity>
+    <default-activity>executeEmptyQuery</default-activity>
     <data-control-scope>
       <isolated/>
     </data-control-scope>
     <managed-bean id="__1">
       <managed-bean-name>DocExpBean</managed-bean-name>
       <managed-bean-class>edu.hp.view.bean.doc.DocExpBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__8">
+      <managed-bean-name>NewDocBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.doc.NewDocBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <view id="DocumentExplorer">
@@ -19,6 +24,12 @@
     <view id="ViewDetail">
       <page>/pages/document/ViewDetail.jsff</page>
     </view>
+    <method-call id="executeEmptyQuery">
+      <method>#{bindings.executeEmptyQuery.execute}</method>
+      <outcome>
+        <fixed-outcome>executeEmptyQuery</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__3">
       <from-activity-id>*</from-activity-id>
       <control-flow-case id="__4">
@@ -31,6 +42,13 @@
       </control-flow-case>
       <control-flow-case id="__6">
         <from-outcome>list</from-outcome>
+        <to-activity-id>executeEmptyQuery</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2">
+      <from-activity-id>executeEmptyQuery</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>executeEmptyQuery</from-outcome>
         <to-activity-id>DocumentExplorer</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

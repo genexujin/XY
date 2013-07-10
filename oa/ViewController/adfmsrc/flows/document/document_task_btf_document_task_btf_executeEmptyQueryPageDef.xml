@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="document_task_btf_document_task_btf_executeEmptyQueryPageDef" Package="flows.document"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="executeEmptyQuery" RequiresUpdateModel="true" Action="invokeMethod" MethodName="executeEmptyQuery"
+            IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.DocumentTask"/>
+  </bindings>
+</pageDefinition>

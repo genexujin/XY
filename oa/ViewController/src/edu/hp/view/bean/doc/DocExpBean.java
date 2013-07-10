@@ -1,6 +1,10 @@
 package edu.hp.view.bean.doc;
 
+import edu.hp.model.common.Constants;
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
+
+import edu.hp.view.utils.JSFUtils;
 
 import java.util.Date;
 
@@ -16,8 +20,15 @@ public class DocExpBean {
     private String state;
     private Date startDate;
     private Date endDate;
+    private String dept;
 
     public String doSearch() {
+        
+        System.err.println(dept);
+        if(!isAdmin()){
+            LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+            dept = user.getDeptName();
+        }
 
         oracle.jbo.domain.Date stDt = null, edDt = null;
         
@@ -32,8 +43,17 @@ public class DocExpBean {
         params.put("state", state);
         params.put("startDate", stDt);
         params.put("endDate", edDt);
+        params.put("dept", dept);
         binding.execute();        
         return null;
+    }
+    
+    public boolean isAdmin(){
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        if(user.getIsUserInRole().get(Constants.ROLE_DOC_REVIEW) != null){
+            return true;
+        }
+        return false;
     }
 
     public void setTaskName(String taskName) {
@@ -66,5 +86,13 @@ public class DocExpBean {
 
     public Date getEndDate() {
         return endDate;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
+    }
+
+    public String getDept() {
+        return dept;
     }
 }

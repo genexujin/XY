@@ -25,6 +25,7 @@ public class LoginUser {
     private String currentPassword;
     private String userName;
     private String displayName;
+    private String deptName;
     private ArrayList<String> userGroups;
     private ArrayList<String> userRoles;
     private HashMap<String,Boolean> isUserInRole;
@@ -203,5 +204,13 @@ public class LoginUser {
 
     public RichInputText getNewPasswdCnfmComp() {
         return newPasswdCnfmComp;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getDeptName() {
+        return deptName;
     }
 }

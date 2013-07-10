@@ -53,17 +53,17 @@ public class MyPoBean extends BaseBean {
 
     public String doQuery() {
         String poStateId = getLovAttrValue("PoStateWithEmpty", "FlexCol1");
-        System.out.println("PoState Id is: " + poStateId);
+//        System.out.println("PoState Id is: " + poStateId);
 //        String itemCategoryId = getLovAttrValue("ItemCategory", "Id");
 //        System.out.println("ItemCategory Id is: " + itemCategoryId);
         String submitterId = getLovAttrValue("EmpWithEmpty", "Id");
-        System.out.println("submitterId is: " + submitterId);
+//        System.out.println("submitterId is: " + submitterId);
         String newItemCategory = getLovAttrValue("ItemCategoryWithEmpty", "Value");
-        System.out.println("ItemCategory is: " + newItemCategory);
-        
-        System.out.println("OrderReadableId is: " + orderReadableId);
-        System.out.println("SubmitDateFrom is: " + submitDateFrom);
-        System.out.println("SubmitDateTo is: " + submitDateTo);
+//        System.out.println("ItemCategory is: " + newItemCategory);
+//        
+//        System.out.println("OrderReadableId is: " + orderReadableId);
+//        System.out.println("SubmitDateFrom is: " + submitDateFrom);
+//        System.out.println("SubmitDateTo is: " + submitDateTo);
         
         OperationBinding binding = ADFUtils.findOperation("doQuery");
         binding.getParamsMap().put("oRdId", orderReadableId);

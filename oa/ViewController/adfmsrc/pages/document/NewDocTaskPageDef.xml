@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="NewDocTaskPageDef"
+                Package="pages.document">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.DocumentModule.DocumentTask" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="DocumentTaskIterator"/>
+    <iterator id="DepartmentsIterator" Binds="Root.AdminModule.Departments" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="DocumentTaskIterator" id="TaskName">
+      <AttrNames>
+        <Item Value="TaskName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="TaskDescription">
+      <AttrNames>
+        <Item Value="TaskDescription"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="ExpireDate">
+      <AttrNames>
+        <Item Value="ExpireDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="TaskState">
+      <AttrNames>
+        <Item Value="TaskState"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="SubmitBy">
+      <AttrNames>
+        <Item Value="SubmitBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="DocumentTaskIterator" id="IsPublic" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="IsPublic"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="是"/>
+        <Item Value="否"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="DocumentTaskIterator" id="DeptList">
+      <AttrNames>
+        <Item Value="DeptList"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="DocumentTaskIterator" id="SampleFileUrl">
+      <AttrNames>
+        <Item Value="SampleFileUrl"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="RootAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

@@ -117,6 +117,9 @@
           usageId="edu_hp_view_meal_order_btf_meal_order_btf_findByUserIdPageDef"/>
     <page path="/pages/meal/MealReport.jsff" usageId="edu_hp_view_MealReportPageDef"/>
     <page path="/pages/document/DocumentExplorer.jsff" usageId="edu_hp_view_DocumentExplorerPageDef"/>
+    <page path="/WEB-INF/flows/document/document-task-btf.xml#document-task-btf@executeEmptyQuery"
+          usageId="edu_hp_view_document_task_btf_document_task_btf_executeEmptyQueryPageDef"/>
+    <page path="/pages/document/NewDocTask.jsff" usageId="edu_hp_view_NewDocTaskPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -220,6 +223,9 @@
           path="flows.meal.meal_order_btf_meal_order_btf_findByUserIdPageDef"/>
     <page id="edu_hp_view_MealReportPageDef" path="pages.meal.MealReportPageDef"/>
     <page id="edu_hp_view_DocumentExplorerPageDef" path="pages.document.DocumentExplorerPageDef"/>
+    <page id="edu_hp_view_document_task_btf_document_task_btf_executeEmptyQueryPageDef"
+          path="flows.document.document_task_btf_document_task_btf_executeEmptyQueryPageDef"/>
+    <page id="edu_hp_view_NewDocTaskPageDef" path="pages.document.NewDocTaskPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

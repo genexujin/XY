@@ -19,7 +19,14 @@
                                     <af:commandToolbarButton text="打开" id="ctb1" icon="/images/icons/open.png"
                                                              action="detail"/>
                                     <af:commandToolbarButton text="新项目" id="ctb2"
-                                                             icon="/images/icons/new.png" action="new"/>
+                                                             icon="/images/icons/new.png"
+                                                             rendered="#{viewScope.DocExpBean.admin}"
+                                                             actionListener="#{bindings.CreateInsert.execute}"
+                                                             disabled="#{!bindings.CreateInsert.enabled}" action="new"/>
+                                    <af:commandToolbarButton text="导出" id="ctb3" icon="/images/icons/export.png">
+                                        <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                                                           filename="公文项目.xls"/>
+                                    </af:commandToolbarButton>
                                 </af:toolbar>
                             </f:facet>
                             <f:facet name="statusbar"/>
@@ -29,19 +36,27 @@
                                       fetchSize="#{bindings.DocumentTask.rangeSize}" rowBandingInterval="1"
                                       selectedRowKeys="#{bindings.DocumentTask.collectionModel.selectedRow}"
                                       selectionListener="#{bindings.DocumentTask.collectionModel.makeCurrent}"
-                                      rowSelection="single" id="t2" partialTriggers=":::cb1">
+                                      rowSelection="single" id="t2" partialTriggers=":::cb1 ::ctb2">
                                 <af:column sortProperty="#{bindings.DocumentTask.hints.TaskName.name}" sortable="true"
                                            headerText="#{bindings.DocumentTask.hints.TaskName.label}" id="c1">
                                     <af:outputText value="#{row.TaskName}" id="ot2"/>
                                 </af:column>
-                                <af:column sortProperty="#{bindings.DocumentTask.hints.TaskDescription.name}"
-                                           sortable="true"
-                                           headerText="#{bindings.DocumentTask.hints.TaskDescription.label}" id="c2">
-                                    <af:outputText value="#{row.TaskDescription}" id="ot3"/>
+                                <af:column sortProperty="#{bindings.DocumentTask.hints.DeptList.name}" sortable="false"
+                                           headerText="#{bindings.DocumentTask.hints.DeptList.label}" id="c9">
+                                    <af:outputText value="#{row.DeptList}" id="ot10"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DocumentTask.hints.IsPublic.name}" sortable="false"
+                                           headerText="#{bindings.DocumentTask.hints.IsPublic.label}" id="c8">
+                                    <af:outputText value="#{row.IsPublic}" id="ot9"/>
                                 </af:column>
                                 <af:column sortProperty="#{bindings.DocumentTask.hints.TaskState.name}" sortable="true"
                                            headerText="#{bindings.DocumentTask.hints.TaskState.label}" id="c3">
                                     <af:outputText value="#{row.TaskState}" id="ot4"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DocumentTask.hints.SampleFileUrl.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DocumentTask.hints.SampleFileUrl.label}" id="c7">
+                                    <af:outputText value="#{row.SampleFileUrl}" id="ot8"/>
                                 </af:column>
                                 <af:column sortProperty="#{bindings.DocumentTask.hints.SubmitBy.name}" sortable="true"
                                            headerText="#{bindings.DocumentTask.hints.SubmitBy.label}" id="c4">
@@ -59,10 +74,10 @@
                                         <af:convertDateTime pattern="#{bindings.DocumentTask.hints.ExpireDate.format}"/>
                                     </af:outputText>
                                 </af:column>
-                                <af:column sortProperty="#{bindings.DocumentTask.hints.SampleFileUrl.name}"
+                                <af:column sortProperty="#{bindings.DocumentTask.hints.TaskDescription.name}"
                                            sortable="true"
-                                           headerText="#{bindings.DocumentTask.hints.SampleFileUrl.label}" id="c7">
-                                    <af:outputText value="#{row.SampleFileUrl}" id="ot8"/>
+                                           headerText="#{bindings.DocumentTask.hints.TaskDescription.label}" id="c2">
+                                    <af:outputText value="#{row.TaskDescription}" id="ot3"/>
                                 </af:column>
                             </af:table>
                         </af:panelCollection>
@@ -75,12 +90,19 @@
                                 <af:inputText label="项目名称" id="it1" value="#{viewScope.DocExpBean.taskName}"/>
                                 <af:spacer width="10" height="10" id="s2"/>
                                 <af:selectOneChoice label="状态" id="soc1" value="#{viewScope.DocExpBean.state}">
-                                    <af:selectItem label="未开始" value="DRAFT" id="si1"/>
-                                    <af:selectItem label="进行中" value="ONGOING" id="si2"/>
-                                    <af:selectItem label="已截止" value="EXPIRED" id="si3"/>
-                                    <af:selectItem label="已取消" value="CANCELED" id="si4"/>
+                                    <af:selectItem label="未开始" value="未开始" id="si1"/>
+                                    <af:selectItem label="进行中" value="进行中" id="si2"/>
+                                    <af:selectItem label="已截止" value="已截止" id="si3"/>
+                                    <af:selectItem label="已取消" value="已取消" id="si4"/>
                                 </af:selectOneChoice>
                                 <af:spacer width="10" height="10" id="s1"/>
+                                <af:selectOneChoice
+                                                    label="部门"
+                                                    shortDesc="#{bindings.Departments.hints.tooltip}" id="soc2"
+                                                    value="#{viewScope.DocExpBean.dept}"
+                                                    rendered="#{viewScope.DocExpBean.admin}">
+                                    <f:selectItems value="#{bindings.Departments.items}" id="si5"/>
+                                </af:selectOneChoice>
                             </af:panelGroupLayout>
                             <af:panelGroupLayout id="pgl1" layout="horizontal">
                                 <af:outputText value="项目发起时间范围： " id="ot1"/>
