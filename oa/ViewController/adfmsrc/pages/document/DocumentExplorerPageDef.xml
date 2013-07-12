@@ -45,5 +45,10 @@
       </AttrNames>
     </list>
     <action IterBinding="DocumentTaskIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="DocumentTaskIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

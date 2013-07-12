@@ -3,7 +3,233 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <af:panelStretchLayout id="psl1">
         <f:facet name="center">
+            <af:panelHeader text="公文项目详情" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelStretchLayout id="psl2" startWidth="0px" endWidth="0px" topHeight="170px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="pgl1" layout="scroll">
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                      binding="#{viewScope.DocDetailBean.uploadPopup}" contentDelivery="lazyUncached">
+                                <af:panelWindow id="pw1" contentHeight="50" contentWidth="300" title="上传公文"
+                                                modal="true">
+                                    <af:inputFile id="if1" clientComponent="true" autoSubmit="true"
+                                                  value="#{viewScope.DocDetailBean.uploadFile}"
+                                                  binding="#{viewScope.DocDetailBean.inputFile}"
+                                                  valueChangeListener="#{viewScope.DocDetailBean.fileUploaded}"
+                                                  label="公文文件"/>
+                                </af:panelWindow>
+                            </af:popup>
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                                      contentDelivery="lazyUncached" binding="#{viewScope.DocDetailBean.historyPopup}">
+                                <af:panelWindow id="pw2" stretchChildren="none" modal="true" title="公文历史(默认排序为上传时间最近)"
+                                                contentHeight="100" contentWidth="350">
+                                    <af:panelGroupLayout id="pgl4" layout="scroll">
+                                        <af:table value="#{bindings.History.collectionModel}" var="row"
+                                                  rows="#{bindings.History.rangeSize}"
+                                                  emptyText="#{bindings.History.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.History.rangeSize}" rowBandingInterval="1"
+                                                  selectedRowKeys="#{bindings.History.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.History.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t3" autoHeightRows="10">
+                                            <af:column sortProperty="#{bindings.History.hints.EditorName.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.History.hints.EditorName.label}" id="c1">
+                                                <af:outputText value="#{row.EditorName}" id="ot3"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.History.hints.FileUrl.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.History.hints.FileUrl.label}" id="c2">
+                                                <af:commandLink text="公文下载" id="cl21"                                                               
+                                                                actionListener="#{viewScope.DocDetailBean.doHisDownload}"
+                                                                clientComponent="true">
+                                                    <af:clientAttribute name="filePath" value="#{row.FileUrl}"/>
+                                                    <af:fileDownloadActionListener filename="#{row.FileName}"
+                                                                                   method="#{viewScope.DocDetailBean.downloadHisFile}"/>
+                                                </af:commandLink>                                                
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.History.hints.UploadTime.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.History.hints.UploadTime.label}" id="c3">
+                                                <af:outputText value="#{row.UploadTime}" id="ot5">
+                                                    <af:convertDateTime pattern="#{bindings.History.hints.UploadTime.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelGroupLayout>
+                                </af:panelWindow>
+                            </af:popup>
+                            <af:outputFormatted id="of1" value="部门公文：" styleClass="AFDataText"/>
+                            <af:iterator id="i1" value="#{bindings.DeptTasks.collectionModel}" rows="-1" var="row">
+                                <af:panelGroupLayout id="pgl3" layout="vertical" partialTriggers="cb4 ctb2 ctb3 ::if1">
+                                    <af:separator id="s2"/>
+                                    <af:outputText value="#{row.DeptName}" id="ot1"
+                                                   inlineStyle="color:rgb(56,92,188); font-weight:bold;"/>
+                                    <af:spacer width="10" height="2" id="s3"/>
+                                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                        <af:spacer width="20" height="10" id="s8"/>
+                                        <af:commandLink text="公文下载" id="cl2" disabled="#{row.DocumentFileUrl eq null}"
+                                                        actionListener="#{viewScope.DocDetailBean.doDownload}"
+                                                        clientComponent="true">
+                                            <af:clientAttribute name="filePath" value="#{row.DocumentFileUrl}"/>
+                                            <af:fileDownloadActionListener filename="#{row.FileName}"
+                                                                           method="#{viewScope.DocDetailBean.downloadDeptFile}"/>
+                                        </af:commandLink>
+                                        <af:spacer width="20" height="10" id="s4"/>
+                                        <af:outputText value="当前编辑人：#{row.CurrentEditorName !=null?row.CurrentEditorName:'无'}"
+                                                       id="ot2" clientComponent="true"/>
+                                        <af:spacer width="10" height="10" id="s5"/>
+                                        <af:toolbar id="t2">
+                                            <af:commandToolbarButton text="锁定" id="cb4"
+                                                                     rendered="#{row.CurrentEditorId==null}"
+                                                                     disabled="#{sessionScope.LoginUserBean.deptName != row.DeptName and not sessionScope.LoginUserBean.isUserInRole['公文管理员']}"
+                                                                     icon="/images/icons/listLockIcon.png"
+                                                                     actionListener="#{viewScope.DocDetailBean.doLock}"
+                                                                     clientComponent="true">
+                                                <af:clientAttribute name="deptTaskId" value="#{row.Id}"/>
+                                            </af:commandToolbarButton>
+                                            <af:commandToolbarButton text="释放" id="ctb2"
+                                                                     rendered="#{row.CurrentEditorId eq sessionScope.LoginUserBean.userId}"
+                                                                     disabled="#{sessionScope.LoginUserBean.deptName != row.DeptName and not sessionScope.LoginUserBean.isUserInRole['公文管理员']}"
+                                                                     icon="/images/icons/key.png"
+                                                                     actionListener="#{viewScope.DocDetailBean.doUnlock}"
+                                                                     clientComponent="true">
+                                                <af:clientAttribute name="deptTaskId" value="#{row.Id}"/>
+                                            </af:commandToolbarButton>
+                                            <af:commandToolbarButton text="提醒释放" id="ctb3"
+                                                                     rendered="#{row.CurrentEditorId !=null and row.CurrentEditorId != sessionScope.LoginUserBean.userId}"
+                                                                     disabled="#{sessionScope.LoginUserBean.deptName != row.DeptName and not sessionScope.LoginUserBean.isUserInRole['公文管理员']}"
+                                                                     icon="/images/icons/foreignkey.png"
+                                                                     clientComponent="true">
+                                                <af:clientAttribute name="deptTaskId" value="#{row.Id}"/>
+                                            </af:commandToolbarButton>
+                                            <af:commandToolbarButton text="上传" id="cb5"
+                                                                     disabled="#{(sessionScope.LoginUserBean.deptName != row.DeptName and not sessionScope.LoginUserBean.isUserInRole['公文管理员']) or viewScope.DocDetailBean.expired}"
+                                                                     rendered="#{row.CurrentEditorId eq sessionScope.LoginUserBean.userId}"
+                                                                     icon="/images/icons/file_upload.png"
+                                                                     clientComponent="true"
+                                                                     actionListener="#{viewScope.DocDetailBean.openUploadPopup}">
+                                                <af:clientAttribute name="deptTaskId" value="#{row.Id}"/>
+                                                <af:clientAttribute name="deptName" value="#{row.DeptName}"/>
+                                            </af:commandToolbarButton>
+                                            <af:commandToolbarButton text="历史记录" id="cb6"
+                                                                     rendered="#{sessionScope.LoginUserBean.deptName != row.DeptName and sessionScope.LoginUserBean.isUserInRole['公文管理员']}"
+                                                                     icon="/images/icons/history.png"
+                                                                     clientComponent="true"
+                                                                     actionListener="#{viewScope.DocDetailBean.openHistoryPopup}">
+                                                <af:clientAttribute name="deptTaskId" value="#{row.Id}"/>
+                                            </af:commandToolbarButton>
+                                        </af:toolbar>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:iterator>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelFormLayout id="pfl1" maxColumns="2" rows="4">
+                            <af:inputText value="#{bindings.TaskName.inputValue}"
+                                          label="#{bindings.TaskName.hints.label}"
+                                          required="#{bindings.TaskName.hints.mandatory}"
+                                          columns="#{bindings.TaskName.hints.displayWidth}"
+                                          maximumLength="#{bindings.TaskName.hints.precision}"
+                                          shortDesc="#{bindings.TaskName.hints.tooltip}" id="it1" readOnly="true">
+                                <f:validator binding="#{bindings.TaskName.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.TaskDescription.inputValue}"
+                                          label="#{bindings.TaskDescription.hints.label}"
+                                          required="#{bindings.TaskDescription.hints.mandatory}"
+                                          columns="#{bindings.TaskDescription.hints.displayWidth}"
+                                          maximumLength="#{bindings.TaskDescription.hints.precision}"
+                                          shortDesc="#{bindings.TaskDescription.hints.tooltip}" id="it2" rows="3"
+                                          readOnly="#{viewScope.DocDetailBean.complete}">
+                                <f:validator binding="#{bindings.TaskDescription.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.DeptList.inputValue}"
+                                          label="#{bindings.DeptList.hints.label}"
+                                          required="#{bindings.DeptList.hints.mandatory}"
+                                          columns="#{bindings.DeptList.hints.displayWidth}"
+                                          maximumLength="#{bindings.DeptList.hints.precision}"
+                                          shortDesc="#{bindings.DeptList.hints.tooltip}" id="it6" readOnly="true">
+                                <f:validator binding="#{bindings.DeptList.validator}"/>
+                            </af:inputText>
+                            <af:inputDate value="#{bindings.ExpireDate.inputValue}"
+                                          label="#{bindings.ExpireDate.hints.label}"
+                                          required="#{bindings.ExpireDate.hints.mandatory}"
+                                          columns="#{bindings.ExpireDate.hints.displayWidth}"
+                                          shortDesc="#{bindings.ExpireDate.hints.tooltip}" id="id2"
+                                          readOnly="#{viewScope.DocDetailBean.complete}">
+                                <f:validator binding="#{bindings.ExpireDate.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.ExpireDate.format}"/>
+                            </af:inputDate>
+                            <af:inputText value="#{bindings.SubmitBy.inputValue}"
+                                          label="#{bindings.SubmitBy.hints.label}"
+                                          required="#{bindings.SubmitBy.hints.mandatory}"
+                                          columns="#{bindings.SubmitBy.hints.displayWidth}"
+                                          maximumLength="#{bindings.SubmitBy.hints.precision}"
+                                          shortDesc="#{bindings.SubmitBy.hints.tooltip}" id="it5" readOnly="true">
+                                <f:validator binding="#{bindings.SubmitBy.validator}"/>
+                            </af:inputText>
+                            <af:inputDate value="#{bindings.SubmitDate.inputValue}"
+                                          label="#{bindings.SubmitDate.hints.label}"
+                                          required="#{bindings.SubmitDate.hints.mandatory}"
+                                          columns="#{bindings.SubmitDate.hints.displayWidth}"
+                                          shortDesc="#{bindings.SubmitDate.hints.tooltip}" id="id1" readOnly="true">
+                                <f:validator binding="#{bindings.SubmitDate.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.SubmitDate.format}"/>
+                            </af:inputDate>
+                            <af:selectBooleanCheckbox value="#{bindings.IsPublic.inputValue}"
+                                                      label="#{bindings.IsPublic.label}"
+                                                      shortDesc="#{bindings.IsPublic.hints.tooltip}" id="sbc1"
+                                                      readOnly="#{viewScope.DocDetailBean.complete}"/>
+                            <af:inputText value="#{bindings.TaskState.inputValue}"
+                                          label="#{bindings.TaskState.hints.label}"
+                                          required="#{bindings.TaskState.hints.mandatory}"
+                                          columns="#{bindings.TaskState.hints.displayWidth}"
+                                          maximumLength="#{bindings.TaskState.hints.precision}"
+                                          shortDesc="#{bindings.TaskState.hints.tooltip}" id="it3" readOnly="true">
+                                <f:validator binding="#{bindings.TaskState.validator}"/>
+                            </af:inputText>
+                            <f:facet name="footer">
+                                <af:group id="g1">
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:toolbar id="t1">
+                                        <af:commandToolbarButton text="项目完成" id="cb1"
+                                                                 action="#{viewScope.DocDetailBean.doComplete}"
+                                                                 icon="/images/icons/check.png"
+                                                                 disabled="#{viewScope.DocDetailBean.complete}"
+                                                                 rendered="#{viewScope.DocDetailBean.admin}"/>
+                                        <af:commandToolbarButton id="cb2" text="取消项目"
+                                                                 action="#{viewScope.DocDetailBean.doCancel}"
+                                                                 icon="/images/icons/delete.png"/>
+                                        <af:commandToolbarButton id="cb3" text="保存更改" icon="/images/icons/filesave.png"
+                                                                 disabled="#{viewScope.DocDetailBean.complete}"
+                                                                 actionListener="#{bindings.Commit.execute}"/>
+                                        <af:commandToolbarButton text="返回项目搜索" id="ctb1"
+                                                                 icon="/images/icons/listview.png"
+                                                                 actionListener="#{bindings.Rollback.execute}"
+                                                                 immediate="true" action="list">
+                                            <af:resetActionListener/>
+                                        </af:commandToolbarButton>
+                                        <af:commandLink text="查看公文模板" id="cl1"
+                                                        disabled="#{bindings.SampleFileUrl.inputValue == null}">
+                                            <af:fileDownloadActionListener method="#{viewScope.DocDetailBean.fileDownload}"
+                                                                           filename="#{viewScope.DocDetailBean.sampleFileName}"/>
+                                        </af:commandLink>
+                                    </af:toolbar>
+                                </af:group>
+                            </f:facet>
+                        </af:panelFormLayout>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:panelHeader>
             <!-- id="af_one_column_stretched"   -->
         </f:facet>
     </af:panelStretchLayout>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:DocDetailBean-->
 </ui:composition>

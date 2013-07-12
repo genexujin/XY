@@ -13,7 +13,9 @@
        Notifications.IS_SMS_SENT, 
        Notifications.PRIORITY, 
        Notifications.STATE, 
-       Notifications.TO_USER_ID"
+       Notifications.TO_USER_ID, 
+       Notifications.CONTEXT_OBJECT_TYPE, 
+       Notifications.CONTEXT_OBJECT_ID"
   FromList="NOTIFICATIONS Notifications"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -91,6 +93,18 @@
     EntityAttrName="ToUserId"
     EntityUsage="Notifications"
     AliasName="TO_USER_ID"/>
+  <ViewAttribute
+    Name="ContextObjectType"
+    PrecisionRule="true"
+    EntityAttrName="ContextObjectType"
+    EntityUsage="Notifications"
+    AliasName="CONTEXT_OBJECT_TYPE"/>
+  <ViewAttribute
+    Name="ContextObjectId"
+    PrecisionRule="true"
+    EntityAttrName="ContextObjectId"
+    EntityUsage="Notifications"
+    AliasName="CONTEXT_OBJECT_ID"/>
   <ViewCriteria
     Name="findById"
     ViewObjectName="edu.hp.model.vo.NotificationsView"

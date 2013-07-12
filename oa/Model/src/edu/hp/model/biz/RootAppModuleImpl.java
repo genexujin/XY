@@ -86,6 +86,8 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                             newRow.setIsSmsSent(SMSManager.isEnabled() ? "Y" : "N");
                             newRow.setPriority(new Number(notification.getPriority()));
                             newRow.setTitle(notification.getTitle());
+                            newRow.setContextObjectType(notification.getContextType());
+                            newRow.setContextObjectId(notification.getContextObjectId());
                             String id = (String)receiver.getAttribute("Id");
                             newRow.setToUserId(id);
                             //INSERT IT INTO THE CURRENT RESULT SET
@@ -110,6 +112,8 @@ public class RootAppModuleImpl extends ApplicationModuleImpl implements RootAppM
                 String mobile = employees.findUserMobile(notification.getUserId());
                 NotificationsViewImpl ntfVO = this.getNotifications();
                 NotificationsViewRowImpl newRow = (NotificationsViewRowImpl)ntfVO.createRow();
+                newRow.setContextObjectType(notification.getContextType());
+                newRow.setContextObjectId(notification.getContextObjectId());
                 //newRow.setCategory(category);
                 newRow.setContent(notification.getContent());
                 newRow.setEventDate(new Timestamp(System.currentTimeMillis()));

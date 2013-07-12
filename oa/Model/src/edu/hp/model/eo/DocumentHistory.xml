@@ -33,7 +33,9 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="DOCUMENT_HISTORY">
+    TableName="DOCUMENT_HISTORY"
+    IsUpdateable="while_insert"
+    RetrievedOnInsert="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -99,6 +101,18 @@
           ResId="edu.hp.model.eo.DocumentHistory.FileUrl_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
+  </Attribute>
+  <Attribute
+    Name="FileName"
+    Precision="500"
+    ColumnName="FILE_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="DOCUMENT_HISTORY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
   </Attribute>
   <AccessorAttribute
     Name="DocumentDeptTask"

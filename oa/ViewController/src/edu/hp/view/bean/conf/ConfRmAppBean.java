@@ -76,12 +76,12 @@ public class ConfRmAppBean extends BaseBean {
                 String noteContent = " 提交时间：" + dateStr;
                 //send to requester
                 if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null)
-                    sendNotification(noteTitle, noteContent, userId, null);
+                    sendNotification(noteTitle, noteContent, userId, null,Constants.CONTEXT_TYPE_CONFRM, id);
 
                 String apprvTitle = "有新的会议室申请等待您的审核。";
                 String apprvContent = " 会议主题：" + title + " 申请人： " + userDisplayName;
                 if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null)
-                    sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_CONFRM_ADMIN);
+                    sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_CONFRM_ADMIN,Constants.CONTEXT_TYPE_CONFRM, id);
                 
                 //create task
                 if (user.getIsUserInRole().get(Constants.ROLE_CONFRM_ADMIN) == null)
@@ -117,7 +117,7 @@ public class ConfRmAppBean extends BaseBean {
                 String dateStr = getDateString();
                 String noteContent = " 审核时间：" + dateStr;
                 //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
+                sendNotification(noteTitle, noteContent, userId, null,Constants.CONTEXT_TYPE_CONFRM, id);
                 completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_CONFRM_ADMIN);
 
                 ADFUtils.findOperation("Commit").execute();
@@ -144,7 +144,7 @@ public class ConfRmAppBean extends BaseBean {
             String dateStr = getDateString();
             String noteContent = " 取消时间：" + dateStr;
             //send to requester
-            sendNotification(noteTitle, noteContent, userId, null);
+            sendNotification(noteTitle, noteContent, userId, null,Constants.CONTEXT_TYPE_CONFRM, id);
             this.cancelTask(Constants.CONTEXT_TYPE_CONFRM, id);
             ADFUtils.findOperation("Commit").execute();
         } else {
@@ -171,7 +171,7 @@ public class ConfRmAppBean extends BaseBean {
                     String dateStr = getDateString();
                     String noteContent = " 审核时间：" + dateStr;
                     //send to requester
-                    sendNotification(noteTitle, noteContent, userId, null);
+                    sendNotification(noteTitle, noteContent, userId, null,Constants.CONTEXT_TYPE_CONFRM, id);
                     completeTask(Constants.CONTEXT_TYPE_CONFRM, id, Constants.ROLE_CONFRM_ADMIN);
                     ADFUtils.findOperation("Commit").execute();
                 } else {

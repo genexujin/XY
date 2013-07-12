@@ -13,6 +13,7 @@ import oracle.jbo.server.ViewRowImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class NotificationsViewRowImpl extends ViewRowImpl {
+
     public static final int ENTITY_NOTIFICATIONS = 0;
 
     /**
@@ -108,6 +109,26 @@ public class NotificationsViewRowImpl extends ViewRowImpl {
                 obj.setToUserId((String)value);
             }
         }
+        ,
+        ContextObjectType {
+            public Object get(NotificationsViewRowImpl obj) {
+                return obj.getContextObjectType();
+            }
+
+            public void put(NotificationsViewRowImpl obj, Object value) {
+                obj.setContextObjectType((String)value);
+            }
+        }
+        ,
+        ContextObjectId {
+            public Object get(NotificationsViewRowImpl obj) {
+                return obj.getContextObjectId();
+            }
+
+            public void put(NotificationsViewRowImpl obj, Object value) {
+                obj.setContextObjectId((String)value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -135,6 +156,7 @@ public class NotificationsViewRowImpl extends ViewRowImpl {
             return vals;
         }
     }
+
     public static final int ID = AttributesEnum.Id.index();
     public static final int CATEGORY = AttributesEnum.Category.index();
     public static final int TITLE = AttributesEnum.Title.index();
@@ -144,6 +166,8 @@ public class NotificationsViewRowImpl extends ViewRowImpl {
     public static final int PRIORITY = AttributesEnum.Priority.index();
     public static final int STATE = AttributesEnum.State.index();
     public static final int TOUSERID = AttributesEnum.ToUserId.index();
+    public static final int CONTEXTOBJECTTYPE = AttributesEnum.ContextObjectType.index();
+    public static final int CONTEXTOBJECTID = AttributesEnum.ContextObjectId.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -301,6 +325,38 @@ public class NotificationsViewRowImpl extends ViewRowImpl {
      */
     public void setToUserId(String value) {
         setAttributeInternal(TOUSERID, value);
+    }
+
+    /**
+     * Gets the attribute value for CONTEXT_OBJECT_TYPE using the alias name ContextObjectType.
+     * @return the CONTEXT_OBJECT_TYPE
+     */
+    public String getContextObjectType() {
+        return (String) getAttributeInternal(CONTEXTOBJECTTYPE);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for CONTEXT_OBJECT_TYPE using the alias name ContextObjectType.
+     * @param value value to set the CONTEXT_OBJECT_TYPE
+     */
+    public void setContextObjectType(String value) {
+        setAttributeInternal(CONTEXTOBJECTTYPE, value);
+    }
+
+    /**
+     * Gets the attribute value for CONTEXT_OBJECT_ID using the alias name ContextObjectId.
+     * @return the CONTEXT_OBJECT_ID
+     */
+    public String getContextObjectId() {
+        return (String) getAttributeInternal(CONTEXTOBJECTID);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for CONTEXT_OBJECT_ID using the alias name ContextObjectId.
+     * @param value value to set the CONTEXT_OBJECT_ID
+     */
+    public void setContextObjectId(String value) {
+        setAttributeInternal(CONTEXTOBJECTID, value);
     }
 
     /**

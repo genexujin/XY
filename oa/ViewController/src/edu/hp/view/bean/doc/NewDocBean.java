@@ -1,6 +1,10 @@
 package edu.hp.view.bean.doc;
 
+import edu.hp.model.common.Constants;
+import edu.hp.model.pojo.Notification;
+import edu.hp.view.bean.BaseBean;
 import edu.hp.view.file.FileManager;
+import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 
 import edu.hp.view.utils.JSFUtils;
@@ -12,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.OutputStream;
+
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +35,21 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.input.RichInputFile;
 import oracle.adf.view.rich.component.rich.input.RichSelectManyShuttle;
 
+import oracle.binding.OperationBinding;
+
 import oracle.jbo.Row;
+
+import oracle.jbo.ViewObject;
+
+import oracle.jbo.domain.DBSequence;
+
+import oracle.jbo.domain.Date;
+
+import oracle.jbo.domain.Timestamp;
 
 import org.apache.myfaces.trinidad.model.UploadedFile;
 
-public class NewDocBean {
+public class NewDocBean extends BaseBean {
 
     List<String> selectedDepts;
     List<SelectItem> allDepts;
@@ -94,8 +110,64 @@ public class NewDocBean {
     }
 
     public String startDoc() {
-        // Add event code here...
+        saveDeptList();
+
+        ArrayList<String> userIds = new ArrayList<String>();
+        DCIteratorBinding it = ADFUtils.findIterator("DeptTasksIterator");
+        for (String dep : selectedDepts) {
+            ViewObject vo = it.getViewObject();
+            Row newRow = vo.createRow();
+            newRow.setAttribute("State", "进行中");
+            newRow.setAttribute("DeptName", dep);
+            OperationBinding searchDeptOp = ADFUtils.findOperation("findByName");
+            searchDeptOp.getParamsMap().put("Name", dep);
+            searchDeptOp.execute();
+
+            String mgrId = (String)ADFUtils.getBoundAttributeValue("MgrId");
+            if (!userIds.contains(mgrId))
+                userIds.add(mgrId);
+            newRow.setAttribute("MgrId", mgrId);
+
+
+            String supervisorId = (String)ADFUtils.getBoundAttributeValue("SupervisorId");
+            if (!userIds.contains(supervisorId))
+                userIds.add(supervisorId);
+            newRow.setAttribute("SupervisorId", supervisorId);
+            vo.insertRow(newRow);
+        }
+
+        //更新DocTask上的部分字段
+        ADFUtils.setBoundAttributeValue("TaskState", "进行中");
+        ADFUtils.setBoundAttributeValue("SubmitDate", new Date(new java.sql.Date(System.currentTimeMillis())));
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        ADFUtils.setBoundAttributeValue("SubmitBy", user.getDisplayName());
+        ADFUtils.commit("公文项目已发起！", "公文项目发起过程中出错，请联系管理员！");
+        System.err.println(user.getUserId());
+        if(!userIds.contains(user.getUserId())) userIds.add(user.getUserId());
+        //通知所有相关用户
+        notifyUsers(userIds);
+
         return null;
+    }
+
+    private void notifyUsers(ArrayList<String> userIds) {
+
+        String taskName = (String)ADFUtils.getBoundAttributeValue("TaskName");
+        Timestamp expireDate = (Timestamp)ADFUtils.getBoundAttributeValue("ExpireDate");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String expDtStr = null;
+        if(expireDate!=null){
+            java.util.Date expDt = new java.util.Date(expireDate.getTime());
+            expDtStr = formatter.format(expDt);
+        }
+        String content = " 项目名称：" + taskName + " 截止日期：" + expDtStr + "请进入系统查看详情！";
+
+        String docTaskId = (ADFUtils.getBoundAttributeValue("Id")).toString();
+        for (String userId : userIds) {
+            super.sendNotification("有新的公文项目需要完成！", content, userId, null, Constants.CONTEXT_TYPE_DOCTASK,
+                                   docTaskId);
+        }
+        ADFUtils.commit();
     }
 
 

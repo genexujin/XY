@@ -27,7 +27,8 @@
   <AssociationEnd
     Name="DocumentHistory"
     Cardinality="-1"
-    Owner="edu.hp.model.eo.DocumentHistory">
+    Owner="edu.hp.model.eo.DocumentHistory"
+    HasOwner="true">
     <DesignTime>
       <Attr Name="_aggregation" Value="0"/>
       <Attr Name="_finderName" Value="DocumentHistory"/>

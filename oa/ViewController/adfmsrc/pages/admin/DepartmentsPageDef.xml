@@ -10,22 +10,6 @@
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="DepartmentsQuery"/>
   </executables>
   <bindings>
-    <tree IterBinding="DepartmentsIterator" id="Departments">
-      <nodeDefinition DefName="edu.hp.model.vo.DepartmentsView" Name="Departments0">
-        <AttrNames>
-          <Item Value="DeptName"/>
-          <Item Value="LocationId"/>
-          <Item Value="MgrName"/>
-          <Item Value="CreatedAt"/>
-          <Item Value="CreatedBy"/>
-          <Item Value="LastUpdatedAt"/>
-          <Item Value="LastUpdatedBy"/>
-          <Item Value="Expired" Binds="Expired"/>
-          <Item Value="MgrId"/>
-          <Item Value="DeptId"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
     <action IterBinding="DepartmentsIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
     <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
             RequiresUpdateModel="false" Action="rollbackTransaction"/>
@@ -40,6 +24,16 @@
         <Item Value="N"/>
       </ValueList>
     </button>
-    <listOfValues StaticList="false" IterBinding="DepartmentsIterator" Uses="LOV_MgrId" id="MgrId"/>
+    <tree IterBinding="DepartmentsIterator" id="Departments">
+      <nodeDefinition DefName="edu.hp.model.vo.DepartmentsView" Name="Departments0">
+        <AttrNames>
+          <Item Value="DeptName"/>
+          <Item Value="LocationId"/>
+          <Item Value="MgrId"/>
+          <Item Value="SupervisorId"/>
+          <Item Value="Expired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

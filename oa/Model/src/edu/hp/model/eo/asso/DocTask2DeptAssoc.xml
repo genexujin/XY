@@ -27,7 +27,8 @@
   <AssociationEnd
     Name="DeptTasks"
     Cardinality="-1"
-    Owner="edu.hp.model.eo.DocumentDeptTask">
+    Owner="edu.hp.model.eo.DocumentDeptTask"
+    HasOwner="true">
     <DesignTime>
       <Attr Name="_aggregation" Value="0"/>
       <Attr Name="_finderName" Value="DeptTasks"/>

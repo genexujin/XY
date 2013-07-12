@@ -15,6 +15,11 @@
       <managed-bean-class>edu.hp.view.bean.doc.NewDocBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__9">
+      <managed-bean-name>DocDetailBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.doc.DocDetailBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
     <view id="DocumentExplorer">
       <page>/pages/document/DocumentExplorer.jsff</page>
     </view>

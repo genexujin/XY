@@ -26,8 +26,11 @@ public class Constants {
     public static final String STATE_TASK_CANCELED = "CANCELED";
     public static final String CONTEXT_TYPE_VEHICLE = "VEHICLE";
     public static final String CONTEXT_TYPE_CONFRM = "CONFRM";
+    public static final String CONTEXT_TYPE_CLSRM = "CLSRM";
+    public static final String CONTEXT_TYPE_MEAL = "MEAL";
     public static final String CONTEXT_TYPE_HELPDESK = "HELPDESK";
     public static final String CONTEXT_TYPE_PO = "PO";
+    public static final String CONTEXT_TYPE_DOCTASK = "DOCTASK";
     
     public static final String PO_STATE_INITIAL = "1";
     public static final String PO_STATE_DEPT_REVIEW = "8";

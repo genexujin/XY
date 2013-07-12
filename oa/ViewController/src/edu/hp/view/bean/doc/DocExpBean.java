@@ -1,14 +1,21 @@
 package edu.hp.view.bean.doc;
 
 import edu.hp.model.common.Constants;
+import edu.hp.view.file.FileManager;
 import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 
 import edu.hp.view.utils.JSFUtils;
 
+import java.io.OutputStream;
+
 import java.util.Date;
 
 import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import javax.faces.event.ActionEvent;
 
 import oracle.binding.OperationBinding;
 
@@ -55,6 +62,7 @@ public class DocExpBean {
         }
         return false;
     }
+     
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
@@ -95,4 +103,6 @@ public class DocExpBean {
     public String getDept() {
         return dept;
     }
+
+   
 }

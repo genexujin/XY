@@ -33,7 +33,9 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="DOCUMENT_DEPT_TASK">
+    TableName="DOCUMENT_DEPT_TASK"
+    RetrievedOnInsert="true"
+    IsUpdateable="while_insert">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
@@ -139,6 +141,42 @@
           ResId="edu.hp.model.eo.DocumentDeptTask.DeptName_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
+  </Attribute>
+  <Attribute
+    Name="MgrId"
+    Precision="20"
+    ColumnName="MGR_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="DOCUMENT_DEPT_TASK">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SupervisorId"
+    Precision="20"
+    ColumnName="SUPERVISOR_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="DOCUMENT_DEPT_TASK">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FileName"
+    Precision="1000"
+    ColumnName="FILE_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="DOCUMENT_DEPT_TASK">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
   </Attribute>
   <AccessorAttribute
     Name="Task"

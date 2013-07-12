@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="ViewDetailPageDef"
+                Package="pages.document">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Root.DocumentModule.DocumentTask" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="DocumentTaskIterator"/>
+    <iterator id="DeptTasksIterator" Binds="Root.DocumentModule.DeptTasks" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="HistoryIterator" Binds="Root.DocumentModule.History" DataControl="RootAppModuleDataControl"
+              RangeSize="25">
+      <sortCriteria>
+        <sort attribute="UploadTime" ascending="false"/>
+      </sortCriteria>
+    </iterator>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="DocumentTaskIterator" id="TaskName">
+      <AttrNames>
+        <Item Value="TaskName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="TaskDescription">
+      <AttrNames>
+        <Item Value="TaskDescription"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="TaskState">
+      <AttrNames>
+        <Item Value="TaskState"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="SampleFileUrl">
+      <AttrNames>
+        <Item Value="SampleFileUrl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="SubmitBy">
+      <AttrNames>
+        <Item Value="SubmitBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="ExpireDate">
+      <AttrNames>
+        <Item Value="ExpireDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentTaskIterator" id="DeptList">
+      <AttrNames>
+        <Item Value="DeptList"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="DocumentTaskIterator" id="IsPublic" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="IsPublic"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="是"/>
+        <Item Value="否"/>
+      </ValueList>
+    </button>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <tree IterBinding="DeptTasksIterator" id="DeptTasks">
+      <nodeDefinition DefName="edu.hp.model.vo.DocumentDeptTaskView" Name="DeptTasks0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="CurrentEditorId"/>
+          <Item Value="CurrentEditorName"/>
+          <Item Value="DeptName"/>
+          <Item Value="DocumentFileUrl"/>
+          <Item Value="LastEditorName"/>
+          <Item Value="MgrId"/>
+          <Item Value="State"/>
+          <Item Value="SupervisorId"/>
+          <Item Value="TaskId"/>
+          <Item Value="FileName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="HistoryIterator" id="History">
+      <nodeDefinition DefName="edu.hp.model.vo.DocumentHistoryView" Name="History0">
+        <AttrNames>
+          <Item Value="EditorName"/>
+          <Item Value="FileUrl"/>
+          <Item Value="UploadTime"/>
+          <Item Value="FileName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

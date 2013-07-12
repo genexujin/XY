@@ -145,14 +145,6 @@
         Value=":taskName"
         IsBindVarValue="true"
         Required="Optional"/>
-      <ViewCriteriaItem
-        Name="TaskState"
-        ViewAttribute="TaskState"
-        Operator="="
-        Conjunction="AND"
-        Value=":state"
-        IsBindVarValue="true"
-        Required="Optional"/>
       <ViewCriteriaItemCompound
         ViewAttribute="SubmitDate">
         <ViewCriteria
@@ -193,6 +185,37 @@
         Value=":dept"
         IsBindVarValue="true"
         Required="Optional"/>
+      <ViewCriteriaItemCompound
+        ViewAttribute="TaskState">
+        <ViewCriteria
+          Name="mainSearch_DocumentTaskViewCriteria_row_0_TaskState_itemHolder"
+          ViewObjectName="edu.hp.model.vo.DocumentTaskView"
+          Conjunction="OR">
+          <ViewCriteriaRow
+            Name="mainSearch_DocumentTaskViewCriteria_row_0_TaskState_itemHolder_row_0"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="TaskState"
+              ViewAttribute="TaskState"
+              Operator="="
+              Conjunction="AND"
+              Value=":state"
+              IsBindVarValue="true"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="mainSearch_DocumentTaskViewCriteria_row_0_TaskState_itemHolder_row_1"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="mainSearch_DocumentTaskViewCriteria_row_0_TaskState_mainSearch_DocumentTaskViewCriteria_row_0_TaskState_itemHolder_mainSearch_DocumentTaskViewCriteria_row_0_TaskState_itemHolder_row_1_TaskState"
+              ViewAttribute="TaskState"
+              Operator="&lt;>"
+              Conjunction="AND"
+              Value="未开始"
+              Required="Optional"/>
+          </ViewCriteriaRow>
+        </ViewCriteria>
+      </ViewCriteriaItemCompound>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewLinkAccessor

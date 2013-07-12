@@ -10,7 +10,8 @@
        DocumentHistory.EDITOR_NAME, 
        DocumentHistory.EDITOR_ID, 
        DocumentHistory.UPLOAD_TIME, 
-       DocumentHistory.FILE_URL"
+       DocumentHistory.FILE_URL, 
+       DocumentHistory.FILE_NAME"
   FromList="DOCUMENT_HISTORY DocumentHistory"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -25,13 +26,15 @@
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="DocumentHistory"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="DeptTaskId"
     PrecisionRule="true"
     EntityAttrName="DeptTaskId"
     EntityUsage="DocumentHistory"
-    AliasName="DEPT_TASK_ID"/>
+    AliasName="DEPT_TASK_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="EditorName"
     PrecisionRule="true"
@@ -56,6 +59,12 @@
     EntityAttrName="FileUrl"
     EntityUsage="DocumentHistory"
     AliasName="FILE_URL"/>
+  <ViewAttribute
+    Name="FileName"
+    PrecisionRule="true"
+    EntityAttrName="FileName"
+    EntityUsage="DocumentHistory"
+    AliasName="FILE_NAME"/>
   <ViewLinkAccessor
     Name="DocumentDeptTaskView"
     ViewLink="edu.hp.model.vo.link.DocDept2HistoryViewLink"

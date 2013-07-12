@@ -79,6 +79,27 @@ public class FileManager {
         //return full file path
         return filePath;
     }
+    
+    public String saveDeptDocument(String fileName, String projectName, String deptName, String seq, InputStream is) {
+        
+        //make dir
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        int year = cal.get(Calendar.YEAR);
+        String dir = rootFolder + year + "/" + projectName + "/" + deptName + "/" + seq;
+        System.err.println(dir);
+        String filePath = dir + "/" + fileName;        
+        System.err.println(filePath);
+        new File(dir).mkdirs();
+        System.err.println("made dir");
+        //save file
+        boolean success = _saveFile(is, filePath);
+        System.err.println("file saved");
+        if(!success) return null;
+        
+        //return full file path
+        return filePath;
+    }
 
     private boolean _saveFile(InputStream is, String filePath) {
         

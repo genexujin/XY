@@ -68,19 +68,18 @@
                     </af:popup>
                     <f:facet name="footer">
                         <af:toolbar id="t1">
-                            <af:commandButton text="保存" id="cb1" icon="/images/icons/filesave.png"
-                                              action="#{viewScope.NewDocBean.saveDoc}"/>
-                            <af:commandButton text="项目启动" id="cb2" action="#{viewScope.NewDocBean.startDoc}"
-                                              icon="/images/icons/startserver.png"/>
-                            <af:commandButton text="返回项目搜索" id="ctb1" icon="/images/icons/listview.png"
+                            <af:commandToolbarButton text="项目启动" id="cb2" action="#{viewScope.NewDocBean.startDoc}"
+                                              icon="/images/icons/startserver.png"
+                                              disabled="#{bindings.TaskState.inputValue != '未开始'}"/>
+                            <af:commandToolbarButton text="返回项目搜索" id="ctb1" icon="/images/icons/listview.png"
                                               actionListener="#{bindings.Rollback.execute}" immediate="true"
                                               action="list">
                                 <af:resetActionListener/>
-                            </af:commandButton>
+                            </af:commandToolbarButton>
                             <af:spacer width="10" height="10" id="s2"/>
-                            <af:commandButton text="上传模板" id="cb4" icon="/images/icons/file_upload.png">
+                            <af:commandToolbarButton text="上传模板" id="cb4" icon="/images/icons/file_upload.png">
                                 <af:showPopupBehavior popupId="p1" triggerType="action"/>
-                            </af:commandButton>
+                            </af:commandToolbarButton>
                         </af:toolbar>
                     </f:facet>
                 </af:panelFormLayout>

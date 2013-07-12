@@ -65,6 +65,7 @@ public class VehicleCalendarBean extends CalendarBean {
 
     public void deleteListener(DialogEvent dialogEvent) {
         if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
+
             OperationBinding binding = ADFUtils.findOperation("deleteByPK");
             String clsRmCalId = this.getCurrActivity().getActivity().getId();
             String title = getCurrActivity().getTitle();
@@ -79,9 +80,9 @@ public class VehicleCalendarBean extends CalendarBean {
                 this._currActivity = null;
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
                 refreshCalendar(calendar);
-                sendNotification(noteTitle, noteContent, userId, null);
+                sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_VEHICLE, null);
                 ADFUtils.findOperation("Commit").execute();
-//                System.err.println("refreshed!");
+                //                System.err.println("refreshed!");
             }
 
         }
@@ -177,19 +178,19 @@ public class VehicleCalendarBean extends CalendarBean {
     }
 
     public String save() throws Exception {
-        
+
         String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
         if (Integer.valueOf(id) > 0 && action.equals("new"))
             action = "save";
-        
+
         String time = (String)ADFUtils.getBoundAttributeValue("StartTime");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date date = format.parse(time);
         startDayTime = new Timestamp(date);
-        
+
         time = (String)ADFUtils.getBoundAttributeValue("SubmitDate");
-//        date = format.parse(time);
-//        Timestamp submit = new Timestamp(date);
+        //        date = format.parse(time);
+        //        Timestamp submit = new Timestamp(date);
         //startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
         //Timestamp submit = (Timestamp)ADFUtils.getBoundAttributeValue("SubmitDate");
         if (time == null)
@@ -203,6 +204,7 @@ public class VehicleCalendarBean extends CalendarBean {
 
     private void sendNotification() {
 
+        String id = (ADFUtils.getBoundAttributeValue("Id")).toString();
         String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
         String contactId = (String)ADFUtils.getBoundAttributeValue("ContactId");
         String contactName = (String)ADFUtils.getBoundAttributeValue("ContactName");
@@ -217,7 +219,7 @@ public class VehicleCalendarBean extends CalendarBean {
         String dateStr = getDateString();
         LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
         if (action.equals("save") && state.equals(Constants.STATE_TRIP_PLANNED)) {
-            noteTitle = "您的车辆预订：" + title + " 已完成调度并被"+user.getDisplayName()+"修改。 ";
+            noteTitle = "您的车辆预订：" + title + " 已完成调度并被" + user.getDisplayName() + "修改。 ";
             noteContent = " 修改时间：" + dateStr + " 使用的车辆为：" + vehicleName;
             //System.err.println("sent as saved");
         } else if (action.equals("cancel")) {
@@ -229,16 +231,15 @@ public class VehicleCalendarBean extends CalendarBean {
             noteContent = " 完成时间：" + dateStr + " 使用的车辆为：" + vehicleName;
             //System.err.println("sent as planned");
         }
-        this.sendNotification(noteTitle, noteContent, userId, null);
-        this.sendNotification(noteTitle, noteContent, contactId, null);
-        
+        this.sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
+        this.sendNotification(noteTitle, noteContent, contactId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
+
         String driverId = (String)ADFUtils.getBoundAttributeValue("DriverId");
-        if(driverId!=null)
-            this.sendNotification("您有新的出车单","联系人：" + contactName + " 使用车辆：" 
-                                            + vehicleName +" 联系人电话："+contactPhone
-                                            +" 开始用车时间: " + startTime + " 目的地:"+tripStart
-                                  , driverId,null);
-        
+        if (driverId != null)
+            this.sendNotification("您有新的出车单",
+                                  "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone + " 开始用车时间: " +
+                                  startTime + " 目的地:" + tripStart, driverId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
+
         changeMade = true;
         ADFUtils.findOperation("Commit").execute();
 

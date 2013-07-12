@@ -12,7 +12,10 @@
        DocumentDeptTask.DOCUMENT_FILE_URL, 
        DocumentDeptTask.LAST_EDITOR_NAME, 
        DocumentDeptTask.STATE, 
-       DocumentDeptTask.DEPT_NAME"
+       DocumentDeptTask.DEPT_NAME, 
+       DocumentDeptTask.MGR_ID, 
+       DocumentDeptTask.SUPERVISOR_ID, 
+       DocumentDeptTask.FILE_NAME"
   FromList="DOCUMENT_DEPT_TASK DocumentDeptTask"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -27,13 +30,15 @@
     PrecisionRule="true"
     EntityAttrName="Id"
     EntityUsage="DocumentDeptTask"
-    AliasName="ID"/>
+    AliasName="ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="TaskId"
     PrecisionRule="true"
     EntityAttrName="TaskId"
     EntityUsage="DocumentDeptTask"
-    AliasName="TASK_ID"/>
+    AliasName="TASK_ID"
+    IsUpdateable="while_insert"/>
   <ViewAttribute
     Name="CurrentEditorId"
     PrecisionRule="true"
@@ -70,6 +75,24 @@
     EntityAttrName="DeptName"
     EntityUsage="DocumentDeptTask"
     AliasName="DEPT_NAME"/>
+  <ViewAttribute
+    Name="MgrId"
+    PrecisionRule="true"
+    EntityAttrName="MgrId"
+    EntityUsage="DocumentDeptTask"
+    AliasName="MGR_ID"/>
+  <ViewAttribute
+    Name="SupervisorId"
+    PrecisionRule="true"
+    EntityAttrName="SupervisorId"
+    EntityUsage="DocumentDeptTask"
+    AliasName="SUPERVISOR_ID"/>
+  <ViewAttribute
+    Name="FileName"
+    PrecisionRule="true"
+    EntityAttrName="FileName"
+    EntityUsage="DocumentDeptTask"
+    AliasName="FILE_NAME"/>
   <ViewLinkAccessor
     Name="TaskView"
     ViewLink="edu.hp.model.vo.link.Doc2DeptViewLink"

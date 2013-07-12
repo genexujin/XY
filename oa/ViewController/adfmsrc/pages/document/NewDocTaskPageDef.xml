@@ -8,6 +8,8 @@
               id="DocumentTaskIterator"/>
     <iterator id="DepartmentsIterator" Binds="Root.AdminModule.Departments" DataControl="RootAppModuleDataControl"
               RangeSize="25"/>
+    <iterator id="DeptTasksIterator" Binds="Root.DocumentModule.DeptTasks" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="DocumentTaskIterator" id="TaskName">
@@ -63,5 +65,31 @@
     </attributeValues>
     <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
             DataControl="RootAppModuleDataControl"/>
+    <attributeValues IterBinding="DepartmentsIterator" id="MgrId">
+      <AttrNames>
+        <Item Value="MgrId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DepartmentsIterator" id="SupervisorId">
+      <AttrNames>
+        <Item Value="SupervisorId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="DepartmentsIterator" id="findByName" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findByName" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.AdminModule.Departments">
+      <NamedData NDName="Name" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="DocumentTaskIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="sendNotification" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendNotification" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.sendNotification_RootAppModuleDataControl_dataProvider_sendNotification_result">
+      <NamedData NDName="notification" NDType="edu.hp.model.pojo.Notification"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

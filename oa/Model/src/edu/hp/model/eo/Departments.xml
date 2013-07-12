@@ -81,10 +81,10 @@
     </DesignTime>
     <Properties>
       <SchemaBasedProperties>
-        <LABEL
-          ResId="edu.hp.model.eo.Departments.MgrId_LABEL"/>
         <DISPLAYWIDTH
           Value="10"/>
+        <LABEL
+          ResId="edu.hp.model.eo.Departments.MgrId_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -204,6 +204,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="edu.hp.model.eo.Departments.SupervisorId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Key
     Name="DepartmentPk"

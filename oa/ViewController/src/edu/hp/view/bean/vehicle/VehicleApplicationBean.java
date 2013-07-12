@@ -75,11 +75,12 @@ public class VehicleApplicationBean extends BaseBean {
                 String dateStr = getDateString();
                 String noteContent = " 提交时间：" + dateStr;
                 //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
+                sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
                 //send to approver
                 String apprvTitle = "有新的用车申请等待您的调度！ ";
                 String apprvContent = " 事由：" + title + " 申请人： " + userDisplayName;
-                sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_ZONGWU_MGR);
+                sendNotification(apprvTitle, apprvContent, null, Constants.ROLE_ZONGWU_MGR,
+                                 Constants.CONTEXT_TYPE_VEHICLE, id);
                 //create task
                 createTask(id, Constants.CONTEXT_TYPE_VEHICLE, apprvTitle, Constants.ROLE_ZONGWU_MGR, title);
             }
@@ -218,7 +219,7 @@ public class VehicleApplicationBean extends BaseBean {
 
                 String noteContent = "审核时间：" + dateStr;
                 //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
+                sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
                 if (state.equals(Constants.STATE_PENDING_REVIEW))
                     completeTask(Constants.CONTEXT_TYPE_VEHICLE, id, Constants.ROLE_OFFICE_MGR);
                 else
@@ -250,7 +251,7 @@ public class VehicleApplicationBean extends BaseBean {
 
             String noteContent = "取消时间：" + dateStr;
             //send to requester
-            sendNotification(noteTitle, noteContent, userId, null);
+            sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
             this.cancelTask(Constants.CONTEXT_TYPE_VEHICLE, id);
             ADFUtils.findOperation("Commit").execute();
         } else {
@@ -274,7 +275,7 @@ public class VehicleApplicationBean extends BaseBean {
                 String title = (String)ADFUtils.getBoundAttributeValue("Title");
 
                 sendNotification(driverName + "已确认用车单！", "事由: " + title + " 车辆：" + vehicleName, null,
-                                 Constants.ROLE_ZONGWU_MGR);
+                                 Constants.ROLE_ZONGWU_MGR, Constants.CONTEXT_TYPE_VEHICLE, id);
                 ADFUtils.findOperation("Commit").execute();
             } else {
                 ADFUtils.setBoundAttributeValue("State", state);
@@ -303,7 +304,7 @@ public class VehicleApplicationBean extends BaseBean {
                 String dateStr = getDateString();
                 String noteContent = "完成调度时间：" + dateStr + " 使用的车辆为：" + vehicleName + " 司机：" + driverName;
                 //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
+                sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
                 completeTask(Constants.CONTEXT_TYPE_VEHICLE, id, Constants.ROLE_ZONGWU_MGR);
 
                 //如果选择了一个司机，则发通知给司机并要求其在系统中确认
@@ -319,7 +320,8 @@ public class VehicleApplicationBean extends BaseBean {
                     //                    sendNotification(smsTitle, smsContent, driverId, null);
                     this.sendNotification("您有新的出车单！",
                                           "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone +
-                                          "开始用车时间: " + startTime + " 目的地:" + tripStart, driverId, null);
+                                          "开始用车时间: " + startTime + " 目的地:" + tripStart, driverId, null,
+                                          Constants.CONTEXT_TYPE_VEHICLE, id);
                     createTaskForUser(id, Constants.CONTEXT_TYPE_VEHICLE, smsTitle, driverId, "确认调度");
                 }
                 ADFUtils.findOperation("Commit").execute();

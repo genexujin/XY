@@ -56,12 +56,14 @@ public class BaseBean {
 //        ADFUtils.setBoundAttributeValue("ActEndTime", endStr);
     }
 
-    protected void sendNotification(String title, String content, String userId, String roleName) {
+    protected void sendNotification(String title, String content, String userId, String roleName, String contextType, String contextObjectId) {
         Notification notification = new Notification();
         notification.setTitle(title);
         notification.setContent(content);
         notification.setUserId(userId);
         notification.setRoleName(roleName);
+        notification.setContextObjectId(contextObjectId);
+        notification.setContextType(contextType);
         OperationBinding op = ADFUtils.findOperation("sendNotification");
         op.getParamsMap().put("notification", notification);
         op.execute();

@@ -30,6 +30,8 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.ApplicationModule;
 import oracle.jbo.Key;
 import oracle.jbo.Row;
+import oracle.jbo.RowSetIterator;
+import oracle.jbo.domain.Date;
 import oracle.jbo.uicli.binding.JUCtrlHierBinding;
 import oracle.jbo.uicli.binding.JUCtrlHierNodeBinding;
 import oracle.jbo.uicli.binding.JUCtrlValueBinding;
@@ -52,6 +54,28 @@ import org.apache.myfaces.trinidad.util.Service;
 public class ADFUtils {
 
     public static final ADFLogger LOGGER = ADFLogger.createADFLogger(ADFUtils.class);
+    
+    //传入主键，返回当前迭代器中主键相符的 Row
+    public static Row findByKey(String id, String iteratorName) {
+        DCIteratorBinding it = ADFUtils.findIterator(iteratorName);
+        Key key = new Key(new Object[] { id });
+        RowSetIterator rsi = it.getRowSetIterator();
+        Row row = rsi.findByKey(key, 1)[0];
+        return row;
+    }
+    
+    public static Date now(){
+        return new Date(new java.sql.Date(System.currentTimeMillis()));
+    }
+    
+    //传入主键，返回当前迭代器中主键相符的 Row
+    public static void makeCurrent(String id, String iteratorName) {
+        DCIteratorBinding it = ADFUtils.findIterator(iteratorName);
+        Key key = new Key(new Object[] { id });
+        RowSetIterator rsi = it.getRowSetIterator();
+        Row row = rsi.findByKey(key, 1)[0];
+        rsi.setCurrentRow(row);
+    }
 
     /**
      * ensure the calling page has a binding operation called Commit.
@@ -72,13 +96,26 @@ public class ADFUtils {
                 success = false;
             }
         } catch (Exception e) {
-            success=false;
+            success = false;
             JSFUtils.addFacesErrorMessage(errMsg);
             e.printStackTrace();
         }
 
         return success;
     }
+
+    public static boolean commit() {
+        boolean success = true;
+        try {
+            OperationBinding operation = findOperation("Commit");
+            operation.execute();
+        } catch (Exception e) {
+            success = false;
+            e.printStackTrace();
+        }
+        return success;
+    }
+
     public static void createInsert(String errMsg) {
 
         try {
@@ -273,7 +310,7 @@ public class ADFUtils {
      */
     public static BindingContainer getBindingContainer() {
         return (BindingContainer)JSFUtils.resolveExpression("#{bindings}");
-        
+
         //Maybe another way to do this is:
         //BindingContext.getCurrent().getCurrentBindingsEntry();
     }

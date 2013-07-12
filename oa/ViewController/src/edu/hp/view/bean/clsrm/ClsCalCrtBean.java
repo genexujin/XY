@@ -38,7 +38,7 @@ public class ClsCalCrtBean extends BaseBean {
         if (ensureTimeConflicts()) {
             boolean success = ADFUtils.commit("教室预订已保存！", "预订保存失败，请核对输入的信息或联系管理员！");
             if (success) {
-
+                String id = (ADFUtils.getBoundAttributeValue("Id")).toString();
                 String time = (String)ADFUtils.getBoundAttributeValue("ActStartTime");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date date = format.parse(time);
@@ -53,7 +53,7 @@ public class ClsCalCrtBean extends BaseBean {
                 String dateStr = getDateString();
                 String noteContent = " 提交时间：" + dateStr;
                 //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
+                sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_CLSRM, id);
                 ADFUtils.findOperation("Commit").execute();
                 changeMade = true;
             }

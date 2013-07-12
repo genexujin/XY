@@ -36,56 +36,6 @@
             </af:toolbar>
           </f:facet>
           <f:facet name="statusbar"/>
-          <af:table value="#{bindings.Departments.collectionModel}" var="row" rows="#{bindings.Departments.rangeSize}"
-                    emptyText="#{bindings.Departments.viewable ? 'No data to display.' : 'Access Denied.'}"
-                    fetchSize="#{bindings.Departments.rangeSize}" rowBandingInterval="1"
-                    filterModel="#{bindings.DepartmentsQuery.queryDescriptor}"
-                    queryListener="#{bindings.DepartmentsQuery.processQuery}" filterVisible="false" varStatus="vs"
-                    selectedRowKeys="#{bindings.Departments.collectionModel.selectedRow}"
-                    selectionListener="#{bindings.Departments.collectionModel.makeCurrent}" rowSelection="single"
-                    id="t3" editingMode="clickToEdit" partialTriggers="::ctb3">
-            <af:column sortProperty="#{bindings.Departments.hints.DeptName.name}" filterable="true" sortable="true"
-                       headerText="#{bindings.Departments.hints.DeptName.label}" id="c4">
-              <af:inputText value="#{row.bindings.DeptName.inputValue}"
-                            label="#{bindings.Departments.hints.DeptName.label}"
-                            required="#{bindings.Departments.hints.DeptName.mandatory}"
-                            columns="#{bindings.Departments.hints.DeptName.displayWidth}"
-                            maximumLength="#{bindings.Departments.hints.DeptName.precision}"
-                            shortDesc="#{bindings.Departments.hints.DeptName.tooltip}" id="it3" autoSubmit="true">
-                <f:validator binding="#{row.bindings.DeptName.validator}"/>
-              </af:inputText>
-            </af:column>
-            <af:column sortProperty="#{bindings.Departments.hints.LocationId.name}" filterable="true" sortable="true"
-                       headerText="#{bindings.Departments.hints.LocationId.label}" id="c7">
-              <af:selectOneChoice value="#{row.bindings.LocationId.inputValue}" label="#{row.bindings.LocationId.label}"
-                                  required="#{bindings.Departments.hints.LocationId.mandatory}"
-                                  shortDesc="#{bindings.Departments.hints.LocationId.tooltip}" id="soc1"
-                                  autoSubmit="true">
-                <f:selectItems value="#{row.bindings.LocationId.items}" id="si1"/>
-              </af:selectOneChoice>
-            </af:column>
-            <af:column sortProperty="#{bindings.Departments.hints.MgrId.name}" filterable="true" sortable="false"
-                       headerText="#{bindings.Departments.hints.MgrName.label}" id="c3" width="150">
-              <af:panelGroupLayout id="pgl1" layout="horizontal">
-                <af:outputText value="#{row.MgrName}" id="ot1"/>
-                <af:spacer width="10" height="10" id="s1"/>
-                <af:spacer width="10" height="10" id="s2"/>
-                <af:inputComboboxListOfValues id="mgrIdId" popupTitle="Search and Select: #{bindings.MgrId.hints.label}"
-                                              value="#{bindings.MgrId.inputValue}" label="#{bindings.MgrId.hints.label}"
-                                              model="#{bindings.MgrId.listOfValuesModel}"
-                                              required="#{bindings.MgrId.hints.mandatory}"
-                                              columns="#{bindings.MgrId.hints.displayWidth}"
-                                              shortDesc="#{bindings.MgrId.hints.tooltip}" contentStyle="width:100px;">
-                  <f:validator binding="#{bindings.MgrId.validator}"/>
-                </af:inputComboboxListOfValues>
-              </af:panelGroupLayout>
-            </af:column>
-            <af:column sortProperty="#{bindings.Departments.hints.Expired.name}" filterable="true" sortable="false"
-                       headerText="#{bindings.Departments.hints.Expired.label}" id="c8" align="center" width="50">
-              <af:selectBooleanCheckbox value="#{row.bindings.Expired.inputValue}" label="#{row.bindings.Expired.label}"
-                                        shortDesc="#{bindings.Departments.hints.Expired.tooltip}" id="sbc1"/>
-            </af:column>
-          </af:table>
           <af:popup id="confirm" contentDelivery="lazyUncached">
                         <!-- don't render if the activity is null -->
                         <af:dialog dialogListener="#{viewScope.AdminOperationBean.confirm}"
@@ -95,6 +45,50 @@
                             <af:outputText value="您确认要保存当前所做的所有操作吗？如果要放弃现有操作请点击取消按钮。" id="ot15"/>
                         </af:dialog>
                     </af:popup>
+          <af:table value="#{bindings.Departments.collectionModel}" var="row" rows="#{bindings.Departments.rangeSize}"
+                    emptyText="#{bindings.Departments.viewable ? '暂无数据。' : 'Access Denied.'}"
+                    fetchSize="#{bindings.Departments.rangeSize}" rowBandingInterval="1"
+                    filterModel="#{bindings.DepartmentsQuery.queryDescriptor}"
+                    queryListener="#{bindings.DepartmentsQuery.processQuery}" filterVisible="false" varStatus="vs"
+                    selectedRowKeys="#{bindings.Departments.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.Departments.collectionModel.makeCurrent}" rowSelection="single"
+                    id="t3" partialTriggers="::ctb3">
+            <af:column sortProperty="#{bindings.Departments.hints.DeptName.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Departments.hints.DeptName.label}" id="c1">
+              <af:outputText value="#{row.DeptName}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.Departments.hints.LocationId.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Departments.hints.LocationId.label}" id="c2">
+              <af:selectOneChoice value="#{row.bindings.LocationId.inputValue}" label="#{row.bindings.LocationId.label}"
+                                  required="#{bindings.Departments.hints.LocationId.mandatory}"
+                                  shortDesc="#{bindings.Departments.hints.LocationId.tooltip}" readOnly="true"
+                                  id="soc1">
+                <f:selectItems value="#{row.bindings.LocationId.items}" id="si1"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.Departments.hints.SupervisorId.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Departments.hints.SupervisorId.label}" id="c4">
+              <af:selectOneChoice value="#{row.bindings.SupervisorId.inputValue}"
+                                  label="#{row.bindings.SupervisorId.label}"
+                                  required="#{bindings.Departments.hints.SupervisorId.mandatory}"
+                                  shortDesc="#{bindings.Departments.hints.SupervisorId.tooltip}" readOnly="true"
+                                  id="soc3">
+                <f:selectItems value="#{row.bindings.SupervisorId.items}" id="si3"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.Departments.hints.MgrId.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Departments.hints.MgrId.label}" id="c3">
+              <af:selectOneChoice value="#{row.bindings.MgrId.inputValue}" label="#{row.bindings.MgrId.label}"
+                                  required="#{bindings.Departments.hints.MgrId.mandatory}"
+                                  shortDesc="#{bindings.Departments.hints.MgrId.tooltip}" readOnly="true" id="soc2">
+                <f:selectItems value="#{row.bindings.MgrId.items}" id="si2"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.Departments.hints.Expired.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.Departments.hints.Expired.label}" id="c5">
+              <af:outputText value="#{row.Expired}" id="ot2"/>
+            </af:column>
+          </af:table>
         </af:panelCollection>
       </af:panelHeader>
     </f:facet>

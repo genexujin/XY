@@ -8,6 +8,8 @@ public class Notification implements Serializable{
     private int priority;
     private String roleName;
     private String userId;
+    private String contextType;
+    private String contextObjectId;
 
     public void setTitle(String title) {
         this.title = title;
@@ -50,5 +52,21 @@ public class Notification implements Serializable{
 
     public String getUserId() {
         return userId;
+    }
+
+    public void setContextType(String contextType) {
+        this.contextType = contextType;
+    }
+
+    public String getContextType() {
+        return contextType;
+    }
+
+    public void setContextObjectId(String contextObjectId) {
+        this.contextObjectId = contextObjectId;
+    }
+
+    public String getContextObjectId() {
+        return contextObjectId;
     }
 }

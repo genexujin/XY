@@ -1,5 +1,6 @@
 package edu.hp.view.bean.conf;
 
+import edu.hp.model.common.Constants;
 import edu.hp.view.bean.common.CalendarBean;
 import edu.hp.view.bean.common.OACalendarActivity;
 import edu.hp.view.utils.ADFUtils;
@@ -65,7 +66,7 @@ public class ConfRmCalBean extends CalendarBean {
                 this._currActivity = null;
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
                 refreshCalendar(calendar);                
-                sendNotification(noteTitle, noteContent, userId, null);
+                sendNotification(noteTitle, noteContent, userId, null,Constants.CONTEXT_TYPE_CONFRM, null);
                 ADFUtils.findOperation("Commit").execute();
             }
             

@@ -21,7 +21,9 @@
   CustomQuery="false"
   ComponentClass="edu.hp.model.vo.DepartmentsViewImpl"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  ComponentInterface="edu.hp.model.vo.common.DepartmentsView"
+  ClientProxyName="edu.hp.model.vo.client.DepartmentsViewClient">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -33,6 +35,10 @@
   </Properties>
   <Variable
     Name="DpId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="deptName"
     Kind="viewcriteria"
     Type="java.lang.String"/>
   <ViewAccessor
@@ -47,6 +53,10 @@
       Name="filterByExpired"
       FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
   </ViewAccessor>
+  <ViewAccessor
+    Name="Supervisors"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_LocationId"
     ListVOName="Locations"
@@ -69,7 +79,6 @@
     Name="LOV_MgrId"
     ListVOName="Employees"
     ListRangeSize="-1"
-    ComboRowCountHint="10"
     NullValueFlag="none"
     MRUCount="0">
     <AttrArray Name="AttrNames">
@@ -86,9 +95,24 @@
       <Item Value="DisplayName"/>
       <Item Value="Title"/>
     </AttrArray>
-    <DisplayCriteria
-      Hint="showAndExecute"
-      Name="findByUserName"/>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SupervisorId"
+    ListVOName="Supervisors"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SupervisorId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria/>
   </ListBinding>
   <EntityUsage
     Name="Departments"
@@ -157,7 +181,7 @@
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="combo_lov"/>
+          Value="choice"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -178,7 +202,15 @@
     PrecisionRule="true"
     EntityAttrName="SupervisorId"
     EntityUsage="Departments"
-    AliasName="SUPERVISOR_ID"/>
+    AliasName="SUPERVISOR_ID"
+    LOVName="LOV_SupervisorId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewCriteria
     Name="filterByExpired"
     ViewObjectName="edu.hp.model.vo.DepartmentsView"
@@ -250,8 +282,55 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="findByName"
+    ViewObjectName="edu.hp.model.vo.DepartmentsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="DepartmentsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DeptName"
+        ViewAttribute="DeptName"
+        Operator="="
+        Conjunction="AND"
+        Value=":deptName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="findByName"
+      MethodName="findByName">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="Name"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

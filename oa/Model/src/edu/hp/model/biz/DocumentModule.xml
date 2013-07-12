@@ -5,7 +5,11 @@
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="DocumentModule"
   Version="11.1.2.62.76"
-  ClearCacheOnRollback="true">
+  ClearCacheOnRollback="true"
+  ComponentClass="edu.hp.model.biz.DocumentModuleImpl">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <ViewUsage
     Name="DocumentHistory"
     ViewObjectName="edu.hp.model.vo.DocumentHistoryView"/>

@@ -27,7 +27,7 @@ public class ConfCalDetailBean extends BaseBean {
     private String meetingroomId = null;
     private String action = "new";
 
-    public String save() throws Exception{
+    public String save() throws Exception {
 
         if (ensureTimeConflicts()) {
             String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
@@ -37,7 +37,7 @@ public class ConfCalDetailBean extends BaseBean {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date date = format.parse(time);
             startDayTime = new Timestamp(date);
-//            startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
+            //            startDayTime = (Timestamp)ADFUtils.getBoundAttributeValue("StartTime");
             meetingroomId = (String)ADFUtils.getBoundAttributeValue("MeetingRoomId");
             //ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
             String state = (String)ADFUtils.getBoundAttributeValue("State");
@@ -68,7 +68,7 @@ public class ConfCalDetailBean extends BaseBean {
 
 
                 //send to requester
-                sendNotification(noteTitle, noteContent, userId, null);
+                sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_CONFRM, id);
                 ADFUtils.findOperation("Commit").execute();
                 changeMade = true;
             }
@@ -79,14 +79,14 @@ public class ConfCalDetailBean extends BaseBean {
 
     }
 
-    protected Boolean ensureTimeConflicts() throws Exception{
-        
-        String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");        
+    protected Boolean ensureTimeConflicts() throws Exception {
+
+        String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
         String endTime = (String)ADFUtils.getBoundAttributeValue("EndTime");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date startDate = format.parse(startTime);
         Date endDate = format.parse(endTime);
-        
+
         java.sql.Timestamp actStartTime = new java.sql.Timestamp(startDate.getTime());
         java.sql.Timestamp actEndTime = new java.sql.Timestamp(endDate.getTime());
 
