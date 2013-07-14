@@ -139,6 +139,8 @@ public class NewDocBean extends BaseBean {
         //更新DocTask上的部分字段
         ADFUtils.setBoundAttributeValue("TaskState", "进行中");
         ADFUtils.setBoundAttributeValue("SubmitDate", new Date(new java.sql.Date(System.currentTimeMillis())));
+        System.err.println(userIds);
+        ADFUtils.setBoundAttributeValue("EditorList", userIds.toString());
         LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
         ADFUtils.setBoundAttributeValue("SubmitBy", user.getDisplayName());
         ADFUtils.commit("公文项目已发起！", "公文项目发起过程中出错，请联系管理员！");

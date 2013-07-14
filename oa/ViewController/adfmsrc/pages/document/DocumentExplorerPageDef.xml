@@ -37,6 +37,7 @@
       <NamedData NDName="startDate" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="endDate" NDType="oracle.jbo.domain.Date"/>
       <NamedData NDName="dept" NDType="java.lang.String"/>
+      <NamedData NDName="editorId" NDType="java.lang.String"/>
     </methodAction>
     <list IterBinding="DepartmentsIterator" ListOperMode="navigation" ListIter="DepartmentsIterator" id="Departments"
           DTSupportsMRU="true" SelectItemValueMode="ListObject">

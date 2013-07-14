@@ -17,12 +17,17 @@ public class DepartmentsViewImpl extends ViewObjectImpl implements DepartmentsVi
     public DepartmentsViewImpl() {
     }
     
+    public void queryAll(){
+        
+    }
+    
     public void findByName(String name){
         ViewCriteria criteria = this.getViewCriteria("findByName");
         this.setApplyViewCriteriaNames(null);
         this.applyViewCriteria(criteria);
         this.setdeptName(name);
         this.executeQuery();
+        this.setApplyViewCriteriaNames(null);
     }
 
     /**

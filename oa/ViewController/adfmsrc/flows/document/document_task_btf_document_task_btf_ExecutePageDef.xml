@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76"
+                id="document_task_btf_document_task_btf_ExecutePageDef" Package="flows.document" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="Root.AdminModule.Departments" DataControl="RootAppModuleDataControl" RangeSize="25"
+              id="DepartmentsIterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="DepartmentsIterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

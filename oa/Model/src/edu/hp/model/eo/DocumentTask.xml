@@ -192,6 +192,18 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="EditorList"
+    Precision="500"
+    ColumnName="EDITOR_LIST"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="DOCUMENT_TASK">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
   <AccessorAttribute
     Name="DeptTasks"
     Association="edu.hp.model.eo.asso.DocTask2DeptAssoc"

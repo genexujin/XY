@@ -35,11 +35,17 @@
         <fixed-outcome>executeEmptyQuery</fixed-outcome>
       </outcome>
     </method-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__3">
       <from-activity-id>*</from-activity-id>
       <control-flow-case id="__4">
         <from-outcome>new</from-outcome>
-        <to-activity-id>NewDocTask</to-activity-id>
+        <to-activity-id>Execute</to-activity-id>
       </control-flow-case>
       <control-flow-case id="__5">
         <from-outcome>detail</from-outcome>
@@ -55,6 +61,13 @@
       <control-flow-case id="__7">
         <from-outcome>executeEmptyQuery</from-outcome>
         <to-activity-id>DocumentExplorer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>Execute</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>NewDocTask</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

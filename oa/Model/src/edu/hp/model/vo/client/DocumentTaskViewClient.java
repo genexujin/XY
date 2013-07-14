@@ -17,14 +17,15 @@ public class DocumentTaskViewClient extends ViewUsageImpl implements DocumentTas
     public DocumentTaskViewClient() {
     }
 
+
     public void executeEmptyQuery() {
         Object _ret = getApplicationModuleProxy().riInvokeExportedMethod(this,"executeEmptyQuery",null,null);
         return;
     }
 
-    public void search(String taskName, String state, Date startDate, Date endDate, String dept) {
+    public void search(String taskName, String state, Date startDate, Date endDate, String dept, String editorId) {
         Object _ret =
-            getApplicationModuleProxy().riInvokeExportedMethod(this,"search",new String [] {"java.lang.String","java.lang.String","oracle.jbo.domain.Date","oracle.jbo.domain.Date","java.lang.String"},new Object[] {taskName, state, startDate, endDate, dept});
+            getApplicationModuleProxy().riInvokeExportedMethod(this,"search",new String [] {"java.lang.String","java.lang.String","oracle.jbo.domain.Date","oracle.jbo.domain.Date","java.lang.String","java.lang.String"},new Object[] {taskName, state, startDate, endDate, dept, editorId});
         return;
     }
 }

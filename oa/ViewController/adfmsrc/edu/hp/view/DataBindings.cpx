@@ -121,6 +121,8 @@
           usageId="edu_hp_view_document_task_btf_document_task_btf_executeEmptyQueryPageDef"/>
     <page path="/pages/document/NewDocTask.jsff" usageId="edu_hp_view_NewDocTaskPageDef"/>
     <page path="/pages/document/ViewDetail.jsff" usageId="edu_hp_view_ViewDetailPageDef"/>
+    <page path="/WEB-INF/flows/document/document-task-btf.xml#document-task-btf@Execute"
+          usageId="edu_hp_view_document_task_btf_document_task_btf_ExecutePageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -228,6 +230,8 @@
           path="flows.document.document_task_btf_document_task_btf_executeEmptyQueryPageDef"/>
     <page id="edu_hp_view_NewDocTaskPageDef" path="pages.document.NewDocTaskPageDef"/>
     <page id="edu_hp_view_ViewDetailPageDef" path="pages.document.ViewDetailPageDef"/>
+    <page id="edu_hp_view_document_task_btf_document_task_btf_ExecutePageDef"
+          path="flows.document.document_task_btf_document_task_btf_ExecutePageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

@@ -54,8 +54,8 @@
       FullName="edu.hp.model.vo.EmployeesView.filterByExpired"/>
   </ViewAccessor>
   <ViewAccessor
-    Name="Supervisors"
-    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    Name="Surpervisors"
+    ViewObjectName="edu.hp.model.vo.query.admin.Employees"
     RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_LocationId"
@@ -99,9 +99,10 @@
   </ListBinding>
   <ListBinding
     Name="LOV_SupervisorId"
-    ListVOName="Supervisors"
-    ListRangeSize="10"
-    NullValueFlag="none"
+    ListVOName="Surpervisors"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
     MRUCount="0">
     <AttrArray Name="AttrNames">
       <Item Value="SupervisorId"/>
@@ -110,7 +111,8 @@
       <Item Value="Id"/>
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
-      <Item Value="DisplayName"/>
+      <Item Value="LastName"/>
+      <Item Value="FirstName"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -329,7 +331,7 @@
       <Return
         Type="void"/>
       <Parameter
-        Name="Name"
+        Name="name"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

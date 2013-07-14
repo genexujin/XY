@@ -24,7 +24,7 @@ public class DocumentTaskViewImpl extends ViewObjectImpl implements DocumentTask
         executeEmptyRowSet();
     }
 
-    public void search(String taskName, String state, Date startDate, Date endDate, String dept) {
+    public void search(String taskName, String state, Date startDate, Date endDate, String dept, String editorId) {
         //        System.err.println(taskName);
         //        System.err.println(state);
         //        System.err.println(startDate);
@@ -39,6 +39,7 @@ public class DocumentTaskViewImpl extends ViewObjectImpl implements DocumentTask
         this.setstate(state);
         this.setstartDate(startDate);
         this.setendDate(endDate);
+        this.seteditorId(editorId);
         this.setdept(dept);
         this.executeQuery();
     }
@@ -121,5 +122,21 @@ public class DocumentTaskViewImpl extends ViewObjectImpl implements DocumentTask
      */
     public void setdept(String value) {
         ensureVariableManager().setVariableValue("dept", value);
+    }
+
+    /**
+     * Returns the variable value for editorId.
+     * @return variable value for editorId
+     */
+    public String geteditorId() {
+        return (String)ensureVariableManager().getVariableValue("editorId");
+    }
+
+    /**
+     * Sets <code>value</code> for variable editorId.
+     * @param value value to bind as editorId
+     */
+    public void seteditorId(String value) {
+        ensureVariableManager().setVariableValue("editorId", value);
     }
 }

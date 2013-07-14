@@ -14,7 +14,8 @@
        DocumentTask.SUBMIT_DATE, 
        DocumentTask.EXPIRE_DATE, 
        DocumentTask.DEPT_LIST, 
-       DocumentTask.IS_PUBLIC"
+       DocumentTask.IS_PUBLIC, 
+       DocumentTask.EDITOR_LIST"
   FromList="DOCUMENT_TASK DocumentTask"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -44,6 +45,10 @@
     Type="java.lang.String"/>
   <Variable
     Name="dept"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="editorId"
     Kind="viewcriteria"
     Type="java.lang.String"/>
   <EntityUsage
@@ -111,6 +116,12 @@
     EntityAttrName="IsPublic"
     EntityUsage="DocumentTask"
     AliasName="IS_PUBLIC"/>
+  <ViewAttribute
+    Name="EditorList"
+    PrecisionRule="true"
+    EntityAttrName="EditorList"
+    EntityUsage="DocumentTask"
+    AliasName="EDITOR_LIST"/>
   <ViewCriteria
     Name="mainSearch"
     ViewObjectName="edu.hp.model.vo.DocumentTaskView"
@@ -185,6 +196,14 @@
         Value=":dept"
         IsBindVarValue="true"
         Required="Optional"/>
+      <ViewCriteriaItem
+        Name="EditorList"
+        ViewAttribute="EditorList"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":editorId"
+        IsBindVarValue="true"
+        Required="Optional"/>
       <ViewCriteriaItemCompound
         ViewAttribute="TaskState">
         <ViewCriteria
@@ -225,6 +244,12 @@
     IsUpdateable="false"/>
   <ClientInterface>
     <Method
+      Name="executeEmptyQuery"
+      MethodName="executeEmptyQuery">
+      <Return
+        Type="void"/>
+    </Method>
+    <Method
       Name="search"
       MethodName="search">
       <Return
@@ -244,12 +269,9 @@
       <Parameter
         Name="dept"
         Type="java.lang.String"/>
-    </Method>
-    <Method
-      Name="executeEmptyQuery"
-      MethodName="executeEmptyQuery">
-      <Return
-        Type="void"/>
+      <Parameter
+        Name="editorId"
+        Type="java.lang.String"/>
     </Method>
   </ClientInterface>
 </ViewObject>

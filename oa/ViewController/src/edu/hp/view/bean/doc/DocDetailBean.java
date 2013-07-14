@@ -1,6 +1,7 @@
 package edu.hp.view.bean.doc;
 
 import edu.hp.model.common.Constants;
+import edu.hp.view.bean.BaseBean;
 import edu.hp.view.file.FileManager;
 import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
@@ -21,6 +22,8 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.component.rich.input.RichInputFile;
 
+import oracle.adf.view.rich.event.DialogEvent;
+
 import oracle.jbo.Key;
 import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
@@ -31,14 +34,15 @@ import oracle.jbo.domain.Timestamp;
 
 import org.apache.myfaces.trinidad.model.UploadedFile;
 
-public class DocDetailBean {
+public class DocDetailBean extends BaseBean{
 
     private static final String DEPT_TASK_ITERATOR = "DeptTasksIterator";
     private static final String HISTORY_ITERATOR = "HistoryIterator";
+    private String smsContent;
+    private String lockerId;
     private UploadedFile uploadFile = null;
     private String downloadingFile;
     private String downloadingHistFile;
-
     private String sampleFileName;
     private String lockBtnText;
     private RichInputFile inputFile;
@@ -46,10 +50,12 @@ public class DocDetailBean {
     private String uploadingDeptTaskId;
     private String uploadingDeptName;
     private RichPopup historyPopup;
+    private RichPopup smsPopup;
 
 
     public boolean isComplete() {
         String state = (String)ADFUtils.getBoundAttributeValue("TaskState");
+        //        System.err.println(ADFUtils.getBoundAttributeValue("IsPublic"));
         return state == "已完成" || state == "已取消";
     }
 
@@ -149,11 +155,11 @@ public class DocDetailBean {
             this.uploadPopup.show(hints);
         }
     }
-    
-    public boolean isExpired(){
+
+    public boolean isExpired() {
         Date date = ADFUtils.now();
         Timestamp expDt = (Timestamp)ADFUtils.getBoundAttributeValue("ExpireDate");
-        if (date.getValue().getTime() > expDt.getTime()) {            
+        if (date.getValue().getTime() > expDt.getTime()) {
             return true;
         }
         return false;
@@ -235,15 +241,12 @@ public class DocDetailBean {
         }
     }
 
-    public void setSampleFileName(String sampleFileName) {
-        this.sampleFileName = sampleFileName;
-    }
 
     public void doDownload(ActionEvent actionEvent) {
-        downloadingFile = actionEvent.getComponent().getAttributes().get("filePath").toString();         
+        downloadingFile = actionEvent.getComponent().getAttributes().get("filePath").toString();
         System.err.println(downloadingFile);
     }
-    
+
     public void downloadDeptFile(FacesContext facesContext, OutputStream outputStream) {
         System.err.println("start to download");
         FileManager mgr = new FileManager();
@@ -252,7 +255,7 @@ public class DocDetailBean {
             JSFUtils.addFacesErrorMessage("下载公文发生错误！");
         }
     }
-    
+
     public void downloadHisFile(FacesContext facesContext, OutputStream outputStream) {
         FileManager mgr = new FileManager();
         boolean result = mgr.downloadFile(downloadingHistFile, outputStream);
@@ -262,7 +265,7 @@ public class DocDetailBean {
     }
 
     public void doHisDownload(ActionEvent actionEvent) {
-        downloadingHistFile = actionEvent.getComponent().getAttributes().get("filePath").toString(); 
+        downloadingHistFile = actionEvent.getComponent().getAttributes().get("filePath").toString();
     }
 
     public void setLockBtnText(String lockBtnText) {
@@ -281,6 +284,48 @@ public class DocDetailBean {
         return lockBtnText;
     }
 
+
+    public String save() {
+        // Add event code here...
+        return null;
+    }
+
+    public void openSMSPopup(ActionEvent actionEvent) {
+        String taskName = actionEvent.getComponent().getAttributes().get("taskName").toString();
+        String deptName = actionEvent.getComponent().getAttributes().get("deptName").toString();
+        lockerId = actionEvent.getComponent().getAttributes().get("lockerId").toString();
+        LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
+        String userName = user.getDisplayName();
+        this.smsContent = "用户" + userName + "发出请求，请您释放" + deptName + "的公文项目：" + taskName + "的编辑锁，谢谢！";
+        RichPopup.PopupHints hints = new RichPopup.PopupHints();
+        this.smsPopup.show(hints);
+    }
+
+
+    public void notifyToRelease(DialogEvent dialogEvent) {
+        if(dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)){
+            System.err.println(lockerId);
+            super.sendNotification("公文编辑锁释放提醒！", this.smsContent, lockerId, null, Constants.CONTEXT_TYPE_DOCTASK,
+                                   null);
+            ADFUtils.commit();
+        }
+    }
+
+    public void setSmsContent(String smsContent) {
+        this.smsContent = smsContent;
+    }
+
+    public String getSmsContent() {
+        return smsContent;
+    }
+
+    public void setSmsPopup(RichPopup smsPopup) {
+        this.smsPopup = smsPopup;
+    }
+
+    public RichPopup getSmsPopup() {
+        return smsPopup;
+    }
 
     public void setUploadFile(UploadedFile uploadFile) {
         this.uploadFile = uploadFile;
@@ -317,11 +362,9 @@ public class DocDetailBean {
     }
 
 
-    public String save() {
-        // Add event code here...
-        return null;
+    public void setSampleFileName(String sampleFileName) {
+        this.sampleFileName = sampleFileName;
     }
 
 
-  
 }

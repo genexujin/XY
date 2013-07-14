@@ -27,14 +27,16 @@ public class DocExpBean {
     private String state;
     private Date startDate;
     private Date endDate;
+    private String userId;
     private String dept;
+    
 
     public String doSearch() {
         
-        System.err.println(dept);
+        System.err.println(userId);
         if(!isAdmin()){
             LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
-            dept = user.getDeptName();
+            userId = user.getUserId();
         }
 
         oracle.jbo.domain.Date stDt = null, edDt = null;
@@ -50,6 +52,7 @@ public class DocExpBean {
         params.put("state", state);
         params.put("startDate", stDt);
         params.put("endDate", edDt);
+        params.put("editorId", userId);
         params.put("dept", dept);
         binding.execute();        
         return null;
@@ -96,6 +99,15 @@ public class DocExpBean {
         return endDate;
     }
 
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
     public void setDept(String dept) {
         this.dept = dept;
     }
@@ -103,6 +115,4 @@ public class DocExpBean {
     public String getDept() {
         return dept;
     }
-
-   
 }

@@ -65,7 +65,7 @@ public class FileManager {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
         int year = cal.get(Calendar.YEAR);
-        String dir = rootFolder + year + "/" + projectName + "/sample";
+        String dir = rootFolder + year + "/" + projectName.trim() + "/sample";
         System.err.println(dir);
         String filePath = dir + "/" + fileName;        
         System.err.println(filePath);
@@ -86,7 +86,7 @@ public class FileManager {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
         int year = cal.get(Calendar.YEAR);
-        String dir = rootFolder + year + "/" + projectName + "/" + deptName + "/" + seq;
+        String dir = rootFolder + year + "/" + projectName.trim() + "/" + deptName + "/" + seq;
         System.err.println(dir);
         String filePath = dir + "/" + fileName;        
         System.err.println(filePath);
