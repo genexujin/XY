@@ -65,7 +65,7 @@ public class FileManager {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
         int year = cal.get(Calendar.YEAR);
-        String dir = rootFolder + year + "/" + projectName.trim() + "/sample";
+        String dir = rootFolder + year + "/projects/" + projectName.trim() + "/sample";
         System.err.println(dir);
         String filePath = dir + "/" + fileName;        
         System.err.println(filePath);
@@ -86,7 +86,7 @@ public class FileManager {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
         int year = cal.get(Calendar.YEAR);
-        String dir = rootFolder + year + "/" + projectName.trim() + "/" + deptName + "/" + seq;
+        String dir = rootFolder + year + "/projects/" + projectName.trim() + "/" + deptName + "/" + seq;
         System.err.println(dir);
         String filePath = dir + "/" + fileName;        
         System.err.println(filePath);
@@ -97,6 +97,26 @@ public class FileManager {
         System.err.println("file saved");
         if(!success) return null;
         
+        //return full file path
+        return filePath;
+    }
+    
+    public String savePublicDocument(String fileName, String title, InputStream is) {
+        
+        //make dir
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        int year = cal.get(Calendar.YEAR);
+        String dir = rootFolder + year + "/public/" + title.trim() ;
+        System.err.println(dir);
+        String filePath = dir + "/" + fileName;        
+        System.err.println(filePath);
+        new File(dir).mkdirs();
+        System.err.println("made dir");
+        //save file
+        boolean success = _saveFile(is, filePath);
+        System.err.println("file saved");
+        if(!success) return null;        
         //return full file path
         return filePath;
     }

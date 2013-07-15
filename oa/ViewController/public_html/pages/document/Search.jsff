@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="center">
+            <af:panelHeader text="搜索" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelStretchLayout id="psl2" topHeight="80px" startWidth="0px" endWidth="0px" bottomHeight="0px">
+                    <f:facet name="bottom"/>
+                    <f:facet name="center">
+                        <af:panelCollection id="pc1">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t1">
+                                   <af:commandToolbarButton text="打开" id="ctb1" icon="/images/icons/open.png"
+                                                             action="detail"
+                                                             disabled="#{bindings.Id.inputValue == null}"/>
+                                    <af:commandToolbarButton text="新项目" id="ctb2"
+                                                             icon="/images/icons/new.png"
+                                                             rendered="#{viewScope.DocSearchBean.admin}"
+                                                             actionListener="#{bindings.CreateInsert.execute}"
+                                                             disabled="#{!bindings.CreateInsert.enabled}" action="new"/>
+                                    <af:commandToolbarButton text="导出" id="ctb3" icon="/images/icons/export.png">
+                                        <af:exportCollectionActionListener type="excelHTML" exportedId="t2"
+                                                                           filename="公文项目.xls"/>
+                                    </af:commandToolbarButton>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.DocumentPublish.collectionModel}" var="row"
+                                      rows="#{bindings.DocumentPublish.rangeSize}"
+                                      emptyText="#{bindings.DocumentPublish.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.DocumentPublish.rangeSize}" rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.DocumentPublish.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.DocumentPublish.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t2">
+                                <af:column sortProperty="#{bindings.DocumentPublish.hints.Title.name}" sortable="true"
+                                           headerText="#{bindings.DocumentPublish.hints.Title.label}" id="c1">
+                                    <af:outputText value="#{row.Title}" id="ot2"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DocumentPublish.hints.Description.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DocumentPublish.hints.Description.label}" id="c2">
+                                    <af:outputText value="#{row.Description}" id="ot3"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DocumentPublish.hints.GroupList.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DocumentPublish.hints.GroupList.label}" id="c3">
+                                    <af:outputText value="#{row.GroupList}" id="ot4"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DocumentPublish.hints.State.name}" sortable="true"
+                                           headerText="#{bindings.DocumentPublish.hints.State.label}" id="c4">
+                                    <af:outputText value="#{row.State}" id="ot5"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DocumentPublish.hints.SubmitBy.name}"
+                                           sortable="true" headerText="#{bindings.DocumentPublish.hints.SubmitBy.label}"
+                                           id="c5">
+                                    <af:outputText value="#{row.SubmitBy}" id="ot6"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.DocumentPublish.hints.SubmitDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.DocumentPublish.hints.SubmitDate.label}" id="c6">
+                                    <af:outputText value="#{row.SubmitDate}" id="ot7">
+                                        <af:convertDateTime pattern="#{bindings.DocumentPublish.hints.SubmitDate.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                            </af:table>
+                        </af:panelCollection>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelGroupLayout id="pfl1" layout="vertical">
+                            <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                <af:inputText label="标题" id="it1" value="#{viewScope.DocExpBean.taskName}"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:selectOneChoice label="状态" id="soc1" value="#{viewScope.DocExpBean.state}">
+                                    <af:selectItem label="已发送" value="已发送" id="si2"/>
+                                    <af:selectItem label="已取消" value="已取消" id="si4"/>
+                                </af:selectOneChoice>
+                                <af:spacer width="10" height="10" id="s1"/>
+                            </af:panelGroupLayout>
+                            <af:panelGroupLayout id="pgl1" layout="horizontal">
+                                <af:outputText id="ot1" value="发送时间范围： "/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:inputDate label="开始" id="id1" value="#{viewScope.DocExpBean.startDate}">
+                                    <af:convertDateTime type="date"/>
+                                </af:inputDate>
+                                <af:spacer width="10" height="10" id="s4"/>
+                                <af:inputDate label="结束" id="id2" value="#{viewScope.DocExpBean.endDate}">
+                                    <af:convertDateTime type="date"/>
+                                </af:inputDate>
+                                <af:spacer width="10" height="10" id="s5"/>
+                                <af:commandButton text="搜索" id="cb1" icon="/images/icons/quick_query.png"
+                                                  action="#{viewScope.DocSearchBean.doSearch}" clientComponent="true"/>
+                                <af:spacer width="10" height="10" id="s6"/>
+                                <af:commandButton id="cb2" text="用户组" icon="/images/icons/user.png" action="grp"/>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:panelHeader>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

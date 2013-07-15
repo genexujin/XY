@@ -28,6 +28,15 @@
   <ViewUsage
     Name="History"
     ViewObjectName="edu.hp.model.vo.DocumentHistoryView"/>
+  <ViewUsage
+    Name="Groups"
+    ViewObjectName="edu.hp.model.vo.GroupsView"/>
+  <ViewUsage
+    Name="EmpOfGrps"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"/>
+  <ViewUsage
+    Name="DocumentPublish"
+    ViewObjectName="edu.hp.model.vo.DocumentPublishView"/>
   <ViewLinkUsage
     Name="Doc2DeptViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.Doc2DeptViewLink"
@@ -45,5 +54,11 @@
     ViewLinkObjectName="edu.hp.model.vo.link.DocDept2HistoryViewLink"
     SrcViewUsageName="edu.hp.model.biz.DocumentModule.DeptTasks"
     DstViewUsageName="edu.hp.model.biz.DocumentModule.History"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="UserGrpViewLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.UserGrpViewLink"
+    SrcViewUsageName="edu.hp.model.biz.DocumentModule.Groups"
+    DstViewUsageName="edu.hp.model.biz.DocumentModule.EmpOfGrps"
     Reversed="false"/>
 </AppModule>

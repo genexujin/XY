@@ -1,6 +1,9 @@
 package edu.hp.model.biz;
 
+import edu.hp.model.vo.DocumentPublishViewImpl;
 import edu.hp.model.vo.DocumentTaskViewImpl;
+
+import edu.hp.model.vo.EmployeesViewImpl;
 
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
@@ -89,5 +92,37 @@ public class DocumentModuleImpl extends ApplicationModuleImpl {
      */
     public ViewLinkImpl getDocDept2HistoryViewLink1() {
         return (ViewLinkImpl)findViewLink("DocDept2HistoryViewLink1");
+    }
+
+    /**
+     * Container's getter for GroupsView1.
+     * @return GroupsView1
+     */
+    public ViewObjectImpl getGroups() {
+        return (ViewObjectImpl)findViewObject("Groups");
+    }
+
+    /**
+     * Container's getter for EmployeesView1.
+     * @return EmployeesView1
+     */
+    public EmployeesViewImpl getEmpOfGrps() {
+        return (EmployeesViewImpl)findViewObject("EmpOfGrps");
+    }
+
+    /**
+     * Container's getter for UserGrpViewLink1.
+     * @return UserGrpViewLink1
+     */
+    public ViewLinkImpl getUserGrpViewLink1() {
+        return (ViewLinkImpl)findViewLink("UserGrpViewLink1");
+    }
+
+    /**
+     * Container's getter for DocumentPublishView1.
+     * @return DocumentPublishView1
+     */
+    public DocumentPublishViewImpl getDocumentPublish() {
+        return (DocumentPublishViewImpl)findViewObject("DocumentPublish");
     }
 }

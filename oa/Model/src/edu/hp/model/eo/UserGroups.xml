@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UserGroups"
+  Version="11.1.2.62.76"
+  DBObjectType="table"
+  DBObjectName="USER_GROUPS"
+  AliasName="UserGroups"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="UserId"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="USER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USER_GROUPS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="GroupId"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="GROUP_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USER_GROUPS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="UserGroupsPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="USER_GROUPS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="edu.hp.model.eo.UserGroups.UserId"/>
+      <Item Value="edu.hp.model.eo.UserGroups.GroupId"/>
+    </AttrArray>
+  </Key>
+</Entity>

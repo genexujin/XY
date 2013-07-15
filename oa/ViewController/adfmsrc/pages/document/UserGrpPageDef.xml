@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="UserGrpPageDef"
+                Package="pages.document">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Groups" RangeSize="25" DataControl="DocumentModuleDataControl" id="GroupsIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="GroupsIterator" id="Groups">
+      <nodeDefinition DefName="edu.hp.model.vo.GroupsView" Name="Groups0">
+        <AttrNames>
+          <Item Value="GroupName"/>
+          <Item Value="GroupDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="GroupsIterator" id="GroupName">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

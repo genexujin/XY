@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="NewPageDef"
+                Package="pages.document">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DocumentPublish" RangeSize="25" DataControl="DocumentModuleDataControl"
+              id="DocumentPublishIterator"/>
+    <iterator id="GroupsIterator" Binds="Root.DocumentModule.Groups" DataControl="RootAppModuleDataControl"
+              RangeSize="-1"/>
+    <iterator id="EmpOfGrpsIterator" Binds="Root.DocumentModule.EmpOfGrps" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="DocumentPublishIterator" id="Title">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="State">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="SubmitBy">
+      <AttrNames>
+        <Item Value="SubmitBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="DocumentPublishIterator" id="ReceiverList">
+      <AttrNames>
+        <Item Value="ReceiverList"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="GroupList">
+      <AttrNames>
+        <Item Value="GroupList"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="FileUrl">
+      <AttrNames>
+        <Item Value="FileUrl"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="GroupsIterator" id="findByName" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findByName" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.Groups">
+      <NamedData NDName="grpName" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

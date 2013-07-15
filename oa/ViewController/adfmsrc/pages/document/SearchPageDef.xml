@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="SearchPageDef"
+                Package="pages.document">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DocumentPublish" RangeSize="25" DataControl="DocumentModuleDataControl"
+              id="DocumentPublishIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="search" RequiresUpdateModel="true" Action="invokeMethod" MethodName="search"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.DocumentPublish">
+      <NamedData NDName="title" NDType="java.lang.String"/>
+      <NamedData NDName="state" NDType="java.lang.String"/>
+      <NamedData NDName="startDate" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="endDate" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="editorId" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="DocumentPublishIterator" id="DocumentPublish">
+      <nodeDefinition DefName="edu.hp.model.vo.DocumentPublishView" Name="DocumentPublish0">
+        <AttrNames>
+          <Item Value="Title"/>
+          <Item Value="Description"/>
+          <Item Value="GroupList"/>
+          <Item Value="State"/>
+          <Item Value="SubmitBy"/>
+          <Item Value="SubmitDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DocumentPublishIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="DocumentPublishIterator" id="CreateInsert"
+            InstanceName="DocumentModuleDataControl.DocumentPublish" DataControl="DocumentModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

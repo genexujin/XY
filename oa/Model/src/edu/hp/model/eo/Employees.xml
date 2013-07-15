@@ -499,6 +499,13 @@
       AssociationOtherEnd="edu.hp.model.eo.asso.EmpPoAssoc.Submitter"
       Type="oracle.jbo.RowIterator"
       IsUpdateable="false"/>
+    <AccessorAttribute
+        Name="Groups"
+        Association="edu.hp.model.eo.asso.UserGrpAssoc"
+        AssociationEnd="edu.hp.model.eo.asso.UserGrpAssoc.Groups"
+        AssociationOtherEnd="edu.hp.model.eo.asso.UserGrpAssoc.Employees"
+        Type="oracle.jbo.RowIterator"
+        IsUpdateable="false"/>
     <Key
       Name="EmployeesPk"
       PrimaryKey="true">

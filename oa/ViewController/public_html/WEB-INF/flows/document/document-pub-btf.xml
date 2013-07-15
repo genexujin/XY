@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="document-pub-btf">
+    <default-activity>executeEmptyQuery</default-activity>
+    <managed-bean id="__8">
+      <managed-bean-name>DocSearchBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.doc.DocSearchBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__9">
+      <managed-bean-name>NewPubBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.doc.NewPubBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="Search">
+      <page>/pages/document/Search.jsff</page>
+    </view>
+    <view id="New">
+      <page>/pages/document/New.jsff</page>
+    </view>
+    <view id="Detail">
+      <page>/pages/document/Detail.jsff</page>
+    </view>
+    <view id="UserGrp">
+      <page>/pages/document/UserGrp.jsff</page>
+    </view>
+    <method-call id="executeEmptyQuery">
+      <method>#{bindings.executeEmptyQuery.execute}</method>
+      <outcome>
+        <fixed-outcome>executeEmptyQuery</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>search</from-outcome>
+        <to-activity-id>executeEmptyQuery</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__3">
+        <from-outcome>new</from-outcome>
+        <to-activity-id>New</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__4">
+        <from-outcome>detail</from-outcome>
+        <to-activity-id>Detail</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>grp</from-outcome>
+        <to-activity-id>UserGrp</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>executeEmptyQuery</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>executeEmptyQuery</from-outcome>
+        <to-activity-id>Search</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
