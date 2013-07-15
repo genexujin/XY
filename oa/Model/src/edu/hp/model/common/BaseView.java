@@ -16,4 +16,13 @@ public class BaseView  extends ViewObjectImpl {
         executeQuery();
     }
     
+    public void queryByVC(String vcName, String varName, Object value, int rangeSize){
+        setApplyViewCriteriaNames(null);
+        ViewCriteria criteria = this.getViewCriteria(vcName);
+        applyViewCriteria(criteria);
+        setRangeSize(rangeSize);
+        ensureVariableManager().setVariableValue(varName, value);
+        executeQuery();
+    }
+    
 }

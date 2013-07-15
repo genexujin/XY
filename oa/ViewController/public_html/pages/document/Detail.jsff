@@ -3,6 +3,42 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <af:panelStretchLayout id="psl1">
         <f:facet name="center">
+            <af:panelHeader text="详情" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelFormLayout id="pfl1">
+                    <af:panelLabelAndMessage label="#{bindings.Title.hints.label}" id="plam1">
+                        <af:outputText value="#{bindings.Title.inputValue}" id="ot1"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{bindings.Description.hints.label}" id="plam2">
+                        <af:outputText value="#{bindings.Description.inputValue}" id="ot2"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{bindings.GroupList.hints.label}" id="plam3">
+                        <af:outputText value="#{bindings.GroupList.inputValue}" id="ot3"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{bindings.State.hints.label}" id="plam5">
+                        <af:outputText value="#{bindings.State.inputValue}" id="ot5"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{bindings.SubmitBy.hints.label}" id="plam6">
+                        <af:outputText value="#{bindings.SubmitBy.inputValue}" id="ot6"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{bindings.SubmitDate.hints.label}" id="plam7">
+                        <af:outputText value="#{bindings.SubmitDate.inputValue}" id="ot7">
+                            <af:convertDateTime pattern="#{bindings.SubmitDate.format}"/>
+                        </af:outputText>
+                    </af:panelLabelAndMessage>
+                    <f:facet name="footer">
+                        <af:toolbar id="t1">
+                            <af:commandToolbarButton text="取消" id="ctb2" icon="/images/icons/undo.png"/>
+                        </af:toolbar>
+                    </f:facet>
+                    <af:separator id="s1"/>
+                    <af:commandLink text="附件下载" id="cl1"/>
+                </af:panelFormLayout>
+            </af:panelHeader>
             <!-- id="af_one_column_stretched"   -->
         </f:facet>
     </af:panelStretchLayout>

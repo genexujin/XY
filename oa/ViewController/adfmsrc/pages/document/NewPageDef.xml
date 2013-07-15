@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="DocumentPublish" RangeSize="25" DataControl="DocumentModuleDataControl"
+    <iterator Binds="Root.DocumentModule.DocumentPublish" RangeSize="25" DataControl="RootAppModuleDataControl"
               id="DocumentPublishIterator"/>
     <iterator id="GroupsIterator" Binds="Root.DocumentModule.Groups" DataControl="RootAppModuleDataControl"
               RangeSize="-1"/>
@@ -60,6 +60,17 @@
                   MethodName="findByName" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.Groups">
       <NamedData NDName="grpName" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="DocumentPublishIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="sendNotification" InstanceName="data.RootAppModuleDataControl.dataProvider"
+                  DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendNotification" IsViewObjectMethod="false"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.sendNotification_RootAppModuleDataControl_dataProvider_sendNotification_result">
+      <NamedData NDName="notification" NDType="edu.hp.model.pojo.Notification"/>
     </methodAction>
   </bindings>
 </pageDefinition>

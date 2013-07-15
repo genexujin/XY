@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.62.76" id="DetailPageDef"
+                Package="pages.document">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DocumentPublish" RangeSize="25" DataControl="DocumentModuleDataControl"
+              id="DocumentPublishIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="DocumentPublishIterator" id="Title">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="GroupList">
+      <AttrNames>
+        <Item Value="GroupList"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="State">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="SubmitBy">
+      <AttrNames>
+        <Item Value="SubmitBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DocumentPublishIterator" id="FileUrl">
+      <AttrNames>
+        <Item Value="FileUrl"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

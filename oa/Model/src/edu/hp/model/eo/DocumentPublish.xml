@@ -42,6 +42,8 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.DocumentPublish.Title_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -60,6 +62,8 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.DocumentPublish.Description_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>

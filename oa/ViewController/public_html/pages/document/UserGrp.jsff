@@ -9,69 +9,152 @@
                 <f:facet name="toolbar"/>
                 <f:facet name="legend"/>
                 <f:facet name="info"/>
-                <af:panelStretchLayout id="psl2" startWidth="0px" endWidth="0px" bottomHeight="0px" topHeight="150px">
+                <af:panelStretchLayout id="psl2" startWidth="0px" endWidth="0px" bottomHeight="0px" topHeight="330px">
                     <f:facet name="bottom"/>
                     <f:facet name="center">
                         <af:panelGroupLayout id="pgl1" layout="vertical">
-                            <af:outputText value="用户组 #{bindings.GroupName.inputValue}成员：" id="ot1" inlineStyle="font-size:medium;"/>
-                            <af:panelGroupLayout id="pgl2" layout="horizontal">
-                                <af:inputText label="用户姓名" id="it3"/>
-                                <af:commandButton text="搜索" id="cb1" icon="/images/icons/quick_query.png"/>
+                            <af:panelGroupLayout id="pgl5" layout="horizontal">
+                                <af:outputText value="用户组 #{bindings.GroupName.inputValue}成员：" id="ot1"
+                                               inlineStyle="font-size:medium;"/>
                             </af:panelGroupLayout>
-                            <af:selectManyShuttle label="选择成员" id="sms1" size="10" leadingHeader="可选成员"
-                                                  trailingHeader="已选成员">
-                                <f:selectItems value="" id="si1"/>
-                            </af:selectManyShuttle>
-                            <af:commandButton id="cb2" text="保存" icon="/images/icons/filesave.png"/>
+                            <af:panelCollection id="pc2">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t4">
+                                        <af:commandToolbarButton text="添加" id="ctb4" icon="/images/icons/add.png">
+                                            <af:showPopupBehavior triggerType="action" popupId="p1"/>
+                                        </af:commandToolbarButton>
+                                        <af:commandToolbarButton id="ctb5" text="删除" icon="/images/icons/delete.png"
+                                                                 actionListener="#{bindings.Delete1.execute}"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.UserGroups.collectionModel}" var="row"
+                                          rows="#{bindings.UserGroups.rangeSize}"
+                                          emptyText="#{bindings.UserGroups.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.UserGroups.rangeSize}" rowBandingInterval="1"
+                                          selectedRowKeys="#{bindings.UserGroups.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.UserGroups.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t3" partialTriggers="::ctb5">
+                                    <af:column sortProperty="#{bindings.UserGroups.hints.UserName.name}"
+                                               sortable="false"
+                                               headerText="成员" id="c3">
+                                        <af:inputText value="#{row.bindings.UserName.inputValue}"
+                                                      label="#{bindings.UserGroups.hints.UserName.label}"
+                                                      required="#{bindings.UserGroups.hints.UserName.mandatory}"
+                                                      columns="#{bindings.UserGroups.hints.UserName.displayWidth}"
+                                                      maximumLength="#{bindings.UserGroups.hints.UserName.precision}"
+                                                      shortDesc="#{bindings.UserGroups.hints.UserName.tooltip}"
+                                                      id="it4" readOnly="true">
+                                            <f:validator binding="#{row.bindings.UserName.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                </af:table>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                          contentDelivery="lazyUncached" binding="#{viewScope.UserGroupBean.popup}"
+                                          popupFetchListener="#{viewScope.UserGroupBean.onPopupLaunch}">
+                                    <af:panelWindow id="pw1" stretchChildren="first" title="选择成员" contentWidth="500"
+                                                    contentHeight="290" modal="true">
+                                        <af:panelGroupLayout id="pgl6" layout="vertical">
+                                            <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                                <af:inputText label="用户姓名" id="it3"
+                                                              value="#{viewScope.UserGroupBean.userName}"/>
+                                                <af:commandButton text="搜索" id="cb1"
+                                                                  icon="/images/icons/quick_query.png"
+                                                                  action="#{viewScope.UserGroupBean.searchUser}"/>
+                                                <af:commandButton text="确认添加" id="cb3" icon="/images/icons/add.png"
+                                                                  action="#{viewScope.UserGroupBean.saveGroupUsers}"/>
+                                            </af:panelGroupLayout>
+                                            <af:table value="#{bindings.EmpsQuery.collectionModel}" var="row"
+                                                      rows="#{bindings.EmpsQuery.rangeSize}"
+                                                      emptyText="#{bindings.EmpsQuery.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.EmpsQuery.rangeSize}" rowBandingInterval="0"
+                                                      selectionListener="#{bindings.EmpsQuery.collectionModel.makeCurrent}"
+                                                      rowSelection="multiple" id="t5">
+                                                <af:column sortProperty="#{bindings.EmpsQuery.hints.Fullname.name}"
+                                                           sortable="true"
+                                                           headerText="姓名"
+                                                           id="c4">
+                                                    <af:outputText value="#{row.Fullname}" id="ot2"/>
+                                                </af:column>
+                                            </af:table>
+                                        </af:panelGroupLayout>
+                                    </af:panelWindow>
+                                </af:popup>
+                            </af:panelCollection>
                         </af:panelGroupLayout>
                     </f:facet>
                     <f:facet name="start"/>
                     <f:facet name="end"/>
                     <f:facet name="top">
-                        <af:panelCollection id="pc1">
-                            <f:facet name="menus"/>
-                            <f:facet name="toolbar">
-                                <af:toolbar id="t2">
-                                    <af:commandToolbarButton text="新用户组" id="ctb1" icon="/images/icons/new.png"/>
-                                    <af:commandToolbarButton id="ctb2" text="删除" icon="/images/icons/delete.png"/>
-                                </af:toolbar>
-                            </f:facet>
-                            <f:facet name="statusbar"/>
-                            <af:table value="#{bindings.Groups.collectionModel}" var="row"
-                                      rows="#{bindings.Groups.rangeSize}"
-                                      emptyText="#{bindings.Groups.viewable ? 'No data to display.' : 'Access Denied.'}"
-                                      fetchSize="#{bindings.Groups.rangeSize}" rowBandingInterval="1"
-                                      selectedRowKeys="#{bindings.Groups.collectionModel.selectedRow}"
-                                      selectionListener="#{bindings.Groups.collectionModel.makeCurrent}"
-                                      rowSelection="single" id="t1" editingMode="clickToEdit">
-                                <af:column sortProperty="#{bindings.Groups.hints.GroupName.name}" sortable="true"
-                                           headerText="#{bindings.Groups.hints.GroupName.label}" id="c1">
-                                    <af:inputText value="#{row.bindings.GroupName.inputValue}"
-                                                  label="#{bindings.Groups.hints.GroupName.label}"
-                                                  required="#{bindings.Groups.hints.GroupName.mandatory}"
-                                                  columns="#{bindings.Groups.hints.GroupName.displayWidth}"
-                                                  maximumLength="#{bindings.Groups.hints.GroupName.precision}"
-                                                  shortDesc="#{bindings.Groups.hints.GroupName.tooltip}" id="it1">
-                                        <f:validator binding="#{row.bindings.GroupName.validator}"/>
-                                    </af:inputText>
-                                </af:column>
-                                <af:column sortProperty="#{bindings.Groups.hints.GroupDesc.name}" sortable="true"
-                                           headerText="#{bindings.Groups.hints.GroupDesc.label}" id="c2" width="200">
-                                    <af:inputText value="#{row.bindings.GroupDesc.inputValue}"
-                                                  label="#{bindings.Groups.hints.GroupDesc.label}"
-                                                  required="#{bindings.Groups.hints.GroupDesc.mandatory}"
-                                                  columns="#{bindings.Groups.hints.GroupDesc.displayWidth}"
-                                                  maximumLength="#{bindings.Groups.hints.GroupDesc.precision}"
-                                                  shortDesc="#{bindings.Groups.hints.GroupDesc.tooltip}" id="it2">
-                                        <f:validator binding="#{row.bindings.GroupDesc.validator}"/>
-                                    </af:inputText>
-                                </af:column>
-                            </af:table>
-                        </af:panelCollection>
+                        <af:panelGroupLayout layout="scroll" id="pgl3">
+                            <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                <af:commandButton id="cb2" text="保存" icon="/images/icons/filesave.png"
+                                                  action="#{viewScope.UserGroupBean.save}"/>
+                                <af:commandButton id="cb4" text="取消" icon="/images/icons/undo.png"
+                                                  actionListener="#{bindings.Rollback.execute}">
+                                    <af:resetActionListener/>
+                                </af:commandButton>
+                                <af:commandButton text="返回搜索" id="ctb3" icon="/images/icons/listview.png"
+                                                  actionListener="#{bindings.Rollback.execute}" immediate="true"
+                                                  action="search">
+                                    <af:resetActionListener/>
+                                </af:commandButton>
+                            </af:panelGroupLayout>
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t2">
+                                        <af:commandToolbarButton text="新用户组" id="ctb1" icon="/images/icons/new.png"
+                                                                 actionListener="#{bindings.CreateInsert.execute}"
+                                                                 disabled="#{!bindings.CreateInsert.enabled}"/>
+                                        <af:commandToolbarButton id="ctb2" text="删除" icon="/images/icons/delete.png"
+                                                                 actionListener="#{bindings.Delete.execute}"
+                                                                 disabled="#{!bindings.Delete.enabled}"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.Groups.collectionModel}" var="row"
+                                          rows="#{bindings.Groups.rangeSize}"
+                                          emptyText="#{bindings.Groups.viewable ? '暂无数据。' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Groups.rangeSize}" rowBandingInterval="1"
+                                          selectedRowKeys="#{bindings.Groups.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.Groups.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1" editingMode="clickToEdit"
+                                          partialTriggers="::ctb1 ::ctb2 :::pc2:ctb4 :::pc2:ctb5" autoHeightRows="-1">
+                                    <af:column sortProperty="#{bindings.Groups.hints.GroupName.name}" sortable="true"
+                                               headerText="#{bindings.Groups.hints.GroupName.label}" id="c1">
+                                        <af:inputText value="#{row.bindings.GroupName.inputValue}"
+                                                      label="#{bindings.Groups.hints.GroupName.label}"
+                                                      required="#{bindings.Groups.hints.GroupName.mandatory}"
+                                                      columns="#{bindings.Groups.hints.GroupName.displayWidth}"
+                                                      maximumLength="#{bindings.Groups.hints.GroupName.precision}"
+                                                      shortDesc="#{bindings.Groups.hints.GroupName.tooltip}" id="it1"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{row.bindings.GroupName.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Groups.hints.GroupDesc.name}" sortable="true"
+                                               headerText="#{bindings.Groups.hints.GroupDesc.label}" id="c2"
+                                               width="200">
+                                        <af:inputText value="#{row.bindings.GroupDesc.inputValue}"
+                                                      label="#{bindings.Groups.hints.GroupDesc.label}"
+                                                      required="#{bindings.Groups.hints.GroupDesc.mandatory}"
+                                                      columns="#{bindings.Groups.hints.GroupDesc.displayWidth}"
+                                                      maximumLength="#{bindings.Groups.hints.GroupDesc.precision}"
+                                                      shortDesc="#{bindings.Groups.hints.GroupDesc.tooltip}" id="it2"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{row.bindings.GroupDesc.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelGroupLayout>
                     </f:facet>
                 </af:panelStretchLayout>
             </af:panelHeader>
             <!-- id="af_one_column_stretched"   -->
         </f:facet>
     </af:panelStretchLayout>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:UserGroupBean-->
 </ui:composition>

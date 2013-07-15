@@ -6,12 +6,34 @@
   Name="UserGroupsView"
   Version="11.1.2.62.76"
   SelectList="UserGroups.USER_ID, 
-       UserGroups.GROUP_ID"
+       UserGroups.GROUP_ID, 
+       UserGroups.USER_NAME"
   FromList="USER_GROUPS UserGroups"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
   UseGlueCode="false">
+  <ViewAccessor
+    Name="EmployeesView1"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_UserId"
+    ListVOName="EmployeesView1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="UserGroups"
     Entity="edu.hp.model.eo.UserGroups"/>
@@ -21,7 +43,15 @@
     PrecisionRule="true"
     EntityAttrName="UserId"
     EntityUsage="UserGroups"
-    AliasName="USER_ID"/>
+    AliasName="USER_ID"
+    LOVName="LOV_UserId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="GroupId"
     IsNotNull="true"
@@ -29,4 +59,10 @@
     EntityAttrName="GroupId"
     EntityUsage="UserGroups"
     AliasName="GROUP_ID"/>
+  <ViewAttribute
+    Name="UserName"
+    PrecisionRule="true"
+    EntityAttrName="UserName"
+    EntityUsage="UserGroups"
+    AliasName="USER_NAME"/>
 </ViewObject>

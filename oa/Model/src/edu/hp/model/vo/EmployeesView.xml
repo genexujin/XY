@@ -36,7 +36,9 @@
   PageIterMode="Full"
   UseGlueCode="false"
   FetchMode="FETCH_AS_NEEDED"
-  ComponentClass="edu.hp.model.vo.EmployeesViewImpl">
+  ComponentClass="edu.hp.model.vo.EmployeesViewImpl"
+  ComponentInterface="edu.hp.model.vo.common.EmployeesView"
+  ClientProxyName="edu.hp.model.vo.client.EmployeesViewClient">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -50,6 +52,10 @@
     Type="java.lang.String"/>
   <Variable
     Name="DpId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="displayName"
     Kind="viewcriteria"
     Type="java.lang.String"/>
   <ViewAccessor
@@ -322,8 +328,7 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     AliasName="VIEW_ATTR"
-    SQLType="VARCHAR"
-    IsQueriable="false">
+    SQLType="VARCHAR">
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[LastName+FirstName]]></TransientExpression>
     <Dependencies>
@@ -596,6 +601,42 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="queryByDisplayName"
+    ViewObjectName="edu.hp.model.vo.EmployeesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EmployeesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DisplayName"
+        ViewAttribute="DisplayName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":displayName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="RolesVA"
     ViewLink="edu.hp.model.vo.link.UserRoleViewLink"
@@ -653,4 +694,15 @@
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>
   </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="findByDisplayName"
+      MethodName="findByDisplayName">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="displayName"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
 </ViewObject>

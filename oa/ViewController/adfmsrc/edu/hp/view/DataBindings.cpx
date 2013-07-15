@@ -128,6 +128,7 @@
     <page path="/pages/document/Search.jsff" usageId="edu_hp_view_SearchPageDef"/>
     <page path="/pages/document/New.jsff" usageId="edu_hp_view_NewPageDef"/>
     <page path="/pages/document/UserGrp.jsff" usageId="edu_hp_view_UserGrpPageDef"/>
+    <page path="/pages/document/Detail.jsff" usageId="edu_hp_view_DetailPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="edu_hp_view_HomePageDef" path="pages.main.HomePageDef"/>
@@ -242,6 +243,7 @@
     <page id="edu_hp_view_SearchPageDef" path="pages.document.SearchPageDef"/>
     <page id="edu_hp_view_NewPageDef" path="pages.document.NewPageDef"/>
     <page id="edu_hp_view_UserGrpPageDef" path="pages.document.UserGrpPageDef"/>
+    <page id="edu_hp_view_DetailPageDef" path="pages.document.DetailPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AdminModuleDataControl" Package="edu.hp.model.biz"

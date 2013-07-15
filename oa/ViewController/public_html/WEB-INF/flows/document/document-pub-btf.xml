@@ -12,6 +12,11 @@
       <managed-bean-class>edu.hp.view.bean.doc.NewPubBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__10">
+      <managed-bean-name>UserGroupBean</managed-bean-name>
+      <managed-bean-class>edu.hp.view.bean.doc.UserGroupBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
     <view id="Search">
       <page>/pages/document/Search.jsff</page>
     </view>
@@ -30,6 +35,9 @@
         <fixed-outcome>executeEmptyQuery</fixed-outcome>
       </outcome>
     </method-call>
+    <view id="EditUserGroups">
+      <page>/pages/document/EditUserGroups.jsff</page>
+    </view>
     <control-flow-rule id="__1">
       <from-activity-id>*</from-activity-id>
       <control-flow-case id="__2">
@@ -54,6 +62,13 @@
       <control-flow-case id="__7">
         <from-outcome>executeEmptyQuery</from-outcome>
         <to-activity-id>Search</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>UserGrp</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>EditUserGroups</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <use-page-fragments/>

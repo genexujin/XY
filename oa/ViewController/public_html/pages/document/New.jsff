@@ -26,8 +26,8 @@
                         <f:validator binding="#{bindings.Description.validator}"/>
                     </af:inputText>
                     <af:selectManyShuttle label="用户组" value="#{viewScope.NewPubBean.selectedGroups}" id="sms1"
-                                          layout="horizontal" trailingHeader="已选部门" leadingHeader="可选部门"
-                                          autoSubmit="true" size="10" binding="#{viewScope.NewDocBean.theShuttle}">
+                                          layout="horizontal" trailingHeader="已选用户组" leadingHeader="可选用户组"
+                                          autoSubmit="true" size="10" binding="#{viewScope.NewPubBean.theShuttle}">
                         <f:selectItems value="#{viewScope.NewPubBean.allGroups}" id="si1"/>
                     </af:selectManyShuttle>
                     <af:inputText value="#{bindings.State.inputValue}" label="#{bindings.State.hints.label}"
@@ -55,7 +55,7 @@
                         <af:toolbar id="t1">
                             <af:commandToolbarButton text="发送" id="cb2" action="#{viewScope.NewPubBean.startPub}"
                                                      icon="/images/icons/startserver.png"
-                                                     disabled="#{bindings.TaskState.inputValue != '未开始'}"/>
+                                                     disabled="#{bindings.State.inputValue != '未发送'}"/>
                             <af:commandToolbarButton text="返回搜索" id="ctb1" icon="/images/icons/listview.png"
                                                      actionListener="#{bindings.Rollback.execute}" immediate="true"
                                                      action="search">
@@ -70,9 +70,9 @@
                     <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
                         <af:panelWindow id="pw1" title="上传附件" modal="true" contentHeight="50" contentWidth="300">
                             <af:inputFile id="if1" label="附件文件" clientComponent="true" autoSubmit="true"
-                                          value="#{viewScope.NewDocBean.uploadFile}"
-                                          binding="#{viewScope.NewDocBean.inputFile}"
-                                          valueChangeListener="#{viewScope.NewDocBean.fileUploaded}"/>
+                                          value="#{viewScope.NewPubBean.uploadFile}"
+                                          binding="#{viewScope.NewPubBean.inputFile}"
+                                          valueChangeListener="#{viewScope.NewPubBean.fileUploaded}"/>
                         </af:panelWindow>
                     </af:popup>
                 </af:panelFormLayout>

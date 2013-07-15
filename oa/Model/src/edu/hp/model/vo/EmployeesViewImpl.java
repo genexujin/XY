@@ -2,6 +2,8 @@ package edu.hp.model.vo;
 
 import edu.hp.model.common.BaseView;
 
+import edu.hp.model.vo.common.EmployeesView;
+
 import oracle.jbo.Row;
 import oracle.jbo.server.ViewObjectImpl;
 // ---------------------------------------------------------------------
@@ -10,33 +12,37 @@ import oracle.jbo.server.ViewObjectImpl;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class EmployeesViewImpl extends BaseView {
+public class EmployeesViewImpl extends BaseView implements EmployeesView {
     /**
      * This is the default constructor (do not remove).
      */
     public EmployeesViewImpl() {
     }
-    
+
     /**
      * 查找用户的手机号
      * @param userName
      * @return
      */
-    public String findUserMobile (String userName){
-        this.queryByVC("findByUserId","userId",userName);
+    public String findUserMobile(String userName) {
+        this.queryByVC("findByUserId", "userId", userName);
         String mobile = null;
         Row[] allRowsInRange = this.getAllRowsInRange();
-        if(allRowsInRange!=null && allRowsInRange.length>0){
+        if (allRowsInRange != null && allRowsInRange.length > 0) {
             mobile = (String)allRowsInRange[0].getAttribute("Mobile");
         }
         return mobile;
     }
-    
-    public String findUserMobileById(String id){
-        this.queryByVC("findByIdCriteria","ud",id);
+
+    public void findByDisplayName(String displayName) {
+        this.queryByVC("queryByDisplayName", "displayName", displayName, -1);
+    }
+
+    public String findUserMobileById(String id) {
+        this.queryByVC("findByIdCriteria", "ud", id, -1);
         String mobile = null;
         Row[] allRowsInRange = this.getAllRowsInRange();
-        if(allRowsInRange!=null && allRowsInRange.length>0){
+        if (allRowsInRange != null && allRowsInRange.length > 0) {
             mobile = (String)allRowsInRange[0].getAttribute("Mobile");
         }
         return mobile;
@@ -89,5 +95,21 @@ public class EmployeesViewImpl extends BaseView {
      */
     public void setDpId(String value) {
         ensureVariableManager().setVariableValue("DpId", value);
+    }
+
+    /**
+     * Returns the variable value for displayName.
+     * @return variable value for displayName
+     */
+    public String getdisplayName() {
+        return (String)ensureVariableManager().getVariableValue("displayName");
+    }
+
+    /**
+     * Sets <code>value</code> for variable displayName.
+     * @param value value to bind as displayName
+     */
+    public void setdisplayName(String value) {
+        ensureVariableManager().setVariableValue("displayName", value);
     }
 }

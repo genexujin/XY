@@ -5,6 +5,8 @@ import edu.hp.model.vo.DocumentTaskViewImpl;
 
 import edu.hp.model.vo.EmployeesViewImpl;
 
+import edu.hp.model.vo.GroupsViewImpl;
+
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
@@ -124,5 +126,29 @@ public class DocumentModuleImpl extends ApplicationModuleImpl {
      */
     public DocumentPublishViewImpl getDocumentPublish() {
         return (DocumentPublishViewImpl)findViewObject("DocumentPublish");
+    }
+
+    /**
+     * Container's getter for UserGroupsView1.
+     * @return UserGroupsView1
+     */
+    public ViewObjectImpl getUserGroups() {
+        return (ViewObjectImpl)findViewObject("UserGroups");
+    }
+
+    /**
+     * Container's getter for GroupUserViewLink1.
+     * @return GroupUserViewLink1
+     */
+    public ViewLinkImpl getGroupUserViewLink1() {
+        return (ViewLinkImpl)findViewLink("GroupUserViewLink1");
+    }
+
+    /**
+     * Container's getter for EmployeeQueryByDisplayNameView1.
+     * @return EmployeeQueryByDisplayNameView1
+     */
+    public ViewObjectImpl getEmpsQuery() {
+        return (ViewObjectImpl)findViewObject("EmpsQuery");
     }
 }

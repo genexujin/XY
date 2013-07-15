@@ -42,6 +42,8 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.Groups.GroupName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -60,6 +62,8 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.Groups.GroupDesc_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -68,6 +72,13 @@
     Association="edu.hp.model.eo.asso.UserGrpAssoc"
     AssociationEnd="edu.hp.model.eo.asso.UserGrpAssoc.Employees"
     AssociationOtherEnd="edu.hp.model.eo.asso.UserGrpAssoc.Groups"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="UserGroups"
+    Association="edu.hp.model.eo.asso.GrpUserAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.GrpUserAssoc.UserGroups"
+    AssociationOtherEnd="edu.hp.model.eo.asso.GrpUserAssoc.Groups"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <Key

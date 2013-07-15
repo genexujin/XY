@@ -6,7 +6,8 @@
   <executables/>
   <bindings>
     <action id="executeEmptyQuery" RequiresUpdateModel="true" Action="invokeMethod" MethodName="executeEmptyQuery"
-            IsViewObjectMethod="true" DataControl="DocumentModuleDataControl"
-            InstanceName="data.DocumentModuleDataControl.DocumentPublish"/>
+            IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+            InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.DocumentPublish"
+            ReturnName="data.RootAppModuleDataControl.methodResults.executeEmptyQuery_RootAppModuleDataControl_dataProvider_Root_DocumentModule_DocumentPublish_executeEmptyQuery_result"/>
   </bindings>
 </pageDefinition>

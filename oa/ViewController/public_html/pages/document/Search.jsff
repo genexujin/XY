@@ -76,9 +76,9 @@
                     <f:facet name="top">
                         <af:panelGroupLayout id="pfl1" layout="vertical">
                             <af:panelGroupLayout id="pgl2" layout="horizontal">
-                                <af:inputText label="标题" id="it1" value="#{viewScope.DocExpBean.taskName}"/>
+                                <af:inputText label="标题" id="it1" value="#{viewScope.DocSearchBean.title}"/>
                                 <af:spacer width="10" height="10" id="s2"/>
-                                <af:selectOneChoice label="状态" id="soc1" value="#{viewScope.DocExpBean.state}">
+                                <af:selectOneChoice label="状态" id="soc1" value="#{viewScope.DocSearchBean.state}">
                                     <af:selectItem label="已发送" value="已发送" id="si2"/>
                                     <af:selectItem label="已取消" value="已取消" id="si4"/>
                                 </af:selectOneChoice>
@@ -87,11 +87,11 @@
                             <af:panelGroupLayout id="pgl1" layout="horizontal">
                                 <af:outputText id="ot1" value="发送时间范围： "/>
                                 <af:spacer width="10" height="10" id="s3"/>
-                                <af:inputDate label="开始" id="id1" value="#{viewScope.DocExpBean.startDate}">
+                                <af:inputDate label="开始" id="id1" value="#{viewScope.DocSearchBean.startDt}">
                                     <af:convertDateTime type="date"/>
                                 </af:inputDate>
                                 <af:spacer width="10" height="10" id="s4"/>
-                                <af:inputDate label="结束" id="id2" value="#{viewScope.DocExpBean.endDate}">
+                                <af:inputDate label="结束" id="id2" value="#{viewScope.DocSearchBean.endDt}">
                                     <af:convertDateTime type="date"/>
                                 </af:inputDate>
                                 <af:spacer width="10" height="10" id="s5"/>

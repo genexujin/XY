@@ -87,6 +87,11 @@
     ViewLink="edu.hp.model.vo.link.UserGrpViewLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="UserGroupsView"
+    ViewLink="edu.hp.model.vo.link.GroupUserViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <ClientInterface>
     <Method
       Name="findByName"

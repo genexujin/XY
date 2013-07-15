@@ -4,7 +4,7 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="DocumentPublish" RangeSize="25" DataControl="DocumentModuleDataControl"
+    <iterator Binds="Root.DocumentModule.DocumentPublish" RangeSize="25" DataControl="RootAppModuleDataControl"
               id="DocumentPublishIterator"/>
   </executables>
   <bindings>

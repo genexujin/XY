@@ -4,21 +4,61 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="Groups" RangeSize="25" DataControl="DocumentModuleDataControl" id="GroupsIterator"/>
+    <iterator id="UserGroupsIterator" Binds="Root.DocumentModule.UserGroups" DataControl="RootAppModuleDataControl"
+              RangeSize="-1"/>
+    <iterator id="EmpsQueryIterator" Binds="Root.DocumentModule.EmpsQuery" DataControl="RootAppModuleDataControl"
+              RangeSize="-1"/>
+    <iterator id="GroupsIterator" Binds="Root.DocumentModule.Groups" DataControl="RootAppModuleDataControl"
+              RangeSize="25"/>
   </executables>
   <bindings>
-    <tree IterBinding="GroupsIterator" id="Groups">
-      <nodeDefinition DefName="edu.hp.model.vo.GroupsView" Name="Groups0">
-        <AttrNames>
-          <Item Value="GroupName"/>
-          <Item Value="GroupDesc"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
+    <action id="Rollback" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <methodAction IterBinding="EmpsQueryIterator" id="query" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="query" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.EmpsQuery">
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" InstanceName="RootAppModuleDataControl" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action IterBinding="GroupsIterator" id="CreateInsert"
+            InstanceName="RootAppModuleDataControl.Root.DocumentModule.Groups" DataControl="RootAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="GroupsIterator" id="Delete" InstanceName="RootAppModuleDataControl.Root.DocumentModule.Groups"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="GroupsIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
     <attributeValues IterBinding="GroupsIterator" id="GroupName">
       <AttrNames>
         <Item Value="GroupName"/>
       </AttrNames>
     </attributeValues>
+    <tree IterBinding="GroupsIterator" id="Groups">
+      <nodeDefinition DefName="edu.hp.model.vo.GroupsView" Name="Groups0">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="GroupDesc"/>
+          <Item Value="GroupName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="UserGroupsIterator" id="UserGroups">
+      <nodeDefinition DefName="edu.hp.model.vo.UserGroupsView" Name="UserGroups0">
+        <AttrNames>
+          <Item Value="UserName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="UserGroupsIterator" id="Delete1" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="EmpsQueryIterator" id="EmpsQuery">
+      <nodeDefinition DefName="edu.hp.model.vo.query.admin.EmployeeQueryByDisplayNameView" Name="EmpsQuery0">
+        <AttrNames>
+          <Item Value="Fullname"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

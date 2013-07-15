@@ -37,6 +37,12 @@
   <ViewUsage
     Name="DocumentPublish"
     ViewObjectName="edu.hp.model.vo.DocumentPublishView"/>
+  <ViewUsage
+    Name="UserGroups"
+    ViewObjectName="edu.hp.model.vo.UserGroupsView"/>
+  <ViewUsage
+    Name="EmpsQuery"
+    ViewObjectName="edu.hp.model.vo.query.admin.EmployeeQueryByDisplayNameView"/>
   <ViewLinkUsage
     Name="Doc2DeptViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.Doc2DeptViewLink"
@@ -60,5 +66,11 @@
     ViewLinkObjectName="edu.hp.model.vo.link.UserGrpViewLink"
     SrcViewUsageName="edu.hp.model.biz.DocumentModule.Groups"
     DstViewUsageName="edu.hp.model.biz.DocumentModule.EmpOfGrps"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="GroupUserViewLink1"
+    ViewLinkObjectName="edu.hp.model.vo.link.GroupUserViewLink"
+    SrcViewUsageName="edu.hp.model.biz.DocumentModule.Groups"
+    DstViewUsageName="edu.hp.model.biz.DocumentModule.UserGroups"
     Reversed="false"/>
 </AppModule>

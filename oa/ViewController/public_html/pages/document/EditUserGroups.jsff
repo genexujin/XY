@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelStretchLayout id="psl1">
+        <f:facet name="center">
+            <af:panelGroupLayout id="pgl1"/>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+</ui:composition>

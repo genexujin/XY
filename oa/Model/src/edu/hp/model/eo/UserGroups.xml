@@ -38,6 +38,25 @@
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="UserName"
+    Precision="200"
+    ColumnName="USER_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USER_GROUPS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Groups"
+    Association="edu.hp.model.eo.asso.GrpUserAssoc"
+    AssociationEnd="edu.hp.model.eo.asso.GrpUserAssoc.Groups"
+    AssociationOtherEnd="edu.hp.model.eo.asso.GrpUserAssoc.UserGroups"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
   <Key
     Name="UserGroupsPk"
     PrimaryKey="true">
@@ -46,6 +65,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.UserGroups.UserId"/>
+      <Item Value="edu.hp.model.eo.UserGroups.GroupId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_UserGroups">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="GROUPS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_USER_GROUPS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
       <Item Value="edu.hp.model.eo.UserGroups.GroupId"/>
     </AttrArray>
   </Key>
