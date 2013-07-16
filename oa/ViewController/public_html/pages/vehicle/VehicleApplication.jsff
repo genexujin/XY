@@ -277,7 +277,8 @@
                         <af:inputDate value="#{bindings.StartTime.inputValue}" label="#{bindings.StartTime.hints.label}"
                                       required="#{bindings.StartTime.hints.mandatory}"
                                       columns="#{bindings.StartTime.hints.displayWidth}"
-                                      shortDesc="#{bindings.StartTime.hints.tooltip}" id="id7" autoSubmit="true">
+                                      shortDesc="#{bindings.StartTime.hints.tooltip}" id="id7" autoSubmit="true"
+                                      valueChangeListener="#{viewScope.vehicleApplicationBean.onStartDateChange}">
                             <f:validator binding="#{bindings.StartTime.validator}"/>
                             <af:convertDateTime pattern="#{bindings.StartTime.format}" type="both"/>
                         </af:inputDate>
@@ -310,11 +311,32 @@
                         <af:selectBooleanCheckbox value="#{bindings.ReturnTrip.inputValue}"
                                                   label="#{bindings.ReturnTrip.label}"
                                                   shortDesc="#{bindings.ReturnTrip.hints.tooltip}" id="sbc2"
-                                                  readOnly="#{pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='planner'}"/>
+                                                  readOnly="#{pageFlowScope.fromMenu=='approver' or pageFlowScope.fromMenu=='planner'}"
+                                                  autoSubmit="true"
+                                                  valueChangeListener="#{viewScope.vehicleApplicationBean.onReturnChanged}"/>
                         <af:inputText label="#{bindings.State.hints.label}" value="#{bindings.State.inputValue}"
                                       id="soc4" required="#{bindings.State.hints.mandatory}"
                                       columns="#{bindings.State.hints.displayWidth}"
                                       shortDesc="#{bindings.State.hints.tooltip}" disabled="false" readOnly="true"/>
+                        <af:inputDate value="#{bindings.ReturnStartTime.inputValue}"
+                                      label="#{bindings.ReturnStartTime.hints.label}"
+                                      required="#{bindings.ReturnStartTime.hints.mandatory}"
+                                      columns="#{bindings.ReturnStartTime.hints.displayWidth}"
+                                      shortDesc="#{bindings.ReturnStartTime.hints.tooltip}" id="id6" partialTriggers="sbc2"
+                                      disabled="#{bindings.ReturnTrip.inputValue == 'Y'}" autoSubmit="true"
+                                      valueChangeListener="#{viewScope.vehicleApplicationBean.onReturnStartChanged}">
+                            <f:validator binding="#{bindings.ReturnStartTime.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.ReturnStartTime.format}"/>
+                        </af:inputDate>
+                        <af:inputDate value="#{bindings.ReturnEndTime.inputValue}"
+                                      label="#{bindings.ReturnEndTime.hints.label}"
+                                      required="#{bindings.ReturnEndTime.hints.mandatory}"
+                                      columns="#{bindings.ReturnEndTime.hints.displayWidth}"
+                                      shortDesc="#{bindings.ReturnEndTime.hints.tooltip}" id="id5" partialTriggers="sbc2"
+                                      disabled="#{bindings.ReturnTrip.inputValue == 'Y'}">
+                            <f:validator binding="#{bindings.ReturnEndTime.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.ReturnEndTime.format}"/>
+                        </af:inputDate>
                     </af:panelFormLayout>
                     <af:separator id="s2"/>
                     <af:panelFormLayout id="pfl3" rows="1">

@@ -260,6 +260,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.VehicleCalendar.ReturnStartTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.VehicleCalendar.ReturnStartTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.VehicleCalendar.ReturnStartTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -274,6 +278,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="edu.hp.model.eo.VehicleCalendar.ReturnEndTime_LABEL"/>
+        <FMT_FORMATTER
+          ResId="edu.hp.model.eo.VehicleCalendar.ReturnEndTime_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="edu.hp.model.eo.VehicleCalendar.ReturnEndTime_FMT_FORMAT"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -482,6 +490,18 @@
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
+  <Attribute
+    Name="MasterId"
+    Precision="20"
+    ColumnName="MASTER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="VEHICLE_CALENDAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
   <Key
     Name="VehicleAlendarPk"
     PrimaryKey="true">
@@ -595,6 +615,17 @@
     Name="VehicleCalendar_Rule_9"
     ResId="VEHICLE_START_DATE_RULE"
     MethodName="validateStartDate"/>
+  <validation:ExpressionValidationBean
+    Name="VehicleCalendar_Rule_10"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:OnCondition><![CDATA[ReturnTrip == 'Y']]></validation:OnCondition>
+    <validation:MsgIds>
+      <validation:Item
+        Value="RETURN_TIME_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[ReturnStartTime!=null && ReturnEndTime!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

@@ -115,5 +115,37 @@
     </attributeValues>
     <list IterBinding="VehicleDMLIterator" StaticList="false" Uses="LOV_DriverId" id="DriverId" DTSupportsMRU="true"
           SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="VehicleDMLIterator" id="ReturnStartTime">
+      <AttrNames>
+        <Item Value="ReturnStartTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="ReturnEndTime">
+      <AttrNames>
+        <Item Value="ReturnEndTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="IsReturnTrip">
+      <AttrNames>
+        <Item Value="ReturnTrip"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="deleteTargetRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteTargetRow"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleSubTaskView1">
+      <NamedData NDName="masterId" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="DriverName">
+      <AttrNames>
+        <Item Value="DriverName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updateTargetRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateTargetRow"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.VehicleModule.VehicleSubTaskView1">
+      <NamedData NDName="masterId" NDType="java.lang.String"/>
+      <NamedData NDName="start" NDType="oracle.jbo.domain.Timestamp"/>
+      <NamedData NDName="end" NDType="oracle.jbo.domain.Timestamp"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

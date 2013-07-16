@@ -27,7 +27,8 @@
                                 <af:menu id="m1" rendered="#{pageFlowScope.vehiclesCalBean.editable}">
                                     <af:commandMenuItem text="编辑" id="cmi1" icon="/images/icons/edit.png"
                                                         action="#{pageFlowScope.vehiclesCalBean.doEdit}"/>
-                                    <af:commandMenuItem text="取消" id="cmi2" icon="/images/icons/undo.png">
+                                    <af:commandMenuItem text="取消" id="cmi2" icon="/images/icons/undo.png"
+                                                        rendered="false">
                                         <af:showPopupBehavior popupId="delete" triggerType="action"/>
                                     </af:commandMenuItem>
                                 </af:menu>

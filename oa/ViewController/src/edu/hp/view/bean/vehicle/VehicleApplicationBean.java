@@ -14,16 +14,20 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
+import javax.faces.component.UIComponent;
 import javax.faces.event.ActionEvent;
 
 import javax.faces.event.ValueChangeEvent;
 
+import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.event.ContextInfoEvent;
 import oracle.adf.view.rich.event.DialogEvent;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.Row;
+import oracle.jbo.RowSetIterator;
 import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Timestamp;
 
@@ -52,6 +56,11 @@ public class VehicleApplicationBean extends BaseBean {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         ADFUtils.setBoundAttributeValue("State", Constants.STATE_REVIEWED);
         ADFUtils.setBoundAttributeValue("SubmitDate", new Timestamp(System.currentTimeMillis()));
+        String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+        String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+        String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+        String title = (String)ADFUtils.getBoundAttributeValue("Title");
+
 
         LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
         int needNotification = 0;
@@ -67,10 +76,6 @@ public class VehicleApplicationBean extends BaseBean {
 
         if (success) {
 
-            String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
-            String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
-            String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
-            String title = (String)ADFUtils.getBoundAttributeValue("Title");
 
             if (needNotification == 2) {
                 String noteTitle = "您为事由：" + title + " 所做的用车申请已提交并等待调度！ ";
@@ -287,21 +292,56 @@ public class VehicleApplicationBean extends BaseBean {
     }
 
 
-    public String planTrip() {
+    public String planTrip() throws Exception {
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         if (state != null && state.equals(Constants.STATE_REVIEWED)) {
             ADFUtils.setBoundAttributeValue("State", Constants.STATE_TRIP_PLANNED);
+            String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
+            String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+            String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
+            String title = (String)ADFUtils.getBoundAttributeValue("Title");
+            String contactName = (String)ADFUtils.getBoundAttributeValue("ContactName");
+            Object numOfPeople = ADFUtils.getBoundAttributeValue("NumOfPeople");
+            String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
+            String vehicleId = (String)ADFUtils.getBoundAttributeValue("VehicleId");
+            String driverName = (String)ADFUtils.getBoundAttributeValue("DriverName");
+            String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
+
+            String returnEndTime = (String)ADFUtils.getBoundAttributeValue("ReturnEndTime");
+            System.err.println(returnEndTime);
+            String returnStartTime = (String)ADFUtils.getBoundAttributeValue("ReturnStartTime");
+            System.err.println(returnStartTime);
+
+            String isReturnTrip = (String)ADFUtils.getBoundAttributeValue("IsReturnTrip");
+            //如果有返程则新建一条返程的记录。
+            if (isReturnTrip != null && isReturnTrip.equals("Y")) {
+                DCIteratorBinding it = ADFUtils.findIterator("VehicleDMLIterator");
+                RowSetIterator iterator = it.getRowSetIterator();
+                Row childRow = iterator.createRow();
+                childRow.setAttribute("MasterId", id);
+                childRow.setAttribute("UserId", userId);
+                childRow.setAttribute("UserDisplayName", userDisplayName);
+                childRow.setAttribute("Title", title);
+                childRow.setAttribute("ContactName", contactName);
+                childRow.setAttribute("NumOfPeople", numOfPeople);
+                childRow.setAttribute("VehicleName", vehicleName);
+                childRow.setAttribute("DriverName", driverName);
+                childRow.setAttribute("VehicleId", vehicleId);
+                childRow.setAttribute("State", Constants.STATE_TRIP_PLANNED);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Timestamp rtnSt = new Timestamp(sdf.parse(returnStartTime));
+                Timestamp rtnEd = new Timestamp(sdf.parse(returnEndTime));
+                childRow.setAttribute("StartTime", rtnSt);
+                childRow.setAttribute("EndTime", rtnEd);
+
+            }
 
             //ADFUtils.setBoundAttributeValue("State", edu.hp.model.common.Constants.STATE_REVIEWED);
             boolean success = ADFUtils.commit("车辆预订已完成调度！", "车辆预订调度失败，请核对输入的信息或联系管理员！");
             if (success) {
-                String id = ((DBSequence)ADFUtils.getBoundAttributeValue("Id")).toString();
-                String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
-                String ContactPhone = (String)ADFUtils.getBoundAttributeValue("ContactPhone");
-                String userId = (String)ADFUtils.getBoundAttributeValue("UserId");
-                String title = (String)ADFUtils.getBoundAttributeValue("Title");
-                String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
-                String driverName = (String)ADFUtils.getBoundAttributeValue("DriverName");
+
+
                 String noteTitle = "您为事由：" + title + " 所做的用车申请已完成调度。 ";
                 String dateStr = getDateString();
                 String noteContent = "完成调度时间：" + dateStr + " 使用的车辆为：" + vehicleName + " 司机：" + driverName;
@@ -312,18 +352,25 @@ public class VehicleApplicationBean extends BaseBean {
                 //如果选择了一个司机，则发通知给司机并要求其在系统中确认
                 String driverId = (String)ADFUtils.getBoundAttributeValue("DriverId");
                 if (driverId != null) {
-                    String contactName = (String)ADFUtils.getBoundAttributeValue("ContactName");
+
                     String contactPhone = (String)ADFUtils.getBoundAttributeValue("ContactPhone");
                     String tripStart = (String)ADFUtils.getBoundAttributeValue("TripStart");
-                    String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
+
                     String smsTitle = "有新的派车单发送给您！";
                     //                    String smsContent =
                     //                        " 使用车辆为： " + vehicleName + " 申请人为：" + userDisplayName + " 申请人电话：" + ContactPhone;
                     //                    sendNotification(smsTitle, smsContent, driverId, null);
-                    this.sendNotification("您有新的出车单！",
-                                          "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone +
-                                          "开始用车时间: " + startTime + " 目的地:" + tripStart, driverId, null,
-                                          Constants.CONTEXT_TYPE_VEHICLE, id);
+                    String content = null;
+                    if (isReturnTrip != null && isReturnTrip.equals("Y")) {
+                        content =
+                                "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone + "开始用车时间: " +
+                                startTime + " 目的地:" + tripStart + "回程时间："+ returnStartTime;
+                    } else {
+                        content =
+                                "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone + "开始用车时间: " +
+                                startTime + " 目的地:" + tripStart;
+                    }
+                    this.sendNotification("您有新的出车单！", content, driverId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
                     createTaskForUser(id, Constants.CONTEXT_TYPE_VEHICLE, smsTitle, driverId, "确认调度");
                 }
                 ADFUtils.findOperation("Commit").execute();
@@ -406,9 +453,26 @@ public class VehicleApplicationBean extends BaseBean {
         //        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN, RichPopup.PopupHints.AlignTypes.ALIGN_END_AFTER);
         this.usuagePopup.show(hints);
     }
-    
+
+    public void onReturnChanged(ValueChangeEvent valueChangeEvent) {
+        Boolean obj = (Boolean)valueChangeEvent.getNewValue();
+        if (obj)
+            ADFUtils.setBoundAttributeValue("IsReturnTrip", "Y");
+        else
+            ADFUtils.setBoundAttributeValue("IsReturnTrip", "N");
+
+        //        UIComponent startComp = valueChangeEvent.getComponent().findComponent("id6");
+        //        ADFUtils.partialRefreshComponenet(startComp);
+        //        UIComponent endComp = valueChangeEvent.getComponent().findComponent("id5");
+        //        ADFUtils.partialRefreshComponenet(endComp);
+    }
+
     public void onStartDateChange(ValueChangeEvent valueChangeEvent) {
-        super.syncDate(valueChangeEvent,"id8");
+        super.syncDate(valueChangeEvent, "id8");
+    }
+
+    public void onReturnStartChanged(ValueChangeEvent valueChangeEvent) {
+        super.syncDate(valueChangeEvent, "id5");
     }
 
     public void setDay(String day) {
@@ -426,4 +490,6 @@ public class VehicleApplicationBean extends BaseBean {
     public RichPopup getUsuagePopup() {
         return usuagePopup;
     }
+
+
 }

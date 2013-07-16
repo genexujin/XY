@@ -28,6 +28,9 @@
   <ViewUsage
     Name="VehicleUsuageByDay"
     ViewObjectName="edu.hp.model.vo.query.vehicle.VehicleUsuageByDay"/>
+  <ViewUsage
+    Name="VehicleSubTaskView1"
+    ViewObjectName="edu.hp.model.vo.VehicleSubTaskView"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

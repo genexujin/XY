@@ -221,5 +221,20 @@
       <NamedData NDName="userId" NDType="java.lang.String"/>
       <NamedData NDName="contextTitle" NDType="java.lang.String"/>
     </methodAction>
+    <attributeValues IterBinding="VehicleDMLIterator" id="ReturnEndTime">
+      <AttrNames>
+        <Item Value="ReturnEndTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="ReturnStartTime">
+      <AttrNames>
+        <Item Value="ReturnStartTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VehicleDMLIterator" id="IsReturnTrip">
+      <AttrNames>
+        <Item Value="ReturnTrip"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

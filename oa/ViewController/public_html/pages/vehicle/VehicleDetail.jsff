@@ -18,7 +18,10 @@
                             <af:commandToolbarButton text="保存" id="ctb1"
                                                      icon="/images/icons/saveall.png"
                                                      action="#{pageFlowScope.vehiclesCalBean.save}"/>
-                            <af:commandToolbarButton text="取消" id="ctb3" actionListener="#{bindings.Rollback.execute}"
+                            <af:commandToolbarButton id="ctb2" text="撤销" icon="/images/icons/undo.png"
+                                                     action="#{pageFlowScope.vehiclesCalBean.doCancel}"
+                                                     rendered="false"/>
+                            <af:commandToolbarButton text="重置" id="ctb3" actionListener="#{bindings.Rollback.execute}"
                                                      icon="/images/icons/rollback.png" immediate="true"
                                                      disabled="#{!bindings.Rollback.enabled}">
                                 <af:resetActionListener/>
@@ -119,7 +122,28 @@
                         <af:selectBooleanCheckbox value="#{bindings.ReturnTrip.inputValue}"
                                                   label="#{bindings.ReturnTrip.label}"
                                                   shortDesc="#{bindings.ReturnTrip.hints.tooltip}" id="sbc1"
-                                                  autoSubmit="true"/>
+                                                  autoSubmit="true"
+                                                  valueChangeListener="#{pageFlowScope.vehiclesCalBean.onReturnChanged}"/>
+                        <af:inputDate value="#{bindings.ReturnStartTime.inputValue}"
+                                      label="#{bindings.ReturnStartTime.hints.label}"
+                                      required="#{bindings.ReturnStartTime.hints.mandatory}"
+                                      columns="#{bindings.ReturnStartTime.hints.displayWidth}"
+                                      shortDesc="#{bindings.ReturnStartTime.hints.tooltip}" id="id1"
+                                      partialTriggers="sbc1" autoSubmit="true"
+                                      valueChangeListener="#{pageFlowScope.vehiclesCalBean.onReturnStartChanged}"
+                                      disabled="#{bindings.IsReturnTrip.inputValue != 'Y'}">
+                            <f:validator binding="#{bindings.ReturnStartTime.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.ReturnStartTime.format}"/>
+                        </af:inputDate>
+                        <af:inputDate value="#{bindings.ReturnEndTime.inputValue}"
+                                      label="#{bindings.ReturnEndTime.hints.label}"
+                                      required="#{bindings.ReturnEndTime.hints.mandatory}"
+                                      columns="#{bindings.ReturnEndTime.hints.displayWidth}"
+                                      shortDesc="#{bindings.ReturnEndTime.hints.tooltip}" id="id2"
+                                      partialTriggers="sbc1" disabled="#{bindings.IsReturnTrip.inputValue != 'Y'}">
+                            <f:validator binding="#{bindings.ReturnEndTime.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.ReturnEndTime.format}"/>
+                        </af:inputDate>
                     </af:panelFormLayout>
                     <af:separator id="s2"/>
                     <af:panelFormLayout id="pfl3" rows="1">

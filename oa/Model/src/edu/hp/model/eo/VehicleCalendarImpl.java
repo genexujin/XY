@@ -278,6 +278,16 @@ public class VehicleCalendarImpl extends EntityImpl {
                 obj.setDriverMobile((String)value);
             }
         }
+        ,
+        MasterId {
+            public Object get(VehicleCalendarImpl obj) {
+                return obj.getMasterId();
+            }
+
+            public void put(VehicleCalendarImpl obj, Object value) {
+                obj.setMasterId((String)value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static int firstIndex = 0;
@@ -332,6 +342,7 @@ public class VehicleCalendarImpl extends EntityImpl {
     public static final int DRIVERID = AttributesEnum.DriverId.index();
     public static final int DRIVERNAME = AttributesEnum.DriverName.index();
     public static final int DRIVERMOBILE = AttributesEnum.DriverMobile.index();
+    public static final int MASTERID = AttributesEnum.MasterId.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -769,6 +780,22 @@ public class VehicleCalendarImpl extends EntityImpl {
      */
     public void setDriverMobile(String value) {
         setAttributeInternal(DRIVERMOBILE, value);
+    }
+
+    /**
+     * Gets the attribute value for MasterId, using the alias name MasterId.
+     * @return the value of MasterId
+     */
+    public String getMasterId() {
+        return (String)getAttributeInternal(MASTERID);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for MasterId.
+     * @param value value to set the MasterId
+     */
+    public void setMasterId(String value) {
+        setAttributeInternal(MASTERID, value);
     }
 
     /**

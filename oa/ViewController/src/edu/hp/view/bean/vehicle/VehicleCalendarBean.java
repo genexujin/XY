@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
+import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.event.CalendarActivityDurationChangeEvent;
 import oracle.adf.view.rich.event.DialogEvent;
@@ -25,6 +26,8 @@ import oracle.adf.view.rich.model.CalendarActivity;
 
 import oracle.binding.OperationBinding;
 
+import oracle.jbo.Row;
+import oracle.jbo.RowSetIterator;
 import oracle.jbo.domain.DBSequence;
 import oracle.jbo.domain.Timestamp;
 
@@ -42,7 +45,7 @@ public class VehicleCalendarBean extends CalendarBean {
     private RichPopup usagePopup;
 
     public VehicleCalendarBean() {
-
+        System.err.println("initialized !!!!!!!!!!!!!!!!!!!");
         needCheckConflict = false;
         refreshCalendarOptName = "refreshCalendar";
         providerNumOfPplCol = "FlexCol1";
@@ -86,6 +89,7 @@ public class VehicleCalendarBean extends CalendarBean {
                 UIComponent calendar = JSFUtils.findComponentInRoot(calendarid);
                 refreshCalendar(calendar);
                 sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_VEHICLE, null);
+
                 ADFUtils.findOperation("Commit").execute();
                 //                System.err.println("refreshed!");
             }
@@ -181,9 +185,9 @@ public class VehicleCalendarBean extends CalendarBean {
         //System.err.println(calendar.getClientId());
         this.refreshCalendar(calendar);
     }
-    
+
     public void onStartDateChange(ValueChangeEvent valueChangeEvent) {
-        super.syncDate(valueChangeEvent,"id4");
+        super.syncDate(valueChangeEvent, "id4");
     }
 
     public String save() throws Exception {
@@ -208,14 +212,19 @@ public class VehicleCalendarBean extends CalendarBean {
         boolean success = ADFUtils.commit("车辆预订已保存！", "车辆预订保存失败，请核对输入的信息或联系管理员！");
         if (success)
             sendNotification();
+        
+        action = "save";
+        
         return null;
     }
 
-    private void sendNotification() {
+    private void sendNotification() throws Exception {
 
         String id = (ADFUtils.getBoundAttributeValue("Id")).toString();
         String vehicleName = (String)ADFUtils.getBoundAttributeValue("VehicleName");
         String contactId = (String)ADFUtils.getBoundAttributeValue("ContactId");
+        String userDisplayName = (String)ADFUtils.getBoundAttributeValue("UserDisplayName");
+        Object numOfPeople = ADFUtils.getBoundAttributeValue("NumOfPeople");
         String contactName = (String)ADFUtils.getBoundAttributeValue("ContactName");
         String contactPhone = (String)ADFUtils.getBoundAttributeValue("ContactPhone");
         String tripStart = (String)ADFUtils.getBoundAttributeValue("TripStart");
@@ -223,6 +232,15 @@ public class VehicleCalendarBean extends CalendarBean {
         String title = (String)ADFUtils.getBoundAttributeValue("Title");
         String state = (String)ADFUtils.getBoundAttributeValue("State");
         String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
+        String isReturnTrip = (String)ADFUtils.getBoundAttributeValue("IsReturnTrip");
+        System.err.println(isReturnTrip);
+        String returnEndTime = (String)ADFUtils.getBoundAttributeValue("ReturnEndTime");
+        String driverName = (String)ADFUtils.getBoundAttributeValue("DriverName");
+        System.err.println(returnEndTime);
+        String returnStartTime = (String)ADFUtils.getBoundAttributeValue("ReturnStartTime");
+        System.err.println(returnStartTime);
+        String driverId = (String)ADFUtils.getBoundAttributeValue("DriverId");
+
         String noteTitle;
         String noteContent;
         String dateStr = getDateString();
@@ -230,28 +248,134 @@ public class VehicleCalendarBean extends CalendarBean {
         if (action.equals("save") && state.equals(Constants.STATE_TRIP_PLANNED)) {
             noteTitle = "您的车辆预订：" + title + " 已完成调度并被" + user.getDisplayName() + "修改。 ";
             noteContent = " 修改时间：" + dateStr + " 使用的车辆为：" + vehicleName;
+            
+            if (isReturnTrip != null && isReturnTrip.equals("Y")) {
+                //更新关联返程
+                updateSubTask(id, returnEndTime, returnStartTime);
+            }else{
+                deleteSubTask(id);
+            }
+            
+            if (driverId != null) {
+                String smsTitle = "派车单已修改！";
+                sendMsgToDriver(id, vehicleName, contactName, contactPhone, tripStart, startTime, isReturnTrip,
+                                returnStartTime, driverId, smsTitle);
+
+            }
             //System.err.println("sent as saved");
         } else if (action.equals("cancel")) {
+
             noteTitle = "您的车辆预订：" + title + " 已取消。 ";
             noteContent = " 取消时间：" + dateStr;
+
+            if (isReturnTrip != null && isReturnTrip.equals("Y")) {
+                //删除关联返程
+                deleteSubTask(id);;
+            }
+
+            if (driverId != null) {
+                String smsTitle = "派车单已取消！";
+                sendMsgToDriver(id, vehicleName, contactName, contactPhone, tripStart, startTime, isReturnTrip,
+                                returnStartTime, driverId, smsTitle);
+            }
+
             //System.err.println("sent as cancelled");
         } else {
             noteTitle = "您的车辆预订：" + title + " 已调度完成。 ";
             noteContent = " 完成时间：" + dateStr + " 使用的车辆为：" + vehicleName;
+
+            if (isReturnTrip != null && isReturnTrip.equals("Y")) {
+                DCIteratorBinding it = ADFUtils.findIterator("VehicleDMLIterator");
+                RowSetIterator iterator = it.getRowSetIterator();
+                Row childRow = iterator.createRow();
+                childRow.setAttribute("MasterId", id);
+                childRow.setAttribute("UserId", userId);
+                childRow.setAttribute("UserDisplayName", userDisplayName);
+                childRow.setAttribute("Title", title);
+                childRow.setAttribute("ContactName", contactName);
+                childRow.setAttribute("NumOfPeople", numOfPeople);
+                childRow.setAttribute("VehicleName", vehicleName);
+                childRow.setAttribute("DriverName", driverName);
+                childRow.setAttribute("VehicleId", vehicleId);
+                childRow.setAttribute("State", Constants.STATE_TRIP_PLANNED);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Timestamp rtnSt = new Timestamp(sdf.parse(returnStartTime));
+                Timestamp rtnEd = new Timestamp(sdf.parse(returnEndTime));
+                childRow.setAttribute("StartTime", rtnSt);
+                childRow.setAttribute("EndTime", rtnEd);
+
+            }
+            //发送给司机消息
+            if (driverId != null) {
+                String smsTitle = "有新的派车单发送给您！";
+                sendMsgToDriver(id, vehicleName, contactName, contactPhone, tripStart, startTime, isReturnTrip,
+                                returnStartTime, driverId, smsTitle);
+            }
             //System.err.println("sent as planned");
         }
         this.sendNotification(noteTitle, noteContent, userId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
         this.sendNotification(noteTitle, noteContent, contactId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
 
-        String driverId = (String)ADFUtils.getBoundAttributeValue("DriverId");
-        if (driverId != null)
-            this.sendNotification("您有新的出车单",
-                                  "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone + " 开始用车时间: " +
-                                  startTime + " 目的地:" + tripStart, driverId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
+        //        String driverId = (String)ADFUtils.getBoundAttributeValue("DriverId");
+        //        if (driverId != null)
+        //            this.sendNotification("您有新的出车单",
+        //                                  "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone + " 开始用车时间: " +
+        //                                  startTime + " 目的地:" + tripStart, driverId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
 
         changeMade = true;
         ADFUtils.findOperation("Commit").execute();
 
+    }
+
+    private void deleteSubTask(String id) {
+        OperationBinding binding = ADFUtils.findOperation("deleteTargetRow");
+        binding.getParamsMap().put("masterId", id);
+        binding.execute();
+    }
+
+    private void updateSubTask(String id, String returnEndTime,
+                               String returnStartTime) throws java.text.ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Timestamp rtnSt = new Timestamp(sdf.parse(returnStartTime));
+        Timestamp rtnEd = new Timestamp(sdf.parse(returnEndTime));
+        OperationBinding binding = ADFUtils.findOperation("updateTargetRow");
+        binding.getParamsMap().put("masterId", id);
+        binding.getParamsMap().put("start", rtnSt);
+        binding.getParamsMap().put("end", rtnEd);
+        binding.execute();
+    }
+
+    private void sendMsgToDriver(String id, String vehicleName, String contactName, String contactPhone,
+                                 String tripStart, String startTime, String isReturnTrip, String returnStartTime,
+                                 String driverId, String smsTitle) {
+        String content = null;
+        if (isReturnTrip != null && isReturnTrip.equals("Y")) {
+            content =
+                    "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone + "开始用车时间: " + startTime +
+                    " 目的地:" + tripStart + "回程时间：" + returnStartTime;
+        } else {
+            content =
+                    "联系人：" + contactName + " 使用车辆：" + vehicleName + " 联系人电话：" + contactPhone + "开始用车时间: " + startTime +
+                    " 目的地:" + tripStart;
+        }
+        this.sendNotification(smsTitle, content, driverId, null, Constants.CONTEXT_TYPE_VEHICLE, id);
+    }
+
+    public void onReturnChanged(ValueChangeEvent valueChangeEvent) {
+        Boolean obj = (Boolean)valueChangeEvent.getNewValue();
+        if (obj)
+            ADFUtils.setBoundAttributeValue("IsReturnTrip", "Y");
+        else
+            ADFUtils.setBoundAttributeValue("IsReturnTrip", "N");
+
+        //        UIComponent startComp = valueChangeEvent.getComponent().findComponent("id6");
+        //        ADFUtils.partialRefreshComponenet(startComp);
+        //        UIComponent endComp = valueChangeEvent.getComponent().findComponent("id5");
+        //        ADFUtils.partialRefreshComponenet(endComp);
+    }
+
+    public void onReturnStartChanged(ValueChangeEvent valueChangeEvent) {
+        super.syncDate(valueChangeEvent, "id2");
     }
 
     public void onStateChange(ValueChangeEvent valueChangeEvent) {
@@ -287,9 +411,11 @@ public class VehicleCalendarBean extends CalendarBean {
             refreshOp.execute();
 
         }
+        action = "new";
+        
         return "Calendar";
     }
-    
+
     public void openVehicleUsuage(ActionEvent actionEvent) {
 
         String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
@@ -342,5 +468,10 @@ public class VehicleCalendarBean extends CalendarBean {
 
     public RichPopup getUsagePopup() {
         return usagePopup;
+    }
+
+    public String doCancel() {
+        // Add event code here...
+        return null;
     }
 }

@@ -29,7 +29,8 @@
        VehicleCalendar.SUBMIT_DATE, 
        VehicleCalendar.DRIVER_ID, 
        VehicleCalendar.DRIVER_NAME, 
-       VehicleCalendar.DRIVER_MOBILE"
+       VehicleCalendar.DRIVER_MOBILE, 
+       VehicleCalendar.MASTER_ID"
   FromList="VEHICLE_CALENDAR VehicleCalendar"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -37,7 +38,8 @@
   UseGlueCode="false"
   ComponentClass="edu.hp.model.vo.VehicleCalendarViewImpl"
   ComponentInterface="edu.hp.model.vo.common.VehicleCalendarView"
-  ClientProxyName="edu.hp.model.vo.client.VehicleCalendarViewClient">
+  ClientProxyName="edu.hp.model.vo.client.VehicleCalendarViewClient"
+  Where="VehicleCalendar.MASTER_ID is null">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
@@ -362,6 +364,12 @@
     EntityAttrName="DriverMobile"
     EntityUsage="VehicleCalendar"
     AliasName="DRIVER_MOBILE"/>
+  <ViewAttribute
+    Name="MasterId"
+    PrecisionRule="true"
+    EntityAttrName="MasterId"
+    EntityUsage="VehicleCalendar"
+    AliasName="MASTER_ID"/>
   <ViewCriteria
     Name="findById"
     ViewObjectName="edu.hp.model.vo.VehicleCalendarView"
