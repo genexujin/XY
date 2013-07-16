@@ -43,6 +43,12 @@
   <ViewUsage
     Name="EmpsQuery"
     ViewObjectName="edu.hp.model.vo.query.admin.EmployeeQueryByDisplayNameView"/>
+  <ViewUsage
+    Name="UserGroupsView"
+    ViewObjectName="edu.hp.model.vo.UserGroupsView"/>
+  <ViewUsage
+    Name="UserGroupQuery"
+    ViewObjectName="edu.hp.model.vo.query.security.UserGroupQuery"/>
   <ViewLinkUsage
     Name="Doc2DeptViewLink"
     ViewLinkObjectName="edu.hp.model.vo.link.Doc2DeptViewLink"

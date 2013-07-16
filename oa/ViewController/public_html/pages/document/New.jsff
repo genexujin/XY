@@ -51,6 +51,10 @@
                         <f:validator binding="#{bindings.SubmitDate.validator}"/>
                         <af:convertDateTime pattern="#{bindings.SubmitDate.format}"/>
                     </af:inputDate>
+                    <af:commandLink text="下载附件" id="cl1" disabled="#{bindings.FileUrl.inputValue==null}">
+                        <af:fileDownloadActionListener filename="#{viewScope.NewPubBean.fileName}"
+                                                       method="#{viewScope.NewPubBean.fileDownload}"/>
+                    </af:commandLink>
                     <f:facet name="footer">
                         <af:toolbar id="t1">
                             <af:commandToolbarButton text="发送" id="cb2" action="#{viewScope.NewPubBean.startPub}"

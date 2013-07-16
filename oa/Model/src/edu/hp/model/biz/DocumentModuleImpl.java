@@ -7,6 +7,10 @@ import edu.hp.model.vo.EmployeesViewImpl;
 
 import edu.hp.model.vo.GroupsViewImpl;
 
+import edu.hp.model.vo.query.admin.EmployeeQueryByDisplayNameViewImpl;
+
+import edu.hp.model.vo.query.security.UserGroupQueryImpl;
+
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
@@ -150,5 +154,21 @@ public class DocumentModuleImpl extends ApplicationModuleImpl {
      */
     public ViewObjectImpl getEmpsQuery() {
         return (ViewObjectImpl)findViewObject("EmpsQuery");
+    }
+
+    /**
+     * Container's getter for UserGroupsView1.
+     * @return UserGroupsView1
+     */
+    public ViewObjectImpl getUserGroupsView() {
+        return (ViewObjectImpl)findViewObject("UserGroupsView");
+    }
+
+    /**
+     * Container's getter for UserGroupQuery1.
+     * @return UserGroupQuery1
+     */
+    public UserGroupQueryImpl getUserGroupQuery() {
+        return (UserGroupQueryImpl)findViewObject("UserGroupQuery");
     }
 }

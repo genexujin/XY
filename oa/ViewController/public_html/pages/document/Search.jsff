@@ -98,7 +98,8 @@
                                 <af:commandButton text="搜索" id="cb1" icon="/images/icons/quick_query.png"
                                                   action="#{viewScope.DocSearchBean.doSearch}" clientComponent="true"/>
                                 <af:spacer width="10" height="10" id="s6"/>
-                                <af:commandButton id="cb2" text="用户组" icon="/images/icons/user.png" action="grp"/>
+                                <af:commandButton id="cb2" text="用户组" icon="/images/icons/user.png" action="grp"
+                                                  rendered="#{viewScope.DocSearchBean.admin}"/>
                             </af:panelGroupLayout>
                         </af:panelGroupLayout>
                     </f:facet>

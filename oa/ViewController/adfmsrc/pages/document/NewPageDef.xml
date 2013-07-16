@@ -8,8 +8,8 @@
               id="DocumentPublishIterator"/>
     <iterator id="GroupsIterator" Binds="Root.DocumentModule.Groups" DataControl="RootAppModuleDataControl"
               RangeSize="-1"/>
-    <iterator id="EmpOfGrpsIterator" Binds="Root.DocumentModule.EmpOfGrps" DataControl="RootAppModuleDataControl"
-              RangeSize="25"/>
+    <iterator id="UserGroupQueryIterator" Binds="Root.DocumentModule.UserGroupQuery"
+              DataControl="RootAppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="DocumentPublishIterator" id="Title">
@@ -56,11 +56,6 @@
         <Item Value="FileUrl"/>
       </AttrNames>
     </attributeValues>
-    <methodAction IterBinding="GroupsIterator" id="findByName" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="findByName" IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
-                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.Groups">
-      <NamedData NDName="grpName" NDType="java.lang.String"/>
-    </methodAction>
     <attributeValues IterBinding="DocumentPublishIterator" id="Id">
       <AttrNames>
         <Item Value="Id"/>
@@ -71,6 +66,11 @@
                   MethodName="sendNotification" IsViewObjectMethod="false"
                   ReturnName="data.RootAppModuleDataControl.methodResults.sendNotification_RootAppModuleDataControl_dataProvider_sendNotification_result">
       <NamedData NDName="notification" NDType="edu.hp.model.pojo.Notification"/>
+    </methodAction>
+    <methodAction id="query" RequiresUpdateModel="true" Action="invokeMethod" MethodName="query"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.UserGroupQuery">
+      <NamedData NDName="grpName" NDType="java.lang.String"/>
     </methodAction>
   </bindings>
 </pageDefinition>

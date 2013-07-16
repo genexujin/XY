@@ -22,8 +22,7 @@ public class DocSearchBean {
     }
 
     public String doSearch() {
-        
-        
+                
         if(!isAdmin()){
             LoginUser user = (LoginUser)JSFUtils.resolveExpression("#{sessionScope.LoginUserBean}");
             userId = user.getUserId();

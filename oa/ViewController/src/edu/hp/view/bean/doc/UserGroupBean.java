@@ -47,7 +47,7 @@ public class UserGroupBean {
 
     public void onPopupLaunch(PopupFetchEvent popupFetchEvent) {
         System.err.println("ahah");
-        //        this.selectedEmps = null;
+        this.selectedEmps = null;
     }
 
     public String saveGroupUsers() {
@@ -55,11 +55,19 @@ public class UserGroupBean {
         DBSequence grpId = (DBSequence)ADFUtils.getBoundAttributeValue("Id");
 
         DCIteratorBinding iter = ADFUtils.findIterator("UserGroupsIterator");
-        for (Row r : iter.getAllRowsInRange()) {
-            r.remove();
-        }
+
         if (selectedEmps != null && selectedEmps.size() > 0) {
             for (int i = 0; i < selectedEmps.size(); i++) {
+                boolean alreadyAdded = false;
+                for (Row r : iter.getAllRowsInRange()) {
+                    if (r.getAttribute("UserId").equals(selectedEmps.get(i))) {
+                        alreadyAdded = true;
+                        break;
+                    }
+                }
+                if (alreadyAdded)
+                    continue;
+
                 System.err.println("here");
                 Row row = iter.getRowSetIterator().createRow();
                 row.setNewRowState(Row.STATUS_INITIALIZED);
@@ -109,7 +117,7 @@ public class UserGroupBean {
     public List getSelectedEmps() {
         //
         //        if (selectedEmps == null)
-        selectedEmps = ADFUtils.attributeListForIterator("UserGroupsIterator", "UserId");
+        //        selectedEmps = ADFUtils.attributeListForIterator("UserGroupsIterator", "UserId");
         return selectedEmps;
 
     }

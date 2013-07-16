@@ -49,7 +49,7 @@
   </Attribute>
   <Attribute
     Name="Description"
-    Precision="20"
+    Precision="2000"
     ColumnName="DESCRIPTION"
     SQLType="VARCHAR"
     Type="java.lang.String"

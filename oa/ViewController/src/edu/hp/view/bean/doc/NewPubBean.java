@@ -55,17 +55,18 @@ public class NewPubBean extends BaseBean {
 
         ArrayList<String> userIds = new ArrayList<String>();
 
-        DCIteratorBinding it = ADFUtils.findIterator("EmpOfGrpsIterator");
+        DCIteratorBinding it = ADFUtils.findIterator("UserGroupQueryIterator");
         for (String grp : selectedGroups) {
-            OperationBinding searchDeptOp = ADFUtils.findOperation("findByName");
-            searchDeptOp.getParamsMap().put("grpName", grp);
-            searchDeptOp.execute();
-            it.setRangeSize(-1);
-            it.executeQuery();
+            System.err.println("serach for group: " + grp);
+            OperationBinding queryOP = ADFUtils.findOperation("query");
+            queryOP.getParamsMap().put("grpName", grp);
+            queryOP.execute();
+
             Row[] allRowsInRange = it.getAllRowsInRange();
+            System.err.println("gropu user size: "  + allRowsInRange.length);
             for (Row row : allRowsInRange) {
-                if (userIds.contains(row.getAttribute("Id")))
-                    userIds.add((String)row.getAttribute("Id"));
+                if (!userIds.contains(row.getAttribute("UserId")))
+                    userIds.add((String)row.getAttribute("UserId"));
             }
         }
         //更新DocTask上的部分字段
@@ -243,5 +244,11 @@ public class NewPubBean extends BaseBean {
 
     public RichInputFile getInputFile() {
         return inputFile;
+    }
+
+    public String doCancel() {
+        ADFUtils.setBoundAttributeValue("State", "已取消");
+        ADFUtils.commit("已成功取消该下达公文！", "取消过程中失败，请联系管理员！");
+        return null;
     }
 }

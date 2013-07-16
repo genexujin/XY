@@ -32,7 +32,7 @@
                                 <af:table value="#{bindings.UserGroups.collectionModel}" var="row"
                                           rows="#{bindings.UserGroups.rangeSize}"
                                           emptyText="#{bindings.UserGroups.viewable ? '暂无数据。' : 'Access Denied.'}"
-                                          fetchSize="#{bindings.UserGroups.rangeSize}" rowBandingInterval="1"
+                                          fetchSize="#{bindings.UserGroups.rangeSize}" rowBandingInterval="0"
                                           selectedRowKeys="#{bindings.UserGroups.collectionModel.selectedRow}"
                                           selectionListener="#{bindings.UserGroups.collectionModel.makeCurrent}"
                                           rowSelection="single" id="t3" partialTriggers="::ctb5">
@@ -62,22 +62,15 @@
                                                 <af:commandButton text="搜索" id="cb1"
                                                                   icon="/images/icons/quick_query.png"
                                                                   action="#{viewScope.UserGroupBean.searchUser}"/>
-                                                <af:commandButton text="确认添加" id="cb3" icon="/images/icons/add.png"
-                                                                  action="#{viewScope.UserGroupBean.saveGroupUsers}"/>
                                             </af:panelGroupLayout>
-                                            <af:table value="#{bindings.EmpsQuery.collectionModel}" var="row"
-                                                      rows="#{bindings.EmpsQuery.rangeSize}"
-                                                      emptyText="#{bindings.EmpsQuery.viewable ? '暂无数据。' : 'Access Denied.'}"
-                                                      fetchSize="#{bindings.EmpsQuery.rangeSize}" rowBandingInterval="0"
-                                                      selectionListener="#{bindings.EmpsQuery.collectionModel.makeCurrent}"
-                                                      rowSelection="multiple" id="t5">
-                                                <af:column sortProperty="#{bindings.EmpsQuery.hints.Fullname.name}"
-                                                           sortable="true"
-                                                           headerText="姓名"
-                                                           id="c4">
-                                                    <af:outputText value="#{row.Fullname}" id="ot2"/>
-                                                </af:column>
-                                            </af:table>
+                                            <af:selectManyShuttle label="选择成员" id="sms1" size="10" leadingHeader="可选成员"
+                                                                  trailingHeader="已选成员"
+                                                                  value="#{viewScope.UserGroupBean.selectedEmps}"
+                                                                  autoSubmit="true">
+                                                <f:selectItems value="#{viewScope.UserGroupBean.allEmps}" id="si1"/>
+                                            </af:selectManyShuttle>
+                                            <af:commandButton text="确认添加" id="cb3" icon="/images/icons/add.png"
+                                                              action="#{viewScope.UserGroupBean.saveGroupUsers}"/>
                                         </af:panelGroupLayout>
                                     </af:panelWindow>
                                 </af:popup>
@@ -91,10 +84,12 @@
                             <af:panelGroupLayout id="pgl4" layout="horizontal">
                                 <af:commandButton id="cb2" text="保存" icon="/images/icons/filesave.png"
                                                   action="#{viewScope.UserGroupBean.save}"/>
+                                <af:spacer width="10" height="10" id="s1"/>
                                 <af:commandButton id="cb4" text="取消" icon="/images/icons/undo.png"
                                                   actionListener="#{bindings.Rollback.execute}">
                                     <af:resetActionListener/>
                                 </af:commandButton>
+                                <af:spacer width="10" height="10" id="s2"/>
                                 <af:commandButton text="返回搜索" id="ctb3" icon="/images/icons/listview.png"
                                                   actionListener="#{bindings.Rollback.execute}" immediate="true"
                                                   action="search">
