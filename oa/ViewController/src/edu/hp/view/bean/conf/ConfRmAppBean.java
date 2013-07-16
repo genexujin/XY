@@ -224,4 +224,8 @@ public class ConfRmAppBean extends BaseBean {
     public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception{
         super.onAMPMChange(valueChangeEvent, "id3", "id4", Constants.TIME_FORMAT_FULL);
     }
+    
+    public void onStartDateChange(ValueChangeEvent valueChangeEvent) {
+        super.syncDate(valueChangeEvent,"id4");
+    }
 }

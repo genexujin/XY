@@ -16,6 +16,8 @@ import java.util.Date;
 
 import javax.faces.event.ActionEvent;
 
+import javax.faces.event.ValueChangeEvent;
+
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.event.ContextInfoEvent;
 import oracle.adf.view.rich.event.DialogEvent;
@@ -403,6 +405,10 @@ public class VehicleApplicationBean extends BaseBean {
         //        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN_ID, "ot14");
         //        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN, RichPopup.PopupHints.AlignTypes.ALIGN_END_AFTER);
         this.usuagePopup.show(hints);
+    }
+    
+    public void onStartDateChange(ValueChangeEvent valueChangeEvent) {
+        super.syncDate(valueChangeEvent,"id8");
     }
 
     public void setDay(String day) {

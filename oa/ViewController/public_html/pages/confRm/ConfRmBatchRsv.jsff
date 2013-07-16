@@ -366,44 +366,44 @@
                                                        label="#{bindings.RecurrenceType.hints.label}" id="sor3"
                                                        value="#{bindings.RecurrenceType.inputValue}" layout="horizontal"
                                                        autoSubmit="true" immediate="false">
-                                        <af:selectItem label="每周" value="WEEKLY" id="si7"/>
-                                        <af:selectItem label="每两周" value="FORTNIGHTLY" id="si8"/>
+                                        <af:selectItem label="每周" value="WEEKLY" id="si14"/>
+                                        <af:selectItem label="每两周" value="FORTNIGHTLY" id="si15"/>
                                     </af:selectOneRadio>
                                 </af:panelFormLayout>
                                 <af:spacer width="10" height="10" id="s18"/>
-                                <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                <af:panelGroupLayout id="pgl7" layout="horizontal">
                                     <af:outputText value="第一周：" id="ot27"/>
-                                    <af:spacer width="20" height="10" id="s2"/>
+                                    <af:spacer width="20" height="10" id="s16"/>
                                     <af:selectBooleanCheckbox value="#{bindings.FstWkSun.inputValue}"
                                                               label="#{bindings.FstWkSun.label}"
                                                               shortDesc="#{bindings.FstWkSun.hints.tooltip}" id="sbc7"
                                                               autoSubmit="true"/>
-                                    <af:spacer width="20" height="10" id="s5"/>
+                                    <af:spacer width="20" height="10" id="s17"/>
                                     <af:selectBooleanCheckbox value="#{bindings.FstWkMon.inputValue}"
                                                               label="#{bindings.FstWkMon.label}"
-                                                              shortDesc="#{bindings.FstWkMon.hints.tooltip}" id="sbc1"
+                                                              shortDesc="#{bindings.FstWkMon.hints.tooltip}" id="sbc15"
                                                               autoSubmit="true"/>
-                                    <af:spacer width="20" height="10" id="s4"/>
+                                    <af:spacer width="20" height="10" id="s21"/>
                                     <af:selectBooleanCheckbox value="#{bindings.FstWkTue.inputValue}"
                                                               label="#{bindings.FstWkTue.label}"
-                                                              shortDesc="#{bindings.FstWkTue.hints.tooltip}" id="sbc2"
+                                                              shortDesc="#{bindings.FstWkTue.hints.tooltip}" id="sbc16"
                                                               autoSubmit="true"/>
-                                    <af:spacer width="20" height="10" id="s7"/>
+                                    <af:spacer width="20" height="10" id="s20"/>
                                     <af:selectBooleanCheckbox value="#{bindings.FstWkWed.inputValue}"
                                                               label="#{bindings.FstWkWed.label}"
-                                                              shortDesc="#{bindings.FstWkWed.hints.tooltip}" id="sbc3"
+                                                              shortDesc="#{bindings.FstWkWed.hints.tooltip}" id="sbc18"
                                                               autoSubmit="true"/>
                                     <af:spacer width="20" height="10" id="s8"/>
                                     <af:selectBooleanCheckbox value="#{bindings.FstWkThu.inputValue}"
                                                               label="#{bindings.FstWkThu.label}"
-                                                              shortDesc="#{bindings.FstWkThu.hints.tooltip}" id="sbc4"
+                                                              shortDesc="#{bindings.FstWkThu.hints.tooltip}" id="sbc20"
                                                               autoSubmit="true"/>
                                     <af:spacer width="20" height="10" id="s9"/>
                                     <af:selectBooleanCheckbox value="#{bindings.FstWkFri.inputValue}"
                                                               label="#{bindings.FstWkFri.label}"
-                                                              shortDesc="#{bindings.FstWkFri.hints.tooltip}" id="sbc5"
+                                                              shortDesc="#{bindings.FstWkFri.hints.tooltip}" id="sbc19"
                                                               autoSubmit="true"/>
-                                    <af:spacer width="20" height="10" id="s6"/>
+                                    <af:spacer width="20" height="10" id="s22"/>
                                     <af:selectBooleanCheckbox value="#{bindings.FstWkSat.inputValue}"
                                                               label="#{bindings.FstWkSat.label}"
                                                               shortDesc="#{bindings.FstWkSat.hints.tooltip}" id="sbc6"

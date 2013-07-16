@@ -77,4 +77,8 @@ public class ConfBatchBean extends BaseBean{
     public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception{
         super.onAMPMChange(valueChangeEvent, "id5", "id6", Constants.TIME_FORMAT_SHORT);
     }
+    
+    public void onStartDateChange(ValueChangeEvent valueChangeEvent) {
+        super.syncDate(valueChangeEvent,"id6");
+    }
 }

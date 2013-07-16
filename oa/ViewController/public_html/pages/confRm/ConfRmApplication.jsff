@@ -233,7 +233,8 @@
                                       required="#{bindings.StartTime.hints.mandatory}"
                                       columns="#{bindings.StartTime.hints.displayWidth}"
                                       shortDesc="#{bindings.StartTime.hints.tooltip}" id="id3" partialTriggers="sor1"
-                                      autoSubmit="true">
+                                      autoSubmit="true"
+                                      valueChangeListener="#{viewScope.ConfRmAppBean.onStartDateChange}">
                             <f:validator binding="#{bindings.StartTime.validator}"/>
                             <af:convertDateTime pattern="#{bindings.StartTime.format}"
                                                 type="#{bindings.Allday.inputValue=='ALLDAY'?'date':'both'}"/>

@@ -41,7 +41,7 @@
                         <a href="#" style="margin-left:20px;">忘记密码？</a>
                         </span>
                     </span>
-
+                    <p style="color:Gray; font-size:xx-small;"> 建议使用Google Chrome浏览器（1-20+版本）以达到最佳使用效果，本系统也支持微软IE（7-10）、Firefox(2-13+)、Safari(3.1.2,4,5)、Safari(iOS)4.3.3,5 浏览器 </p>
                 </div>
             </form>
         </div>

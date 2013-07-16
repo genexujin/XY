@@ -122,5 +122,9 @@ public class ClsCalCrtBean extends BaseBean {
 //        super.onAMPMChange(valueChangeEvent, "ActStartTime", "ActEndTime", Constants.TIME_FORMAT_FULL);
          super.onAMPMChange(valueChangeEvent, "id1", "id2", Constants.TIME_FORMAT_FULL);
     }
+    
+    public void onStartDateChange(ValueChangeEvent valueChangeEvent) {
+        super.syncDate(valueChangeEvent,"id2");
+    }
 
 }

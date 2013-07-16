@@ -580,6 +580,16 @@
     Name="ConfRoomCalendar_Rule_8"
     ResId="START_TIME_MUST_LESS_THAN"
     MethodName="validateStartDate"/>
+  <validation:ExpressionValidationBean
+    Name="ConfRoomCalendar_Rule_9"
+    OperandType="EXPR"
+    Inverse="false">
+    <validation:MsgIds>
+      <validation:Item
+        Value="CONFLEVEL_CANNOT_NULL"/>
+    </validation:MsgIds>
+    <validation:TransientExpression><![CDATA[ConfLevel!=null]]></validation:TransientExpression>
+  </validation:ExpressionValidationBean>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

@@ -23,8 +23,8 @@ public class BaseBean {
         UIComponent endComponent = valueChangeEvent.getComponent().findComponent(endFieldName);
         String startTime = (String)(startComponent).getAttributes().get("value");
         String endTime = (String)(endComponent).getAttributes().get("value");
-//        System.err.println(startTime);
-//        System.err.println(endTime);
+        //        System.err.println(startTime);
+        //        System.err.println(endTime);
 
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         Date startDate = format.parse(startTime);
@@ -51,12 +51,35 @@ public class BaseBean {
         endComponent.getAttributes().put("value", endStr);
         ADFUtils.partialRefreshComponenet(startComponent);
         ADFUtils.partialRefreshComponenet(endComponent);
-        
-//        ADFUtils.setBoundAttributeValue("ActStartTime", startStr);
-//        ADFUtils.setBoundAttributeValue("ActEndTime", endStr);
+
+        //        ADFUtils.setBoundAttributeValue("ActStartTime", startStr);
+        //        ADFUtils.setBoundAttributeValue("ActEndTime", endStr);
     }
 
-    protected void sendNotification(String title, String content, String userId, String roleName, String contextType, String contextObjectId) {
+    protected void syncDate(ValueChangeEvent valueChangeEvent, String componentId) {
+        UIComponent endComponent = valueChangeEvent.getComponent().findComponent(componentId);
+        String time = (String)valueChangeEvent.getNewValue();
+        String endTime = (String)endComponent.getAttributes().get("value");
+        System.err.println(time);
+        System.err.println(endTime);
+        if (time != null) {
+            String endTimestamp = null;
+            if (endTime != null) {
+                endTimestamp = endTime.substring(10);
+                //            System.err.println(endTimestamp);
+                String endDay = time.substring(0, 10);
+                //            System.err.println(endDay);
+                endComponent.getAttributes().put("value", endDay + endTimestamp);
+            } else {
+                System.err.println("sync Date");
+                endComponent.getAttributes().put("value", time);
+            }
+            ADFUtils.partialRefreshComponenet(endComponent);
+        }
+    }
+
+    protected void sendNotification(String title, String content, String userId, String roleName, String contextType,
+                                    String contextObjectId) {
         Notification notification = new Notification();
         notification.setTitle(title);
         notification.setContent(content);

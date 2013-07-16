@@ -6,6 +6,13 @@
     <variableIterator id="variables"/>
     <iterator id="VehicleDMLIterator" Binds="Root.VehicleModule.VehicleDML" DataControl="RootAppModuleDataControl"
               RangeSize="25"/>
+    <taskFlow id="vehicleusuagebtf1" taskFlowId="/WEB-INF/flows/vehicle/vehicle-usuage-btf.xml#vehicle-usuage-btf"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded"
+              RefreshCondition="#{true}">
+      <parameters>
+        <parameter id="day" value="#{pageFlowScope.vehiclesCalBean.day}"/>
+      </parameters>
+    </taskFlow>
   </executables>
   <bindings>
     <listOfValues StaticList="false" IterBinding="VehicleDMLIterator" Uses="LOV_UserDisplayName" id="UserDisplayName"/>

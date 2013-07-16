@@ -9,13 +9,16 @@ import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
 import javax.faces.component.UIComponent;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
+import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.event.CalendarActivityDurationChangeEvent;
 import oracle.adf.view.rich.event.DialogEvent;
 import oracle.adf.view.rich.model.CalendarActivity;
@@ -35,6 +38,8 @@ public class VehicleCalendarBean extends CalendarBean {
     private Timestamp startDayTime = null;
     private String vehicleId = null;
     private String action = "new";
+    private String day;
+    private RichPopup usagePopup;
 
     public VehicleCalendarBean() {
 
@@ -176,6 +181,10 @@ public class VehicleCalendarBean extends CalendarBean {
         //System.err.println(calendar.getClientId());
         this.refreshCalendar(calendar);
     }
+    
+    public void onStartDateChange(ValueChangeEvent valueChangeEvent) {
+        super.syncDate(valueChangeEvent,"id4");
+    }
 
     public String save() throws Exception {
 
@@ -280,6 +289,30 @@ public class VehicleCalendarBean extends CalendarBean {
         }
         return "Calendar";
     }
+    
+    public void openVehicleUsuage(ActionEvent actionEvent) {
+
+        String startTime = (String)ADFUtils.getBoundAttributeValue("StartTime");
+        //        System.err.println(startTime);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = null;
+        try {
+            if (startTime != null)
+                date = format.parse(startTime);
+            //            System.err.println(date);
+        } catch (ParseException pe) {
+            // TODO: Add catch code
+            pe.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        if (date != null) {
+            this.day = formatter.format(date);
+        }
+        RichPopup.PopupHints hints = new RichPopup.PopupHints();
+        //        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN_ID, "ot14");
+        //        hints.add(RichPopup.PopupHints.HintTypes.HINT_ALIGN, RichPopup.PopupHints.AlignTypes.ALIGN_END_AFTER);
+        this.usagePopup.show(hints);
+    }
 
     public void setMyVelView(boolean myVelView) {
         this.myVelView = myVelView;
@@ -293,5 +326,21 @@ public class VehicleCalendarBean extends CalendarBean {
         if (disclosureEvent.isExpanded()) {
             ADFUtils.findOperation("findByDateRange").execute();
         }
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setUsagePopup(RichPopup usagePopup) {
+        this.usagePopup = usagePopup;
+    }
+
+    public RichPopup getUsagePopup() {
+        return usagePopup;
     }
 }

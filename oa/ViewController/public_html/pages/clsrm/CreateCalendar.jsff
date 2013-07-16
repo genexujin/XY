@@ -36,7 +36,8 @@
                                       columns="#{bindings.ActStartTime.hints.displayWidth}"
                                       shortDesc="#{bindings.ActStartTime.hints.tooltip}" id="id1"
                                       partialTriggers="sor1" required="#{bindings.ActStartTime.hints.mandatory}"
-                                      autoSubmit="true">
+                                      autoSubmit="true"
+                                      valueChangeListener="#{viewScope.clsCalCrtBean.onStartDateChange}">
                             <f:validator binding="#{bindings.ActStartTime.validator}"/>
                             <af:convertDateTime pattern="#{bindings.ActStartTime.format}"
                                                 type="#{bindings.AllDay.inputValue=='ALLDAY'?'date':'both'}"/>

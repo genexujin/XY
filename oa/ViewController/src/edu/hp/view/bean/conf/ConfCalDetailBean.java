@@ -6,10 +6,13 @@ import edu.hp.view.security.LoginUser;
 import edu.hp.view.utils.ADFUtils;
 import edu.hp.view.utils.JSFUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.Calendar;
 import java.util.Date;
 
+import javax.faces.component.UIComponent;
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.binding.OperationBinding;
@@ -141,4 +144,10 @@ public class ConfCalDetailBean extends BaseBean {
     public void onAMPMChange(ValueChangeEvent valueChangeEvent) throws Exception {
         super.onAMPMChange(valueChangeEvent, "id1", "id2", Constants.TIME_FORMAT_FULL);
     }
+
+    public void onStartDateChange(ValueChangeEvent valueChangeEvent) {
+        super.syncDate(valueChangeEvent,"id2");
+    }
+
+    
 }

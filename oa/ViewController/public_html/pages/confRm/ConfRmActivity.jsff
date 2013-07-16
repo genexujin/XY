@@ -72,10 +72,10 @@
                                       required="#{bindings.StartTime.hints.mandatory}"
                                       columns="#{bindings.StartTime.hints.displayWidth}"
                                       shortDesc="#{bindings.StartTime.hints.tooltip}" id="id1" partialTriggers="sor1"
-                                      autoSubmit="true">
+                                      autoSubmit="true"
+                                      valueChangeListener="#{viewScope.confCalDetailBean.onStartDateChange}">
                             <f:validator binding="#{bindings.StartTime.validator}"/>
-                            <af:convertDateTime pattern="#{bindings.StartTime.format}"
-                                                type="#{bindings.Allday.inputValue=='ALLDAY'?'date':'both'}"/>
+                            <af:convertDateTime pattern="#{bindings.StartTime.format}" type="time"/>
                         </af:inputDate>
                         <af:inputDate value="#{bindings.EndTime.inputValue}" label="#{bindings.EndTime.hints.label}"
                                       required="#{bindings.EndTime.hints.mandatory}"
