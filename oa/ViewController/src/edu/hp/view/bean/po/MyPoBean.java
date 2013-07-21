@@ -477,7 +477,10 @@ public class MyPoBean extends BaseBean {
             insertPoHistory(id, receiver, "对该订单进行了收货");
             //            ADFUtils.setBoundAttributeValue("CurrentExecutor", "");
 
-            //Only notification sent to receiver, no task created. So no task to complete
+            //Only notification sent to buyer, no task created. So no task to complete
+            String readableId = ADFUtils.getBoundAttributeValue("OrderReadableId").toString();
+            String buyerId = ADFUtils.getBoundAttributeValue("CurrentBuyerId").toString();
+            sendNotification("采购订单收货完成。", "订单号： " + readableId, buyerId, null, Constants.CONTEXT_TYPE_PO, null);
             //            completeTask(Constants.CONTEXT_TYPE_PO, id, Constants.ROLE_PO_RECEIVER);
 
             ADFUtils.findOperation("Commit").execute();
