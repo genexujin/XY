@@ -35,7 +35,7 @@
       </AttrNames>
     </attributeValues>
     <action IterBinding="DocumentPublishIterator" id="CreateInsert"
-            InstanceName="DocumentModuleDataControl.DocumentPublish" DataControl="DocumentModuleDataControl"
-            RequiresUpdateModel="true" Action="createInsertRow"/>
+            InstanceName="RootAppModuleDataControl.Root.DocumentModule.DocumentPublish"
+            DataControl="RootAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
   </bindings>
 </pageDefinition>
