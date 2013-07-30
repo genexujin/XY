@@ -134,12 +134,15 @@
                             <af:spacer width="10" height="5" id="s15"/>
                             <af:panelList id="pl2">
                                 <af:forEach items="#{sessionScope.LoginUserMenuBean.sysDocMenus}" var="menu">
-                                    <af:commandImageLink text="#{menu.menuName}" id="cil7"
-                                                         actionListener="#{viewScope.SystemBean.openMenu}"
-                                                         icon="#{menu.menuIconURL}">
-                                        <af:clientAttribute name="title" value="#{menu.menuName}"/>
-                                        <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
-                                    </af:commandImageLink>
+                                    <af:panelGroupLayout id="pgl10" layout="vertical">
+                                        <af:commandImageLink text="#{menu.menuName}" id="cil7"
+                                                             actionListener="#{viewScope.SystemBean.openMenu}"
+                                                             icon="#{menu.menuIconURL}">
+                                            <af:clientAttribute name="title" value="#{menu.menuName}"/>
+                                            <af:clientAttribute name="taskflow" value="#{menu.menuTaskFlowURL}"/>
+                                        </af:commandImageLink>
+                                        <af:spacer width="10" height="3" id="s16"/>
+                                    </af:panelGroupLayout>
                                 </af:forEach>
                             </af:panelList>
                         </af:showDetailItem>

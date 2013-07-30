@@ -107,5 +107,10 @@
                   ReturnName="data.RootAppModuleDataControl.methodResults.sendNotification_RootAppModuleDataControl_dataProvider_sendNotification_result">
       <NamedData NDName="notification" NDType="edu.hp.model.pojo.Notification"/>
     </methodAction>
+    <attributeValues IterBinding="DocumentTaskIterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

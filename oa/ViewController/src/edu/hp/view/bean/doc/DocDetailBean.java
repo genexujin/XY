@@ -34,7 +34,7 @@ import oracle.jbo.domain.Timestamp;
 
 import org.apache.myfaces.trinidad.model.UploadedFile;
 
-public class DocDetailBean extends BaseBean{
+public class DocDetailBean extends BaseBean {
 
     private static final String DEPT_TASK_ITERATOR = "DeptTasksIterator";
     private static final String HISTORY_ITERATOR = "HistoryIterator";
@@ -69,12 +69,36 @@ public class DocDetailBean extends BaseBean{
 
     public String doCancel() {
         ADFUtils.setBoundAttributeValue("TaskState", "已取消");
+        String editorList = (String)ADFUtils.getBoundAttributeValue("EditorList");
+        if (editorList != null) {
+            String[] editors = editorList.split(",");
+            String taskName = (String)ADFUtils.getBoundAttributeValue("TaskName");
+            String content = taskName+" 已取消，请停止上传该项目相关公文！";
+            String docTaskId = (ADFUtils.getBoundAttributeValue("Id")).toString();
+            for (String userId : editors) {
+                super.sendNotification("公文项目已取消！", content, userId, null, Constants.CONTEXT_TYPE_DOCTASK,
+                                       docTaskId);
+            }
+            
+        }
         ADFUtils.commit("项目已取消！", "项目取消过程中出错，请联系管理员！");
         return null;
     }
 
     public String doComplete() {
         ADFUtils.setBoundAttributeValue("TaskState", "已完成");
+        String editorList = (String)ADFUtils.getBoundAttributeValue("EditorList");
+        if (editorList != null) {
+            String[] editors = editorList.split(",");
+            String taskName = (String)ADFUtils.getBoundAttributeValue("TaskName");
+            String content = taskName+" 已完成，请停止上传该项目相关公文！";
+            String docTaskId = (ADFUtils.getBoundAttributeValue("Id")).toString();
+            for (String userId : editors) {
+                super.sendNotification("公文项目已完成！", content, userId, null, Constants.CONTEXT_TYPE_DOCTASK,
+                                       docTaskId);
+            }
+            
+        }
         ADFUtils.commit("项目已完成！", "项目完成过程中出错，请联系管理员！");
         return null;
     }
@@ -179,7 +203,8 @@ public class DocDetailBean extends BaseBean{
 
             System.err.println("get the file!");
             String fileName = file.getFilename();
-            if (!(fileName.endsWith(".pdf") || fileName.endsWith(".doc") || fileName.endsWith("docx"))) {
+            //            if (!(fileName.endsWith(".pdf") || fileName.endsWith(".doc") || fileName.endsWith("docx"))) {
+            if (false) {
                 JSFUtils.addFacesErrorMessage("请上传pdf,doc或者docx类型文件， 且文件大小不要大于50M ！");
             } else {
 
@@ -303,7 +328,7 @@ public class DocDetailBean extends BaseBean{
 
 
     public void notifyToRelease(DialogEvent dialogEvent) {
-        if(dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)){
+        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)) {
             System.err.println(lockerId);
             super.sendNotification("公文编辑锁释放提醒！", this.smsContent, lockerId, null, Constants.CONTEXT_TYPE_DOCTASK,
                                    null);

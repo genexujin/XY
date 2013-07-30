@@ -5,7 +5,11 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="Root.MealModule.MealOrder" DataControl="RootAppModuleDataControl" RangeSize="25"
-              id="MealOrderIterator"/>
+              id="MealOrderIterator">
+      <sortCriteria>
+        <sort attribute="MealDate" ascending="true"/>
+      </sortCriteria>
+    </iterator>
     <searchRegion Binds="MealOrderIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="MealOrderQuery"/>
   </executables>

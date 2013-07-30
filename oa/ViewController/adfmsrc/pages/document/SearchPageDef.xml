@@ -5,7 +5,11 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="Root.DocumentModule.DocumentPublish" RangeSize="25" DataControl="RootAppModuleDataControl"
-              id="DocumentPublishIterator"/>
+              id="DocumentPublishIterator">
+      <sortCriteria>
+        <sort attribute="SubmitDate" ascending="false"/>
+      </sortCriteria>
+    </iterator>
   </executables>
   <bindings>
     <methodAction id="search" RequiresUpdateModel="true" Action="invokeMethod" MethodName="search"

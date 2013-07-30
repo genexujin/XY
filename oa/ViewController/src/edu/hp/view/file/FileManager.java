@@ -34,7 +34,7 @@ public class FileManager {
         FileInputStream fis;        
         BufferedOutputStream bos = null;
         BufferedInputStream bis = null;        
-        byte[] data = new byte[1024];
+        byte[] data = new byte[1];
         
         try {
             bis = new BufferedInputStream(new FileInputStream(f));
@@ -44,6 +44,7 @@ public class FileManager {
                 bos.write(data);
             }
             bos.flush();
+//            bos.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,7 +126,7 @@ public class FileManager {
         
         BufferedOutputStream bos = null;
         BufferedInputStream bis = null;
-        byte[] data = new byte[1024];
+        byte[] data = new byte[1];
         try {
             bos = new BufferedOutputStream(new FileOutputStream(filePath));
             bis = new BufferedInputStream(is);
@@ -133,6 +134,7 @@ public class FileManager {
                 bos.write(data);
             }
             bos.flush();
+            bos.close();
             return true;
         } catch (Exception fnfe) {
             fnfe.printStackTrace();           

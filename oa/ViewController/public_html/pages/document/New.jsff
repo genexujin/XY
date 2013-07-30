@@ -53,7 +53,8 @@
                     </af:inputDate>
                     <af:commandLink text="下载附件" id="cl1" disabled="#{bindings.FileUrl.inputValue==null}">
                         <af:fileDownloadActionListener filename="#{viewScope.NewPubBean.fileName}"
-                                                       method="#{viewScope.NewPubBean.fileDownload}"/>
+                                                       method="#{viewScope.NewPubBean.fileDownload}"
+                                                       contentType="application/octet-stream"/>
                     </af:commandLink>
                     <f:facet name="footer">
                         <af:toolbar id="t1">

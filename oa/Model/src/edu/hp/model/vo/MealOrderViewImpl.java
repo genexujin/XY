@@ -4,6 +4,7 @@ import edu.hp.model.vo.common.MealOrderView;
 
 import oracle.jbo.Row;
 import oracle.jbo.Variable;
+import oracle.jbo.ViewCriteria;
 import oracle.jbo.common.VariableImpl;
 import oracle.jbo.server.ViewObjectImpl;
 // ---------------------------------------------------------------------
@@ -29,13 +30,13 @@ public class MealOrderViewImpl extends ViewObjectImpl implements MealOrderView {
     }
     
     public void findByUserId(String userId){
-        VariableImpl user = new VariableImpl();
-        user.setName("userId");
-        this.findByViewCriteriaWithBindVars(this.getViewCriteria("findByUserId"), 
-                                            -1, 
-                                            this.QUERY_MODE_SCAN_DATABASE_TABLES, 
-                                            new Variable[]{user}, new Object[]{userId});
         
+        this.setApplyViewCriteriaNames(null);
+        ViewCriteria criteria = this.getViewCriteria("findByUserId");
+        this.applyViewCriteria(criteria);
+        this.setuserId(userId);
+        this.setRangeSize(-1);
+        this.executeQuery();        
     }
 
     /**

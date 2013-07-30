@@ -10,7 +10,12 @@
   AliasName="MealOrder"
   BindingStyle="OracleName"
   UseGlueCode="false"
-  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation"
+  RowClass="edu.hp.model.eo.MealOrderImpl">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+  </DesignTime>
   <Attribute
     Name="Id"
     ColumnName="ID"
@@ -132,7 +137,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="MEAL_ORDER">
+    TableName="MEAL_ORDER"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1000"/>
     </DesignTime>
@@ -173,6 +179,10 @@
     </validation:MsgIds>
     <validation:TransientExpression><![CDATA[Location!=null]]></validation:TransientExpression>
   </validation:ExpressionValidationBean>
+  <validation:MethodValidationBean
+    Name="MealOrder_Rule_2"
+    ResId="MEAL_DATE_RULE"
+    MethodName="validateSubmitDate"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="edu.hp.model.ModelBundle"/>

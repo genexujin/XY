@@ -63,7 +63,7 @@ public class NewPubBean extends BaseBean {
             queryOP.execute();
 
             Row[] allRowsInRange = it.getAllRowsInRange();
-            System.err.println("gropu user size: "  + allRowsInRange.length);
+            System.err.println("gropu user size: " + allRowsInRange.length);
             for (Row row : allRowsInRange) {
                 if (!userIds.contains(row.getAttribute("UserId")))
                     userIds.add((String)row.getAttribute("UserId"));
@@ -106,7 +106,8 @@ public class NewPubBean extends BaseBean {
 
             System.err.println("get the file!");
             String fileName = file.getFilename();
-            if (!(fileName.endsWith(".pdf") || fileName.endsWith(".doc") || fileName.endsWith("docx"))) {
+            //            if (!(fileName.endsWith(".pdf") || fileName.endsWith(".doc") || fileName.endsWith("docx"))) {
+            if (false) {
                 JSFUtils.addFacesErrorMessage("请上传pdf,doc或者docx类型文件， 且文件大小不要大于50M ！");
             } else {
 

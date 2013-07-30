@@ -233,6 +233,17 @@
               Value="未开始"
               Required="Optional"/>
           </ViewCriteriaRow>
+          <ViewCriteriaRow
+            Name="mainSearch_DocumentTaskViewCriteria_row_0_TaskState_itemHolder_row_2"
+            Conjunction="AND">
+            <ViewCriteriaItem
+              Name="mainSearch_DocumentTaskViewCriteria_row_0_TaskState_mainSearch_DocumentTaskViewCriteria_row_0_TaskState_itemHolder_mainSearch_DocumentTaskViewCriteria_row_0_TaskState_itemHolder_row_2_TaskState"
+              ViewAttribute="TaskState"
+              Operator="&lt;>"
+              Conjunction="AND"
+              Value="已取消"
+              Required="Optional"/>
+          </ViewCriteriaRow>
         </ViewCriteria>
       </ViewCriteriaItemCompound>
     </ViewCriteriaRow>
