@@ -84,5 +84,7 @@ public class Constants {
         "/WEB-INF/flows/helpdesk/MyHdCallDashboard.xml#MyHdCallDashboard";
     public static final String CONTEXT_PO_TASKFLOW =
         "/WEB-INF/flows/po/MyPoDashboard.xml#MyPoDashboard";
-
+    public static final String CHIEF_OFFICER_DEPT_NAME = "院长室";
+    public static final String CHIEF_CP_OFFICER_DEPT_NAME = "党总支";
+    
 }

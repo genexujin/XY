@@ -44,13 +44,13 @@
                                             <af:column sortProperty="#{bindings.History.hints.FileUrl.name}"
                                                        sortable="false"
                                                        headerText="#{bindings.History.hints.FileUrl.label}" id="c2">
-                                                <af:commandLink text="公文下载" id="cl21"                                                               
+                                                <af:commandLink text="公文下载" id="cl21"
                                                                 actionListener="#{viewScope.DocDetailBean.doHisDownload}"
                                                                 clientComponent="true">
                                                     <af:clientAttribute name="filePath" value="#{row.FileUrl}"/>
                                                     <af:fileDownloadActionListener filename="#{row.FileName}"
                                                                                    method="#{viewScope.DocDetailBean.downloadHisFile}"/>
-                                                </af:commandLink>                                                
+                                                </af:commandLink>
                                             </af:column>
                                             <af:column sortProperty="#{bindings.History.hints.UploadTime.name}"
                                                        sortable="false"
@@ -81,14 +81,15 @@
                             <af:outputFormatted id="of1" value="部门公文：" styleClass="AFDataText"/>
                             <af:iterator id="i1" value="#{bindings.DeptTasks.collectionModel}" rows="-1" var="row">
                                 <af:panelGroupLayout id="pgl3" layout="vertical" partialTriggers="cb4 ctb2 ctb3 ::if1"
-                                                     rendered="#{(row.SupervisorId == sessionScope.LoginUserBean.userId or row.MgrId == sessionScope.LoginUserBean.userId) or sessionScope.LoginUserBean.isUserInRole['公文管理员'] or bindings.IsPublic.inputValue eq true}">
+                                                     rendered="#{(row.SupervisorId == sessionScope.LoginUserBean.userId or row.MgrId == sessionScope.LoginUserBean.userId) or sessionScope.LoginUserBean.isUserInRole['公文管理员'] or sessionScope.LoginUserBean.isUserInRole['院领导'] or bindings.IsPublic.inputValue eq true}">
                                     <af:separator id="s2"/>
                                     <af:outputText value="#{row.DeptName}" id="ot1"
                                                    inlineStyle="color:rgb(56,92,188); font-weight:bold;"/>
                                     <af:spacer width="10" height="2" id="s3"/>
                                     <af:panelGroupLayout id="pgl2" layout="horizontal">
                                         <af:spacer width="20" height="10" id="s8"/>
-                                        <af:commandLink text="公文下载(最近修改版本)" id="cl2" disabled="#{row.DocumentFileUrl eq null}"
+                                        <af:commandLink text="公文下载(最近修改版本)" id="cl2"
+                                                        disabled="#{row.DocumentFileUrl eq null}"
                                                         actionListener="#{viewScope.DocDetailBean.doDownload}"
                                                         clientComponent="true" partialTriggers="cb4 ctb2 ctb3 ::if1">
                                             <af:clientAttribute name="filePath" value="#{row.DocumentFileUrl}"/>
@@ -217,17 +218,34 @@
                             </af:inputText>
                             <f:facet name="footer">
                                 <af:group id="g1">
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="p4">
+                                        <af:dialog id="d2" title="请确认完成项目"
+                                                   dialogListener="#{viewScope.DocDetailBean.confirmClose}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:outputText value="您确认要完成该项目吗？" id="ot6"/>
+                                        </af:dialog>
+                                    </af:popup>
+                                    <af:popup childCreation="deferred" autoCancel="disabled" id="p5">
+                                        <af:dialog id="d3" title="请确认取消项目"
+                                                   dialogListener="#{viewScope.DocDetailBean.confirmCancel}">
+                                            <f:facet name="buttonBar"/>
+                                            <af:outputText value="您确认要取消该项目吗？" id="ot7"/>
+                                        </af:dialog>
+                                    </af:popup>
+                                    
                                     <af:spacer width="10" height="10" id="s1"/>
                                     <af:toolbar id="t1">
                                         <af:commandToolbarButton text="项目完成" id="cb1"
-                                                                 action="#{viewScope.DocDetailBean.doComplete}"
                                                                  icon="/images/icons/check.png"
                                                                  disabled="#{viewScope.DocDetailBean.complete}"
-                                                                 rendered="#{viewScope.DocDetailBean.admin and (bindings.TaskState.inputValue != '已完成' and bindings.TaskState.inputValue != '已取消')}"/>
-                                        <af:commandToolbarButton id="cb2" text="取消项目"
-                                                                 action="#{viewScope.DocDetailBean.doCancel}"
+                                                                 rendered="#{viewScope.DocDetailBean.admin and (bindings.TaskState.inputValue != '已完成' and bindings.TaskState.inputValue != '已取消')}">
+                                            <af:showPopupBehavior popupId="p4" triggerType="action"/>
+                                        </af:commandToolbarButton>
+                                        <af:commandToolbarButton id="cb2" text="取消项目"                                                                 
                                                                  icon="/images/icons/delete.png"
-                                                                 rendered="#{viewScope.DocDetailBean.admin and (bindings.TaskState.inputValue != '已完成' and bindings.TaskState.inputValue != '已取消')}"/>
+                                                                 rendered="#{viewScope.DocDetailBean.admin and (bindings.TaskState.inputValue != '已完成' and bindings.TaskState.inputValue != '已取消')}">
+                                            <af:showPopupBehavior popupId="p5" triggerType="action"/>
+                                        </af:commandToolbarButton>
                                         <af:commandToolbarButton id="cb3" text="保存更改" icon="/images/icons/filesave.png"
                                                                  disabled="#{viewScope.DocDetailBean.complete}"
                                                                  actionListener="#{bindings.Commit.execute}"

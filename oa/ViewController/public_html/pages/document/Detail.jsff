@@ -43,7 +43,7 @@
                         </af:toolbar>
                     </f:facet>
                     <af:separator id="s1"/>
-                    <af:commandLink text="附件下载" id="cl1">
+                    <af:commandLink text="附件下载" id="cl1" disabled="#{bindings.FileUrl.inputValue eq null}">
                         <af:fileDownloadActionListener filename="#{viewScope.NewPubBean.fileName}"
                                                        method="#{viewScope.NewPubBean.fileDownload}"/>
                     </af:commandLink>

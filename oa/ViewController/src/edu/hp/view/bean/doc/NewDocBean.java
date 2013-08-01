@@ -35,6 +35,8 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.input.RichInputFile;
 import oracle.adf.view.rich.component.rich.input.RichSelectManyShuttle;
 
+import oracle.adf.view.rich.event.DialogEvent;
+
 import oracle.binding.OperationBinding;
 
 import oracle.jbo.Row;
@@ -114,16 +116,17 @@ public class NewDocBean extends BaseBean {
 
         ArrayList<String> userIds = new ArrayList<String>();
         DCIteratorBinding it = ADFUtils.findIterator("DeptTasksIterator");
+        OperationBinding searchDeptOp = ADFUtils.findOperation("findByName");
+        String mgrId = null;
         for (String dep : selectedDepts) {
             ViewObject vo = it.getViewObject();
             Row newRow = vo.createRow();
             newRow.setAttribute("State", "进行中");
-            newRow.setAttribute("DeptName", dep);
-            OperationBinding searchDeptOp = ADFUtils.findOperation("findByName");
+            newRow.setAttribute("DeptName", dep);            
             searchDeptOp.getParamsMap().put("Name", dep);
             searchDeptOp.execute();
 
-            String mgrId = (String)ADFUtils.getBoundAttributeValue("MgrId");
+            mgrId = (String)ADFUtils.getBoundAttributeValue("MgrId");
             if (!userIds.contains(mgrId))
                 userIds.add(mgrId);
             newRow.setAttribute("MgrId", mgrId);
@@ -135,6 +138,22 @@ public class NewDocBean extends BaseBean {
             newRow.setAttribute("SupervisorId", supervisorId);
             vo.insertRow(newRow);
         }
+        
+        //添加党支部领导可以看这个项目
+        searchDeptOp.getParamsMap().put("Name", Constants.CHIEF_CP_OFFICER_DEPT_NAME);
+        searchDeptOp.execute();
+        mgrId = (String)ADFUtils.getBoundAttributeValue("MgrId");
+        if (!userIds.contains(mgrId))
+            userIds.add(mgrId);
+        
+        //添加院长可以看这个项目
+        searchDeptOp.getParamsMap().put("Name", Constants.CHIEF_OFFICER_DEPT_NAME);
+        searchDeptOp.execute();
+        mgrId = (String)ADFUtils.getBoundAttributeValue("MgrId");
+        if (!userIds.contains(mgrId))
+            userIds.add(mgrId);
+        
+        
 
         //更新DocTask上的部分字段
         ADFUtils.setBoundAttributeValue("TaskState", "进行中");
@@ -166,7 +185,7 @@ public class NewDocBean extends BaseBean {
 
         String docTaskId = (ADFUtils.getBoundAttributeValue("Id")).toString();
         for (String userId : userIds) {
-            super.sendNotification("有新的公文项目需要完成！", content, userId, null, Constants.CONTEXT_TYPE_DOCTASK,
+            super.sendNotification("有新的公文项目已发起！", content, userId, null, Constants.CONTEXT_TYPE_DOCTASK,
                                    docTaskId);
         }
         ADFUtils.commit();
@@ -285,4 +304,9 @@ public class NewDocBean extends BaseBean {
     }
 
 
+    public void confirmStart(DialogEvent dialogEvent) {
+        if(dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)){
+            this.startDoc();
+        }
+    }
 }

@@ -392,4 +392,15 @@ public class DocDetailBean extends BaseBean {
     }
 
 
+    public void confirmClose(DialogEvent dialogEvent) {
+        if(dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)){
+            this.doComplete();
+        }
+    }
+    
+    public void confirmCancel(DialogEvent dialogEvent) {
+        if(dialogEvent.getOutcome().equals(DialogEvent.Outcome.ok)){
+            this.doCancel();
+        }
+    }
 }

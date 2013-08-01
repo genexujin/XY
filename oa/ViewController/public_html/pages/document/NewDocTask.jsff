@@ -67,11 +67,19 @@
                                           valueChangeListener="#{viewScope.NewDocBean.fileUploaded}"/>
                         </af:panelWindow>
                     </af:popup>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="p2">
+                        <af:dialog id="d1" title="请确认启动项目" dialogListener="#{viewScope.NewDocBean.confirmStart}">
+                            <f:facet name="buttonBar"/>
+                            <af:outputText value="您确认要启动该项目吗？" id="ot4"/>
+                        </af:dialog>
+                    </af:popup>
                     <f:facet name="footer">
                         <af:toolbar id="t1">
-                            <af:commandToolbarButton text="项目启动" id="cb2" action="#{viewScope.NewDocBean.startDoc}"
+                            <af:commandToolbarButton text="项目启动" id="cb2"
                                               icon="/images/icons/startserver.png"
-                                              disabled="#{bindings.TaskState.inputValue != '未开始'}"/>
+                                              disabled="#{bindings.TaskState.inputValue != '未开始'}">
+                                <af:showPopupBehavior popupId="p2" triggerType="action"/>
+                            </af:commandToolbarButton>
                             <af:commandToolbarButton text="返回项目搜索" id="ctb1" icon="/images/icons/listview.png"
                                               actionListener="#{bindings.Rollback.execute}" immediate="true"
                                               action="list">

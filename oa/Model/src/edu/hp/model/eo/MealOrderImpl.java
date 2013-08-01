@@ -155,7 +155,7 @@ public class MealOrderImpl extends EntityImpl {
         
         Calendar mealCal = Calendar.getInstance();
         mealCal.setTime(mealDate.getValue());
-        mealCal.add(Calendar.DAY_OF_MONTH, -3);
+        mealCal.add(Calendar.DAY_OF_MONTH, -2);
         mealCal.set(Calendar.MINUTE, 0);
         mealCal.set(Calendar.HOUR_OF_DAY, 12);
         mealCal.set(Calendar.SECOND, 0);

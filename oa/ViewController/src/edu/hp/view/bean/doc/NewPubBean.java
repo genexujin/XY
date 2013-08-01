@@ -69,6 +69,24 @@ public class NewPubBean extends BaseBean {
                     userIds.add((String)row.getAttribute("UserId"));
             }
         }
+        
+        OperationBinding searchDeptOp = ADFUtils.findOperation("findByName");
+        String mgrId = null;
+        //添加党支部领导可以看这个项目
+        searchDeptOp.getParamsMap().put("Name", Constants.CHIEF_CP_OFFICER_DEPT_NAME);
+        searchDeptOp.execute();
+        mgrId = (String)ADFUtils.getBoundAttributeValue("MgrId");
+        if (!userIds.contains(mgrId))
+            userIds.add(mgrId);
+        
+        //添加院长可以看这个项目
+        searchDeptOp.getParamsMap().put("Name", Constants.CHIEF_OFFICER_DEPT_NAME);
+        searchDeptOp.execute();
+        mgrId = (String)ADFUtils.getBoundAttributeValue("MgrId");
+        if (!userIds.contains(mgrId))
+            userIds.add(mgrId);
+        
+        
         //更新DocTask上的部分字段
         ADFUtils.setBoundAttributeValue("State", "已发送");
         ADFUtils.setBoundAttributeValue("SubmitDate", new Date(new java.sql.Date(System.currentTimeMillis())));

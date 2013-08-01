@@ -10,6 +10,8 @@
               RangeSize="-1"/>
     <iterator id="UserGroupQueryIterator" Binds="Root.DocumentModule.UserGroupQuery"
               DataControl="RootAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="Root.AdminModule.Departments" DataControl="RootAppModuleDataControl" RangeSize="10"
+              id="DepartmentsIterator"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="DocumentPublishIterator" id="Title">
@@ -72,5 +74,16 @@
                   InstanceName="data.RootAppModuleDataControl.dataProvider.Root.DocumentModule.UserGroupQuery">
       <NamedData NDName="grpName" NDType="java.lang.String"/>
     </methodAction>
+    <methodAction id="findByName" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByName"
+                  IsViewObjectMethod="true" DataControl="RootAppModuleDataControl"
+                  InstanceName="data.RootAppModuleDataControl.dataProvider.Root.AdminModule.Departments"
+                  ReturnName="data.RootAppModuleDataControl.methodResults.findByName_RootAppModuleDataControl_dataProvider_Root_AdminModule_Departments_findByName_result">
+      <NamedData NDName="name" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="DepartmentsIterator" id="MgrId">
+      <AttrNames>
+        <Item Value="MgrId"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
