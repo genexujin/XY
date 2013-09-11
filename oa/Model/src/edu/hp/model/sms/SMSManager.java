@@ -3,7 +3,7 @@ package edu.hp.model.sms;
 
 public class SMSManager {
 
-    private static boolean enabled = false;
+    private static boolean enabled = true;
     private static String SURFFIX = " 【黄教院】";
 
     //发送SMS
